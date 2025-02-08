@@ -1,0 +1,15 @@
+/home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/ninja/linux/x64/ninja -G Ninja -S /home/kami/Documents/cpp/models -B /home/kami/Documents/cpp/models/cmake-build-debug
+CMake Deprecation Warning at CMakeLists.txt:2 (cmake_minimum_required):
+  Compatibility with CMake < 3.5 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value or use a ...<max> suffix to tell
+  CMake that the project does not need compatibility with older versions.
+
+
+-- CMAKE_PREFIX_PATH: /home/kami/libs/c++/libtorch/
+-- TORCH_LIBRARIES: torch;torch_library;/home/kami/libs/c++/libtorch/lib/libc10.so;/home/kami/libs/c++/libtorch/lib/libkineto.a
+-- TORCH_INCLUDE_DIRS: /home/kami/libs/c++/libtorch/include;/home/kami/libs/c++/libtorch/include/torch/csrc/api/include
+-- Configuring done (0.1s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/kami/Documents/cpp/models/cmake-build-debug

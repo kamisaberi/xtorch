@@ -1,0 +1,3 @@
+/home/kami/Documents/cpp/models/cmake-build-debug/CMakeFiles/dcgan.dir
+/home/kami/Documents/cpp/models/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/kami/Documents/cpp/models/cmake-build-debug/CMakeFiles/rebuild_cache.dir

@@ -1,0 +1,21 @@
+cmake_minimum_required(VERSION 3.10)
+project(TarExtractor)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
+
+# Find libtar library and headers manually
+find_library(LIBTAR_LIBRARY tar REQUIRED)
+find_path(LIBTAR_INCLUDE_DIR tar.h REQUIRED)
+
+# Ensure libtar is found
+if(NOT LIBTAR_LIBRARY OR NOT LIBTAR_INCLUDE_DIR)
+    message(FATAL_ERROR "libtar not found. Please install libtar (e.g., sudo apt-get install libtar-dev).")
+endif()
+
+# Add the executable
+add_executable(extract_tar tr.cpp)
+
+# Include directories and link the library
+target_include_directories(extract_tar PRIVATE ${LIBTAR_INCLUDE_DIR})
+target_link_libraries(extract_tar PRIVATE ${LIBTAR_LIBRARY})
