@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.28 FATAL_ERROR)
 #project(TorchExtension LANGUAGES CXX)
 
-#TODo vvvv TorchExtension MODULE DEFINITION vvv
+#TODO ----vvvv---- TorchExtension MODULE DEFINITION ----vvvv----
 
 project(TorchExtension VERSION 0.1.0 LANGUAGES CXX)
 
@@ -53,7 +53,7 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
 )
 
 
-#TODO vvvv EXPORT MODULE  vvvv
+#TODO ----vvvv---- EXPORT MODULE  ----vvvv----
 
 set(DEFAULT_BUILD_TYPE "Release")
 
@@ -96,7 +96,7 @@ export(TARGETS ${PROJECT_NAME} FILE TorchExtensionConfig.cmake)
 #message(STATUS "TORCH_INCLUDE_DIRS: ${TORCH_INCLUDE_DIRS}")
 
 
-#TODO vvvv TEST PROJECT vvvv
+#TODO ----vvvv---- TEST PROJECT ----vvvv----
 project(Test)
 list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
 find_package(Torch REQUIRED)
