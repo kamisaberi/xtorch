@@ -1,4 +1,5 @@
-CMakeFiles/Test.dir/main.cpp.o: /home/kami/Documents/cpp/models/main.cpp \
+examples/test/CMakeFiles/Test.dir/main.cpp.o: \
+ /home/kami/Documents/cpp/models/examples/test/main.cpp \
  /usr/include/stdc-predef.h \
  /home/kami/libs/c++/libtorch/include/torch/csrc/api/include/torch/torch.h \
  /home/kami/libs/c++/libtorch/include/torch/csrc/api/include/torch/all.h \

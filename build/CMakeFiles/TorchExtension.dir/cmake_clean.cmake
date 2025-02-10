@@ -13,8 +13,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/TorchExtension.dir/src/utils/downloader.cpp.o.d"
   "libTorchExtension.pdb"
   "libTorchExtension.so"
+  "libTorchExtension.so.0.1.0"
   "libTorchExtension.so.1"
-  "libTorchExtension.so.1.0.0"
 )
 
 # Per-language clean rules from dependency scanning.

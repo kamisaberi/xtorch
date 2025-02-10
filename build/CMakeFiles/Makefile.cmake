@@ -11,6 +11,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "CMakeFiles/3.31.2/CMakeCCompiler.cmake"
   "CMakeFiles/3.31.2/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.31.2/CMakeSystem.cmake"
+  "/home/kami/Documents/cpp/models/examples/test/CMakeLists.txt"
   "/home/kami/libs/c++/libtorch/share/cmake/Caffe2/Caffe2Config.cmake"
   "/home/kami/libs/c++/libtorch/share/cmake/Caffe2/Caffe2Targets-release.cmake"
   "/home/kami/libs/c++/libtorch/share/cmake/Caffe2/Caffe2Targets.cmake"
@@ -23,6 +24,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/usr/lib/cmake/opencv4/OpenCVConfig.cmake"
   "/usr/lib/cmake/opencv4/OpenCVModules-release.cmake"
   "/usr/lib/cmake/opencv4/OpenCVModules.cmake"
+  "/usr/local/share/TorchExtension/cmake/TorchExtensionConfig.cmake"
   "/usr/share/cmake/Modules/CMakeCInformation.cmake"
   "/usr/share/cmake/Modules/CMakeCXXInformation.cmake"
   "/usr/share/cmake/Modules/CMakeCheckCompilerFlagCommonPatterns.cmake"
@@ -75,10 +77,11 @@ set(CMAKE_MAKEFILE_OUTPUTS
 # Byproducts of CMake generate step:
 set(CMAKE_MAKEFILE_PRODUCTS
   "CMakeFiles/CMakeDirectoryInformation.cmake"
+  "examples/test/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/TorchExtension.dir/DependInfo.cmake"
-  "CMakeFiles/Test.dir/DependInfo.cmake"
+  "examples/test/CMakeFiles/Test.dir/DependInfo.cmake"
   )

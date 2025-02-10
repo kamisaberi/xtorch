@@ -1,4 +1,6 @@
 cmake_minimum_required(VERSION 3.28 FATAL_ERROR)
+#cmake_policy(SET CMP0002 NEW)
+
 #project(TorchExtension LANGUAGES CXX)
 
 #TODO ----vvvv---- TorchExtension MODULE DEFINITION ----vvvv----
@@ -97,11 +99,18 @@ export(TARGETS ${PROJECT_NAME} FILE TorchExtensionConfig.cmake)
 
 
 #TODO ----vvvv---- TEST PROJECT ----vvvv----
-project(Test)
-list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
-find_package(Torch REQUIRED)
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
-add_executable(${CMAKE_PROJECT_NAME} main.cpp)
-target_link_libraries(${CMAKE_PROJECT_NAME} "${TORCH_LIBRARIES}")
-set_property(TARGET ${CMAKE_PROJECT_NAME} PROPERTY CXX_STANDARD 17)
+
+add_subdirectory(examples/test)
+
+#cmake_minimum_required(VERSION 3.10 FATAL_ERROR)
+#project(Test)
+#list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
+#find_package(Torch REQUIRED)
+#find_package(TorchExtension REQUIRED)
+#set(CMAKE_CXX_STANDARD 17)
+#set(CMAKE_CXX_STANDARD_REQUIRED True)
+#add_executable(${CMAKE_PROJECT_NAME} main.cpp)
+#target_link_libraries(${CMAKE_PROJECT_NAME} "${TORCH_LIBRARIES}")
+#
+#set_property(TARGET ${CMAKE_PROJECT_NAME} PROPERTY CXX_STANDARD 17)
+

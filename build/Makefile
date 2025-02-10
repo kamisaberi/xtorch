@@ -184,32 +184,8 @@ Test: cmake_check_build_system
 
 # fast build rule for target.
 Test/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Test.dir/build.make CMakeFiles/Test.dir/build
+	$(MAKE) $(MAKESILENT) -f examples/test/CMakeFiles/Test.dir/build.make examples/test/CMakeFiles/Test.dir/build
 .PHONY : Test/fast
-
-main.o: main.cpp.o
-.PHONY : main.o
-
-# target to build an object file
-main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Test.dir/build.make CMakeFiles/Test.dir/main.cpp.o
-.PHONY : main.cpp.o
-
-main.i: main.cpp.i
-.PHONY : main.i
-
-# target to preprocess a source file
-main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Test.dir/build.make CMakeFiles/Test.dir/main.cpp.i
-.PHONY : main.cpp.i
-
-main.s: main.cpp.s
-.PHONY : main.s
-
-# target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Test.dir/build.make CMakeFiles/Test.dir/main.cpp.s
-.PHONY : main.cpp.s
 
 src/datasets/cifar10.o: src/datasets/cifar10.cpp.o
 .PHONY : src/datasets/cifar10.o
@@ -345,9 +321,6 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... Test"
 	@echo "... TorchExtension"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
 	@echo "... src/datasets/cifar10.o"
 	@echo "... src/datasets/cifar10.i"
 	@echo "... src/datasets/cifar10.s"

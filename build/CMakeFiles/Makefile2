@@ -64,22 +64,41 @@ CMAKE_BINARY_DIR = /home/kami/Documents/cpp/models/build
 
 # The main recursive "all" target.
 all: CMakeFiles/TorchExtension.dir/all
-all: CMakeFiles/Test.dir/all
+all: examples/test/all
 .PHONY : all
 
 # The main recursive "codegen" target.
 codegen: CMakeFiles/TorchExtension.dir/codegen
-codegen: CMakeFiles/Test.dir/codegen
+codegen: examples/test/codegen
 .PHONY : codegen
 
 # The main recursive "preinstall" target.
-preinstall:
+preinstall: examples/test/preinstall
 .PHONY : preinstall
 
 # The main recursive "clean" target.
 clean: CMakeFiles/TorchExtension.dir/clean
-clean: CMakeFiles/Test.dir/clean
+clean: examples/test/clean
 .PHONY : clean
+
+#=============================================================================
+# Directory level rules for directory examples/test
+
+# Recursive "all" directory target.
+examples/test/all: examples/test/CMakeFiles/Test.dir/all
+.PHONY : examples/test/all
+
+# Recursive "codegen" directory target.
+examples/test/codegen: examples/test/CMakeFiles/Test.dir/codegen
+.PHONY : examples/test/codegen
+
+# Recursive "preinstall" directory target.
+examples/test/preinstall:
+.PHONY : examples/test/preinstall
+
+# Recursive "clean" directory target.
+examples/test/clean: examples/test/CMakeFiles/Test.dir/clean
+.PHONY : examples/test/clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/TorchExtension.dir
@@ -113,35 +132,35 @@ CMakeFiles/TorchExtension.dir/clean:
 .PHONY : CMakeFiles/TorchExtension.dir/clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/Test.dir
+# Target rules for target examples/test/CMakeFiles/Test.dir
 
 # All Build rule for target.
-CMakeFiles/Test.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Test.dir/build.make CMakeFiles/Test.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Test.dir/build.make CMakeFiles/Test.dir/build
+examples/test/CMakeFiles/Test.dir/all:
+	$(MAKE) $(MAKESILENT) -f examples/test/CMakeFiles/Test.dir/build.make examples/test/CMakeFiles/Test.dir/depend
+	$(MAKE) $(MAKESILENT) -f examples/test/CMakeFiles/Test.dir/build.make examples/test/CMakeFiles/Test.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/kami/Documents/cpp/models/build/CMakeFiles --progress-num=1,2 "Built target Test"
-.PHONY : CMakeFiles/Test.dir/all
+.PHONY : examples/test/CMakeFiles/Test.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/Test.dir/rule: cmake_check_build_system
+examples/test/CMakeFiles/Test.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/kami/Documents/cpp/models/build/CMakeFiles 2
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/Test.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 examples/test/CMakeFiles/Test.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/kami/Documents/cpp/models/build/CMakeFiles 0
-.PHONY : CMakeFiles/Test.dir/rule
+.PHONY : examples/test/CMakeFiles/Test.dir/rule
 
 # Convenience name for target.
-Test: CMakeFiles/Test.dir/rule
+Test: examples/test/CMakeFiles/Test.dir/rule
 .PHONY : Test
 
 # codegen rule for target.
-CMakeFiles/Test.dir/codegen:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Test.dir/build.make CMakeFiles/Test.dir/codegen
-.PHONY : CMakeFiles/Test.dir/codegen
+examples/test/CMakeFiles/Test.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f examples/test/CMakeFiles/Test.dir/build.make examples/test/CMakeFiles/Test.dir/codegen
+.PHONY : examples/test/CMakeFiles/Test.dir/codegen
 
 # clean rule for target.
-CMakeFiles/Test.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Test.dir/build.make CMakeFiles/Test.dir/clean
-.PHONY : CMakeFiles/Test.dir/clean
+examples/test/CMakeFiles/Test.dir/clean:
+	$(MAKE) $(MAKESILENT) -f examples/test/CMakeFiles/Test.dir/build.make examples/test/CMakeFiles/Test.dir/clean
+.PHONY : examples/test/CMakeFiles/Test.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

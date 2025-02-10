@@ -57,7 +57,7 @@ set_target_properties(TorchExtension PROPERTIES
 # Import target "TorchExtension" for configuration "Release"
 set_property(TARGET TorchExtension APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
 set_target_properties(TorchExtension PROPERTIES
-  IMPORTED_LOCATION_RELEASE "/home/kami/Documents/cpp/models/build/libTorchExtension.so.1.0.0"
+  IMPORTED_LOCATION_RELEASE "/home/kami/Documents/cpp/models/build/libTorchExtension.so.0.1.0"
   IMPORTED_SONAME_RELEASE "libTorchExtension.so.1"
   )
 

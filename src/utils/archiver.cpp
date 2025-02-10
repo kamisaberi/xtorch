@@ -1,4 +1,5 @@
 #include "../../include/utils/archiver.h"
+
 using namespace std;
 namespace fs = std::filesystem;
 
@@ -41,7 +42,7 @@ std::tuple<bool, string> extractGzip(const std::string &inFile, const std::strin
     return std::make_tuple(true, destPath);
 }
 
-bool extractTar(const std::string &tarFile, const std::string &outPath ) {
+bool extractTar(const std::string &tarFile, const std::string &outPath) {
     TAR *tar;
     // Open the tar file
     if (tar_open(&tar, tarFile.c_str(), NULL, O_RDONLY, 0, TAR_GNU) == -1) {
@@ -67,7 +68,7 @@ bool extractTar(const std::string &tarFile, const std::string &outPath ) {
     return true;
 }
 
-bool extractZip(const std::string &inFile, const std::string &outPath ) {
+bool extractZip(const std::string &inFile, const std::string &outPath) {
     int err = 0;
     zip_t *zip_archive = zip_open(inFile.c_str(), ZIP_RDONLY, &err);
 
@@ -77,7 +78,7 @@ bool extractZip(const std::string &inFile, const std::string &outPath ) {
         int error_code = 0;
         zip_error_set(&zip_error, error_code, 0);
 //        zip_error_to_str(error_buffer, sizeof(error_buffer), err, errno);
-        const char*error_buffer =  zip_error_strerror(&zip_error);
+        const char *error_buffer = zip_error_strerror(&zip_error);
 
 
         std::cerr << "Failed to open ZIP file: " << error_buffer << std::endl;
@@ -103,7 +104,7 @@ bool extractZip(const std::string &inFile, const std::string &outPath ) {
 
             fname = fname.substr(0, fname.length() - 1);
             std::error_code ec;
-            string path = (fs::path(destPath) /  fs::path( fname)).string();
+            string path = (fs::path(destPath) / fs::path(fname)).string();
             if (std::filesystem::create_directory(path, ec)) {
                 std::cout << "Directory created successfully: " << fname << std::endl;
             } else {
@@ -118,7 +119,7 @@ bool extractZip(const std::string &inFile, const std::string &outPath ) {
                 return false;
             }
             // Create a new file to write the extracted content
-            string path = (fs::path(destPath) /  fs::path( filename)).string();
+            string path = (fs::path(destPath) / fs::path(filename)).string();
             FILE *output_file = fopen(path.c_str(), "wb");
             if (!output_file) {
                 std::cerr << "Failed to create file: " << path << std::endl;
