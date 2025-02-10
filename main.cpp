@@ -1,17 +1,20 @@
-//#include <torch/torch.h>
+#include <torch/torch.h>
 //#include <torch/data/datasets/mnist.h>
 //#include <vector>
 //#include <fstream>
-//#include <iostream>
+#include <iostream>
 //#include <string>
 //#include <filesystem>
 //#include <curl/curl.h>
-#include "include/datasets/cifar100.h"
+#include <TorchExtension/datasets/cifar100.h>
+#include <TorchExtension/utils/archiver.h>
 
 
 int main() {
-
-    torch::data::datasets::CIFAR100 cifar100= torch::data::datasets::CIFAR100("/home/kami/Documents/temp/", true , true);
+    torch::Tensor tensor = torch::eye(3);
+    std::cout << tensor << endl;
+    std::cout << "Hello World" << std::endl;
+//    torch::data::datasets::CIFAR100 cifar100("/home/kami/Documents/temp/", true , true);
 
 
     return 0;

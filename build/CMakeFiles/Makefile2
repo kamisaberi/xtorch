@@ -63,11 +63,13 @@ CMAKE_BINARY_DIR = /home/kami/Documents/cpp/models/build
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles/TorchExt.dir/all
+all: CMakeFiles/TorchExtension.dir/all
+all: CMakeFiles/Test.dir/all
 .PHONY : all
 
 # The main recursive "codegen" target.
-codegen: CMakeFiles/TorchExt.dir/codegen
+codegen: CMakeFiles/TorchExtension.dir/codegen
+codegen: CMakeFiles/Test.dir/codegen
 .PHONY : codegen
 
 # The main recursive "preinstall" target.
@@ -75,39 +77,71 @@ preinstall:
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: CMakeFiles/TorchExt.dir/clean
+clean: CMakeFiles/TorchExtension.dir/clean
+clean: CMakeFiles/Test.dir/clean
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/TorchExt.dir
+# Target rules for target CMakeFiles/TorchExtension.dir
 
 # All Build rule for target.
-CMakeFiles/TorchExt.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExt.dir/build.make CMakeFiles/TorchExt.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExt.dir/build.make CMakeFiles/TorchExt.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/kami/Documents/cpp/models/build/CMakeFiles --progress-num=1,2,3,4 "Built target TorchExt"
-.PHONY : CMakeFiles/TorchExt.dir/all
+CMakeFiles/TorchExtension.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/kami/Documents/cpp/models/build/CMakeFiles --progress-num=3,4,5,6,7,8 "Built target TorchExtension"
+.PHONY : CMakeFiles/TorchExtension.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/TorchExt.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/kami/Documents/cpp/models/build/CMakeFiles 4
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/TorchExt.dir/all
+CMakeFiles/TorchExtension.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/kami/Documents/cpp/models/build/CMakeFiles 6
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/TorchExtension.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/kami/Documents/cpp/models/build/CMakeFiles 0
-.PHONY : CMakeFiles/TorchExt.dir/rule
+.PHONY : CMakeFiles/TorchExtension.dir/rule
 
 # Convenience name for target.
-TorchExt: CMakeFiles/TorchExt.dir/rule
-.PHONY : TorchExt
+TorchExtension: CMakeFiles/TorchExtension.dir/rule
+.PHONY : TorchExtension
 
 # codegen rule for target.
-CMakeFiles/TorchExt.dir/codegen:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExt.dir/build.make CMakeFiles/TorchExt.dir/codegen
-.PHONY : CMakeFiles/TorchExt.dir/codegen
+CMakeFiles/TorchExtension.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/codegen
+.PHONY : CMakeFiles/TorchExtension.dir/codegen
 
 # clean rule for target.
-CMakeFiles/TorchExt.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExt.dir/build.make CMakeFiles/TorchExt.dir/clean
-.PHONY : CMakeFiles/TorchExt.dir/clean
+CMakeFiles/TorchExtension.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/clean
+.PHONY : CMakeFiles/TorchExtension.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/Test.dir
+
+# All Build rule for target.
+CMakeFiles/Test.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Test.dir/build.make CMakeFiles/Test.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Test.dir/build.make CMakeFiles/Test.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/kami/Documents/cpp/models/build/CMakeFiles --progress-num=1,2 "Built target Test"
+.PHONY : CMakeFiles/Test.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/Test.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/kami/Documents/cpp/models/build/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/Test.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/kami/Documents/cpp/models/build/CMakeFiles 0
+.PHONY : CMakeFiles/Test.dir/rule
+
+# Convenience name for target.
+Test: CMakeFiles/Test.dir/rule
+.PHONY : Test
+
+# codegen rule for target.
+CMakeFiles/Test.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Test.dir/build.make CMakeFiles/Test.dir/codegen
+.PHONY : CMakeFiles/Test.dir/codegen
+
+# clean rule for target.
+CMakeFiles/Test.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Test.dir/build.make CMakeFiles/Test.dir/clean
+.PHONY : CMakeFiles/Test.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

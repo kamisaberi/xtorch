@@ -1,0 +1,13 @@
+/usr/local/lib/libTorchExtension.so.1.0.0
+/usr/local/lib/libTorchExtension.so.1
+/usr/local/lib/libTorchExtension.so
+/usr/local/include/TorchExtension/utils/base.h
+/usr/local/include/TorchExtension/utils/downloader.h
+/usr/local/include/TorchExtension/utils/archiver.h
+/usr/local/include/TorchExtension/datasets/cifar10.h
+/usr/local/include/TorchExtension/datasets/fashion-mnist.h
+/usr/local/include/TorchExtension/datasets/cifar100.h
+/usr/local/include/TorchExtension/datasets/base.h
+/usr/local/include/TorchExtension/base.h
+/usr/local/share/TorchExtension/cmake/TorchExtensionConfig.cmake
+/usr/local/share/TorchExtension/cmake/TorchExtensionConfig-release.cmake

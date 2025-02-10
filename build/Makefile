@@ -85,6 +85,51 @@ rebuild_cache:
 rebuild_cache/fast: rebuild_cache
 .PHONY : rebuild_cache/fast
 
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Available install components are: \"Unspecified\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+.PHONY : list_install_components/fast
+
+# Special rule for the target install
+install: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install
+
+# Special rule for the target install
+install/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install/fast
+
+# Special rule for the target install/local
+install/local: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local
+
+# Special rule for the target install/local
+install/local/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local/fast
+
+# Special rule for the target install/strip
+install/strip: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing the project stripped..."
+	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip
+
+# Special rule for the target install/strip
+install/strip/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing the project stripped..."
+	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip/fast
+
 # The main all target
 all: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/kami/Documents/cpp/models/build/CMakeFiles /home/kami/Documents/cpp/models/build//CMakeFiles/progress.marks
@@ -117,24 +162,37 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named TorchExt
+# Target rules for targets named TorchExtension
 
 # Build rule for target.
-TorchExt: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 TorchExt
-.PHONY : TorchExt
+TorchExtension: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 TorchExtension
+.PHONY : TorchExtension
 
 # fast build rule for target.
-TorchExt/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExt.dir/build.make CMakeFiles/TorchExt.dir/build
-.PHONY : TorchExt/fast
+TorchExtension/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/build
+.PHONY : TorchExtension/fast
+
+#=============================================================================
+# Target rules for targets named Test
+
+# Build rule for target.
+Test: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Test
+.PHONY : Test
+
+# fast build rule for target.
+Test/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Test.dir/build.make CMakeFiles/Test.dir/build
+.PHONY : Test/fast
 
 main.o: main.cpp.o
 .PHONY : main.o
 
 # target to build an object file
 main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExt.dir/build.make CMakeFiles/TorchExt.dir/main.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Test.dir/build.make CMakeFiles/Test.dir/main.cpp.o
 .PHONY : main.cpp.o
 
 main.i: main.cpp.i
@@ -142,7 +200,7 @@ main.i: main.cpp.i
 
 # target to preprocess a source file
 main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExt.dir/build.make CMakeFiles/TorchExt.dir/main.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Test.dir/build.make CMakeFiles/Test.dir/main.cpp.i
 .PHONY : main.cpp.i
 
 main.s: main.cpp.s
@@ -150,7 +208,7 @@ main.s: main.cpp.s
 
 # target to generate assembly for a file
 main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExt.dir/build.make CMakeFiles/TorchExt.dir/main.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Test.dir/build.make CMakeFiles/Test.dir/main.cpp.s
 .PHONY : main.cpp.s
 
 src/datasets/cifar10.o: src/datasets/cifar10.cpp.o
@@ -158,7 +216,7 @@ src/datasets/cifar10.o: src/datasets/cifar10.cpp.o
 
 # target to build an object file
 src/datasets/cifar10.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExt.dir/build.make CMakeFiles/TorchExt.dir/src/datasets/cifar10.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/cifar10.cpp.o
 .PHONY : src/datasets/cifar10.cpp.o
 
 src/datasets/cifar10.i: src/datasets/cifar10.cpp.i
@@ -166,7 +224,7 @@ src/datasets/cifar10.i: src/datasets/cifar10.cpp.i
 
 # target to preprocess a source file
 src/datasets/cifar10.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExt.dir/build.make CMakeFiles/TorchExt.dir/src/datasets/cifar10.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/cifar10.cpp.i
 .PHONY : src/datasets/cifar10.cpp.i
 
 src/datasets/cifar10.s: src/datasets/cifar10.cpp.s
@@ -174,7 +232,7 @@ src/datasets/cifar10.s: src/datasets/cifar10.cpp.s
 
 # target to generate assembly for a file
 src/datasets/cifar10.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExt.dir/build.make CMakeFiles/TorchExt.dir/src/datasets/cifar10.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/cifar10.cpp.s
 .PHONY : src/datasets/cifar10.cpp.s
 
 src/datasets/cifar100.o: src/datasets/cifar100.cpp.o
@@ -182,7 +240,7 @@ src/datasets/cifar100.o: src/datasets/cifar100.cpp.o
 
 # target to build an object file
 src/datasets/cifar100.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExt.dir/build.make CMakeFiles/TorchExt.dir/src/datasets/cifar100.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/cifar100.cpp.o
 .PHONY : src/datasets/cifar100.cpp.o
 
 src/datasets/cifar100.i: src/datasets/cifar100.cpp.i
@@ -190,7 +248,7 @@ src/datasets/cifar100.i: src/datasets/cifar100.cpp.i
 
 # target to preprocess a source file
 src/datasets/cifar100.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExt.dir/build.make CMakeFiles/TorchExt.dir/src/datasets/cifar100.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/cifar100.cpp.i
 .PHONY : src/datasets/cifar100.cpp.i
 
 src/datasets/cifar100.s: src/datasets/cifar100.cpp.s
@@ -198,8 +256,80 @@ src/datasets/cifar100.s: src/datasets/cifar100.cpp.s
 
 # target to generate assembly for a file
 src/datasets/cifar100.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExt.dir/build.make CMakeFiles/TorchExt.dir/src/datasets/cifar100.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/cifar100.cpp.s
 .PHONY : src/datasets/cifar100.cpp.s
+
+src/datasets/fashion-mnist.o: src/datasets/fashion-mnist.cpp.o
+.PHONY : src/datasets/fashion-mnist.o
+
+# target to build an object file
+src/datasets/fashion-mnist.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/fashion-mnist.cpp.o
+.PHONY : src/datasets/fashion-mnist.cpp.o
+
+src/datasets/fashion-mnist.i: src/datasets/fashion-mnist.cpp.i
+.PHONY : src/datasets/fashion-mnist.i
+
+# target to preprocess a source file
+src/datasets/fashion-mnist.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/fashion-mnist.cpp.i
+.PHONY : src/datasets/fashion-mnist.cpp.i
+
+src/datasets/fashion-mnist.s: src/datasets/fashion-mnist.cpp.s
+.PHONY : src/datasets/fashion-mnist.s
+
+# target to generate assembly for a file
+src/datasets/fashion-mnist.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/fashion-mnist.cpp.s
+.PHONY : src/datasets/fashion-mnist.cpp.s
+
+src/utils/archiver.o: src/utils/archiver.cpp.o
+.PHONY : src/utils/archiver.o
+
+# target to build an object file
+src/utils/archiver.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/utils/archiver.cpp.o
+.PHONY : src/utils/archiver.cpp.o
+
+src/utils/archiver.i: src/utils/archiver.cpp.i
+.PHONY : src/utils/archiver.i
+
+# target to preprocess a source file
+src/utils/archiver.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/utils/archiver.cpp.i
+.PHONY : src/utils/archiver.cpp.i
+
+src/utils/archiver.s: src/utils/archiver.cpp.s
+.PHONY : src/utils/archiver.s
+
+# target to generate assembly for a file
+src/utils/archiver.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/utils/archiver.cpp.s
+.PHONY : src/utils/archiver.cpp.s
+
+src/utils/downloader.o: src/utils/downloader.cpp.o
+.PHONY : src/utils/downloader.o
+
+# target to build an object file
+src/utils/downloader.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/utils/downloader.cpp.o
+.PHONY : src/utils/downloader.cpp.o
+
+src/utils/downloader.i: src/utils/downloader.cpp.i
+.PHONY : src/utils/downloader.i
+
+# target to preprocess a source file
+src/utils/downloader.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/utils/downloader.cpp.i
+.PHONY : src/utils/downloader.cpp.i
+
+src/utils/downloader.s: src/utils/downloader.cpp.s
+.PHONY : src/utils/downloader.s
+
+# target to generate assembly for a file
+src/utils/downloader.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/utils/downloader.cpp.s
+.PHONY : src/utils/downloader.cpp.s
 
 # Help Target
 help:
@@ -208,8 +338,13 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... edit_cache"
+	@echo "... install"
+	@echo "... install/local"
+	@echo "... install/strip"
+	@echo "... list_install_components"
 	@echo "... rebuild_cache"
-	@echo "... TorchExt"
+	@echo "... Test"
+	@echo "... TorchExtension"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
@@ -219,6 +354,15 @@ help:
 	@echo "... src/datasets/cifar100.o"
 	@echo "... src/datasets/cifar100.i"
 	@echo "... src/datasets/cifar100.s"
+	@echo "... src/datasets/fashion-mnist.o"
+	@echo "... src/datasets/fashion-mnist.i"
+	@echo "... src/datasets/fashion-mnist.s"
+	@echo "... src/utils/archiver.o"
+	@echo "... src/utils/archiver.i"
+	@echo "... src/utils/archiver.s"
+	@echo "... src/utils/downloader.o"
+	@echo "... src/utils/downloader.i"
+	@echo "... src/utils/downloader.s"
 .PHONY : help
 
 
