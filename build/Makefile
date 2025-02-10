@@ -259,6 +259,126 @@ src/datasets/fashion-mnist.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/fashion-mnist.cpp.s
 .PHONY : src/datasets/fashion-mnist.cpp.s
 
+src/media/image/processing.o: src/media/image/processing.cpp.o
+.PHONY : src/media/image/processing.o
+
+# target to build an object file
+src/media/image/processing.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/media/image/processing.cpp.o
+.PHONY : src/media/image/processing.cpp.o
+
+src/media/image/processing.i: src/media/image/processing.cpp.i
+.PHONY : src/media/image/processing.i
+
+# target to preprocess a source file
+src/media/image/processing.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/media/image/processing.cpp.i
+.PHONY : src/media/image/processing.cpp.i
+
+src/media/image/processing.s: src/media/image/processing.cpp.s
+.PHONY : src/media/image/processing.s
+
+# target to generate assembly for a file
+src/media/image/processing.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/media/image/processing.cpp.s
+.PHONY : src/media/image/processing.cpp.s
+
+src/models/cnn/alexnet.o: src/models/cnn/alexnet.cpp.o
+.PHONY : src/models/cnn/alexnet.o
+
+# target to build an object file
+src/models/cnn/alexnet.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/models/cnn/alexnet.cpp.o
+.PHONY : src/models/cnn/alexnet.cpp.o
+
+src/models/cnn/alexnet.i: src/models/cnn/alexnet.cpp.i
+.PHONY : src/models/cnn/alexnet.i
+
+# target to preprocess a source file
+src/models/cnn/alexnet.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/models/cnn/alexnet.cpp.i
+.PHONY : src/models/cnn/alexnet.cpp.i
+
+src/models/cnn/alexnet.s: src/models/cnn/alexnet.cpp.s
+.PHONY : src/models/cnn/alexnet.s
+
+# target to generate assembly for a file
+src/models/cnn/alexnet.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/models/cnn/alexnet.cpp.s
+.PHONY : src/models/cnn/alexnet.cpp.s
+
+src/models/cnn/lenet5.o: src/models/cnn/lenet5.cpp.o
+.PHONY : src/models/cnn/lenet5.o
+
+# target to build an object file
+src/models/cnn/lenet5.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/models/cnn/lenet5.cpp.o
+.PHONY : src/models/cnn/lenet5.cpp.o
+
+src/models/cnn/lenet5.i: src/models/cnn/lenet5.cpp.i
+.PHONY : src/models/cnn/lenet5.i
+
+# target to preprocess a source file
+src/models/cnn/lenet5.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/models/cnn/lenet5.cpp.i
+.PHONY : src/models/cnn/lenet5.cpp.i
+
+src/models/cnn/lenet5.s: src/models/cnn/lenet5.cpp.s
+.PHONY : src/models/cnn/lenet5.s
+
+# target to generate assembly for a file
+src/models/cnn/lenet5.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/models/cnn/lenet5.cpp.s
+.PHONY : src/models/cnn/lenet5.cpp.s
+
+src/models/cnn/resnet.o: src/models/cnn/resnet.cpp.o
+.PHONY : src/models/cnn/resnet.o
+
+# target to build an object file
+src/models/cnn/resnet.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/models/cnn/resnet.cpp.o
+.PHONY : src/models/cnn/resnet.cpp.o
+
+src/models/cnn/resnet.i: src/models/cnn/resnet.cpp.i
+.PHONY : src/models/cnn/resnet.i
+
+# target to preprocess a source file
+src/models/cnn/resnet.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/models/cnn/resnet.cpp.i
+.PHONY : src/models/cnn/resnet.cpp.i
+
+src/models/cnn/resnet.s: src/models/cnn/resnet.cpp.s
+.PHONY : src/models/cnn/resnet.s
+
+# target to generate assembly for a file
+src/models/cnn/resnet.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/models/cnn/resnet.cpp.s
+.PHONY : src/models/cnn/resnet.cpp.s
+
+src/models/cnn/vggnet16.o: src/models/cnn/vggnet16.cpp.o
+.PHONY : src/models/cnn/vggnet16.o
+
+# target to build an object file
+src/models/cnn/vggnet16.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/models/cnn/vggnet16.cpp.o
+.PHONY : src/models/cnn/vggnet16.cpp.o
+
+src/models/cnn/vggnet16.i: src/models/cnn/vggnet16.cpp.i
+.PHONY : src/models/cnn/vggnet16.i
+
+# target to preprocess a source file
+src/models/cnn/vggnet16.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/models/cnn/vggnet16.cpp.i
+.PHONY : src/models/cnn/vggnet16.cpp.i
+
+src/models/cnn/vggnet16.s: src/models/cnn/vggnet16.cpp.s
+.PHONY : src/models/cnn/vggnet16.s
+
+# target to generate assembly for a file
+src/models/cnn/vggnet16.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/models/cnn/vggnet16.cpp.s
+.PHONY : src/models/cnn/vggnet16.cpp.s
+
 src/utils/archiver.o: src/utils/archiver.cpp.o
 .PHONY : src/utils/archiver.o
 
@@ -330,6 +450,21 @@ help:
 	@echo "... src/datasets/fashion-mnist.o"
 	@echo "... src/datasets/fashion-mnist.i"
 	@echo "... src/datasets/fashion-mnist.s"
+	@echo "... src/media/image/processing.o"
+	@echo "... src/media/image/processing.i"
+	@echo "... src/media/image/processing.s"
+	@echo "... src/models/cnn/alexnet.o"
+	@echo "... src/models/cnn/alexnet.i"
+	@echo "... src/models/cnn/alexnet.s"
+	@echo "... src/models/cnn/lenet5.o"
+	@echo "... src/models/cnn/lenet5.i"
+	@echo "... src/models/cnn/lenet5.s"
+	@echo "... src/models/cnn/resnet.o"
+	@echo "... src/models/cnn/resnet.i"
+	@echo "... src/models/cnn/resnet.s"
+	@echo "... src/models/cnn/vggnet16.o"
+	@echo "... src/models/cnn/vggnet16.i"
+	@echo "... src/models/cnn/vggnet16.s"
 	@echo "... src/utils/archiver.o"
 	@echo "... src/utils/archiver.i"
 	@echo "... src/utils/archiver.s"

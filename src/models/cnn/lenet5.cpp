@@ -1,6 +1,5 @@
 #include "../../../include/models/cnn/lenet5.h"
 
-#define DEBUG_MODE true
 
 using namespace std;
 
@@ -47,8 +46,3 @@ torch::Tensor LeNet5::forward(torch::Tensor x) {
 }
 
 
-void set_random() {
-    torch::manual_seed(1);
-    torch::cuda::manual_seed_all(1);
-    srand(1);
-}

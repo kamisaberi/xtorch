@@ -14,6 +14,11 @@ add_library(${CMAKE_PROJECT_NAME} SHARED
         src/datasets/fashion-mnist.cpp
         src/utils/archiver.cpp
         src/utils/downloader.cpp
+        src/media/image/processing.cpp
+        src/models/cnn/alexnet.cpp
+        src/models/cnn/lenet5.cpp
+        src/models/cnn/vggnet16.cpp
+        src/models/cnn/resnet.cpp
 )
 
 #set(CMAKE_CXX_STANDARD 17)

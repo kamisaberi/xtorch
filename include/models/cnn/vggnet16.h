@@ -1,6 +1,5 @@
 #pragma once
 #include <torch/torch.h>
-#include <torch/data/datasets/mnist.h>
 #include <iostream>
 #include <vector>
 #include <fstream>
@@ -18,4 +17,3 @@ struct VggNet16 : torch::nn::Module {
     torch::Tensor forward(torch::Tensor x) ;
 };
 
-void set_random();

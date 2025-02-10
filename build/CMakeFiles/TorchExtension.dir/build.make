@@ -142,13 +142,88 @@ CMakeFiles/TorchExtension.dir/src/utils/downloader.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TorchExtension.dir/src/utils/downloader.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kami/Documents/cpp/models/src/utils/downloader.cpp -o CMakeFiles/TorchExtension.dir/src/utils/downloader.cpp.s
 
+CMakeFiles/TorchExtension.dir/src/media/image/processing.cpp.o: CMakeFiles/TorchExtension.dir/flags.make
+CMakeFiles/TorchExtension.dir/src/media/image/processing.cpp.o: /home/kami/Documents/cpp/models/src/media/image/processing.cpp
+CMakeFiles/TorchExtension.dir/src/media/image/processing.cpp.o: CMakeFiles/TorchExtension.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kami/Documents/cpp/models/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/TorchExtension.dir/src/media/image/processing.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TorchExtension.dir/src/media/image/processing.cpp.o -MF CMakeFiles/TorchExtension.dir/src/media/image/processing.cpp.o.d -o CMakeFiles/TorchExtension.dir/src/media/image/processing.cpp.o -c /home/kami/Documents/cpp/models/src/media/image/processing.cpp
+
+CMakeFiles/TorchExtension.dir/src/media/image/processing.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/TorchExtension.dir/src/media/image/processing.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kami/Documents/cpp/models/src/media/image/processing.cpp > CMakeFiles/TorchExtension.dir/src/media/image/processing.cpp.i
+
+CMakeFiles/TorchExtension.dir/src/media/image/processing.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TorchExtension.dir/src/media/image/processing.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kami/Documents/cpp/models/src/media/image/processing.cpp -o CMakeFiles/TorchExtension.dir/src/media/image/processing.cpp.s
+
+CMakeFiles/TorchExtension.dir/src/models/cnn/alexnet.cpp.o: CMakeFiles/TorchExtension.dir/flags.make
+CMakeFiles/TorchExtension.dir/src/models/cnn/alexnet.cpp.o: /home/kami/Documents/cpp/models/src/models/cnn/alexnet.cpp
+CMakeFiles/TorchExtension.dir/src/models/cnn/alexnet.cpp.o: CMakeFiles/TorchExtension.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kami/Documents/cpp/models/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/TorchExtension.dir/src/models/cnn/alexnet.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TorchExtension.dir/src/models/cnn/alexnet.cpp.o -MF CMakeFiles/TorchExtension.dir/src/models/cnn/alexnet.cpp.o.d -o CMakeFiles/TorchExtension.dir/src/models/cnn/alexnet.cpp.o -c /home/kami/Documents/cpp/models/src/models/cnn/alexnet.cpp
+
+CMakeFiles/TorchExtension.dir/src/models/cnn/alexnet.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/TorchExtension.dir/src/models/cnn/alexnet.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kami/Documents/cpp/models/src/models/cnn/alexnet.cpp > CMakeFiles/TorchExtension.dir/src/models/cnn/alexnet.cpp.i
+
+CMakeFiles/TorchExtension.dir/src/models/cnn/alexnet.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TorchExtension.dir/src/models/cnn/alexnet.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kami/Documents/cpp/models/src/models/cnn/alexnet.cpp -o CMakeFiles/TorchExtension.dir/src/models/cnn/alexnet.cpp.s
+
+CMakeFiles/TorchExtension.dir/src/models/cnn/lenet5.cpp.o: CMakeFiles/TorchExtension.dir/flags.make
+CMakeFiles/TorchExtension.dir/src/models/cnn/lenet5.cpp.o: /home/kami/Documents/cpp/models/src/models/cnn/lenet5.cpp
+CMakeFiles/TorchExtension.dir/src/models/cnn/lenet5.cpp.o: CMakeFiles/TorchExtension.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kami/Documents/cpp/models/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/TorchExtension.dir/src/models/cnn/lenet5.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TorchExtension.dir/src/models/cnn/lenet5.cpp.o -MF CMakeFiles/TorchExtension.dir/src/models/cnn/lenet5.cpp.o.d -o CMakeFiles/TorchExtension.dir/src/models/cnn/lenet5.cpp.o -c /home/kami/Documents/cpp/models/src/models/cnn/lenet5.cpp
+
+CMakeFiles/TorchExtension.dir/src/models/cnn/lenet5.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/TorchExtension.dir/src/models/cnn/lenet5.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kami/Documents/cpp/models/src/models/cnn/lenet5.cpp > CMakeFiles/TorchExtension.dir/src/models/cnn/lenet5.cpp.i
+
+CMakeFiles/TorchExtension.dir/src/models/cnn/lenet5.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TorchExtension.dir/src/models/cnn/lenet5.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kami/Documents/cpp/models/src/models/cnn/lenet5.cpp -o CMakeFiles/TorchExtension.dir/src/models/cnn/lenet5.cpp.s
+
+CMakeFiles/TorchExtension.dir/src/models/cnn/vggnet16.cpp.o: CMakeFiles/TorchExtension.dir/flags.make
+CMakeFiles/TorchExtension.dir/src/models/cnn/vggnet16.cpp.o: /home/kami/Documents/cpp/models/src/models/cnn/vggnet16.cpp
+CMakeFiles/TorchExtension.dir/src/models/cnn/vggnet16.cpp.o: CMakeFiles/TorchExtension.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kami/Documents/cpp/models/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/TorchExtension.dir/src/models/cnn/vggnet16.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TorchExtension.dir/src/models/cnn/vggnet16.cpp.o -MF CMakeFiles/TorchExtension.dir/src/models/cnn/vggnet16.cpp.o.d -o CMakeFiles/TorchExtension.dir/src/models/cnn/vggnet16.cpp.o -c /home/kami/Documents/cpp/models/src/models/cnn/vggnet16.cpp
+
+CMakeFiles/TorchExtension.dir/src/models/cnn/vggnet16.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/TorchExtension.dir/src/models/cnn/vggnet16.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kami/Documents/cpp/models/src/models/cnn/vggnet16.cpp > CMakeFiles/TorchExtension.dir/src/models/cnn/vggnet16.cpp.i
+
+CMakeFiles/TorchExtension.dir/src/models/cnn/vggnet16.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TorchExtension.dir/src/models/cnn/vggnet16.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kami/Documents/cpp/models/src/models/cnn/vggnet16.cpp -o CMakeFiles/TorchExtension.dir/src/models/cnn/vggnet16.cpp.s
+
+CMakeFiles/TorchExtension.dir/src/models/cnn/resnet.cpp.o: CMakeFiles/TorchExtension.dir/flags.make
+CMakeFiles/TorchExtension.dir/src/models/cnn/resnet.cpp.o: /home/kami/Documents/cpp/models/src/models/cnn/resnet.cpp
+CMakeFiles/TorchExtension.dir/src/models/cnn/resnet.cpp.o: CMakeFiles/TorchExtension.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kami/Documents/cpp/models/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/TorchExtension.dir/src/models/cnn/resnet.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TorchExtension.dir/src/models/cnn/resnet.cpp.o -MF CMakeFiles/TorchExtension.dir/src/models/cnn/resnet.cpp.o.d -o CMakeFiles/TorchExtension.dir/src/models/cnn/resnet.cpp.o -c /home/kami/Documents/cpp/models/src/models/cnn/resnet.cpp
+
+CMakeFiles/TorchExtension.dir/src/models/cnn/resnet.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/TorchExtension.dir/src/models/cnn/resnet.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kami/Documents/cpp/models/src/models/cnn/resnet.cpp > CMakeFiles/TorchExtension.dir/src/models/cnn/resnet.cpp.i
+
+CMakeFiles/TorchExtension.dir/src/models/cnn/resnet.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TorchExtension.dir/src/models/cnn/resnet.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kami/Documents/cpp/models/src/models/cnn/resnet.cpp -o CMakeFiles/TorchExtension.dir/src/models/cnn/resnet.cpp.s
+
 # Object files for target TorchExtension
 TorchExtension_OBJECTS = \
 "CMakeFiles/TorchExtension.dir/src/datasets/cifar100.cpp.o" \
 "CMakeFiles/TorchExtension.dir/src/datasets/cifar10.cpp.o" \
 "CMakeFiles/TorchExtension.dir/src/datasets/fashion-mnist.cpp.o" \
 "CMakeFiles/TorchExtension.dir/src/utils/archiver.cpp.o" \
-"CMakeFiles/TorchExtension.dir/src/utils/downloader.cpp.o"
+"CMakeFiles/TorchExtension.dir/src/utils/downloader.cpp.o" \
+"CMakeFiles/TorchExtension.dir/src/media/image/processing.cpp.o" \
+"CMakeFiles/TorchExtension.dir/src/models/cnn/alexnet.cpp.o" \
+"CMakeFiles/TorchExtension.dir/src/models/cnn/lenet5.cpp.o" \
+"CMakeFiles/TorchExtension.dir/src/models/cnn/vggnet16.cpp.o" \
+"CMakeFiles/TorchExtension.dir/src/models/cnn/resnet.cpp.o"
 
 # External object files for target TorchExtension
 TorchExtension_EXTERNAL_OBJECTS =
@@ -158,6 +233,11 @@ libTorchExtension.so.0.1.0: CMakeFiles/TorchExtension.dir/src/datasets/cifar10.c
 libTorchExtension.so.0.1.0: CMakeFiles/TorchExtension.dir/src/datasets/fashion-mnist.cpp.o
 libTorchExtension.so.0.1.0: CMakeFiles/TorchExtension.dir/src/utils/archiver.cpp.o
 libTorchExtension.so.0.1.0: CMakeFiles/TorchExtension.dir/src/utils/downloader.cpp.o
+libTorchExtension.so.0.1.0: CMakeFiles/TorchExtension.dir/src/media/image/processing.cpp.o
+libTorchExtension.so.0.1.0: CMakeFiles/TorchExtension.dir/src/models/cnn/alexnet.cpp.o
+libTorchExtension.so.0.1.0: CMakeFiles/TorchExtension.dir/src/models/cnn/lenet5.cpp.o
+libTorchExtension.so.0.1.0: CMakeFiles/TorchExtension.dir/src/models/cnn/vggnet16.cpp.o
+libTorchExtension.so.0.1.0: CMakeFiles/TorchExtension.dir/src/models/cnn/resnet.cpp.o
 libTorchExtension.so.0.1.0: CMakeFiles/TorchExtension.dir/build.make
 libTorchExtension.so.0.1.0: CMakeFiles/TorchExtension.dir/compiler_depend.ts
 libTorchExtension.so.0.1.0: /usr/lib/libcurl.so
@@ -225,7 +305,7 @@ libTorchExtension.so.0.1.0: /usr/lib/libopencv_photo.so.4.10.0
 libTorchExtension.so.0.1.0: /usr/lib/libopencv_imgproc.so.4.10.0
 libTorchExtension.so.0.1.0: /usr/lib/libopencv_core.so.4.10.0
 libTorchExtension.so.0.1.0: CMakeFiles/TorchExtension.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/kami/Documents/cpp/models/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX shared library libTorchExtension.so"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/kami/Documents/cpp/models/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Linking CXX shared library libTorchExtension.so"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/TorchExtension.dir/link.txt --verbose=$(VERBOSE)
 	$(CMAKE_COMMAND) -E cmake_symlink_library libTorchExtension.so.0.1.0 libTorchExtension.so.1 libTorchExtension.so
 

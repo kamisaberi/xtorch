@@ -3,8 +3,6 @@
 #include <iostream>
 #include <vector>
 
-#define DEBUG_MODE true
-
 
 using namespace std;
 
@@ -16,4 +14,3 @@ struct LeNet5 : torch::nn::Module {
     torch::Tensor forward(torch::Tensor x) ;
 };
 
-void set_random();

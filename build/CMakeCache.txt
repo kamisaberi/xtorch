@@ -313,6 +313,15 @@ PKG_CONFIG_ARGN:STRING=
 //pkg-config executable
 PKG_CONFIG_EXECUTABLE:FILEPATH=/usr/bin/pkg-config
 
+//Value Computed by CMake
+Project_BINARY_DIR:STATIC=/home/kami/Documents/cpp/models/build
+
+//Value Computed by CMake
+Project_IS_TOP_LEVEL:STATIC=ON
+
+//Value Computed by CMake
+Project_SOURCE_DIR:STATIC=/home/kami/Documents/cpp/models
+
 //Path to a library.
 TORCH_LIBRARY:FILEPATH=/home/kami/libs/c++/libtorch/lib/libtorch.so
 

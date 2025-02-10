@@ -31,5 +31,3 @@ struct ResNet : torch::nn::Module {
     torch::Tensor forward(torch::Tensor x) ;
 };
 
-void set_random();
-

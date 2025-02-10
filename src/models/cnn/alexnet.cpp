@@ -1,6 +1,5 @@
 #include "../../../include/models/cnn/alexnet.h"
 
-#define DEBUG_MODE true
 
 using namespace std;
 
@@ -130,12 +129,6 @@ torch::Tensor AlexNet::forward(torch::Tensor x) {
     return x;
 }
 
-
-void set_random() {
-    torch::manual_seed(1);
-    torch::cuda::manual_seed_all(1);
-    srand(1);
-}
 
 
 

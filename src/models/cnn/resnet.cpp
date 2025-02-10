@@ -1,7 +1,5 @@
 #include "../../../include/models/cnn/resnet.h"
 
-using namespace std;
-
 
 ResidualBlock::ResidualBlock(int in_channels, int out_channels, int stride, torch::nn::Sequential downsample) {
     conv1 = torch::nn::Sequential();
@@ -108,9 +106,4 @@ torch::Tensor ResNet::forward(torch::Tensor x) {
     return x;
 }
 
-void set_random() {
-    torch::manual_seed(1);
-    torch::cuda::manual_seed_all(1);
-    srand(1);
-}
 

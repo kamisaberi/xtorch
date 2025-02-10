@@ -262,9 +262,4 @@ torch::Tensor VggNet16::forward(torch::Tensor x) {
 }
 
 
-void set_random() {
-    torch::manual_seed(1);
-    torch::cuda::manual_seed_all(1);
-    srand(1);
-}
 
