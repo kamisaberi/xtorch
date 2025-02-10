@@ -1,5 +1,8 @@
 cmake_minimum_required(VERSION 3.28 FATAL_ERROR)
 #project(TorchExtension LANGUAGES CXX)
+
+#TODo vvvv TorchExtension MODULE DEFINITION vvv
+
 project(TorchExtension VERSION 0.1.0 LANGUAGES CXX)
 
 #add_executable( ${CMAKE_PROJECT_NAME} main.cpp src/datasets/cifar100.cpp src/datasets/cifar10.cpp src/datasets/fashion-mnist.cpp)
