@@ -1,15 +1,14 @@
 #pragma once
+
 #include <torch/torch.h>
 #include <fstream>
 #include <iostream>
 #include <vector>
 
-namespace torch {
-    namespace data{
-        namespace  datasets {
+namespace torch::ext::data::datasets {
 
-            // Helper function to read MNIST data
-            std::vector<std::vector<uint8_t>> read_mnist_images(const std::string& file_path, int num_images) ;
+    // Helper function to read MNIST data
+    std::vector<std::vector<uint8_t>> read_mnist_images(const std::string &file_path, int num_images);
 //            std::vector<std::vector<uint8_t>> read_mnist_images(const std::string& file_path, int num_images) {
 //                std::ifstream file(file_path, std::ios::binary);
 //                if (!file.is_open()) {
@@ -38,7 +37,7 @@ namespace torch {
 //                return images;
 //            }
 
-            std::vector<uint8_t> read_mnist_labels(const std::string& file_path, int num_labels) ;
+    std::vector<uint8_t> read_mnist_labels(const std::string &file_path, int num_labels);
 //            std::vector<uint8_t> read_mnist_labels(const std::string& file_path, int num_labels) {
 //                std::ifstream file(file_path, std::ios::binary);
 //                if (!file.is_open()) {
@@ -62,14 +61,14 @@ namespace torch {
 //            }
 
 // Define the FashionMNIST dataset class
-            class FashionMNIST : public torch::data::datasets::Dataset<FashionMNIST> {
-            private:
-                torch::Tensor images_;
-                torch::Tensor labels_;
+    class FashionMNIST : public torch::data::datasets::Dataset<FashionMNIST> {
+    private:
+        torch::Tensor images_;
+        torch::Tensor labels_;
 
-            public:
-                // Constructor: Loads images and labels from files
-                FashionMNIST(const std::string& images_path, const std::string& labels_path, int num_samples) ;
+    public:
+        // Constructor: Loads images and labels from files
+        FashionMNIST(const std::string &images_path, const std::string &labels_path, int num_samples);
 //                FashionMNIST(const std::string& images_path, const std::string& labels_path, int num_samples) {
 //                    auto images_data = read_mnist_images(images_path, num_samples);
 //                    auto labels_data = read_mnist_labels(labels_path, num_samples);
@@ -86,19 +85,17 @@ namespace torch {
 //                    labels_ = labels_.to(torch::kInt64);               // Convert to int64 for loss functions
 //                }
 
-                // Override `get` method to return a single data sample
-                torch::data::Example<> get(size_t index) override ;
+        // Override `get` method to return a single data sample
+        torch::data::Example<> get(size_t index) override;
 //                torch::data::Example<> get(size_t index) override {
 //                    return {images_[index], labels_[index]};
 //                }
 
-                // Override `size` method to return the number of samples
-                torch::optional<size_t> size() const override ;
+        // Override `size` method to return the number of samples
+        torch::optional<size_t> size() const override;
 //                torch::optional<size_t> size() const override {
 //                    return labels_.size(0);
 //                }
-            };
+    };
 
-        }
-    }
 }

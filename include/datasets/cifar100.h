@@ -23,13 +23,12 @@
 using namespace std;
 namespace fs = std::filesystem;
 
-namespace torch {
-    namespace data {
-        namespace datasets {
-            class CIFAR100 : public torch::data::Dataset<CIFAR100> {
-            public:
 
-                CIFAR100(const std::string &root, bool train = true, bool download = false);
+namespace torch::ext::data::datasets {
+    class CIFAR100 : public torch::data::Dataset<CIFAR100> {
+    public:
+
+        CIFAR100(const std::string &root, bool train = true, bool download = false);
 //                CIFAR100(const std::string &root, bool train = true, bool download = false) {
 //                    // Load data from the specified root directory
 //                    this->root = fs::path(root);
@@ -47,31 +46,31 @@ namespace torch {
 //                    load_data(root, train);
 //                }
 
-                // Override the get method to return a sample
-                torch::data::Example<> get(size_t index) override;
+        // Override the get method to return a sample
+        torch::data::Example<> get(size_t index) override;
 //                torch::data::Example<> get(size_t index) {
 //                    // Return the tensor image and its corresponding label
 //                    return {data[index].clone(), torch::tensor(labels[index])}; // Clone to ensure tensor validity
 //                }
 
-                // Override the size method to return the number of samples
-                torch::optional<size_t> size() const override;
+        // Override the size method to return the number of samples
+        torch::optional<size_t> size() const override;
 //                torch::optional<size_t> size() const {
 //                    return data.size();
 //                }
 
 
-            private:
-                std::vector<torch::Tensor> data; // Store image data as tensors
-                std::vector<int64_t> labels;      // Store labels
-                std::string download_url = "https://www.cs.toronto.edu/~kriz/cifar-100-binary.tar.gz";
-                fs::path archive_file_name = "cifar-100-binary.tar.gz";
-                fs::path root;
-                fs::path dataset_path;
+    private:
+        std::vector<torch::Tensor> data; // Store image data as tensors
+        std::vector<int64_t> labels;      // Store labels
+        std::string download_url = "https://www.cs.toronto.edu/~kriz/cifar-100-binary.tar.gz";
+        fs::path archive_file_name = "cifar-100-binary.tar.gz";
+        fs::path root;
+        fs::path dataset_path;
 //            fs::path dataset_raw_path;
-                fs::path dataset_folder_name = "cifar-100-binary";
+        fs::path dataset_folder_name = "cifar-100-binary";
 
-                void load_data(const std::string &root, bool train);
+        void load_data(const std::string &root, bool train);
 //                void load_data(const std::string &root, bool train) {
 //                    const int num_files = 5;
 //                    std::string file_path = root + "/train.bin";
@@ -103,10 +102,10 @@ namespace torch {
 //                }
 
 
-            };
+    };
 
 
-        }
-    }
 }
+
+
 

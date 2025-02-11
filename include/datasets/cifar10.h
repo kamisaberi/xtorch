@@ -17,36 +17,34 @@
 using namespace std;
 namespace fs = std::filesystem;
 
-namespace torch {
-    namespace data {
-        namespace datasets {
 
+namespace torch::ext::data::datasets {
 
-            class CIFAR10 : public torch::data::Dataset<CIFAR10> {
-            public:
-                CIFAR10(const std::string &root);
+    class CIFAR10 : public torch::data::Dataset<CIFAR10> {
+    public:
+        CIFAR10(const std::string &root);
 //                CIFAR10(const std::string &root) {
 //                    // Load data from the specified root directory
 //                    load_data(root);
 //                }
 
-                // Override the get method to return a sample
-                torch::data::Example<> get(size_t index) override;
+        // Override the get method to return a sample
+        torch::data::Example<> get(size_t index) override;
 //                torch::data::Example<> get(size_t index) override {
 //                    // Return the tensor image and its corresponding label
 //                    return {data[index].clone(), torch::tensor(labels[index])}; // Clone to ensure tensor validity
 //                }
 
-                // Override the size method to return the number of samples
-                torch::optional<size_t> size() const override;
+        // Override the size method to return the number of samples
+        torch::optional<size_t> size() const override;
 //                torch::optional<size_t> size() const override {
 //                    return data.size();
 //                }
 
-            private:
-                std::vector<torch::Tensor> data; // Store image data as tensors
-                std::vector<int64_t> labels;      // Store labels
-                void load_data(const std::string &root);
+    private:
+        std::vector<torch::Tensor> data; // Store image data as tensors
+        std::vector<int64_t> labels;      // Store labels
+        void load_data(const std::string &root);
 //                void load_data(const std::string &root) {
 //                    const int num_files = 5;
 //                    for (int i = 1; i <= num_files; ++i) {
@@ -77,7 +75,7 @@ namespace torch {
 //                        file.close();
 //                    }
 //                }
-            };
-        }
-    }
+    };
 }
+
+
