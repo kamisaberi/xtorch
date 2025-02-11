@@ -1,4 +1,4 @@
-#include "../../include/datasets/cifar100.h"
+#include "cifar100.h"
 
 
 namespace torch::ext::data::datasets {

@@ -9,8 +9,8 @@ project(TorchExtension VERSION 0.1.0 LANGUAGES CXX)
 
 #add_executable( ${CMAKE_PROJECT_NAME} main.cpp src/datasets/cifar100.cpp src/datasets/cifar10.cpp src/datasets/fashion-mnist.cpp)
 add_library(${CMAKE_PROJECT_NAME} SHARED
-        src/datasets/cifar100.cpp
-        src/datasets/cifar10.cpp
+        will-be-removed/cifar100.cpp
+        src/datasets/cifar.cpp
         src/datasets/fashion-mnist.cpp
         src/utils/archiver.cpp
         src/utils/downloader.cpp
