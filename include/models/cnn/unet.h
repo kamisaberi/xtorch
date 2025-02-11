@@ -1,6 +1,6 @@
 #pragma once
 #include <torch/torch.h>
-
+#include "../../exceptions/implementation.h"
 
 //class DoubleConv(nn.Module):
 //    def __init__(self, in_channels, out_channels):
@@ -97,5 +97,6 @@ public:
 
 struct UNet : torch::nn::Module {
 public:
+    UNet();
 
 };
