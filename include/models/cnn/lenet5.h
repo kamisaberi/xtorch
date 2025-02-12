@@ -5,12 +5,15 @@
 
 
 using namespace std;
+namespace torch::ext::cnn::models {
 
-struct LeNet5 : torch::nn::Module {
-    torch::nn::Sequential layer1 = nullptr, layer2 = nullptr;
-    torch::nn::Linear fc1 = nullptr, fc2 = nullptr, fc3 = nullptr;
+    struct LeNet5 : torch::nn::Module {
+        torch::nn::Sequential layer1 = nullptr, layer2 = nullptr;
+        torch::nn::Linear fc1 = nullptr, fc2 = nullptr, fc3 = nullptr;
 
-    LeNet5(int num_classes) ;
-    torch::Tensor forward(torch::Tensor x) ;
-};
+        LeNet5(int num_classes);
+
+        torch::Tensor forward(torch::Tensor x);
+    };
+}
 

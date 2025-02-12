@@ -2,6 +2,9 @@
 #include <torch/torch.h>
 #include "../../exceptions/implementation.h"
 
+namespace torch::ext::cnn::models {
+
+
 //class DoubleConv(nn.Module):
 //    def __init__(self, in_channels, out_channels):
 //        super().__init__()
@@ -16,13 +19,11 @@
 //        return self.conv_op(x)
 
 
-struct DoubleConv : torch::nn::Module {
-public:
+    struct DoubleConv : torch::nn::Module {
+    public:
 
 
-
-
-};
+    };
 
 
 //class DownSample(nn.Module):
@@ -36,10 +37,10 @@ public:
 //        p = self.pool(down)
 //        return down, p
 
-struct DownSample : torch::nn::Module {
-public:
+    struct DownSample : torch::nn::Module {
+    public:
 
-};
+    };
 
 
 
@@ -54,10 +55,10 @@ public:
 //        x = torch.cat([x1, x2], 1)
 //        return self.conv(x)
 
-struct UpSample : torch::nn::Module {
-public:
+    struct UpSample : torch::nn::Module {
+    public:
 
-};
+    };
 
 
 //class UNet(nn.Module):
@@ -95,8 +96,9 @@ public:
 //
 
 
-struct UNet : torch::nn::Module {
-public:
-    UNet();
+    struct UNet : torch::nn::Module {
+    public:
+        UNet();
 
-};
+    };
+}

@@ -2,6 +2,12 @@
 #include <torch/torch.h>
 #include "../../exceptions/implementation.h"
 #include <c10/util/Exception.h>
+
+
+namespace torch::ext::cnn::models {
+
+}
+
 //class SqueezeExcite(nn.Module):
 //    def __init__(self,input_channels: int,squeeze: int = 4,) -> None:
 //        """
