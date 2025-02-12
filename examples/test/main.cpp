@@ -16,7 +16,6 @@ int main() {
     std::cout << "Hello World" << std::endl;
 //    torch::data::datasets::CIFAR100 cifar100("/home/kami/Documents/temp/", true , true);
 
-
     return 0;
 }
 
