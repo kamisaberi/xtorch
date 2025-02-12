@@ -1,11 +1,11 @@
-#include "../../include/datasets/sintel.h"
+#include "../../include/datasets/cre-stereo.h"
 
 namespace torch::ext::data::datasets {
 
-    Sintel::Sintel() {
+    CarlaStereo::CarlaStereo() {
         throw NotImplementedException();
     }
-    SintelStereo::SintelStereo() {
+    CREStereo::CREStereo() {
         throw NotImplementedException();
     }
 

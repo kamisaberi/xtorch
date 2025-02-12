@@ -5,14 +5,14 @@
 
 
 namespace torch::ext::data::datasets {
-   class Sintel : torch::data::Dataset<Sintel> {
+   class CarlaStereo : torch::data::Dataset<CarlaStereo> {
 
     public :
-       Sintel();
+       CarlaStereo();
     };
-   class SintelStereo : torch::data::Dataset<SintelStereo> {
+   class CREStereo : torch::data::Dataset<CREStereo> {
 
     public :
-       SintelStereo();
+       CREStereo();
     };
 }
