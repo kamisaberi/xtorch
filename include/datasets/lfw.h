@@ -10,4 +10,9 @@ namespace torch::ext::data::datasets {
     public :
        LFWPeople();
     };
+   class LFWPairs : torch::data::Dataset<LFWPairs> {
+
+    public :
+       LFWPairs();
+    };
 }
