@@ -1,0 +1,103 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"install"
+		],
+		"files" : 
+		[
+			"CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 76,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 80,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 82,
+				"parent" : 0
+			}
+		]
+	},
+	"installers" : 
+	[
+		{
+			"backtrace" : 1,
+			"component" : "Unspecified",
+			"destination" : "lib",
+			"paths" : 
+			[
+				"libTorchExtension.so.1.0.0",
+				"libTorchExtension.so.1"
+			],
+			"targetId" : "TorchExtension::@6890427a1f51a3e7e1df",
+			"targetIndex" : 1,
+			"targetInstallNamelink" : "skip",
+			"type" : "target"
+		},
+		{
+			"backtrace" : 1,
+			"component" : "Unspecified",
+			"destination" : "lib",
+			"paths" : 
+			[
+				"libTorchExtension.so"
+			],
+			"targetId" : "TorchExtension::@6890427a1f51a3e7e1df",
+			"targetIndex" : 1,
+			"targetInstallNamelink" : "only",
+			"type" : "target"
+		},
+		{
+			"backtrace" : 2,
+			"component" : "Unspecified",
+			"destination" : "include/TorchExtension",
+			"paths" : 
+			[
+				{
+					"from" : "include",
+					"to" : "."
+				}
+			],
+			"type" : "directory"
+		},
+		{
+			"backtrace" : 3,
+			"component" : "Unspecified",
+			"destination" : "share/TorchExtension/cmake",
+			"exportName" : "TorchExtensionConfig",
+			"exportTargets" : 
+			[
+				{
+					"id" : "TorchExtension::@6890427a1f51a3e7e1df",
+					"index" : 1
+				}
+			],
+			"paths" : 
+			[
+				"CMakeFiles/Export/f62e87c466f7d90652db602e5a153c43/TorchExtensionConfig.cmake"
+			],
+			"type" : "export"
+		}
+	],
+	"paths" : 
+	{
+		"build" : ".",
+		"source" : "."
+	}
+}
