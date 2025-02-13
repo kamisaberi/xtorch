@@ -4,7 +4,7 @@
 #include <c10/util/Exception.h>
 
 
-namespace torch::ext::cnn::models {
+namespace torch::ext::models {
 
 }
 

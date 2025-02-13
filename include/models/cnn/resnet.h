@@ -7,7 +7,7 @@
 
 using namespace std;
 
-namespace torch::ext::cnn::models {
+namespace torch::ext::models {
 
     struct ResidualBlock : torch::nn::Module {
         torch::nn::Sequential conv1 = nullptr, conv2 = nullptr, downsample = nullptr;

@@ -1,6 +1,6 @@
 #include "../../../include/models/cnn/mobilenetv3.h"
 
-namespace torch::ext::cnn::models {
+namespace torch::ext::models {
 
 
     MobileNetV3::MobileNetV3() {

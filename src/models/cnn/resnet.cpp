@@ -1,6 +1,6 @@
 #include "../../../include/models/cnn/resnet.h"
 
-namespace torch::ext::cnn::models {
+namespace torch::ext::models {
 
     ResidualBlock::ResidualBlock(int in_channels, int out_channels, int stride, torch::nn::Sequential downsample) {
         conv1 = torch::nn::Sequential();

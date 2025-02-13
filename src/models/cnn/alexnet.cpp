@@ -3,7 +3,7 @@
 
 using namespace std;
 
-namespace torch::ext::cnn::models {
+namespace torch::ext::models {
 
     AlexNet::AlexNet(int num_classes) {
         //TODO layer1

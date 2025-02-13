@@ -6,7 +6,7 @@
 #include <string>
 
 using namespace std;
-namespace torch::ext::cnn::models {
+namespace torch::ext::models {
 
 
     struct VggNet16 : torch::nn::Module {

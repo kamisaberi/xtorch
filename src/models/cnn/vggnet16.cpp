@@ -1,6 +1,6 @@
 #include "../../../include/models/cnn/vggnet16.h"
 
-namespace torch::ext::cnn::models {
+namespace torch::ext::models {
 
     VggNet16::VggNet16(int num_classes) {
         //TODO layer1 DONE

@@ -2,7 +2,7 @@
 
 
 using namespace std;
-namespace torch::ext::cnn::models {
+namespace torch::ext::models {
 
 
     LeNet5::LeNet5(int num_classes) {

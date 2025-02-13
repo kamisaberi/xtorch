@@ -5,7 +5,7 @@
 
 
 using namespace std;
-namespace torch::ext::cnn::models {
+namespace torch::ext::models {
 
     struct LeNet5 : torch::nn::Module {
         torch::nn::Sequential layer1 = nullptr, layer2 = nullptr;
