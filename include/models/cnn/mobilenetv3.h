@@ -6,7 +6,6 @@
 
 namespace torch::ext::models {
 
-}
 
 //class SqueezeExcite(nn.Module):
 //    def __init__(self,input_channels: int,squeeze: int = 4,) -> None:
@@ -172,9 +171,10 @@ namespace torch::ext::models {
 //        x = self.classifier(x)
 //        return x
 
-struct MobileNetV3 :torch::nn::Module{
-public:
-    MobileNetV3();
+    struct MobileNetV3 : torch::nn::Module {
+    public:
+        MobileNetV3();
 
 
-};
+    };
+}

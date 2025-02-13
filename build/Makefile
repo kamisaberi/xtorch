@@ -187,53 +187,341 @@ Test/fast:
 	$(MAKE) $(MAKESILENT) -f examples/test/CMakeFiles/Test.dir/build.make examples/test/CMakeFiles/Test.dir/build
 .PHONY : Test/fast
 
-src/datasets/cifar10.o: src/datasets/cifar10.cpp.o
-.PHONY : src/datasets/cifar10.o
+src/datasets/base.o: src/datasets/base.cpp.o
+.PHONY : src/datasets/base.o
 
 # target to build an object file
-src/datasets/cifar10.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/cifar10.cpp.o
-.PHONY : src/datasets/cifar10.cpp.o
+src/datasets/base.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/base.cpp.o
+.PHONY : src/datasets/base.cpp.o
 
-src/datasets/cifar10.i: src/datasets/cifar10.cpp.i
-.PHONY : src/datasets/cifar10.i
+src/datasets/base.i: src/datasets/base.cpp.i
+.PHONY : src/datasets/base.i
 
 # target to preprocess a source file
-src/datasets/cifar10.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/cifar10.cpp.i
-.PHONY : src/datasets/cifar10.cpp.i
+src/datasets/base.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/base.cpp.i
+.PHONY : src/datasets/base.cpp.i
 
-src/datasets/cifar10.s: src/datasets/cifar10.cpp.s
-.PHONY : src/datasets/cifar10.s
+src/datasets/base.s: src/datasets/base.cpp.s
+.PHONY : src/datasets/base.s
 
 # target to generate assembly for a file
-src/datasets/cifar10.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/cifar10.cpp.s
-.PHONY : src/datasets/cifar10.cpp.s
+src/datasets/base.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/base.cpp.s
+.PHONY : src/datasets/base.cpp.s
 
-src/datasets/cifar100.o: src/datasets/cifar100.cpp.o
-.PHONY : src/datasets/cifar100.o
+src/datasets/caltech.o: src/datasets/caltech.cpp.o
+.PHONY : src/datasets/caltech.o
 
 # target to build an object file
-src/datasets/cifar100.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/cifar100.cpp.o
-.PHONY : src/datasets/cifar100.cpp.o
+src/datasets/caltech.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/caltech.cpp.o
+.PHONY : src/datasets/caltech.cpp.o
 
-src/datasets/cifar100.i: src/datasets/cifar100.cpp.i
-.PHONY : src/datasets/cifar100.i
+src/datasets/caltech.i: src/datasets/caltech.cpp.i
+.PHONY : src/datasets/caltech.i
 
 # target to preprocess a source file
-src/datasets/cifar100.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/cifar100.cpp.i
-.PHONY : src/datasets/cifar100.cpp.i
+src/datasets/caltech.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/caltech.cpp.i
+.PHONY : src/datasets/caltech.cpp.i
 
-src/datasets/cifar100.s: src/datasets/cifar100.cpp.s
-.PHONY : src/datasets/cifar100.s
+src/datasets/caltech.s: src/datasets/caltech.cpp.s
+.PHONY : src/datasets/caltech.s
 
 # target to generate assembly for a file
-src/datasets/cifar100.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/cifar100.cpp.s
-.PHONY : src/datasets/cifar100.cpp.s
+src/datasets/caltech.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/caltech.cpp.s
+.PHONY : src/datasets/caltech.cpp.s
+
+src/datasets/celeba.o: src/datasets/celeba.cpp.o
+.PHONY : src/datasets/celeba.o
+
+# target to build an object file
+src/datasets/celeba.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/celeba.cpp.o
+.PHONY : src/datasets/celeba.cpp.o
+
+src/datasets/celeba.i: src/datasets/celeba.cpp.i
+.PHONY : src/datasets/celeba.i
+
+# target to preprocess a source file
+src/datasets/celeba.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/celeba.cpp.i
+.PHONY : src/datasets/celeba.cpp.i
+
+src/datasets/celeba.s: src/datasets/celeba.cpp.s
+.PHONY : src/datasets/celeba.s
+
+# target to generate assembly for a file
+src/datasets/celeba.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/celeba.cpp.s
+.PHONY : src/datasets/celeba.cpp.s
+
+src/datasets/cifar.o: src/datasets/cifar.cpp.o
+.PHONY : src/datasets/cifar.o
+
+# target to build an object file
+src/datasets/cifar.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/cifar.cpp.o
+.PHONY : src/datasets/cifar.cpp.o
+
+src/datasets/cifar.i: src/datasets/cifar.cpp.i
+.PHONY : src/datasets/cifar.i
+
+# target to preprocess a source file
+src/datasets/cifar.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/cifar.cpp.i
+.PHONY : src/datasets/cifar.cpp.i
+
+src/datasets/cifar.s: src/datasets/cifar.cpp.s
+.PHONY : src/datasets/cifar.s
+
+# target to generate assembly for a file
+src/datasets/cifar.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/cifar.cpp.s
+.PHONY : src/datasets/cifar.cpp.s
+
+src/datasets/cityscapes.o: src/datasets/cityscapes.cpp.o
+.PHONY : src/datasets/cityscapes.o
+
+# target to build an object file
+src/datasets/cityscapes.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/cityscapes.cpp.o
+.PHONY : src/datasets/cityscapes.cpp.o
+
+src/datasets/cityscapes.i: src/datasets/cityscapes.cpp.i
+.PHONY : src/datasets/cityscapes.i
+
+# target to preprocess a source file
+src/datasets/cityscapes.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/cityscapes.cpp.i
+.PHONY : src/datasets/cityscapes.cpp.i
+
+src/datasets/cityscapes.s: src/datasets/cityscapes.cpp.s
+.PHONY : src/datasets/cityscapes.s
+
+# target to generate assembly for a file
+src/datasets/cityscapes.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/cityscapes.cpp.s
+.PHONY : src/datasets/cityscapes.cpp.s
+
+src/datasets/coco.o: src/datasets/coco.cpp.o
+.PHONY : src/datasets/coco.o
+
+# target to build an object file
+src/datasets/coco.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/coco.cpp.o
+.PHONY : src/datasets/coco.cpp.o
+
+src/datasets/coco.i: src/datasets/coco.cpp.i
+.PHONY : src/datasets/coco.i
+
+# target to preprocess a source file
+src/datasets/coco.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/coco.cpp.i
+.PHONY : src/datasets/coco.cpp.i
+
+src/datasets/coco.s: src/datasets/coco.cpp.s
+.PHONY : src/datasets/coco.s
+
+# target to generate assembly for a file
+src/datasets/coco.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/coco.cpp.s
+.PHONY : src/datasets/coco.cpp.s
+
+src/datasets/country.o: src/datasets/country.cpp.o
+.PHONY : src/datasets/country.o
+
+# target to build an object file
+src/datasets/country.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/country.cpp.o
+.PHONY : src/datasets/country.cpp.o
+
+src/datasets/country.i: src/datasets/country.cpp.i
+.PHONY : src/datasets/country.i
+
+# target to preprocess a source file
+src/datasets/country.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/country.cpp.i
+.PHONY : src/datasets/country.cpp.i
+
+src/datasets/country.s: src/datasets/country.cpp.s
+.PHONY : src/datasets/country.s
+
+# target to generate assembly for a file
+src/datasets/country.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/country.cpp.s
+.PHONY : src/datasets/country.cpp.s
+
+src/datasets/cre-stereo.o: src/datasets/cre-stereo.cpp.o
+.PHONY : src/datasets/cre-stereo.o
+
+# target to build an object file
+src/datasets/cre-stereo.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/cre-stereo.cpp.o
+.PHONY : src/datasets/cre-stereo.cpp.o
+
+src/datasets/cre-stereo.i: src/datasets/cre-stereo.cpp.i
+.PHONY : src/datasets/cre-stereo.i
+
+# target to preprocess a source file
+src/datasets/cre-stereo.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/cre-stereo.cpp.i
+.PHONY : src/datasets/cre-stereo.cpp.i
+
+src/datasets/cre-stereo.s: src/datasets/cre-stereo.cpp.s
+.PHONY : src/datasets/cre-stereo.s
+
+# target to generate assembly for a file
+src/datasets/cre-stereo.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/cre-stereo.cpp.s
+.PHONY : src/datasets/cre-stereo.cpp.s
+
+src/datasets/dtd.o: src/datasets/dtd.cpp.o
+.PHONY : src/datasets/dtd.o
+
+# target to build an object file
+src/datasets/dtd.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/dtd.cpp.o
+.PHONY : src/datasets/dtd.cpp.o
+
+src/datasets/dtd.i: src/datasets/dtd.cpp.i
+.PHONY : src/datasets/dtd.i
+
+# target to preprocess a source file
+src/datasets/dtd.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/dtd.cpp.i
+.PHONY : src/datasets/dtd.cpp.i
+
+src/datasets/dtd.s: src/datasets/dtd.cpp.s
+.PHONY : src/datasets/dtd.s
+
+# target to generate assembly for a file
+src/datasets/dtd.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/dtd.cpp.s
+.PHONY : src/datasets/dtd.cpp.s
+
+src/datasets/emnist.o: src/datasets/emnist.cpp.o
+.PHONY : src/datasets/emnist.o
+
+# target to build an object file
+src/datasets/emnist.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/emnist.cpp.o
+.PHONY : src/datasets/emnist.cpp.o
+
+src/datasets/emnist.i: src/datasets/emnist.cpp.i
+.PHONY : src/datasets/emnist.i
+
+# target to preprocess a source file
+src/datasets/emnist.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/emnist.cpp.i
+.PHONY : src/datasets/emnist.cpp.i
+
+src/datasets/emnist.s: src/datasets/emnist.cpp.s
+.PHONY : src/datasets/emnist.s
+
+# target to generate assembly for a file
+src/datasets/emnist.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/emnist.cpp.s
+.PHONY : src/datasets/emnist.cpp.s
+
+src/datasets/eth-3d-stereo.o: src/datasets/eth-3d-stereo.cpp.o
+.PHONY : src/datasets/eth-3d-stereo.o
+
+# target to build an object file
+src/datasets/eth-3d-stereo.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/eth-3d-stereo.cpp.o
+.PHONY : src/datasets/eth-3d-stereo.cpp.o
+
+src/datasets/eth-3d-stereo.i: src/datasets/eth-3d-stereo.cpp.i
+.PHONY : src/datasets/eth-3d-stereo.i
+
+# target to preprocess a source file
+src/datasets/eth-3d-stereo.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/eth-3d-stereo.cpp.i
+.PHONY : src/datasets/eth-3d-stereo.cpp.i
+
+src/datasets/eth-3d-stereo.s: src/datasets/eth-3d-stereo.cpp.s
+.PHONY : src/datasets/eth-3d-stereo.s
+
+# target to generate assembly for a file
+src/datasets/eth-3d-stereo.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/eth-3d-stereo.cpp.s
+.PHONY : src/datasets/eth-3d-stereo.cpp.s
+
+src/datasets/euro-sat.o: src/datasets/euro-sat.cpp.o
+.PHONY : src/datasets/euro-sat.o
+
+# target to build an object file
+src/datasets/euro-sat.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/euro-sat.cpp.o
+.PHONY : src/datasets/euro-sat.cpp.o
+
+src/datasets/euro-sat.i: src/datasets/euro-sat.cpp.i
+.PHONY : src/datasets/euro-sat.i
+
+# target to preprocess a source file
+src/datasets/euro-sat.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/euro-sat.cpp.i
+.PHONY : src/datasets/euro-sat.cpp.i
+
+src/datasets/euro-sat.s: src/datasets/euro-sat.cpp.s
+.PHONY : src/datasets/euro-sat.s
+
+# target to generate assembly for a file
+src/datasets/euro-sat.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/euro-sat.cpp.s
+.PHONY : src/datasets/euro-sat.cpp.s
+
+src/datasets/fake-data.o: src/datasets/fake-data.cpp.o
+.PHONY : src/datasets/fake-data.o
+
+# target to build an object file
+src/datasets/fake-data.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/fake-data.cpp.o
+.PHONY : src/datasets/fake-data.cpp.o
+
+src/datasets/fake-data.i: src/datasets/fake-data.cpp.i
+.PHONY : src/datasets/fake-data.i
+
+# target to preprocess a source file
+src/datasets/fake-data.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/fake-data.cpp.i
+.PHONY : src/datasets/fake-data.cpp.i
+
+src/datasets/fake-data.s: src/datasets/fake-data.cpp.s
+.PHONY : src/datasets/fake-data.s
+
+# target to generate assembly for a file
+src/datasets/fake-data.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/fake-data.cpp.s
+.PHONY : src/datasets/fake-data.cpp.s
+
+src/datasets/falling-things-stereo.o: src/datasets/falling-things-stereo.cpp.o
+.PHONY : src/datasets/falling-things-stereo.o
+
+# target to build an object file
+src/datasets/falling-things-stereo.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/falling-things-stereo.cpp.o
+.PHONY : src/datasets/falling-things-stereo.cpp.o
+
+src/datasets/falling-things-stereo.i: src/datasets/falling-things-stereo.cpp.i
+.PHONY : src/datasets/falling-things-stereo.i
+
+# target to preprocess a source file
+src/datasets/falling-things-stereo.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/falling-things-stereo.cpp.i
+.PHONY : src/datasets/falling-things-stereo.cpp.i
+
+src/datasets/falling-things-stereo.s: src/datasets/falling-things-stereo.cpp.s
+.PHONY : src/datasets/falling-things-stereo.s
+
+# target to generate assembly for a file
+src/datasets/falling-things-stereo.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/falling-things-stereo.cpp.s
+.PHONY : src/datasets/falling-things-stereo.cpp.s
 
 src/datasets/fashion-mnist.o: src/datasets/fashion-mnist.cpp.o
 .PHONY : src/datasets/fashion-mnist.o
@@ -258,6 +546,990 @@ src/datasets/fashion-mnist.s: src/datasets/fashion-mnist.cpp.s
 src/datasets/fashion-mnist.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/fashion-mnist.cpp.s
 .PHONY : src/datasets/fashion-mnist.cpp.s
+
+src/datasets/fer.o: src/datasets/fer.cpp.o
+.PHONY : src/datasets/fer.o
+
+# target to build an object file
+src/datasets/fer.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/fer.cpp.o
+.PHONY : src/datasets/fer.cpp.o
+
+src/datasets/fer.i: src/datasets/fer.cpp.i
+.PHONY : src/datasets/fer.i
+
+# target to preprocess a source file
+src/datasets/fer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/fer.cpp.i
+.PHONY : src/datasets/fer.cpp.i
+
+src/datasets/fer.s: src/datasets/fer.cpp.s
+.PHONY : src/datasets/fer.s
+
+# target to generate assembly for a file
+src/datasets/fer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/fer.cpp.s
+.PHONY : src/datasets/fer.cpp.s
+
+src/datasets/fgvc-aircraft.o: src/datasets/fgvc-aircraft.cpp.o
+.PHONY : src/datasets/fgvc-aircraft.o
+
+# target to build an object file
+src/datasets/fgvc-aircraft.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/fgvc-aircraft.cpp.o
+.PHONY : src/datasets/fgvc-aircraft.cpp.o
+
+src/datasets/fgvc-aircraft.i: src/datasets/fgvc-aircraft.cpp.i
+.PHONY : src/datasets/fgvc-aircraft.i
+
+# target to preprocess a source file
+src/datasets/fgvc-aircraft.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/fgvc-aircraft.cpp.i
+.PHONY : src/datasets/fgvc-aircraft.cpp.i
+
+src/datasets/fgvc-aircraft.s: src/datasets/fgvc-aircraft.cpp.s
+.PHONY : src/datasets/fgvc-aircraft.s
+
+# target to generate assembly for a file
+src/datasets/fgvc-aircraft.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/fgvc-aircraft.cpp.s
+.PHONY : src/datasets/fgvc-aircraft.cpp.s
+
+src/datasets/flickr.o: src/datasets/flickr.cpp.o
+.PHONY : src/datasets/flickr.o
+
+# target to build an object file
+src/datasets/flickr.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/flickr.cpp.o
+.PHONY : src/datasets/flickr.cpp.o
+
+src/datasets/flickr.i: src/datasets/flickr.cpp.i
+.PHONY : src/datasets/flickr.i
+
+# target to preprocess a source file
+src/datasets/flickr.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/flickr.cpp.i
+.PHONY : src/datasets/flickr.cpp.i
+
+src/datasets/flickr.s: src/datasets/flickr.cpp.s
+.PHONY : src/datasets/flickr.s
+
+# target to generate assembly for a file
+src/datasets/flickr.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/flickr.cpp.s
+.PHONY : src/datasets/flickr.cpp.s
+
+src/datasets/flowers.o: src/datasets/flowers.cpp.o
+.PHONY : src/datasets/flowers.o
+
+# target to build an object file
+src/datasets/flowers.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/flowers.cpp.o
+.PHONY : src/datasets/flowers.cpp.o
+
+src/datasets/flowers.i: src/datasets/flowers.cpp.i
+.PHONY : src/datasets/flowers.i
+
+# target to preprocess a source file
+src/datasets/flowers.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/flowers.cpp.i
+.PHONY : src/datasets/flowers.cpp.i
+
+src/datasets/flowers.s: src/datasets/flowers.cpp.s
+.PHONY : src/datasets/flowers.s
+
+# target to generate assembly for a file
+src/datasets/flowers.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/flowers.cpp.s
+.PHONY : src/datasets/flowers.cpp.s
+
+src/datasets/flying.o: src/datasets/flying.cpp.o
+.PHONY : src/datasets/flying.o
+
+# target to build an object file
+src/datasets/flying.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/flying.cpp.o
+.PHONY : src/datasets/flying.cpp.o
+
+src/datasets/flying.i: src/datasets/flying.cpp.i
+.PHONY : src/datasets/flying.i
+
+# target to preprocess a source file
+src/datasets/flying.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/flying.cpp.i
+.PHONY : src/datasets/flying.cpp.i
+
+src/datasets/flying.s: src/datasets/flying.cpp.s
+.PHONY : src/datasets/flying.s
+
+# target to generate assembly for a file
+src/datasets/flying.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/flying.cpp.s
+.PHONY : src/datasets/flying.cpp.s
+
+src/datasets/food.o: src/datasets/food.cpp.o
+.PHONY : src/datasets/food.o
+
+# target to build an object file
+src/datasets/food.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/food.cpp.o
+.PHONY : src/datasets/food.cpp.o
+
+src/datasets/food.i: src/datasets/food.cpp.i
+.PHONY : src/datasets/food.i
+
+# target to preprocess a source file
+src/datasets/food.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/food.cpp.i
+.PHONY : src/datasets/food.cpp.i
+
+src/datasets/food.s: src/datasets/food.cpp.s
+.PHONY : src/datasets/food.s
+
+# target to generate assembly for a file
+src/datasets/food.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/food.cpp.s
+.PHONY : src/datasets/food.cpp.s
+
+src/datasets/gtsrb.o: src/datasets/gtsrb.cpp.o
+.PHONY : src/datasets/gtsrb.o
+
+# target to build an object file
+src/datasets/gtsrb.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/gtsrb.cpp.o
+.PHONY : src/datasets/gtsrb.cpp.o
+
+src/datasets/gtsrb.i: src/datasets/gtsrb.cpp.i
+.PHONY : src/datasets/gtsrb.i
+
+# target to preprocess a source file
+src/datasets/gtsrb.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/gtsrb.cpp.i
+.PHONY : src/datasets/gtsrb.cpp.i
+
+src/datasets/gtsrb.s: src/datasets/gtsrb.cpp.s
+.PHONY : src/datasets/gtsrb.s
+
+# target to generate assembly for a file
+src/datasets/gtsrb.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/gtsrb.cpp.s
+.PHONY : src/datasets/gtsrb.cpp.s
+
+src/datasets/hd1k.o: src/datasets/hd1k.cpp.o
+.PHONY : src/datasets/hd1k.o
+
+# target to build an object file
+src/datasets/hd1k.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/hd1k.cpp.o
+.PHONY : src/datasets/hd1k.cpp.o
+
+src/datasets/hd1k.i: src/datasets/hd1k.cpp.i
+.PHONY : src/datasets/hd1k.i
+
+# target to preprocess a source file
+src/datasets/hd1k.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/hd1k.cpp.i
+.PHONY : src/datasets/hd1k.cpp.i
+
+src/datasets/hd1k.s: src/datasets/hd1k.cpp.s
+.PHONY : src/datasets/hd1k.s
+
+# target to generate assembly for a file
+src/datasets/hd1k.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/hd1k.cpp.s
+.PHONY : src/datasets/hd1k.cpp.s
+
+src/datasets/hmdb.o: src/datasets/hmdb.cpp.o
+.PHONY : src/datasets/hmdb.o
+
+# target to build an object file
+src/datasets/hmdb.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/hmdb.cpp.o
+.PHONY : src/datasets/hmdb.cpp.o
+
+src/datasets/hmdb.i: src/datasets/hmdb.cpp.i
+.PHONY : src/datasets/hmdb.i
+
+# target to preprocess a source file
+src/datasets/hmdb.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/hmdb.cpp.i
+.PHONY : src/datasets/hmdb.cpp.i
+
+src/datasets/hmdb.s: src/datasets/hmdb.cpp.s
+.PHONY : src/datasets/hmdb.s
+
+# target to generate assembly for a file
+src/datasets/hmdb.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/hmdb.cpp.s
+.PHONY : src/datasets/hmdb.cpp.s
+
+src/datasets/imagenet.o: src/datasets/imagenet.cpp.o
+.PHONY : src/datasets/imagenet.o
+
+# target to build an object file
+src/datasets/imagenet.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/imagenet.cpp.o
+.PHONY : src/datasets/imagenet.cpp.o
+
+src/datasets/imagenet.i: src/datasets/imagenet.cpp.i
+.PHONY : src/datasets/imagenet.i
+
+# target to preprocess a source file
+src/datasets/imagenet.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/imagenet.cpp.i
+.PHONY : src/datasets/imagenet.cpp.i
+
+src/datasets/imagenet.s: src/datasets/imagenet.cpp.s
+.PHONY : src/datasets/imagenet.s
+
+# target to generate assembly for a file
+src/datasets/imagenet.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/imagenet.cpp.s
+.PHONY : src/datasets/imagenet.cpp.s
+
+src/datasets/imagenette.o: src/datasets/imagenette.cpp.o
+.PHONY : src/datasets/imagenette.o
+
+# target to build an object file
+src/datasets/imagenette.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/imagenette.cpp.o
+.PHONY : src/datasets/imagenette.cpp.o
+
+src/datasets/imagenette.i: src/datasets/imagenette.cpp.i
+.PHONY : src/datasets/imagenette.i
+
+# target to preprocess a source file
+src/datasets/imagenette.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/imagenette.cpp.i
+.PHONY : src/datasets/imagenette.cpp.i
+
+src/datasets/imagenette.s: src/datasets/imagenette.cpp.s
+.PHONY : src/datasets/imagenette.s
+
+# target to generate assembly for a file
+src/datasets/imagenette.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/imagenette.cpp.s
+.PHONY : src/datasets/imagenette.cpp.s
+
+src/datasets/in-stereo.o: src/datasets/in-stereo.cpp.o
+.PHONY : src/datasets/in-stereo.o
+
+# target to build an object file
+src/datasets/in-stereo.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/in-stereo.cpp.o
+.PHONY : src/datasets/in-stereo.cpp.o
+
+src/datasets/in-stereo.i: src/datasets/in-stereo.cpp.i
+.PHONY : src/datasets/in-stereo.i
+
+# target to preprocess a source file
+src/datasets/in-stereo.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/in-stereo.cpp.i
+.PHONY : src/datasets/in-stereo.cpp.i
+
+src/datasets/in-stereo.s: src/datasets/in-stereo.cpp.s
+.PHONY : src/datasets/in-stereo.s
+
+# target to generate assembly for a file
+src/datasets/in-stereo.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/in-stereo.cpp.s
+.PHONY : src/datasets/in-stereo.cpp.s
+
+src/datasets/inaturalist.o: src/datasets/inaturalist.cpp.o
+.PHONY : src/datasets/inaturalist.o
+
+# target to build an object file
+src/datasets/inaturalist.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/inaturalist.cpp.o
+.PHONY : src/datasets/inaturalist.cpp.o
+
+src/datasets/inaturalist.i: src/datasets/inaturalist.cpp.i
+.PHONY : src/datasets/inaturalist.i
+
+# target to preprocess a source file
+src/datasets/inaturalist.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/inaturalist.cpp.i
+.PHONY : src/datasets/inaturalist.cpp.i
+
+src/datasets/inaturalist.s: src/datasets/inaturalist.cpp.s
+.PHONY : src/datasets/inaturalist.s
+
+# target to generate assembly for a file
+src/datasets/inaturalist.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/inaturalist.cpp.s
+.PHONY : src/datasets/inaturalist.cpp.s
+
+src/datasets/kinetics.o: src/datasets/kinetics.cpp.o
+.PHONY : src/datasets/kinetics.o
+
+# target to build an object file
+src/datasets/kinetics.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/kinetics.cpp.o
+.PHONY : src/datasets/kinetics.cpp.o
+
+src/datasets/kinetics.i: src/datasets/kinetics.cpp.i
+.PHONY : src/datasets/kinetics.i
+
+# target to preprocess a source file
+src/datasets/kinetics.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/kinetics.cpp.i
+.PHONY : src/datasets/kinetics.cpp.i
+
+src/datasets/kinetics.s: src/datasets/kinetics.cpp.s
+.PHONY : src/datasets/kinetics.s
+
+# target to generate assembly for a file
+src/datasets/kinetics.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/kinetics.cpp.s
+.PHONY : src/datasets/kinetics.cpp.s
+
+src/datasets/kitti.o: src/datasets/kitti.cpp.o
+.PHONY : src/datasets/kitti.o
+
+# target to build an object file
+src/datasets/kitti.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/kitti.cpp.o
+.PHONY : src/datasets/kitti.cpp.o
+
+src/datasets/kitti.i: src/datasets/kitti.cpp.i
+.PHONY : src/datasets/kitti.i
+
+# target to preprocess a source file
+src/datasets/kitti.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/kitti.cpp.i
+.PHONY : src/datasets/kitti.cpp.i
+
+src/datasets/kitti.s: src/datasets/kitti.cpp.s
+.PHONY : src/datasets/kitti.s
+
+# target to generate assembly for a file
+src/datasets/kitti.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/kitti.cpp.s
+.PHONY : src/datasets/kitti.cpp.s
+
+src/datasets/kmnist.o: src/datasets/kmnist.cpp.o
+.PHONY : src/datasets/kmnist.o
+
+# target to build an object file
+src/datasets/kmnist.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/kmnist.cpp.o
+.PHONY : src/datasets/kmnist.cpp.o
+
+src/datasets/kmnist.i: src/datasets/kmnist.cpp.i
+.PHONY : src/datasets/kmnist.i
+
+# target to preprocess a source file
+src/datasets/kmnist.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/kmnist.cpp.i
+.PHONY : src/datasets/kmnist.cpp.i
+
+src/datasets/kmnist.s: src/datasets/kmnist.cpp.s
+.PHONY : src/datasets/kmnist.s
+
+# target to generate assembly for a file
+src/datasets/kmnist.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/kmnist.cpp.s
+.PHONY : src/datasets/kmnist.cpp.s
+
+src/datasets/lfw.o: src/datasets/lfw.cpp.o
+.PHONY : src/datasets/lfw.o
+
+# target to build an object file
+src/datasets/lfw.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/lfw.cpp.o
+.PHONY : src/datasets/lfw.cpp.o
+
+src/datasets/lfw.i: src/datasets/lfw.cpp.i
+.PHONY : src/datasets/lfw.i
+
+# target to preprocess a source file
+src/datasets/lfw.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/lfw.cpp.i
+.PHONY : src/datasets/lfw.cpp.i
+
+src/datasets/lfw.s: src/datasets/lfw.cpp.s
+.PHONY : src/datasets/lfw.s
+
+# target to generate assembly for a file
+src/datasets/lfw.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/lfw.cpp.s
+.PHONY : src/datasets/lfw.cpp.s
+
+src/datasets/lsun.o: src/datasets/lsun.cpp.o
+.PHONY : src/datasets/lsun.o
+
+# target to build an object file
+src/datasets/lsun.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/lsun.cpp.o
+.PHONY : src/datasets/lsun.cpp.o
+
+src/datasets/lsun.i: src/datasets/lsun.cpp.i
+.PHONY : src/datasets/lsun.i
+
+# target to preprocess a source file
+src/datasets/lsun.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/lsun.cpp.i
+.PHONY : src/datasets/lsun.cpp.i
+
+src/datasets/lsun.s: src/datasets/lsun.cpp.s
+.PHONY : src/datasets/lsun.s
+
+# target to generate assembly for a file
+src/datasets/lsun.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/lsun.cpp.s
+.PHONY : src/datasets/lsun.cpp.s
+
+src/datasets/middlebury.o: src/datasets/middlebury.cpp.o
+.PHONY : src/datasets/middlebury.o
+
+# target to build an object file
+src/datasets/middlebury.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/middlebury.cpp.o
+.PHONY : src/datasets/middlebury.cpp.o
+
+src/datasets/middlebury.i: src/datasets/middlebury.cpp.i
+.PHONY : src/datasets/middlebury.i
+
+# target to preprocess a source file
+src/datasets/middlebury.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/middlebury.cpp.i
+.PHONY : src/datasets/middlebury.cpp.i
+
+src/datasets/middlebury.s: src/datasets/middlebury.cpp.s
+.PHONY : src/datasets/middlebury.s
+
+# target to generate assembly for a file
+src/datasets/middlebury.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/middlebury.cpp.s
+.PHONY : src/datasets/middlebury.cpp.s
+
+src/datasets/mnist.o: src/datasets/mnist.cpp.o
+.PHONY : src/datasets/mnist.o
+
+# target to build an object file
+src/datasets/mnist.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/mnist.cpp.o
+.PHONY : src/datasets/mnist.cpp.o
+
+src/datasets/mnist.i: src/datasets/mnist.cpp.i
+.PHONY : src/datasets/mnist.i
+
+# target to preprocess a source file
+src/datasets/mnist.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/mnist.cpp.i
+.PHONY : src/datasets/mnist.cpp.i
+
+src/datasets/mnist.s: src/datasets/mnist.cpp.s
+.PHONY : src/datasets/mnist.s
+
+# target to generate assembly for a file
+src/datasets/mnist.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/mnist.cpp.s
+.PHONY : src/datasets/mnist.cpp.s
+
+src/datasets/moving-mnist.o: src/datasets/moving-mnist.cpp.o
+.PHONY : src/datasets/moving-mnist.o
+
+# target to build an object file
+src/datasets/moving-mnist.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/moving-mnist.cpp.o
+.PHONY : src/datasets/moving-mnist.cpp.o
+
+src/datasets/moving-mnist.i: src/datasets/moving-mnist.cpp.i
+.PHONY : src/datasets/moving-mnist.i
+
+# target to preprocess a source file
+src/datasets/moving-mnist.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/moving-mnist.cpp.i
+.PHONY : src/datasets/moving-mnist.cpp.i
+
+src/datasets/moving-mnist.s: src/datasets/moving-mnist.cpp.s
+.PHONY : src/datasets/moving-mnist.s
+
+# target to generate assembly for a file
+src/datasets/moving-mnist.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/moving-mnist.cpp.s
+.PHONY : src/datasets/moving-mnist.cpp.s
+
+src/datasets/omniglot.o: src/datasets/omniglot.cpp.o
+.PHONY : src/datasets/omniglot.o
+
+# target to build an object file
+src/datasets/omniglot.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/omniglot.cpp.o
+.PHONY : src/datasets/omniglot.cpp.o
+
+src/datasets/omniglot.i: src/datasets/omniglot.cpp.i
+.PHONY : src/datasets/omniglot.i
+
+# target to preprocess a source file
+src/datasets/omniglot.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/omniglot.cpp.i
+.PHONY : src/datasets/omniglot.cpp.i
+
+src/datasets/omniglot.s: src/datasets/omniglot.cpp.s
+.PHONY : src/datasets/omniglot.s
+
+# target to generate assembly for a file
+src/datasets/omniglot.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/omniglot.cpp.s
+.PHONY : src/datasets/omniglot.cpp.s
+
+src/datasets/oxfordIII-t-pet.o: src/datasets/oxfordIII-t-pet.cpp.o
+.PHONY : src/datasets/oxfordIII-t-pet.o
+
+# target to build an object file
+src/datasets/oxfordIII-t-pet.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/oxfordIII-t-pet.cpp.o
+.PHONY : src/datasets/oxfordIII-t-pet.cpp.o
+
+src/datasets/oxfordIII-t-pet.i: src/datasets/oxfordIII-t-pet.cpp.i
+.PHONY : src/datasets/oxfordIII-t-pet.i
+
+# target to preprocess a source file
+src/datasets/oxfordIII-t-pet.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/oxfordIII-t-pet.cpp.i
+.PHONY : src/datasets/oxfordIII-t-pet.cpp.i
+
+src/datasets/oxfordIII-t-pet.s: src/datasets/oxfordIII-t-pet.cpp.s
+.PHONY : src/datasets/oxfordIII-t-pet.s
+
+# target to generate assembly for a file
+src/datasets/oxfordIII-t-pet.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/oxfordIII-t-pet.cpp.s
+.PHONY : src/datasets/oxfordIII-t-pet.cpp.s
+
+src/datasets/pcam.o: src/datasets/pcam.cpp.o
+.PHONY : src/datasets/pcam.o
+
+# target to build an object file
+src/datasets/pcam.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/pcam.cpp.o
+.PHONY : src/datasets/pcam.cpp.o
+
+src/datasets/pcam.i: src/datasets/pcam.cpp.i
+.PHONY : src/datasets/pcam.i
+
+# target to preprocess a source file
+src/datasets/pcam.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/pcam.cpp.i
+.PHONY : src/datasets/pcam.cpp.i
+
+src/datasets/pcam.s: src/datasets/pcam.cpp.s
+.PHONY : src/datasets/pcam.s
+
+# target to generate assembly for a file
+src/datasets/pcam.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/pcam.cpp.s
+.PHONY : src/datasets/pcam.cpp.s
+
+src/datasets/photo-tour.o: src/datasets/photo-tour.cpp.o
+.PHONY : src/datasets/photo-tour.o
+
+# target to build an object file
+src/datasets/photo-tour.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/photo-tour.cpp.o
+.PHONY : src/datasets/photo-tour.cpp.o
+
+src/datasets/photo-tour.i: src/datasets/photo-tour.cpp.i
+.PHONY : src/datasets/photo-tour.i
+
+# target to preprocess a source file
+src/datasets/photo-tour.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/photo-tour.cpp.i
+.PHONY : src/datasets/photo-tour.cpp.i
+
+src/datasets/photo-tour.s: src/datasets/photo-tour.cpp.s
+.PHONY : src/datasets/photo-tour.s
+
+# target to generate assembly for a file
+src/datasets/photo-tour.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/photo-tour.cpp.s
+.PHONY : src/datasets/photo-tour.cpp.s
+
+src/datasets/places.o: src/datasets/places.cpp.o
+.PHONY : src/datasets/places.o
+
+# target to build an object file
+src/datasets/places.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/places.cpp.o
+.PHONY : src/datasets/places.cpp.o
+
+src/datasets/places.i: src/datasets/places.cpp.i
+.PHONY : src/datasets/places.i
+
+# target to preprocess a source file
+src/datasets/places.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/places.cpp.i
+.PHONY : src/datasets/places.cpp.i
+
+src/datasets/places.s: src/datasets/places.cpp.s
+.PHONY : src/datasets/places.s
+
+# target to generate assembly for a file
+src/datasets/places.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/places.cpp.s
+.PHONY : src/datasets/places.cpp.s
+
+src/datasets/qmnist.o: src/datasets/qmnist.cpp.o
+.PHONY : src/datasets/qmnist.o
+
+# target to build an object file
+src/datasets/qmnist.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/qmnist.cpp.o
+.PHONY : src/datasets/qmnist.cpp.o
+
+src/datasets/qmnist.i: src/datasets/qmnist.cpp.i
+.PHONY : src/datasets/qmnist.i
+
+# target to preprocess a source file
+src/datasets/qmnist.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/qmnist.cpp.i
+.PHONY : src/datasets/qmnist.cpp.i
+
+src/datasets/qmnist.s: src/datasets/qmnist.cpp.s
+.PHONY : src/datasets/qmnist.s
+
+# target to generate assembly for a file
+src/datasets/qmnist.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/qmnist.cpp.s
+.PHONY : src/datasets/qmnist.cpp.s
+
+src/datasets/rendered-sst2.o: src/datasets/rendered-sst2.cpp.o
+.PHONY : src/datasets/rendered-sst2.o
+
+# target to build an object file
+src/datasets/rendered-sst2.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/rendered-sst2.cpp.o
+.PHONY : src/datasets/rendered-sst2.cpp.o
+
+src/datasets/rendered-sst2.i: src/datasets/rendered-sst2.cpp.i
+.PHONY : src/datasets/rendered-sst2.i
+
+# target to preprocess a source file
+src/datasets/rendered-sst2.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/rendered-sst2.cpp.i
+.PHONY : src/datasets/rendered-sst2.cpp.i
+
+src/datasets/rendered-sst2.s: src/datasets/rendered-sst2.cpp.s
+.PHONY : src/datasets/rendered-sst2.s
+
+# target to generate assembly for a file
+src/datasets/rendered-sst2.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/rendered-sst2.cpp.s
+.PHONY : src/datasets/rendered-sst2.cpp.s
+
+src/datasets/sb-dataset.o: src/datasets/sb-dataset.cpp.o
+.PHONY : src/datasets/sb-dataset.o
+
+# target to build an object file
+src/datasets/sb-dataset.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/sb-dataset.cpp.o
+.PHONY : src/datasets/sb-dataset.cpp.o
+
+src/datasets/sb-dataset.i: src/datasets/sb-dataset.cpp.i
+.PHONY : src/datasets/sb-dataset.i
+
+# target to preprocess a source file
+src/datasets/sb-dataset.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/sb-dataset.cpp.i
+.PHONY : src/datasets/sb-dataset.cpp.i
+
+src/datasets/sb-dataset.s: src/datasets/sb-dataset.cpp.s
+.PHONY : src/datasets/sb-dataset.s
+
+# target to generate assembly for a file
+src/datasets/sb-dataset.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/sb-dataset.cpp.s
+.PHONY : src/datasets/sb-dataset.cpp.s
+
+src/datasets/sbu.o: src/datasets/sbu.cpp.o
+.PHONY : src/datasets/sbu.o
+
+# target to build an object file
+src/datasets/sbu.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/sbu.cpp.o
+.PHONY : src/datasets/sbu.cpp.o
+
+src/datasets/sbu.i: src/datasets/sbu.cpp.i
+.PHONY : src/datasets/sbu.i
+
+# target to preprocess a source file
+src/datasets/sbu.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/sbu.cpp.i
+.PHONY : src/datasets/sbu.cpp.i
+
+src/datasets/sbu.s: src/datasets/sbu.cpp.s
+.PHONY : src/datasets/sbu.s
+
+# target to generate assembly for a file
+src/datasets/sbu.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/sbu.cpp.s
+.PHONY : src/datasets/sbu.cpp.s
+
+src/datasets/scene-flow-stereo.o: src/datasets/scene-flow-stereo.cpp.o
+.PHONY : src/datasets/scene-flow-stereo.o
+
+# target to build an object file
+src/datasets/scene-flow-stereo.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/scene-flow-stereo.cpp.o
+.PHONY : src/datasets/scene-flow-stereo.cpp.o
+
+src/datasets/scene-flow-stereo.i: src/datasets/scene-flow-stereo.cpp.i
+.PHONY : src/datasets/scene-flow-stereo.i
+
+# target to preprocess a source file
+src/datasets/scene-flow-stereo.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/scene-flow-stereo.cpp.i
+.PHONY : src/datasets/scene-flow-stereo.cpp.i
+
+src/datasets/scene-flow-stereo.s: src/datasets/scene-flow-stereo.cpp.s
+.PHONY : src/datasets/scene-flow-stereo.s
+
+# target to generate assembly for a file
+src/datasets/scene-flow-stereo.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/scene-flow-stereo.cpp.s
+.PHONY : src/datasets/scene-flow-stereo.cpp.s
+
+src/datasets/semeion.o: src/datasets/semeion.cpp.o
+.PHONY : src/datasets/semeion.o
+
+# target to build an object file
+src/datasets/semeion.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/semeion.cpp.o
+.PHONY : src/datasets/semeion.cpp.o
+
+src/datasets/semeion.i: src/datasets/semeion.cpp.i
+.PHONY : src/datasets/semeion.i
+
+# target to preprocess a source file
+src/datasets/semeion.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/semeion.cpp.i
+.PHONY : src/datasets/semeion.cpp.i
+
+src/datasets/semeion.s: src/datasets/semeion.cpp.s
+.PHONY : src/datasets/semeion.s
+
+# target to generate assembly for a file
+src/datasets/semeion.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/semeion.cpp.s
+.PHONY : src/datasets/semeion.cpp.s
+
+src/datasets/sintel.o: src/datasets/sintel.cpp.o
+.PHONY : src/datasets/sintel.o
+
+# target to build an object file
+src/datasets/sintel.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/sintel.cpp.o
+.PHONY : src/datasets/sintel.cpp.o
+
+src/datasets/sintel.i: src/datasets/sintel.cpp.i
+.PHONY : src/datasets/sintel.i
+
+# target to preprocess a source file
+src/datasets/sintel.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/sintel.cpp.i
+.PHONY : src/datasets/sintel.cpp.i
+
+src/datasets/sintel.s: src/datasets/sintel.cpp.s
+.PHONY : src/datasets/sintel.s
+
+# target to generate assembly for a file
+src/datasets/sintel.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/sintel.cpp.s
+.PHONY : src/datasets/sintel.cpp.s
+
+src/datasets/stanford-cars.o: src/datasets/stanford-cars.cpp.o
+.PHONY : src/datasets/stanford-cars.o
+
+# target to build an object file
+src/datasets/stanford-cars.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/stanford-cars.cpp.o
+.PHONY : src/datasets/stanford-cars.cpp.o
+
+src/datasets/stanford-cars.i: src/datasets/stanford-cars.cpp.i
+.PHONY : src/datasets/stanford-cars.i
+
+# target to preprocess a source file
+src/datasets/stanford-cars.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/stanford-cars.cpp.i
+.PHONY : src/datasets/stanford-cars.cpp.i
+
+src/datasets/stanford-cars.s: src/datasets/stanford-cars.cpp.s
+.PHONY : src/datasets/stanford-cars.s
+
+# target to generate assembly for a file
+src/datasets/stanford-cars.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/stanford-cars.cpp.s
+.PHONY : src/datasets/stanford-cars.cpp.s
+
+src/datasets/stl.o: src/datasets/stl.cpp.o
+.PHONY : src/datasets/stl.o
+
+# target to build an object file
+src/datasets/stl.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/stl.cpp.o
+.PHONY : src/datasets/stl.cpp.o
+
+src/datasets/stl.i: src/datasets/stl.cpp.i
+.PHONY : src/datasets/stl.i
+
+# target to preprocess a source file
+src/datasets/stl.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/stl.cpp.i
+.PHONY : src/datasets/stl.cpp.i
+
+src/datasets/stl.s: src/datasets/stl.cpp.s
+.PHONY : src/datasets/stl.s
+
+# target to generate assembly for a file
+src/datasets/stl.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/stl.cpp.s
+.PHONY : src/datasets/stl.cpp.s
+
+src/datasets/sun.o: src/datasets/sun.cpp.o
+.PHONY : src/datasets/sun.o
+
+# target to build an object file
+src/datasets/sun.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/sun.cpp.o
+.PHONY : src/datasets/sun.cpp.o
+
+src/datasets/sun.i: src/datasets/sun.cpp.i
+.PHONY : src/datasets/sun.i
+
+# target to preprocess a source file
+src/datasets/sun.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/sun.cpp.i
+.PHONY : src/datasets/sun.cpp.i
+
+src/datasets/sun.s: src/datasets/sun.cpp.s
+.PHONY : src/datasets/sun.s
+
+# target to generate assembly for a file
+src/datasets/sun.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/sun.cpp.s
+.PHONY : src/datasets/sun.cpp.s
+
+src/datasets/svhn.o: src/datasets/svhn.cpp.o
+.PHONY : src/datasets/svhn.o
+
+# target to build an object file
+src/datasets/svhn.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/svhn.cpp.o
+.PHONY : src/datasets/svhn.cpp.o
+
+src/datasets/svhn.i: src/datasets/svhn.cpp.i
+.PHONY : src/datasets/svhn.i
+
+# target to preprocess a source file
+src/datasets/svhn.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/svhn.cpp.i
+.PHONY : src/datasets/svhn.cpp.i
+
+src/datasets/svhn.s: src/datasets/svhn.cpp.s
+.PHONY : src/datasets/svhn.s
+
+# target to generate assembly for a file
+src/datasets/svhn.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/svhn.cpp.s
+.PHONY : src/datasets/svhn.cpp.s
+
+src/datasets/ucf.o: src/datasets/ucf.cpp.o
+.PHONY : src/datasets/ucf.o
+
+# target to build an object file
+src/datasets/ucf.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/ucf.cpp.o
+.PHONY : src/datasets/ucf.cpp.o
+
+src/datasets/ucf.i: src/datasets/ucf.cpp.i
+.PHONY : src/datasets/ucf.i
+
+# target to preprocess a source file
+src/datasets/ucf.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/ucf.cpp.i
+.PHONY : src/datasets/ucf.cpp.i
+
+src/datasets/ucf.s: src/datasets/ucf.cpp.s
+.PHONY : src/datasets/ucf.s
+
+# target to generate assembly for a file
+src/datasets/ucf.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/ucf.cpp.s
+.PHONY : src/datasets/ucf.cpp.s
+
+src/datasets/usps.o: src/datasets/usps.cpp.o
+.PHONY : src/datasets/usps.o
+
+# target to build an object file
+src/datasets/usps.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/usps.cpp.o
+.PHONY : src/datasets/usps.cpp.o
+
+src/datasets/usps.i: src/datasets/usps.cpp.i
+.PHONY : src/datasets/usps.i
+
+# target to preprocess a source file
+src/datasets/usps.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/usps.cpp.i
+.PHONY : src/datasets/usps.cpp.i
+
+src/datasets/usps.s: src/datasets/usps.cpp.s
+.PHONY : src/datasets/usps.s
+
+# target to generate assembly for a file
+src/datasets/usps.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/usps.cpp.s
+.PHONY : src/datasets/usps.cpp.s
+
+src/datasets/voc.o: src/datasets/voc.cpp.o
+.PHONY : src/datasets/voc.o
+
+# target to build an object file
+src/datasets/voc.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/voc.cpp.o
+.PHONY : src/datasets/voc.cpp.o
+
+src/datasets/voc.i: src/datasets/voc.cpp.i
+.PHONY : src/datasets/voc.i
+
+# target to preprocess a source file
+src/datasets/voc.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/voc.cpp.i
+.PHONY : src/datasets/voc.cpp.i
+
+src/datasets/voc.s: src/datasets/voc.cpp.s
+.PHONY : src/datasets/voc.s
+
+# target to generate assembly for a file
+src/datasets/voc.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/voc.cpp.s
+.PHONY : src/datasets/voc.cpp.s
+
+src/datasets/wider-face.o: src/datasets/wider-face.cpp.o
+.PHONY : src/datasets/wider-face.o
+
+# target to build an object file
+src/datasets/wider-face.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/wider-face.cpp.o
+.PHONY : src/datasets/wider-face.cpp.o
+
+src/datasets/wider-face.i: src/datasets/wider-face.cpp.i
+.PHONY : src/datasets/wider-face.i
+
+# target to preprocess a source file
+src/datasets/wider-face.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/wider-face.cpp.i
+.PHONY : src/datasets/wider-face.cpp.i
+
+src/datasets/wider-face.s: src/datasets/wider-face.cpp.s
+.PHONY : src/datasets/wider-face.s
+
+# target to generate assembly for a file
+src/datasets/wider-face.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/wider-face.cpp.s
+.PHONY : src/datasets/wider-face.cpp.s
 
 src/media/image/processing.o: src/media/image/processing.cpp.o
 .PHONY : src/media/image/processing.o
@@ -331,6 +1603,30 @@ src/models/cnn/lenet5.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/models/cnn/lenet5.cpp.s
 .PHONY : src/models/cnn/lenet5.cpp.s
 
+src/models/cnn/mobilenetv3.o: src/models/cnn/mobilenetv3.cpp.o
+.PHONY : src/models/cnn/mobilenetv3.o
+
+# target to build an object file
+src/models/cnn/mobilenetv3.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/models/cnn/mobilenetv3.cpp.o
+.PHONY : src/models/cnn/mobilenetv3.cpp.o
+
+src/models/cnn/mobilenetv3.i: src/models/cnn/mobilenetv3.cpp.i
+.PHONY : src/models/cnn/mobilenetv3.i
+
+# target to preprocess a source file
+src/models/cnn/mobilenetv3.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/models/cnn/mobilenetv3.cpp.i
+.PHONY : src/models/cnn/mobilenetv3.cpp.i
+
+src/models/cnn/mobilenetv3.s: src/models/cnn/mobilenetv3.cpp.s
+.PHONY : src/models/cnn/mobilenetv3.s
+
+# target to generate assembly for a file
+src/models/cnn/mobilenetv3.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/models/cnn/mobilenetv3.cpp.s
+.PHONY : src/models/cnn/mobilenetv3.cpp.s
+
 src/models/cnn/resnet.o: src/models/cnn/resnet.cpp.o
 .PHONY : src/models/cnn/resnet.o
 
@@ -354,6 +1650,30 @@ src/models/cnn/resnet.s: src/models/cnn/resnet.cpp.s
 src/models/cnn/resnet.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/models/cnn/resnet.cpp.s
 .PHONY : src/models/cnn/resnet.cpp.s
+
+src/models/cnn/unet.o: src/models/cnn/unet.cpp.o
+.PHONY : src/models/cnn/unet.o
+
+# target to build an object file
+src/models/cnn/unet.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/models/cnn/unet.cpp.o
+.PHONY : src/models/cnn/unet.cpp.o
+
+src/models/cnn/unet.i: src/models/cnn/unet.cpp.i
+.PHONY : src/models/cnn/unet.i
+
+# target to preprocess a source file
+src/models/cnn/unet.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/models/cnn/unet.cpp.i
+.PHONY : src/models/cnn/unet.cpp.i
+
+src/models/cnn/unet.s: src/models/cnn/unet.cpp.s
+.PHONY : src/models/cnn/unet.s
+
+# target to generate assembly for a file
+src/models/cnn/unet.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/models/cnn/unet.cpp.s
+.PHONY : src/models/cnn/unet.cpp.s
 
 src/models/cnn/vggnet16.o: src/models/cnn/vggnet16.cpp.o
 .PHONY : src/models/cnn/vggnet16.o
@@ -441,15 +1761,174 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... Test"
 	@echo "... TorchExtension"
-	@echo "... src/datasets/cifar10.o"
-	@echo "... src/datasets/cifar10.i"
-	@echo "... src/datasets/cifar10.s"
-	@echo "... src/datasets/cifar100.o"
-	@echo "... src/datasets/cifar100.i"
-	@echo "... src/datasets/cifar100.s"
+	@echo "... src/datasets/base.o"
+	@echo "... src/datasets/base.i"
+	@echo "... src/datasets/base.s"
+	@echo "... src/datasets/caltech.o"
+	@echo "... src/datasets/caltech.i"
+	@echo "... src/datasets/caltech.s"
+	@echo "... src/datasets/celeba.o"
+	@echo "... src/datasets/celeba.i"
+	@echo "... src/datasets/celeba.s"
+	@echo "... src/datasets/cifar.o"
+	@echo "... src/datasets/cifar.i"
+	@echo "... src/datasets/cifar.s"
+	@echo "... src/datasets/cityscapes.o"
+	@echo "... src/datasets/cityscapes.i"
+	@echo "... src/datasets/cityscapes.s"
+	@echo "... src/datasets/coco.o"
+	@echo "... src/datasets/coco.i"
+	@echo "... src/datasets/coco.s"
+	@echo "... src/datasets/country.o"
+	@echo "... src/datasets/country.i"
+	@echo "... src/datasets/country.s"
+	@echo "... src/datasets/cre-stereo.o"
+	@echo "... src/datasets/cre-stereo.i"
+	@echo "... src/datasets/cre-stereo.s"
+	@echo "... src/datasets/dtd.o"
+	@echo "... src/datasets/dtd.i"
+	@echo "... src/datasets/dtd.s"
+	@echo "... src/datasets/emnist.o"
+	@echo "... src/datasets/emnist.i"
+	@echo "... src/datasets/emnist.s"
+	@echo "... src/datasets/eth-3d-stereo.o"
+	@echo "... src/datasets/eth-3d-stereo.i"
+	@echo "... src/datasets/eth-3d-stereo.s"
+	@echo "... src/datasets/euro-sat.o"
+	@echo "... src/datasets/euro-sat.i"
+	@echo "... src/datasets/euro-sat.s"
+	@echo "... src/datasets/fake-data.o"
+	@echo "... src/datasets/fake-data.i"
+	@echo "... src/datasets/fake-data.s"
+	@echo "... src/datasets/falling-things-stereo.o"
+	@echo "... src/datasets/falling-things-stereo.i"
+	@echo "... src/datasets/falling-things-stereo.s"
 	@echo "... src/datasets/fashion-mnist.o"
 	@echo "... src/datasets/fashion-mnist.i"
 	@echo "... src/datasets/fashion-mnist.s"
+	@echo "... src/datasets/fer.o"
+	@echo "... src/datasets/fer.i"
+	@echo "... src/datasets/fer.s"
+	@echo "... src/datasets/fgvc-aircraft.o"
+	@echo "... src/datasets/fgvc-aircraft.i"
+	@echo "... src/datasets/fgvc-aircraft.s"
+	@echo "... src/datasets/flickr.o"
+	@echo "... src/datasets/flickr.i"
+	@echo "... src/datasets/flickr.s"
+	@echo "... src/datasets/flowers.o"
+	@echo "... src/datasets/flowers.i"
+	@echo "... src/datasets/flowers.s"
+	@echo "... src/datasets/flying.o"
+	@echo "... src/datasets/flying.i"
+	@echo "... src/datasets/flying.s"
+	@echo "... src/datasets/food.o"
+	@echo "... src/datasets/food.i"
+	@echo "... src/datasets/food.s"
+	@echo "... src/datasets/gtsrb.o"
+	@echo "... src/datasets/gtsrb.i"
+	@echo "... src/datasets/gtsrb.s"
+	@echo "... src/datasets/hd1k.o"
+	@echo "... src/datasets/hd1k.i"
+	@echo "... src/datasets/hd1k.s"
+	@echo "... src/datasets/hmdb.o"
+	@echo "... src/datasets/hmdb.i"
+	@echo "... src/datasets/hmdb.s"
+	@echo "... src/datasets/imagenet.o"
+	@echo "... src/datasets/imagenet.i"
+	@echo "... src/datasets/imagenet.s"
+	@echo "... src/datasets/imagenette.o"
+	@echo "... src/datasets/imagenette.i"
+	@echo "... src/datasets/imagenette.s"
+	@echo "... src/datasets/in-stereo.o"
+	@echo "... src/datasets/in-stereo.i"
+	@echo "... src/datasets/in-stereo.s"
+	@echo "... src/datasets/inaturalist.o"
+	@echo "... src/datasets/inaturalist.i"
+	@echo "... src/datasets/inaturalist.s"
+	@echo "... src/datasets/kinetics.o"
+	@echo "... src/datasets/kinetics.i"
+	@echo "... src/datasets/kinetics.s"
+	@echo "... src/datasets/kitti.o"
+	@echo "... src/datasets/kitti.i"
+	@echo "... src/datasets/kitti.s"
+	@echo "... src/datasets/kmnist.o"
+	@echo "... src/datasets/kmnist.i"
+	@echo "... src/datasets/kmnist.s"
+	@echo "... src/datasets/lfw.o"
+	@echo "... src/datasets/lfw.i"
+	@echo "... src/datasets/lfw.s"
+	@echo "... src/datasets/lsun.o"
+	@echo "... src/datasets/lsun.i"
+	@echo "... src/datasets/lsun.s"
+	@echo "... src/datasets/middlebury.o"
+	@echo "... src/datasets/middlebury.i"
+	@echo "... src/datasets/middlebury.s"
+	@echo "... src/datasets/mnist.o"
+	@echo "... src/datasets/mnist.i"
+	@echo "... src/datasets/mnist.s"
+	@echo "... src/datasets/moving-mnist.o"
+	@echo "... src/datasets/moving-mnist.i"
+	@echo "... src/datasets/moving-mnist.s"
+	@echo "... src/datasets/omniglot.o"
+	@echo "... src/datasets/omniglot.i"
+	@echo "... src/datasets/omniglot.s"
+	@echo "... src/datasets/oxfordIII-t-pet.o"
+	@echo "... src/datasets/oxfordIII-t-pet.i"
+	@echo "... src/datasets/oxfordIII-t-pet.s"
+	@echo "... src/datasets/pcam.o"
+	@echo "... src/datasets/pcam.i"
+	@echo "... src/datasets/pcam.s"
+	@echo "... src/datasets/photo-tour.o"
+	@echo "... src/datasets/photo-tour.i"
+	@echo "... src/datasets/photo-tour.s"
+	@echo "... src/datasets/places.o"
+	@echo "... src/datasets/places.i"
+	@echo "... src/datasets/places.s"
+	@echo "... src/datasets/qmnist.o"
+	@echo "... src/datasets/qmnist.i"
+	@echo "... src/datasets/qmnist.s"
+	@echo "... src/datasets/rendered-sst2.o"
+	@echo "... src/datasets/rendered-sst2.i"
+	@echo "... src/datasets/rendered-sst2.s"
+	@echo "... src/datasets/sb-dataset.o"
+	@echo "... src/datasets/sb-dataset.i"
+	@echo "... src/datasets/sb-dataset.s"
+	@echo "... src/datasets/sbu.o"
+	@echo "... src/datasets/sbu.i"
+	@echo "... src/datasets/sbu.s"
+	@echo "... src/datasets/scene-flow-stereo.o"
+	@echo "... src/datasets/scene-flow-stereo.i"
+	@echo "... src/datasets/scene-flow-stereo.s"
+	@echo "... src/datasets/semeion.o"
+	@echo "... src/datasets/semeion.i"
+	@echo "... src/datasets/semeion.s"
+	@echo "... src/datasets/sintel.o"
+	@echo "... src/datasets/sintel.i"
+	@echo "... src/datasets/sintel.s"
+	@echo "... src/datasets/stanford-cars.o"
+	@echo "... src/datasets/stanford-cars.i"
+	@echo "... src/datasets/stanford-cars.s"
+	@echo "... src/datasets/stl.o"
+	@echo "... src/datasets/stl.i"
+	@echo "... src/datasets/stl.s"
+	@echo "... src/datasets/sun.o"
+	@echo "... src/datasets/sun.i"
+	@echo "... src/datasets/sun.s"
+	@echo "... src/datasets/svhn.o"
+	@echo "... src/datasets/svhn.i"
+	@echo "... src/datasets/svhn.s"
+	@echo "... src/datasets/ucf.o"
+	@echo "... src/datasets/ucf.i"
+	@echo "... src/datasets/ucf.s"
+	@echo "... src/datasets/usps.o"
+	@echo "... src/datasets/usps.i"
+	@echo "... src/datasets/usps.s"
+	@echo "... src/datasets/voc.o"
+	@echo "... src/datasets/voc.i"
+	@echo "... src/datasets/voc.s"
+	@echo "... src/datasets/wider-face.o"
+	@echo "... src/datasets/wider-face.i"
+	@echo "... src/datasets/wider-face.s"
 	@echo "... src/media/image/processing.o"
 	@echo "... src/media/image/processing.i"
 	@echo "... src/media/image/processing.s"
@@ -459,9 +1938,15 @@ help:
 	@echo "... src/models/cnn/lenet5.o"
 	@echo "... src/models/cnn/lenet5.i"
 	@echo "... src/models/cnn/lenet5.s"
+	@echo "... src/models/cnn/mobilenetv3.o"
+	@echo "... src/models/cnn/mobilenetv3.i"
+	@echo "... src/models/cnn/mobilenetv3.s"
 	@echo "... src/models/cnn/resnet.o"
 	@echo "... src/models/cnn/resnet.i"
 	@echo "... src/models/cnn/resnet.s"
+	@echo "... src/models/cnn/unet.o"
+	@echo "... src/models/cnn/unet.i"
+	@echo "... src/models/cnn/unet.s"
 	@echo "... src/models/cnn/vggnet16.o"
 	@echo "... src/models/cnn/vggnet16.i"
 	@echo "... src/models/cnn/vggnet16.s"

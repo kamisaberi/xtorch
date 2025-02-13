@@ -9,16 +9,73 @@ project(TorchExtension VERSION 0.1.0 LANGUAGES CXX)
 
 #add_executable( ${CMAKE_PROJECT_NAME} main.cpp src/datasets/cifar100.cpp src/datasets/cifar10.cpp src/datasets/fashion-mnist.cpp)
 add_library(${CMAKE_PROJECT_NAME} SHARED
-        will-be-removed/cifar100.cpp
-        src/datasets/cifar.cpp
-        src/datasets/fashion-mnist.cpp
         src/utils/archiver.cpp
         src/utils/downloader.cpp
         src/media/image/processing.cpp
+
         src/models/cnn/alexnet.cpp
         src/models/cnn/lenet5.cpp
         src/models/cnn/vggnet16.cpp
         src/models/cnn/resnet.cpp
+        src/models/cnn/unet.cpp
+        src/models/cnn/mobilenetv3.cpp
+
+        src/datasets/base.cpp
+        src/datasets/caltech.cpp
+        src/datasets/celeba.cpp
+        src/datasets/cifar.cpp
+        src/datasets/cityscapes.cpp
+        src/datasets/coco.cpp
+        src/datasets/country.cpp
+        src/datasets/cre-stereo.cpp
+        src/datasets/dtd.cpp
+        src/datasets/emnist.cpp
+        src/datasets/eth-3d-stereo.cpp
+        src/datasets/euro-sat.cpp
+        src/datasets/fake-data.cpp
+        src/datasets/falling-things-stereo.cpp
+        src/datasets/fashion-mnist.cpp
+        src/datasets/fer.cpp
+        src/datasets/fgvc-aircraft.cpp
+        src/datasets/flickr.cpp
+        src/datasets/flowers.cpp
+        src/datasets/flying.cpp
+        src/datasets/food.cpp
+        src/datasets/gtsrb.cpp
+        src/datasets/hd1k.cpp
+        src/datasets/hmdb.cpp
+        src/datasets/imagenet.cpp
+        src/datasets/imagenette.cpp
+        src/datasets/in-stereo.cpp
+        src/datasets/inaturalist.cpp
+        src/datasets/kinetics.cpp
+        src/datasets/kitti.cpp
+        src/datasets/kmnist.cpp
+        src/datasets/lfw.cpp
+        src/datasets/lsun.cpp
+        src/datasets/middlebury.cpp
+        src/datasets/mnist.cpp
+        src/datasets/moving-mnist.cpp
+        src/datasets/omniglot.cpp
+        src/datasets/oxfordIII-t-pet.cpp
+        src/datasets/pcam.cpp
+        src/datasets/photo-tour.cpp
+        src/datasets/places.cpp
+        src/datasets/qmnist.cpp
+        src/datasets/rendered-sst2.cpp
+        src/datasets/sb-dataset.cpp
+        src/datasets/sbu.cpp
+        src/datasets/scene-flow-stereo.cpp
+        src/datasets/semeion.cpp
+        src/datasets/sintel.cpp
+        src/datasets/stanford-cars.cpp
+        src/datasets/stl.cpp
+        src/datasets/sun.cpp
+        src/datasets/svhn.cpp
+        src/datasets/ucf.cpp
+        src/datasets/usps.cpp
+        src/datasets/voc.cpp
+        src/datasets/wider-face.cpp
 )
 
 #set(CMAKE_CXX_STANDARD 17)
