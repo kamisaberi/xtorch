@@ -7,26 +7,29 @@ namespace fs = std::filesystem;
 std::tuple<bool, string> extractGzip(const std::string &inFile, const std::string &outFile) {
     gzFile gz = gzopen(inFile.c_str(), "rb");
     if (!gz) {
-        std::cerr << "Could not open " << inFile << std::endl;
+        std::cerr << "Could not open inFile " << inFile << std::endl;
         return std::make_tuple(false, "");
     }
 
 
     string destPath = "";
+//    cout << "out file name: "<< fs::path(outFile).filename().string().size() << endl;
     if (outFile == "") { //destination file name and path didn't specify
         destPath = inFile.substr(0, inFile.size() - 3);
-    } else if (fs::path(outFile).filename().string() ==
-               "") { //destination file name didn't specify but destination path specified
-        string destFileName = fs::path(inFile).filename().string().substr(0, inFile.size() - 3);
-        destPath = (fs::path(outFile) / fs::path(destPath)).string();
-    } else if (fs::path(outFile).filename().string() ==
-               outFile) { //destination file name specified but path didn't specify
+    } else if (fs::path(outFile).filename().string() == "") {
+        //destination file name didn't specify but destination path specified
+        string fln = fs::path(inFile).filename().string();
+        string destFileName = fln.substr(0, fln.size() - 3);
+//        cout << destFileName << endl;
+        destPath = (fs::path(outFile) / fs::path(destFileName)).string();
+    } else if (fs::path(outFile).filename().string() == outFile) {
+        //destination file name specified but path didn't specify
         destPath = "./" + outFile;
     }
 
     std::ofstream out(destPath, std::ios::binary);
     if (!out) {
-        std::cerr << "Could not open " << destPath << std::endl;
+        std::cerr << "Could not open detFile" << destPath << std::endl;
         gzclose(gz);
         return std::make_tuple(false, "");
     }
@@ -57,10 +60,13 @@ bool extractTar(const std::string &tarFile, const std::string &outPath) {
 
     // Extract all files from the tar archive
     cout << outPath << endl;
-    if (tar_extract_all(tar, (char *) destPath.c_str()) == -1) { // Extract to current directory
+//    if (tar_extract_all(tar, (char *) destPath.c_str()) == -1) { // Extract to current directory
+    int res = tar_extract_all(tar, (char *) outPath.c_str());
+    cout << "res:" << res;
+    if (res == -1) { // Extract to current directory
         std::cerr << "Error extracting tar file: " << tarFile << std::endl;
         tar_close(tar);
-        return false;
+        return true;
     }
     // Close the tar file
     tar_close(tar);
@@ -144,7 +150,7 @@ bool extractZip(const std::string &inFile, const std::string &outPath) {
 
 bool extract(const std::string &inFile, const std::string &outFile) {
     string ext = fs::path(inFile).filename().extension().string();
-    cout << ext << endl;
+//    cout << ext << endl;
     if (ext == ".gz") {
         cout << outFile << endl;
         auto [result, path] = extractGzip(inFile, outFile);

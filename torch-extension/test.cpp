@@ -6,7 +6,7 @@
 //#include <string>
 //#include <filesystem>
 //#include <curl/curl.h>
-#include "include/datasets/ucf.h"
+#include "include/datasets/cifar.h"
 
 int main() {
     torch::Tensor tensor = torch::eye(3);
@@ -14,9 +14,11 @@ int main() {
     std::cout << "Hello World" << std::endl;
     std::string r = "./test/test1/ali";
 //    torch::ext::data::datasets::UCF101 u1 = torch::ext::data::datasets::UCF101(5);
-    torch::ext::data::datasets::UCF101 u1 = torch::ext::data::datasets::UCF101(r);
+//    torch::ext::data::datasets::UCF101 u1 = torch::ext::data::datasets::UCF101(r);
+
+    torch::ext::data::datasets::CIFAR100 cifar100("/home/kami/Documents/temp/", true , true);
+    cout << cifar100.get(0).target << endl;
     std::cout << "End\n";
-//    torch::ext::data::datasets::CIFAR100 cifar100("/home/kami/Documents/temp/", true , true);
 
 
     return 0;

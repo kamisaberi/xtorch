@@ -59,16 +59,26 @@ namespace torch::ext::data::datasets {
         this->root = fs::path(root);
         this->dataset_path = this->root / this->dataset_folder_name;
 
-//                this->dataset_raw_path=this->dataset_path  /  fs::path("raw/");
-//    if (download) {
-//        auto [result, path] = download_data(this->download_url, this->root.string());
-//        if (result) {
-//            string pth = (this->root / this->archive_file_name).string();
-//            extract(pth, this->root);
-//        }
-//    }
+        bool res = true;
+        if (download) {
+            cout << fs::exists(this->root / this->archive_file_name) << endl;
+            if (!fs::exists(this->root / this->archive_file_name)) {
+                auto [result, path] = download_data(this->download_url, this->root.string());
+                res = result;
+            }
+            if (res) {
+//                fs::path pth1 = this->root / this->archive_file_name;
+//                cout << pth1.string() << endl;
+                string pth = (this->root / this->archive_file_name).string();
+//                cout << pth << endl;
+                extract(pth, this->root);
+            }
+        }
+        if (res) {
+            load_data( train);
+        }
 
-        load_data(root, train);
+
     }
 
     torch::data::Example<> CIFAR100::get(size_t index) {
@@ -81,9 +91,10 @@ namespace torch::ext::data::datasets {
         return data.size();
     }
 
-    void CIFAR100::load_data(const std::string &root, bool train) {
+    void CIFAR100::load_data(bool train) {
         const int num_files = 5;
-        std::string file_path = root + "/train.bin";
+        std::string file_path = (dataset_path / train_file_name).string();
+        cout << "train file path : " << file_path << endl;
         std::ifstream file(file_path, std::ios::binary);
         if (!file.is_open()) {
             std::cerr << "Failed to open file: " << file_path << std::endl;
@@ -110,7 +121,6 @@ namespace torch::ext::data::datasets {
 
         file.close();
     }
-
 
 
 }

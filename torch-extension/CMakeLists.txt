@@ -178,7 +178,7 @@ set(TEST_SOURCE_FILES
         src/utils/archiver.cpp
         src/utils/downloader.cpp
         src/media/image/processing.cpp
-        src/datasets/ucf.cpp
+        src/datasets/cifar.cpp
         test.cpp
 )
 
@@ -186,4 +186,17 @@ add_executable(${CMAKE_PROJECT_NAME} ${TEST_SOURCE_FILES})
 target_link_libraries(${CMAKE_PROJECT_NAME} "${TORCH_LIBRARIES}")
 #
 set_property(TARGET ${CMAKE_PROJECT_NAME} PROPERTY CXX_STANDARD 17)
+
+target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS})
+target_link_libraries(${CMAKE_PROJECT_NAME}
+        ${CURL_LIBRARIES}
+        ${TORCH_LIBRARIES}
+        ${OpenCV_LIBS}
+        ${ZLIB_LIBS}
+        ${ZIP_LIBRARIES}
+        zip
+        ${ZLIB_LIBRARIES}
+        ${LIBTAR_LIBRARY}
+)
+
 
