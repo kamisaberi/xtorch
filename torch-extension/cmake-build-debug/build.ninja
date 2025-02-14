@@ -11,7 +11,7 @@
 # =============================================================================
 
 # =============================================================================
-# Project: Test
+# Project: TorchExtension
 # Configurations: Debug
 # =============================================================================
 
@@ -39,7 +39,7 @@ include CMakeFiles/rules.ninja
 #############################################
 # Logical path to working directory; prefix for absolute paths.
 
-cmake_ninja_workdir = /home/kami/Documents/cpp/models/cmake-build-debug/
+cmake_ninja_workdir = /home/kami/Documents/cpp/models/torch-extension/cmake-build-debug/
 # =============================================================================
 # Object build statements for SHARED_LIBRARY target TorchExtension
 
@@ -49,29 +49,655 @@ cmake_ninja_workdir = /home/kami/Documents/cpp/models/cmake-build-debug/
 
 build cmake_object_order_depends_target_TorchExtension: phony || .
 
-build CMakeFiles/TorchExtension.dir/src/datasets/cifar100.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/src/datasets/cifar100.cpp || cmake_object_order_depends_target_TorchExtension
+build CMakeFiles/TorchExtension.dir/src/utils/archiver.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/utils/archiver.cpp || cmake_object_order_depends_target_TorchExtension
   DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
-  DEP_FILE = CMakeFiles/TorchExtension.dir/src/datasets/cifar100.cpp.o.d
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/utils/archiver.cpp.o.d
   FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
-  INCLUDES = -I/home/kami/Documents/cpp/models/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  OBJECT_DIR = CMakeFiles/TorchExtension.dir
+  OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/utils
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
+
+build CMakeFiles/TorchExtension.dir/src/utils/downloader.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/utils/downloader.cpp || cmake_object_order_depends_target_TorchExtension
+  DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/utils/downloader.cpp.o.d
+  FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  OBJECT_DIR = CMakeFiles/TorchExtension.dir
+  OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/utils
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
+
+build CMakeFiles/TorchExtension.dir/src/media/image/processing.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/media/image/processing.cpp || cmake_object_order_depends_target_TorchExtension
+  DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/media/image/processing.cpp.o.d
+  FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  OBJECT_DIR = CMakeFiles/TorchExtension.dir
+  OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/media/image
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
+
+build CMakeFiles/TorchExtension.dir/src/models/cnn/alexnet.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/models/cnn/alexnet.cpp || cmake_object_order_depends_target_TorchExtension
+  DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/models/cnn/alexnet.cpp.o.d
+  FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  OBJECT_DIR = CMakeFiles/TorchExtension.dir
+  OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/models/cnn
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
+
+build CMakeFiles/TorchExtension.dir/src/models/cnn/lenet5.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/models/cnn/lenet5.cpp || cmake_object_order_depends_target_TorchExtension
+  DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/models/cnn/lenet5.cpp.o.d
+  FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  OBJECT_DIR = CMakeFiles/TorchExtension.dir
+  OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/models/cnn
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
+
+build CMakeFiles/TorchExtension.dir/src/models/cnn/vggnet16.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/models/cnn/vggnet16.cpp || cmake_object_order_depends_target_TorchExtension
+  DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/models/cnn/vggnet16.cpp.o.d
+  FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  OBJECT_DIR = CMakeFiles/TorchExtension.dir
+  OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/models/cnn
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
+
+build CMakeFiles/TorchExtension.dir/src/models/cnn/resnet.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/models/cnn/resnet.cpp || cmake_object_order_depends_target_TorchExtension
+  DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/models/cnn/resnet.cpp.o.d
+  FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  OBJECT_DIR = CMakeFiles/TorchExtension.dir
+  OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/models/cnn
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
+
+build CMakeFiles/TorchExtension.dir/src/models/cnn/unet.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/models/cnn/unet.cpp || cmake_object_order_depends_target_TorchExtension
+  DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/models/cnn/unet.cpp.o.d
+  FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  OBJECT_DIR = CMakeFiles/TorchExtension.dir
+  OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/models/cnn
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
+
+build CMakeFiles/TorchExtension.dir/src/models/cnn/mobilenetv3.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/models/cnn/mobilenetv3.cpp || cmake_object_order_depends_target_TorchExtension
+  DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/models/cnn/mobilenetv3.cpp.o.d
+  FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  OBJECT_DIR = CMakeFiles/TorchExtension.dir
+  OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/models/cnn
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
+
+build CMakeFiles/TorchExtension.dir/src/datasets/base.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/datasets/base.cpp || cmake_object_order_depends_target_TorchExtension
+  DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/datasets/base.cpp.o.d
+  FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
   OBJECT_DIR = CMakeFiles/TorchExtension.dir
   OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/datasets
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
 
-build CMakeFiles/TorchExtension.dir/src/datasets/cifar10.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/src/datasets/cifar10.cpp || cmake_object_order_depends_target_TorchExtension
+build CMakeFiles/TorchExtension.dir/src/datasets/caltech.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/datasets/caltech.cpp || cmake_object_order_depends_target_TorchExtension
   DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
-  DEP_FILE = CMakeFiles/TorchExtension.dir/src/datasets/cifar10.cpp.o.d
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/datasets/caltech.cpp.o.d
   FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
-  INCLUDES = -I/home/kami/Documents/cpp/models/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
   OBJECT_DIR = CMakeFiles/TorchExtension.dir
   OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/datasets
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
 
-build CMakeFiles/TorchExtension.dir/src/datasets/fashion-mnist.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/src/datasets/fashion-mnist.cpp || cmake_object_order_depends_target_TorchExtension
+build CMakeFiles/TorchExtension.dir/src/datasets/celeba.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/datasets/celeba.cpp || cmake_object_order_depends_target_TorchExtension
+  DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/datasets/celeba.cpp.o.d
+  FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  OBJECT_DIR = CMakeFiles/TorchExtension.dir
+  OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/datasets
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
+
+build CMakeFiles/TorchExtension.dir/src/datasets/cifar.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/datasets/cifar.cpp || cmake_object_order_depends_target_TorchExtension
+  DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/datasets/cifar.cpp.o.d
+  FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  OBJECT_DIR = CMakeFiles/TorchExtension.dir
+  OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/datasets
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
+
+build CMakeFiles/TorchExtension.dir/src/datasets/cityscapes.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/datasets/cityscapes.cpp || cmake_object_order_depends_target_TorchExtension
+  DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/datasets/cityscapes.cpp.o.d
+  FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  OBJECT_DIR = CMakeFiles/TorchExtension.dir
+  OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/datasets
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
+
+build CMakeFiles/TorchExtension.dir/src/datasets/coco.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/datasets/coco.cpp || cmake_object_order_depends_target_TorchExtension
+  DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/datasets/coco.cpp.o.d
+  FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  OBJECT_DIR = CMakeFiles/TorchExtension.dir
+  OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/datasets
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
+
+build CMakeFiles/TorchExtension.dir/src/datasets/country.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/datasets/country.cpp || cmake_object_order_depends_target_TorchExtension
+  DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/datasets/country.cpp.o.d
+  FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  OBJECT_DIR = CMakeFiles/TorchExtension.dir
+  OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/datasets
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
+
+build CMakeFiles/TorchExtension.dir/src/datasets/cre-stereo.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/datasets/cre-stereo.cpp || cmake_object_order_depends_target_TorchExtension
+  DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/datasets/cre-stereo.cpp.o.d
+  FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  OBJECT_DIR = CMakeFiles/TorchExtension.dir
+  OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/datasets
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
+
+build CMakeFiles/TorchExtension.dir/src/datasets/dtd.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/datasets/dtd.cpp || cmake_object_order_depends_target_TorchExtension
+  DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/datasets/dtd.cpp.o.d
+  FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  OBJECT_DIR = CMakeFiles/TorchExtension.dir
+  OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/datasets
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
+
+build CMakeFiles/TorchExtension.dir/src/datasets/emnist.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/datasets/emnist.cpp || cmake_object_order_depends_target_TorchExtension
+  DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/datasets/emnist.cpp.o.d
+  FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  OBJECT_DIR = CMakeFiles/TorchExtension.dir
+  OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/datasets
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
+
+build CMakeFiles/TorchExtension.dir/src/datasets/eth-3d-stereo.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/datasets/eth-3d-stereo.cpp || cmake_object_order_depends_target_TorchExtension
+  DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/datasets/eth-3d-stereo.cpp.o.d
+  FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  OBJECT_DIR = CMakeFiles/TorchExtension.dir
+  OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/datasets
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
+
+build CMakeFiles/TorchExtension.dir/src/datasets/euro-sat.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/datasets/euro-sat.cpp || cmake_object_order_depends_target_TorchExtension
+  DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/datasets/euro-sat.cpp.o.d
+  FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  OBJECT_DIR = CMakeFiles/TorchExtension.dir
+  OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/datasets
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
+
+build CMakeFiles/TorchExtension.dir/src/datasets/fake-data.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/datasets/fake-data.cpp || cmake_object_order_depends_target_TorchExtension
+  DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/datasets/fake-data.cpp.o.d
+  FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  OBJECT_DIR = CMakeFiles/TorchExtension.dir
+  OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/datasets
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
+
+build CMakeFiles/TorchExtension.dir/src/datasets/falling-things-stereo.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/datasets/falling-things-stereo.cpp || cmake_object_order_depends_target_TorchExtension
+  DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/datasets/falling-things-stereo.cpp.o.d
+  FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  OBJECT_DIR = CMakeFiles/TorchExtension.dir
+  OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/datasets
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
+
+build CMakeFiles/TorchExtension.dir/src/datasets/fashion-mnist.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/datasets/fashion-mnist.cpp || cmake_object_order_depends_target_TorchExtension
   DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
   DEP_FILE = CMakeFiles/TorchExtension.dir/src/datasets/fashion-mnist.cpp.o.d
   FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
-  INCLUDES = -I/home/kami/Documents/cpp/models/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
   OBJECT_DIR = CMakeFiles/TorchExtension.dir
   OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/datasets
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
+
+build CMakeFiles/TorchExtension.dir/src/datasets/fer.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/datasets/fer.cpp || cmake_object_order_depends_target_TorchExtension
+  DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/datasets/fer.cpp.o.d
+  FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  OBJECT_DIR = CMakeFiles/TorchExtension.dir
+  OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/datasets
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
+
+build CMakeFiles/TorchExtension.dir/src/datasets/fgvc-aircraft.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/datasets/fgvc-aircraft.cpp || cmake_object_order_depends_target_TorchExtension
+  DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/datasets/fgvc-aircraft.cpp.o.d
+  FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  OBJECT_DIR = CMakeFiles/TorchExtension.dir
+  OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/datasets
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
+
+build CMakeFiles/TorchExtension.dir/src/datasets/flickr.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/datasets/flickr.cpp || cmake_object_order_depends_target_TorchExtension
+  DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/datasets/flickr.cpp.o.d
+  FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  OBJECT_DIR = CMakeFiles/TorchExtension.dir
+  OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/datasets
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
+
+build CMakeFiles/TorchExtension.dir/src/datasets/flowers.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/datasets/flowers.cpp || cmake_object_order_depends_target_TorchExtension
+  DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/datasets/flowers.cpp.o.d
+  FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  OBJECT_DIR = CMakeFiles/TorchExtension.dir
+  OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/datasets
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
+
+build CMakeFiles/TorchExtension.dir/src/datasets/flying.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/datasets/flying.cpp || cmake_object_order_depends_target_TorchExtension
+  DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/datasets/flying.cpp.o.d
+  FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  OBJECT_DIR = CMakeFiles/TorchExtension.dir
+  OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/datasets
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
+
+build CMakeFiles/TorchExtension.dir/src/datasets/food.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/datasets/food.cpp || cmake_object_order_depends_target_TorchExtension
+  DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/datasets/food.cpp.o.d
+  FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  OBJECT_DIR = CMakeFiles/TorchExtension.dir
+  OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/datasets
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
+
+build CMakeFiles/TorchExtension.dir/src/datasets/gtsrb.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/datasets/gtsrb.cpp || cmake_object_order_depends_target_TorchExtension
+  DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/datasets/gtsrb.cpp.o.d
+  FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  OBJECT_DIR = CMakeFiles/TorchExtension.dir
+  OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/datasets
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
+
+build CMakeFiles/TorchExtension.dir/src/datasets/hd1k.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/datasets/hd1k.cpp || cmake_object_order_depends_target_TorchExtension
+  DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/datasets/hd1k.cpp.o.d
+  FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  OBJECT_DIR = CMakeFiles/TorchExtension.dir
+  OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/datasets
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
+
+build CMakeFiles/TorchExtension.dir/src/datasets/hmdb.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/datasets/hmdb.cpp || cmake_object_order_depends_target_TorchExtension
+  DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/datasets/hmdb.cpp.o.d
+  FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  OBJECT_DIR = CMakeFiles/TorchExtension.dir
+  OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/datasets
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
+
+build CMakeFiles/TorchExtension.dir/src/datasets/imagenet.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/datasets/imagenet.cpp || cmake_object_order_depends_target_TorchExtension
+  DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/datasets/imagenet.cpp.o.d
+  FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  OBJECT_DIR = CMakeFiles/TorchExtension.dir
+  OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/datasets
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
+
+build CMakeFiles/TorchExtension.dir/src/datasets/imagenette.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/datasets/imagenette.cpp || cmake_object_order_depends_target_TorchExtension
+  DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/datasets/imagenette.cpp.o.d
+  FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  OBJECT_DIR = CMakeFiles/TorchExtension.dir
+  OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/datasets
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
+
+build CMakeFiles/TorchExtension.dir/src/datasets/in-stereo.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/datasets/in-stereo.cpp || cmake_object_order_depends_target_TorchExtension
+  DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/datasets/in-stereo.cpp.o.d
+  FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  OBJECT_DIR = CMakeFiles/TorchExtension.dir
+  OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/datasets
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
+
+build CMakeFiles/TorchExtension.dir/src/datasets/inaturalist.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/datasets/inaturalist.cpp || cmake_object_order_depends_target_TorchExtension
+  DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/datasets/inaturalist.cpp.o.d
+  FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  OBJECT_DIR = CMakeFiles/TorchExtension.dir
+  OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/datasets
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
+
+build CMakeFiles/TorchExtension.dir/src/datasets/kinetics.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/datasets/kinetics.cpp || cmake_object_order_depends_target_TorchExtension
+  DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/datasets/kinetics.cpp.o.d
+  FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  OBJECT_DIR = CMakeFiles/TorchExtension.dir
+  OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/datasets
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
+
+build CMakeFiles/TorchExtension.dir/src/datasets/kitti.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/datasets/kitti.cpp || cmake_object_order_depends_target_TorchExtension
+  DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/datasets/kitti.cpp.o.d
+  FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  OBJECT_DIR = CMakeFiles/TorchExtension.dir
+  OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/datasets
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
+
+build CMakeFiles/TorchExtension.dir/src/datasets/kmnist.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/datasets/kmnist.cpp || cmake_object_order_depends_target_TorchExtension
+  DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/datasets/kmnist.cpp.o.d
+  FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  OBJECT_DIR = CMakeFiles/TorchExtension.dir
+  OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/datasets
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
+
+build CMakeFiles/TorchExtension.dir/src/datasets/lfw.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/datasets/lfw.cpp || cmake_object_order_depends_target_TorchExtension
+  DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/datasets/lfw.cpp.o.d
+  FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  OBJECT_DIR = CMakeFiles/TorchExtension.dir
+  OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/datasets
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
+
+build CMakeFiles/TorchExtension.dir/src/datasets/lsun.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/datasets/lsun.cpp || cmake_object_order_depends_target_TorchExtension
+  DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/datasets/lsun.cpp.o.d
+  FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  OBJECT_DIR = CMakeFiles/TorchExtension.dir
+  OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/datasets
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
+
+build CMakeFiles/TorchExtension.dir/src/datasets/middlebury.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/datasets/middlebury.cpp || cmake_object_order_depends_target_TorchExtension
+  DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/datasets/middlebury.cpp.o.d
+  FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  OBJECT_DIR = CMakeFiles/TorchExtension.dir
+  OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/datasets
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
+
+build CMakeFiles/TorchExtension.dir/src/datasets/mnist.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/datasets/mnist.cpp || cmake_object_order_depends_target_TorchExtension
+  DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/datasets/mnist.cpp.o.d
+  FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  OBJECT_DIR = CMakeFiles/TorchExtension.dir
+  OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/datasets
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
+
+build CMakeFiles/TorchExtension.dir/src/datasets/moving-mnist.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/datasets/moving-mnist.cpp || cmake_object_order_depends_target_TorchExtension
+  DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/datasets/moving-mnist.cpp.o.d
+  FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  OBJECT_DIR = CMakeFiles/TorchExtension.dir
+  OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/datasets
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
+
+build CMakeFiles/TorchExtension.dir/src/datasets/omniglot.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/datasets/omniglot.cpp || cmake_object_order_depends_target_TorchExtension
+  DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/datasets/omniglot.cpp.o.d
+  FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  OBJECT_DIR = CMakeFiles/TorchExtension.dir
+  OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/datasets
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
+
+build CMakeFiles/TorchExtension.dir/src/datasets/oxfordIII-t-pet.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/datasets/oxfordIII-t-pet.cpp || cmake_object_order_depends_target_TorchExtension
+  DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/datasets/oxfordIII-t-pet.cpp.o.d
+  FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  OBJECT_DIR = CMakeFiles/TorchExtension.dir
+  OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/datasets
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
+
+build CMakeFiles/TorchExtension.dir/src/datasets/pcam.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/datasets/pcam.cpp || cmake_object_order_depends_target_TorchExtension
+  DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/datasets/pcam.cpp.o.d
+  FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  OBJECT_DIR = CMakeFiles/TorchExtension.dir
+  OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/datasets
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
+
+build CMakeFiles/TorchExtension.dir/src/datasets/photo-tour.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/datasets/photo-tour.cpp || cmake_object_order_depends_target_TorchExtension
+  DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/datasets/photo-tour.cpp.o.d
+  FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  OBJECT_DIR = CMakeFiles/TorchExtension.dir
+  OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/datasets
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
+
+build CMakeFiles/TorchExtension.dir/src/datasets/places.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/datasets/places.cpp || cmake_object_order_depends_target_TorchExtension
+  DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/datasets/places.cpp.o.d
+  FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  OBJECT_DIR = CMakeFiles/TorchExtension.dir
+  OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/datasets
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
+
+build CMakeFiles/TorchExtension.dir/src/datasets/qmnist.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/datasets/qmnist.cpp || cmake_object_order_depends_target_TorchExtension
+  DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/datasets/qmnist.cpp.o.d
+  FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  OBJECT_DIR = CMakeFiles/TorchExtension.dir
+  OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/datasets
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
+
+build CMakeFiles/TorchExtension.dir/src/datasets/rendered-sst2.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/datasets/rendered-sst2.cpp || cmake_object_order_depends_target_TorchExtension
+  DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/datasets/rendered-sst2.cpp.o.d
+  FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  OBJECT_DIR = CMakeFiles/TorchExtension.dir
+  OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/datasets
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
+
+build CMakeFiles/TorchExtension.dir/src/datasets/sb-dataset.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/datasets/sb-dataset.cpp || cmake_object_order_depends_target_TorchExtension
+  DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/datasets/sb-dataset.cpp.o.d
+  FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  OBJECT_DIR = CMakeFiles/TorchExtension.dir
+  OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/datasets
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
+
+build CMakeFiles/TorchExtension.dir/src/datasets/sbu.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/datasets/sbu.cpp || cmake_object_order_depends_target_TorchExtension
+  DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/datasets/sbu.cpp.o.d
+  FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  OBJECT_DIR = CMakeFiles/TorchExtension.dir
+  OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/datasets
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
+
+build CMakeFiles/TorchExtension.dir/src/datasets/scene-flow-stereo.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/datasets/scene-flow-stereo.cpp || cmake_object_order_depends_target_TorchExtension
+  DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/datasets/scene-flow-stereo.cpp.o.d
+  FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  OBJECT_DIR = CMakeFiles/TorchExtension.dir
+  OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/datasets
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
+
+build CMakeFiles/TorchExtension.dir/src/datasets/semeion.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/datasets/semeion.cpp || cmake_object_order_depends_target_TorchExtension
+  DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/datasets/semeion.cpp.o.d
+  FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  OBJECT_DIR = CMakeFiles/TorchExtension.dir
+  OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/datasets
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
+
+build CMakeFiles/TorchExtension.dir/src/datasets/sintel.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/datasets/sintel.cpp || cmake_object_order_depends_target_TorchExtension
+  DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/datasets/sintel.cpp.o.d
+  FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  OBJECT_DIR = CMakeFiles/TorchExtension.dir
+  OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/datasets
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
+
+build CMakeFiles/TorchExtension.dir/src/datasets/stanford-cars.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/datasets/stanford-cars.cpp || cmake_object_order_depends_target_TorchExtension
+  DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/datasets/stanford-cars.cpp.o.d
+  FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  OBJECT_DIR = CMakeFiles/TorchExtension.dir
+  OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/datasets
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
+
+build CMakeFiles/TorchExtension.dir/src/datasets/stl.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/datasets/stl.cpp || cmake_object_order_depends_target_TorchExtension
+  DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/datasets/stl.cpp.o.d
+  FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  OBJECT_DIR = CMakeFiles/TorchExtension.dir
+  OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/datasets
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
+
+build CMakeFiles/TorchExtension.dir/src/datasets/sun.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/datasets/sun.cpp || cmake_object_order_depends_target_TorchExtension
+  DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/datasets/sun.cpp.o.d
+  FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  OBJECT_DIR = CMakeFiles/TorchExtension.dir
+  OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/datasets
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
+
+build CMakeFiles/TorchExtension.dir/src/datasets/svhn.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/datasets/svhn.cpp || cmake_object_order_depends_target_TorchExtension
+  DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/datasets/svhn.cpp.o.d
+  FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  OBJECT_DIR = CMakeFiles/TorchExtension.dir
+  OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/datasets
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
+
+build CMakeFiles/TorchExtension.dir/src/datasets/ucf.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/datasets/ucf.cpp || cmake_object_order_depends_target_TorchExtension
+  DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/datasets/ucf.cpp.o.d
+  FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  OBJECT_DIR = CMakeFiles/TorchExtension.dir
+  OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/datasets
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
+
+build CMakeFiles/TorchExtension.dir/src/datasets/usps.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/datasets/usps.cpp || cmake_object_order_depends_target_TorchExtension
+  DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/datasets/usps.cpp.o.d
+  FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  OBJECT_DIR = CMakeFiles/TorchExtension.dir
+  OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/datasets
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
+
+build CMakeFiles/TorchExtension.dir/src/datasets/voc.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/datasets/voc.cpp || cmake_object_order_depends_target_TorchExtension
+  DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/datasets/voc.cpp.o.d
+  FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  OBJECT_DIR = CMakeFiles/TorchExtension.dir
+  OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/datasets
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
+
+build CMakeFiles/TorchExtension.dir/src/datasets/wider-face.cpp.o: CXX_COMPILER__TorchExtension_unscanned_Debug /home/kami/Documents/cpp/models/torch-extension/src/datasets/wider-face.cpp || cmake_object_order_depends_target_TorchExtension
+  DEFINES = -DTorchExtension_EXPORTS -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
+  DEP_FILE = CMakeFiles/TorchExtension.dir/src/datasets/wider-face.cpp.o.d
+  FLAGS = -g -fPIC -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
+  INCLUDES = -I/home/kami/Documents/cpp/models/torch-extension/include -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include -isystem /usr/include/opencv4
+  OBJECT_DIR = CMakeFiles/TorchExtension.dir
+  OBJECT_FILE_DIR = CMakeFiles/TorchExtension.dir/src/datasets
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_PDB = libTorchExtension.pdb
 
 
 # =============================================================================
@@ -79,9 +705,9 @@ build CMakeFiles/TorchExtension.dir/src/datasets/fashion-mnist.cpp.o: CXX_COMPIL
 
 
 #############################################
-# Link the shared library libTorchExtension.so.1.0.0
+# Link the shared library libTorchExtension.so.0.1.0
 
-build libTorchExtension.so.1.0.0: CXX_SHARED_LIBRARY_LINKER__TorchExtension_Debug CMakeFiles/TorchExtension.dir/src/datasets/cifar100.cpp.o CMakeFiles/TorchExtension.dir/src/datasets/cifar10.cpp.o CMakeFiles/TorchExtension.dir/src/datasets/fashion-mnist.cpp.o | /usr/lib/libcurl.so /home/kami/libs/c++/libtorch/lib/libtorch.so /home/kami/libs/c++/libtorch/lib/libc10.so /home/kami/libs/c++/libtorch/lib/libkineto.a /usr/lib/libopencv_gapi.so.4.10.0 /usr/lib/libopencv_stitching.so.4.10.0 /usr/lib/libopencv_alphamat.so.4.10.0 /usr/lib/libopencv_aruco.so.4.10.0 /usr/lib/libopencv_bgsegm.so.4.10.0 /usr/lib/libopencv_bioinspired.so.4.10.0 /usr/lib/libopencv_ccalib.so.4.10.0 /usr/lib/libopencv_cvv.so.4.10.0 /usr/lib/libopencv_dnn_objdetect.so.4.10.0 /usr/lib/libopencv_dnn_superres.so.4.10.0 /usr/lib/libopencv_dpm.so.4.10.0 /usr/lib/libopencv_face.so.4.10.0 /usr/lib/libopencv_freetype.so.4.10.0 /usr/lib/libopencv_fuzzy.so.4.10.0 /usr/lib/libopencv_hdf.so.4.10.0 /usr/lib/libopencv_hfs.so.4.10.0 /usr/lib/libopencv_img_hash.so.4.10.0 /usr/lib/libopencv_intensity_transform.so.4.10.0 /usr/lib/libopencv_line_descriptor.so.4.10.0 /usr/lib/libopencv_mcc.so.4.10.0 /usr/lib/libopencv_quality.so.4.10.0 /usr/lib/libopencv_rapid.so.4.10.0 /usr/lib/libopencv_reg.so.4.10.0 /usr/lib/libopencv_rgbd.so.4.10.0 /usr/lib/libopencv_saliency.so.4.10.0 /usr/lib/libopencv_signal.so.4.10.0 /usr/lib/libopencv_stereo.so.4.10.0 /usr/lib/libopencv_structured_light.so.4.10.0 /usr/lib/libopencv_superres.so.4.10.0 /usr/lib/libopencv_surface_matching.so.4.10.0 /usr/lib/libopencv_tracking.so.4.10.0 /usr/lib/libopencv_videostab.so.4.10.0 /usr/lib/libopencv_viz.so.4.10.0 /usr/lib/libopencv_wechat_qrcode.so.4.10.0 /usr/lib/libopencv_xfeatures2d.so.4.10.0 /usr/lib/libopencv_xobjdetect.so.4.10.0 /usr/lib/libopencv_xphoto.so.4.10.0 /usr/lib/libz.so /usr/lib/libtar.so /home/kami/libs/c++/libtorch/lib/libc10.so /usr/lib/libopencv_shape.so.4.10.0 /usr/lib/libopencv_highgui.so.4.10.0 /usr/lib/libopencv_datasets.so.4.10.0 /usr/lib/libopencv_plot.so.4.10.0 /usr/lib/libopencv_text.so.4.10.0 /usr/lib/libopencv_ml.so.4.10.0 /usr/lib/libopencv_phase_unwrapping.so.4.10.0 /usr/lib/libopencv_optflow.so.4.10.0 /usr/lib/libopencv_ximgproc.so.4.10.0 /usr/lib/libopencv_video.so.4.10.0 /usr/lib/libopencv_videoio.so.4.10.0 /usr/lib/libopencv_imgcodecs.so.4.10.0 /usr/lib/libopencv_objdetect.so.4.10.0 /usr/lib/libopencv_calib3d.so.4.10.0 /usr/lib/libopencv_dnn.so.4.10.0 /usr/lib/libopencv_features2d.so.4.10.0 /usr/lib/libopencv_flann.so.4.10.0 /usr/lib/libopencv_photo.so.4.10.0 /usr/lib/libopencv_imgproc.so.4.10.0 /usr/lib/libopencv_core.so.4.10.0
+build libTorchExtension.so.0.1.0: CXX_SHARED_LIBRARY_LINKER__TorchExtension_Debug CMakeFiles/TorchExtension.dir/src/utils/archiver.cpp.o CMakeFiles/TorchExtension.dir/src/utils/downloader.cpp.o CMakeFiles/TorchExtension.dir/src/media/image/processing.cpp.o CMakeFiles/TorchExtension.dir/src/models/cnn/alexnet.cpp.o CMakeFiles/TorchExtension.dir/src/models/cnn/lenet5.cpp.o CMakeFiles/TorchExtension.dir/src/models/cnn/vggnet16.cpp.o CMakeFiles/TorchExtension.dir/src/models/cnn/resnet.cpp.o CMakeFiles/TorchExtension.dir/src/models/cnn/unet.cpp.o CMakeFiles/TorchExtension.dir/src/models/cnn/mobilenetv3.cpp.o CMakeFiles/TorchExtension.dir/src/datasets/base.cpp.o CMakeFiles/TorchExtension.dir/src/datasets/caltech.cpp.o CMakeFiles/TorchExtension.dir/src/datasets/celeba.cpp.o CMakeFiles/TorchExtension.dir/src/datasets/cifar.cpp.o CMakeFiles/TorchExtension.dir/src/datasets/cityscapes.cpp.o CMakeFiles/TorchExtension.dir/src/datasets/coco.cpp.o CMakeFiles/TorchExtension.dir/src/datasets/country.cpp.o CMakeFiles/TorchExtension.dir/src/datasets/cre-stereo.cpp.o CMakeFiles/TorchExtension.dir/src/datasets/dtd.cpp.o CMakeFiles/TorchExtension.dir/src/datasets/emnist.cpp.o CMakeFiles/TorchExtension.dir/src/datasets/eth-3d-stereo.cpp.o CMakeFiles/TorchExtension.dir/src/datasets/euro-sat.cpp.o CMakeFiles/TorchExtension.dir/src/datasets/fake-data.cpp.o CMakeFiles/TorchExtension.dir/src/datasets/falling-things-stereo.cpp.o CMakeFiles/TorchExtension.dir/src/datasets/fashion-mnist.cpp.o CMakeFiles/TorchExtension.dir/src/datasets/fer.cpp.o CMakeFiles/TorchExtension.dir/src/datasets/fgvc-aircraft.cpp.o CMakeFiles/TorchExtension.dir/src/datasets/flickr.cpp.o CMakeFiles/TorchExtension.dir/src/datasets/flowers.cpp.o CMakeFiles/TorchExtension.dir/src/datasets/flying.cpp.o CMakeFiles/TorchExtension.dir/src/datasets/food.cpp.o CMakeFiles/TorchExtension.dir/src/datasets/gtsrb.cpp.o CMakeFiles/TorchExtension.dir/src/datasets/hd1k.cpp.o CMakeFiles/TorchExtension.dir/src/datasets/hmdb.cpp.o CMakeFiles/TorchExtension.dir/src/datasets/imagenet.cpp.o CMakeFiles/TorchExtension.dir/src/datasets/imagenette.cpp.o CMakeFiles/TorchExtension.dir/src/datasets/in-stereo.cpp.o CMakeFiles/TorchExtension.dir/src/datasets/inaturalist.cpp.o CMakeFiles/TorchExtension.dir/src/datasets/kinetics.cpp.o CMakeFiles/TorchExtension.dir/src/datasets/kitti.cpp.o CMakeFiles/TorchExtension.dir/src/datasets/kmnist.cpp.o CMakeFiles/TorchExtension.dir/src/datasets/lfw.cpp.o CMakeFiles/TorchExtension.dir/src/datasets/lsun.cpp.o CMakeFiles/TorchExtension.dir/src/datasets/middlebury.cpp.o CMakeFiles/TorchExtension.dir/src/datasets/mnist.cpp.o CMakeFiles/TorchExtension.dir/src/datasets/moving-mnist.cpp.o CMakeFiles/TorchExtension.dir/src/datasets/omniglot.cpp.o CMakeFiles/TorchExtension.dir/src/datasets/oxfordIII-t-pet.cpp.o CMakeFiles/TorchExtension.dir/src/datasets/pcam.cpp.o CMakeFiles/TorchExtension.dir/src/datasets/photo-tour.cpp.o CMakeFiles/TorchExtension.dir/src/datasets/places.cpp.o CMakeFiles/TorchExtension.dir/src/datasets/qmnist.cpp.o CMakeFiles/TorchExtension.dir/src/datasets/rendered-sst2.cpp.o CMakeFiles/TorchExtension.dir/src/datasets/sb-dataset.cpp.o CMakeFiles/TorchExtension.dir/src/datasets/sbu.cpp.o CMakeFiles/TorchExtension.dir/src/datasets/scene-flow-stereo.cpp.o CMakeFiles/TorchExtension.dir/src/datasets/semeion.cpp.o CMakeFiles/TorchExtension.dir/src/datasets/sintel.cpp.o CMakeFiles/TorchExtension.dir/src/datasets/stanford-cars.cpp.o CMakeFiles/TorchExtension.dir/src/datasets/stl.cpp.o CMakeFiles/TorchExtension.dir/src/datasets/sun.cpp.o CMakeFiles/TorchExtension.dir/src/datasets/svhn.cpp.o CMakeFiles/TorchExtension.dir/src/datasets/ucf.cpp.o CMakeFiles/TorchExtension.dir/src/datasets/usps.cpp.o CMakeFiles/TorchExtension.dir/src/datasets/voc.cpp.o CMakeFiles/TorchExtension.dir/src/datasets/wider-face.cpp.o | /usr/lib/libcurl.so /home/kami/libs/c++/libtorch/lib/libtorch.so /home/kami/libs/c++/libtorch/lib/libc10.so /home/kami/libs/c++/libtorch/lib/libkineto.a /usr/lib/libopencv_gapi.so.4.10.0 /usr/lib/libopencv_stitching.so.4.10.0 /usr/lib/libopencv_alphamat.so.4.10.0 /usr/lib/libopencv_aruco.so.4.10.0 /usr/lib/libopencv_bgsegm.so.4.10.0 /usr/lib/libopencv_bioinspired.so.4.10.0 /usr/lib/libopencv_ccalib.so.4.10.0 /usr/lib/libopencv_cvv.so.4.10.0 /usr/lib/libopencv_dnn_objdetect.so.4.10.0 /usr/lib/libopencv_dnn_superres.so.4.10.0 /usr/lib/libopencv_dpm.so.4.10.0 /usr/lib/libopencv_face.so.4.10.0 /usr/lib/libopencv_freetype.so.4.10.0 /usr/lib/libopencv_fuzzy.so.4.10.0 /usr/lib/libopencv_hdf.so.4.10.0 /usr/lib/libopencv_hfs.so.4.10.0 /usr/lib/libopencv_img_hash.so.4.10.0 /usr/lib/libopencv_intensity_transform.so.4.10.0 /usr/lib/libopencv_line_descriptor.so.4.10.0 /usr/lib/libopencv_mcc.so.4.10.0 /usr/lib/libopencv_quality.so.4.10.0 /usr/lib/libopencv_rapid.so.4.10.0 /usr/lib/libopencv_reg.so.4.10.0 /usr/lib/libopencv_rgbd.so.4.10.0 /usr/lib/libopencv_saliency.so.4.10.0 /usr/lib/libopencv_signal.so.4.10.0 /usr/lib/libopencv_stereo.so.4.10.0 /usr/lib/libopencv_structured_light.so.4.10.0 /usr/lib/libopencv_superres.so.4.10.0 /usr/lib/libopencv_surface_matching.so.4.10.0 /usr/lib/libopencv_tracking.so.4.10.0 /usr/lib/libopencv_videostab.so.4.10.0 /usr/lib/libopencv_viz.so.4.10.0 /usr/lib/libopencv_wechat_qrcode.so.4.10.0 /usr/lib/libopencv_xfeatures2d.so.4.10.0 /usr/lib/libopencv_xobjdetect.so.4.10.0 /usr/lib/libopencv_xphoto.so.4.10.0 /usr/lib/libz.so /usr/lib/libtar.so /home/kami/libs/c++/libtorch/lib/libc10.so /usr/lib/libopencv_shape.so.4.10.0 /usr/lib/libopencv_highgui.so.4.10.0 /usr/lib/libopencv_datasets.so.4.10.0 /usr/lib/libopencv_plot.so.4.10.0 /usr/lib/libopencv_text.so.4.10.0 /usr/lib/libopencv_ml.so.4.10.0 /usr/lib/libopencv_phase_unwrapping.so.4.10.0 /usr/lib/libopencv_optflow.so.4.10.0 /usr/lib/libopencv_ximgproc.so.4.10.0 /usr/lib/libopencv_video.so.4.10.0 /usr/lib/libopencv_videoio.so.4.10.0 /usr/lib/libopencv_imgcodecs.so.4.10.0 /usr/lib/libopencv_objdetect.so.4.10.0 /usr/lib/libopencv_calib3d.so.4.10.0 /usr/lib/libopencv_dnn.so.4.10.0 /usr/lib/libopencv_features2d.so.4.10.0 /usr/lib/libopencv_flann.so.4.10.0 /usr/lib/libopencv_photo.so.4.10.0 /usr/lib/libopencv_imgproc.so.4.10.0 /usr/lib/libopencv_core.so.4.10.0
   LANGUAGE_COMPILE_FLAGS = -g
   LINK_LIBRARIES = -Wl,-rpath,/lib/intel64:/lib/intel64_win:/lib/win-x64:/home/kami/libs/c++/libtorch/lib:  /usr/lib/libcurl.so  /home/kami/libs/c++/libtorch/lib/libtorch.so  /home/kami/libs/c++/libtorch/lib/libc10.so  /home/kami/libs/c++/libtorch/lib/libkineto.a  /usr/lib/libopencv_gapi.so.4.10.0  /usr/lib/libopencv_stitching.so.4.10.0  /usr/lib/libopencv_alphamat.so.4.10.0  /usr/lib/libopencv_aruco.so.4.10.0  /usr/lib/libopencv_bgsegm.so.4.10.0  /usr/lib/libopencv_bioinspired.so.4.10.0  /usr/lib/libopencv_ccalib.so.4.10.0  /usr/lib/libopencv_cvv.so.4.10.0  /usr/lib/libopencv_dnn_objdetect.so.4.10.0  /usr/lib/libopencv_dnn_superres.so.4.10.0  /usr/lib/libopencv_dpm.so.4.10.0  /usr/lib/libopencv_face.so.4.10.0  /usr/lib/libopencv_freetype.so.4.10.0  /usr/lib/libopencv_fuzzy.so.4.10.0  /usr/lib/libopencv_hdf.so.4.10.0  /usr/lib/libopencv_hfs.so.4.10.0  /usr/lib/libopencv_img_hash.so.4.10.0  /usr/lib/libopencv_intensity_transform.so.4.10.0  /usr/lib/libopencv_line_descriptor.so.4.10.0  /usr/lib/libopencv_mcc.so.4.10.0  /usr/lib/libopencv_quality.so.4.10.0  /usr/lib/libopencv_rapid.so.4.10.0  /usr/lib/libopencv_reg.so.4.10.0  /usr/lib/libopencv_rgbd.so.4.10.0  /usr/lib/libopencv_saliency.so.4.10.0  /usr/lib/libopencv_signal.so.4.10.0  /usr/lib/libopencv_stereo.so.4.10.0  /usr/lib/libopencv_structured_light.so.4.10.0  /usr/lib/libopencv_superres.so.4.10.0  /usr/lib/libopencv_surface_matching.so.4.10.0  /usr/lib/libopencv_tracking.so.4.10.0  /usr/lib/libopencv_videostab.so.4.10.0  /usr/lib/libopencv_viz.so.4.10.0  /usr/lib/libopencv_wechat_qrcode.so.4.10.0  /usr/lib/libopencv_xfeatures2d.so.4.10.0  /usr/lib/libopencv_xobjdetect.so.4.10.0  /usr/lib/libopencv_xphoto.so.4.10.0  -lzip  /usr/lib/libz.so  /usr/lib/libtar.so  -Wl,--no-as-needed,"/home/kami/libs/c++/libtorch/lib/libtorch_cpu.so" -Wl,--as-needed  /home/kami/libs/c++/libtorch/lib/libc10.so  -Wl,--no-as-needed,"/home/kami/libs/c++/libtorch/lib/libtorch.so" -Wl,--as-needed  /usr/lib/libopencv_shape.so.4.10.0  /usr/lib/libopencv_highgui.so.4.10.0  /usr/lib/libopencv_datasets.so.4.10.0  /usr/lib/libopencv_plot.so.4.10.0  /usr/lib/libopencv_text.so.4.10.0  /usr/lib/libopencv_ml.so.4.10.0  /usr/lib/libopencv_phase_unwrapping.so.4.10.0  /usr/lib/libopencv_optflow.so.4.10.0  /usr/lib/libopencv_ximgproc.so.4.10.0  /usr/lib/libopencv_video.so.4.10.0  /usr/lib/libopencv_videoio.so.4.10.0  /usr/lib/libopencv_imgcodecs.so.4.10.0  /usr/lib/libopencv_objdetect.so.4.10.0  /usr/lib/libopencv_calib3d.so.4.10.0  /usr/lib/libopencv_dnn.so.4.10.0  /usr/lib/libopencv_features2d.so.4.10.0  /usr/lib/libopencv_flann.so.4.10.0  /usr/lib/libopencv_photo.so.4.10.0  /usr/lib/libopencv_imgproc.so.4.10.0  /usr/lib/libopencv_core.so.4.10.0
   LINK_PATH = -L/lib/intel64   -L/lib/intel64_win   -L/lib/win-x64
@@ -90,58 +716,24 @@ build libTorchExtension.so.1.0.0: CXX_SHARED_LIBRARY_LINKER__TorchExtension_Debu
   PRE_LINK = :
   SONAME = libTorchExtension.so.1
   SONAME_FLAG = -Wl,-soname,
-  TARGET_FILE = libTorchExtension.so.1.0.0
-  TARGET_IMPLIB = /home/kami/Documents/cpp/models/cmake-build-debug/
-  TARGET_PDB = TorchExtension.so.dbg
+  TARGET_COMPILE_PDB = CMakeFiles/TorchExtension.dir/
+  TARGET_FILE = libTorchExtension.so.0.1.0
+  TARGET_IMPLIB = /home/kami/Documents/cpp/models/torch-extension/cmake-build-debug/
+  TARGET_PDB = libTorchExtension.pdb
 
 
 #############################################
 # Create library symlink libTorchExtension.so
 
-build libTorchExtension.so.1 libTorchExtension.so: CMAKE_SYMLINK_LIBRARY libTorchExtension.so.1.0.0
+build libTorchExtension.so.1 libTorchExtension.so: CMAKE_SYMLINK_LIBRARY libTorchExtension.so.0.1.0
   POST_BUILD = :
-
-# =============================================================================
-# Object build statements for EXECUTABLE target Test
-
-
-#############################################
-# Order-only phony target for Test
-
-build cmake_object_order_depends_target_Test: phony || .
-
-build CMakeFiles/Test.dir/main.cpp.o: CXX_COMPILER__Test_unscanned_Debug /home/kami/Documents/cpp/models/main.cpp || cmake_object_order_depends_target_Test
-  DEFINES = -DUSE_C10D_GLOO -DUSE_DISTRIBUTED -DUSE_RPC -DUSE_TENSORPIPE
-  DEP_FILE = CMakeFiles/Test.dir/main.cpp.o.d
-  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always -D_GLIBCXX_USE_CXX11_ABI=1
-  INCLUDES = -isystem /home/kami/libs/c++/libtorch/include -isystem /home/kami/libs/c++/libtorch/include/torch/csrc/api/include
-  OBJECT_DIR = CMakeFiles/Test.dir
-  OBJECT_FILE_DIR = CMakeFiles/Test.dir
-
-
-# =============================================================================
-# Link build statements for EXECUTABLE target Test
-
-
-#############################################
-# Link the executable Test
-
-build Test: CXX_EXECUTABLE_LINKER__Test_Debug CMakeFiles/Test.dir/main.cpp.o | /home/kami/libs/c++/libtorch/lib/libtorch.so /home/kami/libs/c++/libtorch/lib/libc10.so /home/kami/libs/c++/libtorch/lib/libkineto.a /home/kami/libs/c++/libtorch/lib/libc10.so
-  FLAGS = -g
-  LINK_LIBRARIES = -Wl,-rpath,/lib/intel64:/lib/intel64_win:/lib/win-x64:/home/kami/libs/c++/libtorch/lib  /home/kami/libs/c++/libtorch/lib/libtorch.so  /home/kami/libs/c++/libtorch/lib/libc10.so  /home/kami/libs/c++/libtorch/lib/libkineto.a  -Wl,--no-as-needed,"/home/kami/libs/c++/libtorch/lib/libtorch_cpu.so" -Wl,--as-needed  /home/kami/libs/c++/libtorch/lib/libc10.so  -Wl,--no-as-needed,"/home/kami/libs/c++/libtorch/lib/libtorch.so" -Wl,--as-needed
-  LINK_PATH = -L/lib/intel64   -L/lib/intel64_win   -L/lib/win-x64
-  OBJECT_DIR = CMakeFiles/Test.dir
-  POST_BUILD = :
-  PRE_LINK = :
-  TARGET_FILE = Test
-  TARGET_PDB = Test.dbg
 
 
 #############################################
 # Utility command for edit_cache
 
 build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /home/kami/Documents/cpp/models/cmake-build-debug && /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+  COMMAND = cd /home/kami/Documents/cpp/models/torch-extension/cmake-build-debug && /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -152,7 +744,7 @@ build edit_cache: phony CMakeFiles/edit_cache.util
 # Utility command for rebuild_cache
 
 build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /home/kami/Documents/cpp/models/cmake-build-debug && /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/bin/cmake --regenerate-during-build -S/home/kami/Documents/cpp/models -B/home/kami/Documents/cpp/models/cmake-build-debug
+  COMMAND = cd /home/kami/Documents/cpp/models/torch-extension/cmake-build-debug && /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/bin/cmake --regenerate-during-build -S/home/kami/Documents/cpp/models/torch-extension -B/home/kami/Documents/cpp/models/torch-extension/cmake-build-debug
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -170,7 +762,7 @@ build list_install_components: phony
 # Utility command for install
 
 build CMakeFiles/install.util: CUSTOM_COMMAND all
-  COMMAND = cd /home/kami/Documents/cpp/models/cmake-build-debug && /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/bin/cmake -P cmake_install.cmake
+  COMMAND = cd /home/kami/Documents/cpp/models/torch-extension/cmake-build-debug && /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/bin/cmake -P cmake_install.cmake
   DESC = Install the project...
   pool = console
   restat = 1
@@ -182,7 +774,7 @@ build install: phony CMakeFiles/install.util
 # Utility command for install/local
 
 build CMakeFiles/install/local.util: CUSTOM_COMMAND all
-  COMMAND = cd /home/kami/Documents/cpp/models/cmake-build-debug && /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+  COMMAND = cd /home/kami/Documents/cpp/models/torch-extension/cmake-build-debug && /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
   DESC = Installing only the local directory...
   pool = console
   restat = 1
@@ -194,7 +786,7 @@ build install/local: phony CMakeFiles/install/local.util
 # Utility command for install/strip
 
 build CMakeFiles/install/strip.util: CUSTOM_COMMAND all
-  COMMAND = cd /home/kami/Documents/cpp/models/cmake-build-debug && /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+  COMMAND = cd /home/kami/Documents/cpp/models/torch-extension/cmake-build-debug && /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
   DESC = Installing the project stripped...
   pool = console
   restat = 1
@@ -212,9 +804,9 @@ build TorchExtension: phony libTorchExtension.so
 # =============================================================================
 
 #############################################
-# Folder: /home/kami/Documents/cpp/models/cmake-build-debug
+# Folder: /home/kami/Documents/cpp/models/torch-extension/cmake-build-debug
 
-build all: phony libTorchExtension.so Test
+build all: phony libTorchExtension.so
 
 # =============================================================================
 # Built-in targets
@@ -223,14 +815,14 @@ build all: phony libTorchExtension.so Test
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE | /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeCInformation.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeCXXInformation.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeCheckCompilerFlagCommonPatterns.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeCommonLanguageInclude.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeGenericSystem.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeInitializeConfigs.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeLanguageInformation.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeSystemSpecificInformation.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeSystemSpecificInitialize.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CheckCXXCompilerFlag.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CheckCXXSourceCompiles.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/CMakeCommonCompilerMacros.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/GNU-C.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/GNU-CXX.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/GNU.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/FindCURL.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/FindPackageHandleStandardArgs.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/FindPackageMessage.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/FindPkgConfig.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/FindZLIB.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/GNUInstallDirs.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Internal/CheckCompilerFlag.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Internal/CheckFlagCommonConfig.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Internal/CheckSourceCompiles.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Platform/Linux-GNU-C.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Platform/Linux-GNU-CXX.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Platform/Linux-GNU.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Platform/Linux-Initialize.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Platform/Linux.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Platform/UnixPaths.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/SelectLibraryConfigurations.cmake /home/kami/Documents/cpp/models/CMakeLists.txt /home/kami/libs/c++/libtorch/share/cmake/Caffe2/Caffe2Config.cmake /home/kami/libs/c++/libtorch/share/cmake/Caffe2/Caffe2Targets-release.cmake /home/kami/libs/c++/libtorch/share/cmake/Caffe2/Caffe2Targets.cmake /home/kami/libs/c++/libtorch/share/cmake/Caffe2/public/mkl.cmake /home/kami/libs/c++/libtorch/share/cmake/Caffe2/public/mkldnn.cmake /home/kami/libs/c++/libtorch/share/cmake/Caffe2/public/utils.cmake /home/kami/libs/c++/libtorch/share/cmake/Torch/TorchConfig.cmake /home/kami/libs/c++/libtorch/share/cmake/Torch/TorchConfigVersion.cmake /usr/lib/cmake/opencv4/OpenCVConfig-version.cmake /usr/lib/cmake/opencv4/OpenCVConfig.cmake /usr/lib/cmake/opencv4/OpenCVModules-release.cmake /usr/lib/cmake/opencv4/OpenCVModules.cmake CMakeCache.txt CMakeFiles/3.30.5/CMakeCCompiler.cmake CMakeFiles/3.30.5/CMakeCXXCompiler.cmake CMakeFiles/3.30.5/CMakeSystem.cmake
+build build.ninja: RERUN_CMAKE | /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeCXXCompiler.cmake.in /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeCXXCompilerABI.cpp /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeCXXInformation.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeCheckCompilerFlagCommonPatterns.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeCommonLanguageInclude.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeCompilerIdDetection.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeDetermineCXXCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeDetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeDetermineCompilerABI.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeDetermineCompilerId.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeDetermineCompilerSupport.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeDetermineSystem.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeFindBinUtils.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeGenericSystem.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeInitializeConfigs.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeLanguageInformation.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeParseImplicitIncludeInfo.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeParseImplicitLinkInfo.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeParseLibraryArchitecture.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeSystem.cmake.in /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeSystemSpecificInformation.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeSystemSpecificInitialize.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeTestCXXCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeTestCompilerCommon.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CheckCXXCompilerFlag.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CheckCXXSourceCompiles.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/ADSP-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/ARMCC-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/ARMClang-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/AppleClang-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/Borland-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/CMakeCommonCompilerMacros.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/Clang-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/Clang-DetermineCompilerInternal.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/Compaq-CXX-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/Cray-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/CrayClang-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/Embarcadero-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/Fujitsu-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/FujitsuClang-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/GHS-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/GNU-CXX-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/GNU-CXX.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/GNU-FindBinUtils.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/GNU.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/HP-CXX-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/IAR-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/IBMClang-CXX-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/Intel-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/LCC-CXX-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/MSVC-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/NVHPC-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/NVIDIA-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/OrangeC-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/PGI-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/PathScale-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/SCO-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/SunPro-CXX-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/TI-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/TIClang-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/Tasking-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/VisualAge-CXX-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/Watcom-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/XL-CXX-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/XLClang-CXX-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/FindCURL.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/FindPackageHandleStandardArgs.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/FindPackageMessage.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/FindPkgConfig.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/FindZLIB.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/GNUInstallDirs.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Internal/CMakeDetermineLinkerId.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Internal/CheckCompilerFlag.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Internal/CheckFlagCommonConfig.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Internal/CheckSourceCompiles.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Internal/FeatureTesting.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Platform/Linux-Determine-CXX.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Platform/Linux-GNU-CXX.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Platform/Linux-GNU.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Platform/Linux-Initialize.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Platform/Linux.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Platform/UnixPaths.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/SelectLibraryConfigurations.cmake /home/kami/Documents/cpp/models/torch-extension/CMakeLists.txt /home/kami/libs/c++/libtorch/share/cmake/Caffe2/Caffe2Config.cmake /home/kami/libs/c++/libtorch/share/cmake/Caffe2/Caffe2Targets-release.cmake /home/kami/libs/c++/libtorch/share/cmake/Caffe2/Caffe2Targets.cmake /home/kami/libs/c++/libtorch/share/cmake/Caffe2/public/mkl.cmake /home/kami/libs/c++/libtorch/share/cmake/Caffe2/public/mkldnn.cmake /home/kami/libs/c++/libtorch/share/cmake/Caffe2/public/utils.cmake /home/kami/libs/c++/libtorch/share/cmake/Torch/TorchConfig.cmake /home/kami/libs/c++/libtorch/share/cmake/Torch/TorchConfigVersion.cmake /usr/lib/cmake/opencv4/OpenCVConfig-version.cmake /usr/lib/cmake/opencv4/OpenCVConfig.cmake /usr/lib/cmake/opencv4/OpenCVModules-release.cmake /usr/lib/cmake/opencv4/OpenCVModules.cmake CMakeCache.txt CMakeFiles/3.30.5/CMakeCXXCompiler.cmake CMakeFiles/3.30.5/CMakeSystem.cmake
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeCInformation.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeCXXInformation.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeCheckCompilerFlagCommonPatterns.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeCommonLanguageInclude.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeGenericSystem.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeInitializeConfigs.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeLanguageInformation.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeSystemSpecificInformation.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeSystemSpecificInitialize.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CheckCXXCompilerFlag.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CheckCXXSourceCompiles.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/CMakeCommonCompilerMacros.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/GNU-C.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/GNU-CXX.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/GNU.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/FindCURL.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/FindPackageHandleStandardArgs.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/FindPackageMessage.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/FindPkgConfig.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/FindZLIB.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/GNUInstallDirs.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Internal/CheckCompilerFlag.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Internal/CheckFlagCommonConfig.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Internal/CheckSourceCompiles.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Platform/Linux-GNU-C.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Platform/Linux-GNU-CXX.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Platform/Linux-GNU.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Platform/Linux-Initialize.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Platform/Linux.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Platform/UnixPaths.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/SelectLibraryConfigurations.cmake /home/kami/Documents/cpp/models/CMakeLists.txt /home/kami/libs/c++/libtorch/share/cmake/Caffe2/Caffe2Config.cmake /home/kami/libs/c++/libtorch/share/cmake/Caffe2/Caffe2Targets-release.cmake /home/kami/libs/c++/libtorch/share/cmake/Caffe2/Caffe2Targets.cmake /home/kami/libs/c++/libtorch/share/cmake/Caffe2/public/mkl.cmake /home/kami/libs/c++/libtorch/share/cmake/Caffe2/public/mkldnn.cmake /home/kami/libs/c++/libtorch/share/cmake/Caffe2/public/utils.cmake /home/kami/libs/c++/libtorch/share/cmake/Torch/TorchConfig.cmake /home/kami/libs/c++/libtorch/share/cmake/Torch/TorchConfigVersion.cmake /usr/lib/cmake/opencv4/OpenCVConfig-version.cmake /usr/lib/cmake/opencv4/OpenCVConfig.cmake /usr/lib/cmake/opencv4/OpenCVModules-release.cmake /usr/lib/cmake/opencv4/OpenCVModules.cmake CMakeCache.txt CMakeFiles/3.30.5/CMakeCCompiler.cmake CMakeFiles/3.30.5/CMakeCXXCompiler.cmake CMakeFiles/3.30.5/CMakeSystem.cmake: phony
+build /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeCXXCompiler.cmake.in /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeCXXCompilerABI.cpp /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeCXXInformation.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeCheckCompilerFlagCommonPatterns.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeCommonLanguageInclude.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeCompilerIdDetection.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeDetermineCXXCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeDetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeDetermineCompilerABI.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeDetermineCompilerId.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeDetermineCompilerSupport.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeDetermineSystem.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeFindBinUtils.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeGenericSystem.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeInitializeConfigs.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeLanguageInformation.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeParseImplicitIncludeInfo.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeParseImplicitLinkInfo.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeParseLibraryArchitecture.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeSystem.cmake.in /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeSystemSpecificInformation.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeSystemSpecificInitialize.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeTestCXXCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CMakeTestCompilerCommon.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CheckCXXCompilerFlag.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/CheckCXXSourceCompiles.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/ADSP-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/ARMCC-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/ARMClang-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/AppleClang-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/Borland-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/CMakeCommonCompilerMacros.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/Clang-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/Clang-DetermineCompilerInternal.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/Compaq-CXX-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/Cray-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/CrayClang-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/Embarcadero-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/Fujitsu-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/FujitsuClang-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/GHS-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/GNU-CXX-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/GNU-CXX.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/GNU-FindBinUtils.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/GNU.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/HP-CXX-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/IAR-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/IBMClang-CXX-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/Intel-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/LCC-CXX-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/MSVC-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/NVHPC-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/NVIDIA-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/OrangeC-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/PGI-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/PathScale-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/SCO-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/SunPro-CXX-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/TI-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/TIClang-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/Tasking-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/VisualAge-CXX-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/Watcom-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/XL-CXX-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/XLClang-CXX-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/FindCURL.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/FindPackageHandleStandardArgs.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/FindPackageMessage.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/FindPkgConfig.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/FindZLIB.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/GNUInstallDirs.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Internal/CMakeDetermineLinkerId.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Internal/CheckCompilerFlag.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Internal/CheckFlagCommonConfig.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Internal/CheckSourceCompiles.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Internal/FeatureTesting.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Platform/Linux-Determine-CXX.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Platform/Linux-GNU-CXX.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Platform/Linux-GNU.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Platform/Linux-Initialize.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Platform/Linux.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Platform/UnixPaths.cmake /home/kami/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/SelectLibraryConfigurations.cmake /home/kami/Documents/cpp/models/torch-extension/CMakeLists.txt /home/kami/libs/c++/libtorch/share/cmake/Caffe2/Caffe2Config.cmake /home/kami/libs/c++/libtorch/share/cmake/Caffe2/Caffe2Targets-release.cmake /home/kami/libs/c++/libtorch/share/cmake/Caffe2/Caffe2Targets.cmake /home/kami/libs/c++/libtorch/share/cmake/Caffe2/public/mkl.cmake /home/kami/libs/c++/libtorch/share/cmake/Caffe2/public/mkldnn.cmake /home/kami/libs/c++/libtorch/share/cmake/Caffe2/public/utils.cmake /home/kami/libs/c++/libtorch/share/cmake/Torch/TorchConfig.cmake /home/kami/libs/c++/libtorch/share/cmake/Torch/TorchConfigVersion.cmake /usr/lib/cmake/opencv4/OpenCVConfig-version.cmake /usr/lib/cmake/opencv4/OpenCVConfig.cmake /usr/lib/cmake/opencv4/OpenCVModules-release.cmake /usr/lib/cmake/opencv4/OpenCVModules.cmake CMakeCache.txt CMakeFiles/3.30.5/CMakeCXXCompiler.cmake CMakeFiles/3.30.5/CMakeSystem.cmake: phony
 
 
 #############################################

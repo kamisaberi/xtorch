@@ -1,0 +1,5 @@
+/home/kami/Documents/cpp/models/examples/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/kami/Documents/cpp/models/examples/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/kami/Documents/cpp/models/examples/cmake-build-debug/test/CMakeFiles/Test.dir
+/home/kami/Documents/cpp/models/examples/cmake-build-debug/test/CMakeFiles/edit_cache.dir
+/home/kami/Documents/cpp/models/examples/cmake-build-debug/test/CMakeFiles/rebuild_cache.dir

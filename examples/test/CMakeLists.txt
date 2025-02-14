@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.28 FATAL_ERROR)
+#cmake_minimum_required(VERSION 3.28 FATAL_ERROR)
 project(Test)
 
 list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)

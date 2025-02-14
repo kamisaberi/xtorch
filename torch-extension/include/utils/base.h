@@ -7,6 +7,4 @@
 
 #include "archiver.h"
 #include "downloader.h"
-
-
 #endif //DCGAN_BASE_H

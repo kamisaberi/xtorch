@@ -1,4 +1,4 @@
-# Install script for directory: /home/kami/Documents/cpp/models
+# Install script for directory: /home/kami/Documents/cpp/models/torch-extension
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -44,7 +44,7 @@ endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   foreach(file
-      "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libTorchExtension.so.1.0.0"
+      "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libTorchExtension.so.0.1.0"
       "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libTorchExtension.so.1"
       )
     if(EXISTS "${file}" AND
@@ -55,11 +55,11 @@ if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT
     endif()
   endforeach()
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE SHARED_LIBRARY FILES
-    "/home/kami/Documents/cpp/models/cmake-build-debug/libTorchExtension.so.1.0.0"
-    "/home/kami/Documents/cpp/models/cmake-build-debug/libTorchExtension.so.1"
+    "/home/kami/Documents/cpp/models/torch-extension/cmake-build-debug/libTorchExtension.so.0.1.0"
+    "/home/kami/Documents/cpp/models/torch-extension/cmake-build-debug/libTorchExtension.so.1"
     )
   foreach(file
-      "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libTorchExtension.so.1.0.0"
+      "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libTorchExtension.so.0.1.0"
       "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libTorchExtension.so.1"
       )
     if(EXISTS "${file}" AND
@@ -76,18 +76,18 @@ if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE SHARED_LIBRARY FILES "/home/kami/Documents/cpp/models/cmake-build-debug/libTorchExtension.so")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE SHARED_LIBRARY FILES "/home/kami/Documents/cpp/models/torch-extension/cmake-build-debug/libTorchExtension.so")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/TorchExtension" TYPE DIRECTORY FILES "/home/kami/Documents/cpp/models/include/")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/TorchExtension" TYPE DIRECTORY FILES "/home/kami/Documents/cpp/models/torch-extension/include/")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/share/TorchExtension/cmake/TorchExtensionConfig.cmake")
     file(DIFFERENT _cmake_export_file_changed FILES
          "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/share/TorchExtension/cmake/TorchExtensionConfig.cmake"
-         "/home/kami/Documents/cpp/models/cmake-build-debug/CMakeFiles/Export/f62e87c466f7d90652db602e5a153c43/TorchExtensionConfig.cmake")
+         "/home/kami/Documents/cpp/models/torch-extension/cmake-build-debug/CMakeFiles/Export/f62e87c466f7d90652db602e5a153c43/TorchExtensionConfig.cmake")
     if(_cmake_export_file_changed)
       file(GLOB _cmake_old_config_files "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/share/TorchExtension/cmake/TorchExtensionConfig-*.cmake")
       if(_cmake_old_config_files)
@@ -100,9 +100,9 @@ if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT
     endif()
     unset(_cmake_export_file_changed)
   endif()
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/TorchExtension/cmake" TYPE FILE FILES "/home/kami/Documents/cpp/models/cmake-build-debug/CMakeFiles/Export/f62e87c466f7d90652db602e5a153c43/TorchExtensionConfig.cmake")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/TorchExtension/cmake" TYPE FILE FILES "/home/kami/Documents/cpp/models/torch-extension/cmake-build-debug/CMakeFiles/Export/f62e87c466f7d90652db602e5a153c43/TorchExtensionConfig.cmake")
   if(CMAKE_INSTALL_CONFIG_NAME MATCHES "^([Dd][Ee][Bb][Uu][Gg])$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/TorchExtension/cmake" TYPE FILE FILES "/home/kami/Documents/cpp/models/cmake-build-debug/CMakeFiles/Export/f62e87c466f7d90652db602e5a153c43/TorchExtensionConfig-debug.cmake")
+    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/TorchExtension/cmake" TYPE FILE FILES "/home/kami/Documents/cpp/models/torch-extension/cmake-build-debug/CMakeFiles/Export/f62e87c466f7d90652db602e5a153c43/TorchExtensionConfig-debug.cmake")
   endif()
 endif()
 
@@ -121,6 +121,6 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-  file(WRITE "/home/kami/Documents/cpp/models/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+  file(WRITE "/home/kami/Documents/cpp/models/torch-extension/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()
