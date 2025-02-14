@@ -7,8 +7,7 @@ cmake_minimum_required(VERSION 3.28 FATAL_ERROR)
 
 project(TorchExtension VERSION 0.1.0 LANGUAGES CXX)
 
-#add_executable( ${CMAKE_PROJECT_NAME} main.cpp src/datasets/cifar100.cpp src/datasets/cifar10.cpp src/datasets/fashion-mnist.cpp)
-add_library(${CMAKE_PROJECT_NAME} SHARED
+set(LIBRARY_SOURCE_FILES
         src/utils/archiver.cpp
         src/utils/downloader.cpp
         src/media/image/processing.cpp
@@ -77,6 +76,9 @@ add_library(${CMAKE_PROJECT_NAME} SHARED
         src/datasets/voc.cpp
         src/datasets/wider-face.cpp
 )
+
+#add_executable( ${CMAKE_PROJECT_NAME} main.cpp src/datasets/cifar100.cpp src/datasets/cifar10.cpp src/datasets/fashion-mnist.cpp)
+add_library(${CMAKE_PROJECT_NAME} SHARED ${LIBRARY_SOURCE_FILES})
 
 #set(CMAKE_CXX_STANDARD 17)
 #set(CMAKE_CXX_STANDARD_REQUIRED True)
@@ -165,14 +167,23 @@ export(TARGETS ${PROJECT_NAME} FILE TorchExtensionConfig.cmake)
 #add_subdirectory(examples/test)
 
 #cmake_minimum_required(VERSION 3.10 FATAL_ERROR)
-#project(Test)
-#list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
-#find_package(Torch REQUIRED)
-#find_package(TorchExtension REQUIRED)
-#set(CMAKE_CXX_STANDARD 17)
-#set(CMAKE_CXX_STANDARD_REQUIRED True)
-#add_executable(${CMAKE_PROJECT_NAME} main.cpp)
-#target_link_libraries(${CMAKE_PROJECT_NAME} "${TORCH_LIBRARIES}")
+project(Test)
+list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
+find_package(Torch REQUIRED)
+find_package(TorchExtension REQUIRED)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
+
+set(TEST_SOURCE_FILES
+        src/utils/archiver.cpp
+        src/utils/downloader.cpp
+        src/media/image/processing.cpp
+        src/datasets/ucf.cpp
+        test.cpp
+)
+
+add_executable(${CMAKE_PROJECT_NAME} ${TEST_SOURCE_FILES})
+target_link_libraries(${CMAKE_PROJECT_NAME} "${TORCH_LIBRARIES}")
 #
-#set_property(TARGET ${CMAKE_PROJECT_NAME} PROPERTY CXX_STANDARD 17)
+set_property(TARGET ${CMAKE_PROJECT_NAME} PROPERTY CXX_STANDARD 17)
 

@@ -1,0 +1,28 @@
+
+# Consider dependencies only in project.
+set(CMAKE_DEPENDS_IN_PROJECT_ONLY OFF)
+
+# The set of languages for which implicit dependencies are needed:
+set(CMAKE_DEPENDS_LANGUAGES
+  )
+
+# The set of dependency files which are needed:
+set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/home/kami/Documents/cpp/models/torch-extension/src/datasets/ucf.cpp" "CMakeFiles/Test.dir/src/datasets/ucf.cpp.o" "gcc" "CMakeFiles/Test.dir/src/datasets/ucf.cpp.o.d"
+  "/home/kami/Documents/cpp/models/torch-extension/src/media/image/processing.cpp" "CMakeFiles/Test.dir/src/media/image/processing.cpp.o" "gcc" "CMakeFiles/Test.dir/src/media/image/processing.cpp.o.d"
+  "/home/kami/Documents/cpp/models/torch-extension/src/utils/archiver.cpp" "CMakeFiles/Test.dir/src/utils/archiver.cpp.o" "gcc" "CMakeFiles/Test.dir/src/utils/archiver.cpp.o.d"
+  "/home/kami/Documents/cpp/models/torch-extension/src/utils/downloader.cpp" "CMakeFiles/Test.dir/src/utils/downloader.cpp.o" "gcc" "CMakeFiles/Test.dir/src/utils/downloader.cpp.o.d"
+  "/home/kami/Documents/cpp/models/torch-extension/test.cpp" "CMakeFiles/Test.dir/test.cpp.o" "gcc" "CMakeFiles/Test.dir/test.cpp.o.d"
+  "" "Test" "gcc" "CMakeFiles/Test.dir/link.d"
+  )
+
+# Targets to which this target links which contain Fortran sources.
+set(CMAKE_Fortran_TARGET_LINKED_INFO_FILES
+  )
+
+# Targets to which this target links which contain Fortran sources.
+set(CMAKE_Fortran_TARGET_FORWARD_LINKED_INFO_FILES
+  )
+
+# Fortran module output directory.
+set(CMAKE_Fortran_TARGET_MODULE_DIR "")

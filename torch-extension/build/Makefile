@@ -174,6 +174,19 @@ TorchExtension/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/build
 .PHONY : TorchExtension/fast
 
+#=============================================================================
+# Target rules for targets named Test
+
+# Build rule for target.
+Test: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Test
+.PHONY : Test
+
+# fast build rule for target.
+Test/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Test.dir/build.make CMakeFiles/Test.dir/build
+.PHONY : Test/fast
+
 src/datasets/base.o: src/datasets/base.cpp.o
 .PHONY : src/datasets/base.o
 
@@ -1428,6 +1441,7 @@ src/datasets/ucf.o: src/datasets/ucf.cpp.o
 # target to build an object file
 src/datasets/ucf.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/ucf.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Test.dir/build.make CMakeFiles/Test.dir/src/datasets/ucf.cpp.o
 .PHONY : src/datasets/ucf.cpp.o
 
 src/datasets/ucf.i: src/datasets/ucf.cpp.i
@@ -1436,6 +1450,7 @@ src/datasets/ucf.i: src/datasets/ucf.cpp.i
 # target to preprocess a source file
 src/datasets/ucf.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/ucf.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Test.dir/build.make CMakeFiles/Test.dir/src/datasets/ucf.cpp.i
 .PHONY : src/datasets/ucf.cpp.i
 
 src/datasets/ucf.s: src/datasets/ucf.cpp.s
@@ -1444,6 +1459,7 @@ src/datasets/ucf.s: src/datasets/ucf.cpp.s
 # target to generate assembly for a file
 src/datasets/ucf.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/datasets/ucf.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Test.dir/build.make CMakeFiles/Test.dir/src/datasets/ucf.cpp.s
 .PHONY : src/datasets/ucf.cpp.s
 
 src/datasets/usps.o: src/datasets/usps.cpp.o
@@ -1524,6 +1540,7 @@ src/media/image/processing.o: src/media/image/processing.cpp.o
 # target to build an object file
 src/media/image/processing.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/media/image/processing.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Test.dir/build.make CMakeFiles/Test.dir/src/media/image/processing.cpp.o
 .PHONY : src/media/image/processing.cpp.o
 
 src/media/image/processing.i: src/media/image/processing.cpp.i
@@ -1532,6 +1549,7 @@ src/media/image/processing.i: src/media/image/processing.cpp.i
 # target to preprocess a source file
 src/media/image/processing.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/media/image/processing.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Test.dir/build.make CMakeFiles/Test.dir/src/media/image/processing.cpp.i
 .PHONY : src/media/image/processing.cpp.i
 
 src/media/image/processing.s: src/media/image/processing.cpp.s
@@ -1540,6 +1558,7 @@ src/media/image/processing.s: src/media/image/processing.cpp.s
 # target to generate assembly for a file
 src/media/image/processing.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/media/image/processing.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Test.dir/build.make CMakeFiles/Test.dir/src/media/image/processing.cpp.s
 .PHONY : src/media/image/processing.cpp.s
 
 src/models/cnn/alexnet.o: src/models/cnn/alexnet.cpp.o
@@ -1692,6 +1711,7 @@ src/utils/archiver.o: src/utils/archiver.cpp.o
 # target to build an object file
 src/utils/archiver.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/utils/archiver.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Test.dir/build.make CMakeFiles/Test.dir/src/utils/archiver.cpp.o
 .PHONY : src/utils/archiver.cpp.o
 
 src/utils/archiver.i: src/utils/archiver.cpp.i
@@ -1700,6 +1720,7 @@ src/utils/archiver.i: src/utils/archiver.cpp.i
 # target to preprocess a source file
 src/utils/archiver.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/utils/archiver.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Test.dir/build.make CMakeFiles/Test.dir/src/utils/archiver.cpp.i
 .PHONY : src/utils/archiver.cpp.i
 
 src/utils/archiver.s: src/utils/archiver.cpp.s
@@ -1708,6 +1729,7 @@ src/utils/archiver.s: src/utils/archiver.cpp.s
 # target to generate assembly for a file
 src/utils/archiver.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/utils/archiver.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Test.dir/build.make CMakeFiles/Test.dir/src/utils/archiver.cpp.s
 .PHONY : src/utils/archiver.cpp.s
 
 src/utils/downloader.o: src/utils/downloader.cpp.o
@@ -1716,6 +1738,7 @@ src/utils/downloader.o: src/utils/downloader.cpp.o
 # target to build an object file
 src/utils/downloader.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/utils/downloader.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Test.dir/build.make CMakeFiles/Test.dir/src/utils/downloader.cpp.o
 .PHONY : src/utils/downloader.cpp.o
 
 src/utils/downloader.i: src/utils/downloader.cpp.i
@@ -1724,6 +1747,7 @@ src/utils/downloader.i: src/utils/downloader.cpp.i
 # target to preprocess a source file
 src/utils/downloader.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/utils/downloader.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Test.dir/build.make CMakeFiles/Test.dir/src/utils/downloader.cpp.i
 .PHONY : src/utils/downloader.cpp.i
 
 src/utils/downloader.s: src/utils/downloader.cpp.s
@@ -1732,7 +1756,32 @@ src/utils/downloader.s: src/utils/downloader.cpp.s
 # target to generate assembly for a file
 src/utils/downloader.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TorchExtension.dir/build.make CMakeFiles/TorchExtension.dir/src/utils/downloader.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Test.dir/build.make CMakeFiles/Test.dir/src/utils/downloader.cpp.s
 .PHONY : src/utils/downloader.cpp.s
+
+test.o: test.cpp.o
+.PHONY : test.o
+
+# target to build an object file
+test.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Test.dir/build.make CMakeFiles/Test.dir/test.cpp.o
+.PHONY : test.cpp.o
+
+test.i: test.cpp.i
+.PHONY : test.i
+
+# target to preprocess a source file
+test.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Test.dir/build.make CMakeFiles/Test.dir/test.cpp.i
+.PHONY : test.cpp.i
+
+test.s: test.cpp.s
+.PHONY : test.s
+
+# target to generate assembly for a file
+test.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Test.dir/build.make CMakeFiles/Test.dir/test.cpp.s
+.PHONY : test.cpp.s
 
 # Help Target
 help:
@@ -1746,6 +1795,7 @@ help:
 	@echo "... install/strip"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
+	@echo "... Test"
 	@echo "... TorchExtension"
 	@echo "... src/datasets/base.o"
 	@echo "... src/datasets/base.i"
@@ -1942,6 +1992,9 @@ help:
 	@echo "... src/utils/downloader.o"
 	@echo "... src/utils/downloader.i"
 	@echo "... src/utils/downloader.s"
+	@echo "... test.o"
+	@echo "... test.i"
+	@echo "... test.s"
 .PHONY : help
 
 
