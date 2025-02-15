@@ -6,18 +6,15 @@ namespace fs = std::filesystem;
 
 namespace torch::ext::data::datasets {
 
+    //------------------ CIFAR10 ------------------//
     CIFAR10::CIFAR10(const std::string &root) {
-        // Load data from the specified root directory
         load_data(root);
     }
 
-    // Override the get method to return a sample
     torch::data::Example<> CIFAR10::get(size_t index) {
-        // Return the tensor image and its corresponding label
         return {data[index].clone(), torch::tensor(labels[index])}; // Clone to ensure tensor validity
     }
 
-    // Override the size method to return the number of samples
     torch::optional<size_t> CIFAR10::size() const {
         return data.size();
     }
@@ -53,7 +50,7 @@ namespace torch::ext::data::datasets {
         }
     }
 
-
+    //------------------ CIFAR100 ------------------//
     CIFAR100::CIFAR100(const std::string &root, bool train, bool download) {
         // Load data from the specified root directory
         this->root = fs::path(root);
