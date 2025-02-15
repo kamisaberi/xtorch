@@ -101,6 +101,9 @@ find_package(CURL REQUIRED)
 find_package(OpenCV REQUIRED)
 find_package(ZLIB REQUIRED)
 
+find_package(OpenSSL REQUIRED)
+
+
 include_directories(/usr/include)
 include_directories(${ZLIB_INCLUDE_DIRS})
 include_directories(${CURL_INCLUDE_DIR})
@@ -116,7 +119,11 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
         zip
         ${ZLIB_LIBRARIES}
         ${LIBTAR_LIBRARY}
+        OpenSSL::SSL
+        OpenSSL::Crypto
 )
+
+#target_link_libraries(my_executable OpenSSL::SSL OpenSSL::Crypto)
 
 
 #TODO ----vvvv---- EXPORT MODULE  ----vvvv----
@@ -197,6 +204,77 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
         zip
         ${ZLIB_LIBRARIES}
         ${LIBTAR_LIBRARY}
+        OpenSSL::SSL
+        OpenSSL::Crypto
+
+)
+
+
+
+project(md)
+list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
+find_package(Torch REQUIRED)
+find_package(TorchExtension REQUIRED)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
+
+set(TEST_SOURCE_FILES
+        src/utils/md5.cpp
+        md.cpp
+)
+
+add_executable(${CMAKE_PROJECT_NAME} ${TEST_SOURCE_FILES})
+target_link_libraries(${CMAKE_PROJECT_NAME} "${TORCH_LIBRARIES}")
+#
+set_property(TARGET ${CMAKE_PROJECT_NAME} PROPERTY CXX_STANDARD 17)
+
+target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS})
+target_link_libraries(${CMAKE_PROJECT_NAME}
+        ${CURL_LIBRARIES}
+        ${TORCH_LIBRARIES}
+        ${OpenCV_LIBS}
+        ${ZLIB_LIBS}
+        ${ZIP_LIBRARIES}
+        zip
+        ${ZLIB_LIBRARIES}
+        ${LIBTAR_LIBRARY}
+        OpenSSL::SSL
+        OpenSSL::Crypto
+
+)
+
+
+
+project(md2)
+list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
+find_package(Torch REQUIRED)
+find_package(TorchExtension REQUIRED)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
+
+set(TEST_SOURCE_FILES
+        src/utils/md5.cpp
+        md2.cpp
+)
+
+add_executable(${CMAKE_PROJECT_NAME} ${TEST_SOURCE_FILES})
+target_link_libraries(${CMAKE_PROJECT_NAME} "${TORCH_LIBRARIES}")
+#
+set_property(TARGET ${CMAKE_PROJECT_NAME} PROPERTY CXX_STANDARD 17)
+
+target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS})
+target_link_libraries(${CMAKE_PROJECT_NAME}
+        ${CURL_LIBRARIES}
+        ${TORCH_LIBRARIES}
+        ${OpenCV_LIBS}
+        ${ZLIB_LIBS}
+        ${ZIP_LIBRARIES}
+        zip
+        ${ZLIB_LIBRARIES}
+        ${LIBTAR_LIBRARY}
+        OpenSSL::SSL
+        OpenSSL::Crypto
+
 )
 
 
