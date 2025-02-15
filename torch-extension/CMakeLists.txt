@@ -10,6 +10,7 @@ project(TorchExtension VERSION 0.1.0 LANGUAGES CXX)
 set(LIBRARY_SOURCE_FILES
         src/utils/archiver.cpp
         src/utils/downloader.cpp
+        src/utils/md5.cpp
         src/media/image/processing.cpp
 
         src/models/cnn/alexnet.cpp
@@ -186,6 +187,7 @@ set(TEST_SOURCE_FILES
         src/utils/downloader.cpp
         src/media/image/processing.cpp
         src/datasets/cifar.cpp
+        src/utils/md5.cpp
         test.cpp
 )
 

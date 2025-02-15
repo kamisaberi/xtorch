@@ -13,6 +13,7 @@
 //#include <filesystem>
 #include "../utils/downloader.h"
 #include "../utils/archiver.h"
+#include "../utils/md5.h"
 
 using namespace std;
 namespace fs = std::filesystem;

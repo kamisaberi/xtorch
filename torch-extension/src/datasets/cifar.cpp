@@ -58,35 +58,35 @@ namespace torch::ext::data::datasets {
         // Load data from the specified root directory
         this->root = fs::path(root);
         this->dataset_path = this->root / this->dataset_folder_name;
-
         bool res = true;
         if (download) {
-            cout << fs::exists(this->root / this->archive_file_name) << endl;
+            bool should_download = false;
             if (!fs::exists(this->root / this->archive_file_name)) {
+                should_download = true;
+            } else {
+                std::string md5 = md5File((this->root / this->archive_file_name).string());
+                if (md5 != archive_file_md5) {
+                    should_download = true;
+                }
+            }
+            if (should_download) {
                 auto [result, path] = download_data(this->download_url, this->root.string());
                 res = result;
             }
             if (res) {
-//                fs::path pth1 = this->root / this->archive_file_name;
-//                cout << pth1.string() << endl;
                 string pth = (this->root / this->archive_file_name).string();
-//                cout << pth << endl;
-                extract(pth, this->root);
+                res = extract(pth, this->root);
             }
         }
         if (res) {
-            load_data( train);
+            load_data(train);
         }
-
-
     }
 
     torch::data::Example<> CIFAR100::get(size_t index) {
-// Return the tensor image and its corresponding label
         return {data[index].clone(), torch::tensor(labels[index])}; // Clone to ensure tensor validity
     }
 
-//
     torch::optional<size_t> CIFAR100::size() const {
         return data.size();
     }
