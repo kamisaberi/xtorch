@@ -7,8 +7,33 @@ namespace fs = std::filesystem;
 namespace torch::ext::data::datasets {
 
     //------------------ CIFAR10 ------------------//
-    CIFAR10::CIFAR10(const std::string &root) {
-        load_data(root);
+    CIFAR10::CIFAR10(const std::string &root, bool train, bool download) {
+        // Load data from the specified root directory
+        this->root = fs::path(root);
+        this->dataset_path = this->root / this->dataset_folder_name;
+        bool res = true;
+        if (download) {
+            bool should_download = false;
+            if (!fs::exists(this->root / this->archive_file_name)) {
+                should_download = true;
+            } else {
+                std::string md5 = md5File((this->root / this->archive_file_name).string());
+                if (md5 != archive_file_md5) {
+                    should_download = true;
+                }
+            }
+            if (should_download) {
+                auto [result, path] = download_data(this->download_url, this->root.string());
+                res = result;
+            }
+            if (res) {
+                string pth = (this->root / this->archive_file_name).string();
+                res = extract(pth, this->root);
+            }
+        }
+        if (res) {
+            load_data(train);
+        }
     }
 
     torch::data::Example<> CIFAR10::get(size_t index) {
@@ -19,10 +44,10 @@ namespace torch::ext::data::datasets {
         return data.size();
     }
 
-    void CIFAR10::load_data(const std::string &root) {
+    void CIFAR10::load_data(bool train) {
         const int num_files = 5;
         for (int i = 1; i <= num_files; ++i) {
-            std::string file_path = root + "/data_batch_" + std::to_string(i) + ".bin";
+            std::string file_path = root / "/data_batch_" / std::to_string(i) / ".bin";
             std::ifstream file(file_path, std::ios::binary);
             if (!file.is_open()) {
                 std::cerr << "Failed to open file: " << file_path << std::endl;
