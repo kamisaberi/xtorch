@@ -34,7 +34,6 @@ set(LIBRARY_SOURCE_FILES
         src/datasets/euro-sat.cpp
         src/datasets/fake-data.cpp
         src/datasets/falling-things-stereo.cpp
-        src/datasets/fashion-mnist.cpp
         src/datasets/fer.cpp
         src/datasets/fgvc-aircraft.cpp
         src/datasets/flickr.cpp
