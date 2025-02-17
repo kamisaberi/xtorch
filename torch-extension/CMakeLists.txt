@@ -50,7 +50,6 @@ set(LIBRARY_SOURCE_FILES
         src/datasets/inaturalist.cpp
         src/datasets/kinetics.cpp
         src/datasets/kitti.cpp
-        src/datasets/kmnist.cpp
         src/datasets/lfw.cpp
         src/datasets/lsun.cpp
         src/datasets/middlebury.cpp

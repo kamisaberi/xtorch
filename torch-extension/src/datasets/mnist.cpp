@@ -161,4 +161,32 @@ namespace torch::ext::data::datasets {
     }
 
 
+    KMINST::KMINST(const std::string &images_path, const std::string &labels_path,
+                               int num_samples) {
+        auto images_data = read_mnist_images(images_path, num_samples);
+        auto labels_data = read_mnist_labels(labels_path, num_samples);
+
+        images_ = torch::empty({num_samples, 1, 28, 28}, torch::kUInt8);
+        labels_ = torch::empty(num_samples, torch::kUInt8);
+
+        for (int i = 0; i < num_samples; i++) {
+            images_[i] = torch::from_blob(images_data[i].data(), {1, 28, 28}, torch::kUInt8).clone();
+            labels_[i] = labels_data[i];
+        }
+
+        images_ = images_.to(torch::kFloat32).div_(255.0); // Normalize to [0, 1]
+        labels_ = labels_.to(torch::kInt64);               // Convert to int64 for loss functions
+    }
+
+    // Override `get` method to return a single data sample
+    torch::data::Example<> KMINST::get(size_t index) {
+        return {images_[index], labels_[index]};
+    }
+
+    // Override `size` method to return the number of samples
+    torch::optional<size_t> KMINST::size() const {
+        return labels_.size(0);
+    }
+
+
 }
