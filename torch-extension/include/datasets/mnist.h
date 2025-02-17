@@ -9,6 +9,7 @@
 #include <torch/torch.h>
 #include <vector>
 #include <tuple>
+#include <map>
 //#include <fstream>
 //#include <iostream>
 //#include <string>
@@ -122,6 +123,40 @@ namespace torch::ext::data::datasets {
 
     public :
         EMNIST(const std::string &images_path, const std::string &labels_path, int num_samples);
+
+        torch::data::Example<> get(size_t index) override;
+
+        torch::optional<size_t> size() const override;
+
+    };
+
+    class QMNIST : public torch::data::Dataset<EMNIST> {
+    private:
+        torch::Tensor images_;
+        torch::Tensor labels_;
+        std::string download_url_base = "https://raw.githubusercontent.com/facebookresearch/qmnist/master/";
+        fs::path root;
+        fs::path dataset_path;
+        fs::path dataset_folder_name = "QMNIST/raw";
+        std::string archive_file_md5 = "58c8d27c78d21e728a6bc7b3cc06412e";
+        std::map<string, std::vector<std::tuple<fs::path, std::string>>> resources = {
+                {"train", {
+                                  {fs::path("qmnist-train-images-idx3-ubyte.gz"), "ed72d4157d28c017586c42bc6afe6370"},
+                                  {fs::path("qmnist-train-labels-idx2-int.gz"), "0058f8dd561b90ffdd0f734c6a30e5e4"}
+                          }},
+                {"test",  {
+                                  {fs::path("qmnist-test-images-idx3-ubyte.gz"),  "1394631089c404de565df7b7aeaf9412"},
+                                  {fs::path("qmnist-test-labels-idx2-int.gz"),  "5b5b05890a5e13444e108efe57b788aa"}
+                          }},
+                {"nist",  {
+                                  {fs::path("xnist-images-idx3-ubyte.xz"),        "7f124b3b8ab81486c9d8c2749c17f834"},
+                                  {fs::path("xnist-labels-idx2-int.xz"),        "5ed0e788978e45d4a8bd4b7caec3d79d"}
+                          }}
+        };
+
+
+    public :
+        QMNIST(const std::string &images_path, const std::string &labels_path, int num_samples);
 
         torch::data::Example<> get(size_t index) override;
 
