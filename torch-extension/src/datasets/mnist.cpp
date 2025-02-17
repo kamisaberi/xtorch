@@ -132,7 +132,6 @@ namespace torch::ext::data::datasets {
     }
 
 
-
     FashionMNIST::FashionMNIST(const std::string &images_path, const std::string &labels_path,
                                int num_samples) {
         auto images_data = read_mnist_images(images_path, num_samples);
@@ -161,8 +160,7 @@ namespace torch::ext::data::datasets {
     }
 
 
-    KMINST::KMINST(const std::string &images_path, const std::string &labels_path,
-                               int num_samples) {
+    KMNIST::KMNIST(const std::string &images_path, const std::string &labels_path, int num_samples) {
         auto images_data = read_mnist_images(images_path, num_samples);
         auto labels_data = read_mnist_labels(labels_path, num_samples);
 
@@ -179,12 +177,12 @@ namespace torch::ext::data::datasets {
     }
 
     // Override `get` method to return a single data sample
-    torch::data::Example<> KMINST::get(size_t index) {
+    torch::data::Example<> KMNIST::get(size_t index) {
         return {images_[index], labels_[index]};
     }
 
     // Override `size` method to return the number of samples
-    torch::optional<size_t> KMINST::size() const {
+    torch::optional<size_t> KMNIST::size() const {
         return labels_.size(0);
     }
 
