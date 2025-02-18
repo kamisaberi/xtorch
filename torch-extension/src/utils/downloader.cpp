@@ -2,10 +2,10 @@
 
 
 using namespace std;
-namespace  fs = std::filesystem;
+namespace fs = std::filesystem;
 
 
-size_t header_callback(char* buffer, size_t size, size_t nitems, void* userdata) {
+size_t header_callback(char *buffer, size_t size, size_t nitems, void *userdata) {
     std::string header(buffer, size * nitems);
 
     // Look for the Content-Length header
@@ -17,14 +17,18 @@ size_t header_callback(char* buffer, size_t size, size_t nitems, void* userdata)
         length.erase(length.find_last_not_of(" \t\n\r") + 1);
 
         // Convert to size_t and store in userdata
-        *(static_cast<size_t*>(userdata)) = std::stoul(length);
+        *(static_cast<size_t *>(userdata)) = std::stoul(length);
     }
 
     return nitems * size;
 }
 
+std::string rebuild_google_drive_link(std::string gid) {
+    return "https://drive.google.com/uc?id=" + gid;
+}
 
-std::tuple<bool , std::string> download_data(std::string  &url, std::string outPath) {
+
+std::tuple<bool, std::string> download_data(std::string &url, std::string outPath) {
     CURL *curl;
     FILE *fp;
     CURLcode res;
@@ -34,7 +38,7 @@ std::tuple<bool , std::string> download_data(std::string  &url, std::string outP
 //    char outfilename[FILENAME_MAX] = "cifar-100-binary.tar.gz";
     curl = curl_easy_init();
     if (curl) {
-        string outFile=  (fs::path(outPath) /  fs::path(url).filename()).string();
+        string outFile = (fs::path(outPath) / fs::path(url).filename()).string();
         fp = fopen(outFile.c_str(), "wb");
         curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
 //        curl_easy_setopt(curl, CURLOPT_HEADERFUNCTION, header_callback);
@@ -49,8 +53,13 @@ std::tuple<bool , std::string> download_data(std::string  &url, std::string outP
         res = curl_easy_perform(curl);
         curl_easy_cleanup(curl);
         fclose(fp);
-        return std::make_tuple(true,outFile) ;
+        return std::make_tuple(true, outFile);
     }
     return std::make_tuple(false, "");
 }
 
+std::tuple<bool, std::string> download_from_gdrive(std::string gid, std::string outPath) {
+    string url = rebuild_google_drive_link(gid);
+    auto [result, path] = download_data(url, outPath);
+    return std::make_tuple(result, path);
+}
