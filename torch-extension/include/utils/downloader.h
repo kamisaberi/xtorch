@@ -11,5 +11,5 @@ namespace  fs = std::filesystem;
 
 std::tuple<bool , std::string> download_data(std::string  &url, std::string outPath);
 std::string  rebuild_google_drive_link(std::string  gid);
-std::tuple<bool , std::string> download_from_gdrive(std::string  &url, std::string outPath);
+std::tuple<bool , std::string> download_from_gdrive(std::string  gid, std::string outPath);
 
