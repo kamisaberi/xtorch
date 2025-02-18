@@ -1,13 +1,33 @@
 #pragma once
 
+//#include <vector>
+#include <fstream>
+//#include <iostream>
+//#include <string>
+#include <filesystem>
+//#include <curl/curl.h>
 #include <torch/torch.h>
-#include "../exceptions/implementation.h"
+//#include <vector>
+//#include <fstream>
+//#include <iostream>
+//#include <string>
+//#include <filesystem>
+#include "../utils/downloader.h"
+#include "../utils/archiver.h"
+#include "../utils/md5.h"
+
+using namespace std;
+namespace fs = std::filesystem;
 
 
 namespace torch::ext::data::datasets {
    class EuroSAT : torch::data::Dataset<EuroSAT> {
+   private:
+       std::string download_url = "https://huggingface.co/datasets/torchgeo/eurosat/resolve/c877bcd43f099cd0196738f714544e355477f3fd/EuroSAT.zip";
+       fs::path archive_file_name = "EuroSAT.zip";
+       std::string archive_file_md5 = "c8fa014336c82ac7804f0398fcb19387";
 
-    public :
+   public :
        EuroSAT();
     };
 }
