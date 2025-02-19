@@ -1,12 +1,50 @@
 #pragma once
-
+//#include <vector>
+#include <fstream>
+//#include <iostream>
+//#include <string>
+#include <filesystem>
+//#include <curl/curl.h>
 #include <torch/torch.h>
+#include <vector>
+#include <tuple>
+#include <map>
+//#include <fstream>
+//#include <iostream>
+//#include <string>
+//#include <filesystem>
+#include "../utils/downloader.h"
+#include "../utils/archiver.h"
+#include "../utils/md5.h"
 #include "../exceptions/implementation.h"
 
+using namespace std;
+namespace fs = std::filesystem;
 
 namespace torch::ext::data::datasets {
     class LFW : public torch::data::Dataset<LFW> {
     private :
+        fs::path base_folder = fs::path("lfw-py");
+        fs::path download_url_prefix = fs::path("http://vis-www.cs.umass.edu/lfw/");
+
+        file_dict = {
+                "original": ("lfw", "lfw.tgz", "a17d05bd522c52d84eca14327a23d494"),
+                "funneled": ("lfw_funneled", "lfw-funneled.tgz", "1b42dfed7d15c9b2dd63d5e5840c86ad"),
+                "deepfunneled": ("lfw-deepfunneled", "lfw-deepfunneled.tgz", "68331da3eb755a505a502b5aacb3c201"),
+        }
+        checksums = {
+                "pairs.txt": "9f1ba174e4e1c508ff7cdf10ac338a7d",
+                "pairsDevTest.txt": "5132f7440eb68cf58910c8a45a2ac10b",
+                "pairsDevTrain.txt": "4f27cbf15b2da4a85c1907eb4181ad21",
+                "people.txt": "450f0863dd89e85e73936a6d71a3474b",
+                "peopleDevTest.txt": "e4bf5be0a43b5dcd9dc5ccfcb8fb19c5",
+                "peopleDevTrain.txt": "54eaac34beb6d042ed3a7d883e247a21",
+                "lfw-names.txt": "a6d0a479bd074669f656265a6e693f6d",
+        }
+
+        vector<string> annot_file = {"10fold": "", "train": "DevTrain", "test": "DevTest"};
+        fs::path names = fs::path("lfw-names.txt");
+
 
     };
 
