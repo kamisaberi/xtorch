@@ -5,14 +5,20 @@
 
 
 namespace torch::ext::data::datasets {
-   class LFWPeople : torch::data::Dataset<LFWPeople> {
+    class LFW : public torch::data::Dataset<LFW> {
+    private :
 
-    public :
-       LFWPeople();
     };
-   class LFWPairs : torch::data::Dataset<LFWPairs> {
+
+    class LFWPeople : public LFW {
 
     public :
-       LFWPairs();
+        LFWPeople();
+    };
+
+    class LFWPairs : public LFW {
+
+    public :
+        LFWPairs();
     };
 }
