@@ -21,10 +21,16 @@ namespace torch::ext::data::datasets {
         rows = __builtin_bswap32(rows);
         cols = __builtin_bswap32(cols);
 
+        std::vector<torch::Tensor> fimages;
         std::vector<std::vector<uint8_t>> images(num_images, std::vector<uint8_t>(rows * cols));
         for (int i = 0; i < num_images; i++) {
             file.read(reinterpret_cast<char *>(images[i].data()), rows * cols);
+            auto tensor_image = torch::from_blob(images[i].data(), {28, 28},
+                                                 torch::kByte).clone();
+            fimages.push_back(tensor_image);
         }
+//        cout << fimages[0] << endl;
+
 
         file.close();
         return images;
@@ -72,9 +78,9 @@ namespace torch::ext::data::datasets {
             fs::path pth = std::get<0>(resource);
             std::string md = std::get<1>(resource);
             fs::path fpth = this->dataset_path / pth;
-            if ( !(fs::exists(fpth) && md5File(fpth.string()) == md)) {
+            if (!(fs::exists(fpth) && md5File(fpth.string()) == md)) {
                 string u = (this->url / pth).string();
-                auto[r, path]  = download_data( u , this->dataset_path.string());
+                auto [r, path] = download_data(u, this->dataset_path.string());
             }
             extractGzip(fpth);
         }
@@ -92,23 +98,23 @@ namespace torch::ext::data::datasets {
 
     void MNIST::load_data(bool train) {
         if (train) {
-            fs::path imgs = this->dataset_path /  std::get<0>(files["train"]);
+            fs::path imgs = this->dataset_path / std::get<0>(files["train"]);
             fs::path lbls = this->dataset_path / std::get<1>(files["train"]);
             cout << imgs << endl;
             auto images = read_mnist_images(imgs.string(), 50000);
             auto labels = read_mnist_labels(lbls.string(), 50000);
             cout << images.size() << endl;
             cout << labels.size() << endl;
-            for (int i = 0 ; i < 100; i++) {
+            for (int i = 0; i < 100; i++) {
 //                for (auto row : images[i]) {
 //                    cout << (unsigned int) row << " -- ";
 //                }
-                cout << (unsigned int)labels[i] << "\t";
+                cout << (unsigned int) labels[i] << "\t";
             }
             cout << endl;
 
-        }else {
-            fs::path imgs = this->dataset_path /  std::get<0>(files["test"]);
+        } else {
+            fs::path imgs = this->dataset_path / std::get<0>(files["test"]);
             fs::path lbls = this->dataset_path / std::get<1>(files["test"]);
             cout << imgs << endl;
             auto images = read_mnist_images(imgs.string(), 10000);
