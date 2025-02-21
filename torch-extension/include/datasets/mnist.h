@@ -41,21 +41,24 @@ namespace torch::ext::data::datasets {
     private :
         std::vector<torch::Tensor> data; // Store image data as tensors
         std::vector<int64_t> labels;      // Store labels
-        std::string download_url_base = "https://ossci-datasets.s3.amazonaws.com/mnist/";
+        std::string url = "https://ossci-datasets.s3.amazonaws.com/mnist/";
         fs::path root;
         fs::path dataset_path;
         fs::path dataset_folder_name = "MNIST/raw";
 
-        vector<tuple<fs::path, std::string >> resources = {
+        vector <tuple<fs::path, std::string >> resources = {
                 {fs::path("train-images-idx3-ubyte.gz"), "f68b3c2dcbeaaa9fbdd348bbdeb94873"},
                 {fs::path("train-labels-idx1-ubyte.gz"), "d53e105ee54ea40749a09fcbcd1e9432"},
                 {fs::path("t10k-images-idx3-ubyte.gz"),  "9fb629c4189551a2d022fa330f9573f3"},
                 {fs::path("t10k-labels-idx1-ubyte.gz"),  "ec29112dd5afa0611ce80d1b7f02629c"},
         };
 
+        std::map<std::string, std::tuple<fs::path, fs::path>> files = {
+                {"train", {fs::path("train-images-idx3-ubyte"), fs::path("train-labels-idx1-ubyte")}},
+                {"test", {fs::path("t10k-images-idx3-ubyte"), fs::path("t10k-labels-idx1-ubyte")}}
+        };
+
         void load_data(bool train = true);
-
-
     };
 
 
@@ -68,7 +71,7 @@ namespace torch::ext::data::datasets {
         fs::path dataset_path;
         fs::path dataset_folder_name = "MNIST/raw";
 
-        vector<tuple<fs::path, std::string >> resources = {
+        vector <tuple<fs::path, std::string >> resources = {
                 {fs::path("train-images-idx3-ubyte.gz"), "8d4fb7e6c68d591d4c3dfef9ec88bf0d"},
                 {fs::path("train-labels-idx1-ubyte.gz"), "25c81989df183df01b3e8a0aad5dffbe"},
                 {fs::path("t10k-images-idx3-ubyte.gz"),  "bef4ecab320f06d8554ea6380940ec79"},
@@ -94,7 +97,7 @@ namespace torch::ext::data::datasets {
         fs::path dataset_path;
         fs::path dataset_folder_name = "KMNIST/raw";
 
-        vector<tuple<fs::path, std::string >> resources = {
+        vector <tuple<fs::path, std::string >> resources = {
                 {fs::path("train-images-idx3-ubyte.gz"), "bdb82020997e1d708af4cf47b453dcf7"},
                 {fs::path("train-labels-idx1-ubyte.gz"), "e144d726b3acfaa3e44228e80efcd344"},
                 {fs::path("t10k-images-idx3-ubyte.gz"),  "5c965bf0a639b31b8f53240b1b52f4d7"},

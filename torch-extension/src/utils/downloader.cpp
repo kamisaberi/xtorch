@@ -29,6 +29,7 @@ std::string rebuild_google_drive_link(std::string gid) {
 
 
 std::tuple<bool, std::string> download_data(std::string &url, std::string outPath) {
+    cout << url << endl;
     CURL *curl;
     FILE *fp;
     CURLcode res;

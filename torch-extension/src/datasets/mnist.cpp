@@ -56,38 +56,28 @@ namespace torch::ext::data::datasets {
     //------------------ MNIST ------------------//
     MNIST::MNIST(const std::string &root, bool train, bool download) {
 
+        this->root = fs::path(root);
+        if (!fs::exists(this->root)) {
+            throw runtime_error("path is not exists");
+        }
+        this->dataset_path = this->root / this->dataset_folder_name;
+        if (!fs::exists(this->dataset_path)) {
+            fs::create_directories(this->dataset_path);
+        }
+
         bool res = true;
         for (const auto &resource: this->resources) {
-            auto pth = std::get<0>(resource);
-            auto md = std::get<1>(resource);
+            fs::path pth = std::get<0>(resource);
+            std::string md = std::get<1>(resource);
+            fs::path fpth = this->dataset_path / pth;
+            if ( !(fs::exists(fpth) && md5File(fpth.string()) == md)) {
+                string u = (this->url / pth).string();
+                auto[r, path]  = download_data( u , this->dataset_path.string());
+            }
+            extractGzip(fpth);
         }
+        load_data(train);
 
-//        // Load data from the specified root directory
-//        this->root = fs::path(root);
-//        this->dataset_path = this->root / this->dataset_folder_name;
-
-//        if (download) {
-//            bool should_download = false;
-//            if (!fs::exists(this->root / this->archive_file_name)) {
-//                should_download = true;
-//            } else {
-//                std::string md5 = md5File((this->root / this->archive_file_name).string());
-//                if (md5 != archive_file_md5) {
-//                    should_download = true;
-//                }
-//            }
-//            if (should_download) {
-//                auto [result, path] = download_data(this->download_url, this->root.string());
-//                res = result;
-//            }
-//            if (res) {
-//                string pth = (this->root / this->archive_file_name).string();
-//                res = extract(pth, this->root);
-//            }
-//        }
-        if (res) {
-            load_data(train);
-        }
     }
 
     torch::data::Example<> MNIST::get(size_t index) {
@@ -99,35 +89,23 @@ namespace torch::ext::data::datasets {
     }
 
     void MNIST::load_data(bool train) {
+        if (train) {
+            fs::path imgs = this->dataset_path /  std::get<0>(files["train"]);
+            fs::path lbls = this->dataset_path / std::get<1>(files["train"]);
+            cout << imgs << endl;
+            auto images = read_mnist_images(imgs.string(), 50000);
+            auto labels = read_mnist_labels(lbls.string(), 50000);
+            cout << images.size() << endl;
+            cout << labels.size() << endl;
 
-
-        const int num_files = 5;
-        for (int i = 1; i <= num_files; ++i) {
-            std::string file_path = root / "/data_batch_" / std::to_string(i) / ".bin";
-            std::ifstream file(file_path, std::ios::binary);
-            if (!file.is_open()) {
-                std::cerr << "Failed to open file: " << file_path << std::endl;
-                continue;
-            }
-
-            for (int j = 0; j < 10000; ++j) {
-                uint8_t label;
-                file.read(reinterpret_cast<char *>(&label), sizeof(label));
-                labels.push_back(static_cast<int64_t>(label));
-
-                std::vector<uint8_t> image(3072); // 32x32x3 = 3072
-                file.read(reinterpret_cast<char *>(image.data()), image.size());
-
-                // Reshape the image to 3x32x32 and convert to a Torch tensor
-                auto tensor_image = torch::from_blob(image.data(), {3, 32, 32},
-                                                     torch::kByte).clone(); // Clone to ensure memory management
-                tensor_image = tensor_image.permute(
-                        {0, 2, 1}); // Permute to get the correct order (C, H, W)
-
-                data.push_back(tensor_image); // Store the tensor in the data vector
-            }
-
-            file.close();
+        }else {
+            fs::path imgs = this->dataset_path /  std::get<0>(files["test"]);
+            fs::path lbls = this->dataset_path / std::get<1>(files["test"]);
+            cout << imgs << endl;
+            auto images = read_mnist_images(imgs.string(), 10000);
+            auto labels = read_mnist_labels(lbls.string(), 10000);
+            cout << images.size() << endl;
+            cout << labels.size() << endl;
         }
     }
 
