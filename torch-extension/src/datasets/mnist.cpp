@@ -42,12 +42,14 @@ namespace torch::ext::data::datasets {
         file.read(reinterpret_cast<char *>(&num_items), 4);
 
         // Convert endianess
+        cout << magic_number << "\t";
         magic_number = __builtin_bswap32(magic_number);
         num_items = __builtin_bswap32(num_items);
 
         std::vector<uint8_t> labels(num_labels);
         file.read(reinterpret_cast<char *>(labels.data()), num_labels);
 
+        cout << labels.data() << endl;
         file.close();
         return labels;
     }
@@ -97,6 +99,13 @@ namespace torch::ext::data::datasets {
             auto labels = read_mnist_labels(lbls.string(), 50000);
             cout << images.size() << endl;
             cout << labels.size() << endl;
+            for (int i = 0 ; i < 100; i++) {
+//                for (auto row : images[i]) {
+//                    cout << (unsigned int) row << " -- ";
+//                }
+                cout << (unsigned int)labels[i] << "\t";
+            }
+            cout << endl;
 
         }else {
             fs::path imgs = this->dataset_path /  std::get<0>(files["test"]);
