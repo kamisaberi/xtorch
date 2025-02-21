@@ -6,7 +6,7 @@
 //#include <string>
 //#include <filesystem>
 //#include <curl/curl.h>
-#include "include/datasets/cifar.h"
+#include "include/datasets/mnist.h"
 
 int main() {
     torch::Tensor tensor = torch::eye(3);
@@ -16,8 +16,8 @@ int main() {
 //    torch::ext::data::datasets::UCF101 u1 = torch::ext::data::datasets::UCF101(5);
 //    torch::ext::data::datasets::UCF101 u1 = torch::ext::data::datasets::UCF101(r);
 
-    torch::ext::data::datasets::CIFAR100 cifar100("/home/kami/Documents/temp/", true , true);
-    cout << cifar100.get(0).target << endl;
+    torch::ext::data::datasets::MNIST mnist("/home/kami/Documents/temp/", true , true);
+    cout << mnist.get(0).target << endl;
     std::cout << "End\n";
 
 

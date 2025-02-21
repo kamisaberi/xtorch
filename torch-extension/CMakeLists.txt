@@ -29,7 +29,6 @@ set(LIBRARY_SOURCE_FILES
         src/datasets/country.cpp
         src/datasets/cre-stereo.cpp
         src/datasets/dtd.cpp
-        src/datasets/emnist.cpp
         src/datasets/eth-3d-stereo.cpp
         src/datasets/euro-sat.cpp
         src/datasets/fake-data.cpp
@@ -59,7 +58,6 @@ set(LIBRARY_SOURCE_FILES
         src/datasets/pcam.cpp
         src/datasets/photo-tour.cpp
         src/datasets/places.cpp
-        src/datasets/qmnist.cpp
         src/datasets/rendered-sst2.cpp
         src/datasets/sb-dataset.cpp
         src/datasets/sbu.cpp
@@ -184,7 +182,7 @@ set(TEST_SOURCE_FILES
         src/utils/archiver.cpp
         src/utils/downloader.cpp
         src/media/image/processing.cpp
-        src/datasets/cifar.cpp
+        src/datasets/mnist.cpp
         src/utils/md5.cpp
         test.cpp
 )

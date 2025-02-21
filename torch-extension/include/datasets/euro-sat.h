@@ -15,6 +15,8 @@
 #include "../utils/downloader.h"
 #include "../utils/archiver.h"
 #include "../utils/md5.h"
+#include "../exceptions/implementation.h"
+
 
 using namespace std;
 namespace fs = std::filesystem;
