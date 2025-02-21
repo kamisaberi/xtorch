@@ -25,7 +25,7 @@ namespace fs = std::filesystem;
 
 namespace torch::ext::data::datasets {
 
-    std::vector<std::vector<uint8_t>> read_mnist_images(const std::string &file_path, int num_images);
+    std::vector<torch::Tensor> read_mnist_images(const std::string &file_path, int num_images);
 
     std::vector<uint8_t> read_mnist_labels(const std::string &file_path, int num_labels);
 

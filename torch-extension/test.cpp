@@ -18,7 +18,8 @@ int main() {
 
     torch::ext::data::datasets::MNIST train("/home/kami/Documents/temp/", true , true);
     torch::ext::data::datasets::MNIST test("/home/kami/Documents/temp/", false , true);
-//    cout << mnist.get(0).target << endl;
+    cout << train.get(0).target << endl;
+    cout << train.get(0).data << endl;
     std::cout << "End\n";
 
 

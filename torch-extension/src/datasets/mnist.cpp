@@ -2,7 +2,7 @@
 
 namespace torch::ext::data::datasets {
 
-    std::vector<std::vector<uint8_t>> read_mnist_images(const std::string &file_path, int num_images) {
+    std::vector<torch::Tensor> read_mnist_images(const std::string &file_path, int num_images) {
         std::ifstream file(file_path, std::ios::binary);
         if (!file.is_open()) {
             throw std::runtime_error("Failed to open file: " + file_path);
@@ -33,7 +33,7 @@ namespace torch::ext::data::datasets {
 
 
         file.close();
-        return images;
+        return fimages;
     }
 
     std::vector<uint8_t> read_mnist_labels(const std::string &file_path, int num_labels) {
