@@ -135,8 +135,10 @@ namespace torch::ext::data::datasets {
 
     class QMNIST : public torch::data::Dataset<EMNIST> {
     private:
-        torch::Tensor images_;
-        torch::Tensor labels_;
+        vector< torch::Tensor> images_;
+        vector<torch::Tensor> labels_;
+        torch::Tensor image_;
+        torch::Tensor label_;
         std::string download_url_base = "https://raw.githubusercontent.com/facebookresearch/qmnist/master/";
         fs::path root;
         fs::path dataset_path;

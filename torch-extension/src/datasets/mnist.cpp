@@ -210,11 +210,11 @@ namespace torch::ext::data::datasets {
         auto images_data = read_mnist_images(images_path, num_samples);
         auto labels_data = read_mnist_labels(labels_path, num_samples);
 
-        images_ = torch::empty({num_samples, 1, 28, 28}, torch::kUInt8);
-        labels_ = torch::empty(num_samples, torch::kUInt8);
+        image_ = torch::empty({num_samples, 1, 28, 28}, torch::kUInt8);
+        label_ = torch::empty(num_samples, torch::kUInt8);
 
         for (int i = 0; i < num_samples; i++) {
-            images_[i] = torch::from_blob(images_data[i].data(), {1, 28, 28}, torch::kUInt8).clone();
+            images_.push_back(torch::from_blob(images_data[i].data(), {1, 28, 28}, torch::kByte).clone());
             labels_[i] = labels_data[i];
         }
 
