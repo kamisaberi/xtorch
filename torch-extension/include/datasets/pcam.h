@@ -1,13 +1,46 @@
 #pragma once
 
+//#include <vector>
+#include <fstream>
+//#include <iostream>
+//#include <string>
+#include <filesystem>
+//#include <curl/curl.h>
 #include <torch/torch.h>
+#include <vector>
+#include <tuple>
+#include <map>
+//#include <fstream>
+//#include <iostream>
+//#include <string>
+//#include <filesystem>
+#include "../utils/downloader.h"
+#include "../utils/archiver.h"
+#include "../utils/md5.h"
 #include "../exceptions/implementation.h"
 
 
 namespace torch::ext::data::datasets {
-   class PCAM : torch::data::Dataset<PCAM> {
+    class PCAM : torch::data::Dataset<PCAM> {
+    private :
+        std::tuple<fs::path, std::string, std::string>  t = {fs::path("camelyonpatch_level_2_split_train_x.h5"),"1Ka0XfEMiwgCYPdTI-vv6eUElOBnKFKQ2","1571f514728f59376b705fc836ff4b63"};
+        std::map<std::string, std::map<std::string, std::tuple<fs::path, std::string, std::string> >> resources = {
+                {"train",{
+                    {"images", {fs::path("camelyonpatch_level_2_split_train_x.h5"),"1Ka0XfEMiwgCYPdTI-vv6eUElOBnKFKQ2","1571f514728f59376b705fc836ff4b63"} },
+                    {"targets", {fs::path("camelyonpatch_level_2_split_train_y.h5"),"1269yhu3pZDP8UYFQs-NYs3FPwuK-nGSG","35c2d7259d906cfc8143347bb8e05be7"} },
+                }},
+                {"test",{
+                    {"images", {fs::path("camelyonpatch_level_2_split_test_x.h5"),"1qV65ZqZvWzuIVthK8eVDhIwrbnsJdbg_","d8c2d60d490dbd479f8199bdfa0cf6ec"} },
+                    {"targets", {fs::path("camelyonpatch_level_2_split_test_y.h5"),"17BHrSrwWKjYsOgTMmoqrIjDy6Fa2o_gP","60a7035772fbdb7f34eb86d4420cf66a"} },
+                }},
+                {"val",{
+                    {"images", {fs::path("camelyonpatch_level_2_split_valid_x.h5"),"1hgshYGWK8V-eGRy8LToWJJgDU_rXWVJ3","d5b63470df7cfa627aeec8b9dc0c066e"} },
+                    {"targets", {fs::path("camelyonpatch_level_2_split_valid_y.h5"),"1bH8ZRbhSVAhScTS0p9-ZzGnX91cHT3uO","2b85f58b927af9964a4c15b8f7e8f179"} },
+                }}
+        };
+
 
     public :
-       PCAM();
+        PCAM();
     };
 }
