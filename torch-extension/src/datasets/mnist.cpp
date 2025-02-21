@@ -214,7 +214,7 @@ namespace torch::ext::data::datasets {
         label_ = torch::empty(num_samples, torch::kUInt8);
 
         for (int i = 0; i < num_samples; i++) {
-            images_.push_back(torch::from_blob(images_data[i].data(), {1, 28, 28}, torch::kByte).clone());
+            images_.push_back(torch::from_blob(images_data[i].data(), {28, 28}, torch::kByte).clone());
             labels_[i] = labels_data[i];
         }
 
