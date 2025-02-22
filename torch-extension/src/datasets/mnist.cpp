@@ -77,8 +77,12 @@ namespace torch::ext::data::datasets {
             std::string md = std::get<1>(resource);
             fs::path fpth = this->dataset_path / pth;
             if (!(fs::exists(fpth) && md5File(fpth.string()) == md)) {
-                string u = (this->url / pth).string();
-                auto [r, path] = download_data(u, this->dataset_path.string());
+                if (download) {
+                    string u = (this->url / pth).string();
+                    auto [r, path] = download_data(u, this->dataset_path.string());
+                }else {
+                    throw runtime_error("Resources files dent exist. please try again with download = true");
+                }
             }
             extractGzip(fpth);
         }
@@ -86,7 +90,6 @@ namespace torch::ext::data::datasets {
     }
 
     torch::data::Example<> MNIST::get(size_t index) {
-        cout << "MNIST::size: " << data.size() << endl;
         return {data[index].clone(), torch::tensor(labels[index])}; // Clone to ensure tensor validity
     }
 
@@ -101,25 +104,14 @@ namespace torch::ext::data::datasets {
             cout << imgs << endl;
             auto images = read_mnist_images(imgs.string(), 50000);
             auto labels = read_mnist_labels(lbls.string(), 50000);
-            cout << images.size() << endl;
-            cout << labels.size() << endl;
             this->data = images;
             this->labels = labels;
-            //             for (int i = 0; i < 100; i++) {
-            // //                for (auto row : images[i]) {
-            // //                    cout << (unsigned int) row << " -- ";
-            // //                }
-            //                 cout << (unsigned int) labels[i] << "\t";
-            //             }
-            //             cout << endl;
         } else {
             fs::path imgs = this->dataset_path / std::get<0>(files["test"]);
             fs::path lbls = this->dataset_path / std::get<1>(files["test"]);
             cout << imgs << endl;
             auto images = read_mnist_images(imgs.string(), 10000);
             auto labels = read_mnist_labels(lbls.string(), 10000);
-            cout << images.size() << endl;
-            cout << labels.size() << endl;
             this->data = images;
             this->labels = labels;
         }
