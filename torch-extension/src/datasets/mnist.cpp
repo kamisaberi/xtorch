@@ -80,7 +80,7 @@ namespace torch::ext::data::datasets {
                 if (download) {
                     string u = (this->url / pth).string();
                     auto [r, path] = download_data(u, this->dataset_path.string());
-                }else {
+                } else {
                     throw runtime_error("Resources files dent exist. please try again with download = true");
                 }
             }
@@ -118,21 +118,32 @@ namespace torch::ext::data::datasets {
     }
 
 
-    FashionMNIST::FashionMNIST(const std::string &images_path, const std::string &labels_path,
-                               int num_samples) {
-        // auto images_data = read_mnist_images(images_path, num_samples);
-        // auto labels_data = read_mnist_labels(labels_path, num_samples);
-        //
-        // images_ = torch::empty({num_samples, 1, 28, 28}, torch::kUInt8);
-        // labels_ = torch::empty(num_samples, torch::kUInt8);
-        //
-        // for (int i = 0; i < num_samples; i++) {
-        //     images_[i] = torch::from_blob(images_data[i].data(), {1, 28, 28}, torch::kUInt8).clone();
-        //     labels_[i] = labels_data[i];
-        // }
-        //
-        // images_ = images_.to(torch::kFloat32).div_(255.0); // Normalize to [0, 1]
-        // labels_ = labels_.to(torch::kInt64);               // Convert to int64 for loss functions
+    FashionMNIST::FashionMNIST(const std::string &root, bool train, bool download) {
+        this->root = fs::path(root);
+        if (!fs::exists(this->root)) {
+            throw runtime_error("path is not exists");
+        }
+        this->dataset_path = this->root / this->dataset_folder_name;
+        if (!fs::exists(this->dataset_path)) {
+            fs::create_directories(this->dataset_path);
+        }
+
+        bool res = true;
+        for (const auto &resource: this->resources) {
+            fs::path pth = std::get<0>(resource);
+            std::string md = std::get<1>(resource);
+            fs::path fpth = this->dataset_path / pth;
+            if (!(fs::exists(fpth) && md5File(fpth.string()) == md)) {
+                if (download) {
+                    string u = (this->url / pth).string();
+                    auto [r, path] = download_data(u, this->dataset_path.string());
+                } else {
+                    throw runtime_error("Resources files dent exist. please try again with download = true");
+                }
+            }
+            extractGzip(fpth);
+        }
+        load_data(train);
     }
 
     // Override `get` method to return a single data sample
@@ -177,7 +188,32 @@ namespace torch::ext::data::datasets {
     }
 
 
-    KMNIST::KMNIST(const std::string &images_path, const std::string &labels_path, int num_samples) {
+    KMNIST::KMNIST(const std::string &root, bool train, bool download) {
+        this->root = fs::path(root);
+        if (!fs::exists(this->root)) {
+            throw runtime_error("path is not exists");
+        }
+        this->dataset_path = this->root / this->dataset_folder_name;
+        if (!fs::exists(this->dataset_path)) {
+            fs::create_directories(this->dataset_path);
+        }
+
+        bool res = true;
+        for (const auto &resource: this->resources) {
+            fs::path pth = std::get<0>(resource);
+            std::string md = std::get<1>(resource);
+            fs::path fpth = this->dataset_path / pth;
+            if (!(fs::exists(fpth) && md5File(fpth.string()) == md)) {
+                if (download) {
+                    string u = (this->url / pth).string();
+                    auto [r, path] = download_data(u, this->dataset_path.string());
+                } else {
+                    throw runtime_error("Resources files dent exist. please try again with download = true");
+                }
+            }
+            extractGzip(fpth);
+        }
+        load_data(train);
     }
 
     // Override `get` method to return a single data sample
@@ -222,21 +258,54 @@ namespace torch::ext::data::datasets {
     }
 
 
-    EMNIST::EMNIST(const std::string &images_path, const std::string &labels_path, int num_samples) {
-        // auto images_data = read_mnist_images(images_path, num_samples);
-        // auto labels_data = read_mnist_labels(labels_path, num_samples);
-        //
-        // images_ = torch::empty({num_samples, 1, 28, 28}, torch::kUInt8);
-        // labels_ = torch::empty(num_samples, torch::kUInt8);
-        //
-        // for (int i = 0; i < num_samples; i++) {
-        //     images_[i] = torch::from_blob(images_data[i].data(), {1, 28, 28}, torch::kUInt8).clone();
-        //     labels_[i] = labels_data[i];
-        // }
-        //
-        // images_ = images_.to(torch::kFloat32).div_(255.0); // Normalize to [0, 1]
-        // labels_ = labels_.to(torch::kInt64);               // Convert to int64 for loss functions
+    EMNIST::EMNIST(const std::string &root, bool train, bool download) {
+        this->root = fs::path(root);
+        if (!fs::exists(this->root)) {
+            throw runtime_error("path is not exists");
+        }
+        this->dataset_path = this->root / this->dataset_folder_name;
+        if (!fs::exists(this->dataset_path)) {
+            fs::create_directories(this->dataset_path);
+        }
+
+        bool res = true;
+        fs::path fpth = this->dataset_path / archive_file_name;
+        if (!(fs::exists(fpth) && md5File(fpth.string()) == archive_file_md5)) {
+            if (download) {
+                string u = (this->url / archive_file_name).string();
+                auto [r, path] = download_data(u, this->dataset_path.string());
+            } else {
+                throw runtime_error("Resources files dent exist. please try again with download = true");
+            }
+        }
+        extractZip(fpth);
+        load_data(train);
     }
+
+    void EMNIST::load_data(bool train) {
+        if (train) {
+            fs::path imgs = this->dataset_path / std::get<0>(files["train"]);
+            fs::path lbls = this->dataset_path / std::get<1>(files["train"]);
+            cout << imgs << endl;
+            auto images = read_mnist_images(imgs.string(), 50000);
+            auto labels = read_mnist_labels(lbls.string(), 50000);
+            cout << images.size() << endl;
+            cout << labels.size() << endl;
+            this->data = images;
+            this->labels = labels;
+        } else {
+            fs::path imgs = this->dataset_path / std::get<0>(files["test"]);
+            fs::path lbls = this->dataset_path / std::get<1>(files["test"]);
+            cout << imgs << endl;
+            auto images = read_mnist_images(imgs.string(), 10000);
+            auto labels = read_mnist_labels(lbls.string(), 10000);
+            cout << images.size() << endl;
+            cout << labels.size() << endl;
+            this->data = images;
+            this->labels = labels;
+        }
+    }
+
 
     // Override `get` method to return a single data sample
     torch::data::Example<> EMNIST::get(size_t index) {
@@ -248,20 +317,10 @@ namespace torch::ext::data::datasets {
         return labels.size();
     }
 
-    QMNIST::QMNIST(const std::string &images_path, const std::string &labels_path, int num_samples) {
-        // auto images_data = read_mnist_images(images_path, num_samples);
-        // auto labels_data = read_mnist_labels(labels_path, num_samples);
-        //
-        // image_ = torch::empty({num_samples, 1, 28, 28}, torch::kUInt8);
-        // label_ = torch::empty(num_samples, torch::kUInt8);
-        //
-        // for (int i = 0; i < num_samples; i++) {
-        //     images_.push_back(torch::from_blob(images_data[i].data(), {28, 28}, torch::kByte).clone());
-        //     labels_[i] = labels_data[i];
-        // }
-        //
-        // images_ = images_.to(torch::kFloat32).div_(255.0); // Normalize to [0, 1]
-        // labels_ = labels_.to(torch::kInt64);               // Convert to int64 for loss functions
+
+
+
+    QMNIST::QMNIST(const std::string &root, bool train, bool download) {
     }
 
     // Override `get` method to return a single data sample

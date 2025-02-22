@@ -66,7 +66,7 @@ namespace torch::ext::data::datasets {
     private:
         std::vector<torch::Tensor> data; // Store image data as tensors
         std::vector<uint8_t> labels;      // Store labels
-        std::string download_url_base = "http://fashion-mnist.s3-website.eu-central-1.amazonaws.com/";
+        std::string url = "http://fashion-mnist.s3-website.eu-central-1.amazonaws.com/";
         fs::path root;
         fs::path dataset_path;
         fs::path dataset_folder_name = "FashionMNIST/raw";
@@ -87,7 +87,7 @@ namespace torch::ext::data::datasets {
 
     public:
         // Constructor: Loads images and labels from files
-        FashionMNIST(const std::string &images_path, const std::string &labels_path, int num_samples);
+        FashionMNIST(const std::string &root, bool train = true, bool download = false);
 
         torch::data::Example<> get(size_t index) override;
 
@@ -99,7 +99,7 @@ namespace torch::ext::data::datasets {
     private:
         std::vector<torch::Tensor> data; // Store image data as tensors
         std::vector<uint8_t> labels;      // Store labels
-        std::string download_url_base = "http://codh.rois.ac.jp/kmnist/dataset/kmnist/";
+        std::string url = "http://codh.rois.ac.jp/kmnist/dataset/kmnist/";
         fs::path root;
         fs::path dataset_path;
         fs::path dataset_folder_name = "KMNIST/raw";
@@ -119,7 +119,7 @@ namespace torch::ext::data::datasets {
         void load_data(bool train = true);
 
     public :
-        KMNIST(const std::string &images_path, const std::string &labels_path, int num_samples);
+        KMNIST(const std::string &root, bool train = true, bool download = false);
         torch::data::Example<> get(size_t index) override;
         torch::optional<size_t> size() const override;
 
@@ -129,15 +129,15 @@ namespace torch::ext::data::datasets {
     private:
         std::vector<torch::Tensor> data; // Store image data as tensors
         std::vector<uint8_t> labels;      // Store labels
-        std::string download_url_base = "https://biometrics.nist.gov/cs_links/EMNIST/";
+        std::string url = "https://biometrics.nist.gov/cs_links/EMNIST/";
         fs::path root;
         fs::path dataset_path;
         fs::path dataset_folder_name = "EMNIST/raw";
         fs::path archive_file_name = "gzip.zip";
         std::string archive_file_md5 = "58c8d27c78d21e728a6bc7b3cc06412e";
-
+        void load_data(bool train = true);
     public :
-        EMNIST(const std::string &images_path, const std::string &labels_path, int num_samples);
+        EMNIST(const std::string &root, bool train = true, bool download = false);
 
         torch::data::Example<> get(size_t index) override;
 
@@ -173,7 +173,7 @@ namespace torch::ext::data::datasets {
 
 
     public :
-        QMNIST(const std::string &images_path, const std::string &labels_path, int num_samples);
+        QMNIST(const std::string &root, bool train = true, bool download = false);
 
         torch::data::Example<> get(size_t index) override;
 
