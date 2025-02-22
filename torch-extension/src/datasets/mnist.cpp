@@ -149,29 +149,48 @@ namespace torch::ext::data::datasets {
 
     // Override `get` method to return a single data sample
     torch::data::Example<> FashionMNIST::get(size_t index) {
-        return {images_[index], labels_[index]};
+        return {data[index], data[index]};
     }
 
     // Override `size` method to return the number of samples
     torch::optional<size_t> FashionMNIST::size() const {
-        return labels_.size(0);
+        return data.size( );
+    }
+
+    void FashionMNIST::load_data(bool train) {
+        if (train) {
+            fs::path imgs = this->dataset_path / std::get<0>(files["train"]);
+            fs::path lbls = this->dataset_path / std::get<1>(files["train"]);
+            cout << imgs << endl;
+            auto images = read_mnist_images(imgs.string(), 50000);
+            auto labels = read_mnist_labels(lbls.string(), 50000);
+            cout << images.size() << endl;
+            cout << labels.size() << endl;
+            this->data = images;
+            this->labels = labels;
+            //             for (int i = 0; i < 100; i++) {
+            // //                for (auto row : images[i]) {
+            // //                    cout << (unsigned int) row << " -- ";
+            // //                }
+            //                 cout << (unsigned int) labels[i] << "\t";
+            //             }
+            //             cout << endl;
+
+        } else {
+            fs::path imgs = this->dataset_path / std::get<0>(files["test"]);
+            fs::path lbls = this->dataset_path / std::get<1>(files["test"]);
+            cout << imgs << endl;
+            auto images = read_mnist_images(imgs.string(), 10000);
+            auto labels = read_mnist_labels(lbls.string(), 10000);
+            cout << images.size() << endl;
+            cout << labels.size() << endl;
+            this->data = images;
+            this->labels = labels;
+        }
     }
 
 
     KMNIST::KMNIST(const std::string &images_path, const std::string &labels_path, int num_samples) {
-        // auto images_data = read_mnist_images(images_path, num_samples);
-        // auto labels_data = read_mnist_labels(labels_path, num_samples);
-        //
-        // images_ = torch::empty({num_samples, 1, 28, 28}, torch::kUInt8);
-        // labels_ = torch::empty(num_samples, torch::kUInt8);
-        //
-        // for (int i = 0; i < num_samples; i++) {
-        //     images_[i] = torch::from_blob(images_data[i].data(), {1, 28, 28}, torch::kUInt8).clone();
-        //     labels_[i] = labels_data[i];
-        // }
-        //
-        // images_ = images_.to(torch::kFloat32).div_(255.0); // Normalize to [0, 1]
-        // labels_ = labels_.to(torch::kInt64);               // Convert to int64 for loss functions
     }
 
     // Override `get` method to return a single data sample
@@ -182,6 +201,38 @@ namespace torch::ext::data::datasets {
     // Override `size` method to return the number of samples
     torch::optional<size_t> KMNIST::size() const {
         return labels_.size(0);
+    }
+
+    void KMNIST::load_data(bool train) {
+        if (train) {
+            fs::path imgs = this->dataset_path / std::get<0>(files["train"]);
+            fs::path lbls = this->dataset_path / std::get<1>(files["train"]);
+            cout << imgs << endl;
+            auto images = read_mnist_images(imgs.string(), 50000);
+            auto labels = read_mnist_labels(lbls.string(), 50000);
+            cout << images.size() << endl;
+            cout << labels.size() << endl;
+            this->data = images;
+            this->labels = labels;
+            //             for (int i = 0; i < 100; i++) {
+            // //                for (auto row : images[i]) {
+            // //                    cout << (unsigned int) row << " -- ";
+            // //                }
+            //                 cout << (unsigned int) labels[i] << "\t";
+            //             }
+            //             cout << endl;
+
+        } else {
+            fs::path imgs = this->dataset_path / std::get<0>(files["test"]);
+            fs::path lbls = this->dataset_path / std::get<1>(files["test"]);
+            cout << imgs << endl;
+            auto images = read_mnist_images(imgs.string(), 10000);
+            auto labels = read_mnist_labels(lbls.string(), 10000);
+            cout << images.size() << endl;
+            cout << labels.size() << endl;
+            this->data = images;
+            this->labels = labels;
+        }
     }
 
 

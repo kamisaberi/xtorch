@@ -64,12 +64,12 @@ namespace torch::ext::data::datasets {
 
     class FashionMNIST : public torch::data::datasets::Dataset<FashionMNIST> {
     private:
-        torch::Tensor images_;
-        torch::Tensor labels_;
+        std::vector<torch::Tensor> data; // Store image data as tensors
+        std::vector<uint8_t> labels;      // Store labels
         std::string download_url_base = "http://fashion-mnist.s3-website.eu-central-1.amazonaws.com/";
         fs::path root;
         fs::path dataset_path;
-        fs::path dataset_folder_name = "MNIST/raw";
+        fs::path dataset_folder_name = "FashionMNIST/raw";
 
         vector <tuple<fs::path, std::string >> resources = {
                 {fs::path("train-images-idx3-ubyte.gz"), "8d4fb7e6c68d591d4c3dfef9ec88bf0d"},
@@ -77,6 +77,13 @@ namespace torch::ext::data::datasets {
                 {fs::path("t10k-images-idx3-ubyte.gz"),  "bef4ecab320f06d8554ea6380940ec79"},
                 {fs::path("t10k-labels-idx1-ubyte.gz"),  "bb300cfdad3c16e7a12a480ee83cd310"},
         };
+
+        std::map<std::string, std::tuple<fs::path, fs::path>> files = {
+            {"train", {fs::path("train-images-idx3-ubyte"), fs::path("train-labels-idx1-ubyte")}},
+            {"test", {fs::path("t10k-images-idx3-ubyte"), fs::path("t10k-labels-idx1-ubyte")}}
+        };
+
+        void load_data(bool train = true);
 
     public:
         // Constructor: Loads images and labels from files
@@ -90,8 +97,8 @@ namespace torch::ext::data::datasets {
 
     class KMNIST : public torch::data::Dataset<KMNIST> {
     private:
-        torch::Tensor images_;
-        torch::Tensor labels_;
+        std::vector<torch::Tensor> data; // Store image data as tensors
+        std::vector<uint8_t> labels;      // Store labels
         std::string download_url_base = "http://codh.rois.ac.jp/kmnist/dataset/kmnist/";
         fs::path root;
         fs::path dataset_path;
@@ -104,11 +111,16 @@ namespace torch::ext::data::datasets {
                 {fs::path("t10k-labels-idx1-ubyte.gz"),  "7320c461ea6c1c855c0b718fb2a4b134"},
         };
 
+        std::map<std::string, std::tuple<fs::path, fs::path>> files = {
+            {"train", {fs::path("train-images-idx3-ubyte"), fs::path("train-labels-idx1-ubyte")}},
+            {"test", {fs::path("t10k-images-idx3-ubyte"), fs::path("t10k-labels-idx1-ubyte")}}
+        };
+
+        void load_data(bool train = true);
+
     public :
         KMNIST(const std::string &images_path, const std::string &labels_path, int num_samples);
-
         torch::data::Example<> get(size_t index) override;
-
         torch::optional<size_t> size() const override;
 
     };
