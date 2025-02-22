@@ -89,6 +89,7 @@ namespace torch::ext::data::datasets {
     }
 
     torch::data::Example<> MNIST::get(size_t index) {
+        cout << "MNIST::size: " <<  data.size() << endl;
         return {data[index].clone(), torch::tensor(labels[index])}; // Clone to ensure tensor validity
     }
 
@@ -105,13 +106,15 @@ namespace torch::ext::data::datasets {
             auto labels = read_mnist_labels(lbls.string(), 50000);
             cout << images.size() << endl;
             cout << labels.size() << endl;
-            for (int i = 0; i < 100; i++) {
-//                for (auto row : images[i]) {
-//                    cout << (unsigned int) row << " -- ";
-//                }
-                cout << (unsigned int) labels[i] << "\t";
-            }
-            cout << endl;
+            this->data = images;
+            this->labels = labels;
+//             for (int i = 0; i < 100; i++) {
+// //                for (auto row : images[i]) {
+// //                    cout << (unsigned int) row << " -- ";
+// //                }
+//                 cout << (unsigned int) labels[i] << "\t";
+//             }
+//             cout << endl;
 
         } else {
             fs::path imgs = this->dataset_path / std::get<0>(files["test"]);
@@ -121,25 +124,27 @@ namespace torch::ext::data::datasets {
             auto labels = read_mnist_labels(lbls.string(), 10000);
             cout << images.size() << endl;
             cout << labels.size() << endl;
+            this->data = images;
+            this->labels = labels;
         }
     }
 
 
     FashionMNIST::FashionMNIST(const std::string &images_path, const std::string &labels_path,
                                int num_samples) {
-        auto images_data = read_mnist_images(images_path, num_samples);
-        auto labels_data = read_mnist_labels(labels_path, num_samples);
-
-        images_ = torch::empty({num_samples, 1, 28, 28}, torch::kUInt8);
-        labels_ = torch::empty(num_samples, torch::kUInt8);
-
-        for (int i = 0; i < num_samples; i++) {
-            images_[i] = torch::from_blob(images_data[i].data(), {1, 28, 28}, torch::kUInt8).clone();
-            labels_[i] = labels_data[i];
-        }
-
-        images_ = images_.to(torch::kFloat32).div_(255.0); // Normalize to [0, 1]
-        labels_ = labels_.to(torch::kInt64);               // Convert to int64 for loss functions
+        // auto images_data = read_mnist_images(images_path, num_samples);
+        // auto labels_data = read_mnist_labels(labels_path, num_samples);
+        //
+        // images_ = torch::empty({num_samples, 1, 28, 28}, torch::kUInt8);
+        // labels_ = torch::empty(num_samples, torch::kUInt8);
+        //
+        // for (int i = 0; i < num_samples; i++) {
+        //     images_[i] = torch::from_blob(images_data[i].data(), {1, 28, 28}, torch::kUInt8).clone();
+        //     labels_[i] = labels_data[i];
+        // }
+        //
+        // images_ = images_.to(torch::kFloat32).div_(255.0); // Normalize to [0, 1]
+        // labels_ = labels_.to(torch::kInt64);               // Convert to int64 for loss functions
     }
 
     // Override `get` method to return a single data sample
@@ -154,19 +159,19 @@ namespace torch::ext::data::datasets {
 
 
     KMNIST::KMNIST(const std::string &images_path, const std::string &labels_path, int num_samples) {
-        auto images_data = read_mnist_images(images_path, num_samples);
-        auto labels_data = read_mnist_labels(labels_path, num_samples);
-
-        images_ = torch::empty({num_samples, 1, 28, 28}, torch::kUInt8);
-        labels_ = torch::empty(num_samples, torch::kUInt8);
-
-        for (int i = 0; i < num_samples; i++) {
-            images_[i] = torch::from_blob(images_data[i].data(), {1, 28, 28}, torch::kUInt8).clone();
-            labels_[i] = labels_data[i];
-        }
-
-        images_ = images_.to(torch::kFloat32).div_(255.0); // Normalize to [0, 1]
-        labels_ = labels_.to(torch::kInt64);               // Convert to int64 for loss functions
+        // auto images_data = read_mnist_images(images_path, num_samples);
+        // auto labels_data = read_mnist_labels(labels_path, num_samples);
+        //
+        // images_ = torch::empty({num_samples, 1, 28, 28}, torch::kUInt8);
+        // labels_ = torch::empty(num_samples, torch::kUInt8);
+        //
+        // for (int i = 0; i < num_samples; i++) {
+        //     images_[i] = torch::from_blob(images_data[i].data(), {1, 28, 28}, torch::kUInt8).clone();
+        //     labels_[i] = labels_data[i];
+        // }
+        //
+        // images_ = images_.to(torch::kFloat32).div_(255.0); // Normalize to [0, 1]
+        // labels_ = labels_.to(torch::kInt64);               // Convert to int64 for loss functions
     }
 
     // Override `get` method to return a single data sample
@@ -181,19 +186,19 @@ namespace torch::ext::data::datasets {
 
 
     EMNIST::EMNIST(const std::string &images_path, const std::string &labels_path, int num_samples) {
-        auto images_data = read_mnist_images(images_path, num_samples);
-        auto labels_data = read_mnist_labels(labels_path, num_samples);
-
-        images_ = torch::empty({num_samples, 1, 28, 28}, torch::kUInt8);
-        labels_ = torch::empty(num_samples, torch::kUInt8);
-
-        for (int i = 0; i < num_samples; i++) {
-            images_[i] = torch::from_blob(images_data[i].data(), {1, 28, 28}, torch::kUInt8).clone();
-            labels_[i] = labels_data[i];
-        }
-
-        images_ = images_.to(torch::kFloat32).div_(255.0); // Normalize to [0, 1]
-        labels_ = labels_.to(torch::kInt64);               // Convert to int64 for loss functions
+        // auto images_data = read_mnist_images(images_path, num_samples);
+        // auto labels_data = read_mnist_labels(labels_path, num_samples);
+        //
+        // images_ = torch::empty({num_samples, 1, 28, 28}, torch::kUInt8);
+        // labels_ = torch::empty(num_samples, torch::kUInt8);
+        //
+        // for (int i = 0; i < num_samples; i++) {
+        //     images_[i] = torch::from_blob(images_data[i].data(), {1, 28, 28}, torch::kUInt8).clone();
+        //     labels_[i] = labels_data[i];
+        // }
+        //
+        // images_ = images_.to(torch::kFloat32).div_(255.0); // Normalize to [0, 1]
+        // labels_ = labels_.to(torch::kInt64);               // Convert to int64 for loss functions
     }
 
     // Override `get` method to return a single data sample
@@ -207,19 +212,19 @@ namespace torch::ext::data::datasets {
     }
 
     QMNIST::QMNIST(const std::string &images_path, const std::string &labels_path, int num_samples) {
-        auto images_data = read_mnist_images(images_path, num_samples);
-        auto labels_data = read_mnist_labels(labels_path, num_samples);
-
-        image_ = torch::empty({num_samples, 1, 28, 28}, torch::kUInt8);
-        label_ = torch::empty(num_samples, torch::kUInt8);
-
-        for (int i = 0; i < num_samples; i++) {
-            images_.push_back(torch::from_blob(images_data[i].data(), {28, 28}, torch::kByte).clone());
-            labels_[i] = labels_data[i];
-        }
-
-        images_ = images_.to(torch::kFloat32).div_(255.0); // Normalize to [0, 1]
-        labels_ = labels_.to(torch::kInt64);               // Convert to int64 for loss functions
+        // auto images_data = read_mnist_images(images_path, num_samples);
+        // auto labels_data = read_mnist_labels(labels_path, num_samples);
+        //
+        // image_ = torch::empty({num_samples, 1, 28, 28}, torch::kUInt8);
+        // label_ = torch::empty(num_samples, torch::kUInt8);
+        //
+        // for (int i = 0; i < num_samples; i++) {
+        //     images_.push_back(torch::from_blob(images_data[i].data(), {28, 28}, torch::kByte).clone());
+        //     labels_[i] = labels_data[i];
+        // }
+        //
+        // images_ = images_.to(torch::kFloat32).div_(255.0); // Normalize to [0, 1]
+        // labels_ = labels_.to(torch::kInt64);               // Convert to int64 for loss functions
     }
 
     // Override `get` method to return a single data sample
@@ -229,7 +234,7 @@ namespace torch::ext::data::datasets {
 
     // Override `size` method to return the number of samples
     torch::optional<size_t> QMNIST::size() const {
-        return labels_.size(0);
+        return labels_.size();
     }
 
 

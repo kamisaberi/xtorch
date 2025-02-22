@@ -17,8 +17,11 @@ int main() {
 //    torch::ext::data::datasets::UCF101 u1 = torch::ext::data::datasets::UCF101(r);
 
     torch::ext::data::datasets::MNIST train("/home/kami/Documents/temp/", true , true);
+    cout << "ttttttttttttttttttt\n";
     torch::ext::data::datasets::MNIST test("/home/kami/Documents/temp/", false , true);
+    cout << "ttttttttttttttttttt\n";
     cout << train.get(0).target << endl;
+    cout << "ttttttttttttttttttt\n";
     cout << train.get(0).data << endl;
     std::cout << "End\n";
 
