@@ -1,7 +1,6 @@
 #include "../../include/datasets/mnist.h"
 
 namespace torch::ext::data::datasets {
-
     std::vector<torch::Tensor> read_mnist_images(const std::string &file_path, int num_images) {
         std::ifstream file(file_path, std::ios::binary);
         if (!file.is_open()) {
@@ -22,14 +21,14 @@ namespace torch::ext::data::datasets {
         cols = __builtin_bswap32(cols);
 
         std::vector<torch::Tensor> fimages;
-        std::vector<std::vector<uint8_t>> images(num_images, std::vector<uint8_t>(rows * cols));
+        std::vector<std::vector<uint8_t> > images(num_images, std::vector<uint8_t>(rows * cols));
         for (int i = 0; i < num_images; i++) {
             file.read(reinterpret_cast<char *>(images[i].data()), rows * cols);
             auto tensor_image = torch::from_blob(images[i].data(), {28, 28},
                                                  torch::kByte).clone();
             fimages.push_back(tensor_image);
         }
-//        cout << fimages[0] << endl;
+        //        cout << fimages[0] << endl;
 
 
         file.close();
@@ -63,7 +62,6 @@ namespace torch::ext::data::datasets {
 
     //------------------ MNIST ------------------//
     MNIST::MNIST(const std::string &root, bool train, bool download) {
-
         this->root = fs::path(root);
         if (!fs::exists(this->root)) {
             throw runtime_error("path is not exists");
@@ -85,11 +83,10 @@ namespace torch::ext::data::datasets {
             extractGzip(fpth);
         }
         load_data(train);
-
     }
 
     torch::data::Example<> MNIST::get(size_t index) {
-        cout << "MNIST::size: " <<  data.size() << endl;
+        cout << "MNIST::size: " << data.size() << endl;
         return {data[index].clone(), torch::tensor(labels[index])}; // Clone to ensure tensor validity
     }
 
@@ -108,14 +105,13 @@ namespace torch::ext::data::datasets {
             cout << labels.size() << endl;
             this->data = images;
             this->labels = labels;
-//             for (int i = 0; i < 100; i++) {
-// //                for (auto row : images[i]) {
-// //                    cout << (unsigned int) row << " -- ";
-// //                }
-//                 cout << (unsigned int) labels[i] << "\t";
-//             }
-//             cout << endl;
-
+            //             for (int i = 0; i < 100; i++) {
+            // //                for (auto row : images[i]) {
+            // //                    cout << (unsigned int) row << " -- ";
+            // //                }
+            //                 cout << (unsigned int) labels[i] << "\t";
+            //             }
+            //             cout << endl;
         } else {
             fs::path imgs = this->dataset_path / std::get<0>(files["test"]);
             fs::path lbls = this->dataset_path / std::get<1>(files["test"]);
@@ -154,7 +150,7 @@ namespace torch::ext::data::datasets {
 
     // Override `size` method to return the number of samples
     torch::optional<size_t> FashionMNIST::size() const {
-        return data.size( );
+        return data.size();
     }
 
     void FashionMNIST::load_data(bool train) {
@@ -175,7 +171,6 @@ namespace torch::ext::data::datasets {
             //                 cout << (unsigned int) labels[i] << "\t";
             //             }
             //             cout << endl;
-
         } else {
             fs::path imgs = this->dataset_path / std::get<0>(files["test"]);
             fs::path lbls = this->dataset_path / std::get<1>(files["test"]);
@@ -195,12 +190,12 @@ namespace torch::ext::data::datasets {
 
     // Override `get` method to return a single data sample
     torch::data::Example<> KMNIST::get(size_t index) {
-        return {images_[index], labels_[index]};
+        return {data[index], data[index]};
     }
 
     // Override `size` method to return the number of samples
     torch::optional<size_t> KMNIST::size() const {
-        return labels_.size(0);
+        return labels.size();
     }
 
     void KMNIST::load_data(bool train) {
@@ -221,7 +216,6 @@ namespace torch::ext::data::datasets {
             //                 cout << (unsigned int) labels[i] << "\t";
             //             }
             //             cout << endl;
-
         } else {
             fs::path imgs = this->dataset_path / std::get<0>(files["test"]);
             fs::path lbls = this->dataset_path / std::get<1>(files["test"]);
@@ -254,12 +248,12 @@ namespace torch::ext::data::datasets {
 
     // Override `get` method to return a single data sample
     torch::data::Example<> EMNIST::get(size_t index) {
-        return {images_[index], labels_[index]};
+        return {data[index], data[index]};
     }
 
     // Override `size` method to return the number of samples
     torch::optional<size_t> EMNIST::size() const {
-        return labels_.size(0);
+        return labels.size();
     }
 
     QMNIST::QMNIST(const std::string &images_path, const std::string &labels_path, int num_samples) {
@@ -280,13 +274,11 @@ namespace torch::ext::data::datasets {
 
     // Override `get` method to return a single data sample
     torch::data::Example<> QMNIST::get(size_t index) {
-        return {images_[index], labels_[index]};
+        return {data[index], data[index]};
     }
 
     // Override `size` method to return the number of samples
     torch::optional<size_t> QMNIST::size() const {
-        return labels_.size();
+        return labels.size();
     }
-
-
 }

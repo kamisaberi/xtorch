@@ -127,8 +127,8 @@ namespace torch::ext::data::datasets {
 
     class EMNIST : public torch::data::Dataset<EMNIST> {
     private:
-        torch::Tensor images_;
-        torch::Tensor labels_;
+        std::vector<torch::Tensor> data; // Store image data as tensors
+        std::vector<uint8_t> labels;      // Store labels
         std::string download_url_base = "https://biometrics.nist.gov/cs_links/EMNIST/";
         fs::path root;
         fs::path dataset_path;
@@ -147,8 +147,8 @@ namespace torch::ext::data::datasets {
 
     class QMNIST : public torch::data::Dataset<EMNIST> {
     private:
-        vector< torch::Tensor> images_;
-        vector<torch::Tensor> labels_;
+        std::vector<torch::Tensor> data; // Store image data as tensors
+        std::vector<uint8_t> labels;      // Store labels
         torch::Tensor image_;
         torch::Tensor label_;
         std::string download_url_base = "https://raw.githubusercontent.com/facebookresearch/qmnist/master/";
