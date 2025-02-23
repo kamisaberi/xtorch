@@ -24,7 +24,7 @@ namespace torch::ext::data::datasets {
         std::vector<std::vector<uint8_t> > images(num_images, std::vector<uint8_t>(rows * cols));
         for (int i = 0; i < num_images; i++) {
             file.read(reinterpret_cast<char *>(images[i].data()), rows * cols);
-            auto tensor_image = torch::from_blob(images[i].data(), {28, 28},
+            auto tensor_image = torch::from_blob(images[i].data(), {1,28, 28},
                                                  torch::kByte).clone();
             fimages.push_back(tensor_image);
         }

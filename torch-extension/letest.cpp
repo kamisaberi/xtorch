@@ -2,6 +2,7 @@
 #include <torch/data/datasets/mnist.h>
 #include <iostream>
 #include <vector>
+#include "include/datasets/mnist.h"
 
 #define DEBUG_MODE true
 
@@ -81,7 +82,10 @@ int main() {
     torch::Device device(torch::kCPU);
 
     // Load the MNIST dataset
-    auto dataset = torch::data::datasets::MNIST("/home/kami/datasets/MNIST/raw");
+    auto dataset =  torch::ext::data::datasets::MNIST("/home/kami/Documents/temp/", true , true);
+
+//    auto dataset = torch::data::datasets::MNIST("/home/kami/datasets/MNIST/raw");
+    cout << dataset.get(0).data.sizes() << endl;
 
     // Define the target size
     // std::vector<int64_t> size = {32, 32};
@@ -107,25 +111,34 @@ int main() {
     model.train();
     torch::optim::Adam optimizer(model.parameters(), torch::optim::AdamOptions(1e-3));
 
+
     for (size_t epoch = 0; epoch != 10; ++epoch) {
         size_t batch_index = 0;
+//        cout << "epoch 1: " << epoch << endl;
 
         auto train_loader_interator = train_loader->begin();
+//        cout << "epoch 2: " << epoch << endl;
         auto train_loader_end = train_loader->end();
+//        cout << "epoch 3: " << epoch << endl;
 
         while(train_loader_interator != train_loader_end) {
+//          cout << "epoch 4: " << epoch << endl;
             torch::Tensor  data,targets;
+//            cout << "epoch 5: " << epoch << endl;
             auto batch = *train_loader_interator;
+//            cout << "epoch 6: " << epoch << endl;
             data = batch.data;
             targets = batch.target;
+//            cout << "epoch 7: " << epoch << endl;
             optimizer.zero_grad();
+
 
             torch::Tensor output;
             output = model.forward(data);
 
             torch::Tensor loss;
-            cout << output.sizes() << " " << targets.sizes() << endl;
-            cout << targets << endl << endl << endl << endl;
+//            cout << output.sizes() << " " << targets.sizes() << endl;
+//            cout << targets << endl << endl << endl << endl;
             loss = torch::nll_loss(output, targets);
             loss.backward();
             optimizer.step();

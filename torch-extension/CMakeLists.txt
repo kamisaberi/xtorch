@@ -338,6 +338,11 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 set(TEST_SOURCE_FILES
+        src/utils/archiver.cpp
+        src/utils/downloader.cpp
+        src/media/image/processing.cpp
+        src/datasets/mnist.cpp
+        src/utils/md5.cpp
         letest.cpp
 )
 

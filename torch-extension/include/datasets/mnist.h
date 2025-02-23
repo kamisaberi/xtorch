@@ -29,7 +29,7 @@ namespace torch::ext::data::datasets {
 
     std::vector<uint8_t> read_mnist_labels(const std::string &file_path, int num_labels);
 
-    class MNIST : torch::data::Dataset<MNIST> {
+    class MNIST : public torch::data::Dataset<MNIST> {
 
     public :
         MNIST(const std::string &root, bool train = true, bool download = false);
