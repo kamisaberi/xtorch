@@ -346,6 +346,7 @@ set(TEST_SOURCE_FILES
         src/utils/md5.cpp
         letest.cpp
         include/types/arguments.h
+        include/definitions/transforms.h
 )
 
 add_executable(${CMAKE_PROJECT_NAME} ${TEST_SOURCE_FILES})

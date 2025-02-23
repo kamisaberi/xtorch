@@ -12,7 +12,7 @@ enum class DataMode {
     TEST = 3,
 };
 
-struct DatasetArgument {
+struct DatasetArguments {
     DataMode mode = DataMode::TRAIN;
     bool download = false;
     std::vector<torch::data::transforms::Transform> transforms = nullptr;
