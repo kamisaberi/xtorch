@@ -151,7 +151,7 @@ namespace torch::ext::data::datasets {
         std::vector<uint8_t> labels;      // Store labels
         torch::Tensor image_;
         torch::Tensor label_;
-        std::string download_url_base = "https://raw.githubusercontent.com/facebookresearch/qmnist/master/";
+        std::string url = "https://raw.githubusercontent.com/facebookresearch/qmnist/master/";
         fs::path root;
         fs::path dataset_path;
         fs::path dataset_folder_name = "QMNIST/raw";

@@ -283,27 +283,27 @@ namespace torch::ext::data::datasets {
     }
 
     void EMNIST::load_data(bool train) {
-        if (train) {
-            fs::path imgs = this->dataset_path / std::get<0>(files["train"]);
-            fs::path lbls = this->dataset_path / std::get<1>(files["train"]);
-            cout << imgs << endl;
-            auto images = read_mnist_images(imgs.string(), 50000);
-            auto labels = read_mnist_labels(lbls.string(), 50000);
-            cout << images.size() << endl;
-            cout << labels.size() << endl;
-            this->data = images;
-            this->labels = labels;
-        } else {
-            fs::path imgs = this->dataset_path / std::get<0>(files["test"]);
-            fs::path lbls = this->dataset_path / std::get<1>(files["test"]);
-            cout << imgs << endl;
-            auto images = read_mnist_images(imgs.string(), 10000);
-            auto labels = read_mnist_labels(lbls.string(), 10000);
-            cout << images.size() << endl;
-            cout << labels.size() << endl;
-            this->data = images;
-            this->labels = labels;
-        }
+        // if (train) {
+        //     fs::path imgs = this->dataset_path / std::get<0>(files["train"]);
+        //     fs::path lbls = this->dataset_path / std::get<1>(files["train"]);
+        //     cout << imgs << endl;
+        //     auto images = read_mnist_images(imgs.string(), 50000);
+        //     auto labels = read_mnist_labels(lbls.string(), 50000);
+        //     cout << images.size() << endl;
+        //     cout << labels.size() << endl;
+        //     this->data = images;
+        //     this->labels = labels;
+        // } else {
+        //     fs::path imgs = this->dataset_path / std::get<0>(files["test"]);
+        //     fs::path lbls = this->dataset_path / std::get<1>(files["test"]);
+        //     cout << imgs << endl;
+        //     auto images = read_mnist_images(imgs.string(), 10000);
+        //     auto labels = read_mnist_labels(lbls.string(), 10000);
+        //     cout << images.size() << endl;
+        //     cout << labels.size() << endl;
+        //     this->data = images;
+        //     this->labels = labels;
+        // }
     }
 
 
