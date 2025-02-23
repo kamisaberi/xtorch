@@ -18,6 +18,8 @@
 #include "../utils/archiver.h"
 #include "../utils/md5.h"
 #include "../exceptions/implementation.h"
+#include "../definitions/transforms.h"
+#include "../types/arguments.h"
 
 using namespace std;
 namespace fs = std::filesystem;
@@ -33,6 +35,7 @@ namespace torch::ext::data::datasets {
 
     public :
         MNIST(const std::string &root, bool train = true, bool download = false);
+        MNIST(const fs::path &root, DatasetArguments args);
 
         torch::data::Example<> get(size_t index) override;
 

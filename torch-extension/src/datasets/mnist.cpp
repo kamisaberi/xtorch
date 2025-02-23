@@ -89,6 +89,11 @@ namespace torch::ext::data::datasets {
         load_data(train);
     }
 
+    MNIST::MNIST(const fs::path &root, DatasetArguments args) {
+        auto [mode , download , transforms] = args;
+
+    }
+
     torch::data::Example<> MNIST::get(size_t index) {
         return {data[index].clone(), torch::tensor(labels[index])}; // Clone to ensure tensor validity
     }
