@@ -345,6 +345,7 @@ set(TEST_SOURCE_FILES
         src/models/cnn/lenet5.cpp
         src/utils/md5.cpp
         letest.cpp
+        include/types/arguments.h
 )
 
 add_executable(${CMAKE_PROJECT_NAME} ${TEST_SOURCE_FILES})

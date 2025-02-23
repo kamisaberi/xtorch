@@ -22,7 +22,9 @@ torch::Tensor resize_tensor(const torch::Tensor& tensor, const std::vector<int64
     ).squeeze(0);
 }
 
+
 int main() {
+
 
     std::cout.precision(10);
     torch::Device device(torch::kCPU);
