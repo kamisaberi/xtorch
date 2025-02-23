@@ -145,7 +145,7 @@ namespace torch::ext::data::datasets {
 
     };
 
-    class QMNIST : public torch::data::Dataset<EMNIST> {
+    class QMNIST : public torch::data::Dataset<QMNIST> {
     private:
         std::vector<torch::Tensor> data; // Store image data as tensors
         std::vector<uint8_t> labels;      // Store labels
@@ -179,6 +179,7 @@ namespace torch::ext::data::datasets {
 
         torch::optional<size_t> size() const override;
 
+        void load_data(bool train);
     };
 
 

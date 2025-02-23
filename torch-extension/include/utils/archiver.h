@@ -11,11 +11,17 @@
 #include <unistd.h>
 #include <libtar.h>
 #include <fcntl.h>
+#include <lzma.h>
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <stdexcept>
+
 
 using namespace std;
 namespace fs = std::filesystem;
 
-
+void decompressXZ(const std::string& inputFile, const std::string& outputFile) ;
 std::tuple<bool, string> extractGzip(const std::string &inFile, const std::string &outFile = "") ;
 //inline std::tuple<bool, string> extractGzip(const std::string &inFile, const std::string &outFile = "") {
 //    gzFile gz = gzopen(inFile.c_str(), "rb");

@@ -182,6 +182,8 @@ project(Test)
 list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
 find_package(Torch REQUIRED)
 find_package(TorchExtension REQUIRED)
+find_package(LibLZMA REQUIRED)
+
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
@@ -211,6 +213,7 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
         ${LIBTAR_LIBRARY}
         OpenSSL::SSL
         OpenSSL::Crypto
+        LibLZMA::LibLZMA
 
 )
 
@@ -220,8 +223,10 @@ project(md)
 list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
 find_package(Torch REQUIRED)
 find_package(TorchExtension REQUIRED)
+find_package(LibLZMA REQUIRED)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
+
 
 set(TEST_SOURCE_FILES
         src/utils/md5.cpp
@@ -245,6 +250,7 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
         ${LIBTAR_LIBRARY}
         OpenSSL::SSL
         OpenSSL::Crypto
+        LibLZMA::LibLZMA
 
 )
 
@@ -254,6 +260,8 @@ project(md2)
 list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
 find_package(Torch REQUIRED)
 find_package(TorchExtension REQUIRED)
+find_package(LibLZMA REQUIRED)
+
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
@@ -279,6 +287,7 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
         ${LIBTAR_LIBRARY}
         OpenSSL::SSL
         OpenSSL::Crypto
+        LibLZMA::LibLZMA
 
 )
 

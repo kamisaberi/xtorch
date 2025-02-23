@@ -321,6 +321,8 @@ namespace torch::ext::data::datasets {
 
 
     QMNIST::QMNIST(const std::string &root, bool train, bool download) {
+
+
     }
 
     // Override `get` method to return a single data sample
@@ -332,4 +334,30 @@ namespace torch::ext::data::datasets {
     torch::optional<size_t> QMNIST::size() const {
         return labels.size();
     }
+
+    void QMNIST::load_data(bool train) {
+        if (train) {
+            fs::path imgs = this->dataset_path / std::get<0>(resources["train"][0]);
+            fs::path lbls = this->dataset_path / std::get<0>(resources["train"][1]);
+            cout << imgs << endl;
+            auto images = read_mnist_images(imgs.string(), 50000);
+            auto labels = read_mnist_labels(lbls.string(), 50000);
+            cout << images.size() << endl;
+            cout << labels.size() << endl;
+            this->data = images;
+            this->labels = labels;
+        } else {
+            fs::path imgs = this->dataset_path / std::get<0>(resources["test"][0]);
+            fs::path lbls = this->dataset_path / std::get<0>(resources["test"][1]);
+            cout << imgs << endl;
+            auto images = read_mnist_images(imgs.string(), 10000);
+            auto labels = read_mnist_labels(lbls.string(), 10000);
+            cout << images.size() << endl;
+            cout << labels.size() << endl;
+            this->data = images;
+            this->labels = labels;
+        }
+    }
+
+
 }

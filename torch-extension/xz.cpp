@@ -5,7 +5,7 @@
 #include <stdexcept>
 
 // Function to decompress a file using LZMA
-void decompressFile(const std::string& inputFile, const std::string& outputFile) {
+void decompressXZ(const std::string& inputFile, const std::string& outputFile) {
     // Open the input file
     std::ifstream inFile(inputFile, std::ios::binary);
     if (!inFile) {
@@ -74,7 +74,7 @@ int main() {
     std::string outputFile = "/home/kami/Documents/temp/xnist-images-idx3-ubyte"; // Replace with your output file
 
     try {
-        decompressFile(inputFile, outputFile);
+        decompressXZ(inputFile, outputFile);
         std::cout << "File decompressed successfully to: " << outputFile << "\n";
     } catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << "\n";
