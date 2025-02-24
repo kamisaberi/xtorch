@@ -31,18 +31,18 @@ int main() {
     std::vector<int64_t> size = {32, 32};
 
     auto resize_transform = torch::data::transforms::Lambda<torch::data::Example<> >(
-      [size](torch::data::Example<> example) {
-          example.data = resize_tensor(example.data, size);
-          return example;
-      }
+        [size](torch::data::Example<> example) {
+            example.data = resize_tensor(example.data, size);
+            return example;
+        }
     );
 
-  auto normalize_transform = torch::data::transforms::Lambda<torch::data::Example<> >(
-  [](torch::data::Example<> example) {
-      example.data =torch::data::transforms::Normalize<>(0.5, 0.5)(example.data);
-      return example;
-  }
-);
+    auto normalize_transform = torch::data::transforms::Lambda<torch::data::Example<> >(
+        [](torch::data::Example<> example) {
+            example.data = torch::data::transforms::Normalize<>(0.5, 0.5)(example.data);
+            return example;
+        }
+    );
 
 
     std::cout.precision(10);
@@ -50,19 +50,18 @@ int main() {
     // Load the MNIST dataset
 
 
-    std::vector<std::shared_ptr<torch::data::transforms::Lambda<torch::data::Example<> >>> transforms;
-    transforms.push_back(std::make_shared<normalize_transform>());
-//    std::vector<std::function<torch::data::Example<>>> transforms;
-//    std::vector<torch::data::transforms::Transform<Input, Output>> transforms;
-//    transforms.push_back(torch::data::transforms::Normalize<>(0.5,0.5));
-//    transforms.push_back(resize_transform);
+    std::vector<std::shared_ptr<torch::data::transforms::Lambda<torch::data::Example<> > > > transforms;
+    // transforms.push_back(std::make_shared<normalize_transform>());
+    //    std::vector<std::function<torch::data::Example<>>> transforms;
+    //    std::vector<torch::data::transforms::Transform<Input, Output>> transforms;
+    //    transforms.push_back(torch::data::transforms::Normalize<>(0.5,0.5));
+    //    transforms.push_back(resize_transform);
 
     auto dataset = torch::ext::data::datasets::MNIST("/home/kami/Documents/temp/",
                                                      {.mode = DataMode::TRAIN, .download = true});
 
     // Create a lambda function for resizing
     cout << dataset.get(0).data << endl;
-
 
 
     // Apply the resize transform to the dataset
@@ -77,8 +76,6 @@ int main() {
 
     auto train_loader = torch::data::make_data_loader<torch::data::samplers::SequentialSampler>(
         std::move(transformed_dataset), 64);
-
-
 
 
     torch::ext::models::LeNet5 model(10);
