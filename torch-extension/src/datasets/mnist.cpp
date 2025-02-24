@@ -24,7 +24,7 @@ namespace torch::ext::data::datasets {
         std::vector<std::vector<uint8_t> > images(num_images, std::vector<uint8_t>(rows * cols));
         for (int i = 0; i < num_images; i++) {
             file.read(reinterpret_cast<char *>(images[i].data()), rows * cols);
-            auto tensor_image = torch::from_blob(images[i].data(), {1,28, 28},
+            auto tensor_image = torch::from_blob(images[i].data(), {1, 28, 28},
                                                  torch::kByte).clone();
             fimages.push_back(tensor_image);
         }
@@ -60,8 +60,30 @@ namespace torch::ext::data::datasets {
     }
 
 
+
     //------------------ MNIST ------------------//
-    MNIST::MNIST(const std::string &root, bool train, bool download) {
+    MNIST::MNIST(const std::string &root, DataMode mode, bool download) {
+        check_resources(root, download);
+        load_data(mode);
+    }
+
+    MNIST::MNIST(const fs::path &root, DatasetArguments args) {
+        auto [mode , download , transforms] = args;
+        check_resources(root, download);
+        load_data(mode);
+
+
+    }
+
+    torch::data::Example<> MNIST::get(size_t index) {
+        return {data[index].clone(), torch::tensor(labels[index])}; // Clone to ensure tensor validity
+    }
+
+    torch::optional<size_t> MNIST::size() const {
+        return data.size();
+    }
+
+    void MNIST::check_resources(const std::string &root, bool download) {
         this->root = fs::path(root);
         if (!fs::exists(this->root)) {
             throw runtime_error("path is not exists");
@@ -86,24 +108,11 @@ namespace torch::ext::data::datasets {
             }
             extractGzip(fpth);
         }
-        load_data(train);
     }
 
-    MNIST::MNIST(const fs::path &root, DatasetArguments args) {
-        auto [mode , download , transforms] = args;
 
-    }
-
-    torch::data::Example<> MNIST::get(size_t index) {
-        return {data[index].clone(), torch::tensor(labels[index])}; // Clone to ensure tensor validity
-    }
-
-    torch::optional<size_t> MNIST::size() const {
-        return data.size();
-    }
-
-    void MNIST::load_data(bool train) {
-        if (train) {
+    void MNIST::load_data(DataMode mode) {
+        if (mode == DataMode::TRAIN) {
             fs::path imgs = this->dataset_path / std::get<0>(files["train"]);
             fs::path lbls = this->dataset_path / std::get<1>(files["train"]);
             cout << imgs << endl;
@@ -323,11 +332,7 @@ namespace torch::ext::data::datasets {
     }
 
 
-
-
     QMNIST::QMNIST(const std::string &root, bool train, bool download) {
-
-
     }
 
     // Override `get` method to return a single data sample
@@ -363,6 +368,4 @@ namespace torch::ext::data::datasets {
             this->labels = labels;
         }
     }
-
-
 }
