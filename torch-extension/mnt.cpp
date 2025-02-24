@@ -34,7 +34,14 @@ int main() {
           example.data = resize_tensor(example.data, {32, 32});
           return example;
       }
-  );
+    );
+
+  auto normalize_transform = torch::data::transforms::Lambda<torch::data::Example<> >(
+  [](torch::data::Example<> example) {
+      example.data =torch::data::transforms::Normalize<>(0.5, 0.5)(example.data);
+      return example;
+  }
+);
 
 
     std::cout.precision(10);
@@ -43,7 +50,7 @@ int main() {
 
 
 //    std::vector<torch::data::Example<>> transforms;
-//    std::vector<std::function<Example(Example)>> transforms;
+//    std::vector<std::function<torch::data::Example<>>> transforms;
 //    std::vector<torch::data::transforms::Transform<Input, Output>> transforms;
 //    transforms.push_back(torch::data::transforms::Normalize<>(0.5,0.5));
 //    transforms.push_back(resize_transform);
@@ -52,12 +59,20 @@ int main() {
                                                      {.mode = DataMode::TRAIN, .download = true});
 
     // Create a lambda function for resizing
+    cout << dataset.get(0).data << endl;
 
 
 
     // Apply the resize transform to the dataset
-    auto transformed_dataset = dataset.map(resize_transform).map(torch::data::transforms::Normalize<>(0.5, 0.5)).map(
+    auto transformed_dataset = dataset.map(resize_transform).map(normalize_transform).map(
         torch::data::transforms::Stack<>());
+    cout << transformed_dataset.get_batch(0).data << endl;
+
+    auto transformed_dataset2 = dataset.map(resize_transform).map(torch::data::transforms::Normalize<>(0.5, 0.5)).map(
+        torch::data::transforms::Stack<>());
+
+    cout << transformed_dataset2.get_batch(0).data << endl;
+
     auto train_loader = torch::data::make_data_loader<torch::data::samplers::SequentialSampler>(
         std::move(transformed_dataset), 64);
 
