@@ -71,8 +71,9 @@ namespace torch::ext::data::datasets {
         auto [mode , download , transforms] = args;
         check_resources(root, download);
         load_data(mode);
-
-
+        if (!transforms.empty()) {
+            transform_data(transforms);
+        }
     }
 
     torch::data::Example<> MNIST::get(size_t index) {
@@ -129,6 +130,10 @@ namespace torch::ext::data::datasets {
             this->data = images;
             this->labels = labels;
         }
+    }
+
+    void MNIST::transform_data(std::vector<std::shared_ptr<torch::data::transforms::Transform<torch::Tensor, torch::Tensor> > > transforms) {
+
     }
 
 
