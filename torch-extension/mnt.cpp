@@ -28,10 +28,11 @@ torch::Tensor resize_tensor(const torch::Tensor &tensor, const std::vector<int64
 
 
 int main() {
+    std::vector<int64_t> size = {32, 32};
 
     auto resize_transform = torch::data::transforms::Lambda<torch::data::Example<> >(
-      [](torch::data::Example<> example) {
-          example.data = resize_tensor(example.data, {32, 32});
+      [size](torch::data::Example<> example) {
+          example.data = resize_tensor(example.data, size);
           return example;
       }
     );
@@ -49,7 +50,8 @@ int main() {
     // Load the MNIST dataset
 
 
-//    std::vector<torch::data::Example<>> transforms;
+    std::vector<std::shared_ptr<torch::data::transforms::Lambda<torch::data::Example<> >>> transforms;
+    transforms.push_back(std::make_shared<normalize_transform>());
 //    std::vector<std::function<torch::data::Example<>>> transforms;
 //    std::vector<torch::data::transforms::Transform<Input, Output>> transforms;
 //    transforms.push_back(torch::data::transforms::Normalize<>(0.5,0.5));
