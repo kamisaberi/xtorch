@@ -1,34 +1,24 @@
 #include <torch/torch.h>
 #include <vector>
-#include <functional>
-
-// Define an alias for our data sample.
-using Example = torch::data::Example<torch::Tensor, torch::Tensor>;
+#include <memory> // For std::shared_ptr
 
 int main() {
-    // Create a vector of functions taking and returning Example.
-    std::vector<std::function<Example(Example)>> transforms;
+    // Define a vector to hold shared pointers to Normalize objects
+    std::vector<std::shared_ptr<torch::data::transforms::Normalize<>>> transforms;
 
-    // A normalization transform (lambda-based).
-    transforms.push_back([](Example input) {
-        input.data = (input.data - 0.1307) / 0.3081;
-        return input;
-    });
+    // Add a Normalize transform to the vector
+    transforms.push_back(
+        std::make_shared<torch::data::transforms::Normalize<>>(0.5, 0.5)
+    );
 
-    // An example additional transform (e.g., adding random noise).
-    transforms.push_back([](Example input) {
-        input.data = input.data + torch::randn_like(input.data) * 0.1;
-        return input;
-    });
-
-    // Create a sample example.
-    Example sample{torch::randn({1, 28, 28}), torch::tensor(1)};
-
-    // Apply each transform in sequence.
-    for (auto &transform : transforms) {
-        sample = transform(std::move(sample));
+    // Apply the transform to a sample tensor
+    at::Tensor sample = torch::ones({3, 3}); // Example tensor
+    for (const auto& transform : transforms) {
+        sample = transform->apply(sample);
     }
 
-    // Continue with further processing...
+    // Print the transformed tensor
+    std::cout << "Transformed Tensor:\n" << sample << std::endl;
+
     return 0;
 }

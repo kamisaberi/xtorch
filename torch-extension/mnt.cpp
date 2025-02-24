@@ -42,10 +42,11 @@ int main() {
     // Load the MNIST dataset
 
 
-    std::vector<torch::data::transforms::Transform<torch::Tensor, torch::Tensor>> transforms;
+//    std::vector<torch::data::Example<>> transforms;
 //    std::vector<std::function<Example(Example)>> transforms;
 //    std::vector<torch::data::transforms::Transform<Input, Output>> transforms;
-    transforms.push_back(torch::data::transforms::Normalize<>(0.5,0.5));
+//    transforms.push_back(torch::data::transforms::Normalize<>(0.5,0.5));
+//    transforms.push_back(resize_transform);
 
     auto dataset = torch::ext::data::datasets::MNIST("/home/kami/Documents/temp/",
                                                      {.mode = DataMode::TRAIN, .download = true});
