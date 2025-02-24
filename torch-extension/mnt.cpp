@@ -76,7 +76,7 @@ int main() {
 
 
     // Apply the resize transform to the dataset
-    auto transformed_dataset = dataset.map(resize_transform).map(normalize_transform).map(
+    auto transformed_dataset = dataset.map(resize({60,60})).map(normalize_transform).map(
         torch::data::transforms::Stack<>());
     cout << transformed_dataset.get_batch(0).data << endl;
 
