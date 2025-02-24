@@ -1,42 +1,36 @@
 #include <torch/torch.h>
 #include <vector>
-#include <functional>
-#include <iostream>
+#include <memory> // For std::shared_ptr
 
-// Define an alias for your data sample.
-using Example = torch::data::Example<torch::Tensor, torch::Tensor>;
+// Function to resize a tensor
+torch::Tensor resize_tensor(const torch::Tensor& input, const std::vector<int64_t>& size) {
+    return torch::nn::functional::interpolate(
+        input.unsqueeze(0), // Add batch dimension
+        torch::nn::functional::InterpolateFuncOptions().size(size).mode(torch::kBilinear)
+    ).squeeze(0); // Remove batch dimension
+}
 
 int main() {
-    // Define a vector of functions that take and return an Example.
-    std::vector<std::function<Example(Example)>> transforms;
+    // Define the size you want to pass to the Lambda transform
+    std::vector<int64_t> size = {32, 32};
 
-    // Create the built-in Normalize transform.
-    auto normalize = torch::data::transforms::Normalize<>(0.5, 0.5);
-    // Wrap Normalize in a lambda to hide its concrete type.
-    transforms.push_back([normalize](Example ex) mutable -> Example {
-        return normalize(std::move(ex));
-    });
+    // Create the Lambda transform with the size parameter
+    auto resize_transform = torch::data::transforms::Lambda<torch::data::Example<>>(
+        [size](torch::data::Example<> example) {
+            example.data = resize_tensor(example.data, size);
+            return example;
+        }
+    );
 
-    // Create a built-in Lambda transform that multiplies the tensor by 2.
-    auto lambda = torch::data::transforms::Lambda<Example>([](Example ex) {
-        ex.data = ex.data * 2;
-        return ex;
-    });
-    // Wrap the Lambda transform similarly.
-    transforms.push_back([lambda](Example ex) mutable -> Example {
-        return lambda(std::move(ex));
-    });
+    // Example usage
+    torch::Tensor sample_tensor = torch::rand({3, 64, 64}); // Example tensor (CxHxW)
+    torch::data::Example<> example = {sample_tensor, 0}; // Example data and target
 
-    // Create a sample Example.
-    Example sample{torch::randn({3, 224, 224}), torch::tensor(1)};
+    // Apply the transform
+    example = resize_transform(example);
 
-    // Apply each transform sequentially.
-    for (auto &transform : transforms) {
-        sample = transform(std::move(sample));
-    }
-
-    // Optionally print the resulting tensor.
-    std::cout << sample.data << std::endl;
+    // Print the transformed tensor size
+    std::cout << "Transformed Tensor Size: " << example.data.sizes() << std::endl;
 
     return 0;
 }
