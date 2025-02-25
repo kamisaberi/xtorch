@@ -106,8 +106,9 @@ int main() {
 
     // Apply transformations sequentially using map()
     for (const auto& transform : transforms) {
-        auto dataset1 = dataset.map(transform);
+        dataset = dataset.map(transform).dataset();
     }
+    cout << dataset.get(0).data << endl;
     // auto rs = torch::ext::data::transforms::resize({32, 32});
     // torch::data::datasets::MapDataset<torch::ext::data::datasets::MNIST, torch::data::transforms::Lambda<
     //     torch::data::Example<> > > dataset1 = dataset.map(transforms[0]);
