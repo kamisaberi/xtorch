@@ -81,6 +81,7 @@ int main() {
 
     auto dataset = torch::ext::data::datasets::MNIST("/home/kami/Documents/temp/",
                                                      {.mode = DataMode::TRAIN, .download = true});
+    cout << typeid(dataset).name() << endl;
 
     // Create a lambda function for resizing
     // cout << dataset.get(0).data << endl;
@@ -90,7 +91,16 @@ int main() {
     auto transformed_dataset = dataset.map(torch::ext::data::transforms::resize({32, 32}))
             .map(torch::ext::data::transforms::normalize(0.5, 0.5))
             .map(torch::data::transforms::Stack<>());
-    cout << transformed_dataset.get_batch(0).data << endl;
+
+
+    auto sssss = transformed_dataset.size();
+    cout << sssss.value() << endl;
+
+    // cout << typeid(transformed_dataset).name() << endl;
+    // auto ss =  transformed_dataset.get_batch(0).data.sizes();
+    // cout << "SIZES : " << ss << endl;
+    // auto sss = transformed_dataset.dataset().size();
+    // cout << "SIZES : " << sss.value() << endl;
 
 
     vector<torch::data::transforms::Lambda<torch::data::Example<> > > transforms = {
@@ -98,11 +108,13 @@ int main() {
         torch::ext::data::transforms::normalize(0.5, 0.5)
     };
 
-    torch::data::datasets::MapDataset<torch::ext::data::datasets::MNIST, torch::data::transforms::Lambda<torch::data::
-        Example<> > > dataset1;
-    for (auto &transform: transforms) {
-        dataset1 = dataset.map(transform);
-    }
+    // auto rs = torch::ext::data::transforms::resize({32, 32});
+    // torch::data::datasets::MapDataset<torch::ext::data::datasets::MNIST, torch::data::transforms::Lambda<
+    //     torch::data::Example<> > > dataset1 = dataset.map(transforms[0]);
+    // for (int i = 1 ; i < transforms.size();i++) {
+    //     dataset1 = dataset.map(transforms[i]);
+    // }
+    // cout << dataset1.size().value() << endl;
 
     // cout << transformed_dataset2.get_batch(0).data << endl;
 
