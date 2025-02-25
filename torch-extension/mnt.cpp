@@ -37,6 +37,22 @@ void set_random() {
 // }
 
 
+auto normalize_transform = torch::data::transforms::Lambda<torch::data::Example<> >(
+    [](torch::data::Example<> example) {
+        example.data = torch::data::transforms::Normalize<>(0.5, 0.5)(example.data);
+        return example;
+    }
+);
+
+
+torch::data::transforms::Lambda<torch::data::Example<>> normalize(double mean , double stddev) {
+    return torch::data::transforms::Lambda<torch::data::Example<> >(
+        [mean, stddev](torch::data::Example<> example) {
+            example.data = torch::data::transforms::Normalize<>(mean, stddev)(example.data);
+            return example;
+        }
+    );
+}
 
 
 int main() {
@@ -51,12 +67,6 @@ int main() {
     //     }
     // );
 
-    auto normalize_transform = torch::data::transforms::Lambda<torch::data::Example<> >(
-        [](torch::data::Example<> example) {
-            example.data = torch::data::transforms::Normalize<>(0.5, 0.5)(example.data);
-            return example;
-        }
-    );
 
 
     std::cout.precision(10);
@@ -79,7 +89,7 @@ int main() {
 
 
     // Apply the resize transform to the dataset
-    auto transformed_dataset = dataset.map(torch::ext::data::transforms::resize({32,32})).map(normalize_transform).map(
+    auto transformed_dataset = dataset.map(torch::ext::data::transforms::resize({32,32})).map(normalize(0.5,0.5)).map(
         torch::data::transforms::Stack<>());
     cout << transformed_dataset.get_batch(0).data << endl;
 
