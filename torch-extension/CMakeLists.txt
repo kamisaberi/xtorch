@@ -13,6 +13,8 @@ set(LIBRARY_SOURCE_FILES
         src/utils/md5.cpp
         src/media/image/processing.cpp
 
+        src/definitions/transforms.cpp
+
         src/models/cnn/alexnet.cpp
         src/models/cnn/lenet5.cpp
         src/models/cnn/vggnet16.cpp
@@ -72,6 +74,8 @@ set(LIBRARY_SOURCE_FILES
         src/datasets/usps.cpp
         src/datasets/voc.cpp
         src/datasets/wider-face.cpp
+
+
 )
 
 #add_executable( ${CMAKE_PROJECT_NAME} main.cpp src/datasets/cifar100.cpp src/datasets/cifar10.cpp src/datasets/fashion-mnist.cpp)
@@ -346,7 +350,7 @@ set(TEST_SOURCE_FILES
         src/utils/md5.cpp
         letest.cpp
         include/types/arguments.h
-        include/definitions/transforms.h
+        src/definitions/transforms.cpp
 )
 
 add_executable(${CMAKE_PROJECT_NAME} ${TEST_SOURCE_FILES})
@@ -389,7 +393,7 @@ set(TEST_SOURCE_FILES
         src/utils/md5.cpp
         mnt.cpp
         include/types/arguments.h
-        include/definitions/transforms.h
+        src/definitions/transforms.cpp
 )
 
 add_executable(${CMAKE_PROJECT_NAME} ${TEST_SOURCE_FILES})
