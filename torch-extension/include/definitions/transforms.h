@@ -14,6 +14,8 @@ namespace torch::ext::data::transforms {
 
     torch::data::transforms::Lambda<torch::data::Example<>> resize(std::vector<int64_t> size) ;
 
+    torch::data::transforms::Lambda<torch::data::Example<>> normalize(double mean , double stddev) ;
+
 
 
 

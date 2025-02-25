@@ -20,6 +20,15 @@ namespace torch::ext::data::transforms {
         );
     }
 
+    torch::data::transforms::Lambda<torch::data::Example<>> normalize(double mean , double stddev) {
+        return torch::data::transforms::Lambda<torch::data::Example<> >(
+            [mean, stddev](torch::data::Example<> example) {
+                example.data = torch::data::transforms::Normalize<>(mean, stddev)(example.data);
+                return example;
+            }
+        );
+    }
+
 
 
 }
