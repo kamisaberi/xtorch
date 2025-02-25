@@ -83,10 +83,6 @@ int main() {
                                                      {.mode = DataMode::TRAIN, .download = true});
     cout << typeid(dataset).name() << endl;
 
-    // Create a lambda function for resizing
-    // cout << dataset.get(0).data << endl;
-
-
     // Apply the resize transform to the dataset
     auto transformed_dataset = dataset.map(torch::ext::data::transforms::resize({32, 32}))
             .map(torch::ext::data::transforms::normalize(0.5, 0.5))
@@ -108,6 +104,10 @@ int main() {
         torch::ext::data::transforms::normalize(0.5, 0.5)
     };
 
+    // Apply transformations sequentially using map()
+    for (const auto& transform : transforms) {
+        dataset = dataset.map(transform);
+    }
     // auto rs = torch::ext::data::transforms::resize({32, 32});
     // torch::data::datasets::MapDataset<torch::ext::data::datasets::MNIST, torch::data::transforms::Lambda<
     //     torch::data::Example<> > > dataset1 = dataset.map(transforms[0]);
