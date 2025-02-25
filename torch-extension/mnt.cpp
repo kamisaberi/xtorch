@@ -79,8 +79,9 @@ int main() {
     //    transforms.push_back(torch::data::transforms::Normalize<>(0.5,0.5));
     //    transforms.push_back(resize_transform);
 
-    auto dataset = torch::ext::data::datasets::MNIST("/home/kami/Documents/temp/",
-                                                     {.mode = DataMode::TRAIN, .download = true});
+    torch::data::datasets::MapDataset<torch::ext::data::datasets::MNIST, torch::data::transforms::Lambda<torch::data::
+            Example<>>> dataset = torch::ext::data::datasets::MNIST("/home/kami/Documents/temp/",
+                                                                    {.mode = DataMode::TRAIN, .download = true});
 
     // Create a lambda function for resizing
     // cout << dataset.get(0).data << endl;
@@ -92,8 +93,15 @@ int main() {
             .map(torch::data::transforms::Stack<>());
     cout << transformed_dataset.get_batch(0).data << endl;
 
-    // auto transformed_dataset2 = dataset.map(resize_transform).map(torch::data::transforms::Normalize<>(0.5, 0.5)).map(
-    //     torch::data::transforms::Stack<>());
+
+    vector<torch::data::transforms::Lambda<torch::data::Example<>>> seqs = {
+        torch::ext::data::transforms::resize({32, 32}),
+        torch::ext::data::transforms::normalize(0.5, 0.5)
+    };
+
+    for (auto& transform : seqs) {
+        dataset= dataset.map(transform);
+    }
 
     // cout << transformed_dataset2.get_batch(0).data << endl;
 
