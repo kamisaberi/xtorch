@@ -72,16 +72,15 @@ int main() {
     // Load the MNIST dataset
 
 
-    std::vector<std::shared_ptr<torch::data::transforms::Lambda<torch::data::Example<> > > > transforms;
+    // std::vector<std::shared_ptr<torch::data::transforms::Lambda<torch::data::Example<> > > > transforms;
     // transforms.push_back(std::make_shared<normalize_transform>());
     //    std::vector<std::function<torch::data::Example<>>> transforms;
     //    std::vector<torch::data::transforms::Transform<Input, Output>> transforms;
     //    transforms.push_back(torch::data::transforms::Normalize<>(0.5,0.5));
     //    transforms.push_back(resize_transform);
 
-    torch::data::datasets::MapDataset<torch::ext::data::datasets::MNIST, torch::data::transforms::Lambda<torch::data::
-            Example<>>> dataset = torch::ext::data::datasets::MNIST("/home/kami/Documents/temp/",
-                                                                    {.mode = DataMode::TRAIN, .download = true});
+    auto dataset = torch::ext::data::datasets::MNIST("/home/kami/Documents/temp/",
+                                                     {.mode = DataMode::TRAIN, .download = true});
 
     // Create a lambda function for resizing
     // cout << dataset.get(0).data << endl;
@@ -94,13 +93,15 @@ int main() {
     cout << transformed_dataset.get_batch(0).data << endl;
 
 
-    vector<torch::data::transforms::Lambda<torch::data::Example<>>> seqs = {
+    vector<torch::data::transforms::Lambda<torch::data::Example<> > > transforms = {
         torch::ext::data::transforms::resize({32, 32}),
         torch::ext::data::transforms::normalize(0.5, 0.5)
     };
 
-    for (auto& transform : seqs) {
-        dataset= dataset.map(transform);
+    torch::data::datasets::MapDataset<torch::ext::data::datasets::MNIST, torch::data::transforms::Lambda<torch::data::
+        Example<> > > dataset1;
+    for (auto &transform: transforms) {
+        dataset1 = dataset.map(transform);
     }
 
     // cout << transformed_dataset2.get_batch(0).data << endl;
