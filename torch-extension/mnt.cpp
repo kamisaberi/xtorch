@@ -109,8 +109,8 @@ int main() {
 
     // cout << "MNIST training data size: "  << endl;
 
-    // auto dataset2 = torch::ext::data::datasets::MNIST("/home/kami/Documents/temp/",
-    //                                              {.mode = DataMode::TRAIN, .download = true , .transforms = transforms});
+    auto dataset2 = torch::ext::data::datasets::MNIST("/home/kami/Documents/temp/",
+                                                 {.mode = DataMode::TRAIN, .download = true , .transforms = transforms});
 
 
     cout << "r1" << endl;
@@ -167,17 +167,24 @@ int main() {
     cout << "r4" << endl;
 
     for (size_t epoch = 0; epoch != 10; ++epoch) {
+        cout << "r5.1" << endl;
         size_t batch_index = 0;
+        cout << "r5.2" << endl;
         auto train_loader_interator = train_loader->begin();
+        cout << "r5.3" << endl;
         auto train_loader_end = train_loader->end();
+        cout << "r5.4" << endl;
         while (train_loader_interator != train_loader_end) {
+            cout << "r5.4.1" << endl;
             torch::Tensor data, targets;
             auto batch = *train_loader_interator;
             data = batch.data;
             targets = batch.target;
+            cout << "r5.4.2" << endl;
             optimizer.zero_grad();
             torch::Tensor output;
             output = model.forward(data);
+            cout << "r5.4.4" << endl;
             torch::Tensor loss;
             loss = torch::nll_loss(output, targets);
             loss.backward();
