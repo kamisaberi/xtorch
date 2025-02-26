@@ -60,7 +60,6 @@ namespace torch::ext::data::datasets {
     }
 
 
-
     //------------------ MNIST ------------------//
     MNIST::MNIST(const std::string &root, DataMode mode, bool download) {
         check_resources(root, download);
@@ -132,21 +131,21 @@ namespace torch::ext::data::datasets {
         }
     }
 
-    void MNIST::transform_data(vector<torch::data::transforms::Lambda<torch::data::Example<> > > transforms  ) {
+    void MNIST::transform_data(vector<torch::data::transforms::Lambda<torch::data::Example<> > > transforms) {
         std::vector<torch::Tensor> data; // Store image data as tensors
         // std::vector<uint8_t> targets; // Store image data as tensors
-        cout <<  "transforms.size:" <<transforms.size() << endl;
-        for (const auto &transform : transforms) {
+        cout << "transforms.size:" << transforms.size() << endl;
+        for (const auto &transform: transforms) {
             std::cout << "1" << std::endl;
-            auto data_tensor =this->map(transform).map(torch::data::transforms::Stack<>());
+            auto data_tensor = this->map(transform).map(torch::data::transforms::Stack<>());
             std::cout << "2" << " " << this->data.size() << "  " << data_tensor.size().value() << std::endl;
             auto data_loader = torch::data::make_data_loader(std::move(data_tensor), /*batch_size=*/this->data.size());
             std::cout << "3" << std::endl;
             int i = 1;
-            for (auto& batch : *data_loader) {
-                 std::cout << "3 " <<i <<  " " << batch.data.sizes() << std::endl;
+            for (auto &batch: *data_loader) {
+                std::cout << "3 " << i << " " << batch.data.sizes() << std::endl;
                 i++;
-                data.push_back(batch.data); ;
+                data.push_back(batch.data);;
                 // targets.push_back(batch.data()->target[0].to(torch::kUInt8)) ;
             }
             std::cout << "4" << std::endl;
@@ -158,17 +157,16 @@ namespace torch::ext::data::datasets {
         }
 
         std::cout << "10" << std::endl;
-        auto dt =  this->map(torch::data::transforms::Stack<>());
+        auto dt = this->map(torch::data::transforms::Stack<>());
         std::cout << "11" << std::endl;
         auto data_loader = torch::data::make_data_loader(std::move(dt), /*batch_size=*/this->data.size());
         std::cout << "12" << std::endl;
-        for (auto& batch : *data_loader) {
-
-            data.push_back(batch.data) ;
+        for (auto &batch: *data_loader) {
+            data.push_back(batch.data);
         }
         std::cout << "13" << std::endl;
         this->data = data;
-        std::cout << "14  " <<  this->data.size() << std::endl;
+        std::cout << "14  " << this->data.size() << std::endl;
     }
 
 
