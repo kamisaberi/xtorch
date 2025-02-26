@@ -63,7 +63,8 @@ namespace torch::ext::data::datasets {
         void load_data(DataMode mode = DataMode::TRAIN);
 
         void check_resources(const std::string &root, bool download = false);
-        void transform_data(std::vector<std::shared_ptr<torch::data::transforms::Transform<torch::Tensor, torch::Tensor>>> transforms);
+
+        void transform_data(std::vector<torch::data::transforms::Lambda<torch::data::Example<> > > transforms);
     };
 
 

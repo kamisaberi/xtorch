@@ -81,7 +81,7 @@ int main() {
 
     auto dataset = torch::ext::data::datasets::MNIST("/home/kami/Documents/temp/",
                                                      {.mode = DataMode::TRAIN, .download = true});
-    cout << typeid(dataset).name() << endl;
+    // cout << typeid(dataset).name() << endl;
 
     // Apply the resize transform to the dataset
     auto transformed_dataset = dataset.map(torch::ext::data::transforms::resize({32, 32}))
@@ -89,8 +89,8 @@ int main() {
             .map(torch::data::transforms::Stack<>());
 
 
-    auto sssss = transformed_dataset.size();
-    cout << sssss.value() << endl;
+    // auto sssss = transformed_dataset.size();
+    // cout << sssss.value() << endl;
 
     // cout << typeid(transformed_dataset).name() << endl;
     // auto ss =  transformed_dataset.get_batch(0).data.sizes();
@@ -102,13 +102,44 @@ int main() {
     vector<torch::data::transforms::Lambda<torch::data::Example<> > > transforms = {
         torch::ext::data::transforms::resize({32, 32}),
         torch::ext::data::transforms::normalize(0.5, 0.5)
+
     };
 
-    // Apply transformations sequentially using map()
-    for (const auto& transform : transforms) {
-        dataset = dataset.map(transform).dataset();
-    }
-    cout << dataset.get(0).data << endl;
+
+    auto dataset2 = torch::ext::data::datasets::MNIST("/home/kami/Documents/temp/",
+                                                 {.mode = DataMode::TRAIN, .download = true , .transforms = transforms});
+
+
+
+    // for (const auto &transform: transforms) {
+    //     auto t  = dataset.map(transform);
+    //     cout << t.get_batch(0).data()->data[0] << endl;
+    // }
+    // return 0;
+
+
+    // cout << dataset.get(0).data << endl;
+    // dataset = dataset.map(torch::data::transforms::Stack<>());
+    // cout << dataset.get(0).data << endl;
+
+    // auto ld = torch::data::make_data_loader<torch::data::samplers::SequentialSampler>(std::move(dataset), 64);
+    // for (size_t epoch = 0; epoch != 10; ++epoch) {
+    //     size_t batch_index = 0;
+    //     auto ld_iter = ld->begin();
+    //     auto ld_end = ld->end();
+    //     while (ld_iter != ld_end) {
+    //         torch::Tensor data, targets;
+    //         auto batch = *ld_iter;
+    //         data = batch[0].data;
+    //         targets = batch[0].target;
+    //         cout << data << endl;
+    //         return 0;
+    //
+    //         // auto targets = batch.target;
+    //     }
+    // }
+
+
     // auto rs = torch::ext::data::transforms::resize({32, 32});
     // torch::data::datasets::MapDataset<torch::ext::data::datasets::MNIST, torch::data::transforms::Lambda<
     //     torch::data::Example<> > > dataset1 = dataset.map(transforms[0]);

@@ -132,8 +132,35 @@ namespace torch::ext::data::datasets {
         }
     }
 
-    void MNIST::transform_data(std::vector<std::shared_ptr<torch::data::transforms::Transform<torch::Tensor, torch::Tensor> > > transforms) {
+    void MNIST::transform_data(vector<torch::data::transforms::Lambda<torch::data::Example<> > > transforms  ) {
+        std::vector<torch::Tensor> data; // Store image data as tensors
+        // std::vector<uint8_t> targets; // Store image data as tensors
+        for (const auto &transform : transforms) {
+            std::cout << "1" << std::endl;
+            auto data_tensor =this->map(transform);
+            std::cout << "2" << " " << this->data.size() << std::endl;
+            auto data_loader = torch::data::make_data_loader(std::move(data_tensor), /*batch_size=*/this->data.size());
+            std::cout << "3" << std::endl;
+            for (auto& batch : *data_loader) {
+                std::cout << "33333" << std::endl;
+                data.push_back(batch.data()->data) ;
+                // targets.push_back(batch.data()->target[0].to(torch::kUInt8)) ;
+            }
+            std::cout << "4" << std::endl;
+            // torch::Tensor full_data = torch::cat(data, 0);
+            // torch::Tensor full_targets = torch::cat(targets, 0);
+            this->data = data;
+            std::cout << "5" << std::endl;
+            cout << this->data.size() << std::endl;
+            // this->labels = targets;
+        }
 
+        auto dt =  this->map(torch::data::transforms::Stack<>());
+        auto data_loader = torch::data::make_data_loader(std::move(dt), /*batch_size=*/this->data.size());
+        for (auto& batch : *data_loader) {
+            data.push_back(batch.data) ;
+        }
+        this->data = data;
     }
 
 

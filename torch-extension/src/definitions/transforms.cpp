@@ -23,11 +23,23 @@ namespace torch::ext::data::transforms {
     torch::data::transforms::Lambda<torch::data::Example<>> normalize(double mean , double stddev) {
         return torch::data::transforms::Lambda<torch::data::Example<> >(
             [mean, stddev](torch::data::Example<> example) {
-                example.data = torch::data::transforms::Normalize<>(mean, stddev)(example.data);
+                example.data = example.data.to(torch::kDouble).div(255);
                 return example;
             }
         );
     }
+
+//    torch::data::transforms::Lambda<torch::data::Example<>> normalize(double mean , double stddev) {
+//    auto stack_transform = torch::data::transforms::Lambda<std::vector<torch::data::Example<>>>(
+//        [](std::vector<torch::data::Example<>> batch) -> torch::data::Example<> {
+//            std::vector<torch::Tensor> batch_data, batch_targets;
+//            for (const auto& ex : batch) {
+//                batch_data.push_back(ex.data);
+//                batch_targets.push_back(ex.target);
+//            }
+//            return {torch::stack(batch_data), torch::stack(batch_targets)};
+//        }
+//    );
 
 
 

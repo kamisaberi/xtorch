@@ -15,6 +15,6 @@ enum class DataMode {
 struct DatasetArguments {
     DataMode mode = DataMode::TRAIN;
     bool download = false;
-    std::vector<std::shared_ptr<torch::data::transforms::Transform<torch::Tensor, torch::Tensor>>> transforms ={};
+    vector<torch::data::transforms::Lambda<torch::data::Example<> > > transforms  = {};
 
 };
