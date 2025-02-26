@@ -138,13 +138,15 @@ namespace torch::ext::data::datasets {
         cout <<  "transforms.size:" <<transforms.size() << endl;
         for (const auto &transform : transforms) {
             std::cout << "1" << std::endl;
-            auto data_tensor =this->map(transform);
+            auto data_tensor =this->map(transform).map(torch::data::transforms::Stack<>());
             std::cout << "2" << " " << this->data.size() << "  " << data_tensor.size().value() << std::endl;
             auto data_loader = torch::data::make_data_loader(std::move(data_tensor), /*batch_size=*/this->data.size());
             std::cout << "3" << std::endl;
+            int i = 1;
             for (auto& batch : *data_loader) {
-                 std::cout << batch.data()->data.sizes() << std::endl;
-                data.push_back(batch.data()->data) ;
+                 std::cout << "3 " <<i << std::endl;
+                i++;
+                data.push_back(batch.data); ;
                 // targets.push_back(batch.data()->target[0].to(torch::kUInt8)) ;
             }
             std::cout << "4" << std::endl;
