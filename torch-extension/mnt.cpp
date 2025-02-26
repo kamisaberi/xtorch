@@ -79,8 +79,10 @@ int main() {
     //    transforms.push_back(torch::data::transforms::Normalize<>(0.5,0.5));
     //    transforms.push_back(resize_transform);
 
-    auto dataset = torch::ext::data::datasets::MNIST("/home/kami/Documents/temp/",
-                                                     {.mode = DataMode::TRAIN, .download = true});
+    // auto dataset = torch::ext::data::datasets::MNIST("/home/kami/Documents/temp/",
+    //                                                  {.mode = DataMode::TRAIN, .download = true});
+    auto dataset = torch::ext::data::datasets::MNIST("/home/kami/Documents/temp/", DataMode::TRAIN, true);
+
     // cout << typeid(dataset).name() << endl;
 
     // Apply the resize transform to the dataset
@@ -105,9 +107,10 @@ int main() {
 
     };
 
+    // cout << "MNIST training data size: "  << endl;
 
-    auto dataset2 = torch::ext::data::datasets::MNIST("/home/kami/Documents/temp/",
-                                                 {.mode = DataMode::TRAIN, .download = true , .transforms = transforms});
+    // auto dataset2 = torch::ext::data::datasets::MNIST("/home/kami/Documents/temp/",
+    //                                              {.mode = DataMode::TRAIN, .download = true , .transforms = transforms});
 
 
     cout << "r1" << endl;

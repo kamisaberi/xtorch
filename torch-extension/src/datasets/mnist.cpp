@@ -62,8 +62,11 @@ namespace torch::ext::data::datasets {
 
     //------------------ MNIST ------------------//
     MNIST::MNIST(const std::string &root, DataMode mode, bool download) {
+        cout << "EEEEEEEEEEEEEEE 1"<< endl;
         check_resources(root, download);
+        cout << "EEEEEEEEEEEEEEE 2"<< endl;
         load_data(mode);
+        cout << "EEEEEEEEEEEEEEE 3"<< endl;
     }
 
     MNIST::MNIST(const fs::path &root, DatasetArguments args) {
@@ -71,6 +74,7 @@ namespace torch::ext::data::datasets {
         check_resources(root, download);
         load_data(mode);
         if (!transforms.empty()) {
+            cout << "Transforms 11111111111111111111" << endl;
             transform_data(transforms);
         }
     }
