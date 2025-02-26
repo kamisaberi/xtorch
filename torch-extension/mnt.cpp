@@ -110,6 +110,7 @@ int main() {
                                                  {.mode = DataMode::TRAIN, .download = true , .transforms = transforms});
 
 
+    cout << "r1" << endl;
 
     // for (const auto &transform: transforms) {
     //     auto t  = dataset.map(transform);
@@ -150,15 +151,17 @@ int main() {
 
     // cout << transformed_dataset2.get_batch(0).data << endl;
 
+    cout << "r2" << endl;
     auto train_loader = torch::data::make_data_loader<torch::data::samplers::SequentialSampler>(
         std::move(transformed_dataset), 64);
 
+    cout << "r3" << endl;
 
     torch::ext::models::LeNet5 model(10);
     model.to(device);
     model.train();
     torch::optim::Adam optimizer(model.parameters(), torch::optim::AdamOptions(1e-3));
-
+    cout << "r4" << endl;
 
     for (size_t epoch = 0; epoch != 10; ++epoch) {
         size_t batch_index = 0;
