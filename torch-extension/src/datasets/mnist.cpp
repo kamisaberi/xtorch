@@ -144,7 +144,7 @@ namespace torch::ext::data::datasets {
             std::cout << "3" << std::endl;
             int i = 1;
             for (auto& batch : *data_loader) {
-                 std::cout << "3 " <<i << std::endl;
+                 std::cout << "3 " <<i <<  " " << batch.data.sizes() << std::endl;
                 i++;
                 data.push_back(batch.data); ;
                 // targets.push_back(batch.data()->target[0].to(torch::kUInt8)) ;
