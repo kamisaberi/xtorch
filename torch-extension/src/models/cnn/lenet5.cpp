@@ -2,19 +2,26 @@
 
 
 using namespace std;
+
 namespace torch::ext::models {
-
-
     LeNet5::LeNet5(int num_classes) {
-        layer1 = torch::nn::Sequential();
-        torch::nn::Conv2d conv1 = torch::nn::Conv2d(torch::nn::Conv2dOptions(1, 6, 5).stride(1).padding(0));
-        layer1->push_back(conv1);
-        torch::nn::BatchNorm2d batch1 = torch::nn::BatchNorm2d(6);
-        layer1->push_back(batch1);
-        torch::nn::ReLU relu1 = torch::nn::ReLU();
-        layer1->push_back(relu1);
-        torch::nn::MaxPool2d pool1 = torch::nn::MaxPool2d(torch::nn::MaxPool2dOptions(2).stride(2));
-        layer1->push_back(pool1);
+        // layer1 = torch::nn::Sequential();
+        // torch::nn::Conv2d conv1 = torch::nn::Conv2d(torch::nn::Conv2dOptions(1, 6, 5).stride(1).padding(0));
+        // layer1->push_back(conv1);
+        // torch::nn::BatchNorm2d batch1 = torch::nn::BatchNorm2d(6);
+        // layer1->push_back(batch1);
+        // torch::nn::ReLU relu1 = torch::nn::ReLU();
+        // layer1->push_back(relu1);
+        // torch::nn::MaxPool2d pool1 = torch::nn::MaxPool2d(torch::nn::MaxPool2dOptions(2).stride(2));
+        // layer1->push_back(pool1);
+
+        layer1 = torch::nn::Sequential(
+            torch::nn::Conv2d(torch::nn::Conv2dOptions(1, 6, 5).stride(1).padding(0)),
+            torch::nn::BatchNorm2d(6),
+            torch::nn::ReLU(),
+            torch::nn::MaxPool2d(torch::nn::MaxPool2dOptions(2).stride(2))
+        );
+
         register_module("layer1", layer1);
 
         layer2 = torch::nn::Sequential();
@@ -50,6 +57,4 @@ namespace torch::ext::models {
         // cout << "le 04" << endl;
         return x;
     }
-
-
 }
