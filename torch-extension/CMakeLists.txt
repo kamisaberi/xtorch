@@ -394,6 +394,7 @@ set(TEST_SOURCE_FILES
         mnt.cpp
         include/types/arguments.h
         src/definitions/transforms.cpp
+        include/types/enums.h
 )
 
 add_executable(${CMAKE_PROJECT_NAME} ${TEST_SOURCE_FILES})

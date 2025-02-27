@@ -4,13 +4,9 @@
 #include <vector>
 #include <torch/data.h>
 #include <torch/csrc/autograd/grad_mode.h>
+#include "enums.h"
 using namespace std;
 
-enum class DataMode {
-    TRAIN = 1,
-    VALIDATION = 2,
-    TEST = 3,
-};
 
 struct DatasetArguments {
     DataMode mode = DataMode::TRAIN;
