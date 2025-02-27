@@ -40,6 +40,7 @@ namespace torch::ext::models {
     torch::Tensor LeNet5::forward(torch::Tensor x) {
         cout << "le 01" << endl;
         x = layer1->forward(x);
+        cout << "le 01-01" << endl;
         x = layer2->forward(x);
         cout << "le 02" << endl;
         x = torch::relu(fc1->forward(x.view({-1, 400})));

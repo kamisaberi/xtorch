@@ -23,7 +23,7 @@ namespace torch::ext::data::transforms {
     torch::data::transforms::Lambda<torch::data::Example<>> normalize(double mean , double stddev) {
         return torch::data::transforms::Lambda<torch::data::Example<> >(
             [mean, stddev](torch::data::Example<> example) {
-                example.data = example.data.to(torch::kDouble).div(255);
+                example.data = example.data.to(torch::kFloat32).div(255);
                 return example;
             }
         );
