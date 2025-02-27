@@ -109,6 +109,8 @@ int main() {
 
     // cout << "MNIST training data size: "  << endl;
 
+
+
     auto dataset2 = torch::ext::data::datasets::MNIST("/home/kami/Documents/temp/",
                                                  {.mode = DataMode::TRAIN, .download = true , .transforms = transforms});
 
