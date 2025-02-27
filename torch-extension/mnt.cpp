@@ -104,7 +104,6 @@ int main() {
     vector<torch::data::transforms::Lambda<torch::data::Example<> > > transforms = {
         torch::ext::data::transforms::resize({32, 32}),
         torch::ext::data::transforms::normalize(0.5, 0.5)
-
     };
 
     // cout << "MNIST training data size: "  << endl;
