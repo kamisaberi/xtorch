@@ -31,6 +31,14 @@ namespace torch::ext::data::datasets {
     std::vector<uint8_t> read_mnist_labels(const std::string &file_path, int num_labels);
 
     class MNISTBase : public torch::data::Dataset<MNISTBase> {
+    public:
+    private:
+        DataMode mode = DataMode::TRAIN;
+        bool download = false;
+        vector<torch::data::transforms::Lambda<torch::data::Example<> > > transforms  = {};
+        std::vector<torch::Tensor> data; // Store image data as tensors
+        std::vector<uint8_t> labels; // Store labels
+        fs::path root;
 
     };
 
