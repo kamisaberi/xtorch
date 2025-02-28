@@ -24,15 +24,12 @@ namespace torch::ext::models {
 
         register_module("layer1", layer1);
 
-        layer2 = torch::nn::Sequential();
-        torch::nn::Conv2d conv2 = torch::nn::Conv2d(torch::nn::Conv2dOptions(6, 16, 5).stride(1).padding(0));
-        layer2->push_back(conv2);
-        torch::nn::BatchNorm2d batch2 = torch::nn::BatchNorm2d(16);
-        layer2->push_back(batch2);
-        torch::nn::ReLU relu2 = torch::nn::ReLU();
-        layer2->push_back(relu2);
-        torch::nn::MaxPool2d pool2 = torch::nn::MaxPool2d(torch::nn::MaxPool2dOptions(2).stride(2));
-        layer2->push_back(pool2);
+        layer2 = torch::nn::Sequential(
+            torch::nn::Conv2d(torch::nn::Conv2dOptions(6, 16, 5).stride(1).padding(0)),
+            torch::nn::BatchNorm2d(16),
+            torch::nn::ReLU(),
+            torch::nn::MaxPool2d(torch::nn::MaxPool2dOptions(2).stride(2))
+        );
         register_module("layer2", layer2);
 
         fc1 = torch::nn::Linear(400, 120);
