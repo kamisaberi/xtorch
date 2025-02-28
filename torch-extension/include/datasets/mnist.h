@@ -32,15 +32,15 @@ namespace torch::ext::data::datasets {
 
     class MNISTBase : public torch::data::Dataset<MNISTBase> {
     public:
-        std::vector<torch::Tensor> read_images(const std::string &file_path, int num_images);
-        std::vector<uint8_t> read_labels(const std::string &file_path, int num_labels);
+        void read_images(const std::string &file_path, int num_images);
+        void read_labels(const std::string &file_path, int num_labels);
 
     private:
+        std::vector<torch::Tensor> data; // Store image data as tensors
+        std::vector<uint8_t> labels; // Store labels
         DataMode mode = DataMode::TRAIN;
         bool download = false;
         vector<torch::data::transforms::Lambda<torch::data::Example<> > > transforms  = {};
-        std::vector<torch::Tensor> data; // Store image data as tensors
-        std::vector<uint8_t> labels; // Store labels
         fs::path root;
 
     };

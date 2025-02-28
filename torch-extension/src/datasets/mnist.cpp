@@ -60,7 +60,7 @@ namespace torch::ext::data::datasets {
     }
 
 
-    std::vector<torch::Tensor> MNISTBase::read_images(const std::string &file_path, int num_images) {
+    void MNISTBase::read_images(const std::string &file_path, int num_images) {
         std::ifstream file(file_path, std::ios::binary);
         if (!file.is_open()) {
             throw std::runtime_error("Failed to open file: " + file_path);
@@ -91,10 +91,10 @@ namespace torch::ext::data::datasets {
 
 
         file.close();
-        return fimages;
+        this->data = fimages;
     }
 
-    std::vector<uint8_t> MNISTBase::read_labels(const std::string &file_path, int num_labels) {
+    void MNISTBase::read_labels(const std::string &file_path, int num_labels) {
         std::ifstream file(file_path, std::ios::binary);
         if (!file.is_open()) {
             throw std::runtime_error("Failed to open file: " + file_path);
@@ -115,7 +115,7 @@ namespace torch::ext::data::datasets {
 
         cout << labels.data() << endl;
         file.close();
-        return labels;
+        this->labels =  labels;
     }
 
 
