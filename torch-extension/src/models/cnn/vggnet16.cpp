@@ -4,18 +4,12 @@ namespace torch::ext::models {
 
     VggNet16::VggNet16(int num_classes) {
         //TODO layer1 DONE
-        layer1 = torch::nn::Sequential();
-        //        nn.Conv2d(3, 64, kernel_size=3, stride=1, padding=1),
-        torch::nn::Conv2d conv1 = torch::nn::Conv2d(torch::nn::Conv2dOptions(3, 64, 3).stride(1).padding(1));
-        layer1->push_back(conv1);
-        //        nn.BatchNorm2d(64),
-        torch::nn::BatchNorm2d batch1 = torch::nn::BatchNorm2d(64);
-        layer1->push_back(batch1);
-        //        nn.ReLU())
-        torch::nn::ReLU relu1 = torch::nn::ReLU();
-        layer1->push_back(relu1);
+        layer1 = torch::nn::Sequential(
+            torch::nn::Conv2d(torch::nn::Conv2dOptions(3, 64, 3).stride(1).padding(1)),
+            torch::nn::BatchNorm2d(64),
+            torch::nn::ReLU()
+            );
 
-        register_module("layer1", layer1);
 
         //TODO layer2 DONE
         layer2 = torch::nn::Sequential();
@@ -31,7 +25,6 @@ namespace torch::ext::models {
         //        nn.MaxPool2d(kernel_size = 2, stride = 2))
         torch::nn::MaxPool2d pool2 = torch::nn::MaxPool2d(torch::nn::MaxPool2dOptions(2).stride(2));
         layer2->push_back(pool2);
-        register_module("layer2", layer2);
 
         //TODO layer3 DONE
         layer3 = torch::nn::Sequential();
@@ -44,7 +37,6 @@ namespace torch::ext::models {
         //        nn.ReLU())
         torch::nn::ReLU relu3 = torch::nn::ReLU();
         layer3->push_back(relu3);
-        register_module("layer3", layer3);
 
         //TODO layer4 DONE
         layer4 = torch::nn::Sequential();
@@ -60,7 +52,7 @@ namespace torch::ext::models {
         //        nn.MaxPool2d(kernel_size = 2, stride = 2))
         torch::nn::MaxPool2d pool4 = torch::nn::MaxPool2d(torch::nn::MaxPool2dOptions(2).stride(2));
         layer4->push_back(pool4);
-        register_module("layer4", layer4);
+
 
         //TODO layer5 DONE
         layer5 = torch::nn::Sequential();
@@ -73,7 +65,7 @@ namespace torch::ext::models {
         //        nn.ReLU())
         torch::nn::ReLU relu5 = torch::nn::ReLU();
         layer5->push_back(relu5);
-        register_module("layer5", layer5);
+
 
 
         //TODO layer6 DONE
@@ -87,7 +79,6 @@ namespace torch::ext::models {
         //        nn.ReLU())
         torch::nn::ReLU relu6 = torch::nn::ReLU();
         layer6->push_back(relu6);
-        register_module("layer6", layer6);
 
 
         //TODO layer7 DONE
@@ -104,7 +95,6 @@ namespace torch::ext::models {
         //        nn.MaxPool2d(kernel_size = 2, stride = 2))
         torch::nn::MaxPool2d pool7 = torch::nn::MaxPool2d(torch::nn::MaxPool2dOptions(2).stride(2));
         layer7->push_back(pool7);
-        register_module("layer7", layer7);
 
 
 
@@ -119,7 +109,7 @@ namespace torch::ext::models {
         //        nn.ReLU())
         torch::nn::ReLU relu8 = torch::nn::ReLU();
         layer8->push_back(relu8);
-        register_module("layer8", layer8);
+
 
 
         //TODO layer9 DONE
@@ -133,7 +123,7 @@ namespace torch::ext::models {
         //        nn.ReLU())
         torch::nn::ReLU relu9 = torch::nn::ReLU();
         layer9->push_back(relu9);
-        register_module("layer9", layer9);
+
 
 
         //TODO layer10 DONE
@@ -151,8 +141,6 @@ namespace torch::ext::models {
         //        nn.MaxPool2d(kernel_size = 2, stride = 2))
         torch::nn::MaxPool2d pool10 = torch::nn::MaxPool2d(torch::nn::MaxPool2dOptions(2).stride(2));
         layer10->push_back(pool10);
-        register_module("layer10", layer10);
-
 
 
         //TODO layer11 DONE
@@ -167,7 +155,6 @@ namespace torch::ext::models {
         //        nn.ReLU())
         torch::nn::ReLU relu11 = torch::nn::ReLU();
         layer11->push_back(relu11);
-        register_module("layer11", layer11);
 
 
         //TODO layer12 DONE
@@ -182,7 +169,6 @@ namespace torch::ext::models {
         //        nn.ReLU())
         torch::nn::ReLU relu12 = torch::nn::ReLU();
         layer12->push_back(relu12);
-        register_module("layer12", layer12);
 
 
         //TODO layer13
@@ -200,7 +186,7 @@ namespace torch::ext::models {
         //        nn.MaxPool2d(kernel_size = 2, stride = 2))
         torch::nn::MaxPool2d pool13 = torch::nn::MaxPool2d(torch::nn::MaxPool2dOptions(2).stride(2));
         layer13->push_back(pool13);
-        register_module("layer13", layer13);
+
 
 
 
@@ -215,7 +201,6 @@ namespace torch::ext::models {
         //             nn.ReLU())
         torch::nn::ReLU relu20 = torch::nn::ReLU();
         fc->push_back(relu20);
-        register_module("fc", fc);
 
 
         //TODO fc1 DONE
@@ -229,13 +214,26 @@ namespace torch::ext::models {
         //             nn.ReLU())
         torch::nn::ReLU relu21 = torch::nn::ReLU();
         fc1->push_back(relu21);
-        register_module("fc1", fc1);
+
 
         //TODO fc2 DONE
-        fc2 = torch::nn::Sequential();
-        //        nn.Linear(4096, num_classes))
-        torch::nn::Linear linear22 = torch::nn::Linear(4096, num_classes);
-        fc2->push_back(linear22);
+        fc2 = torch::nn::Sequential( torch::nn::Linear(4096, num_classes));
+
+        register_module("layer1", layer1);
+        register_module("layer2", layer2);
+        register_module("layer3", layer3);
+        register_module("layer4", layer4);
+        register_module("layer5", layer5);
+        register_module("layer6", layer6);
+        register_module("layer7", layer7);
+        register_module("layer8", layer8);
+        register_module("layer9", layer9);
+        register_module("layer10", layer10);
+        register_module("layer11", layer11);
+        register_module("layer12", layer12);
+        register_module("layer13", layer13);
+        register_module("fc", fc);
+        register_module("fc1", fc1);
         register_module("fc2", fc2);
 
 
