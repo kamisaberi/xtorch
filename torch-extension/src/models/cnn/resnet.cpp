@@ -38,28 +38,27 @@ namespace torch::ext::models {
 
     ResNet::ResNet(vector<int> layers, int num_classes) {
         inplanes = 64;
-        conv1 = torch::nn::Sequential();
-        //                nn.Conv2d(3, 64, kernel_size = 7, stride = 2, padding = 3),
-        torch::nn::Conv2d cnv1 = torch::nn::Conv2d(torch::nn::Conv2dOptions(3, 64, 7).stride(2).padding(3));
-        conv1->push_back(cnv1);
-        //                nn.BatchNorm2d(64),
-        torch::nn::BatchNorm2d batch1 = torch::nn::BatchNorm2d(64);
-        conv1->push_back(batch1);
-        //                nn.ReLU())
-        torch::nn::ReLU relu1 = torch::nn::ReLU();
-        conv1->push_back(relu1);
+
+
+        conv1 = torch::nn::Sequential(
+            torch::nn::Conv2d(torch::nn::Conv2dOptions(3, 64, 7).stride(2).padding(3)),
+            torch::nn::BatchNorm2d(64),
+            torch::nn::ReLU()
+        );
+
         register_module("conv1", conv1);
 
+        maxpool = torch::nn::MaxPool2d(torch::nn::MaxPool2dOptions(3).stride(2).padding(1));
+        // maxpool = torch::nn::MaxPool2d(torch::nn::MaxPool2dOptions(3).stride(2).padding(1));
 
-        maxpool = torch::nn::MaxPool2d(torch::nn::MaxPool2dOptions(3).stride(2).padding(1));
-        maxpool = torch::nn::MaxPool2d(torch::nn::MaxPool2dOptions(3).stride(2).padding(1));
         layer0 = makeLayerFromResidualBlock(64, layers[0], 1);
-        register_module("layer0", layer0);
         layer1 = makeLayerFromResidualBlock(128, layers[1], 2);
-        register_module("layer1", layer1);
         layer2 = makeLayerFromResidualBlock(256, layers[2], 2);
-        register_module("layer2", layer2);
         layer3 = makeLayerFromResidualBlock(512, layers[3], 2);
+
+        register_module("layer0", layer0);
+        register_module("layer1", layer1);
+        register_module("layer2", layer2);
         register_module("layer3", layer3);
         avgpool = torch::nn::AvgPool2d(torch::nn::AvgPool2dOptions(7).stride(1));
         fc = torch::nn::Linear(512, num_classes);
