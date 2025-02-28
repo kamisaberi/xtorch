@@ -1,14 +1,13 @@
 #include "../../../include/models/cnn/vggnet16.h"
 
 namespace torch::ext::models {
-
     VggNet16::VggNet16(int num_classes) {
         //TODO layer1 DONE
         layer1 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(3, 64, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(64),
             torch::nn::ReLU()
-            );
+        );
 
 
         //TODO layer2 DONE
@@ -67,7 +66,6 @@ namespace torch::ext::models {
         layer5->push_back(relu5);
 
 
-
         //TODO layer6 DONE
         layer6 = torch::nn::Sequential();
         //        nn.Conv2d(256, 256, kernel_size=3, stride=1, padding=1),
@@ -97,7 +95,6 @@ namespace torch::ext::models {
         layer7->push_back(pool7);
 
 
-
         //TODO layer8 DONE
         layer8 = torch::nn::Sequential();
         //        nn.Conv2d(256, 512, kernel_size=3, stride=1, padding=1),
@@ -109,7 +106,6 @@ namespace torch::ext::models {
         //        nn.ReLU())
         torch::nn::ReLU relu8 = torch::nn::ReLU();
         layer8->push_back(relu8);
-
 
 
         //TODO layer9 DONE
@@ -125,99 +121,56 @@ namespace torch::ext::models {
         layer9->push_back(relu9);
 
 
-
         //TODO layer10 DONE
-        //self.layer10 = nn.Sequential(
-        layer10 = torch::nn::Sequential();
-        //        nn.Conv2d(512, 512, kernel_size=3, stride=1, padding=1),
-        torch::nn::Conv2d conv10 = torch::nn::Conv2d(torch::nn::Conv2dOptions(512, 512, 3).stride(1).padding(1));
-        layer10->push_back(conv10);
-        //        nn.BatchNorm2d(512),
-        torch::nn::BatchNorm2d batch10 = torch::nn::BatchNorm2d(512);
-        layer10->push_back(batch10);
-        //        nn.ReLU())
-        torch::nn::ReLU relu10 = torch::nn::ReLU();
-        layer10->push_back(relu10);
-        //        nn.MaxPool2d(kernel_size = 2, stride = 2))
-        torch::nn::MaxPool2d pool10 = torch::nn::MaxPool2d(torch::nn::MaxPool2dOptions(2).stride(2));
-        layer10->push_back(pool10);
+        layer10 = torch::nn::Sequential(
+            torch::nn::Conv2d(torch::nn::Conv2dOptions(512, 512, 3).stride(1).padding(1)),
+            torch::nn::BatchNorm2d(512),
+            torch::nn::ReLU(),
+            torch::nn::MaxPool2d(torch::nn::MaxPool2dOptions(2).stride(2))
+        );
 
 
         //TODO layer11 DONE
-        //self.layer11 = nn.Sequential(
-        layer11 = torch::nn::Sequential();
-        //        nn.Conv2d(512, 512, kernel_size=3, stride=1, padding=1),
-        torch::nn::Conv2d conv11 = torch::nn::Conv2d(torch::nn::Conv2dOptions(512, 512, 3).stride(1).padding(1));
-        layer11->push_back(conv11);
-        //        nn.BatchNorm2d(512),
-        torch::nn::BatchNorm2d batch11 = torch::nn::BatchNorm2d(512);
-        layer11->push_back(batch11);
-        //        nn.ReLU())
-        torch::nn::ReLU relu11 = torch::nn::ReLU();
-        layer11->push_back(relu11);
+        layer11 = torch::nn::Sequential(
+            torch::nn::Conv2d(torch::nn::Conv2dOptions(512, 512, 3).stride(1).padding(1)),
+            torch::nn::BatchNorm2d(512),
+            torch::nn::ReLU()
+        );
 
 
         //TODO layer12 DONE
-        //self.layer12 = nn.Sequential(
-        layer12 = torch::nn::Sequential();
-        //        nn.Conv2d(512, 512, kernel_size=3, stride=1, padding=1),
-        torch::nn::Conv2d conv12 = torch::nn::Conv2d(torch::nn::Conv2dOptions(512, 512, 3).stride(1).padding(1));
-        layer12->push_back(conv12);
-        //        nn.BatchNorm2d(512),
-        torch::nn::BatchNorm2d batch12 = torch::nn::BatchNorm2d(512);
-        layer12->push_back(batch12);
-        //        nn.ReLU())
-        torch::nn::ReLU relu12 = torch::nn::ReLU();
-        layer12->push_back(relu12);
+        layer12 = torch::nn::Sequential(
+            torch::nn::Conv2d(torch::nn::Conv2dOptions(512, 512, 3).stride(1).padding(1)),
+            torch::nn::BatchNorm2d(512),
+            torch::nn::ReLU()
+        );
 
 
         //TODO layer13
-        //self.layer13 = nn.Sequential(
-        layer13 = torch::nn::Sequential();
-        //        nn.Conv2d(512, 512, kernel_size=3, stride=1, padding=1),
-        torch::nn::Conv2d conv13 = torch::nn::Conv2d(torch::nn::Conv2dOptions(512, 512, 3).stride(1).padding(1));
-        layer13->push_back(conv13);
-        //        nn.BatchNorm2d(512),
-        torch::nn::BatchNorm2d batch13 = torch::nn::BatchNorm2d(512);
-        layer13->push_back(batch13);
-        //        nn.ReLU())
-        torch::nn::ReLU relu13 = torch::nn::ReLU();
-        layer13->push_back(relu13);
-        //        nn.MaxPool2d(kernel_size = 2, stride = 2))
-        torch::nn::MaxPool2d pool13 = torch::nn::MaxPool2d(torch::nn::MaxPool2dOptions(2).stride(2));
-        layer13->push_back(pool13);
-
-
+        layer13 = torch::nn::Sequential(
+            torch::nn::Conv2d(torch::nn::Conv2dOptions(512, 512, 3).stride(1).padding(1)),
+            torch::nn::BatchNorm2d(512),
+            torch::nn::ReLU(),
+            torch::nn::MaxPool2d(torch::nn::MaxPool2dOptions(2).stride(2))
+        );
 
 
         //TODO fc DONE
-        fc = torch::nn::Sequential();
-        //             nn.Dropout(0.5),
-        torch::nn::Dropout drop20 = torch::nn::Dropout(0.5);
-        fc->push_back(drop20);
-        //             nn.Linear(7*7*512, 4096),
-        torch::nn::Linear linear20 = torch::nn::Linear(7 * 7 * 512, 4096);
-        fc->push_back(linear20);
-        //             nn.ReLU())
-        torch::nn::ReLU relu20 = torch::nn::ReLU();
-        fc->push_back(relu20);
-
+        fc = torch::nn::Sequential(
+            torch::nn::Dropout(0.5),
+            torch::nn::Linear(7 * 7 * 512, 4096),
+            torch::nn::ReLU()
+        );
 
         //TODO fc1 DONE
-        fc1 = torch::nn::Sequential();
-        //             nn.Dropout(0.5),
-        torch::nn::Dropout drop21 = torch::nn::Dropout(0.5);
-        fc1->push_back(drop21);
-        //             nn.Linear(4096, 4096),
-        torch::nn::Linear linear21 = torch::nn::Linear(4096, 4096);
-        fc1->push_back(linear21);
-        //             nn.ReLU())
-        torch::nn::ReLU relu21 = torch::nn::ReLU();
-        fc1->push_back(relu21);
-
+        fc1 = torch::nn::Sequential(
+            torch::nn::Dropout(0.5),
+            torch::nn::Linear(4096, 4096),
+            torch::nn::ReLU()
+        );
 
         //TODO fc2 DONE
-        fc2 = torch::nn::Sequential( torch::nn::Linear(4096, num_classes));
+        fc2 = torch::nn::Sequential(torch::nn::Linear(4096, num_classes));
 
         register_module("layer1", layer1);
         register_module("layer2", layer2);
@@ -235,8 +188,6 @@ namespace torch::ext::models {
         register_module("fc", fc);
         register_module("fc1", fc1);
         register_module("fc2", fc2);
-
-
     }
 
     torch::Tensor VggNet16::forward(torch::Tensor x) {
@@ -259,6 +210,4 @@ namespace torch::ext::models {
         x = fc2->forward(x);
         return x;
     }
-
-
 }
