@@ -1,30 +1,22 @@
 #include "../../../include/models/cnn/resnet.h"
 
 namespace torch::ext::models {
-
     ResidualBlock::ResidualBlock(int in_channels, int out_channels, int stride, torch::nn::Sequential downsample) {
-        conv1 = torch::nn::Sequential();
-        //                nn.Conv2d(in_channels, out_channels, kernel_size = 3, stride = stride, padding = 1),
-        torch::nn::Conv2d cnv1 = torch::nn::Conv2d(
-                torch::nn::Conv2dOptions(in_channels, out_channels, 3).stride(stride).padding(1));
-        conv1->push_back(cnv1);
-        //                nn.BatchNorm2d(out_channels),
-        torch::nn::BatchNorm2d batch1 = torch::nn::BatchNorm2d(out_channels);
-        conv1->push_back(batch1);
-        //                nn.ReLU())
-        torch::nn::ReLU relu1 = torch::nn::ReLU();
-        conv1->push_back(relu1);
+        conv1 = torch::nn::Sequential(
+            torch::nn::Conv2d(torch::nn::Conv2dOptions(in_channels, out_channels, 3).stride(stride).padding(1)),
+            torch::nn::BatchNorm2d(out_channels),
+            torch::nn::ReLU()
+        );
+
+        conv2 = torch::nn::Sequential(
+            torch::nn::Conv2d(torch::nn::Conv2dOptions(out_channels, out_channels, 3).stride(1).padding(1)),
+            torch::nn::BatchNorm2d(out_channels)
+        );
+
         register_module("conv1", conv1);
+        register_module("conv2", conv2);
 
-        conv2 = torch::nn::Sequential();
-        //                nn.Conv2d(out_channels, out_channels, kernel_size = 3, stride = 1, padding = 1),
-        torch::nn::Conv2d cnv2 = torch::nn::Conv2d(
-                torch::nn::Conv2dOptions(out_channels, out_channels, 3).stride(1).padding(1));
-        conv2->push_back(cnv2);
 
-        //                nn.BatchNorm2d(out_channels),
-        torch::nn::BatchNorm2d batch2 = torch::nn::BatchNorm2d(out_channels);
-        conv2->push_back(batch2);
         this->downsample = downsample;
         this->relu = torch::nn::ReLU();
         this->out_channels = out_channels;
@@ -36,7 +28,8 @@ namespace torch::ext::models {
         out = conv2->forward(out);
         if (downsample) {
             residual = downsample->forward(x);
-        } else {}
+        } else {
+        }
         out += residual;
         out = relu(out);
         return out;
@@ -46,16 +39,17 @@ namespace torch::ext::models {
     ResNet::ResNet(vector<int> layers, int num_classes) {
         inplanes = 64;
         conv1 = torch::nn::Sequential();
-//                nn.Conv2d(3, 64, kernel_size = 7, stride = 2, padding = 3),
+        //                nn.Conv2d(3, 64, kernel_size = 7, stride = 2, padding = 3),
         torch::nn::Conv2d cnv1 = torch::nn::Conv2d(torch::nn::Conv2dOptions(3, 64, 7).stride(2).padding(3));
         conv1->push_back(cnv1);
-//                nn.BatchNorm2d(64),
+        //                nn.BatchNorm2d(64),
         torch::nn::BatchNorm2d batch1 = torch::nn::BatchNorm2d(64);
         conv1->push_back(batch1);
         //                nn.ReLU())
         torch::nn::ReLU relu1 = torch::nn::ReLU();
         conv1->push_back(relu1);
         register_module("conv1", conv1);
+
 
         maxpool = torch::nn::MaxPool2d(torch::nn::MaxPool2dOptions(3).stride(2).padding(1));
         maxpool = torch::nn::MaxPool2d(torch::nn::MaxPool2dOptions(3).stride(2).padding(1));
@@ -77,7 +71,7 @@ namespace torch::ext::models {
             downsample = torch::nn::Sequential();
             //                    nn.Conv2d(self.inplanes, planes, kernel_size=1, stride=stride),
             torch::nn::Conv2d convd = torch::nn::Conv2d(
-                    torch::nn::Conv2dOptions(inplanes, planes, 1).stride(stride).padding(0));
+                torch::nn::Conv2dOptions(inplanes, planes, 1).stride(stride).padding(0));
             downsample->push_back(convd);
             //                    nn.BatchNorm2d(planes),
             torch::nn::BatchNorm2d batchd = torch::nn::BatchNorm2d(planes);
@@ -106,6 +100,4 @@ namespace torch::ext::models {
         x = fc->forward(x);
         return x;
     }
-
-
 }
