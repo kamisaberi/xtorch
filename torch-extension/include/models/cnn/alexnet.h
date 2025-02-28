@@ -9,7 +9,7 @@ using namespace std;
 
 
 namespace torch::ext::models {
-   struct AlexNet : torch::nn::Module {
+   struct AlexNet :public torch::nn::Module {
         torch::nn::Sequential layer1 = nullptr, layer2 = nullptr, layer3 = nullptr, layer4 = nullptr, layer5 = nullptr;
         torch::nn::Sequential fc = nullptr, fc1 = nullptr, fc2 = nullptr;
     public:
