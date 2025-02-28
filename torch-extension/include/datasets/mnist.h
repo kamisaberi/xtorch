@@ -32,6 +32,9 @@ namespace torch::ext::data::datasets {
 
     class MNISTBase : public torch::data::Dataset<MNISTBase> {
     public:
+        MNISTBase(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+        MNISTBase(const fs::path &root, DatasetArguments args);
+
         void read_images(const std::string &file_path, int num_images);
         void read_labels(const std::string &file_path, int num_labels);
         torch::data::Example<> get(size_t index) override;

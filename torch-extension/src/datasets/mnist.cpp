@@ -59,6 +59,28 @@ namespace torch::ext::data::datasets {
         return labels;
     }
 
+    MNISTBase::MNISTBase(const std::string &root, DataMode mode, bool download) {
+        this->root = root;
+        this->download = download;
+        this->mode = mode;
+        // check_resources(root, download);
+        // load_data(mode);
+    }
+
+    MNISTBase::MNISTBase(const fs::path &root, DatasetArguments args) {
+        auto [mode , download , transforms] = args;
+        this->root = root;
+        this->download = download;
+        this->mode = mode;
+        this->transforms = transforms;
+        // check_resources(root, download);
+        // load_data(mode);
+        if (!transforms.empty()) {
+            // cout << "Transforms 11111111111111111111" << endl;
+            this->transform_data(transforms);
+        }
+    }
+
 
     void MNISTBase::read_images(const std::string &file_path, int num_images) {
         std::ifstream file(file_path, std::ios::binary);
@@ -115,7 +137,7 @@ namespace torch::ext::data::datasets {
 
         cout << labels.data() << endl;
         file.close();
-        this->labels =  labels;
+        this->labels = labels;
     }
 
     void MNISTBase::transform_data(vector<torch::data::transforms::Lambda<torch::data::Example<> > > transforms) {
@@ -155,14 +177,13 @@ namespace torch::ext::data::datasets {
     }
 
 
-
     //------------------ MNIST ------------------//
-    MNIST::MNIST(const std::string &root, DataMode mode, bool download) {
+    MNIST::MNIST(const std::string &root, DataMode mode, bool download) : MNISTBase(root, mode, download) {
         check_resources(root, download);
         load_data(mode);
     }
 
-    MNIST::MNIST(const fs::path &root, DatasetArguments args) {
+    MNIST::MNIST(const fs::path &root, DatasetArguments args) : MNISTBase(root, args) {
         auto [mode , download , transforms] = args;
         check_resources(root, download);
         load_data(mode);
