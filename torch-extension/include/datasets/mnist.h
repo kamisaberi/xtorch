@@ -34,35 +34,35 @@ namespace torch::ext::data::datasets {
     public:
         void read_images(const std::string &file_path, int num_images);
         void read_labels(const std::string &file_path, int num_labels);
+        torch::data::Example<> get(size_t index) override;
+        torch::optional<size_t> size() const override;
 
-    private:
+    protected:
         std::vector<torch::Tensor> data; // Store image data as tensors
         std::vector<uint8_t> labels; // Store labels
         DataMode mode = DataMode::TRAIN;
         bool download = false;
-        vector<torch::data::transforms::Lambda<torch::data::Example<> > > transforms  = {};
         fs::path root;
+        fs::path dataset_path;
         void transform_data(std::vector<torch::data::transforms::Lambda<torch::data::Example<> > > transforms);
+
+    private:
+        vector<torch::data::transforms::Lambda<torch::data::Example<> > > transforms  = {};
 
     };
 
 
-    class MNIST : public torch::data::Dataset<MNIST> {
+    class MNIST : public MNISTBase {
     public :
         MNIST(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
 
         MNIST(const fs::path &root, DatasetArguments args);
 
-        torch::data::Example<> get(size_t index) override;
-
-        torch::optional<size_t> size() const override;
 
     private :
         std::vector<torch::Tensor> data; // Store image data as tensors
         std::vector<uint8_t> labels; // Store labels
         std::string url = "https://ossci-datasets.s3.amazonaws.com/mnist/";
-        fs::path root;
-        fs::path dataset_path;
         fs::path dataset_folder_name = "MNIST/raw";
 
         vector<tuple<fs::path, std::string> > resources = {
@@ -81,7 +81,6 @@ namespace torch::ext::data::datasets {
 
         void check_resources(const std::string &root, bool download = false);
 
-        void transform_data(std::vector<torch::data::transforms::Lambda<torch::data::Example<> > > transforms);
     };
 
 
