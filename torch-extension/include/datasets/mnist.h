@@ -42,6 +42,7 @@ namespace torch::ext::data::datasets {
         bool download = false;
         vector<torch::data::transforms::Lambda<torch::data::Example<> > > transforms  = {};
         fs::path root;
+        void transform_data(std::vector<torch::data::transforms::Lambda<torch::data::Example<> > > transforms);
 
     };
 
