@@ -11,59 +11,35 @@ namespace torch::ext::models {
 
 
         //TODO layer2 DONE
-        layer2 = torch::nn::Sequential();
-        //        nn.Conv2d(64, 64, kernel_size=3, stride=1, padding=1),
-        torch::nn::Conv2d conv2 = torch::nn::Conv2d(torch::nn::Conv2dOptions(64, 64, 3).stride(1).padding(1));
-        layer2->push_back(conv2);
-        //        nn.BatchNorm2d(64),
-        torch::nn::BatchNorm2d batch2 = torch::nn::BatchNorm2d(64);
-        layer2->push_back(batch2);
-        //        nn.ReLU(),
-        torch::nn::ReLU relu2 = torch::nn::ReLU();
-        layer2->push_back(relu2);
-        //        nn.MaxPool2d(kernel_size = 2, stride = 2))
-        torch::nn::MaxPool2d pool2 = torch::nn::MaxPool2d(torch::nn::MaxPool2dOptions(2).stride(2));
-        layer2->push_back(pool2);
+        layer2 = torch::nn::Sequential(
+            torch::nn::Conv2d(torch::nn::Conv2dOptions(64, 64, 3).stride(1).padding(1)),
+            torch::nn::BatchNorm2d(64),
+            torch::nn::ReLU(),
+            torch::nn::MaxPool2d(torch::nn::MaxPool2dOptions(2).stride(2))
+        );
 
         //TODO layer3 DONE
-        layer3 = torch::nn::Sequential();
-        //        nn.Conv2d(64, 128, kernel_size=3, stride=1, padding=1),
-        torch::nn::Conv2d conv3 = torch::nn::Conv2d(torch::nn::Conv2dOptions(64, 128, 3).stride(1).padding(1));
-        layer3->push_back(conv3);
-        //        nn.BatchNorm2d(128),
-        torch::nn::BatchNorm2d batch3 = torch::nn::BatchNorm2d(128);
-        layer3->push_back(batch3);
-        //        nn.ReLU())
-        torch::nn::ReLU relu3 = torch::nn::ReLU();
-        layer3->push_back(relu3);
+        layer3 = torch::nn::Sequential(
+            torch::nn::Conv2d(torch::nn::Conv2dOptions(64, 128, 3).stride(1).padding(1)),
+            torch::nn::BatchNorm2d(128),
+            torch::nn::ReLU()
+        );
 
         //TODO layer4 DONE
-        layer4 = torch::nn::Sequential();
-        //        nn.Conv2d(128, 128, kernel_size=3, stride=1, padding=1),
-        torch::nn::Conv2d conv4 = torch::nn::Conv2d(torch::nn::Conv2dOptions(128, 128, 3).stride(1).padding(1));
-        layer4->push_back(conv4);
-        //        nn.BatchNorm2d(128),
-        torch::nn::BatchNorm2d batch4 = torch::nn::BatchNorm2d(128);
-        layer4->push_back(batch4);
-        //        nn.ReLU(),
-        torch::nn::ReLU relu4 = torch::nn::ReLU();
-        layer4->push_back(relu4);
-        //        nn.MaxPool2d(kernel_size = 2, stride = 2))
-        torch::nn::MaxPool2d pool4 = torch::nn::MaxPool2d(torch::nn::MaxPool2dOptions(2).stride(2));
-        layer4->push_back(pool4);
+        layer4 = torch::nn::Sequential(
+            torch::nn::Conv2d(torch::nn::Conv2dOptions(128, 128, 3).stride(1).padding(1)),
+            torch::nn::BatchNorm2d(128),
+            torch::nn::ReLU(),
+            torch::nn::MaxPool2d(torch::nn::MaxPool2dOptions(2).stride(2))
+        );
 
 
         //TODO layer5 DONE
-        layer5 = torch::nn::Sequential();
-        //        nn.Conv2d(128, 256, kernel_size=3, stride=1, padding=1),
-        torch::nn::Conv2d conv5 = torch::nn::Conv2d(torch::nn::Conv2dOptions(128, 256, 3).stride(1).padding(1));
-        layer5->push_back(conv5);
-        //        nn.BatchNorm2d(256),
-        torch::nn::BatchNorm2d batch5 = torch::nn::BatchNorm2d(256);
-        layer5->push_back(batch5);
-        //        nn.ReLU())
-        torch::nn::ReLU relu5 = torch::nn::ReLU();
-        layer5->push_back(relu5);
+        layer5 = torch::nn::Sequential(
+            torch::nn::Conv2d(torch::nn::Conv2dOptions(128, 256, 3).stride(1).padding(1)),
+            torch::nn::BatchNorm2d(256),
+            torch::nn::ReLU()
+        );
 
 
         //TODO layer6 DONE
