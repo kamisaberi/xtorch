@@ -190,6 +190,7 @@ namespace torch::ext::data::datasets {
 
     MNIST::MNIST(const fs::path &root, DatasetArguments args) : MNISTBase(root, args) {
         auto [mode , download , transforms] = args;
+        cout << "MNIST SIZE: " << this->data.size() << endl;
         check_resources(root, download);
         load_data(mode);
         cout << "MNIST SIZE: " << this->data.size() << endl;

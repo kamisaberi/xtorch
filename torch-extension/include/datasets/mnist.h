@@ -63,8 +63,8 @@ namespace torch::ext::data::datasets {
 
 
     private :
-        std::vector<torch::Tensor> data; // Store image data as tensors
-        std::vector<uint8_t> labels; // Store labels
+        // std::vector<torch::Tensor> data; // Store image data as tensors
+        // std::vector<uint8_t> labels; // Store labels
         std::string url = "https://ossci-datasets.s3.amazonaws.com/mnist/";
         fs::path dataset_folder_name = "MNIST/raw";
 
