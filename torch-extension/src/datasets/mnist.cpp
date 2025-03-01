@@ -75,10 +75,6 @@ namespace torch::ext::data::datasets {
         this->transforms = transforms;
         // check_resources(root, download);
         // load_data(mode);
-        if (!transforms.empty()) {
-            // cout << "Transforms 11111111111111111111" << endl;
-            this->transform_data(transforms);
-        }
     }
 
 
@@ -196,10 +192,12 @@ namespace torch::ext::data::datasets {
         auto [mode , download , transforms] = args;
         check_resources(root, download);
         load_data(mode);
+        cout << "MNIST SIZE: " << this->data.size() << endl;
         if (!transforms.empty()) {
             // cout << "Transforms 11111111111111111111" << endl;
             this->transform_data(transforms);
         }
+        cout << "MNIST SIZE: " << this->data.size() << endl;
     }
 
     // torch::data::Example<> MNIST::get(size_t index) {
