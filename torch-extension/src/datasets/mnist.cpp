@@ -176,6 +176,15 @@ namespace torch::ext::data::datasets {
         // std::cout << "14  " << this->data.size() << std::endl;
     }
 
+    torch::data::Example<> MNISTBase::get(size_t index) {
+        return {data[index], data[index]};
+    }
+
+    // Override `size` method to return the number of samples
+    torch::optional<size_t> MNISTBase::size() const {
+        return data.size();
+    }
+
 
     //------------------ MNIST ------------------//
     MNIST::MNIST(const std::string &root, DataMode mode, bool download) : MNISTBase(root, mode, download) {
