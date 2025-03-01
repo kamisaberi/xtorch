@@ -391,10 +391,10 @@ set(TEST_SOURCE_FILES
         src/datasets/mnist.cpp
         src/models/cnn/lenet5.cpp
         src/utils/md5.cpp
-        mnt.cpp
         include/types/arguments.h
         src/definitions/transforms.cpp
         include/types/enums.h
+        mnt.cpp
 )
 
 add_executable(${CMAKE_PROJECT_NAME} ${TEST_SOURCE_FILES})

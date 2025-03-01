@@ -56,6 +56,7 @@ void set_random() {
 
 
 int main() {
+    cout << "mnt 01\n";
     std::vector<int64_t> size = {32, 32};
 
     std::cout.precision(10);
@@ -67,6 +68,7 @@ int main() {
             .map(torch::ext::data::transforms::normalize(0.5, 0.5))
             .map(torch::data::transforms::Stack<>());
 
+    cout << "mnt 02\n";
     vector<torch::data::transforms::Lambda<torch::data::Example<> > > transforms = {
         torch::ext::data::transforms::resize({32, 32}),
         torch::ext::data::transforms::normalize(0.5, 0.5)
@@ -74,15 +76,17 @@ int main() {
     auto dataset2 = torch::ext::data::datasets::MNIST("/home/kami/Documents/temp/",
                                                  {.mode = DataMode::TRAIN, .download = true , .transforms = transforms});
 
+    cout << "mnt 03:" << dataset2.size().value() << "\n";
     auto train_loader = torch::data::make_data_loader<torch::data::samplers::SequentialSampler>(
         std::move(transformed_dataset), 64);
 
+    cout << "mnt 04\n";
 
     torch::ext::models::LeNet5 model(10);
     model.to(device);
     model.train();
     torch::optim::Adam optimizer(model.parameters(), torch::optim::AdamOptions(1e-3));
-
+    cout << "mnt 05\n";
     for (size_t epoch = 0; epoch != 10; ++epoch) {
         size_t batch_index = 0;
         auto train_loader_interator = train_loader->begin();
@@ -107,6 +111,7 @@ int main() {
         }
     }
 
+    cout << "mnt 06\n";
 
 
     return 0;
