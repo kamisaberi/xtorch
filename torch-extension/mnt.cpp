@@ -63,19 +63,24 @@ int main() {
     torch::Device device(torch::kCPU);
 
     auto dataset = torch::ext::data::datasets::MNIST("/home/kami/Documents/temp/", DataMode::TRAIN, true);
+
+    cout  << "DATASET\n";
+    cout << dataset.get(0).data << "  " << dataset.get(0).target << "\n";
+
     //
     auto transformed_dataset = dataset.map(torch::ext::data::transforms::resize({32, 32}))
             .map(torch::ext::data::transforms::normalize(0.5, 0.5))
             .map(torch::data::transforms::Stack<>());
 
-    cout << "mnt 02\n";
+    cout  << "TRANSFORMED DATASET\n";
+    cout << transformed_dataset.get_batch(0).data << "  " << transformed_dataset.get_batch(0).target << "\n";
 
 
     //TODO Custom Dataset START
-    vector<torch::data::transforms::Lambda<torch::data::Example<> > > transforms = {
-        torch::ext::data::transforms::resize({32, 32}),
-        torch::ext::data::transforms::normalize(0.5, 0.5)
-    };
+    // vector<torch::data::transforms::Lambda<torch::data::Example<> > > transforms = {
+    //     torch::ext::data::transforms::resize({32, 32}),
+    //     torch::ext::data::transforms::normalize(0.5, 0.5)
+    // };
     // auto dataset2 = torch::ext::data::datasets::MNIST("/home/kami/Documents/temp/",
     //                                              {.mode = DataMode::TRAIN, .download = true , .transforms = transforms});
     // cout << "mnt 03:" << dataset2.size().value() << "\n";
