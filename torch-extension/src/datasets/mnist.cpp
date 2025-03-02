@@ -248,9 +248,11 @@ namespace torch::ext::data::datasets {
         if (mode == DataMode::TRAIN) {
             fs::path imgs = this->dataset_path / std::get<0>(files["train"]);
             fs::path lbls = this->dataset_path / std::get<1>(files["train"]);
+            cout << imgs.string() << "  " << lbls.string() << endl;
             cout << imgs << endl;
             auto images = read_mnist_images(imgs.string(), 50000);
             auto labels = read_mnist_labels(lbls.string(), 50000);
+            cout << labels[0] << endl;
             this->data = images;
             this->labels = labels;
         } else {
