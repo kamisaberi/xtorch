@@ -77,19 +77,19 @@ int main() {
 
 
     //TODO Custom Dataset START
-    // vector<torch::data::transforms::Lambda<torch::data::Example<> > > transforms = {
-    //     torch::ext::data::transforms::resize({32, 32}),
-    //     torch::ext::data::transforms::normalize(0.5, 0.5)
-    // };
-    // auto dataset2 = torch::ext::data::datasets::MNIST("/home/kami/Documents/temp/",
-    //                                              {.mode = DataMode::TRAIN, .download = true , .transforms = transforms});
+    vector<torch::data::transforms::Lambda<torch::data::Example<> > > transforms = {
+        torch::ext::data::transforms::resize({32, 32}),
+        torch::ext::data::transforms::normalize(0.5, 0.5)
+    };
+    auto dataset2 = torch::ext::data::datasets::MNIST("/home/kami/Documents/temp/",
+                                                 {.mode = DataMode::TRAIN, .download = true , .transforms = transforms});
     // cout << "mnt 03:" << dataset2.size().value() << "\n";
     //TODO Custom Dataset FINISH
 
 
 
     auto train_loader = torch::data::make_data_loader<torch::data::samplers::SequentialSampler>(
-        std::move(transformed_dataset), 64);
+        std::move(dataset2), 64);
 
     cout << "mnt 04\n";
 
