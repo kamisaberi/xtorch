@@ -84,12 +84,13 @@ int main() {
     auto dataset2 = torch::ext::data::datasets::MNIST("/home/kami/Documents/temp/",
                                                  {.mode = DataMode::TRAIN, .download = true /*, .transforms = transforms*/});
     // cout << "mnt 03:" << dataset2.size().value() << "\n";
+    auto dataset3 =dataset2.map(torch::data::transforms::Stack<>());
     //TODO Custom Dataset FINISH
 
 
 
     auto train_loader = torch::data::make_data_loader<torch::data::samplers::SequentialSampler>(
-        std::move(dataset2), 64);
+        std::move(dataset3), 64);
 
     cout << "mnt 04\n";
 
