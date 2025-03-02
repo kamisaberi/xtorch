@@ -64,15 +64,16 @@ int main() {
 
     auto dataset = torch::ext::data::datasets::MNIST("/home/kami/Documents/temp/", DataMode::TRAIN, true);
 
-    cout  << "DATASET\n";
+    cout << "DATASET\n";
     cout << dataset.get(0).data << "  " << dataset.get(0).target << "\n";
 
     //
-    auto transformed_dataset = dataset.map(torch::ext::data::transforms::resize({32, 32}))
-            .map(torch::ext::data::transforms::normalize(0.5, 0.5))
+    auto transformed_dataset = dataset
+            // .map(torch::ext::data::transforms::resize({32, 32}))
+            // .map(torch::ext::data::transforms::normalize(0.5, 0.5))
             .map(torch::data::transforms::Stack<>());
 
-    cout  << "TRANSFORMED DATASET\n";
+    cout << "TRANSFORMED DATASET\n";
     cout << transformed_dataset.get_batch(0).data << "  " << transformed_dataset.get_batch(0).target << "\n";
 
 
@@ -82,11 +83,13 @@ int main() {
         torch::ext::data::transforms::normalize(0.5, 0.5)
     };
     auto dataset2 = torch::ext::data::datasets::MNIST("/home/kami/Documents/temp/",
-                                                 {.mode = DataMode::TRAIN, .download = true , .transforms = transforms});
+                                                      {
+                                                          .mode = DataMode::TRAIN, .download = true,
+                                                          .transforms = transforms
+                                                      });
     // cout << "mnt 03:" << dataset2.size().value() << "\n";
     // auto dataset3 =dataset2.map(torch::data::transforms::Stack<>());
     //TODO Custom Dataset FINISH
-
 
 
     auto train_loader = torch::data::make_data_loader<torch::data::samplers::SequentialSampler>(
