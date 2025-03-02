@@ -82,7 +82,7 @@ int main() {
         torch::ext::data::transforms::normalize(0.5, 0.5)
     };
     auto dataset2 = torch::ext::data::datasets::MNIST("/home/kami/Documents/temp/",
-                                                 {.mode = DataMode::TRAIN, .download = true , .transforms = transforms});
+                                                 {.mode = DataMode::TRAIN, .download = true /*, .transforms = transforms*/});
     // cout << "mnt 03:" << dataset2.size().value() << "\n";
     //TODO Custom Dataset FINISH
 
