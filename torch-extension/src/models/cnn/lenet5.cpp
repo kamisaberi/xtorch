@@ -32,11 +32,14 @@ namespace torch::ext::models {
     }
 
     torch::Tensor LeNet5::forward(torch::Tensor x) {
+        // cout << "t1\n";
         x = layer1->forward(x);
         x = layer2->forward(x);
         x = torch::relu(fc1->forward(x.view({-1, 400})));
         x = torch::relu(fc2->forward(x));
         x = torch::log_softmax(fc3->forward(x), /*dim=*/1);
+        // cout << x.sizes() << endl;
+        // cout << x << endl;
         return x;
     }
 }

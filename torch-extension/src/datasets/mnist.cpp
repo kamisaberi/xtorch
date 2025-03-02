@@ -54,7 +54,7 @@ namespace torch::ext::data::datasets {
         std::vector<uint8_t> labels(num_labels);
         file.read(reinterpret_cast<char *>(labels.data()), num_labels);
 
-        cout << labels.data() << endl;
+        // cout << labels.size() << endl;
         file.close();
         return labels;
     }
