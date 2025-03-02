@@ -106,6 +106,8 @@ int main() {
             torch::Tensor output;
             output = model.forward(data);
             torch::Tensor loss;
+            cout << "output: " << output.sizes() << endl;
+            cout << "targets: " << targets.sizes() << endl;
             loss = torch::nll_loss(output, targets);
             loss.backward();
             optimizer.step();
