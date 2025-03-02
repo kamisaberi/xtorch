@@ -173,7 +173,7 @@ namespace torch::ext::data::datasets {
     }
 
     torch::data::Example<> MNISTBase::get(size_t index) {
-        return {data[index], data[index]};
+        return {data[index], torch::tensor(labels[index])};
     }
 
     // Override `size` method to return the number of samples
