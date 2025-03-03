@@ -34,10 +34,6 @@ namespace torch::ext::data::datasets {
 
         BaseDataset(const fs::path &root, DatasetArguments args);
 
-        void read_images(const std::string &file_path, int num_images);
-
-        void read_labels(const std::string &file_path, int num_labels);
-
         torch::data::Example<> get(size_t index) override;
 
         torch::optional<size_t> size() const override;
