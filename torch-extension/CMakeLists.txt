@@ -22,7 +22,7 @@ set(LIBRARY_SOURCE_FILES
         src/models/cnn/unet.cpp
         src/models/cnn/mobilenetv3.cpp
 
-        src/datasets/base.cpp
+        src/datasets/image-folder.cpp
         src/datasets/caltech.cpp
         src/datasets/celeba.cpp
         src/datasets/cifar.cpp

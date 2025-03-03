@@ -69,8 +69,8 @@ int main() {
 
     //
     auto transformed_dataset = dataset
-            // .map(torch::ext::data::transforms::resize({32, 32}))
-            // .map(torch::ext::data::transforms::normalize(0.5, 0.5))
+            .map(torch::ext::data::transforms::resize({32, 32}))
+            .map(torch::ext::data::transforms::normalize(0.5, 0.5))
             .map(torch::data::transforms::Stack<>());
 
     cout << "TRANSFORMED DATASET\n";
@@ -93,7 +93,7 @@ int main() {
 
 
     auto train_loader = torch::data::make_data_loader<torch::data::samplers::SequentialSampler>(
-        std::move(dataset2), 64);
+        std::move(transformed_dataset), 64);
 
     cout << "mnt 04\n";
 
