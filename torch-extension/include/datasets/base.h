@@ -27,7 +27,6 @@ namespace fs = std::filesystem;
 
 
 namespace torch::ext::data::datasets {
-
     class BaseDataset : public torch::data::Dataset<BaseDataset> {
     public:
         BaseDataset(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
@@ -37,6 +36,9 @@ namespace torch::ext::data::datasets {
         torch::data::Example<> get(size_t index) override;
 
         torch::optional<size_t> size() const override;
+
+        torch::data::datasets::MapDataset<torch::ext::data::datasets::BaseDataset, torch::data::transforms::Stack<>()>
+        transform_dataset();
 
     protected:
         std::vector<torch::Tensor> data; // Store image data as tensors
