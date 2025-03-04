@@ -33,11 +33,15 @@ namespace torch::ext::data::datasets {
     class MNISTBase : public torch::data::Dataset<MNISTBase> {
     public:
         MNISTBase(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+
         MNISTBase(const fs::path &root, DatasetArguments args);
 
         void read_images(const std::string &file_path, int num_images);
+
         void read_labels(const std::string &file_path, int num_labels);
+
         torch::data::Example<> get(size_t index) override;
+
         torch::optional<size_t> size() const override;
 
     protected:
@@ -47,11 +51,11 @@ namespace torch::ext::data::datasets {
         bool download = false;
         fs::path root;
         fs::path dataset_path;
+
         void transform_data(std::vector<torch::data::transforms::Lambda<torch::data::Example<> > > transforms);
 
     private:
-        vector<torch::data::transforms::Lambda<torch::data::Example<> > > transforms  = {};
-
+        vector<torch::data::transforms::Lambda<torch::data::Example<> > > transforms = {};
     };
 
 
@@ -60,7 +64,6 @@ namespace torch::ext::data::datasets {
         MNIST(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
 
         MNIST(const fs::path &root, DatasetArguments args);
-
 
     private :
         // std::vector<torch::Tensor> data; // Store image data as tensors
@@ -83,12 +86,10 @@ namespace torch::ext::data::datasets {
         void load_data(DataMode mode = DataMode::TRAIN);
 
         void check_resources(const std::string &root, bool download = false);
-
     };
 
 
     class FashionMNIST : MNISTBase {
-
     public:
         FashionMNIST(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
 
@@ -111,25 +112,19 @@ namespace torch::ext::data::datasets {
         };
 
         void load_data(DataMode mode = DataMode::TRAIN);
-        void check_resources(const std::string &root, bool download = false);
 
-    // public:
-    //     // Constructor: Loads images and labels from files
-    //     FashionMNIST(const std::string &root, bool train = true, bool download = false);
-    //
-    //     torch::data::Example<> get(size_t index) override;
-    //
-    //     torch::optional<size_t> size() const override;
+        void check_resources(const std::string &root, bool download = false);
     };
 
 
-    class KMNIST : public torch::data::Dataset<KMNIST> {
+    class KMNIST : public MNISTBase {
+    public :
+        KMNIST(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+        KMNIST(const fs::path &root, DatasetArguments args);
+
+
     private:
-        std::vector<torch::Tensor> data; // Store image data as tensors
-        std::vector<uint8_t> labels; // Store labels
         std::string url = "http://codh.rois.ac.jp/kmnist/dataset/kmnist/";
-        fs::path root;
-        fs::path dataset_path;
         fs::path dataset_folder_name = "KMNIST/raw";
 
         vector<tuple<fs::path, std::string> > resources = {
@@ -144,14 +139,9 @@ namespace torch::ext::data::datasets {
             {"test", {fs::path("t10k-images-idx3-ubyte"), fs::path("t10k-labels-idx1-ubyte")}}
         };
 
-        void load_data(bool train = true);
+        void load_data(DataMode mode = DataMode::TRAIN);
 
-    public :
-        KMNIST(const std::string &root, bool train = true, bool download = false);
-
-        torch::data::Example<> get(size_t index) override;
-
-        torch::optional<size_t> size() const override;
+        void check_resources(const std::string &root, bool download = false);
     };
 
     class EMNIST : public torch::data::Dataset<EMNIST> {

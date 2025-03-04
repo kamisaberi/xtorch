@@ -303,55 +303,9 @@ namespace torch::ext::data::datasets {
     // }
 
     FashionMNIST::FashionMNIST(const std::string &root, DataMode mode, bool download) : MNISTBase(root, mode, download) {
-
-        // cout << "MNIST SIZE: " << this->data.size() << endl;
-        // cout << "MNIST SIZE: " << this->labels.size() << endl;
         check_resources(root, download);
         load_data(mode);
-        // cout << "MNIST SIZE: " << this->data.size() << endl;
-        // cout << "MNIST SIZE: " << this->labels.size() << endl;
-        // cout << this->data[0].sizes() << endl;
-        // cout << this->labels << endl;
     }
-
-
-    // FashionMNIST::FashionMNIST(const std::string &root, bool train, bool download) {
-    //     this->root = fs::path(root);
-    //     if (!fs::exists(this->root)) {
-    //         throw runtime_error("path is not exists");
-    //     }
-    //     this->dataset_path = this->root / this->dataset_folder_name;
-    //     if (!fs::exists(this->dataset_path)) {
-    //         fs::create_directories(this->dataset_path);
-    //     }
-    //
-    //     bool res = true;
-    //     for (const auto &resource: this->resources) {
-    //         fs::path pth = std::get<0>(resource);
-    //         std::string md = std::get<1>(resource);
-    //         fs::path fpth = this->dataset_path / pth;
-    //         if (!(fs::exists(fpth) && md5File(fpth.string()) == md)) {
-    //             if (download) {
-    //                 string u = (this->url / pth).string();
-    //                 auto [r, path] = download_data(u, this->dataset_path.string());
-    //             } else {
-    //                 throw runtime_error("Resources files dent exist. please try again with download = true");
-    //             }
-    //         }
-    //         extractGzip(fpth);
-    //     }
-    //     load_data(train);
-    // }
-
-    // // Override `get` method to return a single data sample
-    // torch::data::Example<> FashionMNIST::get(size_t index) {
-    //     return {data[index], data[index]};
-    // }
-    //
-    // // Override `size` method to return the number of samples
-    // torch::optional<size_t> FashionMNIST::size() const {
-    //     return data.size();
-    // }
 
     void FashionMNIST::load_data(DataMode mode) {
         if (mode == DataMode::TRAIN) {
@@ -433,75 +387,42 @@ namespace torch::ext::data::datasets {
         }
     }
 
+    KMNIST::KMNIST(const std::string &root, DataMode mode, bool download) : MNISTBase(root, mode, download) {
 
-    KMNIST::KMNIST(const std::string &root, bool train, bool download) {
-        this->root = fs::path(root);
-        if (!fs::exists(this->root)) {
-            throw runtime_error("path is not exists");
-        }
-        this->dataset_path = this->root / this->dataset_folder_name;
-        if (!fs::exists(this->dataset_path)) {
-            fs::create_directories(this->dataset_path);
-        }
-
-        bool res = true;
-        for (const auto &resource: this->resources) {
-            fs::path pth = std::get<0>(resource);
-            std::string md = std::get<1>(resource);
-            fs::path fpth = this->dataset_path / pth;
-            if (!(fs::exists(fpth) && md5File(fpth.string()) == md)) {
-                if (download) {
-                    string u = (this->url / pth).string();
-                    auto [r, path] = download_data(u, this->dataset_path.string());
-                } else {
-                    throw runtime_error("Resources files dent exist. please try again with download = true");
-                }
-            }
-            extractGzip(fpth);
-        }
-        load_data(train);
+        // cout << "MNIST SIZE: " << this->data.size() << endl;
+        // cout << "MNIST SIZE: " << this->labels.size() << endl;
+        check_resources(root, download);
+        load_data(mode);
+        // cout << "MNIST SIZE: " << this->data.size() << endl;
+        // cout << "MNIST SIZE: " << this->labels.size() << endl;
+        // cout << this->data[0].sizes() << endl;
+        // cout << this->labels << endl;
     }
 
-    // Override `get` method to return a single data sample
-    torch::data::Example<> KMNIST::get(size_t index) {
-        return {data[index], data[index]};
-    }
 
-    // Override `size` method to return the number of samples
-    torch::optional<size_t> KMNIST::size() const {
-        return labels.size();
-    }
-
-    void KMNIST::load_data(bool train) {
-        if (train) {
+    void KMNIST::load_data(DataMode mode) {
+        if (mode == DataMode::TRAIN) {
             fs::path imgs = this->dataset_path / std::get<0>(files["train"]);
             fs::path lbls = this->dataset_path / std::get<1>(files["train"]);
+            cout << imgs.string() << "  " << lbls.string() << endl;
             cout << imgs << endl;
             auto images = read_mnist_images(imgs.string(), 50000);
             auto labels = read_mnist_labels(lbls.string(), 50000);
-            cout << images.size() << endl;
-            cout << labels.size() << endl;
+            cout << labels[0] << endl;
             this->data = images;
             this->labels = labels;
-            //             for (int i = 0; i < 100; i++) {
-            // //                for (auto row : images[i]) {
-            // //                    cout << (unsigned int) row << " -- ";
-            // //                }
-            //                 cout << (unsigned int) labels[i] << "\t";
-            //             }
-            //             cout << endl;
         } else {
             fs::path imgs = this->dataset_path / std::get<0>(files["test"]);
             fs::path lbls = this->dataset_path / std::get<1>(files["test"]);
             cout << imgs << endl;
             auto images = read_mnist_images(imgs.string(), 10000);
             auto labels = read_mnist_labels(lbls.string(), 10000);
-            cout << images.size() << endl;
-            cout << labels.size() << endl;
             this->data = images;
             this->labels = labels;
         }
     }
+
+
 
 
     EMNIST::EMNIST(const std::string &root, bool train, bool download) {
