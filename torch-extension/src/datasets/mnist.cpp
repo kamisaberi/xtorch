@@ -389,14 +389,8 @@ namespace torch::ext::data::datasets {
 
     KMNIST::KMNIST(const std::string &root, DataMode mode, bool download) : MNISTBase(root, mode, download) {
 
-        // cout << "MNIST SIZE: " << this->data.size() << endl;
-        // cout << "MNIST SIZE: " << this->labels.size() << endl;
         check_resources(root, download);
         load_data(mode);
-        // cout << "MNIST SIZE: " << this->data.size() << endl;
-        // cout << "MNIST SIZE: " << this->labels.size() << endl;
-        // cout << this->data[0].sizes() << endl;
-        // cout << this->labels << endl;
     }
 
 
