@@ -95,11 +95,7 @@ namespace torch::ext::data::datasets {
         FashionMNIST(const fs::path &root, DatasetArguments args);
 
     private:
-        // std::vector<torch::Tensor> data; // Store image data as tensors
-        // std::vector<uint8_t> labels; // Store labels
         std::string url = "http://fashion-mnist.s3-website.eu-central-1.amazonaws.com/";
-        // fs::path root;
-        // fs::path dataset_path;
         fs::path dataset_folder_name = "FashionMNIST/raw";
 
         vector<tuple<fs::path, std::string> > resources = {
@@ -115,6 +111,7 @@ namespace torch::ext::data::datasets {
         };
 
         void load_data(bool train = true);
+        void check_resources(const std::string &root, bool download = false);
 
     // public:
     //     // Constructor: Loads images and labels from files
