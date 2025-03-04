@@ -315,33 +315,33 @@ namespace torch::ext::data::datasets {
     }
 
 
-    FashionMNIST::FashionMNIST(const std::string &root, bool train, bool download) {
-        this->root = fs::path(root);
-        if (!fs::exists(this->root)) {
-            throw runtime_error("path is not exists");
-        }
-        this->dataset_path = this->root / this->dataset_folder_name;
-        if (!fs::exists(this->dataset_path)) {
-            fs::create_directories(this->dataset_path);
-        }
-
-        bool res = true;
-        for (const auto &resource: this->resources) {
-            fs::path pth = std::get<0>(resource);
-            std::string md = std::get<1>(resource);
-            fs::path fpth = this->dataset_path / pth;
-            if (!(fs::exists(fpth) && md5File(fpth.string()) == md)) {
-                if (download) {
-                    string u = (this->url / pth).string();
-                    auto [r, path] = download_data(u, this->dataset_path.string());
-                } else {
-                    throw runtime_error("Resources files dent exist. please try again with download = true");
-                }
-            }
-            extractGzip(fpth);
-        }
-        load_data(train);
-    }
+    // FashionMNIST::FashionMNIST(const std::string &root, bool train, bool download) {
+    //     this->root = fs::path(root);
+    //     if (!fs::exists(this->root)) {
+    //         throw runtime_error("path is not exists");
+    //     }
+    //     this->dataset_path = this->root / this->dataset_folder_name;
+    //     if (!fs::exists(this->dataset_path)) {
+    //         fs::create_directories(this->dataset_path);
+    //     }
+    //
+    //     bool res = true;
+    //     for (const auto &resource: this->resources) {
+    //         fs::path pth = std::get<0>(resource);
+    //         std::string md = std::get<1>(resource);
+    //         fs::path fpth = this->dataset_path / pth;
+    //         if (!(fs::exists(fpth) && md5File(fpth.string()) == md)) {
+    //             if (download) {
+    //                 string u = (this->url / pth).string();
+    //                 auto [r, path] = download_data(u, this->dataset_path.string());
+    //             } else {
+    //                 throw runtime_error("Resources files dent exist. please try again with download = true");
+    //             }
+    //         }
+    //         extractGzip(fpth);
+    //     }
+    //     load_data(train);
+    // }
 
     // // Override `get` method to return a single data sample
     // torch::data::Example<> FashionMNIST::get(size_t index) {
