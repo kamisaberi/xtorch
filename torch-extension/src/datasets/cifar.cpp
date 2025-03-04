@@ -23,7 +23,7 @@ namespace torch::ext::data::datasets {
                 }
             }
             if (should_download) {
-                auto [result, path] = download_data(this->download_url, this->root.string());
+                auto [result, path] = download_data(this->url, this->root.string());
                 res = result;
             }
             if (res) {
@@ -92,7 +92,7 @@ namespace torch::ext::data::datasets {
                 }
             }
             if (should_download) {
-                auto [result, path] = download_data(this->download_url, this->root.string());
+                auto [result, path] = download_data(this->url, this->root.string());
                 res = result;
             }
             if (res) {

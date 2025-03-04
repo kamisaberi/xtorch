@@ -33,7 +33,7 @@ namespace torch::ext::data::datasets {
 
         std::vector<torch::Tensor> data; // Store image data as tensors
         std::vector<int64_t> labels;      // Store labels
-        std::string download_url = "https://www.cs.toronto.edu/~kriz/cifar-10-binary.tar.gz";
+        std::string url = "https://www.cs.toronto.edu/~kriz/cifar-10-binary.tar.gz";
         fs::path archive_file_name = "cifar-10-binary.tar.gz";
         std::string archive_file_md5 = "c32a1d4ab5d03f1284b67883e8d87530";
         fs::path root;
@@ -63,7 +63,7 @@ namespace torch::ext::data::datasets {
     private:
         std::vector<torch::Tensor> data; // Store image data as tensors
         std::vector<int64_t> labels;      // Store labels
-        std::string download_url = "https://www.cs.toronto.edu/~kriz/cifar-100-binary.tar.gz";
+        std::string url = "https://www.cs.toronto.edu/~kriz/cifar-100-binary.tar.gz";
         fs::path archive_file_name = "cifar-100-binary.tar.gz";
         std::string archive_file_md5 = "03b5dce01913d631647c71ecec9e9cb8";
         fs::path root;
