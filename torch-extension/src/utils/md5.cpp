@@ -1,7 +1,7 @@
 #include "../../include/utils/md5.h"
 
 
-std::string md5File(const std::string &filename) {
+std::string get_md5_checksum(const std::string &filename) {
     unsigned char mdValue[EVP_MAX_MD_SIZE];
     unsigned int mdLength;
 
@@ -48,7 +48,7 @@ std::string md5File(const std::string &filename) {
 //
 //
 //
-//std::string md5File(const std::string &filename) {
+//std::string get_md5_checksum(const std::string &filename) {
 //    unsigned char c[MD5_DIGEST_LENGTH];
 //    MD5_CTX mdContext;
 //    MD5_Init(&mdContext);

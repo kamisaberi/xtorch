@@ -8,4 +8,4 @@
 #include <openssl/err.h>
 
 
-std::string md5File(const std::string &filename) ;
+std::string get_md5_checksum(const std::string &filename) ;

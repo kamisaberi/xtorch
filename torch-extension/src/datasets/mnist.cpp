@@ -231,7 +231,7 @@ namespace torch::ext::data::datasets {
             fs::path pth = std::get<0>(resource);
             std::string md = std::get<1>(resource);
             fs::path fpth = this->dataset_path / pth;
-            if (!(fs::exists(fpth) && md5File(fpth.string()) == md)) {
+            if (!(fs::exists(fpth) && get_md5_checksum(fpth.string()) == md)) {
                 if (download) {
                     string u = (this->url / pth).string();
                     auto [r, path] = download_data(u, this->dataset_path.string());
@@ -375,7 +375,7 @@ namespace torch::ext::data::datasets {
             fs::path pth = std::get<0>(resource);
             std::string md = std::get<1>(resource);
             fs::path fpth = this->dataset_path / pth;
-            if (!(fs::exists(fpth) && md5File(fpth.string()) == md)) {
+            if (!(fs::exists(fpth) && get_md5_checksum(fpth.string()) == md)) {
                 if (download) {
                     string u = (this->url / pth).string();
                     auto [r, path] = download_data(u, this->dataset_path.string());

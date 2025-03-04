@@ -1,5 +1,5 @@
 #include "include/utils/md5.h"
-//std::string md5File(const std::string &filename) {
+//std::string get_md5_checksum(const std::string &filename) {
 //    unsigned char mdValue[EVP_MAX_MD_SIZE];
 //    unsigned int mdLength;
 //
@@ -45,7 +45,7 @@
 
 int main() {
     std::string filename = "/home/kami/Documents/temp/cifar-100-binary.tar.gz"; // Change this to your file path
-    std::string md5Hash = md5File(filename);
+    std::string md5Hash = get_md5_checksum(filename);
 
     if (!md5Hash.empty()) {
         std::cout << "MD5 Hash: " << md5Hash << std::endl;
