@@ -353,7 +353,7 @@ namespace torch::ext::data::datasets {
     //     return data.size();
     // }
 
-    void MNIST::load_data(DataMode mode) {
+    void FashionMNIST::load_data(DataMode mode) {
         if (mode == DataMode::TRAIN) {
             fs::path imgs = this->dataset_path / std::get<0>(files["train"]);
             fs::path lbls = this->dataset_path / std::get<1>(files["train"]);

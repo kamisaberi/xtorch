@@ -110,7 +110,7 @@ namespace torch::ext::data::datasets {
             {"test", {fs::path("t10k-images-idx3-ubyte"), fs::path("t10k-labels-idx1-ubyte")}}
         };
 
-        void load_data(bool train = true);
+        void load_data(DataMode mode = DataMode::TRAIN);
         void check_resources(const std::string &root, bool download = false);
 
     // public:
