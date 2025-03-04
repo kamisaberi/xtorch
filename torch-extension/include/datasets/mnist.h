@@ -66,8 +66,6 @@ namespace torch::ext::data::datasets {
         MNIST(const fs::path &root, DatasetArguments args);
 
     private :
-        // std::vector<torch::Tensor> data; // Store image data as tensors
-        // std::vector<uint8_t> labels; // Store labels
         std::string url = "https://ossci-datasets.s3.amazonaws.com/mnist/";
         fs::path dataset_folder_name = "MNIST/raw";
 
@@ -120,8 +118,8 @@ namespace torch::ext::data::datasets {
     class KMNIST : public MNISTBase {
     public :
         KMNIST(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
-        KMNIST(const fs::path &root, DatasetArguments args);
 
+        KMNIST(const fs::path &root, DatasetArguments args);
 
     private:
         std::string url = "http://codh.rois.ac.jp/kmnist/dataset/kmnist/";
@@ -144,25 +142,21 @@ namespace torch::ext::data::datasets {
         void check_resources(const std::string &root, bool download = false);
     };
 
-    class EMNIST : public torch::data::Dataset<EMNIST> {
+    class EMNIST : public MNISTBase {
+    public :
+        EMNIST(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+        EMNIST(const fs::path &root, DatasetArguments args);
+
     private:
-        std::vector<torch::Tensor> data; // Store image data as tensors
-        std::vector<uint8_t> labels; // Store labels
         std::string url = "https://biometrics.nist.gov/cs_links/EMNIST/";
-        fs::path root;
-        fs::path dataset_path;
         fs::path dataset_folder_name = "EMNIST/raw";
         fs::path archive_file_name = "gzip.zip";
         std::string archive_file_md5 = "58c8d27c78d21e728a6bc7b3cc06412e";
 
-        void load_data(bool train = true);
+        void load_data(DataMode mode = DataMode::TRAIN);
 
-    public :
-        EMNIST(const std::string &root, bool train = true, bool download = false);
+        void check_resources(const std::string &root, bool download = false);
 
-        torch::data::Example<> get(size_t index) override;
-
-        torch::optional<size_t> size() const override;
     };
 
     class QMNIST : public torch::data::Dataset<QMNIST> {
