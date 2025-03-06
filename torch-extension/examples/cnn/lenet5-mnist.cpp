@@ -11,12 +11,7 @@
 
 using namespace std;
 using Example = torch::data::Example<torch::Tensor, torch::Tensor>;
-
-void set_random() {
-    torch::manual_seed(1);
-    torch::cuda::manual_seed_all(1);
-    srand(1);
-}
+namespace torch::ext::examples::cnn {
 
 int main() {
     cout << "mnt 01\n";
@@ -64,4 +59,5 @@ int main() {
     }
 
     return 0;
+}
 }
