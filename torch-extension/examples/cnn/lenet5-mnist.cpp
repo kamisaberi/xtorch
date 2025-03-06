@@ -14,7 +14,6 @@ using Example = torch::data::Example<torch::Tensor, torch::Tensor>;
 namespace torch::ext::examples::cnn {
 
 int main() {
-    cout << "mnt 01\n";
     std::vector<int64_t> size = {32, 32};
 
     std::cout.precision(10);
