@@ -32,7 +32,7 @@ namespace torch::ext::data::datasets {
 
     class MNISTBase : public torch::data::Dataset<MNISTBase> {
     public:
-        MNISTBase(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+        explicit MNISTBase(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
 
         MNISTBase(const fs::path &root, DatasetArguments args);
 
