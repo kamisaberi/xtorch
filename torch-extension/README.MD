@@ -11,7 +11,7 @@
 ## Installation
 - download libtorch-extended using `git clone https://github.com/kamisaberi/libtorch-extended.git`
 - go to libtorch-extended folder `cd libtorch-extended`
-- go to libtorch-extended folder `cd libtorch-extention`
+- go to libtorch-extension folder `cd libtorch-extension`
 - create build folder `mkdir build`
 - go to build folder `cd build`
 - run cmake command `cmake ..`
