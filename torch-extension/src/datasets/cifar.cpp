@@ -76,7 +76,7 @@ namespace torch::ext::data::datasets {
     }
 
     //------------------ CIFAR100 ------------------//
-    CIFAR100::CIFAR100(const std::string &root, bool train, bool download) {
+    CIFAR100::CIFAR100(const std::string &root,  DataMode mode, bool download) {
         // Load data from the specified root directory
         this->root = fs::path(root);
         this->dataset_path = this->root / this->dataset_folder_name;
@@ -101,7 +101,7 @@ namespace torch::ext::data::datasets {
             }
         }
         if (res) {
-            load_data(train);
+            load_data(mode);
         }
     }
 
@@ -113,7 +113,7 @@ namespace torch::ext::data::datasets {
         return data.size();
     }
 
-    void CIFAR100::load_data(bool train) {
+    void CIFAR100::load_data( DataMode mode) {
         const int num_files = 5;
         std::string file_path = (dataset_path / train_file_name).string();
         cout << "train file path : " << file_path << endl;

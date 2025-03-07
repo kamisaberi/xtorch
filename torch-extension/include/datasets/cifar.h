@@ -53,7 +53,7 @@ namespace torch::ext::data::datasets {
 
     class CIFAR100 : public torch::data::Dataset<CIFAR100> {
     public:
-        CIFAR100(const std::string &root, bool train = true, bool download = false);
+        CIFAR100(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
 
         torch::data::Example<> get(size_t index) override;
 
@@ -71,6 +71,6 @@ namespace torch::ext::data::datasets {
         fs::path train_file_name = "train.bin";
         fs::path test_file_name = "test.bin";
 
-        void load_data(bool train);
+        void load_data( DataMode mode = DataMode::TRAIN);
     };
 }
