@@ -239,7 +239,7 @@ namespace torch::ext::data::datasets {
                     throw runtime_error("Resources files dent exist. please try again with download = true");
                 }
             }
-            extractGzip(fpth);
+            torch::ext::utils::extractGzip(fpth);
         }
     }
 
@@ -383,7 +383,7 @@ namespace torch::ext::data::datasets {
                     throw runtime_error("Resources files dent exist. please try again with download = true");
                 }
             }
-            extractGzip(fpth);
+            torch::ext::utils::extractGzip(fpth);
         }
     }
 

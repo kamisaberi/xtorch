@@ -28,7 +28,7 @@ namespace torch::ext::data::datasets {
             }
             if (res) {
                 string pth = (this->root / this->archive_file_name).string();
-                res = extract(pth, this->root);
+                res = torch::ext::utils::extract(pth, this->root);
             }
         }
         if (res) {
@@ -97,7 +97,7 @@ namespace torch::ext::data::datasets {
             }
             if (res) {
                 string pth = (this->root / this->archive_file_name).string();
-                res = extract(pth, this->root);
+                res = torch::ext::utils::extract(pth, this->root);
             }
         }
         if (res) {
