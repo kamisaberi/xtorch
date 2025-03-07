@@ -17,7 +17,7 @@ namespace torch::ext::data::datasets {
             if (!fs::exists(this->root / this->archive_file_name)) {
                 should_download = true;
             } else {
-                std::string md5 = get_md5_checksum((this->root / this->archive_file_name).string());
+                std::string md5 = torch::ext::utils::get_md5_checksum((this->root / this->archive_file_name).string());
                 if (md5 != archive_file_md5) {
                     should_download = true;
                 }
@@ -86,7 +86,7 @@ namespace torch::ext::data::datasets {
             if (!fs::exists(this->root / this->archive_file_name)) {
                 should_download = true;
             } else {
-                std::string md5 = get_md5_checksum((this->root / this->archive_file_name).string());
+                std::string md5 = torch::ext::utils::get_md5_checksum((this->root / this->archive_file_name).string());
                 if (md5 != archive_file_md5) {
                     should_download = true;
                 }
