@@ -165,12 +165,12 @@ namespace torch::ext::data::datasets {
         QMNIST(const fs::path &root, DatasetArguments args);
 
     private:
-        std::vector<torch::Tensor> data; // Store image data as tensors
-        std::vector<uint8_t> labels; // Store labels
-        torch::Tensor image_;
-        torch::Tensor label_;
+        // std::vector<torch::Tensor> data; // Store image data as tensors
+        // std::vector<uint8_t> labels; // Store labels
+        // torch::Tensor image_;
+        // torch::Tensor label_;
         std::string url = "https://raw.githubusercontent.com/facebookresearch/qmnist/master/";
-        fs::path root;
+        // fs::path root;
         fs::path dataset_path;
         fs::path dataset_folder_name = "QMNIST/raw";
         std::string archive_file_md5 = "58c8d27c78d21e728a6bc7b3cc06412e";
