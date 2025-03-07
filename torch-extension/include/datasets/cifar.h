@@ -14,25 +14,24 @@
 #include "../utils/downloader.h"
 #include "../utils/extract.h"
 #include "../utils/md5.h"
+#include "../include/types/enums.h"
 
 using namespace std;
 namespace fs = std::filesystem;
 
 
 namespace torch::ext::data::datasets {
-
     class CIFAR10 : public torch::data::Dataset<CIFAR10> {
     public:
-        CIFAR10(const std::string &root , bool train= true, bool download = false);
+        CIFAR10(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
 
         torch::data::Example<> get(size_t index) override;
 
         torch::optional<size_t> size() const override;
 
     private:
-
         std::vector<torch::Tensor> data; // Store image data as tensors
-        std::vector<int64_t> labels;      // Store labels
+        std::vector<int64_t> labels; // Store labels
         std::string url = "https://www.cs.toronto.edu/~kriz/cifar-10-binary.tar.gz";
         fs::path archive_file_name = "cifar-10-binary.tar.gz";
         std::string archive_file_md5 = "c32a1d4ab5d03f1284b67883e8d87530";
@@ -40,15 +39,15 @@ namespace torch::ext::data::datasets {
         fs::path dataset_path;
         fs::path dataset_folder_name = "cifar-10-batches-bin";
         vector<fs::path> train_file_names = {
-                fs::path("data_batch_1.bin"),
-                fs::path("data_batch_2.bin"),
-                fs::path("data_batch_3.bin"),
-                fs::path("data_batch_4.bin"),
-                fs::path("data_batch_5.bin")
+            fs::path("data_batch_1.bin"),
+            fs::path("data_batch_2.bin"),
+            fs::path("data_batch_3.bin"),
+            fs::path("data_batch_4.bin"),
+            fs::path("data_batch_5.bin")
         };
         fs::path test_file_name = "test_batch.bin";
 
-        void load_data(bool train = true);
+        void load_data(DataMode mode = DataMode::TRAIN);
     };
 
 
@@ -62,7 +61,7 @@ namespace torch::ext::data::datasets {
 
     private:
         std::vector<torch::Tensor> data; // Store image data as tensors
-        std::vector<int64_t> labels;      // Store labels
+        std::vector<int64_t> labels; // Store labels
         std::string url = "https://www.cs.toronto.edu/~kriz/cifar-100-binary.tar.gz";
         fs::path archive_file_name = "cifar-100-binary.tar.gz";
         std::string archive_file_md5 = "03b5dce01913d631647c71ecec9e9cb8";
@@ -73,10 +72,5 @@ namespace torch::ext::data::datasets {
         fs::path test_file_name = "test.bin";
 
         void load_data(bool train);
-
     };
-
-
 }
-
-

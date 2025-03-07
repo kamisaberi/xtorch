@@ -7,7 +7,7 @@ namespace fs = std::filesystem;
 namespace torch::ext::data::datasets {
 
     //------------------ CIFAR10 ------------------//
-    CIFAR10::CIFAR10(const std::string &root, bool train, bool download) {
+    CIFAR10::CIFAR10(const std::string &root, DataMode mode, bool download) {
         // Load data from the specified root directory
         this->root = fs::path(root);
         this->dataset_path = this->root / this->dataset_folder_name;
@@ -32,7 +32,7 @@ namespace torch::ext::data::datasets {
             }
         }
         if (res) {
-            load_data(train);
+            load_data(mode);
         }
     }
 
@@ -44,7 +44,7 @@ namespace torch::ext::data::datasets {
         return data.size();
     }
 
-    void CIFAR10::load_data(bool train) {
+    void CIFAR10::load_data(DataMode mode) {
         const int num_files = 5;
         for (int i = 1; i <= num_files; ++i) {
             std::string file_path = root / "/data_batch_" / std::to_string(i) / ".bin";
