@@ -184,36 +184,18 @@ namespace torch::ext::data::datasets {
 
     //------------------ MNIST ------------------//
     MNIST::MNIST(const std::string &root, DataMode mode, bool download) : MNISTBase(root, mode, download) {
-        // cout << "MNIST SIZE: " << this->data.size() << endl;
-        // cout << "MNIST SIZE: " << this->labels.size() << endl;
         check_resources(root, download);
         load_data(mode);
-        // cout << "MNIST SIZE: " << this->data.size() << endl;
-        // cout << "MNIST SIZE: " << this->labels.size() << endl;
-        // cout << this->data[0].sizes() << endl;
-        // cout << this->labels << endl;
     }
 
     MNIST::MNIST(const fs::path &root, DatasetArguments args) : MNISTBase(root, args) {
         auto [mode , download , transforms] = args;
-        // cout << "MNIST SIZE: " << this->data.size() << endl;
         check_resources(root, download);
         load_data(mode);
-        // cout << "MNIST SIZE: " << this->data.size() << endl;
         if (!transforms.empty()) {
-            // cout << "Transforms 11111111111111111111" << endl;
             this->transform_data(transforms);
         }
-        // cout << "MNIST SIZE: " << this->data.size() << endl;
     }
-
-    // torch::data::Example<> MNIST::get(size_t index) {
-    //     return {data[index].clone(), torch::tensor(labels[index])}; // Clone to ensure tensor validity
-    // }
-    //
-    // torch::optional<size_t> MNIST::size() const {
-    //     return data.size();
-    // }
 
     void MNIST::check_resources(const std::string &root, bool download) {
         this->root = fs::path(root);
@@ -483,7 +465,7 @@ namespace torch::ext::data::datasets {
     }
 
 
-    void QMNIST::load_data(DataMode mode ) {
+    void QMNIST::load_data(DataMode mode) {
         if (mode == DataMode::TRAIN) {
             fs::path imgs = this->dataset_path / std::get<0>(resources["train"][0]);
             fs::path lbls = this->dataset_path / std::get<0>(resources["train"][1]);

@@ -28,7 +28,7 @@ namespace  torch::ext::utils {
     }
 
 
-    std::tuple<bool, std::string> download_data(std::string &url, std::string outPath) {
+    std::tuple<bool, std::string> download(std::string &url, std::string outPath) {
         cout << url << endl;
         CURL *curl;
         FILE *fp;
