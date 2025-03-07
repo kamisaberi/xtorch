@@ -145,6 +145,7 @@ namespace torch::ext::data::datasets {
     class EMNIST : public MNISTBase {
     public :
         EMNIST(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+
         EMNIST(const fs::path &root, DatasetArguments args);
 
     private:
@@ -156,10 +157,13 @@ namespace torch::ext::data::datasets {
         void load_data(DataMode mode = DataMode::TRAIN);
 
         void check_resources(const std::string &root, bool download = false);
-
     };
 
-    class QMNIST : public torch::data::Dataset<QMNIST> {
+    class QMNIST : public MNISTBase {
+    public :
+        QMNIST(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+        QMNIST(const fs::path &root, DatasetArguments args);
+
     private:
         std::vector<torch::Tensor> data; // Store image data as tensors
         std::vector<uint8_t> labels; // Store labels
@@ -190,14 +194,9 @@ namespace torch::ext::data::datasets {
                 }
             }
         };
+        void load_data(DataMode mode = DataMode::TRAIN);
 
-    public :
-        QMNIST(const std::string &root, bool train = true, bool download = false);
+        void check_resources(const std::string &root, bool download = false);
 
-        torch::data::Example<> get(size_t index) override;
-
-        torch::optional<size_t> size() const override;
-
-        void load_data(bool train);
     };
 }

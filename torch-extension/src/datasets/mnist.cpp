@@ -458,18 +458,30 @@ namespace torch::ext::data::datasets {
     }
 
 
-    QMNIST::QMNIST(const std::string &root, bool train, bool download) {
+    MNIST::MNIST(const std::string &root, DataMode mode, bool download) : MNISTBase(root, mode, download) {
+        // cout << "MNIST SIZE: " << this->data.size() << endl;
+        // cout << "MNIST SIZE: " << this->labels.size() << endl;
+        check_resources(root, download);
+        load_data(mode);
+        // cout << "MNIST SIZE: " << this->data.size() << endl;
+        // cout << "MNIST SIZE: " << this->labels.size() << endl;
+        // cout << this->data[0].sizes() << endl;
+        // cout << this->labels << endl;
     }
 
-    // Override `get` method to return a single data sample
-    torch::data::Example<> QMNIST::get(size_t index) {
-        return {data[index], data[index]};
+    MNIST::MNIST(const fs::path &root, DatasetArguments args) : MNISTBase(root, args) {
+        auto [mode , download , transforms] = args;
+        // cout << "MNIST SIZE: " << this->data.size() << endl;
+        check_resources(root, download);
+        load_data(mode);
+        // cout << "MNIST SIZE: " << this->data.size() << endl;
+        if (!transforms.empty()) {
+            // cout << "Transforms 11111111111111111111" << endl;
+            this->transform_data(transforms);
+        }
+        // cout << "MNIST SIZE: " << this->data.size() << endl;
     }
 
-    // Override `size` method to return the number of samples
-    torch::optional<size_t> QMNIST::size() const {
-        return labels.size();
-    }
 
     void QMNIST::load_data(bool train) {
         if (train) {
