@@ -6,6 +6,8 @@
 - libtorch
 - zlib
 - libzip
+## Check libraries:
+- run check-deps.sh `sh ./check-deps.sh`
 ## Installation
 - download libtorch-extended using `git clone https://github.com/kamisaberi/libtorch-extended.git`
 - go to libtorch-extended folder `cd libtorch-extended`
