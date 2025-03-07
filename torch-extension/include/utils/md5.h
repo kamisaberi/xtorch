@@ -7,5 +7,6 @@
 #include <openssl/evp.h>
 #include <openssl/err.h>
 
-
-std::string get_md5_checksum(const std::string &filename) ;
+namespace torch::ext::utils {
+    std::string get_md5_checksum(const std::string &filename);
+}
