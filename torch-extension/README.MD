@@ -13,6 +13,6 @@
 - create build folder `mkdir build`
 - go to build folder `cd build`
 - run cmake command `cmake ..`
-- run make commane `make`
+- run make command `make`
 
 
