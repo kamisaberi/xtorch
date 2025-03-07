@@ -1,20 +1,5 @@
 #pragma once
-//#include <vector>
-#include <fstream>
-//#include <iostream>
-//#include <string>
-#include <filesystem>
-//#include <curl/curl.h>
-#include <torch/torch.h>
-//#include <vector>
-//#include <fstream>
-//#include <iostream>
-//#include <string>
-//#include <filesystem>
-#include "../utils/downloader.h"
-#include "../utils/extract.h"
-#include "../utils/md5.h"
-#include "../include/types/enums.h"
+#include "../base/datasets.h"
 
 using namespace std;
 namespace fs = std::filesystem;
