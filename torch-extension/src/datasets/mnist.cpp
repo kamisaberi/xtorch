@@ -215,7 +215,7 @@ namespace torch::ext::data::datasets {
             if (!(fs::exists(fpth) && torch::ext::utils::get_md5_checksum(fpth.string()) == md)) {
                 if (download) {
                     string u = (this->url / pth).string();
-                    auto [r, path] = torch::ext::utils::download_data(u, this->dataset_path.string());
+                    auto [r, path] = torch::ext::utils::download(u, this->dataset_path.string());
                 } else {
                     throw runtime_error("Resources files dent exist. please try again with download = true");
                 }
@@ -369,7 +369,7 @@ namespace torch::ext::data::datasets {
             if (!(fs::exists(fpth) && torch::ext::utils::get_md5_checksum(fpth.string()) == md)) {
                 if (download) {
                     string u = (this->url / pth).string();
-                    auto [r, path] = torch::ext::utils::download_data(u, this->dataset_path.string());
+                    auto [r, path] = torch::ext::utils::download(u, this->dataset_path.string());
                 } else {
                     throw runtime_error("Resources files dent exist. please try again with download = true");
                 }
