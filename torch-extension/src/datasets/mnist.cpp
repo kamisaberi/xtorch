@@ -419,10 +419,12 @@ namespace torch::ext::data::datasets {
             fs::path imgs = this->dataset_path / std::get<0>(files["test"]);
             fs::path lbls = this->dataset_path / std::get<1>(files["test"]);
             cout << imgs << endl;
-            auto images = read_mnist_images(imgs.string(), 10000);
-            auto labels = read_mnist_labels(lbls.string(), 10000);
-            this->data = images;
-            this->labels = labels;
+            this->read_images(imgs.string(), 10000);
+            this->read_labels(lbls.string(), 10000);
+            // auto images = read_mnist_images(imgs.string(), 10000);
+            // auto labels = read_mnist_labels(lbls.string(), 10000);
+            // this->data = images;
+            // this->labels = labels;
         }
     }
 
