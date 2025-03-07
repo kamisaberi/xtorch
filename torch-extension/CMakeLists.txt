@@ -399,6 +399,7 @@ set(TEST_SOURCE_FILES
         src/datasets/base.cpp
         include/datasets/functions.h
         src/datasets/functions.cpp
+        include/base/datasets.h
 )
 
 add_executable(${CMAKE_PROJECT_NAME} ${TEST_SOURCE_FILES})
