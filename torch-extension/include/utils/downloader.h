@@ -6,10 +6,12 @@
 #include <filesystem>
 #include <curl/curl.h>
 using namespace std;
-namespace  fs = std::filesystem;
+namespace fs = std::filesystem;
 
+namespace torch::ext::utils {
+    std::tuple<bool, std::string> download_data(std::string &url, std::string outPath);
 
-std::tuple<bool , std::string> download_data(std::string  &url, std::string outPath);
-std::string  rebuild_google_drive_link(std::string  gid);
-std::tuple<bool , std::string> download_from_gdrive(std::string  gid, std::string outPath);
+    std::string rebuild_google_drive_link(std::string gid);
 
+    std::tuple<bool, std::string> download_from_gdrive(std::string gid, std::string outPath);
+}
