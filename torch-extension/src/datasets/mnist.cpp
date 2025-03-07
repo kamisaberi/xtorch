@@ -1,63 +1,63 @@
 #include "../../include/datasets/mnist.h"
 
 namespace torch::ext::data::datasets {
-    std::vector<torch::Tensor> read_mnist_images(const std::string &file_path, int num_images) {
-        std::ifstream file(file_path, std::ios::binary);
-        if (!file.is_open()) {
-            throw std::runtime_error("Failed to open file: " + file_path);
-        }
-
-        // Read metadata
-        int32_t magic_number, num_items, rows, cols;
-        file.read(reinterpret_cast<char *>(&magic_number), 4);
-        file.read(reinterpret_cast<char *>(&num_items), 4);
-        file.read(reinterpret_cast<char *>(&rows), 4);
-        file.read(reinterpret_cast<char *>(&cols), 4);
-
-        // Convert endianess
-        magic_number = __builtin_bswap32(magic_number);
-        num_items = __builtin_bswap32(num_items);
-        rows = __builtin_bswap32(rows);
-        cols = __builtin_bswap32(cols);
-
-        std::vector<torch::Tensor> fimages;
-        std::vector<std::vector<uint8_t> > images(num_images, std::vector<uint8_t>(rows * cols));
-        for (int i = 0; i < num_images; i++) {
-            file.read(reinterpret_cast<char *>(images[i].data()), rows * cols);
-            auto tensor_image = torch::from_blob(images[i].data(), {1, 28, 28},
-                                                 torch::kByte).clone();
-            fimages.push_back(tensor_image);
-        }
-        //        cout << fimages[0] << endl;
-
-
-        file.close();
-        return fimages;
-    }
-
-    std::vector<uint8_t> read_mnist_labels(const std::string &file_path, int num_labels) {
-        std::ifstream file(file_path, std::ios::binary);
-        if (!file.is_open()) {
-            throw std::runtime_error("Failed to open file: " + file_path);
-        }
-
-        // Read metadata
-        int32_t magic_number, num_items;
-        file.read(reinterpret_cast<char *>(&magic_number), 4);
-        file.read(reinterpret_cast<char *>(&num_items), 4);
-
-        // Convert endianess
-        cout << magic_number << "\t";
-        magic_number = __builtin_bswap32(magic_number);
-        num_items = __builtin_bswap32(num_items);
-
-        std::vector<uint8_t> labels(num_labels);
-        file.read(reinterpret_cast<char *>(labels.data()), num_labels);
-
-        // cout << labels.size() << endl;
-        file.close();
-        return labels;
-    }
+    // std::vector<torch::Tensor> read_mnist_images(const std::string &file_path, int num_images) {
+    //     std::ifstream file(file_path, std::ios::binary);
+    //     if (!file.is_open()) {
+    //         throw std::runtime_error("Failed to open file: " + file_path);
+    //     }
+    //
+    //     // Read metadata
+    //     int32_t magic_number, num_items, rows, cols;
+    //     file.read(reinterpret_cast<char *>(&magic_number), 4);
+    //     file.read(reinterpret_cast<char *>(&num_items), 4);
+    //     file.read(reinterpret_cast<char *>(&rows), 4);
+    //     file.read(reinterpret_cast<char *>(&cols), 4);
+    //
+    //     // Convert endianess
+    //     magic_number = __builtin_bswap32(magic_number);
+    //     num_items = __builtin_bswap32(num_items);
+    //     rows = __builtin_bswap32(rows);
+    //     cols = __builtin_bswap32(cols);
+    //
+    //     std::vector<torch::Tensor> fimages;
+    //     std::vector<std::vector<uint8_t> > images(num_images, std::vector<uint8_t>(rows * cols));
+    //     for (int i = 0; i < num_images; i++) {
+    //         file.read(reinterpret_cast<char *>(images[i].data()), rows * cols);
+    //         auto tensor_image = torch::from_blob(images[i].data(), {1, 28, 28},
+    //                                              torch::kByte).clone();
+    //         fimages.push_back(tensor_image);
+    //     }
+    //     //        cout << fimages[0] << endl;
+    //
+    //
+    //     file.close();
+    //     return fimages;
+    // }
+    //
+    // std::vector<uint8_t> read_mnist_labels(const std::string &file_path, int num_labels) {
+    //     std::ifstream file(file_path, std::ios::binary);
+    //     if (!file.is_open()) {
+    //         throw std::runtime_error("Failed to open file: " + file_path);
+    //     }
+    //
+    //     // Read metadata
+    //     int32_t magic_number, num_items;
+    //     file.read(reinterpret_cast<char *>(&magic_number), 4);
+    //     file.read(reinterpret_cast<char *>(&num_items), 4);
+    //
+    //     // Convert endianess
+    //     cout << magic_number << "\t";
+    //     magic_number = __builtin_bswap32(magic_number);
+    //     num_items = __builtin_bswap32(num_items);
+    //
+    //     std::vector<uint8_t> labels(num_labels);
+    //     file.read(reinterpret_cast<char *>(labels.data()), num_labels);
+    //
+    //     // cout << labels.size() << endl;
+    //     file.close();
+    //     return labels;
+    // }
 
     MNISTBase::MNISTBase(const std::string &root, DataMode mode, bool download) {
         this->root = root;
@@ -184,7 +184,6 @@ namespace torch::ext::data::datasets {
 
     //------------------ MNIST ------------------//
     MNIST::MNIST(const std::string &root, DataMode mode, bool download) : MNISTBase(root, mode, download) {
-
         // cout << "MNIST SIZE: " << this->data.size() << endl;
         // cout << "MNIST SIZE: " << this->labels.size() << endl;
         check_resources(root, download);
@@ -250,19 +249,23 @@ namespace torch::ext::data::datasets {
             fs::path lbls = this->dataset_path / std::get<1>(files["train"]);
             cout << imgs.string() << "  " << lbls.string() << endl;
             cout << imgs << endl;
-            auto images = read_mnist_images(imgs.string(), 50000);
-            auto labels = read_mnist_labels(lbls.string(), 50000);
-            cout << labels[0] << endl;
-            this->data = images;
-            this->labels = labels;
+            this->read_images(imgs.string(), 50000);
+            this->read_labels(lbls.string(), 50000);
+            // auto images = read_mnist_images(imgs.string(), 50000);
+            // auto labels = read_mnist_labels(lbls.string(), 50000);
+            // cout << labels[0] << endl;
+            // this->data = images;
+            // this->labels = labels;
         } else {
             fs::path imgs = this->dataset_path / std::get<0>(files["test"]);
             fs::path lbls = this->dataset_path / std::get<1>(files["test"]);
             cout << imgs << endl;
-            auto images = read_mnist_images(imgs.string(), 10000);
-            auto labels = read_mnist_labels(lbls.string(), 10000);
-            this->data = images;
-            this->labels = labels;
+            this->read_images(imgs.string(), 10000);
+            this->read_labels(imgs.string(), 10000);
+            // auto images = read_mnist_images(imgs.string(), 10000);
+            // auto labels = read_mnist_labels(lbls.string(), 10000);
+            // this->data = images;
+            // this->labels = labels;
         }
     }
 
@@ -302,7 +305,8 @@ namespace torch::ext::data::datasets {
     //     // std::cout << "14  " << this->data.size() << std::endl;
     // }
 
-    FashionMNIST::FashionMNIST(const std::string &root, DataMode mode, bool download) : MNISTBase(root, mode, download) {
+    FashionMNIST::FashionMNIST(const std::string &root, DataMode mode,
+                               bool download) : MNISTBase(root, mode, download) {
         check_resources(root, download);
         load_data(mode);
     }
@@ -388,7 +392,6 @@ namespace torch::ext::data::datasets {
     }
 
     KMNIST::KMNIST(const std::string &root, DataMode mode, bool download) : MNISTBase(root, mode, download) {
-
         check_resources(root, download);
         load_data(mode);
     }
@@ -418,7 +421,6 @@ namespace torch::ext::data::datasets {
 
 
     EMNIST::EMNIST(const std::string &root, DataMode mode, bool download) : MNISTBase(root, mode, download) {
-
         check_resources(root, download);
         load_data(mode);
     }
@@ -445,12 +447,6 @@ namespace torch::ext::data::datasets {
         //     this->labels = labels;
         // }
     }
-
-
-
-
-
-
 
 
     QMNIST::QMNIST(const std::string &root, bool train, bool download) {
