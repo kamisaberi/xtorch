@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../base/datasets.h"
+#include "base.h"
 
 
 
@@ -10,7 +11,7 @@ namespace fs = std::filesystem;
 
 
 namespace torch::ext::data::datasets {
-    class Caltech101 : torch::data::Dataset<Caltech101> {
+    class Caltech101 : public BaseDataset{
     private:
         vector<std::tuple<string, string, string>> resources = {
                 {"https://drive.google.com/file/d/137RyRjvTBkBiIfeYBNZBtViDHQ6_Ewsp", "101_ObjectCategories.tar.gz",
