@@ -9,7 +9,7 @@ namespace fs = std::filesystem;
 namespace torch::ext::data::datasets {
     class BaseDataset : public torch::data::Dataset<BaseDataset> {
     public:
-        BaseDataset(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+        explicit BaseDataset(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
 
         BaseDataset(const fs::path &root, DatasetArguments args);
 
