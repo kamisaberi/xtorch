@@ -10,6 +10,11 @@ namespace fs = std::filesystem;
 
 namespace torch::ext::data::datasets {
     class Caltech101 : public BaseDataset {
+    public :
+        Caltech101(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+
+        Caltech101(const fs::path &root, DatasetArguments args);
+
     private:
         vector<std::tuple<string, string, string> > resources = {
             {
@@ -21,12 +26,14 @@ namespace torch::ext::data::datasets {
                 "6f83eeb1f24d99cab4eb377263132c91"
             }
         };
-
-    public :
-        Caltech101();
     };
 
     class Caltech256 : public BaseDataset {
+    public :
+        Caltech256(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+
+        Caltech256(const fs::path &root, DatasetArguments args);
+
     private:
         vector<std::tuple<string, string, string> > resources = {
             {
@@ -34,8 +41,5 @@ namespace torch::ext::data::datasets {
                 "67b4f42ca05d46448c6bb8ecd2220f6d"
             },
         };
-
-    public :
-        Caltech256();
     };
 }
