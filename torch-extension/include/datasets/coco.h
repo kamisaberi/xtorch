@@ -4,14 +4,13 @@
 
 
 namespace torch::ext::data::datasets {
-   class CocoDetection : BaseDataset{
-
+    class CocoDetection : BaseDataset {
     public :
-       CocoDetection();
+        CocoDetection();
     };
-   class CocoCaptions : BaseDataset{
 
+    class CocoCaptions : BaseDataset {
     public :
-       CocoCaptions();
+        CocoCaptions();
     };
 }
