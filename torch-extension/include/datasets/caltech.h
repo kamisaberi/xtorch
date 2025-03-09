@@ -24,7 +24,7 @@ namespace torch::ext::data::datasets {
         Caltech101();
     };
 
-    class Caltech256 : torch::data::Dataset<Caltech256> {
+    class Caltech256 : public  BaseDataset{
     private:
         vector<std::tuple<string, string, string>> resources = {
                 {"https://drive.google.com/file/d/1r6o0pSROcV1_VwT4oSjA2FBUSCWGuxLK", "256_ObjectCategories.tar",
