@@ -1,12 +1,14 @@
 #pragma once
 #include "../base/datasets.h"
+#include "base.h"
+
 
 
 using namespace std;
 namespace fs = std::filesystem;
 
 namespace torch::ext::data::datasets {
-   class Country211 : torch::data::Dataset<Country211> {
+   class Country211 : BaseDataset {
    private:
 
        std::string download_url = "https://openaipublic.azureedge.net/clip/data/";
