@@ -6,11 +6,25 @@
 namespace torch::ext::data::datasets {
     class CocoDetection : BaseDataset {
     public :
-        CocoDetection();
+        CocoDetection(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+
+        CocoDetection(const fs::path &root, DatasetArguments args);
+
+    private :
+        void load_data(DataMode mode = DataMode::TRAIN);
+
+        void check_resources(const std::string &root, bool download = false);
     };
 
     class CocoCaptions : BaseDataset {
     public :
-        CocoCaptions();
+        CocoCaptions(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+
+        CocoCaptions(const fs::path &root, DatasetArguments args);
+
+    private :
+        void load_data(DataMode mode = DataMode::TRAIN);
+
+        void check_resources(const std::string &root, bool download = false);
     };
 }
