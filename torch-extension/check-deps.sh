@@ -1,12 +1,27 @@
-/bin/sh
+#/bin/sh
 
-#if [  ]; then
-#
-#fi
-#for i in {1..5} ; do
-#
-#done
+#!/bin/bash
 
-#while [  ]; do
-#
-#done
+PACKAGE_NAME="libtar"
+
+if pacman -Q "${PACKAGE_NAME}" &> /dev/null; then
+    echo "${PACKAGE_NAME} is installed."
+else
+    echo "${PACKAGE_NAME} is not installed."
+fi
+
+PACKAGE_NAME="libzip"
+
+if pacman -Q "${PACKAGE_NAME}" &> /dev/null; then
+    echo "${PACKAGE_NAME} is installed."
+else
+    echo "${PACKAGE_NAME} is not installed."
+fi
+
+PACKAGE_NAME="xz"
+
+if pacman -Q "${PACKAGE_NAME}" &> /dev/null; then
+    echo "${PACKAGE_NAME} is installed."
+else
+    echo "${PACKAGE_NAME} is not installed."
+fi
