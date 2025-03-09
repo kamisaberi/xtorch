@@ -1,9 +1,10 @@
 #pragma once
 #include "../base/datasets.h"
+#include "base.h"
 
 
 namespace torch::ext::data::datasets {
-   class Cityscapes : torch::data::Dataset<Cityscapes> {
+   class Cityscapes : BaseDataset<Cityscapes> {
 
     public :
        Cityscapes();
