@@ -1,14 +1,15 @@
 #pragma once
 #include "../base/datasets.h"
+#include "base.h"
 
 
 namespace torch::ext::data::datasets {
-   class CocoDetection : torch::data::Dataset<CocoDetection> {
+   class CocoDetection : BaseDataset{
 
     public :
        CocoDetection();
     };
-   class CocoCaptions : torch::data::Dataset<CocoCaptions> {
+   class CocoCaptions : BaseDataset{
 
     public :
        CocoCaptions();
