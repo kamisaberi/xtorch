@@ -9,5 +9,10 @@ namespace torch::ext::data::datasets {
         Cityscapes(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
 
         Cityscapes(const fs::path &root, DatasetArguments args);
+
+    private :
+        void load_data(DataMode mode = DataMode::TRAIN);
+
+        void check_resources(const std::string &root, bool download = false);
     };
 }
