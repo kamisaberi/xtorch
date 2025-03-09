@@ -4,7 +4,7 @@
 
 
 namespace torch::ext::data::datasets {
-   class Cityscapes : BaseDataset<Cityscapes> {
+   class Cityscapes : BaseDataset {
 
     public :
        Cityscapes();
