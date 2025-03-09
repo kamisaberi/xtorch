@@ -1,13 +1,14 @@
 #pragma once
 
 #include "../base/datasets.h"
+#include "base.h"
 
 
 using namespace std;
 namespace fs = std::filesystem;
 
 namespace torch::ext::data::datasets {
-    class CelebA : torch::data::Dataset<CelebA> {
+    class CelebA : BaseDataset{
     private:
         vector<std::tuple<string, string, fs::path>> resources = {
                 {"0B7EVK8r0v71pZjFTYXZWM3FlRnM", "00d2c5bc6d35e252742224ab0c1e8fcb", "img_align_celeba.zip"},
