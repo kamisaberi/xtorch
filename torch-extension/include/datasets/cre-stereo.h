@@ -2,11 +2,12 @@
 
 
 #include "../base/datasets.h"
+#include "base.h"
 
 
 
 namespace torch::ext::data::datasets {
-   class CarlaStereo : torch::data::Dataset<CarlaStereo> {
+   class CarlaStereo : BaseDataset {
 
     public :
        CarlaStereo();
