@@ -1,18 +1,31 @@
 #pragma once
 
+#include "base.h"
 #include "../base/datasets.h"
 
 
-
 namespace torch::ext::data::datasets {
-   class FlyingChairs : torch::data::Dataset<FlyingChairs> {
-
+    class FlyingChairs : BaseDataset {
     public :
-       FlyingChairs();
+        FlyingChairs(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+
+        FlyingChairs(const fs::path &root, DatasetArguments args);
+
+    private :
+        void load_data(DataMode mode = DataMode::TRAIN);
+
+        void check_resources(const std::string &root, bool download = false);
     };
-   class FlyingThings3D : torch::data::Dataset<FlyingThings3D> {
 
+    class FlyingThings3D : BaseDataset {
     public :
-       FlyingThings3D();
+        FlyingThings3D(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+
+        FlyingThings3D(const fs::path &root, DatasetArguments args);
+
+    private :
+        void load_data(DataMode mode = DataMode::TRAIN);
+
+        void check_resources(const std::string &root, bool download = false);
     };
 }
