@@ -4,14 +4,16 @@
 #include "base.h"
 
 
-
 namespace torch::ext::data::datasets {
-   class ETH3DStereo : BaseDataset {
+    class ETH3DStereo : BaseDataset {
+    public:
+        ETH3DStereo(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
 
-       ETH3DStereo(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
-       ETH3DStereo(const fs::path &root, DatasetArguments args);
+        ETH3DStereo(const fs::path &root, DatasetArguments args);
 
-    public :
-       ETH3DStereo();
+    private :
+        void load_data(DataMode mode = DataMode::TRAIN);
+
+        void check_resources(const std::string &root, bool download = false);
     };
 }
