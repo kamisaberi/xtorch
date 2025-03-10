@@ -1,11 +1,18 @@
 #pragma once
+#include "base.h"
 #include "../base/datasets.h"
 
 
 namespace torch::ext::data::datasets {
-   class InStereo2k : torch::data::Dataset<InStereo2k> {
-
+    class InStereo2k : BaseDataset {
     public :
-       InStereo2k();
+        InStereo2k(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+
+        InStereo2k(const fs::path &root, DatasetArguments args);
+
+    private :
+        void load_data(DataMode mode = DataMode::TRAIN);
+
+        void check_resources(const std::string &root, bool download = false);
     };
 }
