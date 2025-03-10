@@ -1,12 +1,14 @@
 #pragma once
 #include "../base/datasets.h"
-
+#include "base.h"
 
 
 namespace torch::ext::data::datasets {
-   class DTD : torch::data::Dataset<DTD> {
+   class DTD : BaseDataset {
 
     public :
-       DTD();
+    DTD(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+       DTD(const fs::path &root, DatasetArguments args);
+
     };
 }
