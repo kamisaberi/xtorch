@@ -49,8 +49,15 @@ namespace torch::ext::data::datasets {
         void check_resources(const std::string &root, bool download = false);
     };
 
-    class Kitti2015Stereo : torch::data::Dataset<Kitti2015Stereo> {
+    class Kitti2015Stereo : BaseDataset {
     public :
-        Kitti2015Stereo();
+        Kitti2015Stereo(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+
+        Kitti2015Stereo(const fs::path &root, DatasetArguments args);
+
+    private :
+        void load_data(DataMode mode = DataMode::TRAIN);
+
+        void check_resources(const std::string &root, bool download = false);
     };
 }
