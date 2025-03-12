@@ -1,11 +1,17 @@
 #pragma once
 
 #include "../base/datasets.h"
+#include "base.h"
 
 
 
 namespace torch::ext::data::datasets {
-    class PhotoTour : torch::data::Dataset<PhotoTour> {
+    class PhotoTour : BaseDataset {
+    public :
+        PhotoTour(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+
+        PhotoTour(const fs::path &root, DatasetArguments args);
+
     private :
         std::map<std::string, std::tuple<fs::path, fs::path, std::string>> resources = {
                 {"notredame_harris", {fs::path("http://matthewalunbrown.com/patchdata/notredame_harris.zip"), fs::path(
@@ -23,8 +29,10 @@ namespace torch::ext::data::datasets {
 
 
         };
+        void load_data(DataMode mode = DataMode::TRAIN);
 
-    public :
-        PhotoTour();
-    };
-}
+        void check_resources(const std::string &root, bool download = false);
+
+
+
+    }
