@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../base/datasets.h"
+#include "base.h"
 
 
 namespace torch::ext::data {
