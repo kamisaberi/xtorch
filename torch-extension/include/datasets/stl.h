@@ -1,12 +1,18 @@
 #pragma once
 #include "../base/datasets.h"
+#include "base.h"
 
 using namespace std;
 namespace fs = std::filesystem;
 
 
 namespace torch::ext::data::datasets {
-    class STL10 : torch::data::Dataset<STL10> {
+    class STL10 : BaseDataset {
+    public :
+        STL10(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+
+        STL10(const fs::path &root, DatasetArguments args);
+
     private :
 
         fs::path base_folder = fs::path("stl10_binary");
@@ -25,9 +31,11 @@ namespace torch::ext::data::datasets {
         std::vector<std::tuple<fs::path, std::string >> test_list = {{"test_X.bin", "7f263ba9f9e0b06b93213547f721ac82"},
                                                                      {"test_y.bin", "36f9794fa4beb8a2c72628de14fa638e"}};
         std::vector<std::string> splits = {"train", "train+unlabeled", "unlabeled", "test"};
+        void load_data(DataMode mode = DataMode::TRAIN);
+
+        void check_resources(const std::string &root, bool download = false);
 
 
-    public :
-        STL10();
+
     };
 }
