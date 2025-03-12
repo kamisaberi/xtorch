@@ -1,13 +1,18 @@
 #pragma once
 #include "../base/datasets.h"
-
+#include "base.h"
 
 using namespace std;
 namespace fs = std::filesystem;
 
 
 namespace torch::ext::data::datasets {
-    class SVHN : torch::data::Dataset<SVHN> {
+    class SVHN : BaseDataset {
+    public :
+        SVHN(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+
+        SVHN(const fs::path &root, DatasetArguments args);
+
     private:
         std::map<std::string, std::tuple<fs::path, fs::path, std::string>> resources = {
                 {"train", {
@@ -27,8 +32,9 @@ namespace torch::ext::data::datasets {
                           }
                 }
         };
+        void load_data(DataMode mode = DataMode::TRAIN);
 
-    public :
-        SVHN();
+        void check_resources(const std::string &root, bool download = false);
+
     };
 }
