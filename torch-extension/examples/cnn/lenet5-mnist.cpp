@@ -7,7 +7,7 @@
 #include <torch/data/transforms/base.h>
 #include <functional>
 #include "../../include/definitions/transforms.h"
-
+//TODO TEST
 
 using namespace std;
 using Example = torch::data::Example<torch::Tensor, torch::Tensor>;
