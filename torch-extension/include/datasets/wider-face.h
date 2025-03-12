@@ -1,5 +1,6 @@
 #pragma once
 #include "../base/datasets.h"
+#include "base.h"
 
 
 using namespace std;
@@ -7,7 +8,12 @@ namespace fs = std::filesystem;
 
 
 namespace torch::ext::data::datasets {
-    class WIDERFace : torch::data::Dataset<WIDERFace> {
+    class WIDERFace : BaseDataset {
+    public :
+        WIDERFace(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+
+        WIDERFace(const fs::path &root, DatasetArguments args);
+
     private:
         fs::path BASE_FOLDER = fs::path("widerface");
         std::vector<std::tuple<std::string, std::string, fs::path> > FILE_LIST = {
@@ -20,8 +26,10 @@ namespace torch::ext::data::datasets {
                 "0e3767bcf0e326556d407bf5bff5d27c",
                 fs::path("wider_face_split.zip")
         };
+        void load_data(DataMode mode = DataMode::TRAIN);
 
-    public :
-        WIDERFace();
+        void check_resources(const std::string &root, bool download = false);
+
+
     };
 }
