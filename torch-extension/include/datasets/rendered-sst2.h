@@ -1,18 +1,24 @@
 #pragma once
 #include "../base/datasets.h"
-
+#include "base.h"
 
 using namespace std;
 namespace fs = std::filesystem;
 
 
 namespace torch::ext::data::datasets {
-    class RenderedSST2 : torch::data::Dataset<RenderedSST2> {
+    class RenderedSST2 : BaseDataset {
+    public :
+        RenderedSST2(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+
+        RenderedSST2(const fs::path &root, DatasetArguments args);
+
     private:
         fs::path url = fs::path("https://openaipublic.azureedge.net/clip/data/rendered-sst2.tgz");
         std::string md5 = "2384d08e9dcfa4bd55b324e610496ee5";
+        void load_data(DataMode mode = DataMode::TRAIN);
 
-    public :
-        RenderedSST2();
+        void check_resources(const std::string &root, bool download = false);
+
     };
 }
