@@ -6,7 +6,4 @@
 #include <vector>
 #include <torch/data/transforms/base.h>
 #include <functional>
-#include "../../include/datasets/cifar.h"
-#include "../../include/models/cnn/alexnet.h"
-#include "../../include/definitions/transforms.h"
 
