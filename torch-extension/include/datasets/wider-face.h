@@ -10,7 +10,7 @@ namespace fs = std::filesystem;
 namespace torch::ext::data::datasets {
     class WIDERFace : BaseDataset {
     public :
-        WIDERFace(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+        explicit WIDERFace(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
 
         WIDERFace(const fs::path &root, DatasetArguments args);
 
