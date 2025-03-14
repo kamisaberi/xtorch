@@ -68,7 +68,7 @@ namespace torch::ext::data::datasets {
     };
 
 
-    class FashionMNIST : MNISTBase {
+    class FashionMNIST : public MNISTBase {
     public:
         FashionMNIST(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
 
