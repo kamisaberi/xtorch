@@ -2,7 +2,7 @@
 #include <torch/data/datasets/mnist.h>
 #include <iostream>
 #include <vector>
-#include "../../include/datasets/mnist.h"
+#include "../../include/datasets/cifar.h"
 #include "../../include/models/cnn/lenet5.h"
 #include <torch/data/transforms/base.h>
 #include <functional>
@@ -19,7 +19,7 @@ int main() {
     std::cout.precision(10);
     torch::Device device(torch::kCPU);
 
-    auto dataset = torch::ext::data::datasets::MNIST("/home/kami/Documents/temp/", DataMode::TRAIN, true);
+    auto dataset = torch::ext::data::datasets::CIFAR100("/home/kami/Documents/temp/", DataMode::TRAIN, true);
 
     auto transformed_dataset = dataset
             .map(torch::ext::data::transforms::resize({32, 32}))
