@@ -2,8 +2,8 @@
 #include <torch/data/datasets/mnist.h>
 #include <iostream>
 #include <vector>
-#include "../../include/datasets/mnist.h"
-#include "../../include/models/cnn/lenet5.h"
+#include "../../include/datasets/cifar.h"
+#include "../../include/models/cnn/resnet.h"
 #include <torch/data/transforms/base.h>
 #include <functional>
 #include "../../include/definitions/transforms.h"
@@ -19,7 +19,7 @@ int main() {
     std::cout.precision(10);
     torch::Device device(torch::kCPU);
 
-    auto dataset = torch::ext::data::datasets::MNIST("/home/kami/Documents/temp/", DataMode::TRAIN, true);
+    auto dataset = torch::ext::data::datasets::CIFAR100("/home/kami/Documents/temp/", DataMode::TRAIN, true);
 
     auto transformed_dataset = dataset
             .map(torch::ext::data::transforms::resize({32, 32}))
@@ -29,7 +29,7 @@ int main() {
     auto train_loader = torch::data::make_data_loader<torch::data::samplers::SequentialSampler>(
         std::move(transformed_dataset), 64);
 
-    torch::ext::models::LeNet5 model(10);
+    torch::ext::models::ResNet model({2,2,2,3},10);
     model.to(device);
     model.train();
     torch::optim::Adam optimizer(model.parameters(), torch::optim::AdamOptions(1e-3));
