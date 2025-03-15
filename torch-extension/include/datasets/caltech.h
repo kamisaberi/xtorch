@@ -26,7 +26,7 @@ namespace torch::ext::data::datasets {
                 "6f83eeb1f24d99cab4eb377263132c91"
             }
         };
-
+        fs::path dataset_folder_name = "caltech";
         void load_data(DataMode mode = DataMode::TRAIN);
 
         void check_resources(const std::string &root, bool download = false);
