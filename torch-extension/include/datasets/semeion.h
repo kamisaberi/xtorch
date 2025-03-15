@@ -17,8 +17,10 @@ namespace torch::ext::data::datasets {
 
    private:
        fs::path url = fs::path("http://archive.ics.uci.edu/ml/machine-learning-databases/semeion/semeion.data");
-       fs::path filename = fs::path("semeion.data");
-       std::string md5_checksum = "cb545d371d2ce14ec121470795a77432";
+       fs::path dataset_file_name = fs::path("semeion.data");
+       std::string dataset_file_md5 = "cb545d371d2ce14ec121470795a77432";
+       fs::path dataset_folder_name = "semeion";
+
        void load_data(DataMode mode = DataMode::TRAIN);
 
        void check_resources(const std::string &root, bool download = false);
