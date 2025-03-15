@@ -5,7 +5,7 @@
 
 
 namespace torch::ext::data::datasets {
-    class FallingThingsStereo : torch::data::Dataset<FallingThingsStereo> {
+    class FallingThingsStereo : public BaseDataset {
     public :
         FallingThingsStereo(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
 
