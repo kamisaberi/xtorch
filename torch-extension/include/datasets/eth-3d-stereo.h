@@ -5,7 +5,7 @@
 
 
 namespace torch::ext::data::datasets {
-    class ETH3DStereo : BaseDataset {
+    class ETH3DStereo : public BaseDataset {
     public:
         ETH3DStereo(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
 
