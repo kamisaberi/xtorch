@@ -4,7 +4,7 @@
 
 
 namespace torch::ext::data::datasets {
-    class FGVCAircraft : BaseDataset {
+    class FGVCAircraft :public BaseDataset {
     public :
         FGVCAircraft(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
 
