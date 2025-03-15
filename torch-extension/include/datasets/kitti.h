@@ -12,13 +12,14 @@ namespace torch::ext::data::datasets {
         Kitti(const fs::path &root, DatasetArguments args);
 
     private:
-        fs::path data_url = fs::path("https://s3.eu-central-1.amazonaws.com/avg-kitti/");
+        fs::path url = fs::path("https://s3.eu-central-1.amazonaws.com/avg-kitti/");
         vector<std::string> resources = {
             "data_object_image_2.zip",
             "data_object_label_2.zip"
         };
         fs::path image_dir_name = fs::path("image_2");
         fs::path labels_dir_name = fs::path("label_2");
+        fs::path dataset_folder_name = "kitti";
 
         void load_data(DataMode mode = DataMode::TRAIN);
 
