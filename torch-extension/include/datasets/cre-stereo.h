@@ -6,7 +6,7 @@
 
 
 namespace torch::ext::data::datasets {
-    class CarlaStereo : BaseDataset {
+    class CarlaStereo : public  BaseDataset {
     public :
         CarlaStereo(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
 
@@ -19,7 +19,7 @@ namespace torch::ext::data::datasets {
     };
 
 
-    class CREStereo : BaseDataset {
+    class CREStereo : public BaseDataset {
     public :
         CREStereo(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
 
