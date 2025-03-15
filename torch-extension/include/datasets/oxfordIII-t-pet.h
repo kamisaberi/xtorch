@@ -11,7 +11,7 @@ namespace torch::ext::data::datasets {
         OxfordIIITPet(const fs::path &root, DatasetArguments args);
 
     private :
-        vector<std::tuple<fs::path, std::string> > _RESOURCES = {
+        vector<std::tuple<fs::path, std::string> > resources = {
             {
                 fs::path("https://www.robots.ox.ac.uk/~vgg/data/pets/data/images.tar.gz"),
                 "5c4f3ee8e5d25df40f4fd59a7f44e54c"
@@ -22,7 +22,7 @@ namespace torch::ext::data::datasets {
             }
         };
         vector<std::string> _VALID_TARGET_TYPES = {"category", "binary-category", "segmentation"};
-
+        fs::path dataset_folder_name = "oxford-iii-pets";
         void load_data(DataMode mode = DataMode::TRAIN);
 
         void check_resources(const std::string &root, bool download = false);
