@@ -7,7 +7,7 @@ using namespace std;
 namespace fs = std::filesystem;
 
 namespace torch::ext::data::datasets {
-    class Country211 : BaseDataset {
+    class Country211 : public BaseDataset {
     private:
         std::string url = "https://openaipublic.azureedge.net/clip/data/";
         fs::path dataset_file_name = "country211.tgz";
