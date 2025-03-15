@@ -8,7 +8,7 @@ using namespace std;
 namespace fs = std::filesystem;
 
 namespace torch::ext::data::datasets {
-    class CelebA : BaseDataset {
+    class CelebA : public BaseDataset {
     public :
         CelebA(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
 
