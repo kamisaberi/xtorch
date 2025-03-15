@@ -59,6 +59,8 @@ namespace torch::ext::data::datasets {
             }
         };
 
+        fs::path dataset_folder_name = "inaturalist";
+
         void load_data(DataMode mode = DataMode::TRAIN);
 
         void check_resources(const std::string &root, bool download = false);
