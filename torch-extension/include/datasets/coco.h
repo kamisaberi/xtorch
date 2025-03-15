@@ -4,7 +4,7 @@
 
 
 namespace torch::ext::data::datasets {
-    class CocoDetection : BaseDataset {
+    class CocoDetection : public BaseDataset {
     public :
         CocoDetection(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
 
@@ -16,7 +16,7 @@ namespace torch::ext::data::datasets {
         void check_resources(const std::string &root, bool download = false);
     };
 
-    class CocoCaptions : BaseDataset {
+    class CocoCaptions : public BaseDataset {
     public :
         CocoCaptions(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
 
