@@ -5,7 +5,7 @@
 
 
 namespace torch::ext::data::datasets {
-    class FER2013 : BaseDataset {
+    class FER2013 : public BaseDataset {
     public :
         FER2013(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
 
