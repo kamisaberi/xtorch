@@ -17,8 +17,8 @@ namespace torch::ext::data::datasets {
 
         fs::path base_folder = fs::path("stl10_binary");
         fs::path url = fs::path("http://ai.stanford.edu/~acoates/stl10/stl10_binary.tar.gz");
-        fs::path filename = fs::path("stl10_binary.tar.gz");
-        std::string tgz_md5 = "91f7769df0f17e558f3565bffb0c7dfb";
+        fs::path dataset_file_name = fs::path("stl10_binary.tar.gz");
+        std::string dataset_file_md5 = "91f7769df0f17e558f3565bffb0c7dfb";
         fs::path class_names_file = fs::path("class_names.txt");
         fs::path folds_list_file = fs::path("fold_indices.txt");
 
