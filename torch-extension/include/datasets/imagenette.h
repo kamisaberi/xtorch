@@ -37,6 +37,7 @@ namespace torch::ext::data::datasets {
                 }
             }
         };
+        fs::path dataset_folder_name = "imagenette";
 
         void load_data(DataMode mode = DataMode::TRAIN);
 
