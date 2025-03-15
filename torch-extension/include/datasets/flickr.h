@@ -5,7 +5,7 @@
 
 
 namespace torch::ext::data::datasets {
-    class Flickr8k : BaseDataset {
+    class Flickr8k :public BaseDataset {
     public :
         Flickr8k(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
 
@@ -17,7 +17,7 @@ namespace torch::ext::data::datasets {
         void check_resources(const std::string &root, bool download = false);
     };
 
-    class Flickr30k : BaseDataset {
+    class Flickr30k :public BaseDataset {
     public :
         Flickr30k(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
 
