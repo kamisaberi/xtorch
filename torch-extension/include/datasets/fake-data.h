@@ -5,7 +5,7 @@
 
 
 namespace torch::ext::data::datasets {
-    class FakeData : BaseDataset {
+    class FakeData :public BaseDataset {
     public :
         FakeData(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
 
