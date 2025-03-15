@@ -4,7 +4,7 @@
 
 
 namespace torch::ext::data::datasets {
-    class Cityscapes : BaseDataset {
+    class Cityscapes : public BaseDataset {
     public :
         Cityscapes(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
 
