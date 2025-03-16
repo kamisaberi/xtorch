@@ -2,8 +2,8 @@
 
 namespace torch::ext::data::datasets {
 
-    Kinetics::Kinetics() {
-        throw NotImplementedException();
-    }
+    // Kinetics::Kinetics() {
+    //     throw NotImplementedException();
+    // }
 
 }
