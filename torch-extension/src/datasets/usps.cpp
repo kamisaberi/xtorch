@@ -2,8 +2,8 @@
 
 namespace torch::ext::data::datasets {
 
-    USPS::USPS() {
-        throw NotImplementedException();
-    }
+    // USPS::USPS() {
+    //     throw NotImplementedException();
+    // }
 
 }

@@ -2,8 +2,8 @@
 
 namespace torch::ext::data::datasets {
 
-    WIDERFace::WIDERFace() {
-        throw NotImplementedException();
-    }
+    // WIDERFace::WIDERFace() {
+    //     throw NotImplementedException();
+    // }
 
 }
