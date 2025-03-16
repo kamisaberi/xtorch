@@ -2,8 +2,8 @@
 
 namespace torch::ext::data::datasets {
 
-    Cityscapes::Cityscapes() {
-        throw NotImplementedException();
-    }
+    // Cityscapes::Cityscapes() {
+    //     throw NotImplementedException();
+    // }
 
 }
