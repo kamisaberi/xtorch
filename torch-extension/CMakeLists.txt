@@ -17,7 +17,7 @@ set(LIBRARY_SOURCE_FILES
 
         src/models/cnn/alexnet.cpp
         src/models/cnn/lenet5.cpp
-        src/models/cnn/vggnet16.cpp
+        src/models/cnn/vggnet.cpp
         src/models/cnn/resnet.cpp
         src/models/cnn/unet.cpp
         src/models/cnn/mobilenet.cpp

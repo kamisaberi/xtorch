@@ -1,6 +1,6 @@
 #include "includes/base.h"
 #include "../../include/datasets/mnist.h"
-#include "../../include/models/cnn/vggnet16.h"
+#include "../../include/models/cnn/vggnet.h"
 #include "../../include/definitions/transforms.h"
 
 
