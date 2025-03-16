@@ -2,14 +2,14 @@
 
 namespace torch::ext::data::datasets {
 
-    Flickr8k::Flickr8k() {
-        throw NotImplementedException();
-    }
-
-
-
-    Flickr30k::Flickr30k() {
-        throw NotImplementedException();
-    }
+    // Flickr8k::Flickr8k() {
+    //     throw NotImplementedException();
+    // }
+    //
+    //
+    //
+    // Flickr30k::Flickr30k() {
+    //     throw NotImplementedException();
+    // }
 
 }
