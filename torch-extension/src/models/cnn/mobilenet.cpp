@@ -1,4 +1,4 @@
-#include "../../../include/models/cnn/mobilenetv3.h"
+#include "../../../include/models/cnn/mobilenet.h"
 
 namespace torch::ext::models {
 

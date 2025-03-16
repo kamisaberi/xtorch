@@ -20,7 +20,7 @@ set(LIBRARY_SOURCE_FILES
         src/models/cnn/vggnet16.cpp
         src/models/cnn/resnet.cpp
         src/models/cnn/unet.cpp
-        src/models/cnn/mobilenetv3.cpp
+        src/models/cnn/mobilenet.cpp
 
         src/datasets/image-folder.cpp
         src/datasets/caltech.cpp
