@@ -2,8 +2,8 @@
 
 namespace torch::ext::data::datasets {
 
-    FakeData::FakeData() {
-        throw NotImplementedException();
-    }
+    // FakeData::FakeData() {
+    //     throw NotImplementedException();
+    // }
 
 }

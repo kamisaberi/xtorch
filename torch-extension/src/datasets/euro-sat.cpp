@@ -2,8 +2,8 @@
 
 namespace torch::ext::data::datasets {
 
-    EuroSAT::EuroSAT() {
-        throw NotImplementedException();
-    }
+    // EuroSAT::EuroSAT() {
+    //     throw NotImplementedException();
+    // }
 
 }
