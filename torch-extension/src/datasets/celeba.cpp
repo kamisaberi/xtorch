@@ -2,8 +2,8 @@
 
 namespace torch::ext::data::datasets {
 
-    CelebA::CelebA() {
-        throw NotImplementedException();
-    }
+    // CelebA::CelebA() {
+    //     throw NotImplementedException();
+    // }
 
 }
