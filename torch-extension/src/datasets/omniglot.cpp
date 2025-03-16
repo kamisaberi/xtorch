@@ -2,8 +2,8 @@
 
 namespace torch::ext::data::datasets {
 
-    Omniglot::Omniglot() {
-        throw NotImplementedException();
-    }
+    // Omniglot::Omniglot() {
+    //     throw NotImplementedException();
+    // }
 
 }
