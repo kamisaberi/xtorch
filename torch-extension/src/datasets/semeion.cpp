@@ -2,8 +2,8 @@
 
 namespace torch::ext::data::datasets {
 
-    SEMEION::SEMEION() {
-        throw NotImplementedException();
-    }
+    // SEMEION::SEMEION() {
+    //     throw NotImplementedException();
+    // }
 
 }

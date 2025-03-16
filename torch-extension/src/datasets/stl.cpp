@@ -2,8 +2,8 @@
 
 namespace torch::ext::data::datasets {
 
-    STL10::STL10() {
-        throw NotImplementedException();
-    }
+    // STL10::STL10() {
+    //     throw NotImplementedException();
+    // }
 
 }

@@ -2,8 +2,8 @@
 
 namespace torch::ext::data::datasets {
 
-    StanfordCars::StanfordCars() {
-        throw NotImplementedException();
-    }
+    // StanfordCars::StanfordCars() {
+    //     throw NotImplementedException();
+    // }
 
 }
