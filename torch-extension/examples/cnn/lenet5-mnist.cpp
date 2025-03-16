@@ -47,7 +47,7 @@ int main() {
                 std::cout << "Epoch: " << epoch << " | Batch: " << batch_index << " | Loss: " << loss.item<float>() <<
                         std::endl;
             }
-            ++train_loader_interator;
+            ++train_loader_iterator;
         }
     }
 
