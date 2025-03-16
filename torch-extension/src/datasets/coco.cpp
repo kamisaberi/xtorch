@@ -2,11 +2,11 @@
 
 namespace torch::ext::data::datasets {
 
-    CocoDetection::CocoDetection() {
-        throw NotImplementedException();
-    }
-    CocoCaptions::CocoCaptions() {
-        throw NotImplementedException();
-    }
+    // CocoDetection::CocoDetection() {
+    //     throw NotImplementedException();
+    // }
+    // CocoCaptions::CocoCaptions() {
+    //     throw NotImplementedException();
+    // }
 
 }
