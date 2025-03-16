@@ -2,8 +2,8 @@
 
 namespace torch::ext::data::datasets {
 
-    INaturalist::INaturalist() {
-        throw NotImplementedException();
-    }
+    // INaturalist::INaturalist() {
+    //     throw NotImplementedException();
+    // }
 
 }

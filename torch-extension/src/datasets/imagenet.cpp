@@ -2,8 +2,8 @@
 
 namespace torch::ext::data::datasets {
 
-    ImageNet::ImageNet() {
-        throw NotImplementedException();
-    }
+    // ImageNet::ImageNet() {
+    //     throw NotImplementedException();
+    // }
 
 }
