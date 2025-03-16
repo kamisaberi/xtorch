@@ -5,7 +5,7 @@
 
 using namespace std;
 using Example = torch::data::Example<torch::Tensor, torch::Tensor>;
-namespace torch::ext::examples::cnn {
+//namespace torch::ext::examples::cnn {
 
 int main() {
     std::vector<int64_t> size = {32, 32};
@@ -53,4 +53,4 @@ int main() {
 
     return 0;
 }
-}
+//}
