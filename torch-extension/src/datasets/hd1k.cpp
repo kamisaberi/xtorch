@@ -2,8 +2,8 @@
 
 namespace torch::ext::data::datasets {
 
-    HD1K::HD1K() {
-        throw NotImplementedException();
-    }
+    // HD1K::HD1K() {
+    //     throw NotImplementedException();
+    // }
 
 }

@@ -2,8 +2,8 @@
 
 namespace torch::ext::data::datasets {
 
-    GTSRB::GTSRB() {
-        throw NotImplementedException();
-    }
+    // GTSRB::GTSRB() {
+    //     throw NotImplementedException();
+    // }
 
 }
