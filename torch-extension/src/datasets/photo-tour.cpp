@@ -2,8 +2,8 @@
 
 namespace torch::ext::data::datasets {
 
-    PhotoTour::PhotoTour() {
-        throw NotImplementedException();
-    }
+    // PhotoTour::PhotoTour() {
+    //     throw NotImplementedException();
+    // }
 
 }
