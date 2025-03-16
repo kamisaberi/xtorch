@@ -2,8 +2,8 @@
 
 namespace torch::ext::data::datasets {
 
-    FGVCAircraft::FGVCAircraft() {
-        throw NotImplementedException();
-    }
+    // FGVCAircraft::FGVCAircraft() {
+    //     throw NotImplementedException();
+    // }
 
 }
