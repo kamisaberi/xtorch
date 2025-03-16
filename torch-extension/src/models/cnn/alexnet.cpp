@@ -4,11 +4,11 @@
 using namespace std;
 
 namespace torch::ext::models {
-    AlexNet::AlexNet(int num_classes) {
+    AlexNet::AlexNet(int num_classes , int in_channels) {
 
         //TODO layer1
         layer1 = torch::nn::Sequential(
-            torch::nn::Conv2d(torch::nn::Conv2dOptions(3, 96, 11).stride(4).padding(0)),
+            torch::nn::Conv2d(torch::nn::Conv2dOptions(in_channels, 96, 11).stride(4).padding(0)),
             torch::nn::BatchNorm2d(96),
             torch::nn::ReLU(),
             torch::nn::MaxPool2d(torch::nn::MaxPool2dOptions(3).stride(2))
