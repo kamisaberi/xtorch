@@ -2,8 +2,8 @@
 
 namespace torch::ext::data::datasets {
 
-    RenderedSST2::RenderedSST2() {
-        throw NotImplementedException();
-    }
+    // RenderedSST2::RenderedSST2() {
+    //     throw NotImplementedException();
+    // }
 
 }

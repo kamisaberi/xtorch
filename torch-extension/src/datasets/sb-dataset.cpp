@@ -2,8 +2,8 @@
 
 namespace torch::ext::data::datasets {
 
-    SBDataset::SBDataset() {
-        throw NotImplementedException();
-    }
+    // SBDataset::SBDataset() {
+    //     throw NotImplementedException();
+    // }
 
 }
