@@ -1,10 +1,10 @@
 #include "../../../include/models/cnn/vggnet16.h"
 
 namespace torch::ext::models {
-    VggNet16::VggNet16(int num_classes) {
+    VggNet16::VggNet16(int num_classes,int in_channels) {
         //TODO layer1 DONE
         layer1 = torch::nn::Sequential(
-            torch::nn::Conv2d(torch::nn::Conv2dOptions(3, 64, 3).stride(1).padding(1)),
+            torch::nn::Conv2d(torch::nn::Conv2dOptions(in_channels, 64, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(64),
             torch::nn::ReLU()
         );
