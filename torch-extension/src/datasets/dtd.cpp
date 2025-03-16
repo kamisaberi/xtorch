@@ -2,8 +2,8 @@
 
 namespace torch::ext::data::datasets {
 
-    DTD::DTD() {
-        throw NotImplementedException();
-    }
+    // DTD::DTD() {
+    //     throw NotImplementedException();
+    // }
 
 }

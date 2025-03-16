@@ -2,8 +2,8 @@
 
 namespace torch::ext::data::datasets {
 
-    FallingThingsStereo::FallingThingsStereo() {
-        throw NotImplementedException();
-    }
+    // FallingThingsStereo::FallingThingsStereo() {
+    //     throw NotImplementedException();
+    // }
 
 }

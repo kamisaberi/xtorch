@@ -2,8 +2,8 @@
 
 namespace torch::ext::data::datasets {
 
-    ETH3DStereo::ETH3DStereo() {
-        throw NotImplementedException();
-    }
+    // ETH3DStereo::ETH3DStereo() {
+    //     throw NotImplementedException();
+    // }
 
 }
