@@ -2,8 +2,8 @@
 
 namespace torch::ext::data::datasets {
 
-    LSUN::LSUN() {
-        throw NotImplementedException();
-    }
+    // LSUN::LSUN() {
+    //     throw NotImplementedException();
+    // }
 
 }

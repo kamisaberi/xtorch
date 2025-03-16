@@ -2,11 +2,11 @@
 
 namespace torch::ext::data::datasets {
 
-    LFWPeople::LFWPeople() {
-        throw NotImplementedException();
-    }
-    LFWPairs::LFWPairs() {
-        throw NotImplementedException();
-    }
+    // LFWPeople::LFWPeople() {
+    //     throw NotImplementedException();
+    // }
+    // LFWPairs::LFWPairs() {
+    //     throw NotImplementedException();
+    // }
 
 }
