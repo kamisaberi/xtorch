@@ -2,8 +2,8 @@
 
 namespace torch::ext::data::datasets {
 
-    Food101::Food101() {
-        throw NotImplementedException();
-    }
+    // Food101::Food101() {
+    //     throw NotImplementedException();
+    // }
 
 }

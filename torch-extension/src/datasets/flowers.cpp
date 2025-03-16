@@ -2,8 +2,8 @@
 
 namespace torch::ext::data::datasets {
 
-    Flowers102::Flowers102() {
-        throw NotImplementedException();
-    }
+    // Flowers102::Flowers102() {
+    //     throw NotImplementedException();
+    // }
 
 }
