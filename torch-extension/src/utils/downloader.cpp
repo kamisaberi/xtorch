@@ -61,7 +61,7 @@ namespace  torch::ext::utils {
 
     std::tuple<bool, std::string> download_from_gdrive(std::string gid, std::string outPath) {
         string url = rebuild_google_drive_link(gid);
-        auto [result, path] = download_data(url, outPath);
+        auto [result, path] = download(url, outPath);
         return std::make_tuple(result, path);
     }
 }
