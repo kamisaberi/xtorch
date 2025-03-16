@@ -5,7 +5,7 @@
 
 
 namespace torch::ext::data::datasets {
-    class FlyingChairs : BaseDataset {
+    class FlyingChairs : public BaseDataset {
     public :
         FlyingChairs(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
 
@@ -17,7 +17,7 @@ namespace torch::ext::data::datasets {
         void check_resources(const std::string &root, bool download = false);
     };
 
-    class FlyingThings3D : BaseDataset {
+    class FlyingThings3D : public BaseDataset {
     public :
         FlyingThings3D(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
 
