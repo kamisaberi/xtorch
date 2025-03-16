@@ -7,7 +7,7 @@ using namespace std;
 namespace fs = std::filesystem;
 
 namespace torch::ext::data::datasets {
-    class Food101 : BaseDataset {
+    class Food101 : public BaseDataset {
     public :
         Food101(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
 
