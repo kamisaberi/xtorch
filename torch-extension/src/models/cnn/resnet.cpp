@@ -36,12 +36,12 @@ namespace torch::ext::models {
     }
 
 
-    ResNet::ResNet(vector<int> layers, int num_classes) {
+    ResNet::ResNet(vector<int> layers, int num_classes, int in_channels) {
         inplanes = 64;
 
 
         conv1 = torch::nn::Sequential(
-            torch::nn::Conv2d(torch::nn::Conv2dOptions(3, 64, 7).stride(2).padding(3)),
+            torch::nn::Conv2d(torch::nn::Conv2dOptions(in_channels, 64, 7).stride(2).padding(3)),
             torch::nn::BatchNorm2d(64),
             torch::nn::ReLU()
         );

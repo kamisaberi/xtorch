@@ -29,7 +29,7 @@ namespace torch::ext::models {
         torch::nn::Sequential layer0 = nullptr, layer1 = nullptr, layer2 = nullptr, layer3 = nullptr;
         torch::nn::Linear fc = nullptr;
 
-        ResNet(vector<int> layers, int num_classes = 10);
+        ResNet(vector<int> layers, int num_classes = 10, int in_channels = 3 /* input channels */);
 
         torch::nn::Sequential makeLayerFromResidualBlock(int planes, int blocks, int stride = 1);
 
