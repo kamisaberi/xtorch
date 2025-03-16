@@ -13,7 +13,7 @@ namespace torch::ext::models {
         torch::nn::Linear fc1 = nullptr, fc2 = nullptr, fc3 = nullptr;
 
     public:
-        LeNet5(int num_classes);
+        LeNet5(int num_classes, int in_channels = 1);
 
         torch::Tensor forward(torch::Tensor x);
     };

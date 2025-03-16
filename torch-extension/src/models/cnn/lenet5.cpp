@@ -4,9 +4,9 @@
 using namespace std;
 
 namespace torch::ext::models {
-    LeNet5::LeNet5(int num_classes) {
+    LeNet5::LeNet5(int num_classes, int in_channels) {
         layer1 = torch::nn::Sequential(
-            torch::nn::Conv2d(torch::nn::Conv2dOptions(1, 6, 5).stride(1).padding(0)),
+            torch::nn::Conv2d(torch::nn::Conv2dOptions(in_channels, 6, 5).stride(1).padding(0)),
             torch::nn::BatchNorm2d(6),
             torch::nn::ReLU(),
             torch::nn::MaxPool2d(torch::nn::MaxPool2dOptions(2).stride(2))
