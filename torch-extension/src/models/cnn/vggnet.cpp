@@ -1,4 +1,4 @@
-#include "../../../include/models/cnn/vggnet16.h"
+#include "../../../include/models/cnn/vggnet.h"
 
 namespace torch::ext::models {
     VggNet16::VggNet16(int num_classes,int in_channels) {

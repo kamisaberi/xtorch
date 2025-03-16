@@ -1,7 +1,7 @@
 #include "includes/base.h"
 
 #include "../../include/datasets/cifar.h"
-#include "../../include/models/cnn/vggnet16.h"
+#include "../../include/models/cnn/vggnet.h"
 #include "../../include/definitions/transforms.h"
 
 
