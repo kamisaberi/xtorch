@@ -2,8 +2,8 @@
 
 namespace torch::ext::data::datasets {
 
-    SVHN::SVHN() {
-        throw NotImplementedException();
-    }
+    // SVHN::SVHN() {
+    //     throw NotImplementedException();
+    // }
 
 }
