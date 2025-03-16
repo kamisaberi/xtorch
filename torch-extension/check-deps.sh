@@ -1,5 +1,3 @@
-#/bin/sh
-
 #!/bin/bash
 
 PACKAGE_NAME="libtar"
