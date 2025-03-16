@@ -2,8 +2,8 @@
 
 namespace torch::ext::data::datasets {
 
-    MovingMNIST::MovingMNIST() {
-        throw NotImplementedException();
-    }
+    // MovingMNIST::MovingMNIST() {
+    //     throw NotImplementedException();
+    // }
 
 }
