@@ -482,4 +482,31 @@ namespace torch::ext::data::datasets {
             // this->labels = labels;
         }
     }
+    void QMNIST::check_resources(const std::string &root, bool download) {
+        // this->root = fs::path(root);
+        // if (!fs::exists(this->root)) {
+        //     throw runtime_error("path is not exists");
+        // }
+        // this->dataset_path = this->root / this->dataset_folder_name;
+        // if (!fs::exists(this->dataset_path)) {
+        //     fs::create_directories(this->dataset_path);
+        // }
+        //
+        // bool res = true;
+        // for (const auto &resource: this->resources) {
+        //     fs::path pth = std::get<0>(resource);
+        //     std::string md = std::get<1>(resource);
+        //     fs::path fpth = this->dataset_path / pth;
+        //     if (!(fs::exists(fpth) && torch::ext::utils::get_md5_checksum(fpth.string()) == md)) {
+        //         if (download) {
+        //             string u = (this->url / pth).string();
+        //             auto [r, path] = torch::ext::utils::download(u, this->dataset_path.string());
+        //         } else {
+        //             throw runtime_error("Resources files dent exist. please try again with download = true");
+        //         }
+        //     }
+        //     torch::ext::utils::extractGzip(fpth);
+        // }
+    }
+
 }
