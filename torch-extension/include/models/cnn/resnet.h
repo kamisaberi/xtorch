@@ -9,17 +9,19 @@ using namespace std;
 
 namespace torch::ext::models {
 
-    struct ResidualBlock : torch::nn::Module {
-        torch::nn::Sequential conv1 = nullptr, conv2 = nullptr, downsample = nullptr;
-        int out_channels;
-        torch::nn::ReLU relu = nullptr;
-        torch::Tensor residual;
+    namespace {
+        struct ResidualBlock : torch::nn::Module {
+            torch::nn::Sequential conv1 = nullptr, conv2 = nullptr, downsample = nullptr;
+            int out_channels;
+            torch::nn::ReLU relu = nullptr;
+            torch::Tensor residual;
 
-        ResidualBlock(int in_channels, int out_channels, int stride = 1, torch::nn::Sequential downsample = nullptr);
+            ResidualBlock(int in_channels, int out_channels, int stride = 1,
+                          torch::nn::Sequential downsample = nullptr);
 
-        torch::Tensor forward(torch::Tensor x);
-    };
-
+            torch::Tensor forward(torch::Tensor x);
+        };
+    }
 
     struct ResNet : torch::nn::Module {
         int inplanes = 64;
