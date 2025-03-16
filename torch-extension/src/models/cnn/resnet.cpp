@@ -1,39 +1,45 @@
 #include "../../../include/models/cnn/resnet.h"
 
 namespace torch::ext::models {
-    ResidualBlock::ResidualBlock(int in_channels, int out_channels, int stride, torch::nn::Sequential downsample) {
-        conv1 = torch::nn::Sequential(
-            torch::nn::Conv2d(torch::nn::Conv2dOptions(in_channels, out_channels, 3).stride(stride).padding(1)),
-            torch::nn::BatchNorm2d(out_channels),
-            torch::nn::ReLU()
-        );
 
-        conv2 = torch::nn::Sequential(
-            torch::nn::Conv2d(torch::nn::Conv2dOptions(out_channels, out_channels, 3).stride(1).padding(1)),
-            torch::nn::BatchNorm2d(out_channels)
-        );
+    namespace {
 
-        register_module("conv1", conv1);
-        register_module("conv2", conv2);
+        ResidualBlock::ResidualBlock(int in_channels, int out_channels, int stride, torch::nn::Sequential downsample) {
+            conv1 = torch::nn::Sequential(
+                    torch::nn::Conv2d(torch::nn::Conv2dOptions(in_channels, out_channels, 3).stride(stride).padding(1)),
+                    torch::nn::BatchNorm2d(out_channels),
+                    torch::nn::ReLU()
+            );
+
+            conv2 = torch::nn::Sequential(
+                    torch::nn::Conv2d(torch::nn::Conv2dOptions(out_channels, out_channels, 3).stride(1).padding(1)),
+                    torch::nn::BatchNorm2d(out_channels)
+            );
+
+            register_module("conv1", conv1);
+            register_module("conv2", conv2);
 
 
-        this->downsample = downsample;
-        this->relu = torch::nn::ReLU();
-        this->out_channels = out_channels;
-    }
-
-    torch::Tensor ResidualBlock::forward(torch::Tensor x) {
-        residual = x;
-        torch::Tensor out = conv1->forward(x);
-        out = conv2->forward(out);
-        if (downsample) {
-            residual = downsample->forward(x);
-        } else {
+            this->downsample = downsample;
+            this->relu = torch::nn::ReLU();
+            this->out_channels = out_channels;
         }
-        out += residual;
-        out = relu(out);
-        return out;
+
+        torch::Tensor ResidualBlock::forward(torch::Tensor x) {
+            residual = x;
+            torch::Tensor out = conv1->forward(x);
+            out = conv2->forward(out);
+            if (downsample) {
+                residual = downsample->forward(x);
+            } else {
+            }
+            out += residual;
+            out = relu(out);
+            return out;
+        }
+
     }
+
 
 
     ResNet::ResNet(vector<int> layers, int num_classes, int in_channels) {
