@@ -15,7 +15,7 @@ namespace torch::ext::models {
         torch::nn::Sequential layer11 = nullptr, layer12 = nullptr, layer13 = nullptr;
         torch::nn::Sequential fc = nullptr, fc1 = nullptr, fc2 = nullptr;
 
-        VggNet16(int num_classes);
+        VggNet16(int num_classes /* classes */, int in_channels = 3 /* input channels */);
 
         torch::Tensor forward(torch::Tensor x);
     };
