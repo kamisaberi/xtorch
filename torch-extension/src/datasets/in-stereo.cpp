@@ -2,8 +2,8 @@
 
 namespace torch::ext::data::datasets {
 
-    InStereo2k::InStereo2k() {
-        throw NotImplementedException();
-    }
+    // InStereo2k::InStereo2k() {
+    //     throw NotImplementedException();
+    // }
 
 }
