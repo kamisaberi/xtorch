@@ -29,11 +29,11 @@ int main() {
     torch::optim::Adam optimizer(model.parameters(), torch::optim::AdamOptions(1e-3));
     for (size_t epoch = 0; epoch != 10; ++epoch) {
         size_t batch_index = 0;
-        auto train_loader_interator = train_loader->begin();
+        auto train_loader_iterator = train_loader->begin();
         auto train_loader_end = train_loader->end();
-        while (train_loader_interator != train_loader_end) {
+        while (train_loader_iterator != train_loader_end) {
             torch::Tensor data, targets;
-            auto batch = *train_loader_interator;
+            auto batch = *train_loader_iterator;
             data = batch.data;
             targets = batch.target;
             optimizer.zero_grad();
