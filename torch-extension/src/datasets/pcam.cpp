@@ -2,8 +2,8 @@
 
 namespace torch::ext::data::datasets {
 
-    PCAM::PCAM() {
-        throw NotImplementedException();
-    }
+    // PCAM::PCAM() {
+    //     throw NotImplementedException();
+    // }
 
 }

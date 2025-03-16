@@ -2,8 +2,8 @@
 
 namespace torch::ext::data::datasets {
 
-    Places365::Places365() {
-        throw NotImplementedException();
-    }
+    // Places365::Places365() {
+    //     throw NotImplementedException();
+    // }
 
 }
