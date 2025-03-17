@@ -7,7 +7,7 @@ find_package(LibLZMA REQUIRED)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-set(TEST_SOURCE_FILES
+set(BASE_SOURCE_FILES
         ../src/utils/extract.cpp
         ../src/utils/downloader.cpp
         ../src/media/image/processing.cpp
@@ -38,8 +38,27 @@ set(TEST_LIBRARIES ${CURL_LIBRARIES}
         LibLZMA::LibLZMA
 )
 
-add_executable(lenet5-mnist ${TEST_SOURCE_FILES} cnn/lenet5-mnist.cpp)
+
+
+
+# LeNet5 MNIST
+set(SOURCE_FILES
+        ../src/datasets/mnist.cpp
+        ../src/models/cnn/lenet5.cpp
+)
+add_executable(lenet5-mnist ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/lenet5-mnist.cpp)
 target_link_libraries(lenet5-mnist "${TORCH_LIBRARIES}")
 set_property(TARGET lenet5-mnist PROPERTY CXX_STANDARD 17)
 target_include_directories(lenet5-mnist PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS})
 target_link_libraries(lenet5-mnist ${TEST_LIBRARIES})
+
+# LeNet5 FashionMNIST
+set(SOURCE_FILES
+        ../src/datasets/mnist.cpp
+        ../src/models/cnn/lenet5.cpp
+)
+add_executable(lenet5-fashionmnist ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/lenet5-fashionmnist.cpp)
+target_link_libraries(lenet5-fashionmnist "${TORCH_LIBRARIES}")
+set_property(TARGET lenet5-fashionmnist PROPERTY CXX_STANDARD 17)
+target_include_directories(lenet5-fashionmnist PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS})
+target_link_libraries(lenet5-fashionmnist ${TEST_LIBRARIES})
