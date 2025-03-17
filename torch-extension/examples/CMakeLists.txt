@@ -98,3 +98,16 @@ target_link_libraries(alexnet-mnist "${TORCH_LIBRARIES}")
 set_property(TARGET alexnet-mnist PROPERTY CXX_STANDARD 17)
 target_include_directories(alexnet-mnist PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS})
 target_link_libraries(alexnet-mnist ${TEST_LIBRARIES})
+
+
+
+# AlexNet FashionMNIST
+set(SOURCE_FILES
+        ../src/datasets/mnist.cpp
+        ../src/models/cnn/alexnet.cpp
+)
+add_executable(alexnet-fashionmnist ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/alexnet-fashionmnist.cpp)
+target_link_libraries(alexnet-fashionmnist "${TORCH_LIBRARIES}")
+set_property(TARGET alexnet-fashionmnist PROPERTY CXX_STANDARD 17)
+target_include_directories(alexnet-fashionmnist PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS})
+target_link_libraries(alexnet-fashionmnist ${TEST_LIBRARIES})
