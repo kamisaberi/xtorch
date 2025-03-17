@@ -26,13 +26,13 @@ set(TEST_SOURCE_FILES
         cnn/lenet5-mnist.cpp
 )
 
-add_executable(lenet-mnist ${TEST_SOURCE_FILES})
-target_link_libraries(lenet-mnist "${TORCH_LIBRARIES}")
+add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
+target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
 #
-set_property(TARGET lenet-mnist PROPERTY CXX_STANDARD 17)
+set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
 
-target_include_directories(lenet-mnist PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS})
-target_link_libraries(lenet-mnist
+target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS})
+target_link_libraries(${PROJECT_NAME}
         ${CURL_LIBRARIES}
         ${TORCH_LIBRARIES}
         ${OpenCV_LIBS}
