@@ -1,4 +1,4 @@
-project(lenet-mnist)
+project(examples)
 list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
 find_package(Torch REQUIRED)
 find_package(TorchExtension REQUIRED)
