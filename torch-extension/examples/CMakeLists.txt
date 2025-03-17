@@ -1,7 +1,7 @@
 project(examples)
 list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
 find_package(Torch REQUIRED)
-find_package(TorchExtension REQUIRED)
+#find_package(TorchExtension REQUIRED)
 find_package(LibLZMA REQUIRED)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -23,17 +23,9 @@ set(TEST_SOURCE_FILES
         ../src/datasets/functions.cpp
         ../include/base/datasets.h
         ../examples/cnn/includes/base.h
-        cnn/lenet5-mnist.cpp
 )
 
-add_executable(app01 ${TEST_SOURCE_FILES})
-target_link_libraries(app01 "${TORCH_LIBRARIES}")
-#
-set_property(TARGET app01 PROPERTY CXX_STANDARD 17)
-
-target_include_directories(app01 PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS})
-target_link_libraries(app01
-        ${CURL_LIBRARIES}
+set(TEST_LIBRARIES ${CURL_LIBRARIES}
         ${TORCH_LIBRARIES}
         ${OpenCV_LIBS}
         ${ZLIB_LIBS}
@@ -45,3 +37,9 @@ target_link_libraries(app01
         OpenSSL::Crypto
         LibLZMA::LibLZMA
 )
+
+add_executable(app01 ${TEST_SOURCE_FILES} cnn/lenet5-mnist.cpp)
+target_link_libraries(app01 "${TORCH_LIBRARIES}")
+set_property(TARGET app01 PROPERTY CXX_STANDARD 17)
+target_include_directories(app01 PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS})
+target_link_libraries(app01 ${TEST_LIBRARIES})
