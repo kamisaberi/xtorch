@@ -38,8 +38,8 @@ set(TEST_LIBRARIES ${CURL_LIBRARIES}
         LibLZMA::LibLZMA
 )
 
-add_executable(app01 ${TEST_SOURCE_FILES} cnn/lenet5-mnist.cpp)
-target_link_libraries(app01 "${TORCH_LIBRARIES}")
-set_property(TARGET app01 PROPERTY CXX_STANDARD 17)
-target_include_directories(app01 PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS})
-target_link_libraries(app01 ${TEST_LIBRARIES})
+add_executable(lenet5-mnist ${TEST_SOURCE_FILES} cnn/lenet5-mnist.cpp)
+target_link_libraries(lenet5-mnist "${TORCH_LIBRARIES}")
+set_property(TARGET lenet5-mnist PROPERTY CXX_STANDARD 17)
+target_include_directories(lenet5-mnist PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS})
+target_link_libraries(lenet5-mnist ${TEST_LIBRARIES})
