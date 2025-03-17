@@ -39,7 +39,9 @@ set(TEST_LIBRARIES ${CURL_LIBRARIES}
 )
 
 
+######################################## APPLICATIONS ########################################
 
+#--------------------------------------- CNN/LeNet ---------------------------------------#
 
 # LeNet5 MNIST
 set(SOURCE_FILES
@@ -88,6 +90,8 @@ target_link_libraries(lenet5-cifar100 ${TEST_LIBRARIES})
 
 
 
+#--------------------------------------- CNN/AlexNet ---------------------------------------#
+
 # AlexNet MNIST
 set(SOURCE_FILES
         ../src/datasets/mnist.cpp
@@ -134,3 +138,17 @@ target_link_libraries(alexnet-cifar100 "${TORCH_LIBRARIES}")
 set_property(TARGET alexnet-cifar100 PROPERTY CXX_STANDARD 17)
 target_include_directories(alexnet-cifar100 PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS})
 target_link_libraries(alexnet-cifar100 ${TEST_LIBRARIES})
+
+
+#--------------------------------------- CNN/ResNet ---------------------------------------#
+
+# ResNet MNIST
+set(SOURCE_FILES
+        ../src/datasets/mnist.cpp
+        ../src/models/cnn/resnet.cpp
+)
+add_executable(resnet-mnist ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/resnet-mnist.cpp)
+target_link_libraries(resnet-mnist "${TORCH_LIBRARIES}")
+set_property(TARGET resnet-mnist PROPERTY CXX_STANDARD 17)
+target_include_directories(resnet-mnist PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS})
+target_link_libraries(resnet-mnist ${TEST_LIBRARIES})
