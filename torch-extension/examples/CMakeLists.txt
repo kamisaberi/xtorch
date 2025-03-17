@@ -85,3 +85,16 @@ target_link_libraries(lenet5-cifar100 "${TORCH_LIBRARIES}")
 set_property(TARGET lenet5-cifar100 PROPERTY CXX_STANDARD 17)
 target_include_directories(lenet5-cifar100 PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS})
 target_link_libraries(lenet5-cifar100 ${TEST_LIBRARIES})
+
+
+
+# AlexNet MNIST
+set(SOURCE_FILES
+        ../src/datasets/mnist.cpp
+        ../src/models/cnn/alexnet.cpp
+)
+add_executable(alexnet-mnist ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/alexnet-mnist.cpp)
+target_link_libraries(alexnet-mnist "${TORCH_LIBRARIES}")
+set_property(TARGET alexnet-mnist PROPERTY CXX_STANDARD 17)
+target_include_directories(alexnet-mnist PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS})
+target_link_libraries(alexnet-mnist ${TEST_LIBRARIES})
