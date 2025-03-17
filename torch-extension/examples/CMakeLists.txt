@@ -62,3 +62,15 @@ target_link_libraries(lenet5-fashionmnist "${TORCH_LIBRARIES}")
 set_property(TARGET lenet5-fashionmnist PROPERTY CXX_STANDARD 17)
 target_include_directories(lenet5-fashionmnist PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS})
 target_link_libraries(lenet5-fashionmnist ${TEST_LIBRARIES})
+
+
+# LeNet5 CIFAR10
+set(SOURCE_FILES
+        ../src/datasets/cifar.cpp
+        ../src/models/cnn/lenet5.cpp
+)
+add_executable(lenet5-cifar10 ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/lenet5-cifar10.cpp)
+target_link_libraries(lenet5-cifar10 "${TORCH_LIBRARIES}")
+set_property(TARGET lenet5-cifar10 PROPERTY CXX_STANDARD 17)
+target_include_directories(lenet5-cifar10 PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS})
+target_link_libraries(lenet5-cifar10 ${TEST_LIBRARIES})
