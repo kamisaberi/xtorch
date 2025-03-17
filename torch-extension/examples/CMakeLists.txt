@@ -152,3 +152,15 @@ target_link_libraries(resnet-mnist "${TORCH_LIBRARIES}")
 set_property(TARGET resnet-mnist PROPERTY CXX_STANDARD 17)
 target_include_directories(resnet-mnist PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS})
 target_link_libraries(resnet-mnist ${TEST_LIBRARIES})
+
+
+# ResNet FashionMNIST
+set(SOURCE_FILES
+        ../src/datasets/mnist.cpp
+        ../src/models/cnn/resnet.cpp
+)
+add_executable(resnet-fashionmnist ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/resnet-fashionmnist.cpp)
+target_link_libraries(resnet-fashionmnist "${TORCH_LIBRARIES}")
+set_property(TARGET resnet-fashionmnist PROPERTY CXX_STANDARD 17)
+target_include_directories(resnet-fashionmnist PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS})
+target_link_libraries(resnet-fashionmnist ${TEST_LIBRARIES})
