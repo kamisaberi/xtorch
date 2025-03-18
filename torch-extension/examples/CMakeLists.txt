@@ -192,7 +192,7 @@ target_link_libraries(resnet-cifar100 ${TEST_LIBRARIES})
 
 #--------------------------------------- CNN/VggNet ---------------------------------------#
 
-# ResNet MNIST
+# VggNet MNIST
 set(SOURCE_FILES
         ../src/datasets/mnist.cpp
         ../src/models/cnn/vggnet.cpp
@@ -202,3 +202,16 @@ target_link_libraries(vggnet16-mnist "${TORCH_LIBRARIES}")
 set_property(TARGET vggnet16-mnist PROPERTY CXX_STANDARD 17)
 target_include_directories(vggnet16-mnist PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS})
 target_link_libraries(vggnet16-mnist ${TEST_LIBRARIES})
+
+
+
+# VggNet FashionMNIST
+set(SOURCE_FILES
+        ../src/datasets/mnist.cpp
+        ../src/models/cnn/vggnet.cpp
+)
+add_executable(vggnet16-fashionmnist ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/vggnet16-fashionmnist.cpp)
+target_link_libraries(vggnet16-fashionmnist "${TORCH_LIBRARIES}")
+set_property(TARGET vggnet16-fashionmnist PROPERTY CXX_STANDARD 17)
+target_include_directories(vggnet16-fashionmnist PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS})
+target_link_libraries(vggnet16-fashionmnist ${TEST_LIBRARIES})
