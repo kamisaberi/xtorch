@@ -216,7 +216,7 @@ set_property(TARGET vggnet16-fashionmnist PROPERTY CXX_STANDARD 17)
 target_include_directories(vggnet16-fashionmnist PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS})
 target_link_libraries(vggnet16-fashionmnist ${TEST_LIBRARIES})
 
-# ResNet CIFAR10
+# VggNet CIFAR10
 set(SOURCE_FILES
         ../src/datasets/cifar.cpp
         ../src/models/cnn/vggnet.cpp
@@ -226,3 +226,15 @@ target_link_libraries(vggnet16-cifar10 "${TORCH_LIBRARIES}")
 set_property(TARGET vggnet16-cifar10 PROPERTY CXX_STANDARD 17)
 target_include_directories(vggnet16-cifar10 PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS})
 target_link_libraries(vggnet16-cifar10 ${TEST_LIBRARIES})
+
+
+# VggNet CIFAR100
+set(SOURCE_FILES
+        ../src/datasets/cifar.cpp
+        ../src/models/cnn/vggnet.cpp
+)
+add_executable(vggnet16-cifar100 ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/vggnet16-cifar100.cpp)
+target_link_libraries(vggnet16-cifar100 "${TORCH_LIBRARIES}")
+set_property(TARGET vggnet16-cifar100 PROPERTY CXX_STANDARD 17)
+target_include_directories(vggnet16-cifar100 PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS})
+target_link_libraries(vggnet16-cifar100 ${TEST_LIBRARIES})
