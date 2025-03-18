@@ -164,3 +164,14 @@ target_link_libraries(resnet-fashionmnist "${TORCH_LIBRARIES}")
 set_property(TARGET resnet-fashionmnist PROPERTY CXX_STANDARD 17)
 target_include_directories(resnet-fashionmnist PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS})
 target_link_libraries(resnet-fashionmnist ${TEST_LIBRARIES})
+
+# ResNet CIFAR10
+set(SOURCE_FILES
+        ../src/datasets/cifar.cpp
+        ../src/models/cnn/resnet.cpp
+)
+add_executable(alexnet-cifar10 ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/resnet-cifar10.cpp)
+target_link_libraries(alexnet-cifar10 "${TORCH_LIBRARIES}")
+set_property(TARGET alexnet-cifar10 PROPERTY CXX_STANDARD 17)
+target_include_directories(alexnet-cifar10 PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS})
+target_link_libraries(alexnet-cifar10 ${TEST_LIBRARIES})
