@@ -25,6 +25,13 @@ namespace torch::ext::data::transforms {
         ).squeeze(0);
     }
 
+    torch::Tensor  grayscale_to_rgb(const torch::Tensor &tensor) {
+        return torch::nn::functional::interpolate(
+            tensor.unsqueeze(0),
+            torch::nn::functional::InterpolateFuncOptions().mode(torch::kBilinear).align_corners(false)
+        ).squeeze(0);
+
+    }
 
     torch::data::transforms::Lambda<torch::data::Example<>> resize(std::vector<int64_t> size) {
         return torch::data::transforms::Lambda<torch::data::Example<> >(
