@@ -46,8 +46,8 @@ namespace torch::ext::data::datasets {
 
     void CIFAR10::load_data(DataMode mode) {
         const int num_files = 5;
-        for (int i = 1; i <= num_files; ++i) {
-            std::string file_path = root / "/data_batch_" / std::to_string(i) / ".bin";
+        for (auto path : this->train_file_names) {
+            std::string file_path = this->dataset_path / path;
             cout << "Loading file " << file_path << endl;
             std::ifstream file(file_path, std::ios::binary);
             if (!file.is_open()) {
@@ -73,7 +73,36 @@ namespace torch::ext::data::datasets {
             }
 
             file.close();
+
         }
+        // for (int i = 1; i <= num_files; ++i) {
+        //     std::string file_path = root / "/data_batch_" / std::to_string(i) / ".bin";
+        //     cout << "Loading file " << file_path << endl;
+        //     std::ifstream file(file_path, std::ios::binary);
+        //     if (!file.is_open()) {
+        //         std::cerr << "Failed to open file: " << file_path << std::endl;
+        //         continue;
+        //     }
+        //
+        //     for (int j = 0; j < 10000; ++j) {
+        //         uint8_t label;
+        //         file.read(reinterpret_cast<char *>(&label), sizeof(label));
+        //         labels.push_back(static_cast<int64_t>(label));
+        //
+        //         std::vector<uint8_t> image(3072); // 32x32x3 = 3072
+        //         file.read(reinterpret_cast<char *>(image.data()), image.size());
+        //
+        //         // Reshape the image to 3x32x32 and convert to a Torch tensor
+        //         auto tensor_image = torch::from_blob(image.data(), {3, 32, 32},
+        //                                              torch::kByte).clone(); // Clone to ensure memory management
+        //         tensor_image = tensor_image.permute(
+        //             {0, 2, 1}); // Permute to get the correct order (C, H, W)
+        //
+        //         data.push_back(tensor_image); // Store the tensor in the data vector
+        //     }
+        //
+        //     file.close();
+        // }
     }
 
     //------------------ CIFAR100 ------------------//
