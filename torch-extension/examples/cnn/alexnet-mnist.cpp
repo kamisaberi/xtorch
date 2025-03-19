@@ -8,7 +8,7 @@ using namespace std;
 using Example = torch::data::Example<torch::Tensor, torch::Tensor>;
 
 int main() {
-    std::vector<int64_t> size = {32, 32};
+    std::vector<int64_t> size = {227, 227};
 
     std::cout.precision(10);
     torch::Device device(torch::kCPU);
@@ -16,7 +16,7 @@ int main() {
     auto dataset = torch::ext::data::datasets::MNIST("/home/kami/Documents/temp/", DataMode::TRAIN, true);
 
     auto transformed_dataset = dataset
-            .map(torch::ext::data::transforms::resize({227, 227}))
+            .map(torch::ext::data::transforms::resize(size))
             .map(torch::ext::data::transforms::normalize(0.5, 0.5))
             .map(torch::data::transforms::Stack<>());
 
