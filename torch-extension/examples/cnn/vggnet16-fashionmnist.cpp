@@ -9,7 +9,7 @@ using namespace std;
 using Example = torch::data::Example<torch::Tensor, torch::Tensor>;
 
 int main() {
-    std::vector<int64_t> size = {32, 32};
+    std::vector<int64_t> size = {227, 227};
 
     std::cout.precision(10);
     torch::Device device(torch::kCPU);
