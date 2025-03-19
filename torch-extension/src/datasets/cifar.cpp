@@ -48,7 +48,7 @@ namespace torch::ext::data::datasets {
         const int num_files = 5;
         for (auto path : this->train_file_names) {
             std::string file_path = this->dataset_path / path;
-            cout << "Loading file " << file_path << endl;
+            // cout << "Loading file " << file_path << endl;
             std::ifstream file(file_path, std::ios::binary);
             if (!file.is_open()) {
                 std::cerr << "Failed to open file: " << file_path << std::endl;
