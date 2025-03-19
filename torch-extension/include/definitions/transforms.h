@@ -20,4 +20,6 @@ namespace torch::ext::data::transforms {
 
     torch::data::transforms::Lambda<torch::data::Example<> > normalize(double mean, double stddev);
 
+    torch::data::transforms::Lambda<torch::data::Example<> > grayscaleToRGB();
+
 }
