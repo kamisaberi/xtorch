@@ -130,9 +130,9 @@ namespace torch::ext::data::datasets {
                 res = torch::ext::utils::extract(pth, this->root);
             }
         }
-        if (res) {
+        // if (res) {
             load_data(mode);
-        }
+        // }
     }
 
     torch::data::Example<> CIFAR100::get(size_t index) {
