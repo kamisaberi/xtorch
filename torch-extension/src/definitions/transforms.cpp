@@ -26,11 +26,8 @@ namespace torch::ext::data::transforms {
     }
 
     torch::Tensor  grayscale_to_rgb(const torch::Tensor &tensor) {
-        return torch::nn::functional::interpolate(
-            tensor.unsqueeze(0),
-            torch::nn::functional::InterpolateFuncOptions().mode(torch::kBilinear).align_corners(false)
-        ).squeeze(0);
-
+        torch::Tensor gray = tensor.dim() == 3 ? tensor.unsqueeze(1) : tensor; // Ensure [N, 1, H, W]
+        return gray.repeat({1, 3, 1, 1}); // [N, 1, H, W] -> [N, 3, H, W]
     }
 
     torch::data::transforms::Lambda<torch::data::Example<>> resize(std::vector<int64_t> size) {
@@ -68,6 +65,7 @@ namespace torch::ext::data::transforms {
             }
         );
     }
+
 
 
 
