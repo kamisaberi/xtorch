@@ -15,11 +15,14 @@ int main() {
     torch::Device device(torch::kCPU);
 
     auto dataset = torch::ext::data::datasets::CIFAR10("/home/kami/Documents/temp/", DataMode::TRAIN, true);
+    cout << dataset.size().value() << endl;
+
 
     auto transformed_dataset = dataset
             .map(torch::ext::data::transforms::resize({32, 32}))
             .map(torch::ext::data::transforms::normalize(0.5, 0.5))
             .map(torch::data::transforms::Stack<>());
+
 
     auto train_loader = torch::data::make_data_loader<torch::data::samplers::SequentialSampler>(
         std::move(transformed_dataset), 64);
@@ -29,6 +32,7 @@ int main() {
     model.train();
     torch::optim::Adam optimizer(model.parameters(), torch::optim::AdamOptions(1e-3));
     for (size_t epoch = 0; epoch != 10; ++epoch) {
+//      cout << "epoch: " << epoch << endl;
         size_t batch_index = 0;
         auto train_loader_interator = train_loader->begin();
         auto train_loader_end = train_loader->end();
