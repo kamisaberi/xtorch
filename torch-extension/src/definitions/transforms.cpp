@@ -67,6 +67,14 @@ namespace torch::ext::data::transforms {
     }
 
 
+    torch::data::transforms::Lambda<torch::data::Example<>> grayscaleToRGB() {
+        return torch::data::transforms::Lambda<torch::data::Example<> >(
+            [](torch::data::Example<> example) {
+                example.data = grayscale_image(example.data);
+                return example;
+            }
+        );
+    }
 
 
 }
