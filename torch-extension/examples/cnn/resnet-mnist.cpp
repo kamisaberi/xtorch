@@ -16,7 +16,7 @@ int main() {
     auto dataset = torch::ext::data::datasets::MNIST("/home/kami/Documents/temp/", DataMode::TRAIN, true);
 
     auto transformed_dataset = dataset
-            .map(torch::ext::data::transforms::resize({32, 32}))
+            .map(torch::ext::data::transforms::resize(size))
             .map(torch::ext::data::transforms::normalize(0.5, 0.5))
             .map(torch::data::transforms::Stack<>());
 
