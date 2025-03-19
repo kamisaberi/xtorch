@@ -33,7 +33,7 @@ namespace torch::ext::data::datasets {
         // if (res) {
         load_data(mode);
         // }
-        cout << "DATA SIZES:" << this->data.size() << endl;
+        // cout << "DATA SIZES:" << this->data.size() << endl;
     }
 
     torch::data::Example<> CIFAR10::get(size_t index) {
