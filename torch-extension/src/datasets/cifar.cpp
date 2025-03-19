@@ -5,7 +5,6 @@ namespace fs = std::filesystem;
 
 
 namespace torch::ext::data::datasets {
-
     //------------------ CIFAR10 ------------------//
     CIFAR10::CIFAR10(const std::string &root, DataMode mode, bool download) {
         // Load data from the specified root directory
@@ -31,9 +30,10 @@ namespace torch::ext::data::datasets {
                 res = torch::ext::utils::extract(pth, this->root);
             }
         }
-        if (res) {
-            load_data(mode);
-        }
+        // if (res) {
+        load_data(mode);
+        // }
+        cout << "DATA SIZES:" << this->data.size() << endl;
     }
 
     torch::data::Example<> CIFAR10::get(size_t index) {
@@ -48,6 +48,7 @@ namespace torch::ext::data::datasets {
         const int num_files = 5;
         for (int i = 1; i <= num_files; ++i) {
             std::string file_path = root / "/data_batch_" / std::to_string(i) / ".bin";
+            cout << "Loading file " << file_path << endl;
             std::ifstream file(file_path, std::ios::binary);
             if (!file.is_open()) {
                 std::cerr << "Failed to open file: " << file_path << std::endl;
@@ -66,7 +67,7 @@ namespace torch::ext::data::datasets {
                 auto tensor_image = torch::from_blob(image.data(), {3, 32, 32},
                                                      torch::kByte).clone(); // Clone to ensure memory management
                 tensor_image = tensor_image.permute(
-                        {0, 2, 1}); // Permute to get the correct order (C, H, W)
+                    {0, 2, 1}); // Permute to get the correct order (C, H, W)
 
                 data.push_back(tensor_image); // Store the tensor in the data vector
             }
@@ -76,7 +77,7 @@ namespace torch::ext::data::datasets {
     }
 
     //------------------ CIFAR100 ------------------//
-    CIFAR100::CIFAR100(const std::string &root,  DataMode mode, bool download) {
+    CIFAR100::CIFAR100(const std::string &root, DataMode mode, bool download) {
         // Load data from the specified root directory
         this->root = fs::path(root);
         this->dataset_path = this->root / this->dataset_folder_name;
@@ -113,7 +114,7 @@ namespace torch::ext::data::datasets {
         return data.size();
     }
 
-    void CIFAR100::load_data( DataMode mode) {
+    void CIFAR100::load_data(DataMode mode) {
         const int num_files = 5;
         std::string file_path = (dataset_path / train_file_name).string();
         cout << "train file path : " << file_path << endl;
@@ -143,8 +144,4 @@ namespace torch::ext::data::datasets {
 
         file.close();
     }
-
-
 }
-
-
