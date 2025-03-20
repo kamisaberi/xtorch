@@ -3,6 +3,7 @@
 namespace torch::ext::data::datasets {
     Imagenette::Imagenette(const std::string &root, DataMode mode, bool download, ImageType type) : BaseDataset(
         root, mode, download) {
+        this->type = type;
         check_resources(root, download);
         load_data(mode);
     }

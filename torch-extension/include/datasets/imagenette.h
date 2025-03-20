@@ -39,6 +39,7 @@ namespace torch::ext::data::datasets {
                 }
             }
         };
+        ImageType type = ImageType::PX160;
         fs::path dataset_folder_name = "imagenette";
 
         void load_data(DataMode mode = DataMode::TRAIN);
