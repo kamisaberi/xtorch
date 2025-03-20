@@ -104,6 +104,7 @@ find_package(ZLIB REQUIRED)
 
 find_package(OpenSSL REQUIRED)
 find_package(LibLZMA REQUIRED)
+find_package(LibArchive REQUIRED)
 
 #find_package(XZ REQUIRED)
 
@@ -115,7 +116,7 @@ include_directories(${CURL_INCLUDE_DIR})
 include_directories(${ZIP_INCLUDE_DIRS})
 #include_directories(${XZ_INCLUDE_DIRS})
 
-target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS})
+target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
 target_link_libraries(${CMAKE_PROJECT_NAME}
         ${CURL_LIBRARIES}
         ${TORCH_LIBRARIES}
@@ -128,6 +129,7 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
         OpenSSL::SSL
         OpenSSL::Crypto
         LibLZMA::LibLZMA
+        ${LibArchive_LIBRARIES}
 #        XZ::XZ
 )
 
