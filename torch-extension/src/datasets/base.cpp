@@ -15,5 +15,14 @@ namespace torch::ext::data::datasets {
         this->transforms = transforms;
     }
 
+    torch::data::Example<> BaseDataset::get(size_t index) {
+        return {data[index], torch::tensor(labels[index])};
+    }
+
+    // Override `size` method to return the number of samples
+    torch::optional<size_t> BaseDataset::size() const {
+        return data.size();
+    }
+
 
 }

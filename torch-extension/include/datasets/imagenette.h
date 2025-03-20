@@ -27,7 +27,7 @@ namespace torch::ext::data::datasets {
         return "unknown"; // Default value if enum not found
     }
 
-    class Imagenette : BaseDataset {
+    class Imagenette : public BaseDataset {
     public :
         Imagenette(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false , ImageType type = ImageType::PX160) ;
 
