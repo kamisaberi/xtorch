@@ -29,7 +29,10 @@ namespace torch::ext::data::datasets {
         }
 
         // auto tp = static_cast<string>(this->type);
-        // std::tuple<fs::path, std::string> res= this->resources[tp];
+        std::tuple<fs::path, std::string> res = this->resources[getImageTypeValue(this->type)];
+        fs::path pth = std::get<0>(res);
+        std::string md = std::get<1>(res);
+
         // bool res = true;
         // for (const auto &resource: this->resources) {
         //     fs::path pth = std::get<0>(resource);
