@@ -20,24 +20,24 @@ int main() {
 
     auto dataset = torch::ext::data::datasets::Imagenette("/home/kami/Documents/temp/", DataMode::TRAIN,  true,torch::ext::data::datasets::ImageType::PX160);
 
-    cout << "DATASET\n";
-    cout << dataset.get(0).data << "  " << dataset.get(0).target << "\n";
-
-    //
-    auto transformed_dataset = dataset
-            .map(torch::ext::data::transforms::resize({32, 32}))
-            .map(torch::ext::data::transforms::normalize(0.5, 0.5))
-            .map(torch::data::transforms::Stack<>());
-
-    cout << "TRANSFORMED DATASET\n";
-    cout << transformed_dataset.get_batch(0).data << "  " << transformed_dataset.get_batch(0).target << "\n";
-
-
-    //TODO Custom Dataset START
-    vector<torch::data::transforms::Lambda<torch::data::Example<> > > transforms = {
-        torch::ext::data::transforms::resize({32, 32}),
-        torch::ext::data::transforms::normalize(0.5, 0.5)
-    };
+//    cout << "DATASET\n";
+//    cout << dataset.get(0).data << "  " << dataset.get(0).target << "\n";
+//
+//    //
+//    auto transformed_dataset = dataset
+//            .map(torch::ext::data::transforms::resize({32, 32}))
+//            .map(torch::ext::data::transforms::normalize(0.5, 0.5))
+//            .map(torch::data::transforms::Stack<>());
+//
+//    cout << "TRANSFORMED DATASET\n";
+//    cout << transformed_dataset.get_batch(0).data << "  " << transformed_dataset.get_batch(0).target << "\n";
+//
+//
+//    //TODO Custom Dataset START
+//    vector<torch::data::transforms::Lambda<torch::data::Example<> > > transforms = {
+//        torch::ext::data::transforms::resize({32, 32}),
+//        torch::ext::data::transforms::normalize(0.5, 0.5)
+//    };
 
 //    auto train_loader = torch::data::make_data_loader<torch::data::samplers::SequentialSampler>(
 //        std::move(transformed_dataset), 64);

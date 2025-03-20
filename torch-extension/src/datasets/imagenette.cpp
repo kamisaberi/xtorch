@@ -27,12 +27,20 @@ namespace torch::ext::data::datasets {
         if (!fs::exists(this->dataset_path)) {
             fs::create_directories(this->dataset_path);
         }
-
         // auto tp = static_cast<string>(this->type);
-        std::tuple<fs::path, std::string> res = this->resources[getImageTypeValue(this->type)];
-        fs::path pth = std::get<0>(res);
-        std::string md = std::get<1>(res);
-
+        // std::tuple<fs::path,fs::path, std::string> res = this->resources[getImageTypeValue(this->type)];
+        auto [url , dataset_filename , md] =  this->resources[getImageTypeValue(this->type)];
+        // fs::path pth = std::get<0>(res);
+        // std::string md = std::get<1>(res);
+        fs::path fpth = this->dataset_path / dataset_filename;
+        if (!(fs::exists(fpth) && torch::ext::utils::get_md5_checksum(fpth.string()) == md)) {
+            if (download) {
+                string u = url.string();
+                auto [r, path] = torch::ext::utils::download(u, this->dataset_path.string());
+            } else {
+                throw runtime_error("Resources files dent exist. please try again with download = true");
+            }
+        }
         // bool res = true;
         // for (const auto &resource: this->resources) {
         //     fs::path pth = std::get<0>(resource);
