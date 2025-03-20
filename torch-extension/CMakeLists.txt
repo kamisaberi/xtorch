@@ -523,6 +523,7 @@ set(TEST_SOURCE_FILES
         src/utils/downloader.cpp
         src/media/image/processing.cpp
         src/datasets/mnist.cpp
+        src/datasets/imagenette.cpp
         src/models/cnn/lenet5.cpp
         src/utils/md5.cpp
         include/types/arguments.h

@@ -12,9 +12,9 @@ namespace torch::ext::data::datasets {
         auto [mode , download , transforms] = args;
         check_resources(root, download);
         load_data(mode);
-        if (!transforms.empty()) {
-            this->transform_data(transforms);
-        }
+        // if (!transforms.empty()) {
+        //     this->transform_data(transforms);
+        // }
     }
 
 
