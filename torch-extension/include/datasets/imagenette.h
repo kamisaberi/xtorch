@@ -10,8 +10,23 @@ namespace torch::ext::data::datasets {
     enum class ImageType {
         FULL = 0,
         PX320 = 1,
-        PX160 = 2,
+        PX160 = 2
+
     };
+    const std::unordered_map<ImageType, std::string> ImageTypeToString = {
+        {ImageType::FULL, "full"},
+        {ImageType::PX320, "320px"},
+        {ImageType::PX160, "160px"}
+    };
+
+    inline std::string getImageTypeValue(ImageType type) {
+        auto it = ImageTypeToString.find(type);
+        if (it != ImageTypeToString.end()) {
+            return it->second;
+        }
+        return "unknown"; // Default value if enum not found
+    }
+
     class Imagenette : BaseDataset {
     public :
         Imagenette(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false , ImageType type = ImageType::PX160) ;
