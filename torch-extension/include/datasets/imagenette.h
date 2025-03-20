@@ -7,9 +7,14 @@ using namespace std;
 namespace fs = std::filesystem;
 
 namespace torch::ext::data::datasets {
+    enum class ImageType {
+        FULL = 0,
+        PX320 = 1,
+        PX160 = 2,
+    };
     class Imagenette : BaseDataset {
     public :
-        Imagenette(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+        Imagenette(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false , ImageType type = ImageType::PX160) ;
 
         Imagenette(const fs::path &root, DatasetArguments args);
 
