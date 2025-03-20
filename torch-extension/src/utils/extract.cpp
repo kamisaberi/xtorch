@@ -311,6 +311,8 @@ namespace torch::ext::utils {
             }
         } else if (ext == ".zip") {
             extractZip(inFile, outFile);
+        } else if (ext == ".tgz") {
+            extractTgz(inFile, outFile);
         } else if (ext == ".tar") {
             extractTar(inFile, outFile);
         }
