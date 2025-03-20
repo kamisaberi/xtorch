@@ -16,6 +16,11 @@
 #include <fstream>
 #include <vector>
 #include <stdexcept>
+#include <archive.h>
+#include <archive_entry.h>
+#include <fstream>
+#include <iostream>
+#include <filesystem>
 
 
 using namespace std;
