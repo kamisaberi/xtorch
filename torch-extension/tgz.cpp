@@ -91,13 +91,9 @@ bool extract_tgz(const std::string& filename, const std::string& output_dir) {
 }
 
 int main(int argc, char* argv[]) {
-    if (argc != 3) {
-        std::cerr << "Usage: " << argv[0] << " <archive.tgz> <output_directory>" << std::endl;
-        return 1;
-    }
 
-    std::string filename = argv[1];
-    std::string output_dir = argv[2];
+    std::string filename = "/home/kami/Downloads/imagenette2-160.tgz";
+    std::string output_dir = "/home/kami/Downloads/";
 
     if (extract_tgz(filename, output_dir)) {
         std::cout << "Successfully extracted " << filename << " to " << output_dir << std::endl;
