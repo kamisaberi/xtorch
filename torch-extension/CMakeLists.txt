@@ -221,6 +221,8 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
         OpenSSL::SSL
         OpenSSL::Crypto
         LibLZMA::LibLZMA
+        ${LibArchive_LIBRARIES}
+
 
 )
 
@@ -260,6 +262,8 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
         OpenSSL::SSL
         OpenSSL::Crypto
         LibLZMA::LibLZMA
+        ${LibArchive_LIBRARIES}
+
 
 )
 
@@ -298,6 +302,8 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
         OpenSSL::SSL
         OpenSSL::Crypto
         LibLZMA::LibLZMA
+        ${LibArchive_LIBRARIES}
+
 
 )
 
@@ -336,6 +342,8 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
         OpenSSL::SSL
         OpenSSL::Crypto
         LibLZMA::LibLZMA
+        ${LibArchive_LIBRARIES}
+
 )
 
 
@@ -381,6 +389,8 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
         OpenSSL::SSL
         OpenSSL::Crypto
         LibLZMA::LibLZMA
+        ${LibArchive_LIBRARIES}
+
 )
 
 
@@ -433,6 +443,8 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
         OpenSSL::SSL
         OpenSSL::Crypto
         LibLZMA::LibLZMA
+        ${LibArchive_LIBRARIES}
+
 )
 
 
