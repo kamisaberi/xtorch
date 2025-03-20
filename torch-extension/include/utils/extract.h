@@ -30,6 +30,8 @@ namespace torch::ext::utils {
 
     bool extractZip(const std::string &inFile, const std::string &outPath = "./");
 
+    bool extractTgz(const std::string &inFile, const std::string &outPath = "./");
+
     bool extract(const std::string &inFile, const std::string &outFile = "");
 
 }
