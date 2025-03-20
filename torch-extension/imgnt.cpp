@@ -38,53 +38,44 @@ int main() {
         torch::ext::data::transforms::resize({32, 32}),
         torch::ext::data::transforms::normalize(0.5, 0.5)
     };
-    auto dataset2 = torch::ext::data::datasets::MNIST("/home/kami/Documents/temp/",
-                                                      {
-                                                          .mode = DataMode::TRAIN, .download = true,
-                                                          .transforms = transforms
-                                                      });
-    // cout << "mnt 03:" << dataset2.size().value() << "\n";
-    // auto dataset3 =dataset2.map(torch::data::transforms::Stack<>());
-    //TODO Custom Dataset FINISH
 
-
-    auto train_loader = torch::data::make_data_loader<torch::data::samplers::SequentialSampler>(
-        std::move(transformed_dataset), 64);
-
-    cout << "mnt 04\n";
-
-    torch::ext::models::LeNet5 model(10);
-    model.to(device);
-    model.train();
-    torch::optim::Adam optimizer(model.parameters(), torch::optim::AdamOptions(1e-3));
-    cout << "mnt 05\n";
-    for (size_t epoch = 0; epoch != 10; ++epoch) {
-        size_t batch_index = 0;
-        auto train_loader_interator = train_loader->begin();
-        auto train_loader_end = train_loader->end();
-        while (train_loader_interator != train_loader_end) {
-            torch::Tensor data, targets;
-            auto batch = *train_loader_interator;
-            data = batch.data;
-            targets = batch.target;
-            optimizer.zero_grad();
-            torch::Tensor output;
-            output = model.forward(data);
-            torch::Tensor loss;
-            cout << "output: " << output.sizes() << endl;
-            cout << "targets: " << targets.sizes() << endl;
-            loss = torch::nll_loss(output, targets);
-            loss.backward();
-            optimizer.step();
-            if (++batch_index % 100 == 0) {
-                std::cout << "Epoch: " << epoch << " | Batch: " << batch_index << " | Loss: " << loss.item<float>() <<
-                        std::endl;
-            }
-            ++train_loader_interator;
-        }
-    }
-
-    cout << "mnt 06\n";
+//    auto train_loader = torch::data::make_data_loader<torch::data::samplers::SequentialSampler>(
+//        std::move(transformed_dataset), 64);
+//
+//    cout << "mnt 04\n";
+//
+//    torch::ext::models::LeNet5 model(10);
+//    model.to(device);
+//    model.train();
+//    torch::optim::Adam optimizer(model.parameters(), torch::optim::AdamOptions(1e-3));
+//    cout << "mnt 05\n";
+//    for (size_t epoch = 0; epoch != 10; ++epoch) {
+//        size_t batch_index = 0;
+//        auto train_loader_interator = train_loader->begin();
+//        auto train_loader_end = train_loader->end();
+//        while (train_loader_interator != train_loader_end) {
+//            torch::Tensor data, targets;
+//            auto batch = *train_loader_interator;
+//            data = batch.data;
+//            targets = batch.target;
+//            optimizer.zero_grad();
+//            torch::Tensor output;
+//            output = model.forward(data);
+//            torch::Tensor loss;
+//            cout << "output: " << output.sizes() << endl;
+//            cout << "targets: " << targets.sizes() << endl;
+//            loss = torch::nll_loss(output, targets);
+//            loss.backward();
+//            optimizer.step();
+//            if (++batch_index % 100 == 0) {
+//                std::cout << "Epoch: " << epoch << " | Batch: " << batch_index << " | Loss: " << loss.item<float>() <<
+//                        std::endl;
+//            }
+//            ++train_loader_interator;
+//        }
+//    }
+//
+//    cout << "mnt 06\n";
 
 
     return 0;
