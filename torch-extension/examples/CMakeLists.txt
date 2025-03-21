@@ -275,3 +275,14 @@ target_link_libraries(vggnet16-cifar100 "${TORCH_LIBRARIES}")
 set_property(TARGET vggnet16-cifar100 PROPERTY CXX_STANDARD 17)
 target_include_directories(vggnet16-cifar100 PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
 target_link_libraries(vggnet16-cifar100 ${TEST_LIBRARIES})
+
+# VggNet Imagenette
+set(SOURCE_FILES
+        ../src/datasets/imagenette.cpp
+        ../src/models/cnn/vggnet.cpp
+)
+add_executable(vggnet16-imagenette ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/vggnet16-imagenette.cpp)
+target_link_libraries(vggnet16-imagenette "${TORCH_LIBRARIES}")
+set_property(TARGET vggnet16-imagenette PROPERTY CXX_STANDARD 17)
+target_include_directories(vggnet16-imagenette PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
+target_link_libraries(vggnet16-imagenette ${TEST_LIBRARIES})
