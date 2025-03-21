@@ -13,7 +13,7 @@ namespace torch::ext::data::datasets {
 
     class ImageFolder : public BaseDataset {
     public :
-        ImageFolder(const std::string &root, DataMode mode = DataMode::TRAIN, LabelsType label_type = LabelsType::BY_FOLDER);
+        ImageFolder(const std::string &root,bool load_sub_folders =  false , DataMode mode = DataMode::TRAIN, LabelsType label_type = LabelsType::BY_FOLDER );
 
         ImageFolder(const fs::path &root, DatasetArguments args);
 
@@ -21,6 +21,7 @@ namespace torch::ext::data::datasets {
         fs::path dataset_folder_name = "imagenette";
         vector<string> labels_name;
         LabelsType label_type = LabelsType::BY_FOLDER;
+        bool load_sub_folders = false;
 
         void load_data();
 
