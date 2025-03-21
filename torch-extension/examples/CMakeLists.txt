@@ -154,6 +154,17 @@ set_property(TARGET alexnet-cifar100 PROPERTY CXX_STANDARD 17)
 target_include_directories(alexnet-cifar100 PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
 target_link_libraries(alexnet-cifar100 ${TEST_LIBRARIES})
 
+# AlexNet Imagenette
+set(SOURCE_FILES
+        ../src/datasets/imagenette.cpp
+        ../src/models/cnn/alexnet.cpp
+)
+add_executable(alexnet-imagenette ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/alexnet-imagenette.cpp)
+target_link_libraries(alexnet-imagenette "${TORCH_LIBRARIES}")
+set_property(TARGET alexnet-imagenette PROPERTY CXX_STANDARD 17)
+target_include_directories(alexnet-imagenette PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
+target_link_libraries(alexnet-imagenette ${TEST_LIBRARIES})
+
 
 #--------------------------------------- CNN/ResNet ---------------------------------------#
 
