@@ -214,6 +214,17 @@ set_property(TARGET resnet-cifar100 PROPERTY CXX_STANDARD 17)
 target_include_directories(resnet-cifar100 PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
 target_link_libraries(resnet-cifar100 ${TEST_LIBRARIES})
 
+# ResNet Imagenette
+set(SOURCE_FILES
+        ../src/datasets/imagenette.cpp
+        ../src/models/cnn/resnet.cpp
+)
+add_executable(resnet-imagenette ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/resnet-imagenette.cpp)
+target_link_libraries(resnet-imagenette "${TORCH_LIBRARIES}")
+set_property(TARGET resnet-imagenette PROPERTY CXX_STANDARD 17)
+target_include_directories(resnet-imagenette PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
+target_link_libraries(resnet-imagenette ${TEST_LIBRARIES})
+
 
 
 #--------------------------------------- CNN/VggNet ---------------------------------------#
