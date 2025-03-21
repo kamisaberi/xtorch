@@ -63,8 +63,10 @@ namespace torch::ext::data::datasets {
         if (mode == DataMode::TRAIN) {
             fs::path path = this->dataset_path / folder_name / fs::path("train");
             for (auto &p: fs::directory_iterator(path)) {
-                string u = p.path().string();
-                cout << u << endl;
+                if (fs::is_directory(p.path())) {
+                    string u = p.path().string();
+                    cout << u << endl;
+                }
             }
 
             //     fs::path imgs = this->dataset_path / std::get<0>(files["train"]);
