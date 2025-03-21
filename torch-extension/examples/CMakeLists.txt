@@ -92,6 +92,18 @@ target_include_directories(lenet5-cifar100 PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH
 target_link_libraries(lenet5-cifar100 ${TEST_LIBRARIES})
 
 
+# LeNet5 Imagenette
+set(SOURCE_FILES
+        ../src/datasets/imagenette.cpp
+        ../src/models/cnn/lenet5.cpp
+)
+add_executable(lenet5-imagenette ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/lenet5-imagenette.cpp)
+target_link_libraries(lenet5-imagenette "${TORCH_LIBRARIES}")
+set_property(TARGET lenet5-imagenette PROPERTY CXX_STANDARD 17)
+target_include_directories(lenet5-imagenette PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
+target_link_libraries(lenet5-imagenette ${TEST_LIBRARIES})
+
+
 
 #--------------------------------------- CNN/AlexNet ---------------------------------------#
 
