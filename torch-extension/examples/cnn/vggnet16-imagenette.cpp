@@ -1,5 +1,5 @@
 #include "includes/base.h"
-#include "../../include/datasets/mnist.h"
+#include "../../include/datasets/imagenette.h"
 #include "../../include/models/cnn/vggnet.h"
 #include "../../include/definitions/transforms.h"
 
@@ -13,7 +13,7 @@ int main() {
     std::cout.precision(10);
     torch::Device device(torch::kCPU);
 
-    auto dataset = torch::ext::data::datasets::MNIST("/home/kami/Documents/temp/", DataMode::TRAIN, true);
+    auto dataset = torch::ext::data::datasets::Imagenette("/home/kami/Documents/temp/", DataMode::TRAIN, true, torch::ext::data::datasets::ImageType::PX160);
 
     auto transformed_dataset = dataset
             .map(torch::ext::data::transforms::resize(size))
@@ -23,7 +23,7 @@ int main() {
     auto train_loader = torch::data::make_data_loader<torch::data::samplers::SequentialSampler>(
         std::move(transformed_dataset), 64);
 
-    torch::ext::models::VggNet16 model(10,1);
+    torch::ext::models::VggNet16 model(10,3);
     model.to(device);
     model.train();
     torch::optim::Adam optimizer(model.parameters(), torch::optim::AdamOptions(1e-3));
