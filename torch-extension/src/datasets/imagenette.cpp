@@ -64,8 +64,14 @@ namespace torch::ext::data::datasets {
             fs::path path = this->dataset_path / folder_name / fs::path("train");
             for (auto &p: fs::directory_iterator(path)) {
                 if (fs::is_directory(p.path())) {
-                    string u = p.path().string();
+                    string u = p.path().filename().string();
                     cout << u << endl;
+                    labels_name.push_back(u);
+                    for (auto &img: fs::directory_iterator(p.path())) {
+                        string u = img.path().string();
+                        cout << "\t" << u << endl;
+                    }
+
                 }
             }
 
