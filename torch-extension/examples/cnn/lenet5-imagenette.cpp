@@ -1,5 +1,5 @@
 #include "includes/base.h"
-#include "../../include/datasets/mnist.h"
+#include "../../include/datasets/imagenette.h"
 #include "../../include/models/cnn/lenet5.h"
 #include "../../include/definitions/transforms.h"
 
@@ -12,10 +12,10 @@ int main() {
     std::cout.precision(10);
     torch::Device device(torch::kCPU);
 
-    auto dataset = torch::ext::data::datasets::MNIST("/home/kami/Documents/temp/", DataMode::TRAIN, true);
+    auto dataset = torch::ext::data::datasets::Imagenette("/home/kami/Documents/temp/", DataMode::TRAIN, true,torch::ext::data::datasets::ImageType::PX160 );
 
     auto transformed_dataset = dataset
-            .map(torch::ext::data::transforms::resize({32, 32}))
+            .map(torch::ext::data::transforms::resize(size))
             .map(torch::ext::data::transforms::normalize(0.5, 0.5))
             .map(torch::data::transforms::Stack<>());
 
