@@ -24,13 +24,13 @@ int main() {
     cout << dataset.get(0).data << "  " << dataset.get(0).target << "\n";
 //
 //    //
-//    auto transformed_dataset = dataset
-//            .map(torch::ext::data::transforms::resize({32, 32}))
-//            .map(torch::ext::data::transforms::normalize(0.5, 0.5))
-//            .map(torch::data::transforms::Stack<>());
+    auto transformed_dataset = dataset
+            .map(torch::ext::data::transforms::resize({32, 32}))
+            .map(torch::ext::data::transforms::normalize(0.5, 0.5))
+            .map(torch::data::transforms::Stack<>());
 //
-//    cout << "TRANSFORMED DATASET\n";
-//    cout << transformed_dataset.get_batch(0).data << "  " << transformed_dataset.get_batch(0).target << "\n";
+    cout << "TRANSFORMED DATASET\n";
+    cout << transformed_dataset.get_batch(0).data << "  " << transformed_dataset.get_batch(0).target << "\n";
 //
 //
 //    //TODO Custom Dataset START
