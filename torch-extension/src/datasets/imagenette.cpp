@@ -68,7 +68,7 @@ namespace torch::ext::data::datasets {
                     cout << u << endl;
                     labels_name.push_back(u);
                     for (auto &img: fs::directory_iterator(p.path())) {
-                        string u = img.path().string();
+                        // string u = img.path().string();
                         // cout << "\t" << u << endl;
                         cv::Mat image = cv::imread(img.path().string(), cv::IMREAD_COLOR);
                         if (image.empty()) {
@@ -94,7 +94,7 @@ namespace torch::ext::data::datasets {
 
                         // 6. Make sure the tensor is contiguous in memory
                         tensor = tensor.contiguous();
-                        cout << tensor.sizes() << endl;
+                        // cout << tensor.sizes() << endl;
                         data.push_back(tensor);
                         labels.push_back(labels_name.size() - 1);
                     }
