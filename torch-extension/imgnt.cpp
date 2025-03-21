@@ -20,8 +20,8 @@ int main() {
 
     auto dataset = torch::ext::data::datasets::Imagenette("/home/kami/Documents/temp/", DataMode::TRAIN,  true,torch::ext::data::datasets::ImageType::PX160);
 
-//    cout << "DATASET\n";
-//    cout << dataset.get(0).data << "  " << dataset.get(0).target << "\n";
+    cout << "DATASET\n";
+    cout << dataset.get(0).data << "  " << dataset.get(0).target << "\n";
 //
 //    //
 //    auto transformed_dataset = dataset
