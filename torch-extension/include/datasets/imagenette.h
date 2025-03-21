@@ -11,8 +11,8 @@ namespace torch::ext::data::datasets {
         FULL = 0,
         PX320 = 1,
         PX160 = 2
-
     };
+
     const std::unordered_map<ImageType, std::string> ImageTypeToString = {
         {ImageType::FULL, "full"},
         {ImageType::PX320, "320px"},
@@ -29,20 +29,19 @@ namespace torch::ext::data::datasets {
 
     class Imagenette : public BaseDataset {
     public :
-        Imagenette(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false , ImageType type = ImageType::PX160) ;
-
-
-
+        Imagenette(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false,
+                   ImageType type = ImageType::PX160);
 
 
         Imagenette(const fs::path &root, DatasetArguments args);
 
     private:
-        std::map<string, std::tuple<fs::path, fs::path, std::string> > resources = {
+        std::map<string, std::tuple<fs::path, fs::path, fs::path, std::string> > resources = {
             {
                 "full", {
                     fs::path("https://s3.amazonaws.com/fast-ai-imageclas/imagenette2.tgz"),
                     fs::path("imagenette2.tgz"),
+                    fs::path("imagenette2"),
                     "fe2fc210e6bb7c5664d602c3cd71e612"
                 }
             },
@@ -50,6 +49,7 @@ namespace torch::ext::data::datasets {
                 "320px", {
                     fs::path("https://s3.amazonaws.com/fast-ai-imageclas/imagenette2-320.tgz"),
                     fs::path("imagenette2-320.tgz"),
+                    fs::path("imagenette2-320"),
                     "3df6f0d01a2c9592104656642f5e78a3"
                 }
             },
@@ -57,6 +57,7 @@ namespace torch::ext::data::datasets {
                 "160px", {
                     fs::path("https://s3.amazonaws.com/fast-ai-imageclas/imagenette2-160.tgz"),
                     fs::path("imagenette2-160.tgz"),
+                    fs::path("imagenette2-160"),
                     "e793b78cc4c9e9a4ccc0c1155377a412"
                 }
             }
