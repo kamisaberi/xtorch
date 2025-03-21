@@ -80,10 +80,8 @@ namespace torch::ext::data::datasets {
 
                         // 4. Create a tensor from the image data
                         // OpenCV uses HWC (Height, Width, Channels) format
-                        torch::Tensor tensor = torch::from_blob(
-                            image.data,
-                            {image.rows, image.cols, image.channels()},
-                            torch::kFloat32
+                        torch::Tensor tensor = torch::from_blob(image.data, {image.rows, image.cols, image.channels()},
+                                                                torch::kFloat32
                         );
 
                         // 5. Permute to CHW (Channels, Height, Width) format, which is PyTorch's default
@@ -96,7 +94,6 @@ namespace torch::ext::data::datasets {
                     }
                 }
             }
-
         } else {
             fs::path path = this->dataset_path / folder_name / fs::path("val");
 
@@ -118,10 +115,8 @@ namespace torch::ext::data::datasets {
 
                         // 4. Create a tensor from the image data
                         // OpenCV uses HWC (Height, Width, Channels) format
-                        torch::Tensor tensor = torch::from_blob(
-                            image.data,
-                            {image.rows, image.cols, image.channels()},
-                            torch::kFloat32
+                        torch::Tensor tensor = torch::from_blob(image.data, {image.rows, image.cols, image.channels()},
+                                                                torch::kFloat32
                         );
 
                         // 5. Permute to CHW (Channels, Height, Width) format, which is PyTorch's default
@@ -134,8 +129,6 @@ namespace torch::ext::data::datasets {
                     }
                 }
             }
-
-
         }
     }
 }
