@@ -27,7 +27,7 @@ namespace torch::ext::data::datasets {
         if (!fs::exists(this->dataset_path)) {
             fs::create_directories(this->dataset_path);
         }
-        auto [url , dataset_filename , md] =  this->resources[getImageTypeValue(this->type)];
+        auto [url , dataset_filename , folder_name, md] =  this->resources[getImageTypeValue(this->type)];
         fs::path fpth = this->dataset_path / dataset_filename;
         if (!(fs::exists(fpth) && torch::ext::utils::get_md5_checksum(fpth.string()) == md)) {
             if (download) {
@@ -59,7 +59,14 @@ namespace torch::ext::data::datasets {
 
 
     void Imagenette::load_data(DataMode mode) {
-        // if (mode == DataMode::TRAIN) {
+        auto [url , dataset_filename , folder_name, md] =  this->resources[getImageTypeValue(this->type)];
+        if (mode == DataMode::TRAIN) {
+            fs::path   path = this->dataset_path / folder_name / fs::path("train") ;
+
+
+
+
+
         //     fs::path imgs = this->dataset_path / std::get<0>(files["train"]);
         //     fs::path lbls = this->dataset_path / std::get<1>(files["train"]);
         //     cout << imgs.string() << "  " << lbls.string() << endl;
@@ -71,7 +78,8 @@ namespace torch::ext::data::datasets {
         //     // cout << labels[0] << endl;
         //     // this->data = images;
         //     // this->labels = labels;
-        // } else {
+        } else {
+            fs::path   path = this->dataset_path / folder_name / fs::path("val") ;
         //     fs::path imgs = this->dataset_path / std::get<0>(files["test"]);
         //     fs::path lbls = this->dataset_path / std::get<1>(files["test"]);
         //     cout << imgs << endl;
@@ -81,6 +89,6 @@ namespace torch::ext::data::datasets {
         //     // auto labels = read_mnist_labels(lbls.string(), 10000);
         //     // this->data = images;
         //     // this->labels = labels;
-        // }
+        }
     }
 }
