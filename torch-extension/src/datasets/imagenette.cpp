@@ -65,7 +65,7 @@ namespace torch::ext::data::datasets {
             for (auto &p: fs::directory_iterator(path)) {
                 if (fs::is_directory(p.path())) {
                     string u = p.path().filename().string();
-                    cout << u << endl;
+                    // cout << u << endl;
                     labels_name.push_back(u);
                     for (auto &img: fs::directory_iterator(p.path())) {
                         // string u = img.path().string();
