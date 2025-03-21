@@ -78,7 +78,8 @@ namespace torch::ext::data::datasets {
                         cv::cvtColor(image, image, cv::COLOR_BGR2RGB);
 
                         // 3. Convert image data to float and normalize to [0, 1]
-                        image.convertTo(image, CV_32F, 1.0 / 255.0);
+                        // image.convertTo(image, CV_32F, 1.0 / 255.0);
+                        image.convertTo(image, CV_32F);
 
                         // 4. Create a tensor from the image data
                         // OpenCV uses HWC (Height, Width, Channels) format
@@ -93,7 +94,9 @@ namespace torch::ext::data::datasets {
 
                         // 6. Make sure the tensor is contiguous in memory
                         tensor = tensor.contiguous();
+                        cout << tensor.sizes() << endl;
                         data.push_back(tensor);
+                        labels.push_back(labels_name.size() - 1);
                     }
                 }
             }
