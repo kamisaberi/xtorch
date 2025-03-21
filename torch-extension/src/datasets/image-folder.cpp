@@ -1,3 +1,22 @@
+#include "../../include/datasets/image-folder.h"
+
+namespace torch::ext::data::datasets {
+    ImageFolder::ImageFolder(const std::string &root, DataMode mode, LabelsType label_type) : BaseDataset(root, mode, false) {
+        this->label_type = label_type;
+        load_data();
+    }
+
+    void ImageFolder::load_data() {
+        this->root = fs::path(root);
+        if (!fs::exists(this->root)) {
+            throw runtime_error("path is not exists");
+        }
+        this->dataset_path = this->root;
+
+
+    }
+}
+
 //
 // #include "../../include/datasets/base.h"
 //
