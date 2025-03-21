@@ -31,6 +31,10 @@ namespace torch::ext::data::datasets {
     public :
         Imagenette(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false , ImageType type = ImageType::PX160) ;
 
+
+
+
+
         Imagenette(const fs::path &root, DatasetArguments args);
 
     private:
