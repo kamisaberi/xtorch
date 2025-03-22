@@ -14,5 +14,6 @@
 #include "../types/arguments.h"
 #include "../types/enums.h"
 #include <opencv2/opencv.hpp>
+#include "../media/opencv/images.h"
 
 
