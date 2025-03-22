@@ -521,6 +521,7 @@ project(imgnt)
 list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
 find_package(Torch REQUIRED)
 find_package(TorchExtension REQUIRED)
+find_package(OpenCV REQUIRED)
 find_package(LibLZMA REQUIRED)
 find_package(LibArchive REQUIRED)
 
@@ -532,6 +533,7 @@ set(TEST_SOURCE_FILES
         src/utils/downloader.cpp
         src/media/image/processing.cpp
         src/datasets/mnist.cpp
+        src/media/opencv/images.cpp
         src/datasets/imagenette.cpp
         src/models/cnn/lenet5.cpp
         src/utils/md5.cpp
@@ -545,13 +547,15 @@ set(TEST_SOURCE_FILES
         include/base/datasets.h
         examples/cnn/includes/base.h
         imgnt.cpp
-        src/media/opencv/images.cpp
+
 )
 
 add_executable(${CMAKE_PROJECT_NAME} ${TEST_SOURCE_FILES})
 target_link_libraries(${CMAKE_PROJECT_NAME} "${TORCH_LIBRARIES}")
 #
 set_property(TARGET ${CMAKE_PROJECT_NAME} PROPERTY CXX_STANDARD 17)
+
+include_directories(/usr/include)
 
 target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
 target_link_libraries(${CMAKE_PROJECT_NAME}
