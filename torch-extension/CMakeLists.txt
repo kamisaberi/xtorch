@@ -536,6 +536,7 @@ set(TEST_SOURCE_FILES
         include/base/datasets.h
         examples/cnn/includes/base.h
         imgnt.cpp
+        src/media/opencv/images.cpp
 )
 
 add_executable(${CMAKE_PROJECT_NAME} ${TEST_SOURCE_FILES})
