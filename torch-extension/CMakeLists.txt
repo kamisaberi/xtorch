@@ -13,6 +13,7 @@ set(LIBRARY_SOURCE_FILES
         src/utils/md5.cpp
         src/media/image/processing.cpp
         src/media/opencv/images.cpp
+        src/media/opencv/videos.cpp
 
         src/definitions/transforms.cpp
 
@@ -534,6 +535,7 @@ set(TEST_SOURCE_FILES
         src/media/image/processing.cpp
         src/datasets/mnist.cpp
         src/media/opencv/images.cpp
+        src/media/opencv/videos.cpp
         src/datasets/imagenette.cpp
         src/models/cnn/lenet5.cpp
         src/utils/md5.cpp
@@ -547,6 +549,7 @@ set(TEST_SOURCE_FILES
         include/base/datasets.h
         examples/cnn/includes/base.h
         imgnt.cpp
+        include/media/opencv/videos.h
 
 )
 
