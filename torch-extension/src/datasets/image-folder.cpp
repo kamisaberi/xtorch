@@ -25,18 +25,21 @@ namespace torch::ext::data::datasets {
                 if (this->load_sub_folders == false) {
                     for (auto &file: fs::directory_iterator(entry.path())) {
                         if (!file.is_directory()) {
-                            cv::Mat image = cv::imread(file.path().string(), cv::IMREAD_COLOR);
-                            if (image.empty()) {
-                                throw std::runtime_error("Could not load image at: " + file.path().string());
-                            }
-                            cv::cvtColor(image, image, cv::COLOR_BGR2RGB);
-                            image.convertTo(image, CV_32F);
-                            torch::Tensor tensor = torch::from_blob(
-                                image.data, {image.rows, image.cols, image.channels()},
-                                torch::kFloat32
-                            );
-                            tensor = tensor.permute({2, 0, 1});
-                            tensor = tensor.contiguous();
+
+                            torch::Tensor tensor = torch::ext::media::opencv::convertImageToTensor(file.path());
+
+                            // cv::Mat image = cv::imread(file.path().string(), cv::IMREAD_COLOR);
+                            // if (image.empty()) {
+                            //     throw std::runtime_error("Could not load image at: " + file.path().string());
+                            // }
+                            // cv::cvtColor(image, image, cv::COLOR_BGR2RGB);
+                            // image.convertTo(image, CV_32F);
+                            // torch::Tensor tensor = torch::from_blob(
+                            //     image.data, {image.rows, image.cols, image.channels()},
+                            //     torch::kFloat32
+                            // );
+                            // tensor = tensor.permute({2, 0, 1});
+                            // tensor = tensor.contiguous();
                             data.push_back(tensor);
                             labels.push_back(labels_name.size() - 1);
                         }
@@ -44,18 +47,20 @@ namespace torch::ext::data::datasets {
                 } else {
                     for (auto &file: fs::recursive_directory_iterator(entry.path())) {
                         if (!file.is_directory()) {
-                            cv::Mat image = cv::imread(file.path().string(), cv::IMREAD_COLOR);
-                            if (image.empty()) {
-                                throw std::runtime_error("Could not load image at: " + file.path().string());
-                            }
-                            cv::cvtColor(image, image, cv::COLOR_BGR2RGB);
-                            image.convertTo(image, CV_32F);
-                            torch::Tensor tensor = torch::from_blob(
-                                image.data, {image.rows, image.cols, image.channels()},
-                                torch::kFloat32
-                            );
-                            tensor = tensor.permute({2, 0, 1});
-                            tensor = tensor.contiguous();
+                            torch::Tensor tensor = torch::ext::media::opencv::convertImageToTensor(file.path());
+
+                            // cv::Mat image = cv::imread(file.path().string(), cv::IMREAD_COLOR);
+                            // if (image.empty()) {
+                            //     throw std::runtime_error("Could not load image at: " + file.path().string());
+                            // }
+                            // cv::cvtColor(image, image, cv::COLOR_BGR2RGB);
+                            // image.convertTo(image, CV_32F);
+                            // torch::Tensor tensor = torch::from_blob(
+                            //     image.data, {image.rows, image.cols, image.channels()},
+                            //     torch::kFloat32
+                            // );
+                            // tensor = tensor.permute({2, 0, 1});
+                            // tensor = tensor.contiguous();
                             data.push_back(tensor);
                             labels.push_back(labels_name.size() - 1);
                         }
