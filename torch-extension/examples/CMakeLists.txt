@@ -12,6 +12,7 @@ set(BASE_SOURCE_FILES
         ../src/utils/extract.cpp
         ../src/utils/downloader.cpp
         ../src/media/image/processing.cpp
+        ../src/media/opencv/images.cpp
         ../src/datasets/mnist.cpp
         ../src/models/cnn/lenet5.cpp
         ../src/utils/md5.cpp
