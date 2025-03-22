@@ -9,7 +9,7 @@ namespace fs = std::filesystem;
 
 namespace torch::ext::media::opencv {
 
-    torch::Tensor convertImageToTensor(std::string image);
+    torch::Tensor convertImageToTensor(fs::path image);
 
 
 
