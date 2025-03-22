@@ -5,6 +5,6 @@
 #ifndef DCGAN_BASE_H
 #define DCGAN_BASE_H
 
-#include "archiver.h"
+#include "extract.h"
 #include "downloader.h"
 #endif //DCGAN_BASE_H
