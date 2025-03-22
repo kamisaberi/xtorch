@@ -12,6 +12,7 @@ set(LIBRARY_SOURCE_FILES
         src/utils/downloader.cpp
         src/utils/md5.cpp
         src/media/image/processing.cpp
+        src/media/opencv/images.cpp
 
         src/definitions/transforms.cpp
 
@@ -200,6 +201,8 @@ set(TEST_SOURCE_FILES
         src/media/image/processing.cpp
         src/datasets/mnist.cpp
         src/utils/md5.cpp
+        src/media/opencv/images.cpp
+
         test.cpp
 )
 
@@ -369,6 +372,8 @@ set(TEST_SOURCE_FILES
         letest.cpp
         include/types/arguments.h
         src/definitions/transforms.cpp
+        src/media/opencv/images.cpp
+
 )
 
 add_executable(${CMAKE_PROJECT_NAME} ${TEST_SOURCE_FILES})
@@ -423,6 +428,8 @@ set(TEST_SOURCE_FILES
         src/datasets/functions.cpp
         include/base/datasets.h
         examples/cnn/includes/base.h
+        src/media/opencv/images.cpp
+
 )
 
 add_executable(${CMAKE_PROJECT_NAME} ${TEST_SOURCE_FILES})
@@ -482,6 +489,8 @@ set(TEST_SOURCE_FILES
         src/datasets/functions.cpp
         include/base/datasets.h
         examples/cnn/includes/base.h
+        src/media/opencv/images.cpp
+
 )
 
 add_executable(${CMAKE_PROJECT_NAME} ${TEST_SOURCE_FILES})
