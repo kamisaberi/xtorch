@@ -338,26 +338,7 @@ find_package(LibArchive REQUIRED)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-set(TEST_SOURCE_FILES
-        src/utils/extract.cpp
-        src/utils/downloader.cpp
-        src/media/image/processing.cpp
-        src/datasets/mnist.cpp
-        src/models/cnn/lenet5.cpp
-        src/utils/md5.cpp
-        include/types/arguments.h
-        src/definitions/transforms.cpp
-        include/types/enums.h
-        tgz.cpp
-        include/datasets/base.h
-        src/datasets/base.cpp
-        include/datasets/functions.h
-        src/datasets/functions.cpp
-        include/base/datasets.h
-        examples/cnn/includes/base.h
-        src/media/opencv/images.cpp
-
-)
+set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} ${DATASET_FILES} ${MODEL_FILES} tgz.cpp)
 
 add_executable(${CMAKE_PROJECT_NAME} ${TEST_SOURCE_FILES})
 target_link_libraries(${CMAKE_PROJECT_NAME} "${TORCH_LIBRARIES}")
@@ -394,29 +375,8 @@ find_package(LibArchive REQUIRED)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-set(TEST_SOURCE_FILES
-        src/utils/extract.cpp
-        src/utils/downloader.cpp
-        src/media/image/processing.cpp
-        src/datasets/mnist.cpp
-        src/media/opencv/images.cpp
-        src/media/opencv/videos.cpp
-        src/datasets/imagenette.cpp
-        src/models/cnn/lenet5.cpp
-        src/utils/md5.cpp
-        include/types/arguments.h
-        src/definitions/transforms.cpp
-        include/types/enums.h
-        include/datasets/base.h
-        src/datasets/base.cpp
-        include/datasets/functions.h
-        src/datasets/functions.cpp
-        include/base/datasets.h
-        examples/cnn/includes/base.h
-        imgnt.cpp
-        include/media/opencv/videos.h
 
-)
+set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} ${DATASET_FILES} ${MODEL_FILES} imgnt.cpp)
 
 add_executable(${CMAKE_PROJECT_NAME} ${TEST_SOURCE_FILES})
 target_link_libraries(${CMAKE_PROJECT_NAME} "${TORCH_LIBRARIES}")
@@ -458,29 +418,7 @@ find_package(LibArchive REQUIRED)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-set(TEST_SOURCE_FILES
-        src/utils/extract.cpp
-        src/utils/downloader.cpp
-        src/media/image/processing.cpp
-        src/datasets/mnist.cpp
-        src/media/opencv/images.cpp
-        src/media/opencv/videos.cpp
-        src/datasets/imagenette.cpp
-        src/models/cnn/lenet5.cpp
-        src/utils/md5.cpp
-        include/types/arguments.h
-        src/definitions/transforms.cpp
-        include/types/enums.h
-        include/datasets/base.h
-        src/datasets/base.cpp
-        include/datasets/functions.h
-        src/datasets/functions.cpp
-        include/base/datasets.h
-        examples/cnn/includes/base.h
-        vdtest.cpp
-        include/media/opencv/videos.h
-
-)
+set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} ${DATASET_FILES} ${MODEL_FILES} vdtest.cpp)
 
 add_executable(${CMAKE_PROJECT_NAME} ${TEST_SOURCE_FILES})
 target_link_libraries(${CMAKE_PROJECT_NAME} "${TORCH_LIBRARIES}")
@@ -525,30 +463,7 @@ find_package(LibArchive REQUIRED)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-set(TEST_SOURCE_FILES
-        src/utils/extract.cpp
-        src/utils/downloader.cpp
-        src/utils/filesystem.cpp
-        src/media/image/processing.cpp
-        src/datasets/mnist.cpp
-        src/media/opencv/images.cpp
-        src/media/opencv/videos.cpp
-        src/datasets/imagenette.cpp
-        src/models/cnn/lenet5.cpp
-        src/utils/md5.cpp
-        include/types/arguments.h
-        src/definitions/transforms.cpp
-        include/types/enums.h
-        include/datasets/base.h
-        src/datasets/base.cpp
-        include/datasets/functions.h
-        src/datasets/functions.cpp
-        include/base/datasets.h
-        examples/cnn/includes/base.h
-        include/media/opencv/videos.h
-        cntfiles.cpp
-
-)
+set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} ${DATASET_FILES} ${MODEL_FILES} cntfiles.cpp)
 
 add_executable(${CMAKE_PROJECT_NAME} ${TEST_SOURCE_FILES})
 target_link_libraries(${CMAKE_PROJECT_NAME} "${TORCH_LIBRARIES}")
