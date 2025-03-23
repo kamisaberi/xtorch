@@ -7,6 +7,9 @@ cmake_minimum_required(VERSION 3.28 FATAL_ERROR)
 
 project(TorchExtension VERSION 0.1.0 LANGUAGES CXX)
 
+
+
+# List Of All CPP Files By Category
 file(GLOB_RECURSE UTILITY_FILES CONFIGURE_DEPENDS src/utils/*.cpp)
 file(GLOB_RECURSE MEDIA_FILES CONFIGURE_DEPENDS src/media/*.cpp)
 file(GLOB_RECURSE DATASET_FILES CONFIGURE_DEPENDS src/datasets/*.cpp)
@@ -112,14 +115,7 @@ find_package(LibArchive REQUIRED)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-set(TEST_SOURCE_FILES
-        src/utils/extract.cpp
-        src/utils/downloader.cpp
-        src/media/image/processing.cpp
-        src/datasets/mnist.cpp
-        src/utils/md5.cpp
-        src/media/opencv/images.cpp
-
+set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DATASET_FILES}
         test.cpp
 )
 
