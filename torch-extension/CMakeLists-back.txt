@@ -14,9 +14,100 @@ file(GLOB_RECURSE DEFINITION_FILES CONFIGURE_DEPENDS src/definitions/*.cpp)
 file(GLOB_RECURSE MODEL_FILES CONFIGURE_DEPENDS src/models/*.cpp)
 file(GLOB_RECURSE MODEL_CNN_FILES CONFIGURE_DEPENDS src/models/cnn/*.cpp)
 
-set(LIBRARY_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DATASET_FILIES} ${DEFINITION_FILES} ${MODEL_FILES} )
+#message(STATUS "Project version is ${CPP_FILES}")
+#foreach(file IN LISTS CPP_FILES)
+#    string(REPLACE "src/utils/" "" rel_path ${file})
+#    message(STATUS "Relative to src/utils: ${rel_path}")
+#endforeach()
+#
+#file(RELATIVE_PATH rel_path ${CMAKE_CURRENT_SOURCE_DIR} src/utils/filesystem.cpp)
+#message(STATUS "Relative path: ${rel_path}")
 
+set(LIBRARY_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DATASET_FILIES} ${DEFINITION_FILES} ${MODEL_FILES} )
+#        src/utils/extract.cpp
+#        src/utils/downloader.cpp
+#        src/utils/md5.cpp
+#
+#
+#
+#        src/media/image/processing.cpp
+#        src/media/opencv/images.cpp
+#        src/media/opencv/videos.cpp
+#
+#
+#        src/definitions/transforms.cpp
+#
+#        src/models/cnn/alexnet.cpp
+#        src/models/cnn/lenet5.cpp
+#        src/models/cnn/vggnet.cpp
+#        src/models/cnn/resnet.cpp
+#        src/models/cnn/unet.cpp
+#        src/models/cnn/mobilenet.cpp
+#
+#
+#
+#
+#        src/datasets/image-folder.cpp
+#        src/datasets/caltech.cpp
+#        src/datasets/celeba.cpp
+#        src/datasets/cifar.cpp
+#        src/datasets/cityscapes.cpp
+#        src/datasets/coco.cpp
+#        src/datasets/country.cpp
+#        src/datasets/cre-stereo.cpp
+#        src/datasets/dtd.cpp
+#        src/datasets/eth-3d-stereo.cpp
+#        src/datasets/euro-sat.cpp
+#        src/datasets/fake-data.cpp
+#        src/datasets/falling-things-stereo.cpp
+#        src/datasets/fer.cpp
+#        src/datasets/fgvc-aircraft.cpp
+#        src/datasets/flickr.cpp
+#        src/datasets/flowers.cpp
+#        src/datasets/flying.cpp
+#        src/datasets/food.cpp
+#        src/datasets/gtsrb.cpp
+#        src/datasets/hd1k.cpp
+#        src/datasets/hmdb.cpp
+#        src/datasets/imagenet.cpp
+#        src/datasets/imagenette.cpp
+#        src/datasets/in-stereo.cpp
+#        src/datasets/inaturalist.cpp
+#        src/datasets/kinetics.cpp
+#        src/datasets/kitti.cpp
+#        src/datasets/lfw.cpp
+#        src/datasets/lsun.cpp
+#        src/datasets/middlebury.cpp
+#        src/datasets/mnist.cpp
+#        src/datasets/moving-mnist.cpp
+#        src/datasets/omniglot.cpp
+#        src/datasets/oxfordIII-t-pet.cpp
+#        src/datasets/pcam.cpp
+#        src/datasets/photo-tour.cpp
+#        src/datasets/places.cpp
+#        src/datasets/rendered-sst2.cpp
+#        src/datasets/sb-dataset.cpp
+#        src/datasets/sbu.cpp
+#        src/datasets/scene-flow-stereo.cpp
+#        src/datasets/semeion.cpp
+#        src/datasets/sintel.cpp
+#        src/datasets/stanford-cars.cpp
+#        src/datasets/stl.cpp
+#        src/datasets/sun.cpp
+#        src/datasets/svhn.cpp
+#        src/datasets/ucf.cpp
+#        src/datasets/usps.cpp
+#        src/datasets/voc.cpp
+#        src/datasets/wider-face.cpp
+#
+#
+#)
+
+#add_executable( ${CMAKE_PROJECT_NAME} main.cpp src/datasets/cifar100.cpp src/datasets/cifar10.cpp src/datasets/fashion-mnist.cpp)
 add_library(${CMAKE_PROJECT_NAME} SHARED ${LIBRARY_SOURCE_FILES})
+
+#set(CMAKE_CXX_STANDARD 17)
+#set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 find_library(LIBTAR_LIBRARY tar REQUIRED)
 find_path(LIBTAR_INCLUDE_DIR tar.h REQUIRED)
@@ -40,13 +131,15 @@ find_package(OpenSSL REQUIRED)
 find_package(LibLZMA REQUIRED)
 find_package(LibArchive REQUIRED)
 
+#find_package(XZ REQUIRED)
+
 
 
 include_directories(/usr/include)
 include_directories(${ZLIB_INCLUDE_DIRS})
 include_directories(${CURL_INCLUDE_DIR})
 include_directories(${ZIP_INCLUDE_DIRS})
-
+#include_directories(${XZ_INCLUDE_DIRS})
 
 target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
 target_link_libraries(${CMAKE_PROJECT_NAME}
@@ -62,7 +155,10 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
         OpenSSL::Crypto
         LibLZMA::LibLZMA
         ${LibArchive_LIBRARIES}
+#        XZ::XZ
 )
+
+#target_link_libraries(my_executable OpenSSL::SSL OpenSSL::Crypto)
 
 
 #TODO ----vvvv---- EXPORT MODULE  ----vvvv----
@@ -77,6 +173,10 @@ if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
 endif()
 
 include(GNUInstallDirs)
+
+#set(SOURCE_FILES src/library.cpp)
+
+#add_library(${PROJECT_NAME} SHARED ${SOURCE_FILES})
 
 target_include_directories(${PROJECT_NAME} PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
@@ -96,6 +196,13 @@ install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAM
 install(EXPORT TorchExtensionConfig DESTINATION share/TorchExtension/cmake)
 
 export(TARGETS ${PROJECT_NAME} FILE TorchExtensionConfig.cmake)
+
+
+
+#message(STATUS "CMAKE_PREFIX_PATH: ${CMAKE_PREFIX_PATH}")
+#message(STATUS "TORCH_LIBRARIES: ${TORCH_LIBRARIES}")
+#message(STATUS "TORCH_INCLUDE_DIRS: ${TORCH_INCLUDE_DIRS}")
+
 
 #TODO ----vvvv---- TEST PROJECT ----vvvv----
 
