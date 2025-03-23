@@ -580,7 +580,7 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
 
 
 
-####################################### IMGNT #######################################
+####################################### VDTEST #######################################
 
 project(vdtest)
 list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
@@ -614,6 +614,73 @@ set(TEST_SOURCE_FILES
         examples/cnn/includes/base.h
         vdtest.cpp
         include/media/opencv/videos.h
+
+)
+
+add_executable(${CMAKE_PROJECT_NAME} ${TEST_SOURCE_FILES})
+target_link_libraries(${CMAKE_PROJECT_NAME} "${TORCH_LIBRARIES}")
+#
+set_property(TARGET ${CMAKE_PROJECT_NAME} PROPERTY CXX_STANDARD 17)
+
+include_directories(/usr/include)
+
+target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
+target_link_libraries(${CMAKE_PROJECT_NAME}
+        ${CURL_LIBRARIES}
+        ${TORCH_LIBRARIES}
+        ${OpenCV_LIBS}
+        ${ZLIB_LIBS}
+        ${ZIP_LIBRARIES}
+        zip
+        ${ZLIB_LIBRARIES}
+        ${LIBTAR_LIBRARY}
+        OpenSSL::SSL
+        OpenSSL::Crypto
+        LibLZMA::LibLZMA
+        ${LibArchive_LIBRARIES}
+)
+
+
+
+
+
+
+
+
+####################################### CNTFILES #######################################
+
+project(cntfiles)
+list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
+find_package(Torch REQUIRED)
+find_package(TorchExtension REQUIRED)
+find_package(OpenCV REQUIRED)
+find_package(LibLZMA REQUIRED)
+find_package(LibArchive REQUIRED)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
+
+set(TEST_SOURCE_FILES
+        src/utils/extract.cpp
+        src/utils/downloader.cpp
+        src/media/image/processing.cpp
+        src/datasets/mnist.cpp
+        src/media/opencv/images.cpp
+        src/media/opencv/videos.cpp
+        src/datasets/imagenette.cpp
+        src/models/cnn/lenet5.cpp
+        src/utils/md5.cpp
+        include/types/arguments.h
+        src/definitions/transforms.cpp
+        include/types/enums.h
+        include/datasets/base.h
+        src/datasets/base.cpp
+        include/datasets/functions.h
+        src/datasets/functions.cpp
+        include/base/datasets.h
+        examples/cnn/includes/base.h
+        include/media/opencv/videos.h
+        cntfiles.cpp
 
 )
 
