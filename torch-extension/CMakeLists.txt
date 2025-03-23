@@ -115,9 +115,7 @@ find_package(LibArchive REQUIRED)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DATASET_FILES}
-        test.cpp
-)
+set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} src/datasets/mnist.cpp test.cpp)
 
 add_executable(${CMAKE_PROJECT_NAME} ${TEST_SOURCE_FILES})
 target_link_libraries(${CMAKE_PROJECT_NAME} "${TORCH_LIBRARIES}")
@@ -155,10 +153,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 
-set(TEST_SOURCE_FILES
-        src/utils/md5.cpp
-        md.cpp
-)
+set(TEST_SOURCE_FILES src/utils/md5.cpp md.cpp)
 
 add_executable(${CMAKE_PROJECT_NAME} ${TEST_SOURCE_FILES})
 target_link_libraries(${CMAKE_PROJECT_NAME} "${TORCH_LIBRARIES}")
@@ -195,10 +190,7 @@ find_package(LibArchive REQUIRED)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-set(TEST_SOURCE_FILES
-        src/utils/md5.cpp
-        md2.cpp
-)
+set(TEST_SOURCE_FILES src/utils/md5.cpp md2.cpp)
 
 add_executable(${CMAKE_PROJECT_NAME} ${TEST_SOURCE_FILES})
 target_link_libraries(${CMAKE_PROJECT_NAME} "${TORCH_LIBRARIES}")
@@ -236,9 +228,7 @@ find_package(LibArchive REQUIRED)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-set(TEST_SOURCE_FILES
-        xz.cpp
-)
+set(TEST_SOURCE_FILES xz.cpp)
 
 add_executable(${CMAKE_PROJECT_NAME} ${TEST_SOURCE_FILES})
 target_link_libraries(${CMAKE_PROJECT_NAME} "${TORCH_LIBRARIES}")
@@ -275,19 +265,7 @@ find_package(LibArchive REQUIRED)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-set(TEST_SOURCE_FILES
-        src/utils/extract.cpp
-        src/utils/downloader.cpp
-        src/media/image/processing.cpp
-        src/datasets/mnist.cpp
-        src/models/cnn/lenet5.cpp
-        src/utils/md5.cpp
-        letest.cpp
-        include/types/arguments.h
-        src/definitions/transforms.cpp
-        src/media/opencv/images.cpp
-
-)
+set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} src/datasets/mnist.cpp src/models/cnn/lenet5.cpp letest.cpp)
 
 add_executable(${CMAKE_PROJECT_NAME} ${TEST_SOURCE_FILES})
 target_link_libraries(${CMAKE_PROJECT_NAME} "${TORCH_LIBRARIES}")
@@ -324,26 +302,7 @@ find_package(LibArchive REQUIRED)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-set(TEST_SOURCE_FILES
-        src/utils/extract.cpp
-        src/utils/downloader.cpp
-        src/media/image/processing.cpp
-        src/datasets/mnist.cpp
-        src/models/cnn/lenet5.cpp
-        src/utils/md5.cpp
-        include/types/arguments.h
-        src/definitions/transforms.cpp
-        include/types/enums.h
-        mnt.cpp
-        include/datasets/base.h
-        src/datasets/base.cpp
-        include/datasets/functions.h
-        src/datasets/functions.cpp
-        include/base/datasets.h
-        examples/cnn/includes/base.h
-        src/media/opencv/images.cpp
-
-)
+set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} ${DATASET_FILES} src/models/cnn/lenet5.cpp mnt.cpp)
 
 add_executable(${CMAKE_PROJECT_NAME} ${TEST_SOURCE_FILES})
 target_link_libraries(${CMAKE_PROJECT_NAME} "${TORCH_LIBRARIES}")
@@ -366,12 +325,6 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
         ${LibArchive_LIBRARIES}
 
 )
-
-
-
-
-
-
 
 ####################################### TGZ #######################################
 
