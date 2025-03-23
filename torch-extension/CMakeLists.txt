@@ -663,6 +663,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(TEST_SOURCE_FILES
         src/utils/extract.cpp
         src/utils/downloader.cpp
+        src/utils/filesystem.cpp
         src/media/image/processing.cpp
         src/datasets/mnist.cpp
         src/media/opencv/images.cpp
