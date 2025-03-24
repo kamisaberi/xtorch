@@ -11,20 +11,16 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(BASE_SOURCE_FILES
         ../src/utils/extract.cpp
         ../src/utils/downloader.cpp
+        ../src/utils/filesystem.cpp
+        ../src/utils/md5.cpp
+        ../src/utils/string.cpp
         ../src/media/image/processing.cpp
         ../src/media/opencv/images.cpp
-        ../src/datasets/mnist.cpp
-        ../src/models/cnn/lenet5.cpp
-        ../src/utils/md5.cpp
-        ../include/types/arguments.h
+#        ../src/datasets/mnist.cpp
+#        ../src/models/cnn/lenet5.cpp
         ../src/definitions/transforms.cpp
-        ../include/types/enums.h
-        ../include/datasets/base.h
         ../src/datasets/base.cpp
-        ../include/datasets/functions.h
         ../src/datasets/functions.cpp
-        ../include/base/datasets.h
-        ../examples/cnn/includes/base.h
 )
 
 set(TEST_LIBRARIES ${CURL_LIBRARIES}
