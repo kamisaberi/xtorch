@@ -18,7 +18,7 @@
 int main() {
     std::filesystem::path directory_path = "/home/kami/Documents/temp/videos/";
     try {
-        std::size_t total_files = torch::est::utils::filesystem::countFiles(directory_path, true);
+        std::size_t total_files = torch::ext::utils::filesystem::countFiles(directory_path, true);
         std::cout << "Total number of files: " << total_files << std::endl;
     } catch (const std::filesystem::filesystem_error& e) {
         std::cerr << "Error: " << e.what() << std::endl;
