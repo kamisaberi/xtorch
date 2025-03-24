@@ -1,6 +1,8 @@
 #pragma once
 #include "base.h"
 #include "../base/datasets.h"
+#include  "../utils/filesystem.h"
+#include <fstream>
 
 
 using namespace std;
@@ -18,7 +20,8 @@ namespace torch::ext::data::datasets {
         fs::path dataset_file_name = "food-101.tar.gz";
         std::string dataset_file_md5 = "85eeb15f3717b99a5da872d97d918f87";
         fs::path dataset_folder_name = "food-101";
-        void load_data(DataMode mode = DataMode::TRAIN);
+        std::size_t images_number = 101'000;
+        void load_data();
 
         void check_resources();
     };
