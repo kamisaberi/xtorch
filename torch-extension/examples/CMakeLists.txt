@@ -332,3 +332,14 @@ target_link_libraries(vggnet16-imagenette "${TORCH_LIBRARIES}")
 set_property(TARGET vggnet16-imagenette PROPERTY CXX_STANDARD 17)
 target_include_directories(vggnet16-imagenette PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
 target_link_libraries(vggnet16-imagenette ${TEST_LIBRARIES})
+
+# VggNet Food101
+set(SOURCE_FILES
+        ../src/datasets/food.cpp
+        ../src/models/cnn/vggnet.cpp
+)
+add_executable(vggnet16-food101 ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/vggnet16-food101.cpp)
+target_link_libraries(vggnet16-food101 "${TORCH_LIBRARIES}")
+set_property(TARGET vggnet16-food101 PROPERTY CXX_STANDARD 17)
+target_include_directories(vggnet16-food101 PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
+target_link_libraries(vggnet16-food101 ${TEST_LIBRARIES})
