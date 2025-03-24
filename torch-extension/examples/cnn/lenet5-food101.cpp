@@ -1,5 +1,5 @@
 #include "includes/base.h"
-#include "../../include/datasets/imagenette.h"
+#include "../../include/datasets/food.h"
 #include "../../include/models/cnn/lenet5.h"
 #include "../../include/definitions/transforms.h"
 
@@ -12,7 +12,9 @@ int main() {
     std::cout.precision(10);
     torch::Device device(torch::kCPU);
 
-    auto dataset = torch::ext::data::datasets::Imagenette("/home/kami/Documents/temp/", DataMode::TRAIN, true,torch::ext::data::datasets::ImageType::PX160 );
+    auto dataset = torch::ext::data::datasets::Food101("/home/kami/Documents/temp/", DataMode::TRAIN, false );
+
+//    auto dataset = torch::ext::data::datasets::Imagenette("/home/kami/Documents/temp/", DataMode::TRAIN, true,torch::ext::data::datasets::ImageType::PX160 );
 
     auto transformed_dataset = dataset
             .map(torch::ext::data::transforms::resize(size))
