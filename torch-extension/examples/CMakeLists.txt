@@ -261,6 +261,17 @@ target_include_directories(resnet-imagenette PRIVATE ${LIBTAR_INCLUDE_DIR} ${TOR
 target_link_libraries(resnet-imagenette ${TEST_LIBRARIES})
 
 
+# ResNet Food101
+set(SOURCE_FILES
+        ../src/datasets/food.cpp
+        ../src/models/cnn/resnet.cpp
+)
+add_executable(resnet-food101 ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/resnet-food101.cpp)
+target_link_libraries(resnet-food101 "${TORCH_LIBRARIES}")
+set_property(TARGET resnet-food101 PROPERTY CXX_STANDARD 17)
+target_include_directories(resnet-food101 PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
+target_link_libraries(resnet-food101 ${TEST_LIBRARIES})
+
 
 #--------------------------------------- CNN/VggNet ---------------------------------------#
 
