@@ -6,6 +6,7 @@
 using namespace std;
 namespace torch::ext::utils::string {
     vector<std::string> split(const std::string& str, const std::string& delim);
+    std::string trim(std::string& str);
 
 }
 

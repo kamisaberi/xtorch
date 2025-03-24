@@ -2,7 +2,9 @@
 #include "base.h"
 #include "../base/datasets.h"
 #include  "../utils/filesystem.h"
+#include  "../utils/string.h"
 #include <fstream>
+#include <map>
 
 
 using namespace std;
@@ -21,7 +23,10 @@ namespace torch::ext::data::datasets {
         std::string dataset_file_md5 = "85eeb15f3717b99a5da872d97d918f87";
         fs::path dataset_folder_name = "food-101";
         std::size_t images_number = 101'000;
+        std::vector<string> classes_name ;
+        std::map<string , int> classes_map ;
         void load_data();
+        void load_classes();
 
         void check_resources();
     };

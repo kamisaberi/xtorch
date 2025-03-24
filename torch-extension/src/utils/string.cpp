@@ -16,5 +16,11 @@ namespace torch::ext::utils::string {
         while (pos < str.length() && prev < str.length());
         return tokens;
     }
+    std::string trim(std::string& str)
+    {
+        str.erase(str.find_last_not_of(' ')+1);         //suffixing spaces
+        str.erase(0, str.find_first_not_of(' '));       //prefixing spaces
+        return str;
+    }
 
 }
