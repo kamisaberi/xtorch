@@ -13,6 +13,7 @@ namespace torch::ext::data::datasets {
         fs::path images_path = this->dataset_path / fs::path("images");
         if (fs::exists(images_path)) {
             size_t cnt = torch::ext::utils::filesystem::countFiles(images_path, true);
+            cout << "Found " << cnt << " images" << endl;
             if (cnt != this->images_number) {
                 if (fs::exists(archive_file_abs_path)) {
                     torch::ext::utils::extract(archive_file_abs_path, this->root.string());
@@ -32,6 +33,7 @@ namespace torch::ext::data::datasets {
     }
 
     void Food101::load_classes() {
+        cout << "Loading classes..." << endl;
         fs::path meta_path = this->dataset_path / fs::path("meta");
         fs::path classes_file_path = meta_path / fs::path("classes.txt");
         ifstream ifs(classes_file_path.string());
@@ -48,6 +50,7 @@ namespace torch::ext::data::datasets {
 
 
     void Food101::load_data() {
+        cout << "Loading data..." << endl;
         fs::path images_path = this->dataset_path / fs::path("images");
         fs::path meta_path = this->dataset_path / fs::path("meta");
 
