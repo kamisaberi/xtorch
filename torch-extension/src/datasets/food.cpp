@@ -20,6 +20,22 @@ namespace torch::ext::data::datasets {
         }
     }
 
+    void Food101::load_classes() {
+        fs::path meta_path = this->dataset_path / fs::path("meta");
+        fs::path classes_file_path = meta_path / fs::path("classes.txt");
+        ifstream ifs(classes_file_path.string());
+        while (!ifs.eof()) {
+            std::string line;
+            std::getline(ifs, line);
+            line = torch::ext::utils::string::trim(line);
+            if (line.empty())
+                continue;
+            classes_name.push_back(line);
+            classes_map.insert({line, classes_name.size() - 1});
+        }
+    }
+
+
     void Food101::load_data() {
         fs::path images_path = this->dataset_path / fs::path("images");
         fs::path meta_path = this->dataset_path / fs::path("meta");
@@ -29,16 +45,17 @@ namespace torch::ext::data::datasets {
             ifstream ifs(train_file_path.string());
             while (!ifs.eof()) {
                 string line;
-                getline(ifs,line);
-                fs::path img_path = images_path / fs::path(line);
+                getline(ifs, line);
+                line = torch::ext::utils::string::trim(line);
+                if (line.empty())
+                    continue;
+                vector<string> tokens = torch::ext::utils::string::split(line, "/");
+                string label = tokens[0];
+                fs::path img_path = images_path / fs::path(line + ".jpg");
                 torch::Tensor tensor = torch::ext::media::opencv::convertImageToTensor(img_path);
                 this->data.push_back(tensor);
-
-
+                this->labels.push_back(classes_map[label]);
             }
-
-
-
         } else {
         }
     }
