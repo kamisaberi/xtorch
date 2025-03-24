@@ -45,65 +45,6 @@ set(TEST_LIBRARIES ${CURL_LIBRARIES}
 
 ######################################## APPLICATIONS ########################################
 
-#--------------------------------------- CNN/LeNet ---------------------------------------#
-
-# LeNet5 MNIST
-set(SOURCE_FILES
-        ../src/datasets/mnist.cpp
-        ../src/models/cnn/lenet5.cpp
-)
-add_executable(lenet5-mnist ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/lenet5-mnist.cpp)
-target_link_libraries(lenet5-mnist "${TORCH_LIBRARIES}")
-set_property(TARGET lenet5-mnist PROPERTY CXX_STANDARD 17)
-target_include_directories(lenet5-mnist PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
-target_link_libraries(lenet5-mnist ${TEST_LIBRARIES})
-
-# LeNet5 FashionMNIST
-set(SOURCE_FILES
-        ../src/datasets/mnist.cpp
-        ../src/models/cnn/lenet5.cpp
-)
-add_executable(lenet5-fashionmnist ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/lenet5-fashionmnist.cpp)
-target_link_libraries(lenet5-fashionmnist "${TORCH_LIBRARIES}")
-set_property(TARGET lenet5-fashionmnist PROPERTY CXX_STANDARD 17)
-target_include_directories(lenet5-fashionmnist PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
-target_link_libraries(lenet5-fashionmnist ${TEST_LIBRARIES})
-
-
-# LeNet5 CIFAR10
-set(SOURCE_FILES
-        ../src/datasets/cifar.cpp
-        ../src/models/cnn/lenet5.cpp
-)
-add_executable(lenet5-cifar10 ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/lenet5-cifar10.cpp)
-target_link_libraries(lenet5-cifar10 "${TORCH_LIBRARIES}")
-set_property(TARGET lenet5-cifar10 PROPERTY CXX_STANDARD 17)
-target_include_directories(lenet5-cifar10 PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
-target_link_libraries(lenet5-cifar10 ${TEST_LIBRARIES})
-
-# LeNet5 CIFAR100
-set(SOURCE_FILES
-        ../src/datasets/cifar.cpp
-        ../src/models/cnn/lenet5.cpp
-)
-add_executable(lenet5-cifar100 ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/lenet5-cifar100.cpp)
-target_link_libraries(lenet5-cifar100 "${TORCH_LIBRARIES}")
-set_property(TARGET lenet5-cifar100 PROPERTY CXX_STANDARD 17)
-target_include_directories(lenet5-cifar100 PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
-target_link_libraries(lenet5-cifar100 ${TEST_LIBRARIES})
-
-
-# LeNet5 Imagenette
-set(SOURCE_FILES
-        ../src/datasets/imagenette.cpp
-        ../src/models/cnn/lenet5.cpp
-)
-add_executable(lenet5-imagenette ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/lenet5-imagenette.cpp)
-target_link_libraries(lenet5-imagenette "${TORCH_LIBRARIES}")
-set_property(TARGET lenet5-imagenette PROPERTY CXX_STANDARD 17)
-target_include_directories(lenet5-imagenette PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
-target_link_libraries(lenet5-imagenette ${TEST_LIBRARIES})
-
 
 
 #--------------------------------------- CNN/AlexNet ---------------------------------------#
@@ -165,6 +106,88 @@ target_link_libraries(alexnet-imagenette "${TORCH_LIBRARIES}")
 set_property(TARGET alexnet-imagenette PROPERTY CXX_STANDARD 17)
 target_include_directories(alexnet-imagenette PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
 target_link_libraries(alexnet-imagenette ${TEST_LIBRARIES})
+
+
+# AlexNet Food101
+set(SOURCE_FILES
+        ../src/datasets/food.cpp
+        ../src/models/cnn/alexnet.cpp
+)
+add_executable(alexnet-food101 ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/alexnet-food101.cpp)
+target_link_libraries(alexnet-food101 "${TORCH_LIBRARIES}")
+set_property(TARGET alexnet-food101 PROPERTY CXX_STANDARD 17)
+target_include_directories(alexnet-food101 PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
+target_link_libraries(alexnet-food101 ${TEST_LIBRARIES})
+
+
+
+
+
+
+#--------------------------------------- CNN/LeNet ---------------------------------------#
+
+# LeNet5 MNIST
+set(SOURCE_FILES
+        ../src/datasets/mnist.cpp
+        ../src/models/cnn/lenet5.cpp
+)
+add_executable(lenet5-mnist ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/lenet5-mnist.cpp)
+target_link_libraries(lenet5-mnist "${TORCH_LIBRARIES}")
+set_property(TARGET lenet5-mnist PROPERTY CXX_STANDARD 17)
+target_include_directories(lenet5-mnist PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
+target_link_libraries(lenet5-mnist ${TEST_LIBRARIES})
+
+# LeNet5 FashionMNIST
+set(SOURCE_FILES
+        ../src/datasets/mnist.cpp
+        ../src/models/cnn/lenet5.cpp
+)
+add_executable(lenet5-fashionmnist ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/lenet5-fashionmnist.cpp)
+target_link_libraries(lenet5-fashionmnist "${TORCH_LIBRARIES}")
+set_property(TARGET lenet5-fashionmnist PROPERTY CXX_STANDARD 17)
+target_include_directories(lenet5-fashionmnist PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
+target_link_libraries(lenet5-fashionmnist ${TEST_LIBRARIES})
+
+
+# LeNet5 CIFAR10
+set(SOURCE_FILES
+        ../src/datasets/cifar.cpp
+        ../src/models/cnn/lenet5.cpp
+)
+add_executable(lenet5-cifar10 ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/lenet5-cifar10.cpp)
+target_link_libraries(lenet5-cifar10 "${TORCH_LIBRARIES}")
+set_property(TARGET lenet5-cifar10 PROPERTY CXX_STANDARD 17)
+target_include_directories(lenet5-cifar10 PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
+target_link_libraries(lenet5-cifar10 ${TEST_LIBRARIES})
+
+# LeNet5 CIFAR100
+set(SOURCE_FILES
+        ../src/datasets/cifar.cpp
+        ../src/models/cnn/lenet5.cpp
+)
+add_executable(lenet5-cifar100 ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/lenet5-cifar100.cpp)
+target_link_libraries(lenet5-cifar100 "${TORCH_LIBRARIES}")
+set_property(TARGET lenet5-cifar100 PROPERTY CXX_STANDARD 17)
+target_include_directories(lenet5-cifar100 PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
+target_link_libraries(lenet5-cifar100 ${TEST_LIBRARIES})
+
+
+# LeNet5 Imagenette
+set(SOURCE_FILES
+        ../src/datasets/imagenette.cpp
+        ../src/models/cnn/lenet5.cpp
+)
+add_executable(lenet5-imagenette ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/lenet5-imagenette.cpp)
+target_link_libraries(lenet5-imagenette "${TORCH_LIBRARIES}")
+set_property(TARGET lenet5-imagenette PROPERTY CXX_STANDARD 17)
+target_include_directories(lenet5-imagenette PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
+target_link_libraries(lenet5-imagenette ${TEST_LIBRARIES})
+
+
+
+
+
+
 
 
 #--------------------------------------- CNN/ResNet ---------------------------------------#
