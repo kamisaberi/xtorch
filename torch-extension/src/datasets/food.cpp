@@ -55,11 +55,13 @@ namespace torch::ext::data::datasets {
         fs::path meta_path = this->dataset_path / fs::path("meta");
 
         if (this->mode == DataMode::TRAIN) {
+            cout << "Loading train data..." << endl;
             fs::path train_file_path = meta_path / fs::path("train.txt");
             ifstream ifs(train_file_path.string());
             while (!ifs.eof()) {
                 string line;
                 getline(ifs, line);
+                cout << line << endl;
                 line = torch::ext::utils::string::trim(line);
                 if (line.empty())
                     continue;
