@@ -14,14 +14,20 @@ namespace torch::ext::data::datasets {
         if (fs::exists(images_path)) {
             size_t cnt = torch::ext::utils::filesystem::countFiles(images_path, true);
             if (cnt != this->images_number) {
-                torch::ext::utils::download(this->url, archive_file_abs_path.string());
-                torch::ext::utils::extract(archive_file_abs_path, this->root.string());
+                if (fs::exists(archive_file_abs_path)) {
+                    torch::ext::utils::extract(archive_file_abs_path, this->root.string());
+                } else {
+                    torch::ext::utils::download(this->url, archive_file_abs_path.string());
+                    torch::ext::utils::extract(archive_file_abs_path, this->root.string());
+                }
             }
         } else {
             if (fs::exists(archive_file_abs_path)) {
-                torch::ext::utils::extract(archive_file_abs_path, this->root.string() );
+                torch::ext::utils::extract(archive_file_abs_path, this->root.string());
+            } else {
+                torch::ext::utils::download(this->url, archive_file_abs_path.string());
+                torch::ext::utils::extract(archive_file_abs_path, this->root.string());
             }
-
         }
     }
 
