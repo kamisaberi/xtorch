@@ -10,15 +10,18 @@ namespace torch::ext::data::datasets {
     void Food101::check_resources() {
         fs::path archive_file_abs_path = this->root / this->dataset_file_name;
         this->dataset_path = this->root / this->dataset_folder_name;
-        if (fs::exists(archive_file_abs_path)) {
-            torch::ext::utils::extract(archive_file_abs_path, this->root.string() );
-        } else {
-            fs::path images_path = this->dataset_path / fs::path("images");
+        fs::path images_path = this->dataset_path / fs::path("images");
+        if (fs::exists(images_path)) {
             size_t cnt = torch::ext::utils::filesystem::countFiles(images_path, true);
             if (cnt != this->images_number) {
                 torch::ext::utils::download(this->url, archive_file_abs_path.string());
                 torch::ext::utils::extract(archive_file_abs_path, this->root.string());
             }
+        } else {
+            if (fs::exists(archive_file_abs_path)) {
+                torch::ext::utils::extract(archive_file_abs_path, this->root.string() );
+            }
+
         }
     }
 
