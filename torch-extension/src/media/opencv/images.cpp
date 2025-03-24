@@ -12,7 +12,7 @@ namespace torch::ext::media::opencv {
 
         // 3. Convert image data to float and normalize to [0, 1]
         // image.convertTo(image, CV_32F, 1.0 / 255.0);
-        image.convertTo(image, CV_32F);
+        image.convertTo(image, CV_8U);
 
         // 4. Create a tensor from the image data
         // OpenCV uses HWC (Height, Width, Channels) format
