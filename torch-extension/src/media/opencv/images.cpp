@@ -19,6 +19,7 @@ namespace torch::ext::media::opencv {
         torch::Tensor tensor = torch::from_blob(image.data, {image.rows, image.cols, image.channels()},
                                                 torch::kInt8);
 
+        cout << image.rows << "  " <<  image.cols << "------" << tensor.numel() * tensor.element_size() << endl;
         // 5. Permute to CHW (Channels, Height, Width) format, which is PyTorch's default
         tensor = tensor.permute({2, 0, 1});
 

@@ -13,7 +13,7 @@ namespace fs = std::filesystem;
 namespace torch::ext::data::datasets {
     class Food101 : public BaseDataset {
     public :
-        Food101(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+        Food101(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false, const vector<int> &image_size = {0,0});
 
         Food101(const fs::path &root, DatasetArguments args);
 
@@ -23,9 +23,12 @@ namespace torch::ext::data::datasets {
         std::string dataset_file_md5 = "85eeb15f3717b99a5da872d97d918f87";
         fs::path dataset_folder_name = "food-101";
         std::size_t images_number = 101'000;
-        std::vector<string> classes_name ;
-        std::map<string , int> classes_map ;
+        std::vector<string> classes_name;
+        std::map<string, int> classes_map;
+        vector<int> image_size;
+
         void load_data();
+
         void load_classes();
 
         void check_resources();
