@@ -1,7 +1,8 @@
 #include "../../include/datasets/food.h"
 
 namespace torch::ext::data::datasets {
-    Food101::Food101(const std::string &root, DataMode mode, bool download, const vector<int> &image_size) : BaseDataset(root, mode, download) {
+    Food101::Food101(const std::string &root, DataMode mode, bool download,
+                     const vector<int> &image_size) : BaseDataset(root, mode, download) {
         this->image_size = image_size;
         check_resources();
         load_classes();
@@ -62,7 +63,6 @@ namespace torch::ext::data::datasets {
             while (!ifs.eof()) {
                 string line;
                 getline(ifs, line);
-                cout << line << endl;
                 line = torch::ext::utils::string::trim(line);
                 if (line.empty())
                     continue;
@@ -70,6 +70,7 @@ namespace torch::ext::data::datasets {
                 string label = tokens[0];
                 fs::path img_path = images_path / fs::path(line + ".jpg");
                 torch::Tensor tensor = torch::ext::media::opencv::convertImageToTensor(img_path);
+                cout << line << " " << tensor.sizes() << endl;
                 this->data.push_back(tensor);
                 this->labels.push_back(classes_map[label]);
             }

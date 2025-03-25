@@ -12,9 +12,9 @@ int main() {
     std::cout.precision(10);
     torch::Device device(torch::kCPU);
 
-    auto dataset = torch::ext::data::datasets::Food101("/home/kami/Documents/temp/", DataMode::TRAIN, false );
+    auto dataset = torch::ext::data::datasets::Food101("/home/kami/Documents/temp/", DataMode::TRAIN, false, {32, 32});
 
-//    auto dataset = torch::ext::data::datasets::Imagenette("/home/kami/Documents/temp/", DataMode::TRAIN, true,torch::ext::data::datasets::ImageType::PX160 );
+    //    auto dataset = torch::ext::data::datasets::Imagenette("/home/kami/Documents/temp/", DataMode::TRAIN, true,torch::ext::data::datasets::ImageType::PX160 );
 
     auto transformed_dataset = dataset
             .map(torch::ext::data::transforms::resize(size))
@@ -24,7 +24,7 @@ int main() {
     auto train_loader = torch::data::make_data_loader<torch::data::samplers::SequentialSampler>(
         std::move(transformed_dataset), 64);
 
-    torch::ext::models::LeNet5 model(10, 3 );
+    torch::ext::models::LeNet5 model(10, 3);
     model.to(device);
     model.train();
     torch::optim::Adam optimizer(model.parameters(), torch::optim::AdamOptions(1e-3));
