@@ -69,8 +69,8 @@ namespace torch::ext::data::datasets {
                 vector<string> tokens = torch::ext::utils::string::split(line, "/");
                 string label = tokens[0];
                 fs::path img_path = images_path / fs::path(line + ".jpg");
-                torch::Tensor tensor = torch::ext::media::opencv::convertImageToTensor(img_path);
-                cout << line << " " << tensor.sizes() << endl;
+                torch::Tensor tensor = torch::ext::media::opencv::convertImageToTensor(img_path, this->image_size);
+                // cout << line << " " << tensor.sizes() << endl;
                 this->data.push_back(tensor);
                 this->labels.push_back(classes_map[label]);
             }
