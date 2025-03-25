@@ -13,7 +13,7 @@ int main() {
     std::cout.precision(10);
     torch::Device device(torch::kCPU);
 
-    auto dataset = torch::ext::data::datasets::Food101("/home/kami/Documents/temp/", DataMode::TRAIN, false );
+    auto dataset = torch::ext::data::datasets::Food101("/home/kami/Documents/temp/", DataMode::TRAIN, false, {32, 32});
 
 //    auto dataset = torch::ext::data::datasets::Imagenette("/home/kami/Documents/temp/", DataMode::TRAIN, true, torch::ext::data::datasets::ImageType::PX160);
 
