@@ -23,7 +23,7 @@ namespace torch::ext::media::opencv {
         // 4. Create a tensor from the image data
         // OpenCV uses HWC (Height, Width, Channels) format
         torch::Tensor tensor = torch::from_blob(image.data, {image.rows, image.cols, image.channels()},
-                                                torch::kInt8);
+                                                torch::kFloat);
 
 
         // 5. Permute to CHW (Channels, Height, Width) format, which is PyTorch's default
