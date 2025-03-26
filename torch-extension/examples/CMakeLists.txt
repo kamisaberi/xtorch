@@ -20,7 +20,7 @@ set(BASE_SOURCE_FILES
 #        ../src/models/cnn/lenet5.cpp
         ../src/definitions/transforms.cpp
         ../src/datasets/base.cpp
-        ../src/datasets/functions.cpp
+        ../src/datasets/definitions/functions.cpp
 )
 
 set(TEST_LIBRARIES ${CURL_LIBRARIES}
