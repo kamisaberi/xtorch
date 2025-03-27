@@ -4,7 +4,7 @@
 #include "base.h"
 
 
-namespace torch::ext::data::datasets {
+namespace xt::data::datasets {
     class Flickr8k :public BaseDataset {
     public :
         Flickr8k(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);

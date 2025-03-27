@@ -1,6 +1,6 @@
 #include "../../include/datasets/fgvc-aircraft.h"
 
-namespace torch::ext::data::datasets {
+namespace xt::data::datasets {
 
     // FGVCAircraft::FGVCAircraft() {
     //     throw NotImplementedException();
