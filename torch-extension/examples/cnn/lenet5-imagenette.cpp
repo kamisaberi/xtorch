@@ -12,7 +12,7 @@ int main() {
     std::cout.precision(10);
     torch::Device device(torch::kCPU);
 
-    auto dataset = xt::data::datasets::Imagenette("/home/kami/Documents/temp/", DataMode::TRAIN, true,torch::ext::data::datasets::ImageType::PX160 );
+    auto dataset = xt::data::datasets::Imagenette("/home/kami/Documents/temp/", DataMode::TRAIN, true,xt::data::datasets::ImageType::PX160 );
 
     auto transformed_dataset = dataset
             .map(torch::ext::data::transforms::resize(size))
