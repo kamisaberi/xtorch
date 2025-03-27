@@ -1,6 +1,6 @@
 #include "../../include/datasets/food.h"
 
-namespace torch::ext::data::datasets {
+namespace xt::data::datasets {
     Food101::Food101(const std::string &root, DataMode mode, bool download,
                      const vector<int> &image_size) : BaseDataset(root, mode, download) {
         this->image_size = image_size;
