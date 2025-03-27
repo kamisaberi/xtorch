@@ -1,7 +1,6 @@
-#include "includes/base.h"
-#include "../../include/datasets/mnist.h"
-#include "../../include/models/cnn/lenet5.h"
-#include "../../include/definitions/transforms.h"
+#include "../include/datasets/mnist.h"
+#include "../include/models/cnn/lenet5.h"
+#include "../include/definitions/transforms.h"
 
 using namespace std;
 using Example = torch::data::Example<torch::Tensor, torch::Tensor>;
