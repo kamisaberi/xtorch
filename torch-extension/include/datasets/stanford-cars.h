@@ -2,7 +2,7 @@
 #include "../headers/datasets.h"
 #include "base.h"
 
-namespace torch::ext::data::datasets {
+namespace xt::data::datasets {
    class StanfordCars : BaseDataset {
 
    public :

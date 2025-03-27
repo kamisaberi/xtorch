@@ -3,7 +3,7 @@
 #include "base.h"
 
 
-namespace torch::ext::data::datasets {
+namespace xt::data::datasets {
    class Sintel : BaseDataset {
 
    public :
