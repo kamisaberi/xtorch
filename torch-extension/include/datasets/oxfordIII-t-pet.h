@@ -3,7 +3,7 @@
 #include "../headers/datasets.h"
 
 
-namespace torch::ext::data::datasets {
+namespace xt::data::datasets {
     class OxfordIIITPet : BaseDataset {
     public :
         OxfordIIITPet(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);

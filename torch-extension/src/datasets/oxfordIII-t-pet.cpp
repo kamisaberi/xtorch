@@ -1,6 +1,6 @@
 #include "../../include/datasets/oxfordIII-t-pet.h"
 
-namespace torch::ext::data::datasets {
+namespace xt::data::datasets {
 
     // OxfordIIITPet::OxfordIIITPet() {
     //     throw NotImplementedException();
