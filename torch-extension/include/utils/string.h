@@ -4,7 +4,7 @@
 #include <sstream>
 #include <vector>
 using namespace std;
-namespace torch::ext::utils::string {
+namespace xt::utils::string {
     vector<std::string> split(const std::string& str, const std::string& delim);
     std::string trim(std::string& str);
 
