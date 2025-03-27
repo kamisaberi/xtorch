@@ -1,6 +1,6 @@
 #include "../../include/datasets/stanford-cars.h"
 
-namespace torch::ext::data::datasets {
+namespace xt::data::datasets {
 
     // StanfordCars::StanfordCars() {
     //     throw NotImplementedException();

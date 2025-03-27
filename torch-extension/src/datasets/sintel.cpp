@@ -1,6 +1,6 @@
 #include "../../include/datasets/sintel.h"
 
-namespace torch::ext::data::datasets {
+namespace xt::data::datasets {
 
     // Sintel::Sintel() {
     //     throw NotImplementedException();
