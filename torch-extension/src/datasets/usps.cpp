@@ -1,6 +1,6 @@
 #include "../../include/datasets/usps.h"
 
-namespace torch::ext::data::datasets {
+namespace xt::data::datasets {
 
     // USPS::USPS() {
     //     throw NotImplementedException();
