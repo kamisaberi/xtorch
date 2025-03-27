@@ -456,7 +456,7 @@ target_link_libraries(${PROJECT_NAME}
 
 ####################################### DLTEST3 #######################################
 
-project(imgresize)
+project(dltest3)
 list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
 find_package(Torch REQUIRED)
 find_package(TorchExtension REQUIRED)
