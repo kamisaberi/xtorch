@@ -14,7 +14,7 @@ int main() {
     torch::Device device(torch::kCPU);
 
 
-    auto dataset = torch::ext::data::datasets::MNIST("/home/kami/Documents/temp/", DataMode::TRAIN, true);
+    auto dataset = xt::data::datasets::MNIST("/home/kami/Documents/temp/", DataMode::TRAIN, true);
 
     auto transformed_dataset = dataset
             .map(torch::ext::data::transforms::resize(size))
