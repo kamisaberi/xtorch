@@ -1,6 +1,6 @@
 #include "../../include/datasets/svhn.h"
 
-namespace torch::ext::data::datasets {
+namespace xt::data::datasets {
 
     // SVHN::SVHN() {
     //     throw NotImplementedException();
