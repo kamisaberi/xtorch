@@ -6,7 +6,7 @@
 //#include <string>
 //#include <filesystem>
 //#include <curl/curl.h>
-#include "include/datasets/mnist.h"
+#include "../include/datasets/mnist.h"
 
 int main() {
     torch::Tensor tensor = torch::eye(3);
