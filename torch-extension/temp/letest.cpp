@@ -26,7 +26,7 @@ int main() {
     std::cout.precision(10);
     torch::Device device(torch::kCPU);
     // Load the MNIST dataset
-    auto dataset = torch::ext::data::datasets::MNIST("/home/kami/Documents/temp/",
+    auto dataset = xt::data::datasets::MNIST("/home/kami/Documents/temp/",
                                                      {.mode = DataMode::TRAIN, .download = true});
 
     // Create a lambda function for resizing
