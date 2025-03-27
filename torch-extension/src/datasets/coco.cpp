@@ -1,6 +1,6 @@
 #include "../../include/datasets/coco.h"
 
-namespace torch::ext::data::datasets {
+namespace xt::data::datasets {
 
     // CocoDetection::CocoDetection() {
     //     throw NotImplementedException();
