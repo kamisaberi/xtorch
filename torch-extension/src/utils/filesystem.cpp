@@ -1,6 +1,6 @@
 #include "../../include/utils/filesystem.h"
 
-namespace xt::utils::filesystem {
+namespace xt::utils::fs {
 
     std::size_t countFiles(const fs::path& path , bool recursive){
 
