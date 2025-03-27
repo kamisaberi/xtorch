@@ -1,6 +1,6 @@
 #include "../../include/datasets/hd1k.h"
 
-namespace torch::ext::data::datasets {
+namespace xt::data::datasets {
 
     // HD1K::HD1K() {
     //     throw NotImplementedException();
