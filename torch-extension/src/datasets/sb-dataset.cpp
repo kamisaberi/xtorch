@@ -1,6 +1,6 @@
 #include "../../include/datasets/sb-dataset.h"
 
-namespace torch::ext::data::datasets {
+namespace xt::data::datasets {
 
     // SBDataset::SBDataset() {
     //     throw NotImplementedException();

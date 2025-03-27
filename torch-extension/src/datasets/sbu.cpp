@@ -1,6 +1,6 @@
 #include "../../include/datasets/sbu.h"
 
-namespace torch::ext::data::datasets {
+namespace xt::data::datasets {
 
     // SBU::SBU() {
     //     throw NotImplementedException();
