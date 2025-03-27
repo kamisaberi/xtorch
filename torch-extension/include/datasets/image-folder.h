@@ -4,7 +4,7 @@
 #include "../headers/datasets.h"
 
 
-namespace torch::ext::data::datasets {
+namespace xt::data::datasets {
     enum class LabelsType {
         BY_FOLDER = 0,
         BY_NAME = 1,

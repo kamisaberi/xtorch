@@ -1,6 +1,6 @@
 #include "../../include/datasets/image-folder.h"
 
-namespace torch::ext::data::datasets {
+namespace xt::data::datasets {
     ImageFolder::ImageFolder(const std::string &root, bool load_sub_folders, DataMode mode,
                              LabelsType label_type) : BaseDataset(root, mode, false) {
         this->label_type = label_type;

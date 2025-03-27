@@ -1,6 +1,6 @@
 #include "../../include/datasets/imagenette.h"
 
-namespace torch::ext::data::datasets {
+namespace xt::data::datasets {
     Imagenette::Imagenette(const std::string &root, DataMode mode, bool download, ImageType type) : BaseDataset(
         root, mode, download) {
         this->type = type;
