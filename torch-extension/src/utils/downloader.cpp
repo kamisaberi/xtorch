@@ -4,7 +4,7 @@
 using namespace std;
 namespace fs = std::filesystem;
 
-namespace  torch::ext::utils {
+namespace  xt::utils {
     size_t header_callback(char *buffer, size_t size, size_t nitems, void *userdata) {
         std::string header(buffer, size * nitems);
 

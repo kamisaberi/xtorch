@@ -8,7 +8,7 @@
 using namespace std;
 namespace fs = std::filesystem;
 
-namespace torch::ext::utils {
+namespace xt::utils {
     std::tuple<bool, std::string> download(std::string &url, std::string outPath);
 
     std::string rebuild_google_drive_link(std::string gid);
