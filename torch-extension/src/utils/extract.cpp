@@ -3,7 +3,7 @@
 using namespace std;
 namespace fs = std::filesystem;
 
-namespace torch::ext::utils {
+namespace xt::utils {
     void extractXZ(const std::string &inputFile, const std::string &outputFile) {
         // Open the input file
         std::ifstream inFile(inputFile, std::ios::binary);
