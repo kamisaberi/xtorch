@@ -1,6 +1,6 @@
 #include "../../include/datasets/flickr.h"
 
-namespace torch::ext::data::datasets {
+namespace xt::data::datasets {
 
     // Flickr8k::Flickr8k() {
     //     throw NotImplementedException();
