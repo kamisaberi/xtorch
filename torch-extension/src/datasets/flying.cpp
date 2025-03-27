@@ -1,6 +1,6 @@
 #include "../../include/datasets/flying.h"
 
-namespace torch::ext::data::datasets {
+namespace xt::data::datasets {
 
     // FlyingChairs::FlyingChairs() {
     //     throw NotImplementedException();

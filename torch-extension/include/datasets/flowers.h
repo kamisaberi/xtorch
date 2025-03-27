@@ -3,7 +3,7 @@
 #include "../headers/datasets.h"
 
 
-namespace torch::ext::data::datasets {
+namespace xt::data::datasets {
     class Flowers102 : public BaseDataset {
     public :
         Flowers102(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
