@@ -1,6 +1,6 @@
 #include "../../include/datasets/fake-data.h"
 
-namespace torch::ext::data::datasets {
+namespace xt::data::datasets {
 
     // FakeData::FakeData() {
     //     throw NotImplementedException();
