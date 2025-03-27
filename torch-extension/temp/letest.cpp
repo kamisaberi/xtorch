@@ -2,8 +2,8 @@
 #include <torch/data/datasets/mnist.h>
 #include <iostream>
 #include <vector>
-#include "include/datasets/mnist.h"
-#include "include/models/cnn/lenet5.h"
+#include "../include/datasets/mnist.h"
+#include "../include/models/cnn/lenet5.h"
 
 using namespace std;
 
