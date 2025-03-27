@@ -4,7 +4,7 @@ using namespace std;
 namespace fs = std::filesystem;
 
 
-namespace torch::ext::data::datasets {
+namespace xt::data::datasets {
     //------------------ CIFAR10 ------------------//
     CIFAR10::CIFAR10(const std::string &root, DataMode mode, bool download) {
         // Load data from the specified root directory
