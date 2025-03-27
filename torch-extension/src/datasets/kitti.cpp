@@ -1,6 +1,6 @@
 #include "../../include/datasets/kitti.h"
 
-namespace torch::ext::data::datasets {
+namespace xt::data::datasets {
 
     // Kitti::Kitti() {
     //     throw NotImplementedException();
