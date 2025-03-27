@@ -1,6 +1,6 @@
 #include "../../include/utils/md5.h"
 
-namespace torch::ext::utils {
+namespace xt::utils {
     std::string get_md5_checksum(const std::string &filename) {
         unsigned char mdValue[EVP_MAX_MD_SIZE];
         unsigned int mdLength;
