@@ -29,16 +29,16 @@ namespace xt::data::datasets {
         }
         auto [url , dataset_filename , folder_name, md] = this->resources[getImageTypeValue(this->type)];
         fs::path fpth = this->dataset_path / dataset_filename;
-        if (!(fs::exists(fpth) && torch::ext::utils::get_md5_checksum(fpth.string()) == md)) {
+        if (!(fs::exists(fpth) && xt::utils::get_md5_checksum(fpth.string()) == md)) {
             if (download) {
                 string u = url.string();
-                auto [r, path] = torch::ext::utils::download(u, this->dataset_path.string());
+                auto [r, path] = xt::utils::download(u, this->dataset_path.string());
             } else {
                 throw runtime_error("Resources files dent exist. please try again with download = true");
             }
         }
 
-        torch::ext::utils::extractTgz(fpth, this->dataset_path.string());
+        xt::utils::extractTgz(fpth, this->dataset_path.string());
     }
 
 
