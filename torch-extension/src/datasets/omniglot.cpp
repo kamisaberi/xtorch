@@ -1,6 +1,6 @@
 #include "../../include/datasets/omniglot.h"
 
-namespace torch::ext::data::datasets {
+namespace xt::data::datasets {
 
     // Omniglot::Omniglot() {
     //     throw NotImplementedException();

@@ -4,7 +4,7 @@
 
 
 
-namespace torch::ext::data::datasets {
+namespace xt::data::datasets {
     class PCAM : BaseDataset {
     public :
         PCAM(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);

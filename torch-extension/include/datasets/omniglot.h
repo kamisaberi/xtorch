@@ -4,7 +4,7 @@
 #include "../headers/datasets.h"
 
 
-namespace torch::ext::data::datasets {
+namespace xt::data::datasets {
     class Omniglot : BaseDataset {
     public :
         Omniglot(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
