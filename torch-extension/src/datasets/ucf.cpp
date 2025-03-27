@@ -1,6 +1,6 @@
 #include "../../include/datasets/ucf.h"
 
-namespace torch::ext::data::datasets {
+namespace xt::data::datasets {
 
 //     UCF101::UCF101(const std::string  &root) {
 //         std::cout << root<<std::endl;

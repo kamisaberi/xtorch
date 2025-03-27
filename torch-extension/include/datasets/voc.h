@@ -4,7 +4,7 @@
 #include "base.h"
 
 
-namespace torch::ext::data::datasets {
+namespace xt::data::datasets {
    class VOCSegmentation : BaseDataset {
 
    public :

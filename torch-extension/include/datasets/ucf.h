@@ -3,7 +3,7 @@
 #include "base.h"
 
 
-namespace torch::ext::data::datasets {
+namespace xt::data::datasets {
    class UCF101 : public BaseDataset {
    public :
        UCF101(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
