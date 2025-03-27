@@ -2,11 +2,11 @@
 #include <torch/data/datasets/mnist.h>
 #include <iostream>
 #include <vector>
-#include "include/datasets/imagenette.h"
-#include "include/models/cnn/lenet5.h"
+#include "../include/datasets/imagenette.h"
+#include "../include/models/cnn/lenet5.h"
 #include <torch/data/transforms/base.h>
 #include <functional>
-#include "include/definitions/transforms.h"
+#include "../include/definitions/transforms.h"
 
 using namespace std;
 using Example = torch::data::Example<torch::Tensor, torch::Tensor>;
