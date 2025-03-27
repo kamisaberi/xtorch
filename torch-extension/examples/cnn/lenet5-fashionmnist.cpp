@@ -13,7 +13,7 @@ int main() {
     std::cout.precision(10);
     torch::Device device(torch::kCPU);
 
-    auto dataset = torch::ext::data::datasets::FashionMNIST("/home/kami/Documents/temp/", DataMode::TRAIN, true);
+    auto dataset = xt::data::datasets::FashionMNIST("/home/kami/Documents/temp/", DataMode::TRAIN, true);
 
     auto transformed_dataset = dataset
             .map(torch::ext::data::transforms::resize({32, 32}))
