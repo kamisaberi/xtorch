@@ -1,6 +1,6 @@
 #include "../../include/utils/string.h"
 
-namespace torch::ext::utils::string {
+namespace xt::utils::string {
     vector<std::string> split(const std::string& str, const std::string& delim)
     {
         vector<std::string> tokens;
