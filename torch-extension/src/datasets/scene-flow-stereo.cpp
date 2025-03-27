@@ -1,6 +1,6 @@
 #include "../../include/datasets/scene-flow-stereo.h"
 
-namespace torch::ext::data::datasets {
+namespace xt::data::datasets {
 
     // SceneFlowStereo::SceneFlowStereo() {
     //     throw NotImplementedException();
