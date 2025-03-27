@@ -4,7 +4,7 @@
 #include "../headers/datasets.h"
 
 
-namespace torch::ext::data::datasets {
+namespace xt::data::datasets {
     class MovingMNIST : BaseDataset {
     public :
         MovingMNIST(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);

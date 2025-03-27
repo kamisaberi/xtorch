@@ -1,6 +1,6 @@
 #include "../../include/datasets/mnist.h"
 
-namespace torch::ext::data::datasets {
+namespace xt::data::datasets {
     // std::vector<torch::Tensor> read_mnist_images(const std::string &file_path, int num_images) {
     //     std::ifstream file(file_path, std::ios::binary);
     //     if (!file.is_open()) {
