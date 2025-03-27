@@ -1,6 +1,6 @@
 #include "../../include/datasets/photo-tour.h"
 
-namespace torch::ext::data::datasets {
+namespace xt::data::datasets {
 
     // PhotoTour::PhotoTour() {
     //     throw NotImplementedException();
