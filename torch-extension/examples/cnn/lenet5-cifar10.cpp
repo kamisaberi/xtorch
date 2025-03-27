@@ -14,7 +14,7 @@ int main() {
     std::cout.precision(10);
     torch::Device device(torch::kCPU);
 
-    auto dataset = torch::ext::data::datasets::CIFAR10("/home/kami/Documents/temp/", DataMode::TRAIN, true);
+    auto dataset = xt::data::datasets::CIFAR10("/home/kami/Documents/temp/", DataMode::TRAIN, true);
     cout << dataset.size().value() << endl;
 
 
