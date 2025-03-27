@@ -1,6 +1,6 @@
 #include "../../include/datasets/caltech.h"
 
-namespace torch::ext::data::datasets {
+namespace xt::data::datasets {
 
     // Caltech101::Caltech101() {
     //     throw NotImplementedException();
