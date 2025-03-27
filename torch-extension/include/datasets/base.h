@@ -17,7 +17,7 @@ namespace xt::data::datasets {
 
         torch::optional<size_t> size() const override;
 
-        torch::data::datasets::MapDataset<torch::ext::data::datasets::BaseDataset, torch::data::transforms::Stack<>()>
+        torch::data::datasets::MapDataset<xt::data::datasets::BaseDataset, torch::data::transforms::Stack<>()>
         transform_dataset();
 
     protected:
