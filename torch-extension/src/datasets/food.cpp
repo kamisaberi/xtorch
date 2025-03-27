@@ -14,22 +14,22 @@ namespace xt::data::datasets {
         this->dataset_path = this->root / this->dataset_folder_name;
         fs::path images_path = this->dataset_path / fs::path("images");
         if (fs::exists(images_path)) {
-            size_t cnt = torch::ext::utils::filesystem::countFiles(images_path, true);
+            size_t cnt = xt::utils::fs::countFiles(images_path, true);
             cout << "Found " << cnt << " images" << endl;
             if (cnt != this->images_number) {
                 if (fs::exists(archive_file_abs_path)) {
-                    torch::ext::utils::extract(archive_file_abs_path, this->root.string());
+                    xt::utils::extract(archive_file_abs_path, this->root.string());
                 } else {
-                    torch::ext::utils::download(this->url, archive_file_abs_path.string());
-                    torch::ext::utils::extract(archive_file_abs_path, this->root.string());
+                    xt::utils::download(this->url, archive_file_abs_path.string());
+                    xt::utils::extract(archive_file_abs_path, this->root.string());
                 }
             }
         } else {
             if (fs::exists(archive_file_abs_path)) {
-                torch::ext::utils::extract(archive_file_abs_path, this->root.string());
+                xt::utils::extract(archive_file_abs_path, this->root.string());
             } else {
-                torch::ext::utils::download(this->url, archive_file_abs_path.string());
-                torch::ext::utils::extract(archive_file_abs_path, this->root.string());
+                xt::utils::download(this->url, archive_file_abs_path.string());
+                xt::utils::extract(archive_file_abs_path, this->root.string());
             }
         }
     }
@@ -42,7 +42,7 @@ namespace xt::data::datasets {
         while (!ifs.eof()) {
             std::string line;
             std::getline(ifs, line);
-            line = torch::ext::utils::string::trim(line);
+            line = xt::utils::string::trim(line);
             if (line.empty())
                 continue;
             classes_name.push_back(line);
@@ -63,10 +63,10 @@ namespace xt::data::datasets {
             while (!ifs.eof()) {
                 string line;
                 getline(ifs, line);
-                line = torch::ext::utils::string::trim(line);
+                line = xt::utils::string::trim(line);
                 if (line.empty())
                     continue;
-                vector<string> tokens = torch::ext::utils::string::split(line, "/");
+                vector<string> tokens = xt::utils::string::split(line, "/");
                 string label = tokens[0];
                 fs::path img_path = images_path / fs::path(line + ".jpg");
                 torch::Tensor tensor = torch::ext::media::opencv::convertImageToTensor(img_path, this->image_size);

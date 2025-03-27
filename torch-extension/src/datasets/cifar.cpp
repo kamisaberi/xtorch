@@ -16,18 +16,18 @@ namespace xt::data::datasets {
             if (!fs::exists(this->root / this->archive_file_name)) {
                 should_download = true;
             } else {
-                std::string md5 = torch::ext::utils::get_md5_checksum((this->root / this->archive_file_name).string());
+                std::string md5 = xt::utils::get_md5_checksum((this->root / this->archive_file_name).string());
                 if (md5 != archive_file_md5) {
                     should_download = true;
                 }
             }
             if (should_download) {
-                auto [result, path] = torch::ext::utils::download(this->url, this->root.string());
+                auto [result, path] = xt::utils::download(this->url, this->root.string());
                 res = result;
             }
             if (res) {
                 string pth = (this->root / this->archive_file_name).string();
-                res = torch::ext::utils::extract(pth, this->root);
+                res = xt::utils::extract(pth, this->root);
             }
         }
         // if (res) {
@@ -116,18 +116,18 @@ namespace xt::data::datasets {
             if (!fs::exists(this->root / this->archive_file_name)) {
                 should_download = true;
             } else {
-                std::string md5 = torch::ext::utils::get_md5_checksum((this->root / this->archive_file_name).string());
+                std::string md5 = xt::utils::get_md5_checksum((this->root / this->archive_file_name).string());
                 if (md5 != archive_file_md5) {
                     should_download = true;
                 }
             }
             if (should_download) {
-                auto [result, path] = torch::ext::utils::download(this->url, this->root.string());
+                auto [result, path] = xt::utils::download(this->url, this->root.string());
                 res = result;
             }
             if (res) {
                 string pth = (this->root / this->archive_file_name).string();
-                res = torch::ext::utils::extract(pth, this->root);
+                res = xt::utils::extract(pth, this->root);
             }
         }
         // if (res) {
