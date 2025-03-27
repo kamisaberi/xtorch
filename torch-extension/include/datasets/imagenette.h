@@ -6,7 +6,7 @@
 using namespace std;
 namespace fs = std::filesystem;
 
-namespace torch::ext::data::datasets {
+namespace xt::data::datasets {
     enum class ImageType {
         FULL = 0,
         PX320 = 1,
