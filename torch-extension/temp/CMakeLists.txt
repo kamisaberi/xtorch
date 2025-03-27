@@ -24,15 +24,15 @@ find_package(LibArchive REQUIRED)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} src/datasets/mnist.cpp test.cpp)
+set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ../src/datasets/mnist.cpp test.cpp)
 
-add_executable(${CMAKE_PROJECT_NAME} ${TEST_SOURCE_FILES})
-target_link_libraries(${CMAKE_PROJECT_NAME} "${TORCH_LIBRARIES}")
+add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
+target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
 #
-set_property(TARGET ${CMAKE_PROJECT_NAME} PROPERTY CXX_STANDARD 17)
+set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
 
-target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
-target_link_libraries(${CMAKE_PROJECT_NAME}
+target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
+target_link_libraries(${PROJECT_NAME}
         ${CURL_LIBRARIES}
         ${TORCH_LIBRARIES}
         ${OpenCV_LIBS}
@@ -64,15 +64,15 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 
-set(TEST_SOURCE_FILES src/utils/md5.cpp md.cpp)
+set(TEST_SOURCE_FILES ../src/utils/md5.cpp md.cpp)
 
-add_executable(${CMAKE_PROJECT_NAME} ${TEST_SOURCE_FILES})
-target_link_libraries(${CMAKE_PROJECT_NAME} "${TORCH_LIBRARIES}")
+add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
+target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
 #
-set_property(TARGET ${CMAKE_PROJECT_NAME} PROPERTY CXX_STANDARD 17)
+set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
 
-target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
-target_link_libraries(${CMAKE_PROJECT_NAME}
+target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
+target_link_libraries(${PROJECT_NAME}
         ${CURL_LIBRARIES}
         ${TORCH_LIBRARIES}
         ${OpenCV_LIBS}
@@ -103,15 +103,15 @@ find_package(LibArchive REQUIRED)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-set(TEST_SOURCE_FILES src/utils/md5.cpp md2.cpp)
+set(TEST_SOURCE_FILES ../src/utils/md5.cpp md2.cpp)
 
-add_executable(${CMAKE_PROJECT_NAME} ${TEST_SOURCE_FILES})
-target_link_libraries(${CMAKE_PROJECT_NAME} "${TORCH_LIBRARIES}")
+add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
+target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
 #
-set_property(TARGET ${CMAKE_PROJECT_NAME} PROPERTY CXX_STANDARD 17)
+set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
 
-target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
-target_link_libraries(${CMAKE_PROJECT_NAME}
+target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
+target_link_libraries(${PROJECT_NAME}
         ${CURL_LIBRARIES}
         ${TORCH_LIBRARIES}
         ${OpenCV_LIBS}
@@ -145,13 +145,13 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 set(TEST_SOURCE_FILES xz.cpp)
 
-add_executable(${CMAKE_PROJECT_NAME} ${TEST_SOURCE_FILES})
-target_link_libraries(${CMAKE_PROJECT_NAME} "${TORCH_LIBRARIES}")
+add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
+target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
 #
-set_property(TARGET ${CMAKE_PROJECT_NAME} PROPERTY CXX_STANDARD 17)
+set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
 
-target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
-target_link_libraries(${CMAKE_PROJECT_NAME}
+target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
+target_link_libraries(${PROJECT_NAME}
         ${CURL_LIBRARIES}
         ${TORCH_LIBRARIES}
         ${OpenCV_LIBS}
@@ -182,15 +182,15 @@ find_package(LibArchive REQUIRED)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} src/datasets/mnist.cpp src/models/cnn/lenet5.cpp letest.cpp)
+set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} ../src/datasets/mnist.cpp ../src/models/cnn/lenet5.cpp letest.cpp)
 
-add_executable(${CMAKE_PROJECT_NAME} ${TEST_SOURCE_FILES})
-target_link_libraries(${CMAKE_PROJECT_NAME} "${TORCH_LIBRARIES}")
+add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
+target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
 #
-set_property(TARGET ${CMAKE_PROJECT_NAME} PROPERTY CXX_STANDARD 17)
+set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
 
-target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
-target_link_libraries(${CMAKE_PROJECT_NAME}
+target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
+target_link_libraries(${PROJECT_NAME}
         ${CURL_LIBRARIES}
         ${TORCH_LIBRARIES}
         ${OpenCV_LIBS}
@@ -220,15 +220,15 @@ find_package(LibArchive REQUIRED)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} ${DATASET_FILES} src/models/cnn/lenet5.cpp mnt.cpp)
+set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} ${DATASET_FILES} ../src/models/cnn/lenet5.cpp mnt.cpp)
 
-add_executable(${CMAKE_PROJECT_NAME} ${TEST_SOURCE_FILES})
-target_link_libraries(${CMAKE_PROJECT_NAME} "${TORCH_LIBRARIES}")
+add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
+target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
 #
-set_property(TARGET ${CMAKE_PROJECT_NAME} PROPERTY CXX_STANDARD 17)
+set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
 
-target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
-target_link_libraries(${CMAKE_PROJECT_NAME}
+target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
+target_link_libraries(${PROJECT_NAME}
         ${CURL_LIBRARIES}
         ${TORCH_LIBRARIES}
         ${OpenCV_LIBS}
@@ -258,13 +258,13 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} ${DATASET_FILES} ${MODEL_FILES} tgz.cpp)
 
-add_executable(${CMAKE_PROJECT_NAME} ${TEST_SOURCE_FILES})
-target_link_libraries(${CMAKE_PROJECT_NAME} "${TORCH_LIBRARIES}")
+add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
+target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
 #
-set_property(TARGET ${CMAKE_PROJECT_NAME} PROPERTY CXX_STANDARD 17)
+set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
 
-target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
-target_link_libraries(${CMAKE_PROJECT_NAME}
+target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
+target_link_libraries(${PROJECT_NAME}
         ${CURL_LIBRARIES}
         ${TORCH_LIBRARIES}
         ${OpenCV_LIBS}
@@ -296,15 +296,15 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} ${DATASET_FILES} ${MODEL_FILES} imgnt.cpp)
 
-add_executable(${CMAKE_PROJECT_NAME} ${TEST_SOURCE_FILES})
-target_link_libraries(${CMAKE_PROJECT_NAME} "${TORCH_LIBRARIES}")
+add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
+target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
 #
-set_property(TARGET ${CMAKE_PROJECT_NAME} PROPERTY CXX_STANDARD 17)
+set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
 
 include_directories(/usr/include)
 
-target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
-target_link_libraries(${CMAKE_PROJECT_NAME}
+target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
+target_link_libraries(${PROJECT_NAME}
         ${CURL_LIBRARIES}
         ${TORCH_LIBRARIES}
         ${OpenCV_LIBS}
@@ -338,15 +338,15 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} ${DATASET_FILES} ${MODEL_FILES} vdtest.cpp)
 
-add_executable(${CMAKE_PROJECT_NAME} ${TEST_SOURCE_FILES})
-target_link_libraries(${CMAKE_PROJECT_NAME} "${TORCH_LIBRARIES}")
+add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
+target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
 #
-set_property(TARGET ${CMAKE_PROJECT_NAME} PROPERTY CXX_STANDARD 17)
+set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
 
 include_directories(/usr/include)
 
-target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
-target_link_libraries(${CMAKE_PROJECT_NAME}
+target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
+target_link_libraries(${PROJECT_NAME}
         ${CURL_LIBRARIES}
         ${TORCH_LIBRARIES}
         ${OpenCV_LIBS}
@@ -383,15 +383,15 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} ${DATASET_FILES} ${MODEL_FILES} cntfiles.cpp)
 
-add_executable(${CMAKE_PROJECT_NAME} ${TEST_SOURCE_FILES})
-target_link_libraries(${CMAKE_PROJECT_NAME} "${TORCH_LIBRARIES}")
+add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
+target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
 #
-set_property(TARGET ${CMAKE_PROJECT_NAME} PROPERTY CXX_STANDARD 17)
+set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
 
 include_directories(/usr/include)
 
-target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
-target_link_libraries(${CMAKE_PROJECT_NAME}
+target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
+target_link_libraries(${PROJECT_NAME}
         ${CURL_LIBRARIES}
         ${TORCH_LIBRARIES}
         ${OpenCV_LIBS}
@@ -423,15 +423,15 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} ${DATASET_FILES} ${MODEL_FILES} imgresize.cpp)
 
-add_executable(${CMAKE_PROJECT_NAME} ${TEST_SOURCE_FILES})
-target_link_libraries(${CMAKE_PROJECT_NAME} "${TORCH_LIBRARIES}")
+add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
+target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
 #
-set_property(TARGET ${CMAKE_PROJECT_NAME} PROPERTY CXX_STANDARD 17)
+set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
 
 include_directories(/usr/include)
 
-target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
-target_link_libraries(${CMAKE_PROJECT_NAME}
+target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
+target_link_libraries(${PROJECT_NAME}
         ${CURL_LIBRARIES}
         ${TORCH_LIBRARIES}
         ${OpenCV_LIBS}

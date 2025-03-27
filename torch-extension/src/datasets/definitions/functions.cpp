@@ -1,8 +1,8 @@
-#include "../../include/datasets/functions.h"
+#include "../../../include/datasets/definitions/functions.h"
 
 #include <torch/data/datasets/map.h>
 
-#include "../../include/datasets/base.h"
+#include "../../../include/datasets/base.h"
 
 namespace torch::ext::data {
     // torch::data::datasets::MapDataset<torch::ext::data::datasets::BaseDataset , torch::data::transforms::Stack<>()>
