@@ -5,7 +5,7 @@ using namespace std;
 namespace fs = std::filesystem;
 
 
-namespace torch::ext::data::datasets {
+namespace xt::data::datasets {
     class CIFAR10 : public torch::data::Dataset<CIFAR10> {
     public:
         CIFAR10(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);

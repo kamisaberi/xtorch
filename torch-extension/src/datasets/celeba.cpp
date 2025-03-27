@@ -1,6 +1,6 @@
 #include "../../include/datasets/celeba.h"
 
-namespace torch::ext::data::datasets {
+namespace xt::data::datasets {
 
     // CelebA::CelebA() {
     //     throw NotImplementedException();
