@@ -2,7 +2,7 @@
 
 namespace xt::utils::fs {
 
-    std::size_t countFiles(const fs::path& path , bool recursive){
+    std::size_t countFiles(const std::filesystem::path& path , bool recursive){
 
         if (recursive) {
             return std::count_if(
