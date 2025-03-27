@@ -62,7 +62,7 @@ int main() {
     std::cout.precision(10);
     torch::Device device(torch::kCPU);
 
-    auto dataset = torch::ext::data::datasets::MNIST("/home/kami/Documents/temp/", DataMode::TRAIN, true);
+    auto dataset = xt::data::datasets::MNIST("/home/kami/Documents/temp/", DataMode::TRAIN, true);
 
     cout << "DATASET\n";
     cout << dataset.get(0).data << "  " << dataset.get(0).target << "\n";
@@ -82,7 +82,7 @@ int main() {
         torch::ext::data::transforms::resize({32, 32}),
         torch::ext::data::transforms::normalize(0.5, 0.5)
     };
-    auto dataset2 = torch::ext::data::datasets::MNIST("/home/kami/Documents/temp/",
+    auto dataset2 = xt::data::datasets::MNIST("/home/kami/Documents/temp/",
                                                       {
                                                           .mode = DataMode::TRAIN, .download = true,
                                                           .transforms = transforms
