@@ -3,7 +3,6 @@
 #include <functional>
 #include <iostream>
 #include <random>
-#include "../include/definitions/transforms.h"
 
 // ==========================
 // ComposeTransform Definition
@@ -80,6 +79,8 @@ int main() {
     auto norm_fn = [normalize_fn](torch::Tensor img) mutable {
         return normalize_fn(std::move(img));
     };
+
+
 
     // Compose all transforms
     ComposeTransform transform({resize_fn, random_crop_fn, to_tensor_fn, norm_fn});
