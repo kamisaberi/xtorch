@@ -3,198 +3,147 @@
 #include <vector>
 #include <algorithm>
 #include <random>
+#include "../include/datasets/mnist.h"
+#include "../include/models/cnn/lenet5.h"
+#include "../include/definitions/transforms.h"
+#include <torch/torch.h>
+#include <iostream>
+#include <vector>
+#include <optional>
 
-// Custom transform to resize a single image tensor to 32x32 using bilinear interpolation.
-struct ResizeTransform : public torch::data::transforms::Transform<torch::Tensor, torch::Tensor> {
-    torch::Tensor operator()(torch::Tensor input)  {
-        // MNIST images are 1x28x28 (C x H x W). Add a batch dimension for interpolation.
-        input = input.unsqueeze(0);  // shape: [1, 1, 28, 28]
-        input = torch::nn::functional::interpolate(
-            input,
-            torch::nn::functional::InterpolateFuncOptions().size({32, 32}).mode(torch::kBilinear).align_corners(false)
-        );
-        input = input.squeeze(0);    // remove batch dim, back to [1, 32, 32]
-        return input;
+
+// Custom dataset that produces one Example (data, target) per sample
+struct MyDataset : torch::data::datasets::Dataset<MyDataset, torch::data::Example<>> {
+    size_t dataset_size;
+    MyDataset(size_t size) : dataset_size(size) {}
+
+    // Return an Example containing data and target for the given index
+    torch::data::Example<> get(size_t index) override {
+        // Dummy data: 1-D tensor of length 3, dummy target: scalar tensor (e.g., class label)
+        auto data   = torch::tensor({float(index), float(index) + 0.1f, float(index) + 0.2f});
+        auto target = torch::tensor({static_cast<long>(index % 2)});  // e.g., binary label 0 or 1
+        target = target.squeeze();  // make target a 0-dim scalar tensor
+        return {data, target};
+    }
+
+    // Return number of samples in dataset
+    torch::optional<size_t> size() const override {
+        return dataset_size;
     }
 };
 
-// Custom DataLoader inheriting from DataLoaderBase to iterate over the dataset.
+// Custom DataLoader for a pre-batched (Stack-transformed) dataset
 template <typename Dataset>
-class CustomDataLoader : public torch::data::DataLoaderBase<CustomDataLoader<Dataset>, Dataset> {
+class CustomDataLoader : public torch::data::DataLoaderBase<Dataset, typename Dataset::BatchType, std::vector<size_t>> {
+    using BatchType        = typename Dataset::BatchType;          // e.g., Example<Tensor, Tensor>
+    using BatchRequestType = std::vector<size_t>;                  // list of indices for one batch
+    using Base = torch::data::DataLoaderBase<Dataset, BatchType, BatchRequestType>;
+
 public:
-    using BatchType = torch::data::Example<>;
-    // Constructor: store reference to dataset and initialize index sequence.
-    CustomDataLoader(Dataset& dataset, size_t batch_size, bool shuffle = true)
-        : dataset_(dataset), batch_size_(batch_size), shuffle_(shuffle)
-    {
-        dataset_size_ = dataset_.size().value();               // total number of samples
-        indices_.reserve(dataset_size_);
-        for (size_t i = 0; i < dataset_size_; ++i) {
-            indices_.push_back(i);
+    CustomDataLoader(Dataset dataset, const torch::data::DataLoaderOptions& options, bool shuffle = false)
+        : Base(options, std::make_unique<Dataset>(std::move(dataset))), shuffle_(shuffle) {
+        // Only single-thread (workers=0) is supported in this custom loader
+        if (options.workers() != 0) {
+            throw std::runtime_error("CustomDataLoader supports only workers=0 (single-threaded)");
         }
+        dataset_ptr_ = Base::main_thread_dataset_.get();      // pointer to dataset (stored in base)
+        batch_size_  = options.batch_size();                  // batch size per iteration
+        drop_last_   = options.drop_last();                   // whether to drop last incomplete batch
+        reset_indices();                                      // initialize index sequence
+    }
+
+//    // Iterator support for range-for loops
+//    typename Base::iterator begin() {
+//        this->reset();       // reset (and shuffle if needed) at start of epoch
+//        return Base::begin();
+//    }
+//    typename Base::iterator end() {
+//        return Base::end();
+//    }
+
+protected:
+    // Provide the next batch of indices to fetch from the dataset
+    std::optional<BatchRequestType> get_batch_request() override {
+        if (current_index_ >= indices_.size()) {
+            // No more indices -> signal end of data
+            return std::nullopt;
+        }
+        // Determine the range [start_index, end_index) for the next batch of indices
+        size_t start_index = current_index_;
+        size_t end_index   = std::min(current_index_ + batch_size_, indices_.size());
+        // If drop_last_ is true and the remaining indices are fewer than batch_size, stop here
+        if (drop_last_ && (end_index - start_index) < batch_size_) {
+            return std::nullopt;
+        }
+        // Collect indices for this batch and advance the pointer
+        BatchRequestType batch_indices(indices_.begin() + start_index, indices_.begin() + end_index);
+        current_index_ = end_index;
+        return batch_indices;
+    }
+
+    // Reset and (optionally) shuffle indices for a new epoch
+    void reset_indices() {
+        const size_t N = dataset_ptr_->size().value();
+        indices_.resize(N);
+        std::iota(indices_.begin(), indices_.end(), 0);  // fill with 0,1,...,N-1
         if (shuffle_) {
-            // Shuffle indices for the first epoch
-            std::mt19937 gen(std::random_device{}());
-            std::shuffle(indices_.begin(), indices_.end(), gen);
+            // Shuffle the indices to randomize batch order
+            static std::mt19937 rng(std::random_device{}());  // fixed seeded RNG for reproducibility
+            std::shuffle(indices_.begin(), indices_.end(), rng);
         }
         current_index_ = 0;
     }
 
-    // Reset loader at end of epoch: shuffle indices and reset counter.
+    // Override base class reset() to shuffle indices each epoch (if enabled)
     void reset() override {
-        current_index_ = 0;
-        if (shuffle_) {
-            std::mt19937 gen(std::random_device{}());
-            std::shuffle(indices_.begin(), indices_.end(), gen);
-        }
-    }
-
-    // Fetch the next batch. Returns an optional Example (data=Tensor, target=Tensor).
-    torch::optional<BatchType> next() override {
-        if (current_index_ >= dataset_size_) {
-            // No more data
-            return torch::nullopt;
-        }
-        // Determine the range of indices for the next batch
-        size_t start = current_index_;
-        size_t end = std::min(current_index_ + batch_size_, dataset_size_);
-        current_index_ = end;
-
-        // Gather a batch of examples from the dataset
-        std::vector<torch::Tensor> data_batch;
-        std::vector<torch::Tensor> target_batch;
-        data_batch.reserve(end - start);
-        target_batch.reserve(end - start);
-
-        for (size_t i = start; i < end; ++i) {
-            // Get the sample at the index (this applies all dataset transforms)
-            auto sample = dataset_.get(indices_[i]);
-            data_batch.push_back(sample.data);
-            target_batch.push_back(sample.target);
-        }
-
-        // Stack the individual tensors into batch tensors
-        torch::Tensor stacked_data = torch::stack(data_batch, /*dim=*/0);
-        torch::Tensor stacked_targets = torch::stack(target_batch, /*dim=*/0).squeeze();
-        // .squeeze() to convert targets from shape [batch_size, 1] to [batch_size] if needed
-
-        return BatchType(stacked_data, stacked_targets);
+        reset_indices();
+        Base::reset();  // let DataLoaderBase handle internal reset (e.g., for iterator state)
     }
 
 private:
-    Dataset& dataset_;
+    Dataset* dataset_ptr_;           // raw pointer to the dataset (owned by base class)
+    std::vector<size_t> indices_;    // sequence of indices to iterate over
+    size_t current_index_ = 0;       // current position in indices_ vector
     size_t batch_size_;
     bool shuffle_;
-    size_t dataset_size_;
-    std::vector<size_t> indices_;
-    size_t current_index_;
+    bool drop_last_;
 };
 
-// Define a simple CNN model (two conv layers + one hidden fully-connected layer).
-struct NetImpl : torch::nn::Module {
-    // Layers: conv1, conv2, fc1, fc2
-    torch::nn::Conv2d conv1{nullptr}, conv2{nullptr};
-    torch::nn::Linear fc1{nullptr}, fc2{nullptr};
-
-    NetImpl() {
-        // Initialize convolutional layers
-        conv1 = register_module("conv1", torch::nn::Conv2d(torch::nn::Conv2dOptions(1, 8, /*kernel_size=*/3).stride(1).padding(1)));
-        conv2 = register_module("conv2", torch::nn::Conv2d(torch::nn::Conv2dOptions(8, 16, /*kernel_size=*/3).stride(1).padding(1)));
-        // After two 2x2 poolings, the 32x32 input is reduced to 8x8, with 16 channels
-        fc1   = register_module("fc1", torch::nn::Linear(16 * 8 * 8, 64));
-        fc2   = register_module("fc2", torch::nn::Linear(64, 10));
-    }
-
-    // Implement the forward pass
-    torch::Tensor forward(torch::Tensor x) {
-        // Input x shape: [batch_size, 1, 32, 32]
-        x = torch::relu(conv1(x));
-        x = torch::max_pool2d(x, /*kernel_size=*/2);  // -> shape [batch, 8, 16, 16]
-        x = torch::relu(conv2(x));
-        x = torch::max_pool2d(x, /*kernel_size=*/2);  // -> shape [batch, 16, 8, 8]
-        x = x.view({x.size(0), -1});                  // flatten to [batch, 16*8*8]
-        x = torch::relu(fc1(x));
-        x = fc2(x);
-        return x;
-    }
-};
-TORCH_MODULE(Net);  // This creates Net (alias for std::shared_ptr<NetImpl>)
-
-// Entry point
 int main() {
-    // Set device to CPU (as required)
-    torch::Device device(torch::kCPU);
+    // Create a dataset of 10 samples and apply the Stack<> transform to batch its outputs
+//    MyDataset base_dataset(10);
+    auto base_dataset = xt::data::datasets::MNIST("/home/kami/Documents/temp/", DataMode::TRAIN, true);
 
-    // Set random seed for reproducibility (optional)
-    torch::manual_seed(0);
+//    auto stacked_dataset = base_dataset.map(torch::data::transforms::Stack<>());
 
-    // **Load and transform the MNIST dataset**
-    // Adjust the `data_path` to the location of your MNIST dataset (unzipped files).
-    const std::string data_path = "./data/mnist";  // assume MNIST data is here
-    auto train_dataset = torch::data::datasets::MNIST(data_path)
-        .map(ResizeTransform())                             // resize images to 32x32
-        .map(torch::data::transforms::Normalize<>(0.5, 0.5));  // normalize to mean=0.5, std=0.5
-        // Note: We will stack samples into batches using the CustomDataLoader.
+    auto stacked_dataset = base_dataset
+        .map(torch::ext::data::transforms::resize({32, 32}))
+        .map(torch::ext::data::transforms::normalize(0.5, 0.5))
+        .map(torch::data::transforms::Stack<>());
 
-    // Create an instance of the custom data loader for the training set
-    const size_t batch_size = 64;
-    CustomDataLoader<decltype(train_dataset)> train_loader(train_dataset, batch_size, /*shuffle=*/true);
+    // Configure DataLoaderOptions (batch size 4, single thread, and don't drop last batch)
+    auto options = torch::data::DataLoaderOptions().batch_size(64).drop_last(false);
+    // Instantiate CustomDataLoader with shuffle enabled
+    CustomDataLoader<decltype(stacked_dataset)> loader(std::move(stacked_dataset), options, /*shuffle=*/true);
 
-    // Initialize the neural network, loss function, and optimizer
-    Net model;
-    model->to(device);  // move model to CPU (redundant here since device is CPU)
+//    loader.reset();  // start of epoch
+//
+//    while (auto batch = loader.next()) {
+//        std::cout << "Batch data size: " << batch->data.sizes()
+//                  << ", Batch target size: " << batch->target.sizes() << "\n";
+//        std::cout << "Data:\n" << batch->data << "\n";
+//        std::cout << "Targets:\n" << batch->target << "\n";
+//        std::cout << "-------------------------\n";
+//    }
 
-    torch::nn::CrossEntropyLoss criterion;
-    torch::optim::SGD optimizer(model->parameters(), torch::optim::SGDOptions(0.01).momentum(0.9));
-
-    // **Training loop for 10 epochs**
-    size_t num_epochs = 10;
-    for (size_t epoch = 1; epoch <= num_epochs; ++epoch) {
-        model->train();  // set model to training mode (important if using dropout/batch-norm)
-        double total_loss = 0.0;
-        size_t total_correct = 0;
-        size_t total_samples = 0;
-
-        // Iterate over batches from the data loader
-        while (true) {
-            auto batch = train_loader.next();
-            if (!batch.has_value()) {
-                break;  // no more batches
-            }
-            // Get data and targets from the batch, and move them to the device (CPU here)
-            torch::Tensor data = batch->data.to(device);
-            torch::Tensor targets = batch->target.to(device);
-
-            // Forward pass: compute model predictions
-            torch::Tensor output = model->forward(data);
-            // Compute the loss between predictions and true labels
-            torch::Tensor loss = criterion(output, targets);
-
-            // Backward pass and optimize
-            optimizer.zero_grad();
-            loss.backward();
-            optimizer.step();
-
-            // Accumulate training loss and accuracy statistics
-            total_loss += loss.item<double>() * data.size(0);  // sum of loss for this batch
-            // Compute number of correct predictions in this batch
-            auto pred = output.argmax(1);  // index of max log-probability
-            total_correct += pred.eq(targets).sum().item<int64_t>();
-            total_samples += data.size(0);
-        }
-
-        // Compute average loss and accuracy for the epoch
-        double avg_loss = total_loss / total_samples;
-        double accuracy = static_cast<double>(total_correct) / total_samples * 100.0;
-
-        // Print epoch statistics
-        std::cout << "Epoch [" << epoch << "/" << num_epochs << "] - "
-                  << "Loss: " << avg_loss << " , "
-                  << "Accuracy: " << accuracy << "%\n";
-
-        // Reset the data loader for the next epoch (shuffles the data if enabled)
-        train_loader.reset();
+    std::cout << "Iterating over CustomDataLoader:\n";
+    for (auto& batch : loader) {
+        // Each `batch` is an Example<Tensor, Tensor> with shapes [batch_size, ...]
+        std::cout << "Batch data size: "    << batch.data.sizes()
+                  << ", Batch target size: " << batch.target.sizes() << "\n";
+//        std::cout << "Data:\n"    << batch.data << "\n";
+//        std::cout << "Targets:\n" << batch.target << "\n";
+        std::cout << "-------------------------\n";
     }
-
     return 0;
 }
