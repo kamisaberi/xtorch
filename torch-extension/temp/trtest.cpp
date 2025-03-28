@@ -32,8 +32,8 @@ private:
 // ==========================
 int main() {
     // Parameters
-    int resize_size = 40;
-    int crop_size = 32;
+    int resize_size = 200;
+    int crop_size = 100;
     std::vector<double> mean = {0.5, 0.5, 0.5};
     std::vector<double> stddev = {0.5, 0.5, 0.5};
 
