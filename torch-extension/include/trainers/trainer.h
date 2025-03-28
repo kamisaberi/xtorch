@@ -3,26 +3,37 @@
 #include <torch/torch.h>
 #include <iostream>
 #include <filesystem>
-using namespace std;
-namespace fs = std::filesystem;
 
+#include <memory>  // For std::shared_ptr
+#include <string>  // For std::string
+
+// Forward declarations (assume these classes exist elsewhere)
+//class Optimizer;
+//class LossFunction;
 
 namespace xt {
 
-template <typename Model , typename Loader>
-class Trainer {
+    class Trainer {
+    public:
+        // Default constructor
+        Trainer();
 
-  public:
-    explicit Trainer();
-    void fit(Model &model , Loader &train_loader , Loader &test_loader);
-  private:
+        // Setter methods with fluent interface
+        Trainer& setMaxEpochs(int maxEpochs);
+        Trainer& setOptimizer(std::shared_ptr<Optimizer> optimizer);
+        Trainer& setLossFn(std::shared_ptr<LossFunction> lossFn);
+        Trainer& enableCheckpoint(const std::string& path, int interval);
 
+    private:
+        int maxEpochs_;                         // Maximum number of training epochs
+        std::shared_ptr<Optimizer> optimizer_;  // Optimizer object
+        std::shared_ptr<LossFunction> lossFn_;  // Loss function object
+        bool checkpointEnabled_;                // Flag for checkpointing status
+        std::string checkpointPath_;            // Path for saving checkpoints
+        int checkpointInterval_;                // Interval for checkpointing
+    };
 
-}
+} // namespace xt
 
-
-
-
-}
 
 
