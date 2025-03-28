@@ -161,7 +161,7 @@ int main() {
                 loss = torch::nll_loss(output, targets);
                 loss.backward();
                 optimizer.step();
-//                std::cout << "Epoch: " << epoch << " | Batch: " << batch_index << " | Loss: " << loss.item<float>() <<                            std::endl;
+                std::cout << "Epoch: " << epoch << " | Batch: " <<  " | Loss: " << loss.item<float>() <<                            std::endl;
 
 //            }
 
