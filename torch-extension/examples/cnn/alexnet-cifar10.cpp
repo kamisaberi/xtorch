@@ -40,6 +40,7 @@ int main() {
             torch::Tensor output;
             output = model.forward(data);
             torch::Tensor loss;
+            // torch::nn::CrossEntropyLoss
             loss = torch::nll_loss(output, targets);
             loss.backward();
             optimizer.step();

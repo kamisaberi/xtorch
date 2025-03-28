@@ -20,7 +20,7 @@ namespace xt {
 
         // Setter methods with fluent interface
         Trainer& setMaxEpochs(int maxEpochs);
-        Trainer& setOptimizer(std::shared_ptr<Optimizer> optimizer);
+        Trainer& setOptimizer(std::shared_ptr<torch::optim::Optimizer> optimizer);
         Trainer& setLossFn(std::shared_ptr<LossFunction> lossFn);
         Trainer& enableCheckpoint(const std::string& path, int interval);
 
