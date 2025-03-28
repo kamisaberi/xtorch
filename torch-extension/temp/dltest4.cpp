@@ -136,14 +136,47 @@ int main() {
 //        std::cout << "-------------------------\n";
 //    }
 
-    std::cout << "Iterating over CustomDataLoader:\n";
-    for (auto& batch : loader) {
-        // Each `batch` is an Example<Tensor, Tensor> with shapes [batch_size, ...]
-        std::cout << "Batch data size: "    << batch.data.sizes()
-                  << ", Batch target size: " << batch.target.sizes() << "\n";
-//        std::cout << "Data:\n"    << batch.data << "\n";
-//        std::cout << "Targets:\n" << batch.target << "\n";
-        std::cout << "-------------------------\n";
+    std::vector<int64_t> size = {32, 32};
+    std::cout.precision(10);
+    torch::Device device(torch::kCPU);
+    torch::ext::models::LeNet5 model(10);
+    model.to(device);
+    model.train();
+    torch::optim::Adam optimizer(model.parameters(), torch::optim::AdamOptions(1e-3));
+    for (size_t epoch = 0; epoch != 10; ++epoch) {
+
+            for (auto& batch : loader) {
+                // Each `batch` is an Example<Tensor, Tensor> with shapes [batch_size, ...]
+                std::cout << "Batch data size: "    << batch.data.sizes() << ", Batch target size: " << batch.target.sizes() << "\n";
+        //        std::cout << "Data:\n"    << batch.data << "\n";
+        //        std::cout << "Targets:\n" << batch.target << "\n";
+                std::cout << "-------------------------\n";
+                torch::Tensor data, targets;
+                data = batch.data;
+                targets = batch.target;
+                optimizer.zero_grad();
+                torch::Tensor output;
+                output = model.forward(data);
+                torch::Tensor loss;
+                loss = torch::nll_loss(output, targets);
+                loss.backward();
+                optimizer.step();
+//                std::cout << "Epoch: " << epoch << " | Batch: " << batch_index << " | Loss: " << loss.item<float>() <<                            std::endl;
+
+//            }
+
+        }
     }
+
+
+//    std::cout << "Iterating over CustomDataLoader:\n";
+//    for (auto& batch : loader) {
+//        // Each `batch` is an Example<Tensor, Tensor> with shapes [batch_size, ...]
+//        std::cout << "Batch data size: "    << batch.data.sizes()
+//                  << ", Batch target size: " << batch.target.sizes() << "\n";
+////        std::cout << "Data:\n"    << batch.data << "\n";
+////        std::cout << "Targets:\n" << batch.target << "\n";
+//        std::cout << "-------------------------\n";
+//    }
     return 0;
 }
