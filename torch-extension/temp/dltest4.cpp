@@ -100,6 +100,7 @@ protected:
         Base::reset();  // let DataLoaderBase handle internal reset (e.g., for iterator state)
     }
 
+
 private:
     Dataset* dataset_ptr_;           // raw pointer to the dataset (owned by base class)
     std::vector<size_t> indices_;    // sequence of indices to iterate over
@@ -124,7 +125,7 @@ int main() {
     // Configure DataLoaderOptions (batch size 4, single thread, and don't drop last batch)
     auto options = torch::data::DataLoaderOptions().batch_size(64).drop_last(false);
     // Instantiate CustomDataLoader with shuffle enabled
-    CustomDataLoader<decltype(stacked_dataset)> loader(std::move(stacked_dataset), options, /*shuffle=*/true);
+    CustomDataLoader loader(std::move(stacked_dataset), options, /*shuffle=*/true);
 
 //    loader.reset();  // start of epoch
 //
