@@ -19,13 +19,13 @@ namespace xt {
         return *this;  // Return reference to self for chaining
     }
 
-    Trainer& Trainer::setOptimizer(std::shared_ptr<Optimizer> optimizer) {
+    Trainer& Trainer::setOptimizer(std::shared_ptr<torch::optim::Optimizer> optimizer) {
         optimizer_ = std::move(optimizer);  // Take ownership or share
         return *this;
     }
 
-    Trainer& Trainer::setLossFn(std::shared_ptr<LossFunction> lossFn) {
-        lossFn_ = std::move(lossFn);  // Take ownership or share
+    Trainer& Trainer::setLossFn(std::function<torch::Tensor(torch::Tensor, torch::Tensor)> lossFn) {
+        lossFn_ = lossFn;  // Take ownership or share
         return *this;
     }
 
