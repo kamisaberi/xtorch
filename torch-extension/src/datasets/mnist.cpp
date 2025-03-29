@@ -1,10 +1,12 @@
 #include "../../include/datasets/mnist.h"
 
 namespace xt::data::datasets {
-    MNISTBase::MNISTBase(const std::string &root, DataMode mode, bool download) {
+    MNISTBase::MNISTBase(const std::string &root, DataMode mode, bool download,
+                         std::shared_ptr<xt::data::transforms::Compose> compose) {
         this->root = root;
         this->download = download;
         this->mode = mode;
+        this->compose = *compose;
         // check_resources(root, download);
         // load_data(mode);
     }
@@ -43,8 +45,11 @@ namespace xt::data::datasets {
         std::vector<std::vector<uint8_t> > images(num_images, std::vector<uint8_t>(rows * cols));
         for (int i = 0; i < num_images; i++) {
             file.read(reinterpret_cast<char *>(images[i].data()), rows * cols);
-            auto tensor_image = torch::from_blob(images[i].data(), {1, 28, 28},
-                                                 torch::kByte).clone();
+            torch::Tensor tensor_image = torch::from_blob(images[i].data(), {1, 28, 28},
+                                                          torch::kByte).clone();
+            if (std::make_shared<xt::data::transforms::Compose>(this->compose) != nullptr) {
+                tensor_image = compose(tensor_image);
+            }
             fimages.push_back(tensor_image);
         }
         //        cout << fimages[0] << endl;
@@ -131,13 +136,13 @@ namespace xt::data::datasets {
     // }
 
     MNIST::MNIST(const std::string &root, DataMode mode, bool download,
-                 std::shared_ptr<xt::data::transforms::Compose> compose) : MNISTBase(root, mode, download) {
-        this->compose = *compose;
+                 std::shared_ptr<xt::data::transforms::Compose> compose) : MNISTBase(root, mode, download, compose) {
+        // this->compose = *compose;
         check_resources(root, download);
         load_data(mode);
-        if (std::make_shared<xt::data::transforms::Compose>(this->compose)  != nullptr) {
-            this->transform_data();
-        }
+        // if (std::make_shared<xt::data::transforms::Compose>(this->compose) != nullptr) {
+        //     this->transform_data();
+        // }
     }
 
     MNIST::MNIST(const fs::path &root, DatasetArguments args) : MNISTBase(root, args) {
