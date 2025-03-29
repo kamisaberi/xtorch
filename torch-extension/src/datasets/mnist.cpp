@@ -1,63 +1,6 @@
 #include "../../include/datasets/mnist.h"
 
 namespace xt::data::datasets {
-    // std::vector<torch::Tensor> read_mnist_images(const std::string &file_path, int num_images) {
-    //     std::ifstream file(file_path, std::ios::binary);
-    //     if (!file.is_open()) {
-    //         throw std::runtime_error("Failed to open file: " + file_path);
-    //     }
-    //
-    //     // Read metadata
-    //     int32_t magic_number, num_items, rows, cols;
-    //     file.read(reinterpret_cast<char *>(&magic_number), 4);
-    //     file.read(reinterpret_cast<char *>(&num_items), 4);
-    //     file.read(reinterpret_cast<char *>(&rows), 4);
-    //     file.read(reinterpret_cast<char *>(&cols), 4);
-    //
-    //     // Convert endianess
-    //     magic_number = __builtin_bswap32(magic_number);
-    //     num_items = __builtin_bswap32(num_items);
-    //     rows = __builtin_bswap32(rows);
-    //     cols = __builtin_bswap32(cols);
-    //
-    //     std::vector<torch::Tensor> fimages;
-    //     std::vector<std::vector<uint8_t> > images(num_images, std::vector<uint8_t>(rows * cols));
-    //     for (int i = 0; i < num_images; i++) {
-    //         file.read(reinterpret_cast<char *>(images[i].data()), rows * cols);
-    //         auto tensor_image = torch::from_blob(images[i].data(), {1, 28, 28},
-    //                                              torch::kByte).clone();
-    //         fimages.push_back(tensor_image);
-    //     }
-    //     //        cout << fimages[0] << endl;
-    //
-    //
-    //     file.close();
-    //     return fimages;
-    // }
-    //
-    // std::vector<uint8_t> read_mnist_labels(const std::string &file_path, int num_labels) {
-    //     std::ifstream file(file_path, std::ios::binary);
-    //     if (!file.is_open()) {
-    //         throw std::runtime_error("Failed to open file: " + file_path);
-    //     }
-    //
-    //     // Read metadata
-    //     int32_t magic_number, num_items;
-    //     file.read(reinterpret_cast<char *>(&magic_number), 4);
-    //     file.read(reinterpret_cast<char *>(&num_items), 4);
-    //
-    //     // Convert endianess
-    //     cout << magic_number << "\t";
-    //     magic_number = __builtin_bswap32(magic_number);
-    //     num_items = __builtin_bswap32(num_items);
-    //
-    //     std::vector<uint8_t> labels(num_labels);
-    //     file.read(reinterpret_cast<char *>(labels.data()), num_labels);
-    //
-    //     // cout << labels.size() << endl;
-    //     file.close();
-    //     return labels;
-    // }
 
     MNISTBase::MNISTBase(const std::string &root, DataMode mode, bool download) {
         this->root = root;
