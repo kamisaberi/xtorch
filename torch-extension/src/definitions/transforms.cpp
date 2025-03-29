@@ -78,7 +78,7 @@ namespace xt::data::transforms {
     Compose::Compose() {
 
     }
-    Compose::Compose(std::initializer_list<TransformFunc> transforms)
+    Compose::Compose(std::vector<TransformFunc> transforms)
         : transforms(transforms) {
     }
 

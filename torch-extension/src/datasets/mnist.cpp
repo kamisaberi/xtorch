@@ -11,15 +11,26 @@ namespace xt::data::datasets {
         // load_data(mode);
     }
 
-    MNISTBase::MNISTBase(const fs::path &root, DatasetArguments args) {
-        auto [mode , download , transforms] = args;
+    MNISTBase::MNISTBase(const std::string &root, DataMode mode, bool download,
+                         vector<std::function<torch::Tensor(torch::Tensor)> > transforms) {
         this->root = root;
         this->download = download;
         this->mode = mode;
         this->transforms = transforms;
-        // check_resources(root, download);
-        // load_data(mode);
+        if (!transforms.empty()) {
+            this->compose = xt::data::transforms::Compose(this->transforms);
+        }
     }
+
+    // MNISTBase::MNISTBase(const fs::path &root, DatasetArguments args) {
+    //     auto [mode , download , transforms] = args;
+    //     this->root = root;
+    //     this->download = download;
+    //     this->mode = mode;
+    //     this->transforms = transforms;
+    //     // check_resources(root, download);
+    //     // load_data(mode);
+    // }
 
 
     void MNISTBase::read_images(const std::string &file_path, int num_images) {
@@ -47,13 +58,11 @@ namespace xt::data::datasets {
             file.read(reinterpret_cast<char *>(images[i].data()), rows * cols);
             torch::Tensor tensor_image = torch::from_blob(images[i].data(), {1, 28, 28},
                                                           torch::kByte).clone();
-            if (std::make_shared<xt::data::transforms::Compose>(this->compose) != nullptr) {
+            if (!this->transforms.empty()) {
                 tensor_image = compose(tensor_image);
             }
             fimages.push_back(tensor_image);
         }
-        //        cout << fimages[0] << endl;
-
 
         file.close();
         this->data = fimages;
@@ -145,14 +154,21 @@ namespace xt::data::datasets {
         // }
     }
 
-    MNIST::MNIST(const fs::path &root, DatasetArguments args) : MNISTBase(root, args) {
-        auto [mode , download , transforms] = args;
+    MNIST::MNIST(const std::string &root, DataMode mode , bool download ,
+                 vector<std::function<torch::Tensor(torch::Tensor)> > transforms ) : MNISTBase(root, mode, download, transforms) {
         check_resources(root, download);
         load_data(mode);
-        if (!transforms.empty()) {
-            // this->transform_data(transforms);
-        }
+
     }
+
+    // MNIST::MNIST(const fs::path &root, DatasetArguments args) : MNISTBase(root, args) {
+    //     auto [mode , download , transforms] = args;
+    //     check_resources(root, download);
+    //     load_data(mode);
+    //     if (!transforms.empty()) {
+    //         // this->transform_data(transforms);
+    //     }
+    // }
 
     void MNIST::check_resources(const std::string &root, bool download) {
         this->root = fs::path(root);
@@ -218,11 +234,11 @@ namespace xt::data::datasets {
         }
     }
 
-    FashionMNIST::FashionMNIST(const std::string &root, DataMode mode,
-                               bool download) : MNISTBase(root, mode, download) {
-        check_resources(root, download);
-        load_data(mode);
-    }
+    // FashionMNIST::FashionMNIST(const std::string &root, DataMode mode,
+    //                            bool download) : MNISTBase(root, mode, download) {
+    //     check_resources(root, download);
+    //     load_data(mode);
+    // }
 
     void FashionMNIST::load_data(DataMode mode) {
         if (mode == DataMode::TRAIN) {
@@ -279,10 +295,10 @@ namespace xt::data::datasets {
         }
     }
 
-    KMNIST::KMNIST(const std::string &root, DataMode mode, bool download) : MNISTBase(root, mode, download) {
-        check_resources(root, download);
-        load_data(mode);
-    }
+    // KMNIST::KMNIST(const std::string &root, DataMode mode, bool download) : MNISTBase(root, mode, download) {
+    //     check_resources(root, download);
+    //     load_data(mode);
+    // }
 
 
     void KMNIST::load_data(DataMode mode) {
@@ -339,10 +355,10 @@ namespace xt::data::datasets {
     }
 
 
-    EMNIST::EMNIST(const std::string &root, DataMode mode, bool download) : MNISTBase(root, mode, download) {
-        check_resources(root, download);
-        load_data(mode);
-    }
+    // EMNIST::EMNIST(const std::string &root, DataMode mode, bool download) : MNISTBase(root, mode, download) {
+    //     check_resources(root, download);
+    //     load_data(mode);
+    // }
 
 
     void EMNIST::load_data(DataMode mode) {
@@ -395,24 +411,24 @@ namespace xt::data::datasets {
     }
 
 
-    QMNIST::QMNIST(const std::string &root, DataMode mode, bool download) : MNISTBase(root, mode, download) {
-        check_resources(root, download);
-        load_data(mode);
-    }
-
-
-    QMNIST::QMNIST(const fs::path &root, DatasetArguments args) : MNISTBase(root, args) {
-        auto [mode , download , transforms] = args;
-        // cout << "MNIST SIZE: " << this->data.size() << endl;
-        check_resources(root, download);
-        load_data(mode);
-        // cout << "MNIST SIZE: " << this->data.size() << endl;
-        if (!transforms.empty()) {
-            // cout << "Transforms 11111111111111111111" << endl;
-            // this->transform_data(transforms);
-        }
-        // cout << "MNIST SIZE: " << this->data.size() << endl;
-    }
+    // QMNIST::QMNIST(const std::string &root, DataMode mode, bool download) : MNISTBase(root, mode, download) {
+    //     check_resources(root, download);
+    //     load_data(mode);
+    // }
+    //
+    //
+    // QMNIST::QMNIST(const fs::path &root, DatasetArguments args) : MNISTBase(root, args) {
+    //     auto [mode , download , transforms] = args;
+    //     // cout << "MNIST SIZE: " << this->data.size() << endl;
+    //     check_resources(root, download);
+    //     load_data(mode);
+    //     // cout << "MNIST SIZE: " << this->data.size() << endl;
+    //     if (!transforms.empty()) {
+    //         // cout << "Transforms 11111111111111111111" << endl;
+    //         // this->transform_data(transforms);
+    //     }
+    //     // cout << "MNIST SIZE: " << this->data.size() << endl;
+    // }
 
 
     void QMNIST::load_data(DataMode mode) {
