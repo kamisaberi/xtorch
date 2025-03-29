@@ -25,8 +25,8 @@ int main() {
 //
 //    //
     auto transformed_dataset = dataset
-            .map(torch::ext::data::transforms::resize({32, 32}))
-            .map(torch::ext::data::transforms::normalize(0.5, 0.5))
+            .map(xt::data::transforms::resize({32, 32}))
+            .map(xt::data::transforms::normalize(0.5, 0.5))
             .map(torch::data::transforms::Stack<>());
 
     auto train_loader = torch::data::make_data_loader<torch::data::samplers::SequentialSampler>(
