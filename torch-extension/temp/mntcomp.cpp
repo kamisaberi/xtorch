@@ -25,7 +25,7 @@ int main() {
     auto normalize_fn = torch::data::transforms::Normalize<>(0.5, 0.5);
     auto resize_fn  = xt::data::transforms::create_resize_transform({350,350});
     auto compose = xt::data::transforms::Compose({resize_fn, normalize_fn});
-    auto dataset = xt::data::datasets::MNIST("/home/kami/Documents/temp/", DataMode::TRAIN, true, compose);
+    auto dataset = xt::data::datasets::MNIST("/home/kami/Documents/temp/", DataMode::TRAIN, true,std::make_shared<xt::data::transforms::Compose>(compose) );
 
     auto transformed_dataset = dataset
             .map(xt::data::transforms::resize({32, 32}))
