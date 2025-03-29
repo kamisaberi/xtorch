@@ -390,7 +390,7 @@ namespace xt::data::datasets {
         // cout << "MNIST SIZE: " << this->data.size() << endl;
         if (!transforms.empty()) {
             // cout << "Transforms 11111111111111111111" << endl;
-            this->transform_data(transforms);
+            // this->transform_data(transforms);
         }
         // cout << "MNIST SIZE: " << this->data.size() << endl;
     }
