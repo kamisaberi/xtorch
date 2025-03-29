@@ -31,7 +31,7 @@ namespace xt::data::transforms {
     public:
         using TransformFunc = std::function<torch::Tensor(torch::Tensor)>;
         Compose();
-        Compose(std::initializer_list<TransformFunc> transforms);
+        Compose(std::vector<TransformFunc> transforms);
 
         torch::Tensor operator()(torch::Tensor input) const;
 

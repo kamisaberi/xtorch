@@ -14,8 +14,9 @@ namespace xt::data::datasets {
     class MNISTBase : public torch::data::Dataset<MNISTBase> {
     public:
         explicit MNISTBase(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false, std::shared_ptr<xt::data::transforms::Compose> compose= nullptr);
+        MNISTBase(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false, vector<std::function<torch::Tensor(torch::Tensor)>> transforms= {});
 
-        MNISTBase(const fs::path &root, DatasetArguments args);
+        // MNISTBase(const fs::path &root, DatasetArguments args);
 
         void read_images(const std::string &file_path, int num_images);
 
@@ -38,7 +39,7 @@ namespace xt::data::datasets {
         // void transform_data(std::vector<torch::data::transforms::Lambda<torch::data::Example<> > > transforms);
 
     private:
-        vector<torch::data::transforms::Lambda<torch::data::Example<> > > transforms = {};
+        vector<std::function<torch::Tensor(torch::Tensor)>> transforms = {};
     };
 
 
@@ -46,6 +47,7 @@ namespace xt::data::datasets {
     public :
         // MNIST(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
         MNIST(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false , std::shared_ptr<xt::data::transforms::Compose> compose= nullptr);
+        MNIST(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false, vector<std::function<torch::Tensor(torch::Tensor)>> transforms= {});
 
         MNIST(const fs::path &root, DatasetArguments args);
 
