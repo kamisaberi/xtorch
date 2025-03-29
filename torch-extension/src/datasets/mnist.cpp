@@ -206,10 +206,10 @@ namespace xt::data::datasets {
     void MNIST::transform_data() {
         for (int i = 0; i < this->data.size(); i++) {
             torch::Tensor tensor = this->data[i];
-            cout << this->data[i].sizes() << " " << tensor.sizes() << endl;
+            // cout << this->data[i].sizes() << " " << tensor.sizes() << endl;
             tensor = this->compose(tensor);
-            cout << this->data[i].sizes() << " " << tensor.sizes() << endl;
             this->data[i] = tensor;
+            // cout << this->data[i].sizes() << " " << tensor.sizes() << endl;
         }
     }
 
