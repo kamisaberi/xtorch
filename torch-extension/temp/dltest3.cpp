@@ -84,7 +84,8 @@ int main() {
     std::cout.precision(10);
     torch::Device device(torch::kCPU);
 
-    auto dataset = xt::data::datasets::MNIST("/home/kami/Documents/temp/", DataMode::TRAIN, true);
+    vector<std::function<torch::Tensor(torch::Tensor)>> transforms;
+    auto dataset = xt::data::datasets::MNIST("/home/kami/Documents/temp/", DataMode::TRAIN, true, transforms);
 
     auto transformed_dataset = dataset
             .map(xt::data::transforms::resize({32, 32}))
