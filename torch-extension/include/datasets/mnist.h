@@ -13,7 +13,7 @@ namespace xt::data::datasets {
 
     class MNISTBase : public torch::data::Dataset<MNISTBase> {
     public:
-        explicit MNISTBase(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+        explicit MNISTBase(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false, std::shared_ptr<xt::data::transforms::Compose> compose= nullptr);
 
         MNISTBase(const fs::path &root, DatasetArguments args);
 
@@ -32,6 +32,8 @@ namespace xt::data::datasets {
         bool download = false;
         fs::path root;
         fs::path dataset_path;
+        xt::data::transforms::Compose compose;
+
 
         // void transform_data(std::vector<torch::data::transforms::Lambda<torch::data::Example<> > > transforms);
 
@@ -62,7 +64,6 @@ namespace xt::data::datasets {
             {"train", {fs::path("train-images-idx3-ubyte"), fs::path("train-labels-idx1-ubyte")}},
             {"test", {fs::path("t10k-images-idx3-ubyte"), fs::path("t10k-labels-idx1-ubyte")}}
         };
-        xt::data::transforms::Compose compose;
 
         void load_data(DataMode mode = DataMode::TRAIN);
 
