@@ -88,4 +88,22 @@ namespace xt::data::transforms {
         }
         return input;
     }
+
+
+    std::function<torch::Tensor(torch::Tensor input)> create_resize_transform(std::vector<int64_t> size) {
+        auto resize_fn = [size](torch::Tensor img) -> torch::Tensor {
+            img = img.unsqueeze(0); // Add batch dimension
+            img = torch::nn::functional::interpolate(
+                img,
+                torch::nn::functional::InterpolateFuncOptions()
+                    .size(std::vector<int64_t>({size[0], size[1]}))
+                    .mode(torch::kBilinear)
+                    .align_corners(false)
+            );
+            return img.squeeze(0); // Remove batch dimension
+        };
+        return resize_fn;
+
+    }
+
 }
