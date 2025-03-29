@@ -75,6 +75,9 @@ namespace xt::data::transforms {
     }
 
     using TransformFunc = std::function<torch::Tensor(torch::Tensor)>;
+    Compose::Compose() {
+
+    }
     Compose::Compose(std::initializer_list<TransformFunc> transforms)
         : transforms(transforms) {
     }

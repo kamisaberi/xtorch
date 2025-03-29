@@ -42,8 +42,8 @@ namespace xt::data::datasets {
 
     class MNIST : public MNISTBase {
     public :
-        MNIST(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
-        MNIST(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false , xt::data::transforms::Compose compose);
+        // MNIST(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+        MNIST(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false , std::shared_ptr<xt::data::transforms::Compose> compose= nullptr);
 
         MNIST(const fs::path &root, DatasetArguments args);
 
