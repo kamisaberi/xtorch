@@ -11,6 +11,8 @@
 #include "../include/datasets/mnist.h"
 #include "../include/models/cnn/lenet5.h"
 #include "../include/definitions/transforms.h"
+#include "../include/data-loaders/data-loader.h"
+
 
 using namespace std;
 using Example = torch::data::Example<torch::Tensor, torch::Tensor>;
@@ -26,21 +28,20 @@ int main() {
     auto resize_fn  = xt::data::transforms::create_resize_transform({32,32});
     auto compose = xt::data::transforms::Compose({resize_fn, normalize_fn});
     auto dataset = xt::data::datasets::MNIST("/home/kami/Documents/temp/", DataMode::TRAIN, true,std::make_shared<xt::data::transforms::Compose>(compose) );
-
-
-
-
-
-//    return 0;
-//    auto transformed_dataset = dataset
-//            .map(xt::data::transforms::resize({32, 32}))
-//            .map(xt::data::transforms::normalize(0.5, 0.5))
-//            .map(torch::data::transforms::Stack<>());
-
     auto transformed_dataset = dataset.map(torch::data::transforms::Stack<>());
+    auto transformed_dataset2 = dataset.map(torch::data::transforms::Stack<>());
+
+
+    auto options = torch::data::DataLoaderOptions().batch_size(64).drop_last(false);
+    // Instantiate CustomDataLoader with shuffle enabled
+    xt::DataLoader loader(std::move(transformed_dataset), options, /*shuffle=*/true);
+
+
+
+
 
     auto train_loader = torch::data::make_data_loader<torch::data::samplers::SequentialSampler>(
-        std::move(transformed_dataset), 64);
+        std::move(transformed_dataset2), 64);
 
     torch::ext::models::LeNet5 model(10);
     model.to(device);

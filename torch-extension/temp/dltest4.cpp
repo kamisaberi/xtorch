@@ -113,15 +113,23 @@ private:
 int main() {
     // Create a dataset of 10 samples and apply the Stack<> transform to batch its outputs
 //    MyDataset base_dataset(10);
-    auto base_dataset = xt::data::datasets::MNIST("/home/kami/Documents/temp/", DataMode::TRAIN, true);
+    cout << "1-base_dataset..."  << endl;
+
+    auto normalize_fn = torch::data::transforms::Normalize<>(0.5, 0.5);
+    auto resize_fn  = xt::data::transforms::create_resize_transform({32,32});
+    auto compose = xt::data::transforms::Compose({resize_fn, normalize_fn});
+
+    auto base_dataset = xt::data::datasets::MNIST("/home/kami/Documents/temp/", DataMode::TRAIN, true,std::make_shared<xt::data::transforms::Compose>(compose));
 
 //    auto stacked_dataset = base_dataset.map(torch::data::transforms::Stack<>());
 
+    cout << "2-base_dataset..."  << endl;
     auto stacked_dataset = base_dataset
-        .map(xt::data::transforms::resize({32, 32}))
-        .map(xt::data::transforms::normalize(0.5, 0.5))
+//        .map(xt::data::transforms::resize({32, 32}))
+//        .map(xt::data::transforms::normalize(0.5, 0.5))
         .map(torch::data::transforms::Stack<>());
 
+    //return 0 ;
     // Configure DataLoaderOptions (batch size 4, single thread, and don't drop last batch)
     auto options = torch::data::DataLoaderOptions().batch_size(64).drop_last(false);
     // Instantiate CustomDataLoader with shuffle enabled
@@ -145,13 +153,13 @@ int main() {
     model.train();
     torch::optim::Adam optimizer(model.parameters(), torch::optim::AdamOptions(1e-3));
     for (size_t epoch = 0; epoch != 10; ++epoch) {
-
+            cout << "epoch: " << epoch << endl;
             for (auto& batch : loader) {
                 // Each `batch` is an Example<Tensor, Tensor> with shapes [batch_size, ...]
-                std::cout << "Batch data size: "    << batch.data.sizes() << ", Batch target size: " << batch.target.sizes() << "\n";
+//                std::cout << "Batch data size: "    << batch.data.sizes() << ", Batch target size: " << batch.target.sizes() << "\n";
         //        std::cout << "Data:\n"    << batch.data << "\n";
         //        std::cout << "Targets:\n" << batch.target << "\n";
-                std::cout << "-------------------------\n";
+//                std::cout << "-------------------------\n";
                 torch::Tensor data, targets;
                 data = batch.data;
                 targets = batch.target;
@@ -162,7 +170,7 @@ int main() {
                 loss = torch::nll_loss(output, targets);
                 loss.backward();
                 optimizer.step();
-                std::cout << "Epoch: " << epoch << " | Batch: " <<  " | Loss: " << loss.item<float>() <<                            std::endl;
+//                std::cout << "Epoch: " << epoch << " | Batch: " <<  " | Loss: " << loss.item<float>() <<                            std::endl;
 
 //            }
 
