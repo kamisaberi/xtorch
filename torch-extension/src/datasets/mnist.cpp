@@ -126,12 +126,12 @@ namespace xt::data::datasets {
 
 
     //------------------ MNIST ------------------//
-    MNIST::MNIST(const std::string &root, DataMode mode, bool download) : MNISTBase(root, mode, download) {
-        check_resources(root, download);
-        load_data(mode);
-    }
+    // MNIST::MNIST(const std::string &root, DataMode mode, bool download) : MNISTBase(root, mode, download) {
+    //     check_resources(root, download);
+    //     load_data(mode);
+    // }
 
-    MNIST::MNIST(const std::string &root, DataMode mode, bool download , xt::data::transforms::Compose compose) : MNISTBase(root, mode, download) {
+    MNIST::MNIST(const std::string &root, DataMode mode, bool download , std::shared_ptr<xt::data::transforms::Compose> compose) : MNISTBase(root, mode, download) {
         check_resources(root, download);
         load_data(mode);
 
