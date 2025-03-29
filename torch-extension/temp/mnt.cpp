@@ -69,8 +69,8 @@ int main() {
 
     //
     auto transformed_dataset = dataset
-            .map(torch::ext::data::transforms::resize({32, 32}))
-            .map(torch::ext::data::transforms::normalize(0.5, 0.5))
+            .map(xt::data::transforms::resize({32, 32}))
+            .map(xt::data::transforms::normalize(0.5, 0.5))
             .map(torch::data::transforms::Stack<>());
 
     cout << "TRANSFORMED DATASET\n";
@@ -79,8 +79,8 @@ int main() {
 
     //TODO Custom Dataset START
     vector<torch::data::transforms::Lambda<torch::data::Example<> > > transforms = {
-        torch::ext::data::transforms::resize({32, 32}),
-        torch::ext::data::transforms::normalize(0.5, 0.5)
+        xt::data::transforms::resize({32, 32}),
+        xt::data::transforms::normalize(0.5, 0.5)
     };
     auto dataset2 = xt::data::datasets::MNIST("/home/kami/Documents/temp/",
                                                       {
