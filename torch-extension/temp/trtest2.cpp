@@ -3,6 +3,7 @@
 #include <functional>
 #include <iostream>
 #include <random>
+#include "../include/definitions/transforms.h"
 
 // ==========================
 // ComposeTransform Definition
@@ -92,6 +93,29 @@ int main() {
     // Apply transform
     torch::Tensor out = transform(img);
     std::cout << "Transformed Image sizes: " << out.sizes() << ", dtype: " << out.dtype() << "\n";
+
+    auto make_resize_fn = [](std::vector<int64_t> size) {
+        auto resize_fn = [size](torch::Tensor img) {
+            img = img.unsqueeze(0); // Add batch dimension
+            img = torch::nn::functional::interpolate(
+                img,
+                torch::nn::functional::InterpolateFuncOptions()
+                    .size(std::vector<int64_t>({size[0], size[1]}))
+                    .mode(torch::kBilinear)
+                    .align_corners(false)
+            );
+            return img.squeeze(0); // Remove batch dimension
+        };
+        return resize_fn;
+    };
+
+    auto rs_fn = make_resize_fn({200,300});
+    auto out2 = rs_fn(img);
+    std::cout << "Output dtype: " << out2.dtype() << "\n";
+    std::cout << "Output sizes: " << out2.sizes() << "\n";
+
+
+
 
     return 0;
 }
