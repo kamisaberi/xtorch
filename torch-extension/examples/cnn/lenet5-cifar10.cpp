@@ -19,8 +19,8 @@ int main() {
 
 
     auto transformed_dataset = dataset
-            .map(torch::ext::data::transforms::resize(size))
-            .map(torch::ext::data::transforms::normalize(0.5, 0.5))
+            .map(xt::data::transforms::resize(size))
+            .map(xt::data::transforms::normalize(0.5, 0.5))
             .map(torch::data::transforms::Stack<>());
 
 
