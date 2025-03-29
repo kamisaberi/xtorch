@@ -1,8 +1,6 @@
-
 #include "../../include/definitions/transforms.h"
 
-namespace torch::ext::data::transforms {
-
+namespace xt::data::transforms {
     torch::Tensor resize_tensor(const torch::Tensor &tensor, const std::vector<int64_t> &size) {
         return torch::nn::functional::interpolate(
             tensor.unsqueeze(0),
@@ -10,7 +8,7 @@ namespace torch::ext::data::transforms {
         ).squeeze(0);
     }
 
-    torch::Tensor pad_tensor(const torch::Tensor &tensor,  int size) {
+    torch::Tensor pad_tensor(const torch::Tensor &tensor, int size) {
         std::vector<int64_t> ssize = {size, size};
         return torch::nn::functional::interpolate(
             tensor.unsqueeze(0),
@@ -25,12 +23,12 @@ namespace torch::ext::data::transforms {
         ).squeeze(0);
     }
 
-    torch::Tensor  grayscale_to_rgb(const torch::Tensor &tensor) {
+    torch::Tensor grayscale_to_rgb(const torch::Tensor &tensor) {
         torch::Tensor gray = tensor.dim() == 3 ? tensor.unsqueeze(1) : tensor; // Ensure [N, 1, H, W]
         return gray.repeat({1, 3, 1, 1}); // [N, 1, H, W] -> [N, 3, H, W]
     }
 
-    torch::data::transforms::Lambda<torch::data::Example<>> resize(std::vector<int64_t> size) {
+    torch::data::transforms::Lambda<torch::data::Example<> > resize(std::vector<int64_t> size) {
         return torch::data::transforms::Lambda<torch::data::Example<> >(
             [size](torch::data::Example<> example) {
                 example.data = resize_tensor(example.data, size);
@@ -39,7 +37,7 @@ namespace torch::ext::data::transforms {
         );
     }
 
-    torch::data::transforms::Lambda<torch::data::Example<>> pad(int size) {
+    torch::data::transforms::Lambda<torch::data::Example<> > pad(int size) {
         return torch::data::transforms::Lambda<torch::data::Example<> >(
             [size](torch::data::Example<> example) {
                 example.data = pad_tensor(example.data, size);
@@ -48,7 +46,7 @@ namespace torch::ext::data::transforms {
         );
     }
 
-    torch::data::transforms::Lambda<torch::data::Example<>> grayscale() {
+    torch::data::transforms::Lambda<torch::data::Example<> > grayscale() {
         return torch::data::transforms::Lambda<torch::data::Example<> >(
             [](torch::data::Example<> example) {
                 example.data = grayscale_image(example.data);
@@ -57,7 +55,7 @@ namespace torch::ext::data::transforms {
         );
     }
 
-    torch::data::transforms::Lambda<torch::data::Example<>> normalize(double mean , double stddev) {
+    torch::data::transforms::Lambda<torch::data::Example<> > normalize(double mean, double stddev) {
         return torch::data::transforms::Lambda<torch::data::Example<> >(
             [mean, stddev](torch::data::Example<> example) {
                 example.data = example.data.to(torch::kFloat32).div(255);
@@ -67,7 +65,7 @@ namespace torch::ext::data::transforms {
     }
 
 
-    torch::data::transforms::Lambda<torch::data::Example<>> grayscaleToRGB() {
+    torch::data::transforms::Lambda<torch::data::Example<> > grayscaleToRGB() {
         return torch::data::transforms::Lambda<torch::data::Example<> >(
             [](torch::data::Example<> example) {
                 example.data = grayscale_image(example.data);
@@ -76,25 +74,15 @@ namespace torch::ext::data::transforms {
         );
     }
 
-    class ComposeTransform {
-    public:
-        using TransformFunc = std::function<torch::Tensor(torch::Tensor)>;
+    using TransformFunc = std::function<torch::Tensor(torch::Tensor)>;
+    Compose::Compose(std::initializer_list<TransformFunc> transforms)
+        : transforms(transforms) {
+    }
 
-        // Constructor that accepts an initializer list
-        ComposeTransform(std::initializer_list<TransformFunc> init_list)
-            : transforms_(init_list) { }
-
-        // Apply all transforms in sequence
-        torch::Tensor operator()(torch::Tensor input) const {
-            for (const auto& transform : transforms_) {
-                input = transform(std::move(input));
-            }
-            return input;
+    torch::Tensor Compose::operator()(torch::Tensor input) const {
+        for (const auto &transform: this->transforms) {
+            input = transform(std::move(input));
         }
-
-    private:
-        std::vector<TransformFunc> transforms_;
-    };
-
-
+        return input;
+    }
 }
