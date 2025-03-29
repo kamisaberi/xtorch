@@ -118,8 +118,8 @@ int main() {
 //    auto stacked_dataset = base_dataset.map(torch::data::transforms::Stack<>());
 
     auto stacked_dataset = base_dataset
-        .map(torch::ext::data::transforms::resize({32, 32}))
-        .map(torch::ext::data::transforms::normalize(0.5, 0.5))
+        .map(xt::data::transforms::resize({32, 32}))
+        .map(xt::data::transforms::normalize(0.5, 0.5))
         .map(torch::data::transforms::Stack<>());
 
     // Configure DataLoaderOptions (batch size 4, single thread, and don't drop last batch)

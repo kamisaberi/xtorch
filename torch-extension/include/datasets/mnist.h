@@ -43,6 +43,7 @@ namespace xt::data::datasets {
     class MNIST : public MNISTBase {
     public :
         MNIST(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+        MNIST(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false , xt::data::transforms::Compose compose);
 
         MNIST(const fs::path &root, DatasetArguments args);
 
@@ -61,6 +62,7 @@ namespace xt::data::datasets {
             {"train", {fs::path("train-images-idx3-ubyte"), fs::path("train-labels-idx1-ubyte")}},
             {"test", {fs::path("t10k-images-idx3-ubyte"), fs::path("t10k-labels-idx1-ubyte")}}
         };
+        xt::data::transforms::Compose compose;
 
         void load_data(DataMode mode = DataMode::TRAIN);
 

@@ -131,6 +131,12 @@ namespace xt::data::datasets {
         load_data(mode);
     }
 
+    MNIST::MNIST(const std::string &root, DataMode mode, bool download , xt::data::transforms::Compose compose) : MNISTBase(root, mode, download) {
+        check_resources(root, download);
+        load_data(mode);
+
+    }
+
     MNIST::MNIST(const fs::path &root, DatasetArguments args) : MNISTBase(root, args) {
         auto [mode , download , transforms] = args;
         check_resources(root, download);
@@ -372,15 +378,10 @@ namespace xt::data::datasets {
 
 
     QMNIST::QMNIST(const std::string &root, DataMode mode, bool download) : MNISTBase(root, mode, download) {
-        // cout << "MNIST SIZE: " << this->data.size() << endl;
-        // cout << "MNIST SIZE: " << this->labels.size() << endl;
         check_resources(root, download);
         load_data(mode);
-        // cout << "MNIST SIZE: " << this->data.size() << endl;
-        // cout << "MNIST SIZE: " << this->labels.size() << endl;
-        // cout << this->data[0].sizes() << endl;
-        // cout << this->labels << endl;
     }
+
 
     QMNIST::QMNIST(const fs::path &root, DatasetArguments args) : MNISTBase(root, args) {
         auto [mode , download , transforms] = args;
