@@ -27,6 +27,11 @@ int main() {
     auto compose = xt::data::transforms::Compose({resize_fn, normalize_fn});
     auto dataset = xt::data::datasets::MNIST("/home/kami/Documents/temp/", DataMode::TRAIN, true,std::make_shared<xt::data::transforms::Compose>(compose) );
 
+
+
+
+
+    return 0;
     auto transformed_dataset = dataset
             .map(xt::data::transforms::resize({32, 32}))
             .map(xt::data::transforms::normalize(0.5, 0.5))

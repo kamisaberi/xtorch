@@ -1,7 +1,6 @@
 #include "../../include/datasets/mnist.h"
 
 namespace xt::data::datasets {
-
     MNISTBase::MNISTBase(const std::string &root, DataMode mode, bool download) {
         this->root = root;
         this->download = download;
@@ -131,10 +130,14 @@ namespace xt::data::datasets {
     //     load_data(mode);
     // }
 
-    MNIST::MNIST(const std::string &root, DataMode mode, bool download , std::shared_ptr<xt::data::transforms::Compose> compose) : MNISTBase(root, mode, download) {
+    MNIST::MNIST(const std::string &root, DataMode mode, bool download,
+                 std::shared_ptr<xt::data::transforms::Compose> compose) : MNISTBase(root, mode, download) {
+        this->compose = *compose;
         check_resources(root, download);
         load_data(mode);
-
+        if (std::make_shared<xt::data::transforms::Compose>(this->compose)  != nullptr) {
+            this->transform_data();
+        }
     }
 
     MNIST::MNIST(const fs::path &root, DatasetArguments args) : MNISTBase(root, args) {
@@ -197,6 +200,16 @@ namespace xt::data::datasets {
             // auto labels = read_mnist_labels(lbls.string(), 10000);
             // this->data = images;
             // this->labels = labels;
+        }
+    }
+
+    void MNIST::transform_data() {
+        for (int i = 0; i < this->data.size(); i++) {
+            torch::Tensor tensor = this->data[i];
+            cout << this->data[i].sizes() << " " << tensor.sizes() << endl;
+            tensor = this->compose(tensor);
+            cout << this->data[i].sizes() << " " << tensor.sizes() << endl;
+            this->data[i] = tensor;
         }
     }
 
@@ -426,6 +439,7 @@ namespace xt::data::datasets {
             // this->labels = labels;
         }
     }
+
     void QMNIST::check_resources(const std::string &root, bool download) {
         // this->root = fs::path(root);
         // if (!fs::exists(this->root)) {
@@ -452,5 +466,4 @@ namespace xt::data::datasets {
         //     torch::ext::utils::extractGzip(fpth);
         // }
     }
-
 }

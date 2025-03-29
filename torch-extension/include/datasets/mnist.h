@@ -67,6 +67,7 @@ namespace xt::data::datasets {
         void load_data(DataMode mode = DataMode::TRAIN);
 
         void check_resources(const std::string &root, bool download = false);
+        void transform_data();
     };
 
 
