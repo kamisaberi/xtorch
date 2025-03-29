@@ -15,8 +15,8 @@ int main() {
     auto dataset = xt::data::datasets::Imagenette("/home/kami/Documents/temp/", DataMode::TRAIN, true,xt::data::datasets::ImageType::PX160 );
 
     auto transformed_dataset = dataset
-            .map(torch::ext::data::transforms::resize(size))
-            .map(torch::ext::data::transforms::normalize(0.5, 0.5))
+            .map(xt::data::transforms::resize(size))
+            .map(xt::data::transforms::normalize(0.5, 0.5))
             .map(torch::data::transforms::Stack<>());
 
     auto train_loader = torch::data::make_data_loader<torch::data::samplers::SequentialSampler>(
