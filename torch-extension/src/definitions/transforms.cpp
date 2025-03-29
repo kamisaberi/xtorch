@@ -103,7 +103,6 @@ namespace xt::data::transforms {
             return img.squeeze(0); // Remove batch dimension
         };
         return resize_fn;
-
     }
 
 }
