@@ -38,4 +38,9 @@ namespace xt::data::transforms {
     private:
         std::vector<TransformFunc> transforms;
     };
+
+
+    std::function<torch::Tensor(torch::Tensor input)> create_resize_transform(std::vector<int64_t> size);
+
+
 }
