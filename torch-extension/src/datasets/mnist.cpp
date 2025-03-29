@@ -79,41 +79,41 @@ namespace xt::data::datasets {
         this->labels = labels;
     }
 
-    void MNISTBase::transform_data(vector<torch::data::transforms::Lambda<torch::data::Example<> > > transforms) {
-        std::vector<torch::Tensor> data; // Store image data as tensors
-        // std::vector<uint8_t> targets; // Store image data as tensors
-        // cout << "transforms.size:" << transforms.size() << endl;
-        for (const auto &transform: transforms) {
-            // std::cout << "1" << std::endl;
-            auto data_tensor = this->map(transform).map(torch::data::transforms::Stack<>());
-            // std::cout << "2" << " " << this->data.size() << "  " << data_tensor.size().value() << std::endl;
-            auto data_loader = torch::data::make_data_loader(std::move(data_tensor), /*batch_size=*/this->data.size());
-            // std::cout << "3" << std::endl;
-            for (auto &batch: *data_loader) {
-                // std::cout << "3 " << i << " " << batch.data.sizes() << std::endl;
-                data = batch.data.unbind(0);
-                // targets.push_back(batch.data()->target[0].to(torch::kUInt8)) ;
-            }
-            // std::cout << "4" << std::endl;
-            // torch::Tensor full_data = torch::cat(data, 0);
-            // torch::Tensor full_targets = torch::cat(targets, 0);
-            this->data = data;
-            // std::cout << "5  " << this->data.size() << std::endl;
-            // this->labels = targets;
-        }
-
-        // std::cout << "10" << std::endl;
-        auto dt = this->map(torch::data::transforms::Stack<>());
-        // std::cout << "11" << std::endl;
-        auto data_loader = torch::data::make_data_loader(std::move(dt), /*batch_size=*/this->data.size());
-        // std::cout << "12" << std::endl;
-        for (auto &batch: *data_loader) {
-            data = batch.data.unbind(0);
-        }
-        // std::cout << "13" << std::endl;
-        this->data = data;
-        // std::cout << "14  " << this->data.size() << std::endl;
-    }
+    // void MNISTBase::transform_data(vector<torch::data::transforms::Lambda<torch::data::Example<> > > transforms) {
+    //     std::vector<torch::Tensor> data; // Store image data as tensors
+    //     // std::vector<uint8_t> targets; // Store image data as tensors
+    //     // cout << "transforms.size:" << transforms.size() << endl;
+    //     for (const auto &transform: transforms) {
+    //         // std::cout << "1" << std::endl;
+    //         auto data_tensor = this->map(transform).map(torch::data::transforms::Stack<>());
+    //         // std::cout << "2" << " " << this->data.size() << "  " << data_tensor.size().value() << std::endl;
+    //         auto data_loader = torch::data::make_data_loader(std::move(data_tensor), /*batch_size=*/this->data.size());
+    //         // std::cout << "3" << std::endl;
+    //         for (auto &batch: *data_loader) {
+    //             // std::cout << "3 " << i << " " << batch.data.sizes() << std::endl;
+    //             data = batch.data.unbind(0);
+    //             // targets.push_back(batch.data()->target[0].to(torch::kUInt8)) ;
+    //         }
+    //         // std::cout << "4" << std::endl;
+    //         // torch::Tensor full_data = torch::cat(data, 0);
+    //         // torch::Tensor full_targets = torch::cat(targets, 0);
+    //         this->data = data;
+    //         // std::cout << "5  " << this->data.size() << std::endl;
+    //         // this->labels = targets;
+    //     }
+    //
+    //     // std::cout << "10" << std::endl;
+    //     auto dt = this->map(torch::data::transforms::Stack<>());
+    //     // std::cout << "11" << std::endl;
+    //     auto data_loader = torch::data::make_data_loader(std::move(dt), /*batch_size=*/this->data.size());
+    //     // std::cout << "12" << std::endl;
+    //     for (auto &batch: *data_loader) {
+    //         data = batch.data.unbind(0);
+    //     }
+    //     // std::cout << "13" << std::endl;
+    //     this->data = data;
+    //     // std::cout << "14  " << this->data.size() << std::endl;
+    // }
 
     torch::data::Example<> MNISTBase::get(size_t index) {
         return {data[index], torch::tensor(labels[index])};
@@ -136,7 +136,7 @@ namespace xt::data::datasets {
         check_resources(root, download);
         load_data(mode);
         if (!transforms.empty()) {
-            this->transform_data(transforms);
+            // this->transform_data(transforms);
         }
     }
 

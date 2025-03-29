@@ -76,5 +76,25 @@ namespace torch::ext::data::transforms {
         );
     }
 
+    class ComposeTransform {
+    public:
+        using TransformFunc = std::function<torch::Tensor(torch::Tensor)>;
+
+        // Constructor that accepts an initializer list
+        ComposeTransform(std::initializer_list<TransformFunc> init_list)
+            : transforms_(init_list) { }
+
+        // Apply all transforms in sequence
+        torch::Tensor operator()(torch::Tensor input) const {
+            for (const auto& transform : transforms_) {
+                input = transform(std::move(input));
+            }
+            return input;
+        }
+
+    private:
+        std::vector<TransformFunc> transforms_;
+    };
+
 
 }

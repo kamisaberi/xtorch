@@ -33,7 +33,7 @@ namespace xt::data::datasets {
         fs::path root;
         fs::path dataset_path;
 
-        void transform_data(std::vector<torch::data::transforms::Lambda<torch::data::Example<> > > transforms);
+        // void transform_data(std::vector<torch::data::transforms::Lambda<torch::data::Example<> > > transforms);
 
     private:
         vector<torch::data::transforms::Lambda<torch::data::Example<> > > transforms = {};
