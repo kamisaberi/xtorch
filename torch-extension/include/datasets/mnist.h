@@ -43,9 +43,15 @@ namespace xt::data::datasets {
 
     class MNIST : public MNISTBase {
     public :
-        // MNIST(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
-        MNIST(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false , std::shared_ptr<xt::data::transforms::Compose> compose= nullptr);
-        MNIST(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false, vector<std::function<torch::Tensor(torch::Tensor)>> transforms= {});
+        MNIST(const std::string &root);
+        MNIST(const std::string &root, DataMode mode);
+        MNIST(const std::string &root, DataMode mode , bool download);
+        MNIST(const std::string &root, DataMode mode  , bool download, std::shared_ptr<xt::data::transforms::Compose> compose);
+        MNIST(const std::string &root, DataMode mode , bool download , vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
+
+        // // MNIST(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+        // MNIST(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false , std::shared_ptr<xt::data::transforms::Compose> compose= nullptr);
+        // MNIST(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false, vector<std::function<torch::Tensor(torch::Tensor)>> transforms= {});
 
         MNIST(const fs::path &root, DatasetArguments args);
 
