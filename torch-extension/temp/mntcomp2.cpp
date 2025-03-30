@@ -12,6 +12,7 @@
 #include "../include/models/cnn/lenet5.h"
 #include "../include/definitions/transforms.h"
 #include "../include/data-loaders/data-loader.h"
+#include "../include/trainers/trainer.h"
 
 using namespace std;
 using Example = torch::data::Example<torch::Tensor, torch::Tensor>;
@@ -27,6 +28,10 @@ int main() {
                                                  torch::data::transforms::Normalize<>(0.5, 0.5)
                                              });
     xt::DataLoader loader(std::move(dataset.map(torch::data::transforms::Stack<>())), torch::data::DataLoaderOptions().batch_size(64).drop_last(false), /*shuffle=*/true);
+
+    xt::Trainer trainer();
+//    trainer.set
+
 
     torch::ext::models::LeNet5 model(10);
     model.to(device);
