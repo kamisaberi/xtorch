@@ -1,7 +1,7 @@
 #include "../../../include/models/cnn/vggnet.h"
 
 namespace torch::ext::models {
-    VggNet16::VggNet16(int num_classes,int in_channels) {
+    VggNet16::VggNet16(int num_classes,int in_channels) : BaseModel() {
         //TODO layer1 DONE
         layer1 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(in_channels, 64, 3).stride(1).padding(1)),
@@ -145,7 +145,7 @@ namespace torch::ext::models {
         register_module("fc2", fc2);
     }
 
-    torch::Tensor VggNet16::forward(torch::Tensor x) {
+    torch::Tensor VggNet16::forward(torch::Tensor x) const {
         x = layer1->forward(x);
         x = layer2->forward(x);
         x = layer3->forward(x);
