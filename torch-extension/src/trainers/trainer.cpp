@@ -37,7 +37,7 @@ namespace xt {
     }
 
     template <typename Dataset>
-    void Trainer::fit(torch::ext::models::BaseModel *model , xt::DataLoader<Dataset>  train_loader) {
+    void Trainer::fit(torch::ext::models::BaseModel *model , xt::DataLoader<Dataset>&  train_loader) {
 
         torch::Device device(torch::kCPU);
         model->to(device);
