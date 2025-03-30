@@ -13,7 +13,6 @@
 #include "../include/definitions/transforms.h"
 #include "../include/data-loaders/data-loader.h"
 
-
 using namespace std;
 using Example = torch::data::Example<torch::Tensor, torch::Tensor>;
 
