@@ -17,6 +17,6 @@ namespace torch::ext::models {
     public:
         AlexNet(int num_classes /* classes */, int in_channels =3/* input channels */);
 
-        torch::Tensor forward(torch::Tensor x);
+        torch::Tensor forward(torch::Tensor x) const override;
     };
 }
