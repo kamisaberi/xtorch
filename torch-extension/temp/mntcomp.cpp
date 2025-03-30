@@ -22,10 +22,12 @@ using Example = torch::data::Example<torch::Tensor, torch::Tensor>;
 int main() {
 
   torch::Tensor img = torch::randint(0, 256, {3, 32, 32}, torch::kUInt8);
-//  torch::ext::models::BaseModel *m =new torch::ext::models::Model();
-//  std::unique_ptr< torch::ext::models::BaseModel> m =std::make_unique<torch::ext::models::Model>();
-//  auto out1 =  m->forward(img);
-//  cout << out1 << endl;
+  torch::ext::models::BaseModel *m1 =new torch::ext::models::Model(5);
+  std::unique_ptr< torch::ext::models::BaseModel> m2 =std::make_unique<torch::ext::models::Model>(5);
+  auto out1 =  m1->forward(img);
+  cout << out1.sizes() << endl;
+  auto out2 =  m2->forward(img);
+  cout << out2.sizes() << endl;
 
 
     std::vector<int64_t> size = {32, 32};

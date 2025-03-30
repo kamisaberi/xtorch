@@ -21,9 +21,11 @@ class Model : public BaseModel {
 
 
   public:
-    Model();
+    Model(int a);
     torch::Tensor forward(torch::Tensor input) const override;
 
+private :
+    int a;
 };
 
 

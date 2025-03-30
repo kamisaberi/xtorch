@@ -4,7 +4,7 @@
 using namespace std;
 
 namespace torch::ext::models {
-    LeNet5::LeNet5(int num_classes, int in_channels) {
+    LeNet5::LeNet5(int num_classes, int in_channels) : BaseModel() {
         layer1 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(in_channels, 6, 5).stride(1).padding(0)),
             torch::nn::BatchNorm2d(6),
@@ -31,7 +31,7 @@ namespace torch::ext::models {
         register_module("fc3", fc3);
     }
 
-    torch::Tensor LeNet5::forward(torch::Tensor x) {
+    torch::Tensor LeNet5::forward(torch::Tensor x) const {
         // cout << "t1\n";
         x = layer1->forward(x);
         x = layer2->forward(x);
