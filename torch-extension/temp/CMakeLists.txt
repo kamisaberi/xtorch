@@ -654,7 +654,7 @@ target_link_libraries(${PROJECT_NAME}
 )
 
 
-####################################### MNTCOMP #######################################
+####################################### MNTCOMP2 #######################################
 
 project(mntcomp2)
 list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)

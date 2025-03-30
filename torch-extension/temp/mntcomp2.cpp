@@ -27,7 +27,8 @@ int main() {
                                                  xt::data::transforms::create_resize_transform(size),
                                                  torch::data::transforms::Normalize<>(0.5, 0.5)
                                              });
-    xt::DataLoader loader(std::move(dataset.map(torch::data::transforms::Stack<>())), torch::data::DataLoaderOptions().batch_size(64).drop_last(false), /*shuffle=*/true);
+    auto transformed_dataset =  dataset.map(torch::data::transforms::Stack<>());
+    xt::DataLoader<decltype(transformed_dataset)> loader(std::move(transformed_dataset), torch::data::DataLoaderOptions().batch_size(64).drop_last(false), /*shuffle=*/true);
 
 
 

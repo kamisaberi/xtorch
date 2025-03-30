@@ -41,7 +41,7 @@ int main() {
     auto transformed_dataset = dataset.map(torch::data::transforms::Stack<>());
 
     auto options = torch::data::DataLoaderOptions().batch_size(64).drop_last(false);
-    xt::DataLoader loader(std::move(transformed_dataset), options, /*shuffle=*/true);
+    xt::DataLoader<decltype(transformed_dataset)> loader(std::move(transformed_dataset), options, /*shuffle=*/true);
 
     torch::ext::models::LeNet5 model(10);
     model.to(device);
