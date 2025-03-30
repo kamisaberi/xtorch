@@ -29,14 +29,18 @@ int main() {
                                              });
     xt::DataLoader loader(std::move(dataset.map(torch::data::transforms::Stack<>())), torch::data::DataLoaderOptions().batch_size(64).drop_last(false), /*shuffle=*/true);
 
-    xt::Trainer trainer();
-//    trainer.set
 
 
     torch::ext::models::LeNet5 model(10);
     model.to(device);
     model.train();
     torch::optim::Adam optimizer(model.parameters(), torch::optim::AdamOptions(1e-3));
+    xt::Trainer trainer;
+    trainer.setOptimizer(&optimizer)
+        .setMaxEpochs(10)
+        .setLossFn(torch::nll_loss);
+//    trainer.set
+
     for (size_t epoch = 0; epoch != 10; ++epoch) {
         cout << "epoch: " << epoch << endl;
         for (auto& batch : loader) {

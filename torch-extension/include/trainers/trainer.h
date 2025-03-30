@@ -24,7 +24,7 @@ namespace xt {
 
         // Setter methods with fluent interface
         Trainer& setMaxEpochs(int maxEpochs);
-        Trainer& setOptimizer(std::shared_ptr<torch::optim::Optimizer> optimizer);
+        Trainer& setOptimizer(torch::optim::Optimizer *optimizer);
         Trainer& setLossFn(std::function<torch::Tensor(torch::Tensor, torch::Tensor)> lossFn);
         Trainer& enableCheckpoint(const std::string& path, int interval);
         template <typename Dataset>
@@ -32,7 +32,7 @@ namespace xt {
 
     private:
         int maxEpochs_;                         // Maximum number of training epochs
-        std::shared_ptr<torch::optim::Optimizer> optimizer_;  // Optimizer object
+        torch::optim::Optimizer *optimizer_;  // Optimizer object
         std::function<torch::Tensor(torch::Tensor, torch::Tensor)> lossFn_;
 //        std::shared_ptr<torch::nn::CrossEntropyLoss> lossFn_;  // Loss function object
         bool checkpointEnabled_;                // Flag for checkpointing status

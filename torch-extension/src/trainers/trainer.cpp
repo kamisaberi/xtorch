@@ -19,8 +19,8 @@ namespace xt {
         return *this;  // Return reference to self for chaining
     }
 
-    Trainer& Trainer::setOptimizer(std::shared_ptr<torch::optim::Optimizer> optimizer) {
-        optimizer_ = std::move(optimizer);  // Take ownership or share
+    Trainer& Trainer::setOptimizer(torch::optim::Optimizer *optimizer) {
+        optimizer_ = optimizer;  // Take ownership or share
         return *this;
     }
 
