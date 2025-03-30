@@ -52,8 +52,8 @@ namespace xt {
                 torch::Tensor output;
                 output = model->forward(data);
                 torch::Tensor loss;
-//                loss = this->lossFn_(output, targets);
-                loss = torch::nll_loss(output, targets);
+                loss = this->lossFn_(output, targets);
+//                loss = torch::nll_loss(output, targets);
                 loss.backward();
                 this->optimizer_->step();
                 //                std::cout << "Epoch: " << epoch << " | Batch: " <<  " | Loss: " << loss.item<float>() <<                            std::endl;
