@@ -41,7 +41,8 @@ int main() {
         .setMaxEpochs(5)
         .setLossFn([](auto output, auto target) {return torch::nll_loss(output, target);});
 //    trainer.set
-//    trainer.fit(&model ,loader );
+
+    trainer.fit<decltype(transformed_dataset)>(&model ,loader );
 
     for (size_t epoch = 0; epoch != 10; ++epoch) {
         cout << "epoch: " << epoch << endl;
