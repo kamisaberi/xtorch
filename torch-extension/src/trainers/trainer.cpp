@@ -37,11 +37,11 @@ namespace xt {
     }
 
     template <typename Dataset>
-    void Trainer::fit(torch::nn::Module model , xt::DataLoader<Dataset>  train_loader) {
+    void Trainer::fit(torch::ext::models::BaseModel *model , xt::DataLoader<Dataset>  train_loader) {
 
         torch::Device device(torch::kCPU);
-        model.to(device);
-        model.train();
+        model->to(device);
+        model->train();
         for (size_t epoch = 0; epoch != 10; ++epoch) {
             cout << "epoch: " << epoch << endl;
             for (auto& batch : train_loader) {
@@ -50,7 +50,7 @@ namespace xt {
                 targets = batch.target;
                 this->optimizer_->zero_grad();
                 torch::Tensor output;
-                output = model.forward(data);
+                output = model->forward(data);
                 torch::Tensor loss;
                 loss = this->lossFn_(output, targets);
                 loss.backward();

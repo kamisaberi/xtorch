@@ -7,6 +7,9 @@
 #include <memory>  // For std::shared_ptr
 #include <string>  // For std::string
 #include "../data-loaders/data-loader.h"
+#include "../models/base.h"
+
+
 
 // Forward declarations (assume these classes exist elsewhere)
 //class Optimizer;
@@ -25,7 +28,7 @@ namespace xt {
         Trainer& setLossFn(std::function<torch::Tensor(torch::Tensor, torch::Tensor)> lossFn);
         Trainer& enableCheckpoint(const std::string& path, int interval);
         template <typename Dataset>
-        void fit(torch::nn::Module model , xt::DataLoader<Dataset>  train_loader);
+        void fit(torch::ext::models::BaseModel *model , xt::DataLoader<Dataset>  train_loader);
 
     private:
         int maxEpochs_;                         // Maximum number of training epochs

@@ -13,7 +13,6 @@ class BaseModel: public torch::nn::Module {
   public:
   BaseModel();
    virtual  torch::Tensor forward(torch::Tensor input) const = 0;
-
 };
 
 
