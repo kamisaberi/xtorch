@@ -4,7 +4,7 @@ namespace torch::ext::models {
 
     namespace {
 
-        ResidualBlock::ResidualBlock(int in_channels, int out_channels, int stride, torch::nn::Sequential downsample) {
+        ResidualBlock::ResidualBlock(int in_channels, int out_channels, int stride, torch::nn::Sequential downsample) : BaseModel() {
             conv1 = torch::nn::Sequential(
                     torch::nn::Conv2d(torch::nn::Conv2dOptions(in_channels, out_channels, 3).stride(stride).padding(1)),
                     torch::nn::BatchNorm2d(out_channels),
