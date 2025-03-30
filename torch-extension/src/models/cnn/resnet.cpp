@@ -93,7 +93,7 @@ namespace torch::ext::models {
         return layers;
     }
 
-    torch::Tensor ResNet::forward(torch::Tensor x) {
+    torch::Tensor ResNet::forward(torch::Tensor x) const {
         x = conv1->forward(x);
         x = maxpool->forward(x);
         x = layer0->forward(x);
