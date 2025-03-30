@@ -77,7 +77,7 @@ namespace torch::ext::models {
         //TODO DONE
     }
 
-    torch::Tensor AlexNet::forward(torch::Tensor x) {
+    torch::Tensor AlexNet::forward(torch::Tensor x) const{
         x = layer1->forward(x);
         x = layer2->forward(x);
         x = layer3->forward(x);
