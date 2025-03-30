@@ -4,7 +4,7 @@
 using namespace std;
 
 namespace torch::ext::models {
-    AlexNet::AlexNet(int num_classes , int in_channels) {
+    AlexNet::AlexNet(int num_classes , int in_channels) : BaseModel(){
 
         //TODO layer1
         layer1 = torch::nn::Sequential(
