@@ -25,7 +25,7 @@ namespace torch::ext::models {
         };
     }
 
-    struct ResNet : torch::nn::Module {
+    struct ResNet : BaseModel {
         int inplanes = 64;
         torch::nn::Sequential conv1 = nullptr;
         torch::nn::MaxPool2d maxpool = nullptr;

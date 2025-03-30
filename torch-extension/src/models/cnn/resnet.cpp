@@ -4,7 +4,7 @@ namespace torch::ext::models {
 
     namespace {
 
-        ResidualBlock::ResidualBlock(int in_channels, int out_channels, int stride, torch::nn::Sequential downsample) : BaseModel() {
+        ResidualBlock::ResidualBlock(int in_channels, int out_channels, int stride, torch::nn::Sequential downsample) {
             conv1 = torch::nn::Sequential(
                     torch::nn::Conv2d(torch::nn::Conv2dOptions(in_channels, out_channels, 3).stride(stride).padding(1)),
                     torch::nn::BatchNorm2d(out_channels),
@@ -42,7 +42,7 @@ namespace torch::ext::models {
 
 
 
-    ResNet::ResNet(vector<int> layers, int num_classes, int in_channels) {
+    ResNet::ResNet(vector<int> layers, int num_classes, int in_channels) : BaseModel() {
         inplanes = 64;
 
 
