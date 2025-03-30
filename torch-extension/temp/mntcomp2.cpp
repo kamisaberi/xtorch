@@ -37,9 +37,10 @@ int main() {
     torch::optim::Adam optimizer(model.parameters(), torch::optim::AdamOptions(1e-3));
     xt::Trainer trainer;
     trainer.setOptimizer(&optimizer)
-        .setMaxEpochs(10)
-        .setLossFn(torch::nll_loss);
+        .setMaxEpochs(5)
+        .setLossFn([](auto output, auto target) {return torch::nll_loss(output, target);});
 //    trainer.set
+//    trainer.fit(&model ,loader );
 
     for (size_t epoch = 0; epoch != 10; ++epoch) {
         cout << "epoch: " << epoch << endl;
