@@ -4,13 +4,15 @@
 #include <vector>
 #include <fstream>
 #include <string>
+#include "../base.h"
+
 
 using namespace std;
 
 namespace torch::ext::models {
 
     namespace {
-        struct ResidualBlock : torch::nn::Module {
+        struct ResidualBlock : BaseModel {
             torch::nn::Sequential conv1 = nullptr, conv2 = nullptr, downsample = nullptr;
             int out_channels;
             torch::nn::ReLU relu = nullptr;
