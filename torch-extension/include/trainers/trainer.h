@@ -28,7 +28,35 @@ namespace xt {
         Trainer& setLossFn(std::function<torch::Tensor(torch::Tensor, torch::Tensor)> lossFn);
         Trainer& enableCheckpoint(const std::string& path, int interval);
         template <typename Dataset>
-        void fit(torch::ext::models::BaseModel *model , xt::DataLoader<Dataset>&  train_loader);
+//        void fit(torch::ext::models::BaseModel *model , xt::DataLoader<Dataset>&  train_loader);
+//        template <typename Dataset>
+        void fit(torch::ext::models::BaseModel *model , xt::DataLoader<Dataset>&  train_loader) {
+
+            torch::Device device(torch::kCPU);
+            model->to(device);
+            model->train();
+            for (size_t epoch = 0; epoch != this->maxEpochs_; ++epoch) {
+                cout << "epoch: " << epoch << endl;
+                for (auto& batch : train_loader) {
+                    torch::Tensor data, targets;
+                    data = batch.data;
+                    targets = batch.target;
+                    this->optimizer_->zero_grad();
+                    torch::Tensor output;
+                    output = model->forward(data);
+                    torch::Tensor loss;
+                    loss = this->lossFn_(output, targets);
+                    //                loss = torch::nll_loss(output, targets);
+                    loss.backward();
+                    this->optimizer_->step();
+                    //                std::cout << "Epoch: " << epoch << " | Batch: " <<  " | Loss: " << loss.item<float>() <<                            std::endl;
+
+                    //            }
+
+                }
+            }
+        }
+
 
     private:
         int maxEpochs_;                         // Maximum number of training epochs
