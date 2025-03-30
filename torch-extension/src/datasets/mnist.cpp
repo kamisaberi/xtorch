@@ -247,6 +247,33 @@ namespace xt::data::datasets {
     //     load_data(mode);
     // }
 
+
+
+    FashionMNIST::FashionMNIST(const std::string &root): FashionMNIST::FashionMNIST(root, DataMode::TRAIN , false) {}
+    FashionMNIST::FashionMNIST(const std::string &root ,DataMode mode ): FashionMNIST::FashionMNIST(root, mode , false){}
+    FashionMNIST::FashionMNIST(const std::string &root, DataMode mode, bool download) :MNISTBase(root, mode , download) {
+        check_resources(root, download);
+        load_data(mode);
+    }
+    FashionMNIST::FashionMNIST(const std::string &root, DataMode mode, bool download,
+                         std::shared_ptr<xt::data::transforms::Compose> compose) : MNISTBase::MNISTBase(root, mode , download, compose) {
+        check_resources(root, download);
+        load_data(mode);
+
+    }
+
+    FashionMNIST::FashionMNIST(const std::string &root, DataMode mode, bool download,
+                         vector<std::function<torch::Tensor(torch::Tensor)> > transforms) : MNISTBase::MNISTBase(root, mode , download, transforms) {
+        check_resources(root, download);
+        load_data(mode);
+
+    }
+
+
+
+
+
+
     void FashionMNIST::load_data(DataMode mode) {
         if (mode == DataMode::TRAIN) {
             fs::path imgs = this->dataset_path / std::get<0>(files["train"]);

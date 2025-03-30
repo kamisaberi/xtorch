@@ -80,9 +80,17 @@ namespace xt::data::datasets {
 
     class FashionMNIST : public MNISTBase {
     public:
-        FashionMNIST(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
 
-        FashionMNIST(const fs::path &root, DatasetArguments args);
+        FashionMNIST(const std::string &root);
+        FashionMNIST(const std::string &root, DataMode mode);
+        FashionMNIST(const std::string &root, DataMode mode , bool download);
+        FashionMNIST(const std::string &root, DataMode mode  , bool download, std::shared_ptr<xt::data::transforms::Compose> compose);
+        FashionMNIST(const std::string &root, DataMode mode , bool download , vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
+
+
+        // FashionMNIST(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+        //
+        // FashionMNIST(const fs::path &root, DatasetArguments args);
 
     private:
         std::string url = "http://fashion-mnist.s3-website.eu-central-1.amazonaws.com/";
