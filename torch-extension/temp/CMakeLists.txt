@@ -8,6 +8,8 @@ file(GLOB_RECURSE DATASET_FILES CONFIGURE_DEPENDS ../src/datasets/*.cpp)
 file(GLOB_RECURSE DEFINITION_FILES CONFIGURE_DEPENDS ../src/definitions/*.cpp)
 file(GLOB_RECURSE MODEL_FILES CONFIGURE_DEPENDS ../src/models/*.cpp)
 file(GLOB_RECURSE MODEL_CNN_FILES CONFIGURE_DEPENDS ../src/models/cnn/*.cpp)
+file(GLOB_RECURSE DATA_LOADER_FILES CONFIGURE_DEPENDS ../src/data-loaders/*.cpp)
+file(GLOB_RECURSE TRAINER_FILES CONFIGURE_DEPENDS ../src/trainers/*.cpp)
 
 
 
@@ -667,7 +669,7 @@ find_package(LibArchive REQUIRED)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} ${MODEL_FILES} ../src/trainers/trainer.cpp ../src/data-loaders/data-loader.tpp ../src/datasets/mnist.cpp mntcomp2.cpp)
+set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} ${MODEL_FILES} ${TRAINER_FILES} ${DATA_LOADER_FILES} ../src/trainers/trainer.cpp ../src/data-loaders/data-loader.tpp ../src/datasets/mnist.cpp mntcomp2.cpp)
 
 add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
 target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
