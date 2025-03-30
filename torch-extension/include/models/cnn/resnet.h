@@ -37,7 +37,7 @@ namespace torch::ext::models {
 
         torch::nn::Sequential makeLayerFromResidualBlock(int planes, int blocks, int stride = 1);
 
-        torch::Tensor forward(torch::Tensor x);
+        torch::Tensor forward(torch::Tensor x) const override;
     };
 
 }
