@@ -130,22 +130,43 @@ namespace xt::data::datasets {
     //     load_data(mode);
     // }
 
+    // MNIST::MNIST(const std::string &root, DataMode mode, bool download,
+    //              std::shared_ptr<xt::data::transforms::Compose> compose) : MNISTBase(root, mode, download, compose) {
+    //     // this->compose = *compose;
+    //     check_resources(root, download);
+    //     load_data(mode);
+    //     // if (std::make_shared<xt::data::transforms::Compose>(this->compose) != nullptr) {
+    //     //     this->transform_data();
+    //     // }
+    // }
+    //
+    // MNIST::MNIST(const std::string &root, DataMode mode , bool download ,
+    //              vector<std::function<torch::Tensor(torch::Tensor)> > transforms ) : MNISTBase(root, mode, download, transforms) {
+    //     check_resources(root, download);
+    //     load_data(mode);
+    //
+    // }
+
+    MNIST::MNIST(const std::string &root): MNIST::MNIST(root, DataMode::TRAIN , false) {}
+    MNIST::MNIST(const std::string &root ,DataMode mode ): MNIST::MNIST(root, mode , false){}
+    MNIST::MNIST(const std::string &root, DataMode mode, bool download) :MNISTBase(root, mode , download) {
+        check_resources(root, download);
+        load_data(mode);
+    }
     MNIST::MNIST(const std::string &root, DataMode mode, bool download,
-                 std::shared_ptr<xt::data::transforms::Compose> compose) : MNISTBase(root, mode, download, compose) {
-        // this->compose = *compose;
-        check_resources(root, download);
-        load_data(mode);
-        // if (std::make_shared<xt::data::transforms::Compose>(this->compose) != nullptr) {
-        //     this->transform_data();
-        // }
-    }
-
-    MNIST::MNIST(const std::string &root, DataMode mode , bool download ,
-                 vector<std::function<torch::Tensor(torch::Tensor)> > transforms ) : MNISTBase(root, mode, download, transforms) {
+                         std::shared_ptr<xt::data::transforms::Compose> compose) : MNISTBase::MNISTBase(root, mode , download, compose) {
         check_resources(root, download);
         load_data(mode);
 
     }
+
+    MNIST::MNIST(const std::string &root, DataMode mode, bool download,
+                         vector<std::function<torch::Tensor(torch::Tensor)> > transforms) : MNISTBase::MNISTBase(root, mode , download, transforms) {
+        check_resources(root, download);
+        load_data(mode);
+
+    }
+
 
     // MNIST::MNIST(const fs::path &root, DatasetArguments args) : MNISTBase(root, args) {
     //     auto [mode , download , transforms] = args;
