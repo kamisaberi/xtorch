@@ -12,8 +12,8 @@ using namespace std;
 
 namespace torch::ext::models {
    struct AlexNet :BaseModel {
-        torch::nn::Sequential layer1 = nullptr, layer2 = nullptr, layer3 = nullptr, layer4 = nullptr, layer5 = nullptr;
-        torch::nn::Sequential fc = nullptr, fc1 = nullptr, fc2 = nullptr;
+        mutable  torch::nn::Sequential layer1 = nullptr, layer2 = nullptr, layer3 = nullptr, layer4 = nullptr, layer5 = nullptr;
+        mutable  torch::nn::Sequential fc = nullptr, fc1 = nullptr, fc2 = nullptr;
     public:
         AlexNet(int num_classes /* classes */, int in_channels =3/* input channels */);
 
