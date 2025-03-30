@@ -36,4 +36,32 @@ namespace xt {
         return *this;
     }
 
+    template <typename Dataset>
+    void Trainer::fit(torch::nn::Module model , xt::DataLoader<Dataset>  train_loader) {
+
+        torch::Device device(torch::kCPU);
+        model.to(device);
+        model.train();
+        for (size_t epoch = 0; epoch != 10; ++epoch) {
+            cout << "epoch: " << epoch << endl;
+            for (auto& batch : train_loader) {
+                torch::Tensor data, targets;
+                data = batch.data;
+                targets = batch.target;
+                this->optimizer_->zero_grad();
+                torch::Tensor output;
+                output = model.forward(data);
+                torch::Tensor loss;
+                loss = this->lossFn_(output, targets);
+                loss.backward();
+                this->optimizer_->step();
+                //                std::cout << "Epoch: " << epoch << " | Batch: " <<  " | Loss: " << loss.item<float>() <<                            std::endl;
+
+                //            }
+
+            }
+        }
+
+
+    }
 } // namespace xt

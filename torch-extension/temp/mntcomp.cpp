@@ -12,12 +12,22 @@
 #include "../include/models/cnn/lenet5.h"
 #include "../include/definitions/transforms.h"
 #include "../include/data-loaders/data-loader.h"
+#include "../include/models/base.h"
+
 
 
 using namespace std;
 using Example = torch::data::Example<torch::Tensor, torch::Tensor>;
 
 int main() {
+
+  torch::Tensor img = torch::randint(0, 256, {3, 32, 32}, torch::kUInt8);
+//  torch::ext::models::BaseModel *m =new torch::ext::models::Model();
+//  std::unique_ptr< torch::ext::models::BaseModel> m =std::make_unique<torch::ext::models::Model>();
+//  auto out1 =  m->forward(img);
+//  cout << out1 << endl;
+
+
     std::vector<int64_t> size = {32, 32};
     std::cout.precision(10);
     torch::Device device(torch::kCPU);
