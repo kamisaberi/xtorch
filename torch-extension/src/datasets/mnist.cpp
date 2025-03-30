@@ -1,37 +1,23 @@
 #include "../../include/datasets/mnist.h"
 
 namespace xt::data::datasets {
+    MNISTBase::MNISTBase(const std::string &root): MNISTBase::MNISTBase(root, DataMode::TRAIN , false){}
+    MNISTBase::MNISTBase(const std::string &root ,DataMode mode ): MNISTBase::MNISTBase(root, mode , false){}
+    MNISTBase::MNISTBase(const std::string &root, DataMode mode, bool download) :root(root),mode(mode),download(download){}
     MNISTBase::MNISTBase(const std::string &root, DataMode mode, bool download,
-                         std::shared_ptr<xt::data::transforms::Compose> compose) {
-        this->root = root;
-        this->download = download;
-        this->mode = mode;
+                         std::shared_ptr<xt::data::transforms::Compose> compose) : MNISTBase::MNISTBase(root, mode , download) {
         this->compose = *compose;
         // check_resources(root, download);
         // load_data(mode);
     }
 
     MNISTBase::MNISTBase(const std::string &root, DataMode mode, bool download,
-                         vector<std::function<torch::Tensor(torch::Tensor)> > transforms) {
-        this->root = root;
-        this->download = download;
-        this->mode = mode;
+                         vector<std::function<torch::Tensor(torch::Tensor)> > transforms) : MNISTBase::MNISTBase(root, mode , download) {
         this->transforms = transforms;
         if (!transforms.empty()) {
             this->compose = xt::data::transforms::Compose(this->transforms);
         }
     }
-
-    // MNISTBase::MNISTBase(const fs::path &root, DatasetArguments args) {
-    //     auto [mode , download , transforms] = args;
-    //     this->root = root;
-    //     this->download = download;
-    //     this->mode = mode;
-    //     this->transforms = transforms;
-    //     // check_resources(root, download);
-    //     // load_data(mode);
-    // }
-
 
     void MNISTBase::read_images(const std::string &file_path, int num_images) {
         std::ifstream file(file_path, std::ios::binary);

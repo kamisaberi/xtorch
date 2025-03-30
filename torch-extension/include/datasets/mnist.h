@@ -7,16 +7,14 @@ namespace fs = std::filesystem;
 
 
 namespace xt::data::datasets {
-    // std::vector<torch::Tensor> read_mnist_images(const std::string &file_path, int num_images);
-
-    // std::vector<uint8_t> read_mnist_labels(const std::string &file_path, int num_labels);
 
     class MNISTBase : public torch::data::Dataset<MNISTBase> {
     public:
-        explicit MNISTBase(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false, std::shared_ptr<xt::data::transforms::Compose> compose= nullptr);
-        MNISTBase(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false, vector<std::function<torch::Tensor(torch::Tensor)>> transforms= {});
-
-        // MNISTBase(const fs::path &root, DatasetArguments args);
+        MNISTBase(const std::string &root);
+        MNISTBase(const std::string &root, DataMode mode);
+        MNISTBase(const std::string &root, DataMode mode , bool download);
+        MNISTBase(const std::string &root, DataMode mode  , bool download, std::shared_ptr<xt::data::transforms::Compose> compose);
+        MNISTBase(const std::string &root, DataMode mode , bool download , vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
 
         void read_images(const std::string &file_path, int num_images);
 
