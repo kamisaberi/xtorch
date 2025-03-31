@@ -1,6 +1,7 @@
 #include "../../include/datasets/imagenette.h"
 
 namespace xt::data::datasets {
+
     Imagenette::Imagenette(const std::string &root): Imagenette::Imagenette(
         root, DataMode::TRAIN, false, ImageType::PX160) {
     }

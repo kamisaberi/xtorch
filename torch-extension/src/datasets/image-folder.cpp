@@ -1,6 +1,49 @@
 #include "../../include/datasets/image-folder.h"
 
 namespace xt::data::datasets {
+
+
+
+
+
+    Imagenette::Imagenette(const std::string &root): Imagenette::Imagenette(
+    root, DataMode::TRAIN, false, ImageType::PX160) {
+    }
+
+    Imagenette::Imagenette(const std::string &root, DataMode mode): Imagenette::Imagenette(
+        root, mode, false, ImageType::PX160) {
+    }
+
+    Imagenette::Imagenette(const std::string &root, DataMode mode, bool download): Imagenette::Imagenette(
+        root, mode, download, ImageType::PX160) {
+    }
+
+    Imagenette::Imagenette(const std::string &root, DataMode mode, bool download, ImageType type)
+        : BaseDataset(root, mode, download) {
+        this->type = type;
+        check_resources(root, download);
+        load_data(mode);
+    }
+
+    Imagenette::Imagenette(const std::string &root, DataMode mode, bool download, ImageType type,
+                           vector<std::function<torch::Tensor(torch::Tensor)> > transforms): BaseDataset(
+        root, mode, download) {
+        this->type = type;
+        if (!transforms.empty()) {
+            this->transforms = transforms;
+            this->compose = xt::data::transforms::Compose(transforms);
+        }
+        check_resources(root, download);
+        load_data(mode);
+    }
+
+
+
+
+
+
+
+
     ImageFolder::ImageFolder(const std::string &root, bool load_sub_folders, DataMode mode,
                              LabelsType label_type) : BaseDataset(root, mode, false) {
         this->label_type = label_type;
