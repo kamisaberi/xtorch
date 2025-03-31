@@ -1,6 +1,6 @@
 #include "../../../include/models/cnn/resnet.h"
 
-namespace torch::ext::models {
+namespace xt::models {
 
     namespace {
 
