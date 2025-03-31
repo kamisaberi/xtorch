@@ -8,15 +8,6 @@ namespace xt::data::datasets {
         load_data(mode);
     }
 
-    Imagenette::Imagenette(const fs::path &root, DatasetArguments args) : BaseDataset(root, args) {
-        auto [mode , download , transforms] = args;
-        check_resources(root, download);
-        load_data(mode);
-        // if (!transforms.empty()) {
-        //     this->transform_data(transforms);
-        // }
-    }
-
 
     void Imagenette::check_resources(const std::string &root, bool download) {
         this->root = fs::path(root);
