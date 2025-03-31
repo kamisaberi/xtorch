@@ -66,7 +66,7 @@ namespace xt::data::datasets {
         file.read(reinterpret_cast<char *>(&num_items), 4);
 
         // Convert endianess
-        cout << magic_number << "\t";
+        // cout << magic_number << "\t";
         magic_number = __builtin_bswap32(magic_number);
         num_items = __builtin_bswap32(num_items);
 
