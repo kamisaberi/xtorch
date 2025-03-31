@@ -73,7 +73,7 @@ namespace xt::data::datasets {
         std::vector<uint8_t> labels(num_labels);
         file.read(reinterpret_cast<char *>(labels.data()), num_labels);
 
-        cout << labels.data() << endl;
+        // cout << labels.data() << endl;
         file.close();
         this->labels = labels;
     }
@@ -209,8 +209,8 @@ namespace xt::data::datasets {
         if (mode == DataMode::TRAIN) {
             fs::path imgs = this->dataset_path / std::get<0>(files["train"]);
             fs::path lbls = this->dataset_path / std::get<1>(files["train"]);
-            cout << imgs.string() << "  " << lbls.string() << endl;
-            cout << imgs << endl;
+            // cout << imgs.string() << "  " << lbls.string() << endl;
+            // cout << imgs << endl;
             this->read_images(imgs.string(), 60000);
             this->read_labels(lbls.string(), 60000);
             // auto images = read_mnist_images(imgs.string(), 50000);
