@@ -148,7 +148,7 @@ int main() {
     std::vector<int64_t> size = {32, 32};
     std::cout.precision(10);
     torch::Device device(torch::kCPU);
-    torch::ext::models::LeNet5 model(10);
+    xt::models::LeNet5 model(10);
     model.to(device);
     model.train();
     torch::optim::Adam optimizer(model.parameters(), torch::optim::AdamOptions(1e-3));
