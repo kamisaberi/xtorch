@@ -1,6 +1,11 @@
 #include "../../include/datasets/imagenette.h"
 
 namespace xt::data::datasets {
+
+    Imagenette::Imagenette(const std::string &root): Imagenette::Imagenette(root , DataMode::TRAIN , false, ImageType::PX160){}
+    Imagenette::Imagenette(const std::string &root , DataMode mode): Imagenette::Imagenette(root , mode , false, ImageType::PX160){}
+    Imagenette::Imagenette(const std::string &root , DataMode mode , bool download): Imagenette::Imagenette(root , mode , download, ImageType::PX160){}
+
     Imagenette::Imagenette(const std::string &root, DataMode mode, bool download, ImageType type)
         : BaseDataset(root, mode, download) {
         this->type = type;
