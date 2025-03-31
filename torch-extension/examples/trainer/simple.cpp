@@ -15,7 +15,7 @@
 #include "../../include/trainers/trainer.h"
 
 using namespace std;
-using Example = torch::data::Example<torch::Tensor, torch::Tensor>;
+//using Example = torch::data::Example<torch::Tensor, torch::Tensor>;
 
 int main() {
     std::cout.precision(10);
