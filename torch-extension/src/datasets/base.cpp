@@ -7,14 +7,6 @@ namespace xt::data::datasets {
         this->mode = mode;
     }
 
-    BaseDataset::BaseDataset(const fs::path &root, DatasetArguments args) {
-        auto [mode , download , transforms] = args;
-        this->root = root;
-        this->download = download;
-        this->mode = mode;
-        this->transforms = transforms;
-    }
-
     torch::data::Example<> BaseDataset::get(size_t index) {
         return {data[index], torch::tensor(labels[index])};
     }
