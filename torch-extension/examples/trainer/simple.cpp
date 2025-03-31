@@ -34,7 +34,10 @@ int main() {
     xt::Trainer trainer;
     trainer.setOptimizer(&optimizer)
         .setMaxEpochs(5)
-        .setLossFn([](auto output, auto target) {return torch::nll_loss(output, target);});
+        .setLossFn([](auto output, auto target) {
+          return torch::nll_loss(output, target);
+        });
     trainer.fit<decltype(dataset)>(&model ,loader );
+
     return 0;
 }
