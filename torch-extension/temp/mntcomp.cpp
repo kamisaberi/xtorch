@@ -22,8 +22,8 @@ using Example = torch::data::Example<torch::Tensor, torch::Tensor>;
 int main() {
 
   torch::Tensor img = torch::randint(0, 256, {3, 32, 32}, torch::kUInt8);
-  torch::ext::models::BaseModel *m1 =new torch::ext::models::Model(5);
-  std::unique_ptr< torch::ext::models::BaseModel> m2 =std::make_unique<torch::ext::models::Model>(5);
+  xt::models::BaseModel *m1 =new xt::models::Model(5);
+  std::unique_ptr< xt::models::BaseModel> m2 =std::make_unique<xt::models::Model>(5);
   auto out1 =  m1->forward(img);
   cout << out1.sizes() << endl;
   auto out2 =  m2->forward(img);
@@ -43,7 +43,7 @@ int main() {
     auto options = torch::data::DataLoaderOptions().batch_size(64).drop_last(false);
     xt::DataLoader<decltype(transformed_dataset)> loader(std::move(transformed_dataset), options, /*shuffle=*/true);
 
-    torch::ext::models::LeNet5 model(10);
+    xt::models::LeNet5 model(10);
     model.to(device);
     model.train();
     torch::optim::Adam optimizer(model.parameters(), torch::optim::AdamOptions(1e-3));
