@@ -2,7 +2,7 @@
 #include <torch/torch.h>
 #include "../../exceptions/implementation.h"
 
-namespace torch::ext::models {
+namespace xt::models {
 
 
 //class DoubleConv(nn.Module):

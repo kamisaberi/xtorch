@@ -1,7 +1,7 @@
 #include "../../../include/models/cnn/unet.h"
 
 
-namespace torch::ext::models {
+namespace xt::models {
 
     UNet::UNet() {
         throw NotImplementedException();
