@@ -1,6 +1,6 @@
 #include "../../../include/models/cnn/vggnet.h"
 
-namespace torch::ext::models {
+namespace xt::models {
     VggNet16::VggNet16(int num_classes,int in_channels) : BaseModel() {
         //TODO layer1 DONE
         layer1 = torch::nn::Sequential(
