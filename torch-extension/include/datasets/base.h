@@ -34,10 +34,11 @@ namespace xt::data::datasets {
         fs::path root;
         fs::path dataset_path;
         xt::data::transforms::Compose compose;
+        vector<std::function<torch::Tensor(torch::Tensor)>> transforms = {};
 
 
     private:
         // vector<torch::data::transforms::Lambda<torch::data::Example<> > > transforms = {};
-        vector<std::function<torch::Tensor(torch::Tensor)>> transforms = {};
+
     };
 }
