@@ -37,6 +37,7 @@ namespace xt {
             model->train();
             for (size_t epoch = 0; epoch != this->maxEpochs_; ++epoch) {
                 cout << "epoch: " << epoch << endl;
+                int a = 1;
                 for (auto& batch : train_loader) {
                     torch::Tensor data, targets;
                     data = batch.data;
@@ -46,14 +47,12 @@ namespace xt {
                     output = model->forward(data);
                     torch::Tensor loss;
                     loss = this->lossFn_(output, targets);
-                    //                loss = torch::nll_loss(output, targets);
                     loss.backward();
                     this->optimizer_->step();
-                    //                std::cout << "Epoch: " << epoch << " | Batch: " <<  " | Loss: " << loss.item<float>() <<                            std::endl;
-
-                    //            }
+                    a++;
 
                 }
+                cout << "interval: " << a << endl;
             }
         }
 

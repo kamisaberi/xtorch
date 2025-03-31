@@ -211,8 +211,8 @@ namespace xt::data::datasets {
             fs::path lbls = this->dataset_path / std::get<1>(files["train"]);
             cout << imgs.string() << "  " << lbls.string() << endl;
             cout << imgs << endl;
-            this->read_images(imgs.string(), 50000);
-            this->read_labels(lbls.string(), 50000);
+            this->read_images(imgs.string(), 60000);
+            this->read_labels(lbls.string(), 60000);
             // auto images = read_mnist_images(imgs.string(), 50000);
             // auto labels = read_mnist_labels(lbls.string(), 50000);
             // cout << labels[0] << endl;
@@ -280,8 +280,8 @@ namespace xt::data::datasets {
             fs::path lbls = this->dataset_path / std::get<1>(files["train"]);
             cout << imgs.string() << "  " << lbls.string() << endl;
             cout << imgs << endl;
-            this->read_images(imgs.string(), 50000);
-            this->read_labels(lbls.string(), 50000);
+            this->read_images(imgs.string(), 60000);
+            this->read_labels(lbls.string(), 60000);
             //
             // auto images = read_mnist_images(imgs.string(), 50000);
             // auto labels = read_mnist_labels(lbls.string(), 50000);
