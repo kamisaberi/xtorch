@@ -342,3 +342,22 @@ target_link_libraries(vggnet16-food101 "${TORCH_LIBRARIES}")
 set_property(TARGET vggnet16-food101 PROPERTY CXX_STANDARD 17)
 target_include_directories(vggnet16-food101 PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
 target_link_libraries(vggnet16-food101 ${TEST_LIBRARIES})
+
+
+
+#--------------------------------------- Trainer ---------------------------------------#
+
+
+# Trainer Simple
+set(SOURCE_FILES
+        ../src/datasets/mnist.cpp
+        ../src/models/cnn/lenet5.cpp
+        ../src/trainers/trainer.cpp
+        ../src/data-loaders/data-loader.tpp
+
+)
+add_executable(trainer-simple ${BASE_SOURCE_FILES} ${SOURCE_FILES} trainer/simple.cpp)
+target_link_libraries(trainer-simple "${TORCH_LIBRARIES}")
+set_property(TARGET trainer-simple PROPERTY CXX_STANDARD 17)
+target_include_directories(trainer-simple PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
+target_link_libraries(trainer-simple ${TEST_LIBRARIES})
