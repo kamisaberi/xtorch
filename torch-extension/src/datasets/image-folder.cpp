@@ -17,7 +17,7 @@ namespace xt::data::datasets {
         : BaseDataset(root, mode, false) {
         this->label_type = label_type;
         this->load_sub_folders = load_sub_folders;
-        check_resources(root, download);
+        // check_resources(root, download);
         load_data();
     }
 
@@ -30,7 +30,7 @@ namespace xt::data::datasets {
             this->transforms = transforms;
             this->compose = xt::data::transforms::Compose(transforms);
         }
-        check_resources(root, download);
+        // check_resources(root, download);
         load_data();
     }
 
