@@ -21,6 +21,7 @@ set(BASE_SOURCE_FILES
         ../src/definitions/transforms.cpp
         ../src/datasets/base.cpp
         ../src/datasets/definitions/functions.cpp
+        ../src/models/base.cpp
 )
 
 set(TEST_LIBRARIES ${CURL_LIBRARIES}
@@ -126,7 +127,7 @@ target_link_libraries(alexnet-food101 ${TEST_LIBRARIES})
 set(SOURCE_FILES
         ../src/datasets/mnist.cpp
         ../src/models/cnn/lenet5.cpp
-        ../src/models/base.cpp
+
 )
 add_executable(lenet5-mnist ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/lenet5-mnist.cpp)
 target_link_libraries(lenet5-mnist "${TORCH_LIBRARIES}")
@@ -138,7 +139,6 @@ target_link_libraries(lenet5-mnist ${TEST_LIBRARIES})
 set(SOURCE_FILES
         ../src/datasets/mnist.cpp
         ../src/models/cnn/lenet5.cpp
-        ../src/models/base.cpp
 
 )
 add_executable(lenet5-fashionmnist ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/lenet5-fashionmnist.cpp)
@@ -152,7 +152,6 @@ target_link_libraries(lenet5-fashionmnist ${TEST_LIBRARIES})
 set(SOURCE_FILES
         ../src/datasets/cifar.cpp
         ../src/models/cnn/lenet5.cpp
-        ../src/models/base.cpp
 )
 add_executable(lenet5-cifar10 ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/lenet5-cifar10.cpp)
 target_link_libraries(lenet5-cifar10 "${TORCH_LIBRARIES}")
@@ -164,7 +163,6 @@ target_link_libraries(lenet5-cifar10 ${TEST_LIBRARIES})
 set(SOURCE_FILES
         ../src/datasets/cifar.cpp
         ../src/models/cnn/lenet5.cpp
-        ../src/models/base.cpp
 )
 add_executable(lenet5-cifar100 ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/lenet5-cifar100.cpp)
 target_link_libraries(lenet5-cifar100 "${TORCH_LIBRARIES}")
@@ -177,7 +175,6 @@ target_link_libraries(lenet5-cifar100 ${TEST_LIBRARIES})
 set(SOURCE_FILES
         ../src/datasets/imagenette.cpp
         ../src/models/cnn/lenet5.cpp
-        ../src/models/base.cpp
 )
 add_executable(lenet5-imagenette ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/lenet5-imagenette.cpp)
 target_link_libraries(lenet5-imagenette "${TORCH_LIBRARIES}")
@@ -190,7 +187,6 @@ target_link_libraries(lenet5-imagenette ${TEST_LIBRARIES})
 set(SOURCE_FILES
         ../src/datasets/food.cpp
         ../src/models/cnn/lenet5.cpp
-        ../src/models/base.cpp
 )
 add_executable(lenet5-food101 ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/lenet5-food101.cpp)
 target_link_libraries(lenet5-food101 "${TORCH_LIBRARIES}")
