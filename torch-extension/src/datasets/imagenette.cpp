@@ -67,6 +67,9 @@ namespace xt::data::datasets {
                     labels_name.push_back(u);
                     for (auto &img: fs::directory_iterator(p.path())) {
                         torch::Tensor tensor = torch::ext::media::opencv::convertImageToTensor(img.path());
+                        if (!transforms.empty()) {
+                            tensor = this->compose(tensor);
+                        }
                         data.push_back(tensor);
                         labels.push_back(labels_name.size() - 1);
                     }
@@ -81,6 +84,9 @@ namespace xt::data::datasets {
                     labels_name.push_back(u);
                     for (auto &img: fs::directory_iterator(p.path())) {
                         torch::Tensor tensor = torch::ext::media::opencv::convertImageToTensor(img.path());
+                        if (!transforms.empty()) {
+                            tensor = this->compose(tensor);
+                        }
                         data.push_back(tensor);
                         labels.push_back(labels_name.size() - 1);
                     }
