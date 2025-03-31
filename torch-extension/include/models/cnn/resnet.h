@@ -9,7 +9,7 @@
 
 using namespace std;
 
-namespace torch::ext::models {
+namespace xt::models {
 
     namespace {
         struct ResidualBlock : torch::nn::Module {
