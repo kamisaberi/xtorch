@@ -2,15 +2,15 @@
 
 namespace xt::data::datasets {
     ImageFolder::ImageFolder(const std::string &root): ImageFolder::ImageFolder(
-        root, DataMode::TRAIN, false, ImageType::PX160) {
+        root, false, DataMode::TRAIN, LabelsType::BY_FOLDER) {
     }
 
-    ImageFolder::ImageFolder(const std::string &root, DataMode mode): ImageFolder::ImageFolder(
-        root, mode, false, ImageType::PX160) {
+    ImageFolder::ImageFolder(const std::string &root, bool load_sub_folders): ImageFolder::ImageFolder(
+        root, load_sub_folders, DataMode::TRAIN, LabelsType::BY_FOLDER) {
     }
 
-    ImageFolder::ImageFolder(const std::string &root, DataMode mode, bool download): ImageFolder::ImageFolder(
-        root, mode, download, ImageType::PX160) {
+    ImageFolder::ImageFolder(const std::string &root,bool load_sub_folders, DataMode mode): ImageFolder::ImageFolder(
+        root, load_sub_folders, mode, LabelsType::BY_FOLDER) {
     }
 
     ImageFolder::ImageFolder(const std::string &root, bool load_sub_folders, DataMode mode, LabelsType label_type)
@@ -22,7 +22,8 @@ namespace xt::data::datasets {
     }
 
     ImageFolder::ImageFolder(const std::string &root, bool load_sub_folders, DataMode mode, LabelsType label_type,
-                             vector<std::function<torch::Tensor(torch::Tensor)> > transforms): BaseDataset(root, mode, false) {
+                             vector<std::function<torch::Tensor(torch::Tensor)> > transforms): BaseDataset(
+        root, mode, false) {
         this->label_type = label_type;
         this->load_sub_folders = load_sub_folders;
         if (!transforms.empty()) {
