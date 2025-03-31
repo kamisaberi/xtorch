@@ -4,7 +4,7 @@
 #include <c10/util/Exception.h>
 
 
-namespace torch::ext::models {
+namespace xt::models {
 
 
 //class SqueezeExcite(nn.Module):
