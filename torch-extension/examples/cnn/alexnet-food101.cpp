@@ -23,7 +23,7 @@ int main() {
     auto train_loader = torch::data::make_data_loader<torch::data::samplers::SequentialSampler>(
         std::move(transformed_dataset), 64);
 
-    torch::ext::models::AlexNet model(10,3);
+    xt::models::AlexNet model(10,3);
     model.to(device);
     model.train();
     torch::optim::Adam optimizer(model.parameters(), torch::optim::AdamOptions(1e-3));
