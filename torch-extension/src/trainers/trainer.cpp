@@ -4,35 +4,35 @@
 namespace xt {
 
     Trainer::Trainer()
-        : maxEpochs_(0),
+        : max_epochs_(0),
           optimizer_(nullptr),
-          lossFn_(nullptr),
-          checkpointEnabled_(false),
-          checkpointPath_(""),
-          checkpointInterval_(0)
+          loss_fn_(nullptr),
+          checkpoint_enabled_(false),
+          checkpoint_path_(""),
+          checkpoint_interval_(0)
     {
         // Default constructor initializes members
     }
 
-    Trainer& Trainer::setMaxEpochs(int maxEpochs) {
-        maxEpochs_ = maxEpochs;
+    Trainer& Trainer::set_max_epochs(int maxEpochs) {
+        max_epochs_ = maxEpochs;
         return *this;  // Return reference to self for chaining
     }
 
-    Trainer& Trainer::setOptimizer(torch::optim::Optimizer *optimizer) {
+    Trainer& Trainer::set_optimizer(torch::optim::Optimizer *optimizer) {
         optimizer_ = optimizer;  // Take ownership or share
         return *this;
     }
 
-    Trainer& Trainer::setLossFn(std::function<torch::Tensor(torch::Tensor, torch::Tensor)> lossFn) {
-        lossFn_ = lossFn;  // Take ownership or share
+    Trainer& Trainer::set_loss_fn(std::function<torch::Tensor(torch::Tensor, torch::Tensor)> lossFn) {
+        loss_fn_ = lossFn;  // Take ownership or share
         return *this;
     }
 
-    Trainer& Trainer::enableCheckpoint(const std::string& path, int interval) {
-        checkpointPath_ = path;
-        checkpointInterval_ = interval;
-        checkpointEnabled_ = true;  // Enable checkpointing
+    Trainer& Trainer::enable_checkpoint(const std::string& path, int interval) {
+        checkpoint_path_ = path;
+        checkpoint_interval_ = interval;
+        checkpoint_enabled_ = true;  // Enable checkpointing
         return *this;
     }
 
