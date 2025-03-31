@@ -33,8 +33,6 @@ namespace xt::data::datasets {
                    ImageType type = ImageType::PX160);
 
 
-        Imagenette(const fs::path &root, DatasetArguments args);
-
     private:
         std::map<string, std::tuple<fs::path, fs::path, fs::path, std::string> > resources = {
             {
