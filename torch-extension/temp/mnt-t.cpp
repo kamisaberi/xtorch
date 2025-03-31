@@ -2,11 +2,11 @@
 #include <torch/data/datasets/mnist.h>
 #include <iostream>
 #include <vector>
-#include "include/datasets/mnist.h"
-#include "include/models/cnn/lenet5.h"
+#include "../include/datasets/mnist.h"
+#include "../include/models/cnn/lenet5.h"
 #include <torch/data/transforms/base.h>
 #include <functional>
-#include "include/definitions/transforms.h"
+#include "../include/definitions/transforms.h"
 
 
 using namespace std;
@@ -81,13 +81,13 @@ int main() {
 
     // auto dataset = torch::ext::data::datasets::MNIST("/home/kami/Documents/temp/",
     //                                                  {.mode = DataMode::TRAIN, .download = true});
-    auto dataset = torch::ext::data::datasets::MNIST("/home/kami/Documents/temp/", DataMode::TRAIN, true);
+    auto dataset = xt::data::datasets::MNIST("/home/kami/Documents/temp/", DataMode::TRAIN, true);
 
     // cout << typeid(dataset).name() << endl;
 
     // Apply the resize transform to the dataset
-    auto transformed_dataset = dataset.map(torch::ext::data::transforms::resize({32, 32}))
-            .map(torch::ext::data::transforms::normalize(0.5, 0.5))
+    auto transformed_dataset = dataset.map(xt::data::transforms::resize({32, 32}))
+            .map(xt::data::transforms::normalize(0.5, 0.5))
             .map(torch::data::transforms::Stack<>());
 
 
@@ -102,10 +102,10 @@ int main() {
 
 
     vector<torch::data::transforms::Lambda<torch::data::Example<> > > transforms = {
-        torch::ext::data::transforms::resize({32, 32}),
-        torch::ext::data::transforms::normalize(0.5, 0.5)
+        xt::data::transforms::resize({32, 32}),
+        xt::data::transforms::normalize(0.5, 0.5)
     };
-    auto dataset2 = torch::ext::data::datasets::MNIST("/home/kami/Documents/temp/",
+    auto dataset2 = xt::data::datasets::MNIST("/home/kami/Documents/temp/",
                                                  {.mode = DataMode::TRAIN, .download = true , .transforms = transforms});
     // for (const auto &transform: transforms) {
     //     auto t  = dataset.map(transform);
@@ -150,7 +150,7 @@ int main() {
         std::move(transformed_dataset), 64);
 
 
-    torch::ext::models::LeNet5 model(10);
+    xt::models::LeNet5 model(10);
     model.to(device);
     model.train();
     torch::optim::Adam optimizer(model.parameters(), torch::optim::AdamOptions(1e-3));
