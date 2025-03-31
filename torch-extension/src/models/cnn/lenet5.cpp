@@ -3,7 +3,7 @@
 
 using namespace std;
 
-namespace torch::ext::models {
+namespace xt::models {
     LeNet5::LeNet5(int num_classes, int in_channels) : BaseModel() {
         layer1 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(in_channels, 6, 5).stride(1).padding(0)),
