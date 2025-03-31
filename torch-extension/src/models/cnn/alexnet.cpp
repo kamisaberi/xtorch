@@ -3,7 +3,7 @@
 
 using namespace std;
 
-namespace torch::ext::models {
+namespace xt::models {
     AlexNet::AlexNet(int num_classes , int in_channels) : BaseModel(){
 
         //TODO layer1
