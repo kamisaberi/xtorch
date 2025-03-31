@@ -39,9 +39,9 @@ int main() {
     model.train();
     torch::optim::Adam optimizer(model.parameters(), torch::optim::AdamOptions(1e-3));
     xt::Trainer trainer;
-    trainer.setOptimizer(&optimizer)
-        .setMaxEpochs(5)
-        .setLossFn([](auto output, auto target) {return torch::nll_loss(output, target);});
+    trainer.set_optimizer(&optimizer)
+        .set_max_epochs(5)
+        .set_loss_fn([](auto output, auto target) {return torch::nll_loss(output, target);});
 //    trainer.set
 
     trainer.fit<decltype(transformed_dataset)>(&model ,loader );

@@ -32,6 +32,6 @@ namespace xt::data::datasets {
 
         void load_data();
 
-        void check_resources(const std::string &root, bool download = false);
+        // void check_resources(const std::string &root, bool download = false);
     };
 }
