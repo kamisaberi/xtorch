@@ -24,7 +24,7 @@ int main() {
     auto train_loader = torch::data::make_data_loader<torch::data::samplers::SequentialSampler>(
         std::move(transformed_dataset), 64);
 
-    torch::ext::models::LeNet5 model(100, 3);
+    xt::models::LeNet5 model(100, 3);
     model.to(device);
     model.train();
     torch::optim::Adam optimizer(model.parameters(), torch::optim::AdamOptions(1e-3));
