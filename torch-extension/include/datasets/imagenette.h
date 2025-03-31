@@ -29,9 +29,11 @@ namespace xt::data::datasets {
 
     class Imagenette : public BaseDataset {
     public :
-        Imagenette(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false,
-                   ImageType type = ImageType::PX160);
-
+        Imagenette(const std::string &root);
+        Imagenette(const std::string &root, DataMode mode);
+        Imagenette(const std::string &root, DataMode mode , bool download);
+        Imagenette(const std::string &root, DataMode mode , bool download, ImageType type );
+        Imagenette(const std::string &root, DataMode mode , bool download, ImageType type , vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
 
     private:
         std::map<string, std::tuple<fs::path, fs::path, fs::path, std::string> > resources = {
