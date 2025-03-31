@@ -7,7 +7,7 @@
 #include <unordered_map>
 #include <unordered_set>
 
-namespace torch::ext::models {
+namespace xt::models {
 
 class BaseModel: public torch::nn::Module {
   public:
