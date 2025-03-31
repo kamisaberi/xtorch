@@ -97,7 +97,7 @@ int main() {
 
     cout << "mnt 04\n";
 
-    torch::ext::models::LeNet5 model(10);
+    xt::models::LeNet5 model(10);
     model.to(device);
     model.train();
     torch::optim::Adam optimizer(model.parameters(), torch::optim::AdamOptions(1e-3));
