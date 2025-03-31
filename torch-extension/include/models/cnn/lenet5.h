@@ -8,7 +8,7 @@
 using namespace std;
 
 namespace xt::models {
-    struct LeNet5 : torch::ext::models::BaseModel {
+    struct LeNet5 : BaseModel {
     protected:
         mutable  torch::nn::Sequential layer1 = nullptr, layer2 = nullptr;
         mutable  torch::nn::Linear fc1 = nullptr, fc2 = nullptr, fc3 = nullptr;
