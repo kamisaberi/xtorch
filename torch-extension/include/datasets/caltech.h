@@ -11,9 +11,10 @@ namespace fs = std::filesystem;
 namespace xt::data::datasets {
     class Caltech101 : public BaseDataset {
     public :
-        Caltech101(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
-
-        Caltech101(const fs::path &root, DatasetArguments args);
+        Caltech101(const std::string &root);
+        Caltech101(const std::string &root, DataMode mode);
+        Caltech101(const std::string &root, DataMode mode , bool download);
+        Caltech101(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
 
     private:
         vector<std::tuple<string, string, string> > resources = {

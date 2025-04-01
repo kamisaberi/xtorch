@@ -1,15 +1,19 @@
 #include "../../include/datasets/base.h"
 
 namespace xt::data::datasets {
+    BaseDataset::BaseDataset(const std::string &root): BaseDataset::BaseDataset(root, DataMode::TRAIN, false) {
+    }
 
+    BaseDataset::BaseDataset(const std::string &root, DataMode mode): BaseDataset::BaseDataset(root, mode, false) {
+    }
 
-
-    BaseDataset::BaseDataset(const std::string &root): BaseDataset::BaseDataset(root, DataMode::TRAIN , false){}
-    BaseDataset::BaseDataset(const std::string &root ,DataMode mode ): BaseDataset::BaseDataset(root, mode , false){}
-    BaseDataset::BaseDataset(const std::string &root, DataMode mode, bool download) :root(root),mode(mode),download(download){}
+    BaseDataset::BaseDataset(const std::string &root, DataMode mode, bool download) : root(root), mode(mode),
+        download(download) {
+    }
 
     BaseDataset::BaseDataset(const std::string &root, DataMode mode, bool download,
-                         vector<std::function<torch::Tensor(torch::Tensor)> > transforms) : BaseDataset::BaseDataset(root, mode , download) {
+                             vector<std::function<torch::Tensor(torch::Tensor)> >
+                             transforms) : BaseDataset::BaseDataset(root, mode, download) {
         this->transforms = transforms;
         if (!transforms.empty()) {
             this->compose = xt::data::transforms::Compose(this->transforms);
@@ -25,6 +29,4 @@ namespace xt::data::datasets {
     torch::optional<size_t> BaseDataset::size() const {
         return data.size();
     }
-
-
 }
