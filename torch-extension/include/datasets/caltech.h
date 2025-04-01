@@ -35,9 +35,11 @@ namespace xt::data::datasets {
 
     class Caltech256 : public BaseDataset {
     public :
-        Caltech256(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+        Caltech256(const std::string &root);
+        Caltech256(const std::string &root, DataMode mode);
+        Caltech256(const std::string &root, DataMode mode , bool download);
+        Caltech256(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
 
-        Caltech256(const fs::path &root, DatasetArguments args);
 
     private:
         vector<std::tuple<string, string, string> > resources = {
