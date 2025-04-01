@@ -15,20 +15,14 @@ namespace xt::data::datasets {
     }
 
     Imagenette::Imagenette(const std::string &root, DataMode mode, bool download, ImageType type)
-        : BaseDataset(root, mode, download) {
-
-        this->type = type;
-        cout << "BEFORE check_resources" << endl;
+        : BaseDataset(root, mode, download) , type(type) {
         check_resources(root, download);
-        cout << "BEFORE load_data" << endl;
         load_data(mode);
-        cout << "AFTER load_data" << endl;
     }
 
     Imagenette::Imagenette(const std::string &root, DataMode mode, bool download, ImageType type,
                            vector<std::function<torch::Tensor(torch::Tensor)> > transforms): BaseDataset(
-        root, mode, download) {
-        this->type = type;
+        root, mode, download) , type(type) {
         if (!transforms.empty()) {
             this->transforms = transforms;
             this->compose = xt::data::transforms::Compose(transforms);
