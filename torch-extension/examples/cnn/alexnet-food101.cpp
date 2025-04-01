@@ -13,7 +13,7 @@ int main() {
     std::cout.precision(10);
     torch::Device device(torch::kCPU);
 
-    auto dataset = xt::data::datasets::Food101("/home/kami/Documents/temp/", DataMode::TRAIN, false, {32, 32});
+    auto dataset = xt::data::datasets::Food101("/home/kami/Documents/temp/", DataMode::TRAIN, false);
 
     auto transformed_dataset = dataset
             .map(xt::data::transforms::resize(size))
