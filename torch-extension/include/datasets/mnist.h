@@ -1,4 +1,5 @@
 #pragma once
+#include "base.h"
 #include "../headers/datasets.h"
 
 
@@ -8,7 +9,7 @@ namespace fs = std::filesystem;
 
 namespace xt::data::datasets {
 
-    class MNISTBase : public torch::data::Dataset<MNISTBase> {
+    class MNISTBase : public BaseDataset {
     public:
         MNISTBase(const std::string &root);
         MNISTBase(const std::string &root, DataMode mode);
@@ -19,24 +20,24 @@ namespace xt::data::datasets {
 
         void read_labels(const std::string &file_path, int num_labels);
 
-        torch::data::Example<> get(size_t index) override;
+        // torch::data::Example<> get(size_t index) override;
 
-        torch::optional<size_t> size() const override;
+        // torch::optional<size_t> size() const override;
 
     protected:
-        std::vector<torch::Tensor> data; // Store image data as tensors
-        std::vector<uint8_t> labels; // Store labels
-        DataMode mode = DataMode::TRAIN;
-        bool download = false;
-        fs::path root;
-        fs::path dataset_path;
-        xt::data::transforms::Compose compose;
+        // std::vector<torch::Tensor> data; // Store image data as tensors
+        // std::vector<uint8_t> labels; // Store labels
+        // DataMode mode = DataMode::TRAIN;
+        // bool download = false;
+        // fs::path root;
+        // fs::path dataset_path;
+        // xt::data::transforms::Compose compose;
 
 
         // void transform_data(std::vector<torch::data::transforms::Lambda<torch::data::Example<> > > transforms);
 
     private:
-        vector<std::function<torch::Tensor(torch::Tensor)>> transforms = {};
+        // vector<std::function<torch::Tensor(torch::Tensor)>> transforms = {};
     };
 
 
@@ -45,7 +46,6 @@ namespace xt::data::datasets {
         MNIST(const std::string &root);
         MNIST(const std::string &root, DataMode mode);
         MNIST(const std::string &root, DataMode mode , bool download);
-        MNIST(const std::string &root, DataMode mode  , bool download, std::shared_ptr<xt::data::transforms::Compose> compose);
         MNIST(const std::string &root, DataMode mode , bool download , vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
 
         // // MNIST(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
@@ -83,7 +83,6 @@ namespace xt::data::datasets {
         FashionMNIST(const std::string &root);
         FashionMNIST(const std::string &root, DataMode mode);
         FashionMNIST(const std::string &root, DataMode mode , bool download);
-        FashionMNIST(const std::string &root, DataMode mode  , bool download, std::shared_ptr<xt::data::transforms::Compose> compose);
         FashionMNIST(const std::string &root, DataMode mode , bool download , vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
 
 

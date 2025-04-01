@@ -7,8 +7,7 @@ namespace xt::data::datasets {
     MNISTBase::MNISTBase(const std::string &root, DataMode mode): MNISTBase::MNISTBase(root, mode, false) {
     }
 
-    MNISTBase::MNISTBase(const std::string &root, DataMode mode, bool download) : root(root), mode(mode),
-        download(download) {
+    MNISTBase::MNISTBase(const std::string &root, DataMode mode, bool download) : BaseDataset(root , mode, download) {
     }
 
     MNISTBase::MNISTBase(const std::string &root, DataMode mode, bool download,
@@ -115,14 +114,14 @@ namespace xt::data::datasets {
     //     // std::cout << "14  " << this->data.size() << std::endl;
     // }
 
-    torch::data::Example<> MNISTBase::get(size_t index) {
-        return {data[index], torch::tensor(labels[index])};
-    }
-
-    // Override `size` method to return the number of samples
-    torch::optional<size_t> MNISTBase::size() const {
-        return data.size();
-    }
+    // torch::data::Example<> MNISTBase::get(size_t index) {
+    //     return {data[index], torch::tensor(labels[index])};
+    // }
+    //
+    // // Override `size` method to return the number of samples
+    // torch::optional<size_t> MNISTBase::size() const {
+    //     return data.size();
+    // }
 
 
     //------------------ MNIST ------------------//
@@ -159,12 +158,6 @@ namespace xt::data::datasets {
         load_data(mode);
     }
 
-    MNIST::MNIST(const std::string &root, DataMode mode, bool download,
-                 std::shared_ptr<xt::data::transforms::Compose> compose) : MNISTBase::MNISTBase(
-        root, mode, download, compose) {
-        check_resources(root, download);
-        load_data(mode);
-    }
 
     MNIST::MNIST(const std::string &root, DataMode mode, bool download,
                  vector<std::function<torch::Tensor(torch::Tensor)> > transforms) : MNISTBase::MNISTBase(
@@ -266,12 +259,6 @@ namespace xt::data::datasets {
         load_data(mode);
     }
 
-    FashionMNIST::FashionMNIST(const std::string &root, DataMode mode, bool download,
-                               std::shared_ptr<xt::data::transforms::Compose> compose) : MNISTBase::MNISTBase(
-        root, mode, download, compose) {
-        check_resources(root, download);
-        load_data(mode);
-    }
 
     FashionMNIST::FashionMNIST(const std::string &root, DataMode mode, bool download,
                                vector<std::function<torch::Tensor(torch::Tensor)> > transforms) : MNISTBase::MNISTBase(
