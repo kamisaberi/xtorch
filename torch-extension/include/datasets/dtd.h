@@ -6,9 +6,10 @@
 namespace xt::data::datasets {
     class DTD : public BaseDataset {
     public :
-        DTD(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
-
-        DTD(const fs::path &root, DatasetArguments args);
+        DTD(const std::string &root);
+        DTD(const std::string &root, DataMode mode);
+        DTD(const std::string &root, DataMode mode , bool download);
+        DTD(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
 
     private :
         void load_data(DataMode mode = DataMode::TRAIN);
