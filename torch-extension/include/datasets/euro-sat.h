@@ -10,9 +10,11 @@ namespace fs = std::filesystem;
 namespace xt::data::datasets {
     class EuroSAT :public BaseDataset {
     public :
-        EuroSAT(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+        EuroSAT(const std::string &root);
+        EuroSAT(const std::string &root, DataMode mode);
+        EuroSAT(const std::string &root, DataMode mode , bool download);
+        EuroSAT(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
 
-        EuroSAT(const fs::path &root, DatasetArguments args);
 
     private:
         std::string url =
@@ -21,8 +23,8 @@ namespace xt::data::datasets {
         std::string archive_file_md5 = "c8fa014336c82ac7804f0398fcb19387";
         fs::path dataset_folder_name = "euro-sat";
 
-        void load_data(DataMode mode = DataMode::TRAIN);
+        void load_data();
 
-        void check_resources(const std::string &root, bool download = false);
+        void check_resources();
     };
 }
