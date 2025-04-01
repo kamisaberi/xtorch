@@ -7,10 +7,6 @@ namespace xt::data::datasets {
     BaseDataset::BaseDataset(const std::string &root): BaseDataset::BaseDataset(root, DataMode::TRAIN , false){}
     BaseDataset::BaseDataset(const std::string &root ,DataMode mode ): BaseDataset::BaseDataset(root, mode , false){}
     BaseDataset::BaseDataset(const std::string &root, DataMode mode, bool download) :root(root),mode(mode),download(download){}
-    BaseDataset::BaseDataset(const std::string &root, DataMode mode, bool download,
-                         std::shared_ptr<xt::data::transforms::Compose> compose) : BaseDataset::BaseDataset(root, mode , download) {
-        this->compose = *compose;
-    }
 
     BaseDataset::BaseDataset(const std::string &root, DataMode mode, bool download,
                          vector<std::function<torch::Tensor(torch::Tensor)> > transforms) : BaseDataset::BaseDataset(root, mode , download) {

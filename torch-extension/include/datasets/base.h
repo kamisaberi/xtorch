@@ -13,7 +13,6 @@ namespace xt::data::datasets {
         BaseDataset(const std::string &root);
         BaseDataset(const std::string &root, DataMode mode);
         BaseDataset(const std::string &root, DataMode mode , bool download);
-        BaseDataset(const std::string &root, DataMode mode  , bool download, std::shared_ptr<xt::data::transforms::Compose> compose);
         BaseDataset(const std::string &root, DataMode mode , bool download , vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
 
 
