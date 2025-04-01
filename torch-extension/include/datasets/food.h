@@ -13,9 +13,9 @@ namespace fs = std::filesystem;
 namespace xt::data::datasets {
     class Food101 : public BaseDataset {
     public :
-        Food101(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false, const vector<int> &image_size = {0,0});
 
-        Food101(const fs::path &root, DatasetArguments args);
+
+        Food101(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
 
     private :
         std::string url = "http://data.vision.ee.ethz.ch/cvl/food-101.tar.gz";
@@ -25,7 +25,6 @@ namespace xt::data::datasets {
         std::size_t images_number = 101'000;
         std::vector<string> classes_name;
         std::map<string, int> classes_map;
-        vector<int> image_size;
 
         void load_data();
 
