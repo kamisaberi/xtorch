@@ -16,9 +16,13 @@ namespace xt::data::datasets {
 
     Imagenette::Imagenette(const std::string &root, DataMode mode, bool download, ImageType type)
         : BaseDataset(root, mode, download) {
+
         this->type = type;
+        cout << "BEFORE check_resources" << endl;
         check_resources(root, download);
+        cout << "BEFORE load_data" << endl;
         load_data(mode);
+        cout << "AFTER load_data" << endl;
     }
 
     Imagenette::Imagenette(const std::string &root, DataMode mode, bool download, ImageType type,
@@ -61,16 +65,21 @@ namespace xt::data::datasets {
     void Imagenette::load_data(DataMode mode) {
         auto [url , dataset_filename , folder_name, md] = this->resources[getImageTypeValue(this->type)];
         if (mode == DataMode::TRAIN) {
+            cout << "LOADING TRAINING DATA" << endl;
+            // "/home/kami/Documents/temp/imagenette/imagenette2-160/train/"
             fs::path path = this->dataset_path / folder_name / fs::path("train");
+            cout << path << endl;
             for (auto &p: fs::directory_iterator(path)) {
                 if (fs::is_directory(p.path())) {
                     string u = p.path().filename().string();
                     labels_name.push_back(u);
                     for (auto &img: fs::directory_iterator(p.path())) {
+                        // cout << img.path() << endl;
                         torch::Tensor tensor = torch::ext::media::opencv::convertImageToTensor(img.path());
-                        if (!transforms.empty()) {
-                            tensor = this->compose(tensor);
-                        }
+                        // cout << tensor.sizes() << endl;
+                        // if (!transforms.empty()) {
+                        //     tensor = this->compose(tensor);
+                        // }
                         data.push_back(tensor);
                         labels.push_back(labels_name.size() - 1);
                     }
@@ -85,9 +94,9 @@ namespace xt::data::datasets {
                     labels_name.push_back(u);
                     for (auto &img: fs::directory_iterator(p.path())) {
                         torch::Tensor tensor = torch::ext::media::opencv::convertImageToTensor(img.path());
-                        if (!transforms.empty()) {
-                            tensor = this->compose(tensor);
-                        }
+                        // if (!transforms.empty()) {
+                        //     tensor = this->compose(tensor);
+                        // }
                         data.push_back(tensor);
                         labels.push_back(labels_name.size() - 1);
                     }

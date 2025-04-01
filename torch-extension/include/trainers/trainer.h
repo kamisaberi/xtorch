@@ -8,7 +8,7 @@
 #include <string>  // For std::string
 #include "../data-loaders/data-loader.h"
 #include "../models/base.h"
-
+#include "../datasets/base.h"
 
 
 // Forward declarations (assume these classes exist elsewhere)
@@ -16,6 +16,19 @@
 //class LossFunction;
 
 namespace xt {
+
+//    template <typename Dataset>
+//    void check_dataset_type(const Dataset& dataset) {
+//        if constexpr (std::is_same_v<Dataset, xt::data::datasets::BaseDataset>) {
+//            std::cout << "The object is a MNIST dataset" << std::endl;
+//        } else if constexpr (std::is_same_v<Dataset, torch::data::datasets::MapDataset<xt::data::datasets::BaseDataset, torch::data::transforms::Stack<>>>) {
+//            std::cout << "The object is a transformed MNIST dataset" << std::endl;
+//        } else {
+//            std::cout << "The object is of an unknown type" << std::endl;
+//        }
+//    }
+
+
 
     class Trainer {
     public:

@@ -12,12 +12,22 @@
 #include <iostream>
 #include <vector>
 #include <optional>
+#include "../datasets/base.h"
 
 using namespace std;
 namespace fs = std::filesystem;
 
 
 namespace xt {
+
+    template <typename Dataset>
+    bool is_transformed_dataset(const Dataset& dataset) {
+        if constexpr (std::is_same_v<Dataset, torch::data::datasets::MapDataset<xt::data::datasets::BaseDataset, torch::data::transforms::Stack<>>>) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 
 template <typename Dataset>
