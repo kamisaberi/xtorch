@@ -13,7 +13,6 @@ namespace xt::data::datasets {
         fs::path images_path = this->dataset_path / fs::path("images");
         if (fs::exists(images_path)) {
             size_t cnt = xt::utils::fs::countFiles(images_path, true);
-            cout << "Found " << cnt << " images" << endl;
             if (cnt != this->images_number) {
                 if (fs::exists(archive_file_abs_path)) {
                     xt::utils::extract(archive_file_abs_path, this->root.string());
@@ -50,12 +49,9 @@ namespace xt::data::datasets {
 
 
     void Food101::load_data() {
-        cout << "Loading data..." << endl;
         fs::path images_path = this->dataset_path / fs::path("images");
         fs::path meta_path = this->dataset_path / fs::path("meta");
-
         if (this->mode == DataMode::TRAIN) {
-            cout << "Loading train data..." << endl;
             fs::path train_file_path = meta_path / fs::path("train.txt");
             ifstream ifs(train_file_path.string());
             while (!ifs.eof()) {
@@ -67,8 +63,10 @@ namespace xt::data::datasets {
                 vector<string> tokens = xt::utils::string::split(line, "/");
                 string label = tokens[0];
                 fs::path img_path = images_path / fs::path(line + ".jpg");
-                torch::Tensor tensor = torch::ext::media::opencv::convertImageToTensor(img_path, this->image_size);
-                // cout << line << " " << tensor.sizes() << endl;
+                torch::Tensor tensor = torch::ext::media::opencv::convertImageToTensor(img_path);
+                if (!transforms.empty()) {
+                    tensor = this->compose(tensor);
+                }
                 this->data.push_back(tensor);
                 this->labels.push_back(classes_map[label]);
             }
