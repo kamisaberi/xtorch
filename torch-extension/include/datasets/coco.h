@@ -6,21 +6,24 @@
 namespace xt::data::datasets {
     class CocoDetection : public BaseDataset {
     public :
-        CocoDetection(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+        CocoDetection(const std::string &root);
+        CocoDetection(const std::string &root, DataMode mode);
+        CocoDetection(const std::string &root, DataMode mode , bool download);
+        CocoDetection(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
 
-        CocoDetection(const fs::path &root, DatasetArguments args);
 
     private :
-        void load_data(DataMode mode = DataMode::TRAIN);
+        void load_data();
 
-        void check_resources(const std::string &root, bool download = false);
+        void check_resources();
     };
 
     class CocoCaptions : public BaseDataset {
     public :
-        CocoCaptions(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
-
-        CocoCaptions(const fs::path &root, DatasetArguments args);
+        CocoCaptions(const std::string &root);
+        CocoCaptions(const std::string &root, DataMode mode);
+        CocoCaptions(const std::string &root, DataMode mode , bool download);
+        CocoCaptions(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
 
     private :
         void load_data(DataMode mode = DataMode::TRAIN);
