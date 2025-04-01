@@ -26,8 +26,8 @@ namespace xt::data::datasets {
         };
 
         fs::path dataset_folder_name = "celeba";
-        void load_data(DataMode mode = DataMode::TRAIN);
+        void load_data();
 
-        void check_resources(const std::string &root, bool download = false);
+        void check_resources();
     };
 }
