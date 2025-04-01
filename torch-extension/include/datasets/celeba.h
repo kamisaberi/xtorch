@@ -10,9 +10,10 @@ namespace fs = std::filesystem;
 namespace xt::data::datasets {
     class CelebA : public BaseDataset {
     public :
-        CelebA(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
-
-        CelebA(const fs::path &root, DatasetArguments args);
+        CelebA(const std::string &root);
+        CelebA(const std::string &root, DataMode mode);
+        CelebA(const std::string &root, DataMode mode , bool download);
+        CelebA(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
 
     private:
         vector<std::tuple<string, string, fs::path> > resources = {
