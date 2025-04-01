@@ -71,6 +71,25 @@ namespace xt::data::datasets {
                 this->labels.push_back(classes_map[label]);
             }
         } else {
+            fs::path train_file_path = meta_path / fs::path("test.txt");
+            ifstream ifs(train_file_path.string());
+            while (!ifs.eof()) {
+                string line;
+                getline(ifs, line);
+                line = xt::utils::string::trim(line);
+                if (line.empty())
+                    continue;
+                vector<string> tokens = xt::utils::string::split(line, "/");
+                string label = tokens[0];
+                fs::path img_path = images_path / fs::path(line + ".jpg");
+                torch::Tensor tensor = torch::ext::media::opencv::convertImageToTensor(img_path);
+                if (!transforms.empty()) {
+                    tensor = this->compose(tensor);
+                }
+                this->data.push_back(tensor);
+                this->labels.push_back(classes_map[label]);
+            }
+
         }
     }
 
