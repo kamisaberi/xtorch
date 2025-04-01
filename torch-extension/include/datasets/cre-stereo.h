@@ -8,26 +8,30 @@
 namespace xt::data::datasets {
     class CarlaStereo : public  BaseDataset {
     public :
-        CarlaStereo(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+        CarlaStereo(const std::string &root);
+        CarlaStereo(const std::string &root, DataMode mode);
+        CarlaStereo(const std::string &root, DataMode mode , bool download);
+        CarlaStereo(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
 
-        CarlaStereo(const fs::path &root, DatasetArguments args);
 
     private :
-        void load_data(DataMode mode = DataMode::TRAIN);
+        void load_data();
 
-        void check_resources(const std::string &root, bool download = false);
+        void check_resources();
     };
 
 
     class CREStereo : public BaseDataset {
     public :
-        CREStereo(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+        CREStereo(const std::string &root);
+        CREStereo(const std::string &root, DataMode mode);
+        CREStereo(const std::string &root, DataMode mode , bool download);
+        CREStereo(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
 
-        CREStereo(const fs::path &root, DatasetArguments args);
 
     private :
-        void load_data(DataMode mode = DataMode::TRAIN);
+        void load_data();
 
-        void check_resources(const std::string &root, bool download = false);
+        void check_resources();
     };
 }
