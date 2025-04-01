@@ -9,13 +9,28 @@
 #include "../include/definitions/transforms.h"
 
 #include "../include/datasets/mnist.h"
+#include "../include/datasets/cifar.h"
+#include "../include/datasets/imagenette.h"
 #include "../include/models/cnn/lenet5.h"
 #include "../include/definitions/transforms.h"
 #include "../include/data-loaders/data-loader.h"
 #include "../include/trainers/trainer.h"
+#include <type_traits>
+#include <iostream>
 
 using namespace std;
 using Example = torch::data::Example<torch::Tensor, torch::Tensor>;
+
+template <typename Dataset>
+void check_dataset_type(const Dataset& dataset) {
+    if constexpr (std::is_same_v<Dataset, xt::data::datasets::BaseDataset>) {
+        std::cout << "The object is a MNIST dataset" << std::endl;
+    } else if constexpr (std::is_same_v<Dataset, torch::data::datasets::MapDataset<xt::data::datasets::BaseDataset, torch::data::transforms::Stack<>>>) {
+        std::cout << "The object is a transformed MNIST dataset" << std::endl;
+    } else {
+        std::cout << "The object is of an unknown type" << std::endl;
+    }
+}
 
 int main() {
     std::vector<int64_t> size = {32, 32};
@@ -28,6 +43,22 @@ int main() {
                                                  torch::data::transforms::Normalize<>(0.5, 0.5)
                                              });
     auto transformed_dataset =  dataset.map(torch::data::transforms::Stack<>());
+
+
+    check_dataset_type(dataset);
+    check_dataset_type(transformed_dataset);
+
+    auto dataseti = xt::data::datasets::Imagenette("/home/kami/Documents/temp/", DataMode::TRAIN, true , xt::data::datasets::ImageType::PX160);
+
+    cout << "MNIST dataset size: " << endl;
+    auto transformed_dataseti = dataseti.map(torch::data::transforms::Stack<>());
+
+    cout << "MNIST dataset size: " << endl;
+    check_dataset_type(dataseti);
+    check_dataset_type(transformed_dataseti);
+
+
+    return 0;
 
     xt::DataLoader<decltype(transformed_dataset)> loader(std::move(transformed_dataset), torch::data::DataLoaderOptions().batch_size(64).drop_last(false), /*shuffle=*/true);
 //    xt::DataLoader<decltype(dataset)> loader(std::move(dataset), torch::data::DataLoaderOptions().batch_size(64).drop_last(false), /*shuffle=*/true);
