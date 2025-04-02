@@ -29,7 +29,7 @@ namespace xt::data::datasets {
         SBU(const std::string &root);
         SBU(const std::string &root, DataMode mode);
         SBU(const std::string &root, DataMode mode , bool download);
-        SBU(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
+        SBU(const std::string &root, DataMode mode , bool download, TransformType transforms);
 
 
     private :
