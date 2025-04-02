@@ -6,11 +6,21 @@
 namespace xt::data::datasets {
     class Flowers102 : public BaseDataset {
     public :
-        Flowers102(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
-
-        Flowers102(const fs::path &root, DatasetArguments args);
+        Flowers102(const std::string &root);
+        Flowers102(const std::string &root, DataMode mode);
+        Flowers102(const std::string &root, DataMode mode , bool download);
+        Flowers102(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
 
     private :
+
+        // _download_url_prefix = "https://www.robots.ox.ac.uk/~vgg/data/flowers/102/"
+        // _file_dict = {  # filename, md5
+        // "image": ("102flowers.tgz", "52808999861908f626f3c1f4e79d11fa"),
+        // "label": ("imagelabels.mat", "e0620be6f572b9609742df49c70aed4d"),
+        // "setid": ("setid.mat", "a5357ecc9cb78c4bef273ce3793fc85c"),
+        // }
+        // _splits_map = {"train": "trnid", "val": "valid", "test": "tstid"}
+
         void load_data(DataMode mode = DataMode::TRAIN);
 
         void check_resources(const std::string &root, bool download = false);
