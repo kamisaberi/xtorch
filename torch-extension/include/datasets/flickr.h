@@ -5,6 +5,7 @@
 
 
 namespace xt::data::datasets {
+    [[deprecated("Flickr8k Dataset some files removed and Links are broken")]]
     class Flickr8k :public BaseDataset {
     public :
         Flickr8k(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
@@ -17,6 +18,7 @@ namespace xt::data::datasets {
         void check_resources(const std::string &root, bool download = false);
     };
 
+    [[deprecated("Flickr30k Dataset some files removed and Links are broken")]]
     class Flickr30k :public BaseDataset {
     public :
         Flickr30k(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
