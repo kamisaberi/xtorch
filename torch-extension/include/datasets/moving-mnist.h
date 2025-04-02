@@ -28,7 +28,7 @@ namespace xt::data::datasets {
         MovingMNIST(const std::string &root);
         MovingMNIST(const std::string &root, DataMode mode);
         MovingMNIST(const std::string &root, DataMode mode , bool download);
-        MovingMNIST(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
+        MovingMNIST(const std::string &root, DataMode mode , bool download, TransformType transforms);
 
 
     private :
