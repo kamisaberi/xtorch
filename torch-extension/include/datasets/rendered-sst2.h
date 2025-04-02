@@ -35,7 +35,7 @@ namespace xt::data::datasets {
         RenderedSST2(const std::string &root);
         RenderedSST2(const std::string &root, DataMode mode);
         RenderedSST2(const std::string &root, DataMode mode , bool download);
-        RenderedSST2(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
+        RenderedSST2(const std::string &root, DataMode mode , bool download, TransformType transforms);
 
 
     private:
