@@ -33,9 +33,11 @@ namespace xt::data::datasets {
 
          */
     public :
-        PhotoTour(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+        PhotoTour(const std::string &root);
+        PhotoTour(const std::string &root, DataMode mode);
+        PhotoTour(const std::string &root, DataMode mode , bool download);
+        PhotoTour(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
 
-        PhotoTour(const fs::path &root, DatasetArguments args);
 
     private :
         std::map<std::string, std::tuple<fs::path, fs::path, std::string> > resources = {
@@ -86,8 +88,8 @@ namespace xt::data::datasets {
         };
 
         fs::path dataset_folder_name = "photo-tour";
-        void load_data(DataMode mode = DataMode::TRAIN);
+        void load_data();
 
-        void check_resources(const std::string &root, bool download = false);
+        void check_resources();
     };
 }
