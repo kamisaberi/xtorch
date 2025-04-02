@@ -50,7 +50,7 @@ namespace xt::data::datasets {
         HMDB51(const std::string &root);
         HMDB51(const std::string &root, DataMode mode);
         HMDB51(const std::string &root, DataMode mode , bool download);
-        HMDB51(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
+        HMDB51(const std::string &root, DataMode mode , bool download, TransformType transforms);
 
     private :
         // data_url = "https://serre-lab.clps.brown.edu/wp-content/uploads/2013/10/hmdb51_org.rar"
