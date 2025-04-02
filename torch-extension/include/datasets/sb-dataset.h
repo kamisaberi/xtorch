@@ -42,9 +42,11 @@ namespace xt::data::datasets {
 
          */
     public :
-        SBDataset(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+        SBDataset(const std::string &root);
+        SBDataset(const std::string &root, DataMode mode);
+        SBDataset(const std::string &root, DataMode mode , bool download);
+        SBDataset(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
 
-        SBDataset(const fs::path &root, DatasetArguments args);
 
     private:
         fs::path url = fs::path("https://www2.eecs.berkeley.edu/Research/Projects/CS/vision/grouping/semantic_contours/benchmark.tgz");
