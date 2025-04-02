@@ -33,8 +33,8 @@ namespace xt::data::datasets {
         fs::path url = fs::path("http://www.cs.toronto.edu/~nitish/unsupervised_video/mnist_test_seq.npy");
         fs::path dataset_file_name = fs::path("mnist_test_seq.npy");
         string dataset_file_md5 = "be083ec986bfe91a449d63653c411eb2";
-        void load_data(DataMode mode = DataMode::TRAIN);
+        void load_data();
 
-        void check_resources(const std::string &root, bool download = false);
+        void check_resources();
     };
 }
