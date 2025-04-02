@@ -23,7 +23,7 @@ namespace xt::data::datasets {
         GTSRB(const std::string &root);
         GTSRB(const std::string &root, DataMode mode);
         GTSRB(const std::string &root, DataMode mode , bool download);
-        GTSRB(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
+        GTSRB(const std::string &root, DataMode mode , bool download, TransformType transforms);
 
     private :
         // base_url = "https://sid.erda.dk/public/archives/daaeac0d7ce1152aea9b61d9f1e19370/"
@@ -46,8 +46,8 @@ namespace xt::data::datasets {
         //         md5="fe31e9c9270bbcd7b84b7f21a9d9d9e5",
         //     )
 
-        void load_data(DataMode mode = DataMode::TRAIN);
+        void load_data();
 
-        void check_resources(const std::string &root, bool download = false);
+        void check_resources();
     };
 }
