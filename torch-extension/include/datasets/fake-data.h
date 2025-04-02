@@ -7,14 +7,13 @@
 namespace xt::data::datasets {
     class FakeData : public BaseDataset {
     public :
-        FakeData(const std::string &root);
+        FakeData();
 
-        FakeData(const std::string &root, size_t size);
+        FakeData(size_t size);
 
-        FakeData(const std::string &root, size_t size, vector<int64_t> shape_);
+        FakeData( size_t size, vector<int64_t> shape);
 
-        FakeData(const std::string &root, size_t size, vector<int64_t> shape_,
-                 vector<std::function<torch::Tensor(torch::Tensor)> > transforms);
+        FakeData( size_t size, vector<int64_t> shape, TransformType transforms);
 
     private :
         size_t size_;
