@@ -10,6 +10,23 @@ namespace fs = std::filesystem;
 
 namespace xt::data::datasets {
    class SEMEION : BaseDataset {
+       /*
+       r"""`SEMEION <http://archive.ics.uci.edu/ml/datasets/semeion+handwritten+digit>`_ Dataset.
+
+    Args:
+        root (str or ``pathlib.Path``): Root directory of dataset where directory
+            ``semeion.py`` exists.
+        transform (callable, optional): A function/transform that takes in a PIL image
+            and returns a transformed version. E.g, ``transforms.RandomCrop``
+        target_transform (callable, optional): A function/transform that takes in the
+            target and transforms it.
+        download (bool, optional): If true, downloads the dataset from the internet and
+            puts it in root directory. If dataset is already downloaded, it is not
+            downloaded again.
+
+    """
+
+        */
    public :
        SEMEION(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
 
