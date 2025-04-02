@@ -39,7 +39,7 @@ namespace xt::data::datasets {
        Places365(const std::string &root);
        Places365(const std::string &root, DataMode mode);
        Places365(const std::string &root, DataMode mode , bool download);
-       Places365(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
+       Places365(const std::string &root, DataMode mode , bool download, TransformType transforms);
 
    private :
 
