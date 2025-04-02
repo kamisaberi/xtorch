@@ -64,9 +64,11 @@ namespace xt::data::datasets {
 
          */
     public :
-        Middlebury2014Stereo(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+        Middlebury2014Stereo(const std::string &root);
+        Middlebury2014Stereo(const std::string &root, DataMode mode);
+        Middlebury2014Stereo(const std::string &root, DataMode mode , bool download);
+        Middlebury2014Stereo(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
 
-        Middlebury2014Stereo(const fs::path &root, DatasetArguments args);
 
     private :
         fs::path dataset_folder_name = fs::path("Middlebury2014");
