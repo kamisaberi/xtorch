@@ -32,9 +32,11 @@ namespace xt::data::datasets {
 
          */
     public :
-        RenderedSST2(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+        RenderedSST2(const std::string &root);
+        RenderedSST2(const std::string &root, DataMode mode);
+        RenderedSST2(const std::string &root, DataMode mode , bool download);
+        RenderedSST2(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
 
-        RenderedSST2(const fs::path &root, DatasetArguments args);
 
     private:
         fs::path url = fs::path("https://openaipublic.azureedge.net/clip/data/rendered-sst2.tgz");
