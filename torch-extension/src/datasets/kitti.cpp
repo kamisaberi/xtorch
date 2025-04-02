@@ -63,21 +63,21 @@ namespace xt::data::datasets {
 
 
 
-    // ---------------------- Caltech101 ---------------------- //
-    Caltech101::Caltech101(const std::string &root): Caltech101::Caltech101(root, DataMode::TRAIN, false) {
+    // ---------------------- Kitti2015Stereo ---------------------- //
+    Kitti2015Stereo::Kitti2015Stereo(const std::string &root): Kitti2015Stereo::Kitti2015Stereo(root, DataMode::TRAIN, false) {
     }
 
-    Caltech101::Caltech101(const std::string &root, DataMode mode): Caltech101::Caltech101(root, mode, false) {
+    Kitti2015Stereo::Kitti2015Stereo(const std::string &root, DataMode mode): Kitti2015Stereo::Kitti2015Stereo(root, mode, false) {
     }
 
-    Caltech101::Caltech101(const std::string &root, DataMode mode, bool download) : BaseDataset(root, mode, download) {
-        throw std::runtime_error("Caltech101: Caltech101 not implemented");
+    Kitti2015Stereo::Kitti2015Stereo(const std::string &root, DataMode mode, bool download) : BaseDataset(root, mode, download) {
+        throw std::runtime_error("Kitti2015Stereo: Kitti2015Stereo not implemented");
     }
 
 
-    Caltech101::Caltech101(const std::string &root, DataMode mode, bool download,
+    Kitti2015Stereo::Kitti2015Stereo(const std::string &root, DataMode mode, bool download,
                            TransformType transforms) : BaseDataset(root, mode, download, transforms) {
-        throw std::runtime_error("Caltech101: Caltech101 not implemented");
+        throw std::runtime_error("Kitti2015Stereo: Kitti2015Stereo not implemented");
     }
 
 
