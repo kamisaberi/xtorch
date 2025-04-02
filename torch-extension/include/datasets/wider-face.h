@@ -42,14 +42,10 @@ namespace xt::data::datasets {
 
          */
     public :
-        SEMEION(const std::string &root);
-        SEMEION(const std::string &root, DataMode mode);
-        SEMEION(const std::string &root, DataMode mode , bool download);
-        SEMEION(const std::string &root, DataMode mode , bool download, TransformType transforms);
-
-        explicit WIDERFace(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
-
-        WIDERFace(const fs::path &root, DatasetArguments args);
+        WIDERFace(const std::string &root);
+        WIDERFace(const std::string &root, DataMode mode);
+        WIDERFace(const std::string &root, DataMode mode , bool download);
+        WIDERFace(const std::string &root, DataMode mode , bool download, TransformType transforms);
 
     private:
         fs::path dataset_folder_name = fs::path("widerface");
@@ -63,9 +59,9 @@ namespace xt::data::datasets {
                 "0e3767bcf0e326556d407bf5bff5d27c",
                 fs::path("wider_face_split.zip")
         };
-        void load_data(DataMode mode = DataMode::TRAIN);
+        void load_data();
 
-        void check_resources(const std::string &root, bool download = false);
+        void check_resources();
 
 
     };
