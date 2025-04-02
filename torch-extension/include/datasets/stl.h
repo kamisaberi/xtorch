@@ -8,10 +8,33 @@ namespace fs = std::filesystem;
 
 namespace xt::data::datasets {
     class STL10 : BaseDataset {
-    public :
-        STL10(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+        /*
+        """`STL10 <https://cs.stanford.edu/~acoates/stl10/>`_ Dataset.
 
-        STL10(const fs::path &root, DatasetArguments args);
+    Args:
+        root (str or ``pathlib.Path``): Root directory of dataset where directory
+            ``stl10_binary`` exists.
+        split (string): One of {'train', 'test', 'unlabeled', 'train+unlabeled'}.
+            Accordingly, dataset is selected.
+        folds (int, optional): One of {0-9} or None.
+            For training, loads one of the 10 pre-defined folds of 1k samples for the
+            standard evaluation procedure. If no value is passed, loads the 5k samples.
+        transform (callable, optional): A function/transform that takes in a PIL image
+            and returns a transformed version. E.g, ``transforms.RandomCrop``
+        target_transform (callable, optional): A function/transform that takes in the
+            target and transforms it.
+        download (bool, optional): If true, downloads the dataset from the internet and
+            puts it in root directory. If dataset is already downloaded, it is not
+            downloaded again.
+    """
+
+         */
+    public :
+        STL10(const std::string &root);
+        STL10(const std::string &root, DataMode mode);
+        STL10(const std::string &root, DataMode mode , bool download);
+        STL10(const std::string &root, DataMode mode , bool download, TransformType transforms);
+
 
     private :
 
