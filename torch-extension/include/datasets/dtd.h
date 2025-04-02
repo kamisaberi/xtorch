@@ -9,7 +9,7 @@ namespace xt::data::datasets {
         DTD(const std::string &root);
         DTD(const std::string &root, DataMode mode);
         DTD(const std::string &root, DataMode mode , bool download);
-        DTD(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
+        DTD(const std::string &root, DataMode mode , bool download, TransformType transforms);
 
     private :
         void load_data();
