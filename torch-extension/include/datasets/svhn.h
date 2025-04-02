@@ -34,9 +34,11 @@ namespace xt::data::datasets {
 
          */
     public :
-        SVHN(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+        SVHN(const std::string &root);
+        SVHN(const std::string &root, DataMode mode);
+        SVHN(const std::string &root, DataMode mode , bool download);
+        SVHN(const std::string &root, DataMode mode , bool download, TransformType transforms);
 
-        SVHN(const fs::path &root, DatasetArguments args);
 
     private:
         std::map<std::string, std::tuple<fs::path, fs::path, std::string>> resources = {
