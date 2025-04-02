@@ -9,7 +9,44 @@ namespace fs = std::filesystem;
 
 namespace xt::data::datasets {
     class WIDERFace : BaseDataset {
+        /*
+        """`WIDERFace <http://shuoyang1213.me/WIDERFACE/>`_ Dataset.
+
+    Args:
+        root (str or ``pathlib.Path``): Root directory where images and annotations are downloaded to.
+            Expects the following folder structure if download=False:
+
+            .. code::
+
+                <root>
+                    └── widerface
+                        ├── wider_face_split ('wider_face_split.zip' if compressed)
+                        ├── WIDER_train ('WIDER_train.zip' if compressed)
+                        ├── WIDER_val ('WIDER_val.zip' if compressed)
+                        └── WIDER_test ('WIDER_test.zip' if compressed)
+        split (string): The dataset split to use. One of {``train``, ``val``, ``test``}.
+            Defaults to ``train``.
+        transform (callable, optional): A function/transform that takes in a PIL image
+            and returns a transformed version. E.g, ``transforms.RandomCrop``
+        target_transform (callable, optional): A function/transform that takes in the
+            target and transforms it.
+        download (bool, optional): If true, downloads the dataset from the internet and
+            puts it in root directory. If dataset is already downloaded, it is not
+            downloaded again.
+
+            .. warning::
+
+                To download the dataset `gdown <https://github.com/wkentaro/gdown>`_ is required.
+
+    """
+
+         */
     public :
+        SEMEION(const std::string &root);
+        SEMEION(const std::string &root, DataMode mode);
+        SEMEION(const std::string &root, DataMode mode , bool download);
+        SEMEION(const std::string &root, DataMode mode , bool download, TransformType transforms);
+
         explicit WIDERFace(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
 
         WIDERFace(const fs::path &root, DatasetArguments args);
