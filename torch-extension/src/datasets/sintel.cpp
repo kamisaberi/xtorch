@@ -21,22 +21,22 @@ namespace xt::data::datasets {
     }
 
 
-    // ---------------------- Caltech101 ---------------------- //
+    // ---------------------- SintelStereo ---------------------- //
 
-    Caltech101::Caltech101(const std::string &root): Caltech101::Caltech101(root, DataMode::TRAIN, false) {
+    SintelStereo::SintelStereo(const std::string &root): SintelStereo::SintelStereo(root, DataMode::TRAIN, false) {
     }
 
-    Caltech101::Caltech101(const std::string &root, DataMode mode): Caltech101::Caltech101(root, mode, false) {
+    SintelStereo::SintelStereo(const std::string &root, DataMode mode): SintelStereo::SintelStereo(root, mode, false) {
     }
 
-    Caltech101::Caltech101(const std::string &root, DataMode mode, bool download) : BaseDataset(root, mode, download) {
-        throw std::runtime_error("Caltech101: Caltech101 not implemented");
+    SintelStereo::SintelStereo(const std::string &root, DataMode mode, bool download) : BaseDataset(root, mode, download) {
+        throw std::runtime_error("SintelStereo: SintelStereo not implemented");
     }
 
 
-    Caltech101::Caltech101(const std::string &root, DataMode mode, bool download,
+    SintelStereo::SintelStereo(const std::string &root, DataMode mode, bool download,
                            TransformType transforms) : BaseDataset(root, mode, download, transforms) {
-        throw std::runtime_error("Caltech101: Caltech101 not implemented");
+        throw std::runtime_error("SintelStereo: SintelStereo not implemented");
     }
 
 }
