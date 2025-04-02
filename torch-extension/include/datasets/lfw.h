@@ -12,7 +12,7 @@ namespace xt::data::datasets {
         LFW(const std::string &root);
         LFW(const std::string &root, DataMode mode);
         LFW(const std::string &root, DataMode mode , bool download);
-        LFW(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
+        LFW(const std::string &root, DataMode mode , bool download, TransformType transforms);
 
 
     private :
@@ -75,7 +75,7 @@ namespace xt::data::datasets {
         LFWPeople(const std::string &root);
         LFWPeople(const std::string &root, DataMode mode);
         LFWPeople(const std::string &root, DataMode mode , bool download);
-        LFWPeople(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
+        LFWPeople(const std::string &root, DataMode mode , bool download, TransformType transforms);
 
 
     private :
@@ -111,7 +111,7 @@ namespace xt::data::datasets {
         LFWPairs(const std::string &root);
         LFWPairs(const std::string &root, DataMode mode);
         LFWPairs(const std::string &root, DataMode mode , bool download);
-        LFWPairs(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
+        LFWPairs(const std::string &root, DataMode mode , bool download, TransformType transforms);
 
 
     private :
