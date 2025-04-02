@@ -5,10 +5,43 @@
 
 namespace xt::data::datasets {
     class InStereo2k : BaseDataset {
-    public :
-        InStereo2k(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+        /*
+        """`InStereo2k <https://github.com/YuhuaXu/StereoDataset>`_ dataset.
 
-        InStereo2k(const fs::path &root, DatasetArguments args);
+        The dataset is expected to have the following structure: ::
+
+            root
+                InStereo2k
+                    train
+                        scene1
+                            left.png
+                            right.png
+                            left_disp.png
+                            right_disp.png
+                            ...
+                        scene2
+                        ...
+                    test
+                        scene1
+                            left.png
+                            right.png
+                            left_disp.png
+                            right_disp.png
+                            ...
+                        scene2
+                        ...
+
+        Args:
+            root (str or ``pathlib.Path``): Root directory where InStereo2k is located.
+            split (string): Either "train" or "test".
+            transforms (callable, optional): A function/transform that takes in a sample and returns a transformed version.
+        """
+         */
+    public :
+        InStereo2k(const std::string &root);
+        InStereo2k(const std::string &root, DataMode mode);
+        InStereo2k(const std::string &root, DataMode mode , bool download);
+        InStereo2k(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
 
     private :
         void load_data(DataMode mode = DataMode::TRAIN);
