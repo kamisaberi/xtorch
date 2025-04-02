@@ -13,7 +13,7 @@ namespace xt::data::datasets {
         EuroSAT(const std::string &root);
         EuroSAT(const std::string &root, DataMode mode);
         EuroSAT(const std::string &root, DataMode mode , bool download);
-        EuroSAT(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
+        EuroSAT(const std::string &root, DataMode mode , bool download, TransformType transforms);
 
 
     private:
