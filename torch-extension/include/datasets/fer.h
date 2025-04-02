@@ -36,8 +36,16 @@ namespace xt::data::datasets {
         FER2013(const fs::path &root, DatasetArguments args);
 
     private :
-        void load_data(DataMode mode = DataMode::TRAIN);
+        void load_data();
 
-        void check_resources(const std::string &root, bool download = false);
+        void check_resources();
+
+        // resources = {
+        //     "train": ("train.csv", "3f0dfb3d3fd99c811a1299cb947e3131"),
+        //     "test": ("test.csv", "b02c2298636a634e8c2faabbf3ea9a23"),
+        //     "fer": ("fer2013.csv", "f8428a1edbd21e88f42c73edd2a14f95"),
+        //     "icml": ("icml_face_data.csv", "b114b9e04e6949e5fe8b6a98b3892b1d"),
+        // }
+
     };
 }
