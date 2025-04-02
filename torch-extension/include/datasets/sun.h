@@ -27,9 +27,11 @@ namespace xt::data::datasets {
 
          */
     public :
-        explicit SUN397(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+        SUN397(const std::string &root);
+        SUN397(const std::string &root, DataMode mode);
+        SUN397(const std::string &root, DataMode mode , bool download);
+        SUN397(const std::string &root, DataMode mode , bool download, TransformType transforms);
 
-        SUN397(const fs::path &root, DatasetArguments args);
 
     private :
         fs::path url = fs::path("http://vision.princeton.edu/projects/2010/SUN/SUN397.tar.gz");
