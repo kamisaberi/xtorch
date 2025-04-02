@@ -32,7 +32,7 @@ namespace xt::data::datasets {
         FlyingChairs(const std::string &root);
         FlyingChairs(const std::string &root, DataMode mode);
         FlyingChairs(const std::string &root, DataMode mode , bool download);
-        FlyingChairs(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
+        FlyingChairs(const std::string &root, DataMode mode , bool download, TransformType transforms);
 
     private :
         void load_data();
@@ -72,7 +72,7 @@ namespace xt::data::datasets {
         FlyingThings3D(const std::string &root);
         FlyingThings3D(const std::string &root, DataMode mode);
         FlyingThings3D(const std::string &root, DataMode mode , bool download);
-        FlyingThings3D(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
+        FlyingThings3D(const std::string &root, DataMode mode , bool download, TransformType transforms);
 
 
     private :
