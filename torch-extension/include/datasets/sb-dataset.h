@@ -45,7 +45,7 @@ namespace xt::data::datasets {
         SBDataset(const std::string &root);
         SBDataset(const std::string &root, DataMode mode);
         SBDataset(const std::string &root, DataMode mode , bool download);
-        SBDataset(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
+        SBDataset(const std::string &root, DataMode mode , bool download, TransformType transforms);
 
 
     private:
