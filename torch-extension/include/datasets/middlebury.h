@@ -72,8 +72,8 @@ namespace xt::data::datasets {
 
     private :
         fs::path dataset_folder_name = fs::path("Middlebury2014");
-        void load_data(DataMode mode = DataMode::TRAIN);
+        void load_data();
 
-        void check_resources(const std::string &root, bool download = false);
+        void check_resources();
     };
 }
