@@ -48,16 +48,18 @@ namespace xt::data::datasets {
 
  */
    public :
-       Sintel(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+       Sintel(const std::string &root);
+       Sintel(const std::string &root, DataMode mode);
+       Sintel(const std::string &root, DataMode mode , bool download);
+       Sintel(const std::string &root, DataMode mode , bool download, TransformType transforms);
 
-       Sintel(const fs::path &root, DatasetArguments args);
    private :
        void load_data(DataMode mode = DataMode::TRAIN);
 
        void check_resources(const std::string &root, bool download = false);
 
    };
-   class SintelStereo : torch::data::Dataset<SintelStereo> {
+   class SintelStereo : BaseDataset {
 /*
        """Sintel `Stereo Dataset <http://sintel.is.tue.mpg.de/stereo>`_.
 
@@ -105,9 +107,11 @@ namespace xt::data::datasets {
 
  */
    public :
-       SintelStereo(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+       SintelStereo(const std::string &root);
+       SintelStereo(const std::string &root, DataMode mode);
+       SintelStereo(const std::string &root, DataMode mode , bool download);
+       SintelStereo(const std::string &root, DataMode mode , bool download, TransformType transforms);
 
-       SintelStereo(const fs::path &root, DatasetArguments args);
    private :
        void load_data(DataMode mode = DataMode::TRAIN);
 
