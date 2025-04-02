@@ -31,7 +31,7 @@ namespace xt::data::datasets {
        SEMEION(const std::string &root);
        SEMEION(const std::string &root, DataMode mode);
        SEMEION(const std::string &root, DataMode mode , bool download);
-       SEMEION(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
+       SEMEION(const std::string &root, DataMode mode , bool download, TransformType transforms);
 
 
    private:
