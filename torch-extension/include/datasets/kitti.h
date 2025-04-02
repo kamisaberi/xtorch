@@ -44,7 +44,7 @@ namespace xt::data::datasets {
         Kitti(const std::string &root);
         Kitti(const std::string &root, DataMode mode);
         Kitti(const std::string &root, DataMode mode , bool download);
-        Kitti(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
+        Kitti(const std::string &root, DataMode mode , bool download, TransformType transforms);
 
 
     private:
@@ -88,7 +88,7 @@ namespace xt::data::datasets {
         KittiFlow(const std::string &root);
         KittiFlow(const std::string &root, DataMode mode);
         KittiFlow(const std::string &root, DataMode mode , bool download);
-        KittiFlow(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
+        KittiFlow(const std::string &root, DataMode mode , bool download, TransformType transforms);
 
 
     private :
@@ -142,7 +142,7 @@ namespace xt::data::datasets {
         Kitti2012Stereo(const std::string &root);
         Kitti2012Stereo(const std::string &root, DataMode mode);
         Kitti2012Stereo(const std::string &root, DataMode mode , bool download);
-        Kitti2012Stereo(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
+        Kitti2012Stereo(const std::string &root, DataMode mode , bool download, TransformType transforms);
 
 
     private :
@@ -199,7 +199,7 @@ namespace xt::data::datasets {
         Kitti2015Stereo(const std::string &root);
         Kitti2015Stereo(const std::string &root, DataMode mode);
         Kitti2015Stereo(const std::string &root, DataMode mode , bool download);
-        Kitti2015Stereo(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
+        Kitti2015Stereo(const std::string &root, DataMode mode , bool download, TransformType transforms);
 
 
     private :
