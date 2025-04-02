@@ -67,9 +67,11 @@ namespace xt::data::datasets {
 
          */
     public :
-        Kinetics(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+        Kinetics(const std::string &root);
+        Kinetics(const std::string &root, DataMode mode);
+        Kinetics(const std::string &root, DataMode mode , bool download);
+        Kinetics(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
 
-        Kinetics(const fs::path &root, DatasetArguments args);
 
     private :
     //     _TAR_URLS = {
@@ -83,8 +85,8 @@ namespace xt::data::datasets {
     //     "700": "https://s3.amazonaws.com/kinetics/700_2020/annotations/{split}.csv",
     // }
 
-        void load_data(DataMode mode = DataMode::TRAIN);
+        void load_data();
 
-        void check_resources(const std::string &root, bool download = false);
+        void check_resources();
     };
 }
