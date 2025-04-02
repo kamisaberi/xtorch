@@ -44,9 +44,9 @@ namespace xt::data::datasets {
         };
         fs::path names = fs::path("lfw-names.txt");
 
-        void load_data(DataMode mode = DataMode::TRAIN);
+        void load_data();
 
-        void check_resources(const std::string &root, bool download = false);
+        void check_resources();
     };
 
     class LFWPeople : public LFW {
@@ -79,9 +79,9 @@ namespace xt::data::datasets {
 
 
     private :
-        void load_data(DataMode mode = DataMode::TRAIN);
+        void load_data();
 
-        void check_resources(const std::string &root, bool download = false);
+        void check_resources();
     };
 
     class LFWPairs : public LFW {
@@ -115,8 +115,8 @@ namespace xt::data::datasets {
 
 
     private :
-        void load_data(DataMode mode = DataMode::TRAIN);
+        void load_data();
 
-        void check_resources(const std::string &root, bool download = false);
+        void check_resources();
     };
 }
