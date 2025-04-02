@@ -10,7 +10,7 @@ namespace xt::data::datasets {
         ETH3DStereo(const std::string &root);
         ETH3DStereo(const std::string &root, DataMode mode);
         ETH3DStereo(const std::string &root, DataMode mode , bool download);
-        ETH3DStereo(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
+        ETH3DStereo(const std::string &root, DataMode mode , bool download, TransformType transforms);
 
 
     private :
