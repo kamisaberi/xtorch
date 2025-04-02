@@ -47,7 +47,7 @@ namespace xt::data::datasets {
         FallingThingsStereo(const std::string &root);
         FallingThingsStereo(const std::string &root, DataMode mode);
         FallingThingsStereo(const std::string &root, DataMode mode , bool download);
-        FallingThingsStereo(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
+        FallingThingsStereo(const std::string &root, DataMode mode , bool download, TransformType transforms);
 
     private :
         fs::path  url ="https://drive.google.com/open?id=1y4h9T6D9rf6dAmsRwEtfzJdcghCnI_01";
