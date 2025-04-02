@@ -46,7 +46,7 @@ namespace xt::data::datasets {
         INaturalist(const std::string &root);
         INaturalist(const std::string &root, DataMode mode);
         INaturalist(const std::string &root, DataMode mode , bool download);
-        INaturalist(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
+        INaturalist(const std::string &root, DataMode mode , bool download, TransformType transforms);
 
     private:
         std::map<string, std::tuple<fs::path, std::string> > resources = {
