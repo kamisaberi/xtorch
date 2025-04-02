@@ -9,7 +9,7 @@ namespace xt::data::datasets {
         FGVCAircraft(const std::string &root);
         FGVCAircraft(const std::string &root, DataMode mode);
         FGVCAircraft(const std::string &root, DataMode mode , bool download);
-        FGVCAircraft(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
+        FGVCAircraft(const std::string &root, DataMode mode , bool download, TransformType transforms);
 
 
     private :
