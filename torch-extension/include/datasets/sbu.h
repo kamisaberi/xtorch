@@ -9,6 +9,22 @@ namespace fs = std::filesystem;
 
 namespace xt::data::datasets {
     class SBU : BaseDataset {
+        /*
+        """`SBU Captioned Photo <http://www.cs.virginia.edu/~vicente/sbucaptions/>`_ Dataset.
+
+    Args:
+        root (str or ``pathlib.Path``): Root directory of dataset where tarball
+            ``SBUCaptionedPhotoDataset.tar.gz`` exists.
+        transform (callable, optional): A function/transform that takes in a PIL image
+            and returns a transformed version. E.g, ``transforms.RandomCrop``
+        target_transform (callable, optional): A function/transform that takes in the
+            target and transforms it.
+        download (bool, optional): If True, downloads the dataset from the internet and
+            puts it in root directory. If dataset is already downloaded, it is not
+            downloaded again.
+    """
+
+         */
     public :
         SBU(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
 
