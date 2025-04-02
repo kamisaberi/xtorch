@@ -70,7 +70,7 @@ namespace xt::data::datasets {
         Kinetics(const std::string &root);
         Kinetics(const std::string &root, DataMode mode);
         Kinetics(const std::string &root, DataMode mode , bool download);
-        Kinetics(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
+        Kinetics(const std::string &root, DataMode mode , bool download, TransformType transforms);
 
 
     private :
