@@ -6,6 +6,32 @@
 
 namespace xt::data::datasets {
     class PhotoTour : BaseDataset {
+        /*
+        """`Multi-view Stereo Correspondence <http://matthewalunbrown.com/patchdata/patchdata.html>`_ Dataset.
+
+    .. note::
+
+        We only provide the newer version of the dataset, since the authors state that it
+
+            is more suitable for training descriptors based on difference of Gaussian, or Harris corners, as the
+            patches are centred on real interest point detections, rather than being projections of 3D points as is the
+            case in the old dataset.
+
+        The original dataset is available under http://phototour.cs.washington.edu/patches/default.htm.
+
+
+    Args:
+        root (str or ``pathlib.Path``): Root directory where images are.
+        name (string): Name of the dataset to load.
+        transform (callable, optional): A function/transform that takes in a PIL image
+            and returns a transformed version.
+        download (bool, optional): If true, downloads the dataset from the internet and
+            puts it in root directory. If dataset is already downloaded, it is not
+            downloaded again.
+
+    """
+
+         */
     public :
         PhotoTour(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
 
