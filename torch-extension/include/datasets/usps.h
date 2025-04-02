@@ -10,10 +10,32 @@ namespace fs = std::filesystem;
 
 namespace xt::data::datasets {
     class USPS : BaseDataset {
-    public :
-        USPS(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+        /*
+        """`USPS <https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/multiclass.html#usps>`_ Dataset.
+    The data-format is : [label [index:value ]*256 \\n] * num_lines, where ``label`` lies in ``[1, 10]``.
+    The value for each pixel lies in ``[-1, 1]``. Here we transform the ``label`` into ``[0, 9]``
+    and make pixel values in ``[0, 255]``.
 
-        USPS(const fs::path &root, DatasetArguments args);
+    Args:
+        root (str or ``pathlib.Path``): Root directory of dataset to store``USPS`` data files.
+        train (bool, optional): If True, creates dataset from ``usps.bz2``,
+            otherwise from ``usps.t.bz2``.
+        transform (callable, optional): A function/transform that takes in a PIL image
+            and returns a transformed version. E.g, ``transforms.RandomCrop``
+        target_transform (callable, optional): A function/transform that takes in the
+            target and transforms it.
+        download (bool, optional): If true, downloads the dataset from the internet and
+            puts it in root directory. If dataset is already downloaded, it is not
+            downloaded again.
+
+    """
+
+         */
+    public :
+        USPS(const std::string &root);
+        USPS(const std::string &root, DataMode mode);
+        USPS(const std::string &root, DataMode mode , bool download);
+        USPS(const std::string &root, DataMode mode , bool download, TransformType transforms);
 
     private :
         std::map<std::string, std::tuple<fs::path, fs::path, std::string>> resources = {
@@ -33,9 +55,9 @@ namespace xt::data::datasets {
                           }
                 }
         };
-        void load_data(DataMode mode = DataMode::TRAIN);
+        void load_data();
 
-        void check_resources(const std::string &root, bool download = false);
+        void check_resources();
 
     };
 }
