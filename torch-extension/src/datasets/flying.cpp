@@ -25,23 +25,23 @@ namespace xt::data::datasets {
 
 
 
-    // ---------------------- Caltech101 ---------------------- //
+    // ---------------------- FlyingThings3D ---------------------- //
 
 
-    Caltech101::Caltech101(const std::string &root): Caltech101::Caltech101(root, DataMode::TRAIN, false) {
+    FlyingThings3D::FlyingThings3D(const std::string &root): FlyingThings3D::FlyingThings3D(root, DataMode::TRAIN, false) {
     }
 
-    Caltech101::Caltech101(const std::string &root, DataMode mode): Caltech101::Caltech101(root, mode, false) {
+    FlyingThings3D::FlyingThings3D(const std::string &root, DataMode mode): FlyingThings3D::FlyingThings3D(root, mode, false) {
     }
 
-    Caltech101::Caltech101(const std::string &root, DataMode mode, bool download) : BaseDataset(root, mode, download) {
-        throw std::runtime_error("Caltech101: Caltech101 not implemented");
+    FlyingThings3D::FlyingThings3D(const std::string &root, DataMode mode, bool download) : BaseDataset(root, mode, download) {
+        throw std::runtime_error("FlyingThings3D: FlyingThings3D not implemented");
     }
 
 
-    Caltech101::Caltech101(const std::string &root, DataMode mode, bool download,
+    FlyingThings3D::FlyingThings3D(const std::string &root, DataMode mode, bool download,
                            TransformType transforms) : BaseDataset(root, mode, download, transforms) {
-        throw std::runtime_error("Caltech101: Caltech101 not implemented");
+        throw std::runtime_error("FlyingThings3D: FlyingThings3D not implemented");
     }
 
 }
