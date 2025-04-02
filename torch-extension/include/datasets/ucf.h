@@ -56,9 +56,9 @@ namespace xt::data::datasets {
        UCF101(const std::string &root, DataMode mode , bool download, TransformType transforms);
 
    private :
-       void load_data(DataMode mode = DataMode::TRAIN);
+       void load_data();
 
-       void check_resources(const std::string &root, bool download = false);
+       void check_resources();
 
 
     };
