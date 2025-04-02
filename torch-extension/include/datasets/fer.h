@@ -34,7 +34,7 @@ namespace xt::data::datasets {
         FER2013(const std::string &root);
         FER2013(const std::string &root, DataMode mode);
         FER2013(const std::string &root, DataMode mode , bool download);
-        FER2013(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
+        FER2013(const std::string &root, DataMode mode , bool download, TransformType transforms);
 
     private :
         void load_data();
