@@ -33,7 +33,7 @@ namespace xt::data::datasets {
         Imagenette(const std::string &root, DataMode mode);
         Imagenette(const std::string &root, DataMode mode , bool download);
         Imagenette(const std::string &root, DataMode mode , bool download, ImageType type );
-        Imagenette(const std::string &root, DataMode mode , bool download, ImageType type , vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
+        Imagenette(const std::string &root, DataMode mode , bool download, ImageType type , TransformType transforms);
 
     private:
         std::map<string, std::tuple<fs::path, fs::path, fs::path, std::string> > resources = {
