@@ -35,7 +35,7 @@ namespace xt::data::datasets {
         PCAM(const std::string &root);
         PCAM(const std::string &root, DataMode mode);
         PCAM(const std::string &root, DataMode mode , bool download);
-        PCAM(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
+        PCAM(const std::string &root, DataMode mode , bool download, TransformType transforms);
 
 
     private :
