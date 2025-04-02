@@ -32,7 +32,7 @@ namespace xt::data::datasets {
         OxfordIIITPet(const std::string &root);
         OxfordIIITPet(const std::string &root, DataMode mode);
         OxfordIIITPet(const std::string &root, DataMode mode , bool download);
-        OxfordIIITPet(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
+        OxfordIIITPet(const std::string &root, DataMode mode , bool download, TransformType transforms);
 
 
     private :
