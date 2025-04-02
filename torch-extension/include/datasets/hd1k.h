@@ -35,6 +35,26 @@ namespace xt::data::datasets {
         Yours,
         The HD1K Benchmark Team
 
+        ----------------------------------------------------------------------------------------------------------------
+        """`HD1K <http://hci-benchmark.iwr.uni-heidelberg.de/>`__ dataset for optical flow.
+        The dataset is expected to have the following structure: ::
+
+            root
+                hd1k
+                    hd1k_challenge
+                        image_2
+                    hd1k_flow_gt
+                        flow_occ
+                    hd1k_input
+                        image_2
+        Args:
+            root (str or ``pathlib.Path``): Root directory of the HD1K Dataset.
+            split (string, optional): The dataset split, either "train" (default) or "test"
+            transforms (callable, optional): A function/transform that takes in
+                ``img1, img2, flow, valid_flow_mask`` and returns a transformed version.
+        """
+
+
         */
     public :
         HD1K(const std::string &root);
