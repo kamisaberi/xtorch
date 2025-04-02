@@ -8,10 +8,45 @@ namespace fs = std::filesystem;
 
 namespace xt::data::datasets {
     class INaturalist : BaseDataset {
-    public :
-        INaturalist(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+        /*
+        """`iNaturalist <https://github.com/visipedia/inat_comp>`_ Dataset.
+        Args:
+            root (str or ``pathlib.Path``): Root directory of dataset where the image files are stored.
+                This class does not require/use annotation files.
+            version (string, optional): Which version of the dataset to download/use. One of
+                '2017', '2018', '2019', '2021_train', '2021_train_mini', '2021_valid'.
+                Default: `2021_train`.
+            target_type (string or list, optional): Type of target to use, for 2021 versions, one of:
 
-        INaturalist(const fs::path &root, DatasetArguments args);
+                - ``full``: the full category (species)
+                - ``kingdom``: e.g. "Animalia"
+                - ``phylum``: e.g. "Arthropoda"
+                - ``class``: e.g. "Insecta"
+                - ``order``: e.g. "Coleoptera"
+                - ``family``: e.g. "Cleridae"
+                - ``genus``: e.g. "Trichodes"
+
+                for 2017-2019 versions, one of:
+
+                - ``full``: the full (numeric) category
+                - ``super``: the super category, e.g. "Amphibians"
+
+                Can also be a list to output a tuple with all specified target types.
+                Defaults to ``full``.
+            transform (callable, optional): A function/transform that takes in a PIL image
+                and returns a transformed version. E.g, ``transforms.RandomCrop``
+            target_transform (callable, optional): A function/transform that takes in the
+                target and transforms it.
+            download (bool, optional): If true, downloads the dataset from the internet and
+                puts it in root directory. If dataset is already downloaded, it is not
+                downloaded again.
+        """
+         */
+    public :
+        INaturalist(const std::string &root);
+        INaturalist(const std::string &root, DataMode mode);
+        INaturalist(const std::string &root, DataMode mode , bool download);
+        INaturalist(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
 
     private:
         std::map<string, std::tuple<fs::path, std::string> > resources = {
