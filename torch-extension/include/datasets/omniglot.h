@@ -9,27 +9,26 @@ namespace xt::data::datasets {
         /*
         https://github.com/brendenlake/omniglot
         """`Omniglot <https://github.com/brendenlake/omniglot>`_ Dataset.
-
-    Args:
-        root (str or ``pathlib.Path``): Root directory of dataset where directory
-            ``omniglot-py`` exists.
-        background (bool, optional): If True, creates dataset from the "background" set, otherwise
-            creates from the "evaluation" set. This terminology is defined by the authors.
-        transform (callable, optional): A function/transform that takes in a PIL image
-            and returns a transformed version. E.g, ``transforms.RandomCrop``
-        target_transform (callable, optional): A function/transform that takes in the
-            target and transforms it.
-        download (bool, optional): If true, downloads the dataset zip files from the internet and
-            puts it in root directory. If the zip files are already downloaded, they are not
-            downloaded again.
-    """
-
-
+        Args:
+            root (str or ``pathlib.Path``): Root directory of dataset where directory
+                ``omniglot-py`` exists.
+            background (bool, optional): If True, creates dataset from the "background" set, otherwise
+                creates from the "evaluation" set. This terminology is defined by the authors.
+            transform (callable, optional): A function/transform that takes in a PIL image
+                and returns a transformed version. E.g, ``transforms.RandomCrop``
+            target_transform (callable, optional): A function/transform that takes in the
+                target and transforms it.
+            download (bool, optional): If true, downloads the dataset zip files from the internet and
+                puts it in root directory. If the zip files are already downloaded, they are not
+                downloaded again.
+        """
          */
     public :
-        Omniglot(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+        Omniglot(const std::string &root);
+        Omniglot(const std::string &root, DataMode mode);
+        Omniglot(const std::string &root, DataMode mode , bool download);
+        Omniglot(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
 
-        Omniglot(const fs::path &root, DatasetArguments args);
 
     private :
         // folder = "omniglot-py"
