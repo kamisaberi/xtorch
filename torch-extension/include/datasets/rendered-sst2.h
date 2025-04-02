@@ -43,9 +43,9 @@ namespace xt::data::datasets {
         fs::path dataset_file_name = "rendered-sst2.tgz";
         std::string dataset_file_md5 = "2384d08e9dcfa4bd55b324e610496ee5";
         fs::path dataset_folder_name = "rendered-sst2";
-        void load_data(DataMode mode = DataMode::TRAIN);
+        void load_data();
 
-        void check_resources(const std::string &root, bool download = false);
+        void check_resources();
 
     };
 }
