@@ -9,7 +9,7 @@ namespace xt::data::datasets {
         Flowers102(const std::string &root);
         Flowers102(const std::string &root, DataMode mode);
         Flowers102(const std::string &root, DataMode mode , bool download);
-        Flowers102(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
+        Flowers102(const std::string &root, DataMode mode , bool download, TransformType transforms);
 
     private :
 
