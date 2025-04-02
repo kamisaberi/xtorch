@@ -5,27 +5,75 @@
 
 
 namespace xt::data::datasets {
-   class VOCSegmentation : BaseDataset {
+    class VOCDetection : BaseDataset {
+        /*
+        """`Pascal VOC <http://host.robots.ox.ac.uk/pascal/VOC/>`_ Detection Dataset.
 
-   public :
-       VOCSegmentation(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+     Args:
+         root (str or ``pathlib.Path``): Root directory of the VOC Dataset.
+         year (string, optional): The dataset year, supports years ``"2007"`` to ``"2012"``.
+         image_set (string, optional): Select the image_set to use, ``"train"``, ``"trainval"`` or ``"val"``. If
+             ``year=="2007"``, can also be ``"test"``.
+         download (bool, optional): If true, downloads the dataset from the internet and
+             puts it in root directory. If dataset is already downloaded, it is not
+             downloaded again.
+             (default: alphabetic indexing of VOC's 20 classes).
+         transform (callable, optional): A function/transform that takes in a PIL image
+             and returns a transformed version. E.g, ``transforms.RandomCrop``
+         target_transform (callable, required): A function/transform that takes in the
+             target and transforms it.
+         transforms (callable, optional): A function/transform that takes input sample and its target as entry
+             and returns a transformed version.
+     """
 
-       VOCSegmentation(const fs::path &root, DatasetArguments args);
-   private :
-       void load_data(DataMode mode = DataMode::TRAIN);
+         */
 
-       void check_resources(const std::string &root, bool download = false);
+    public :
+        VOCDetection(const std::string &root);
 
-   };
-   class VOCDetection : BaseDataset {
+        VOCDetection(const std::string &root, DataMode mode);
 
-   public :
-       VOCDetection(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+        VOCDetection(const std::string &root, DataMode mode, bool download);
 
-       VOCDetection(const fs::path &root, DatasetArguments args);
-   private :
-       void load_data(DataMode mode = DataMode::TRAIN);
+        VOCDetection(const std::string &root, DataMode mode, bool download, TransformType transforms);
 
-       void check_resources(const std::string &root, bool download = false);
+
+    private :
+        void load_data(DataMode mode = DataMode::TRAIN);
+
+        void check_resources(const std::string &root, bool download = false);
+    };
+
+    class VOCSegmentation : BaseDataset {
+        /*
+        """`Pascal VOC <http://host.robots.ox.ac.uk/pascal/VOC/>`_ Segmentation Dataset.
+
+     Args:
+         root (str or ``pathlib.Path``): Root directory of the VOC Dataset.
+         year (string, optional): The dataset year, supports years ``"2007"`` to ``"2012"``.
+         image_set (string, optional): Select the image_set to use, ``"train"``, ``"trainval"`` or ``"val"``. If
+             ``year=="2007"``, can also be ``"test"``.
+         download (bool, optional): If true, downloads the dataset from the internet and
+             puts it in root directory. If dataset is already downloaded, it is not
+             downloaded again.
+         transform (callable, optional): A function/transform that  takes in a PIL image
+             and returns a transformed version. E.g, ``transforms.RandomCrop``
+         target_transform (callable, optional): A function/transform that takes in the
+             target and transforms it.
+         transforms (callable, optional): A function/transform that takes input sample and its target as entry
+             and returns a transformed version.
+     """
+
+         */
+
+    public :
+        VOCSegmentation(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+
+        VOCSegmentation(const fs::path &root, DatasetArguments args);
+
+    private :
+        void load_data(DataMode mode = DataMode::TRAIN);
+
+        void check_resources(const std::string &root, bool download = false);
     };
 }
