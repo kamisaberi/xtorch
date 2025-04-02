@@ -36,7 +36,7 @@ namespace xt::data::datasets {
         PhotoTour(const std::string &root);
         PhotoTour(const std::string &root, DataMode mode);
         PhotoTour(const std::string &root, DataMode mode , bool download);
-        PhotoTour(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
+        PhotoTour(const std::string &root, DataMode mode , bool download, TransformType transforms);
 
 
     private :
