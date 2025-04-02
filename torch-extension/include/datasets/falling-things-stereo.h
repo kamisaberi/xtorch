@@ -12,8 +12,11 @@ namespace xt::data::datasets {
         FallingThingsStereo(const fs::path &root, DatasetArguments args);
 
     private :
-        void load_data(DataMode mode = DataMode::TRAIN);
-
-        void check_resources(const std::string &root, bool download = false);
+        fs::path  url ="https://drive.google.com/open?id=1y4h9T6D9rf6dAmsRwEtfzJdcghCnI_01";
+        fs::path dataset_file_name = "fat.zip";
+        std::string dataset_file_md5 = "????????????????????????????????";
+        fs::path dataset_folder_name = "fat";
+        void load_data();
+        void check_resources();
     };
 }
