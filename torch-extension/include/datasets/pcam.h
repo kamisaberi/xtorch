@@ -32,9 +32,11 @@ namespace xt::data::datasets {
 
          */
     public :
-        PCAM(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+        PCAM(const std::string &root);
+        PCAM(const std::string &root, DataMode mode);
+        PCAM(const std::string &root, DataMode mode , bool download);
+        PCAM(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
 
-        PCAM(const fs::path &root, DatasetArguments args);
 
     private :
         std::tuple<fs::path, std::string, std::string>  t = {fs::path("camelyonpatch_level_2_split_train_x.h5"),"1Ka0XfEMiwgCYPdTI-vv6eUElOBnKFKQ2","1571f514728f59376b705fc836ff4b63"};
