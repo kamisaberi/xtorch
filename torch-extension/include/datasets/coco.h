@@ -9,7 +9,7 @@ namespace xt::data::datasets {
         CocoDetection(const std::string &root);
         CocoDetection(const std::string &root, DataMode mode);
         CocoDetection(const std::string &root, DataMode mode , bool download);
-        CocoDetection(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
+        CocoDetection(const std::string &root, DataMode mode , bool download, TransformType transforms);
 
 
     private :
@@ -23,7 +23,7 @@ namespace xt::data::datasets {
         CocoCaptions(const std::string &root);
         CocoCaptions(const std::string &root, DataMode mode);
         CocoCaptions(const std::string &root, DataMode mode , bool download);
-        CocoCaptions(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
+        CocoCaptions(const std::string &root, DataMode mode , bool download, TransformType transforms);
 
     private :
         void load_data();
