@@ -60,7 +60,7 @@ namespace xt::data::datasets {
         HD1K(const std::string &root);
         HD1K(const std::string &root, DataMode mode);
         HD1K(const std::string &root, DataMode mode , bool download);
-        HD1K(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
+        HD1K(const std::string &root, DataMode mode , bool download, TransformType transforms);
 
 
     private :
