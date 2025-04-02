@@ -48,8 +48,8 @@ namespace xt::data::datasets {
         };
         vector<std::string> _VALID_TARGET_TYPES = {"category", "binary-category", "segmentation"};
         fs::path dataset_folder_name = "oxford-iii-pets";
-        void load_data(DataMode mode = DataMode::TRAIN);
+        void load_data();
 
-        void check_resources(const std::string &root, bool download = false);
+        void check_resources();
     };
 }
