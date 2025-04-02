@@ -28,9 +28,11 @@ namespace xt::data::datasets {
 
         */
    public :
-       SEMEION(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+       SEMEION(const std::string &root);
+       SEMEION(const std::string &root, DataMode mode);
+       SEMEION(const std::string &root, DataMode mode , bool download);
+       SEMEION(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
 
-       SEMEION(const fs::path &root, DatasetArguments args);
 
    private:
        fs::path url = fs::path("http://archive.ics.uci.edu/ml/machine-learning-databases/semeion/semeion.data");
@@ -38,9 +40,9 @@ namespace xt::data::datasets {
        std::string dataset_file_md5 = "cb545d371d2ce14ec121470795a77432";
        fs::path dataset_folder_name = "semeion";
 
-       void load_data(DataMode mode = DataMode::TRAIN);
+       void load_data();
 
-       void check_resources(const std::string &root, bool download = false);
+       void check_resources();
 
     };
 }
