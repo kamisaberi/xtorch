@@ -67,7 +67,7 @@ namespace xt::data::datasets {
         Middlebury2014Stereo(const std::string &root);
         Middlebury2014Stereo(const std::string &root, DataMode mode);
         Middlebury2014Stereo(const std::string &root, DataMode mode , bool download);
-        Middlebury2014Stereo(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
+        Middlebury2014Stereo(const std::string &root, DataMode mode , bool download, TransformType transforms);
 
 
     private :
