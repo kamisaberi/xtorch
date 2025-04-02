@@ -39,9 +39,9 @@ namespace xt::data::datasets {
 
 
     private :
-        void load_data(DataMode mode = DataMode::TRAIN);
+        void load_data();
 
-        void check_resources(const std::string &root, bool download = false);
+        void check_resources();
     };
 
     class VOCSegmentation : BaseDataset {
@@ -67,13 +67,15 @@ namespace xt::data::datasets {
          */
 
     public :
-        VOCSegmentation(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+        VOCSegmentation(const std::string &root);
+        VOCSegmentation(const std::string &root, DataMode mode);
+        VOCSegmentation(const std::string &root, DataMode mode , bool download);
+        VOCSegmentation(const std::string &root, DataMode mode , bool download, TransformType transforms);
 
-        VOCSegmentation(const fs::path &root, DatasetArguments args);
 
     private :
-        void load_data(DataMode mode = DataMode::TRAIN);
+        void load_data();
 
-        void check_resources(const std::string &root, bool download = false);
+        void check_resources();
     };
 }
