@@ -56,9 +56,9 @@ namespace xt::data::datasets {
         fs::path voc_train_url = fs::path("https://www.cs.cornell.edu/~bharathh/train_noval.txt");
         fs::path voc_split_filename = fs::path("train_noval.txt");
         std::string voc_split_md5 = "79bff800c5f0b1ec6b21080a3c066722";
-        void load_data(DataMode mode = DataMode::TRAIN);
+        void load_data();
 
-        void check_resources(const std::string &root, bool download = false);
+        void check_resources();
 
 
     };
