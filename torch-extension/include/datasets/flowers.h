@@ -21,8 +21,8 @@ namespace xt::data::datasets {
         // }
         // _splits_map = {"train": "trnid", "val": "valid", "test": "tstid"}
 
-        void load_data(DataMode mode = DataMode::TRAIN);
+        void load_data();
 
-        void check_resources(const std::string &root, bool download = false);
+        void check_resources();
     };
 }
