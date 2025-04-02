@@ -21,7 +21,7 @@ namespace xt::data::datasets {
     }
 
     Imagenette::Imagenette(const std::string &root, DataMode mode, bool download, ImageType type,
-                           vector<std::function<torch::Tensor(torch::Tensor)> > transforms): BaseDataset(
+                           TransformType transforms): BaseDataset(
         root, mode, download) , type(type) {
         if (!transforms.empty()) {
             this->transforms = transforms;
