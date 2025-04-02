@@ -65,7 +65,7 @@ namespace xt::data::datasets {
        SceneFlowStereo(const std::string &root);
        SceneFlowStereo(const std::string &root, DataMode mode);
        SceneFlowStereo(const std::string &root, DataMode mode , bool download);
-       SceneFlowStereo(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
+       SceneFlowStereo(const std::string &root, DataMode mode , bool download, TransformType transforms);
 
    private :
        fs::path dataset_folder_name = fs::path("SceneFlow") ;
