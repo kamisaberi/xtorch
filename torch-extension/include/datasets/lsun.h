@@ -4,7 +4,8 @@
 
 
 namespace xt::data::datasets {
-    class LSUN : BaseDataset {
+    [[deprecated("LSUN Dataset files removed and Links are broken")]]
+    class LSUN  : BaseDataset  {
     public :
         LSUN(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
 
