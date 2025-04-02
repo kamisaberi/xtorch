@@ -25,9 +25,11 @@ namespace xt::data::datasets {
 
          */
     public :
-        MovingMNIST(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+        MovingMNIST(const std::string &root);
+        MovingMNIST(const std::string &root, DataMode mode);
+        MovingMNIST(const std::string &root, DataMode mode , bool download);
+        MovingMNIST(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
 
-        MovingMNIST(const fs::path &root, DatasetArguments args);
 
     private :
         fs::path url = fs::path("http://www.cs.toronto.edu/~nitish/unsupervised_video/mnist_test_seq.npy");
