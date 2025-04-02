@@ -41,9 +41,11 @@ namespace xt::data::datasets {
 
          */
     public :
-        Kitti(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+        Kitti(const std::string &root);
+        Kitti(const std::string &root, DataMode mode);
+        Kitti(const std::string &root, DataMode mode , bool download);
+        Kitti(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
 
-        Kitti(const fs::path &root, DatasetArguments args);
 
     private:
         fs::path url = fs::path("https://s3.eu-central-1.amazonaws.com/avg-kitti/");
@@ -55,9 +57,9 @@ namespace xt::data::datasets {
         fs::path labels_dir_name = fs::path("label_2");
         fs::path dataset_folder_name = "kitti";
 
-        void load_data(DataMode mode = DataMode::TRAIN);
+        void load_data();
 
-        void check_resources(const std::string &root, bool download = false);
+        void check_resources();
     };
 
     class KittiFlow : BaseDataset {
@@ -83,14 +85,16 @@ namespace xt::data::datasets {
 
          */
     public :
-        KittiFlow(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+        KittiFlow(const std::string &root);
+        KittiFlow(const std::string &root, DataMode mode);
+        KittiFlow(const std::string &root, DataMode mode , bool download);
+        KittiFlow(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
 
-        KittiFlow(const fs::path &root, DatasetArguments args);
 
     private :
-        void load_data(DataMode mode = DataMode::TRAIN);
+        void load_data();
 
-        void check_resources(const std::string &root, bool download = false);
+        void check_resources();
     };
 
     class Kitti2012Stereo : BaseDataset {
@@ -135,14 +139,16 @@ namespace xt::data::datasets {
 
          */
     public :
-        Kitti2012Stereo(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+        Kitti2012Stereo(const std::string &root);
+        Kitti2012Stereo(const std::string &root, DataMode mode);
+        Kitti2012Stereo(const std::string &root, DataMode mode , bool download);
+        Kitti2012Stereo(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
 
-        Kitti2012Stereo(const fs::path &root, DatasetArguments args);
 
     private :
-        void load_data(DataMode mode = DataMode::TRAIN);
+        void load_data();
 
-        void check_resources(const std::string &root, bool download = false);
+        void check_resources();
     };
 
     class Kitti2015Stereo : BaseDataset {
@@ -190,13 +196,15 @@ namespace xt::data::datasets {
 
          */
     public :
-        Kitti2015Stereo(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+        Kitti2015Stereo(const std::string &root);
+        Kitti2015Stereo(const std::string &root, DataMode mode);
+        Kitti2015Stereo(const std::string &root, DataMode mode , bool download);
+        Kitti2015Stereo(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
 
-        Kitti2015Stereo(const fs::path &root, DatasetArguments args);
 
     private :
-        void load_data(DataMode mode = DataMode::TRAIN);
+        void load_data();
 
-        void check_resources(const std::string &root, bool download = false);
+        void check_resources();
     };
 }
