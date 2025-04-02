@@ -44,8 +44,7 @@ namespace xt::data::datasets {
         InStereo2k(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
 
     private :
-        void load_data(DataMode mode = DataMode::TRAIN);
-
-        void check_resources(const std::string &root, bool download = false);
+        void load_data();
+        void check_resources();
     };
 }
