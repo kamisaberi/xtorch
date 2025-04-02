@@ -12,7 +12,7 @@ namespace xt::data::datasets {
 
 
     Caltech101::Caltech101(const std::string &root, DataMode mode, bool download,
-                           vector<std::function<torch::Tensor(torch::Tensor)> > transforms) : BaseDataset(
+                           TransformType transforms) : BaseDataset(
         root, mode, download, transforms) {
     }
 

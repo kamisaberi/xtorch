@@ -8,7 +8,9 @@ namespace fs = std::filesystem;
 
 namespace xt::data::datasets {
     class BaseDataset : public torch::data::Dataset<BaseDataset> {
+
     public:
+        using TransformType = vector<std::function<torch::Tensor(torch::Tensor)> >;
 
         BaseDataset(const std::string &root);
         BaseDataset(const std::string &root, DataMode mode);

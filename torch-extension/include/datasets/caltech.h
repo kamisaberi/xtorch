@@ -14,7 +14,7 @@ namespace xt::data::datasets {
         Caltech101(const std::string &root);
         Caltech101(const std::string &root, DataMode mode);
         Caltech101(const std::string &root, DataMode mode , bool download);
-        Caltech101(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
+        Caltech101(const std::string &root, DataMode mode , bool download, TransformType transforms);
 
     private:
         vector<std::tuple<string, string, string> > resources = {
@@ -38,7 +38,7 @@ namespace xt::data::datasets {
         Caltech256(const std::string &root);
         Caltech256(const std::string &root, DataMode mode);
         Caltech256(const std::string &root, DataMode mode , bool download);
-        Caltech256(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
+        Caltech256(const std::string &root, DataMode mode , bool download, TransformType transforms);
 
 
     private:

@@ -12,8 +12,7 @@ namespace xt::data::datasets {
     }
 
     BaseDataset::BaseDataset(const std::string &root, DataMode mode, bool download,
-                             vector<std::function<torch::Tensor(torch::Tensor)> >
-                             transforms) : BaseDataset::BaseDataset(root, mode, download) {
+                             TransformType transforms) : BaseDataset::BaseDataset(root, mode, download) {
         this->transforms = transforms;
         if (!transforms.empty()) {
             this->compose = xt::data::transforms::Compose(this->transforms);
