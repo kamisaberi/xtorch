@@ -8,12 +8,13 @@ namespace xt::data::datasets {
     }
 
     Caltech101::Caltech101(const std::string &root, DataMode mode, bool download) : BaseDataset(root, mode, download) {
+        throw std::runtime_error("Caltech101: Caltech101 not implemented");
     }
 
 
     Caltech101::Caltech101(const std::string &root, DataMode mode, bool download,
-                           TransformType transforms) : BaseDataset(
-        root, mode, download, transforms) {
+                           TransformType transforms) : BaseDataset(root, mode, download, transforms) {
+        throw std::runtime_error("Caltech101: Caltech101 not implemented");
     }
 
     // Caltech101::Caltech101() {
