@@ -36,9 +36,11 @@ namespace xt::data::datasets {
 
         */
    public :
-       Places365(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+       Places365(const std::string &root);
+       Places365(const std::string &root, DataMode mode);
+       Places365(const std::string &root, DataMode mode , bool download);
+       Places365(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
 
-       Places365(const fs::path &root, DatasetArguments args);
    private :
 
 //        _SPLITS = ("train-standard", "train-challenge", "val")
@@ -68,9 +70,9 @@ namespace xt::data::datasets {
 
 
 
-       void load_data(DataMode mode = DataMode::TRAIN);
+       void load_data();
 
-       void check_resources(const std::string &root, bool download = false);
+       void check_resources();
 
    };
 
