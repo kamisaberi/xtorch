@@ -27,7 +27,7 @@ namespace xt::data::datasets {
         Omniglot(const std::string &root);
         Omniglot(const std::string &root, DataMode mode);
         Omniglot(const std::string &root, DataMode mode , bool download);
-        Omniglot(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
+        Omniglot(const std::string &root, DataMode mode , bool download, TransformType transforms);
 
 
     private :
