@@ -11,17 +11,17 @@ namespace xt::data::datasets {
 
         FakeData(const std::string &root, DataMode mode);
 
-        FakeData(const std::string &root, DataMode mode, bool download);
+        FakeData(const std::string &root, DataMode mode, size_t size);
 
-        FakeData(const std::string &root, DataMode mode, bool download,
+        FakeData(const std::string &root, DataMode mode, size_t size, vector<int64_t> shape_);
+
+        FakeData(const std::string &root, DataMode mode, size_t size, vector<int64_t> shape_,
                  vector<std::function<torch::Tensor(torch::Tensor)> > transforms);
 
     private :
         size_t size_;
         vector<int64_t> shape_ = {3, 24, 24};
+        void generate_data();
 
-        void load_data(DataMode mode = DataMode::TRAIN);
-
-        void check_resources(const std::string &root, bool download = false);
     };
 }
