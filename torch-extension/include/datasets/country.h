@@ -12,7 +12,7 @@ namespace xt::data::datasets {
         Country211(const std::string &root);
         Country211(const std::string &root, DataMode mode);
         Country211(const std::string &root, DataMode mode , bool download);
-        Country211(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
+        Country211(const std::string &root, DataMode mode , bool download, TransformType transforms);
 
 
     private:
