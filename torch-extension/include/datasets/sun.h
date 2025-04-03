@@ -39,10 +39,10 @@ namespace xt::data::datasets {
         std::string dataset_file_md5 = "8ca2778205c41d23104230ba66911c7a";
         fs::path dataset_folder_name = "sun397";
 
-        void load_data(DataMode mode = DataMode::TRAIN);
+        void load_data();
 
 
-        void check_resources(const std::string &root, bool download = false);
+        void check_resources();
 
     };
 }
