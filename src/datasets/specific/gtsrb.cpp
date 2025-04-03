@@ -1,4 +1,4 @@
-#include "../../include/datasets/gtsrb.h"
+#include "../../../include/datasets/specific/gtsrb.h"
 
 namespace xt::data::datasets {
 

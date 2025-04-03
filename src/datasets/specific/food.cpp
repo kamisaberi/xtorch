@@ -1,4 +1,4 @@
-#include "../../include/datasets/food.h"
+#include "../../../include/datasets/specific/food.h"
 
 namespace xt::data::datasets {
     Food101::Food101(const std::string &root): Food101::Food101(root, DataMode::TRAIN, false) {
