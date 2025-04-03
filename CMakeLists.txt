@@ -1,13 +1,6 @@
 cmake_minimum_required(VERSION 3.28 FATAL_ERROR)
-#cmake_policy(SET CMP0002 NEW)
-
-#project(TorchExtension LANGUAGES CXX)
-
-#TODO ----vvvv---- TorchExtension MODULE DEFINITION ----vvvv----
 
 project(TorchExtension VERSION 0.1.0 LANGUAGES CXX)
-
-
 
 # List Of All CPP Files By Category
 file(GLOB_RECURSE UTILITY_FILES CONFIGURE_DEPENDS src/utils/*.cpp)
@@ -69,8 +62,6 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
 )
 
 
-#TODO ----vvvv---- EXPORT MODULE  ----vvvv----
-
 set(DEFAULT_BUILD_TYPE "Release")
 
 if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
@@ -100,14 +91,6 @@ install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAM
 install(EXPORT TorchExtensionConfig DESTINATION share/TorchExtension/cmake)
 
 export(TARGETS ${PROJECT_NAME} FILE TorchExtensionConfig.cmake)
-
-#TODO ----vvvv---- TEST PROJECT ----vvvv----
-
-#add_subdirectory(examples/test)
-
-#cmake_minimum_required(VERSION 3.10 FATAL_ERROR)
-
-
 
 
 
