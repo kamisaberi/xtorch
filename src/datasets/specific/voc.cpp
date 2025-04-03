@@ -1,4 +1,4 @@
-#include "../../include/datasets/voc.h"
+#include "../../../include/datasets/specific/voc.h"
 
 namespace xt::data::datasets {
 
