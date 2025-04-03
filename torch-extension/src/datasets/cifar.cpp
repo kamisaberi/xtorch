@@ -6,7 +6,7 @@ namespace fs = std::filesystem;
 
 namespace xt::data::datasets {
     //------------------ CIFAR10 ------------------//
-    CIFAR10::CIFAR10(const std::string &root, DataMode mode, bool download) {
+    CIFAR10::CIFAR10(const std::string &root, DataMode mode, bool download) : BaseDataset(root, mode, download) {
         // Load data from the specified root directory
         this->root = fs::path(root);
         this->dataset_path = this->root / this->dataset_folder_name;

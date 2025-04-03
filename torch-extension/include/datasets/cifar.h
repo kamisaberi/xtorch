@@ -1,14 +1,19 @@
 #pragma once
 #include "../headers/datasets.h"
+#include "base.h"
 
 using namespace std;
 namespace fs = std::filesystem;
 
 
 namespace xt::data::datasets {
-    class CIFAR10 : public torch::data::Dataset<CIFAR10> {
+    class CIFAR10 : public BaseDataset {
     public:
-        CIFAR10(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+        CIFAR10(const std::string &root);
+        CIFAR10(const std::string &root, DataMode mode);
+        CIFAR10(const std::string &root, DataMode mode , bool download);
+        CIFAR10(const std::string &root, DataMode mode , bool download, TransformType transforms);
+
 
         torch::data::Example<> get(size_t index) override;
 
