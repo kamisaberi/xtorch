@@ -1,4 +1,4 @@
-#include "../../include/datasets/cityscapes.h"
+#include "../../../include/datasets/specific/cityscapes.h"
 
 namespace xt::data::datasets {
 
