@@ -1,5 +1,5 @@
 cmake-build-debug/
 build/
 .idea/
-torch-extension/build/
-torch-extension/cmake-build-debug/
+#torch-extension/build/
+#torch-extension/cmake-build-debug/
