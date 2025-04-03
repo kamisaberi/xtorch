@@ -1,4 +1,4 @@
-#include "../../include/datasets/base.h"
+#include "../../../include/datasets/base/base.h"
 
 namespace xt::data::datasets {
     BaseDataset::BaseDataset(const std::string &root): BaseDataset::BaseDataset(root, DataMode::TRAIN, false) {
