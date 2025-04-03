@@ -12,7 +12,7 @@ namespace xt::data::datasets {
     public:
         using TransformType = vector<std::function<torch::Tensor(torch::Tensor)> >;
 
-        BaseDataset(const std::string &root);
+        explicit BaseDataset(const std::string &root);
         BaseDataset(const std::string &root, DataMode mode);
         BaseDataset(const std::string &root, DataMode mode , bool download);
         BaseDataset(const std::string &root, DataMode mode , bool download , vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
