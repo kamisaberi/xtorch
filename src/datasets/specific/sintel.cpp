@@ -1,4 +1,4 @@
-#include "../../include/datasets/sintel.h"
+#include "../../../include/datasets/specific/sintel.h"
 
 namespace xt::data::datasets {
 
