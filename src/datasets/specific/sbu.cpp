@@ -1,4 +1,4 @@
-#include "../../include/datasets/sbu.h"
+#include "../../../include/datasets/specific/sbu.h"
 
 namespace xt::data::datasets {
 

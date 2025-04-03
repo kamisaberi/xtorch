@@ -1,4 +1,4 @@
-#include "../../include/datasets/scene-flow-stereo.h"
+#include "../../../include/datasets/specific/scene-flow-stereo.h"
 
 namespace xt::data::datasets {
 
