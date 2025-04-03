@@ -1,4 +1,4 @@
-#include "../../include/datasets/wider-face.h"
+#include "../../../include/datasets/specific/wider-face.h"
 
 namespace xt::data::datasets {
 
