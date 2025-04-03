@@ -1,4 +1,4 @@
-#include "../../include/datasets/omniglot.h"
+#include "../../../include/datasets/specific/omniglot.h"
 
 namespace xt::data::datasets {
 
