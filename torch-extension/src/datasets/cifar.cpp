@@ -6,6 +6,13 @@ namespace fs = std::filesystem;
 
 namespace xt::data::datasets {
     //------------------ CIFAR10 ------------------//
+    CIFAR10::CIFAR10(const std::string &root): CIFAR10::CIFAR10(root, DataMode::TRAIN, false) {
+    }
+
+    CIFAR10::CIFAR10(const std::string &root, DataMode mode): CIFAR10::CIFAR10(root, mode, false) {
+    }
+
+
     CIFAR10::CIFAR10(const std::string &root, DataMode mode, bool download) : BaseDataset(root, mode, download) {
         // Load data from the specified root directory
         this->root = fs::path(root);
@@ -35,6 +42,44 @@ namespace xt::data::datasets {
         // }
         // cout << "DATA SIZES:" << this->data.size() << endl;
     }
+
+
+
+    CIFAR10::CIFAR10(const std::string &root, DataMode mode, bool download,
+                       TransformType transforms) : BaseDataset(root, mode, download, transforms) {
+
+        // Load data from the specified root directory
+        this->root = fs::path(root);
+        this->dataset_path = this->root / this->dataset_folder_name;
+        bool res = true;
+        if (download) {
+            bool should_download = false;
+            if (!fs::exists(this->root / this->archive_file_name)) {
+                should_download = true;
+            } else {
+                std::string md5 = xt::utils::get_md5_checksum((this->root / this->archive_file_name).string());
+                if (md5 != archive_file_md5) {
+                    should_download = true;
+                }
+            }
+            if (should_download) {
+                auto [result, path] = xt::utils::download(this->url, this->root.string());
+                res = result;
+            }
+            if (res) {
+                string pth = (this->root / this->archive_file_name).string();
+                res = xt::utils::extract(pth, this->root);
+            }
+        }
+        // if (res) {
+        load_data(mode);
+        // }
+        // cout << "DATA SIZES:" << this->data.size() << endl;
+
+
+    }
+
+
 
     torch::data::Example<> CIFAR10::get(size_t index) {
         return {data[index].clone(), torch::tensor(labels[index])}; // Clone to ensure tensor validity
@@ -106,7 +151,15 @@ namespace xt::data::datasets {
     }
 
     //------------------ CIFAR100 ------------------//
-    CIFAR100::CIFAR100(const std::string &root, DataMode mode, bool download) {
+
+    CIFAR100::CIFAR100(const std::string &root): CIFAR100::CIFAR100(root, DataMode::TRAIN, false) {
+    }
+
+    CIFAR100::CIFAR100(const std::string &root, DataMode mode): CIFAR100::CIFAR100(root, mode, false) {
+    }
+
+
+    CIFAR100::CIFAR100(const std::string &root, DataMode mode, bool download) : BaseDataset(root, mode, download) {
         // Load data from the specified root directory
         this->root = fs::path(root);
         this->dataset_path = this->root / this->dataset_folder_name;
@@ -131,9 +184,46 @@ namespace xt::data::datasets {
             }
         }
         // if (res) {
-            load_data(mode);
+        load_data(mode);
         // }
     }
+
+
+
+    CIFAR100::CIFAR100(const std::string &root, DataMode mode, bool download,
+                           TransformType transforms) : BaseDataset(root, mode, download, transforms) {
+
+        // Load data from the specified root directory
+        this->root = fs::path(root);
+        this->dataset_path = this->root / this->dataset_folder_name;
+        bool res = true;
+        if (download) {
+            bool should_download = false;
+            if (!fs::exists(this->root / this->archive_file_name)) {
+                should_download = true;
+            } else {
+                std::string md5 = xt::utils::get_md5_checksum((this->root / this->archive_file_name).string());
+                if (md5 != archive_file_md5) {
+                    should_download = true;
+                }
+            }
+            if (should_download) {
+                auto [result, path] = xt::utils::download(this->url, this->root.string());
+                res = result;
+            }
+            if (res) {
+                string pth = (this->root / this->archive_file_name).string();
+                res = xt::utils::extract(pth, this->root);
+            }
+        }
+        // if (res) {
+        load_data(mode);
+        // }
+
+
+    }
+
+
 
     torch::data::Example<> CIFAR100::get(size_t index) {
         return {data[index].clone(), torch::tensor(labels[index])}; // Clone to ensure tensor validity
