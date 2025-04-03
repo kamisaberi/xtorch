@@ -1,4 +1,4 @@
-#include "../../include/datasets/caltech.h"
+#include "../../../include/datasets/specific/caltech.h"
 
 namespace xt::data::datasets {
 
