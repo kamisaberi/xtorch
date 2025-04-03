@@ -1,4 +1,4 @@
-#include "../../include/datasets/eth-3d-stereo.h"
+#include "../../../include/datasets/specific/eth-3d-stereo.h"
 
 namespace xt::data::datasets {
 
