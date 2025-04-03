@@ -1,4 +1,4 @@
-#include "../../include/datasets/svhn.h"
+#include "../../../include/datasets/specific/svhn.h"
 
 namespace xt::data::datasets {
 
