@@ -1,4 +1,4 @@
-#include "../../include/datasets/kinetics.h"
+#include "../../../include/datasets/specific/kinetics.h"
 
 namespace xt::data::datasets {
 
