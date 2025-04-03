@@ -1,7 +1,7 @@
 
 #pragma once
 #include <cstring>
-#include <csv2/parameters.hpp>
+#include "parameters.hpp"
 #include <fstream>
 #include <iostream>
 #include <iterator>

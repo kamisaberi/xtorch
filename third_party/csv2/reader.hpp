@@ -3,9 +3,9 @@
 #include <cstring>
 #if __has_include("sys/mman.h") || __has_include(<sys/mman.h>) || __has_include("windows.h") || __has_include(<windows.h>)
 #define __CSV2_HAS_MMAN_H__ 1
-#include <csv2/mio.hpp>
+#include "mio.hpp"
 #endif
-#include <csv2/parameters.hpp>
+#include "parameters.hpp"
 #include <istream>
 #include <string>
 #if ((defined(_MSVC_LANG) && _MSVC_LANG >= 201703L) || __cplusplus >= 201703L)

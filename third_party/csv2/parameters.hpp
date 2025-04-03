@@ -1,6 +1,9 @@
 
 #pragma once
 #include <utility>
+#include <iostream>
+
+using namespace  std;
 
 namespace csv2 {
 
