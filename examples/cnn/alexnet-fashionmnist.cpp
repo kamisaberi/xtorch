@@ -1,5 +1,5 @@
 #include "includes/base.h"
-#include "../../include/datasets/mnist.h"
+#include "../../include/datasets/specific/mnist.h"
 #include "../../include/models/cnn/alexnet.h"
 #include "../../include/definitions/transforms.h"
 
