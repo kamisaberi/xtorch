@@ -2,7 +2,7 @@
 
 #include <torch/data/datasets/map.h>
 
-#include "../../../include/datasets/base.h"
+#include "../../../include/datasets/base/base.h"
 
 namespace xt::data {
     // torch::data::datasets::MapDataset<torch::ext::data::datasets::BaseDataset , torch::data::transforms::Stack<>()>
