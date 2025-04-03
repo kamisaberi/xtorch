@@ -1,4 +1,4 @@
-#include "../../include/datasets/lfw.h"
+#include "../../../include/datasets/specific/lfw.h"
 
 namespace xt::data::datasets {
 
