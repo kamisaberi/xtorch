@@ -1,4 +1,4 @@
-#include "../../include/datasets/middlebury.h"
+#include "../../../include/datasets/specific/middlebury.h"
 
 namespace xt::data::datasets {
 

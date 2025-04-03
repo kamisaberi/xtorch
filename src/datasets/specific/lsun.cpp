@@ -1,4 +1,4 @@
-#include "../../include/datasets/lsun.h"
+#include "../../../include/datasets/specific/lsun.h"
 
 namespace xt::data::datasets {
 
