@@ -1,4 +1,4 @@
-#include "../../include/datasets/moving-mnist.h"
+#include "../../../include/datasets/specific/moving-mnist.h"
 
 namespace xt::data::datasets {
 
