@@ -1,4 +1,4 @@
-#include "../../include/datasets/celeba.h"
+#include "../../../include/datasets/specific/celeba.h"
 
 namespace xt::data::datasets {
 
