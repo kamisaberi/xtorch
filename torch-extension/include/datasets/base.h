@@ -24,9 +24,6 @@ namespace xt::data::datasets {
 
         torch::optional<size_t> size() const override;
 
-        torch::data::datasets::MapDataset<xt::data::datasets::BaseDataset, torch::data::transforms::Stack<>()>
-        transform_dataset();
-
     public:
         std::vector<torch::Tensor> data; // Store image data as tensors
         std::vector<uint8_t> labels; // Store labels
