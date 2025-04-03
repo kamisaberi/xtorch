@@ -21,21 +21,21 @@ namespace xt::data::datasets {
 
 
 
-    // ---------------------- Caltech101 ---------------------- //
-    Caltech101::Caltech101(const std::string &root): Caltech101::Caltech101(root, DataMode::TRAIN, false) {
+    // ---------------------- VOCSegmentation ---------------------- //
+    VOCSegmentation::VOCSegmentation(const std::string &root): VOCSegmentation::VOCSegmentation(root, DataMode::TRAIN, false) {
     }
 
-    Caltech101::Caltech101(const std::string &root, DataMode mode): Caltech101::Caltech101(root, mode, false) {
+    VOCSegmentation::VOCSegmentation(const std::string &root, DataMode mode): VOCSegmentation::VOCSegmentation(root, mode, false) {
     }
 
-    Caltech101::Caltech101(const std::string &root, DataMode mode, bool download) : BaseDataset(root, mode, download) {
-        throw std::runtime_error("Caltech101: Caltech101 not implemented");
+    VOCSegmentation::VOCSegmentation(const std::string &root, DataMode mode, bool download) : BaseDataset(root, mode, download) {
+        throw std::runtime_error("VOCSegmentation: VOCSegmentation not implemented");
     }
 
 
-    Caltech101::Caltech101(const std::string &root, DataMode mode, bool download,
+    VOCSegmentation::VOCSegmentation(const std::string &root, DataMode mode, bool download,
                            TransformType transforms) : BaseDataset(root, mode, download, transforms) {
-        throw std::runtime_error("Caltech101: Caltech101 not implemented");
+        throw std::runtime_error("VOCSegmentation: VOCSegmentation not implemented");
     }
 
 }
