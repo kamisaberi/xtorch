@@ -1,4 +1,4 @@
-#include "../../include/datasets/semeion.h"
+#include "../../../include/datasets/specific/semeion.h"
 
 namespace xt::data::datasets {
 
