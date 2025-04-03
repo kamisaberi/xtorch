@@ -1,4 +1,4 @@
-#include "../../include/datasets/photo-tour.h"
+#include "../../../include/datasets/specific/photo-tour.h"
 
 namespace xt::data::datasets {
 

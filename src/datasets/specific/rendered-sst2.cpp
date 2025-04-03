@@ -1,4 +1,4 @@
-#include "../../include/datasets/rendered-sst2.h"
+#include "../../../include/datasets/specific/rendered-sst2.h"
 
 namespace xt::data::datasets {
 
