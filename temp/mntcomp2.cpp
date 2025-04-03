@@ -32,6 +32,26 @@ void check_dataset_type(const Dataset& dataset) {
     }
 }
 
+struct Resize {
+    std::vector<int64_t> size;
+
+    // Constructor to initialize the factor
+    Resize(std::vector<int64_t> size) : size(size) {}
+
+    // Overload the call operator to multiply the input by the factor
+    torch::Tensor operator()(torch::Tensor img) {
+        img = img.unsqueeze(0); // Add batch dimension
+        img = torch::nn::functional::interpolate(
+            img,
+            torch::nn::functional::InterpolateFuncOptions()
+                .size(std::vector<int64_t>({size[0], size[1]}))
+                .mode(torch::kBilinear)
+                .align_corners(false)
+        );
+        return img.squeeze(0); // Remove batch dimension
+    }
+};
+
 int main() {
     std::vector<int64_t> size = {32, 32};
     std::cout.precision(10);
@@ -39,7 +59,8 @@ int main() {
 
     auto dataset = xt::data::datasets::MNIST("/home/kami/Documents/temp/", DataMode::TRAIN, true,
                                              {
-                                                 xt::data::transforms::create_resize_transform(size),
+                                                 // xt::data::transforms::create_resize_transform(size),
+                                                 Resize(size),
                                                  torch::data::transforms::Normalize<>(0.5, 0.5)
                                              });
     auto transformed_dataset =  dataset.map(torch::data::transforms::Stack<>());
