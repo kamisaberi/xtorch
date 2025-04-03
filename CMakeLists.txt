@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.28 FATAL_ERROR)
 
-project(TorchExtension VERSION 0.1.0 LANGUAGES CXX)
+project(xTorch VERSION 0.1.0 LANGUAGES CXX)
 
 # List Of All CPP Files By Category
 file(GLOB_RECURSE UTILITY_FILES CONFIGURE_DEPENDS src/utils/*.cpp)
@@ -82,15 +82,15 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
         VERSION ${PROJECT_VERSION}
         SOVERSION 1)
 
-install(TARGETS ${PROJECT_NAME} EXPORT TorchExtensionConfig
+install(TARGETS ${PROJECT_NAME} EXPORT xTorchConfig
         ARCHIVE  DESTINATION ${CMAKE_INSTALL_LIBDIR}
         LIBRARY  DESTINATION ${CMAKE_INSTALL_LIBDIR}
         RUNTIME  DESTINATION ${CMAKE_INSTALL_BINDIR})
 install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME})
 
-install(EXPORT TorchExtensionConfig DESTINATION share/TorchExtension/cmake)
+install(EXPORT xTorchConfig DESTINATION share/xTorch/cmake)
 
-export(TARGETS ${PROJECT_NAME} FILE TorchExtensionConfig.cmake)
+export(TARGETS ${PROJECT_NAME} FILE xTorchConfig.cmake)
 
 
 
