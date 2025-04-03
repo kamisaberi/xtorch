@@ -56,9 +56,9 @@ namespace xt::data::datasets {
         std::vector<std::tuple<fs::path, std::string >> test_list = {{"test_X.bin", "7f263ba9f9e0b06b93213547f721ac82"},
                                                                      {"test_y.bin", "36f9794fa4beb8a2c72628de14fa638e"}};
         std::vector<std::string> splits = {"train", "train+unlabeled", "unlabeled", "test"};
-        void load_data(DataMode mode = DataMode::TRAIN);
+        void load_data();
 
-        void check_resources(const std::string &root, bool download = false);
+        void check_resources();
 
 
 
