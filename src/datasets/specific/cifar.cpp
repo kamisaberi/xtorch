@@ -1,4 +1,4 @@
-#include "../../include/datasets/cifar.h"
+#include "../../../include/datasets/specific/cifar.h"
 
 using namespace std;
 namespace fs = std::filesystem;
