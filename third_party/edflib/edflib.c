@@ -44,9 +44,9 @@
 
 #else
 
-#define fseeko fseeko64
-#define ftello ftello64
-#define fopeno fopen64
+#define fseeko fseeko
+#define ftello ftello
+#define fopeno fopen
 
 #endif
 
