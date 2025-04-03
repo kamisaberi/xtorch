@@ -1,7 +1,7 @@
 #pragma once
 
-#include "base.h"
-#include "../headers/datasets.h"
+#include "../base/base.h"
+#include "../../headers/datasets.h"
 
 
 namespace xt::data::datasets {
