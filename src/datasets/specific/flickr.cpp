@@ -1,4 +1,4 @@
-#include "../../include/datasets/flickr.h"
+#include "../../../include/datasets/specific/flickr.h"
 
 namespace xt::data::datasets {
 
