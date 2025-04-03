@@ -1,4 +1,4 @@
-#include "../../include/datasets/coco.h"
+#include "../../../include/datasets/specific/coco.h"
 
 namespace xt::data::datasets {
 
