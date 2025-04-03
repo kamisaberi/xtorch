@@ -1,4 +1,4 @@
-#include "../../include/datasets/image-folder.h"
+#include "../../../include/datasets/general/image-folder.h"
 
 namespace xt::data::datasets {
     ImageFolder::ImageFolder(const std::string &root): ImageFolder::ImageFolder(
