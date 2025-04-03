@@ -9,13 +9,12 @@
 #include "../../include/trainers/trainer.h"
 
 using namespace std;
-//using Example = torch::data::Example<torch::Tensor, torch::Tensor>;
 
 int main() {
     std::cout.precision(10);
     auto dataset = xt::data::datasets::MNIST("/home/kami/Documents/temp/", DataMode::TRAIN, true,
                                              {
-                                                 xt::data::transforms::create_resize_transform({32, 32}),
+                                                 xt::data::transforms::Resize({32, 32}),
                                                  torch::data::transforms::Normalize<>(0.5, 0.5)
                                              }).map(torch::data::transforms::Stack<>());
     xt::DataLoader<decltype(dataset)> loader(std::move(dataset),
