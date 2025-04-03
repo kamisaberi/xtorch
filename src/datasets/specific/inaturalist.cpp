@@ -1,4 +1,4 @@
-#include "../../include/datasets/inaturalist.h"
+#include "../../../include/datasets/specific/inaturalist.h"
 
 namespace xt::data::datasets {
 
