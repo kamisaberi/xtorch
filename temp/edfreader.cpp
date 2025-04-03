@@ -4,7 +4,7 @@
 int main() {
     struct edf_hdr_struct hdr;  // Structure to hold header information
     // Open the file for reading, including annotations if EDF+
-    int hdl = edfopen_file_readonly("/home/kami/Documents/temp/example.edf", &hdr, EDFLIB_READ_ALL_ANNOTATIONS);
+    int hdl = edfopen_file_readonly("/home/kami/Documents/temp/aaaaaaac_s001_t000.edf", &hdr, EDFLIB_READ_ALL_ANNOTATIONS);
     if (hdl < 0) {
         std::cerr << "Error opening file: " << hdl << std::endl;
         return 1;
