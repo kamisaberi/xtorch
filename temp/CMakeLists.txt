@@ -12,7 +12,6 @@ file(GLOB_RECURSE DATA_LOADER_FILES CONFIGURE_DEPENDS ../src/data-loaders/*.cpp)
 file(GLOB_RECURSE TRAINER_FILES CONFIGURE_DEPENDS ../src/trainers/*.cpp)
 
 
-
 ####################################### TEST #######################################
 
 
@@ -131,7 +130,6 @@ file(GLOB_RECURSE TRAINER_FILES CONFIGURE_DEPENDS ../src/trainers/*.cpp)
 #)
 
 ####################################### XZ #######################################
-
 
 
 #project(xz)
@@ -322,9 +320,6 @@ file(GLOB_RECURSE TRAINER_FILES CONFIGURE_DEPENDS ../src/trainers/*.cpp)
 #)
 
 
-
-
-
 ####################################### VDTEST #######################################
 
 #project(vdtest)
@@ -362,12 +357,6 @@ file(GLOB_RECURSE TRAINER_FILES CONFIGURE_DEPENDS ../src/trainers/*.cpp)
 #        LibLZMA::LibLZMA
 #        ${LibArchive_LIBRARIES}
 #)
-
-
-
-
-
-
 
 
 ####################################### CNTFILES #######################################
@@ -409,7 +398,6 @@ file(GLOB_RECURSE TRAINER_FILES CONFIGURE_DEPENDS ../src/trainers/*.cpp)
 #)
 
 
-
 ####################################### IMGRESIZE #######################################
 
 #project(imgresize)
@@ -449,11 +437,7 @@ file(GLOB_RECURSE TRAINER_FILES CONFIGURE_DEPENDS ../src/trainers/*.cpp)
 #)
 
 
-
-
-
 # ================================================= IN USE ========================================================== #
-
 
 
 ####################################### DLTEST3 #######################################
@@ -495,7 +479,6 @@ target_link_libraries(${PROJECT_NAME}
 )
 
 
-
 ####################################### DLTEST4 #######################################
 
 project(dltest4)
@@ -535,7 +518,6 @@ target_link_libraries(${PROJECT_NAME}
 )
 
 
-
 ####################################### TRTEST #######################################
 
 project(trtest)
@@ -549,7 +531,7 @@ find_package(LibArchive REQUIRED)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} ${MODEL_FILES}  ../src/datasets/base.cpp ../src/datasets/mnist.cpp trtest.cpp)
+set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} ${MODEL_FILES} ../src/datasets/base.cpp ../src/datasets/mnist.cpp trtest.cpp)
 
 add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
 target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
@@ -573,8 +555,6 @@ target_link_libraries(${PROJECT_NAME}
         LibLZMA::LibLZMA
         ${LibArchive_LIBRARIES}
 )
-
-
 
 
 ####################################### TRTEST2 #######################################
@@ -590,7 +570,7 @@ find_package(LibArchive REQUIRED)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} ${MODEL_FILES}  ../src/datasets/base.cpp ../src/datasets/mnist.cpp trtest2.cpp)
+set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} ${MODEL_FILES} ../src/datasets/base.cpp ../src/datasets/mnist.cpp trtest2.cpp)
 
 add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
 target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
@@ -616,7 +596,6 @@ target_link_libraries(${PROJECT_NAME}
 )
 
 
-
 ####################################### MNTCOMP #######################################
 
 project(mntcomp)
@@ -630,7 +609,7 @@ find_package(LibArchive REQUIRED)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} ${MODEL_FILES} ../src/data-loaders/data-loader.tpp  ../src/datasets/base.cpp ../src/datasets/mnist.cpp mntcomp.cpp)
+set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} ${MODEL_FILES} ../src/data-loaders/data-loader.tpp ../src/datasets/base.cpp ../src/datasets/mnist.cpp mntcomp.cpp)
 
 add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
 target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
@@ -670,7 +649,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} ${MODEL_FILES} ${TRAINER_FILES} ${DATA_LOADER_FILES}
-        ../src/trainers/trainer.cpp ../src/data-loaders/data-loader.tpp  ../src/datasets/base.cpp ../src/datasets/mnist.cpp ../src/datasets/cifar.cpp ../src/datasets/imagenette.cpp ../src/datasets/base.cpp mntcomp2.cpp)
+        ../src/trainers/trainer.cpp ../src/data-loaders/data-loader.tpp ../src/datasets/base.cpp ../src/datasets/mnist.cpp ../src/datasets/cifar.cpp ../src/datasets/imagenette.cpp ../src/datasets/base.cpp mntcomp2.cpp)
 
 add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
 target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
@@ -694,6 +673,51 @@ target_link_libraries(${PROJECT_NAME}
         LibLZMA::LibLZMA
         ${LibArchive_LIBRARIES}
 )
+
+
+####################################### CNPYTEST #######################################
+
+project(cnpytest)
+list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
+find_package(Torch REQUIRED)
+find_package(TorchExtension REQUIRED)
+find_package(OpenCV REQUIRED)
+find_package(LibLZMA REQUIRED)
+find_package(LibArchive REQUIRED)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
+
+set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} ${MODEL_FILES} ${TRAINER_FILES} ${DATA_LOADER_FILES} ../third_party/cnpy/cnpy.cpp cnpytest.cpp)
+
+add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
+target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
+#
+set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
+
+include_directories(/usr/include)
+
+target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
+target_link_libraries(${PROJECT_NAME}
+        ${CURL_LIBRARIES}
+        ${TORCH_LIBRARIES}
+        ${OpenCV_LIBS}
+        ${ZLIB_LIBS}
+        ${ZIP_LIBRARIES}
+        zip
+        ${ZLIB_LIBRARIES}
+        ${LIBTAR_LIBRARY}
+        OpenSSL::SSL
+        OpenSSL::Crypto
+        LibLZMA::LibLZMA
+        ${LibArchive_LIBRARIES}
+)
+
+
+
+
+
+
 
 
 
