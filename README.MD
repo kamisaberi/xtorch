@@ -45,29 +45,28 @@ xTorch is architected as a thin layer on top of LibTorch’s C++ API, carefully 
 #include <xtorch/xtorch.hpp>
 
 int main() {
-    auto trainData = xt::datasets::ImageFolder("data/train",
-        xt::transforms::Compose({
-            xt::transforms::Resize(224),
-            xt::transforms::RandomCrop(224),
-            xt::transforms::Normalize({0.5,0.5,0.5},{0.5,0.5,0.5})
-        }));
-    auto trainLoader = xt::DataLoader(trainData, 64, true, 4);
-    auto valLoader = xt::DataLoader(xt::datasets::ImageFolder("data/val"), 64);
-
-    auto model = xt::models::ResNet18(10);
-    model.to(torch::kCUDA);
-
-    auto optimizer = xt::optim::AdamW(model.parameters(), 1e-3);
-    auto criterion = torch::nn::CrossEntropyLoss();
-
+    std::cout.precision(10);
+    auto dataset = xt::data::datasets::MNIST("/home/kami/Documents/temp/", DataMode::TRAIN, true,
+                                             {
+                                                 xt::data::transforms::Resize({32, 32}),
+                                                 torch::data::transforms::Normalize<>(0.5, 0.5)
+                                             }).map(torch::data::transforms::Stack<>());
+    xt::DataLoader<decltype(dataset)> loader(std::move(dataset),
+                                             torch::data::DataLoaderOptions().batch_size(64).drop_last(false),
+                                             true);
+    xt::models::LeNet5 model(10);
+    model.to(torch::Device(torch::kCPU));
+    model.train();
+    torch::optim::Adam optimizer(model.parameters(), torch::optim::AdamOptions(1e-3));
     xt::Trainer trainer;
-    trainer.setMaxEpochs(20)
-           .setOptimizer(optimizer)
-           .setLossFn(criterion)
-           .enableCheckpoint("checkpoints/resnet18.pt", 5);
-    trainer.fit(model, trainLoader, valLoader);
+    trainer.set_optimizer(&optimizer)
+        .set_max_epochs(5)
+        .set_loss_fn([](auto output, auto target) {
+          return torch::nll_loss(output, target);
+        });
+    trainer.fit<decltype(dataset)>(&model ,loader );
 
-    xt::export_to_jit(model, "resnet18_script.pt");
+    return 0;
 }
 ```
 
