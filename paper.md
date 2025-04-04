@@ -1,103 +1,66 @@
----
-title: 'Gala: A Python package for galactic dynamics'
-tags:
-  - Python
-  - astronomy
-  - dynamics
-  - galactic dynamics
-  - milky way
-authors:
-  - name: Adrian M. Price-Whelan
-    orcid: 0000-0000-0000-0000
-    equal-contrib: true
-    affiliation: "1, 2" # (Multiple affiliations must be quoted)
-  - name: Author Without ORCID
-    equal-contrib: true # (This is how you can denote equal contributions between multiple authors)
-    affiliation: 2
-  - name: Author with no affiliation
-    corresponding: true # (This is how to denote the corresponding author)
-    affiliation: 3
-  - given-names: Ludwig
-    dropping-particle: van
-    surname: Beethoven
-    affiliation: 3
-affiliations:
-  - name: Lyman Spitzer, Jr. Fellow, Princeton University, United States
-    index: 1
-    ror: 00hx57361
-  - name: Institution Name, Country
-    index: 2
-  - name: Independent Researcher, Country
-    index: 3
-date: 13 August 2017
-bibliography: paper.bib
 
-# Optional fields if submitting to a AAS journal too, see this blog post:
-# https://blog.joss.theoj.org/2018/12/a-new-collaboration-with-aas-publishing
-aas-doi: 10.3847/xxxxx <- update this with the DOI from AAS once you know it.
-aas-journal: Astrophysical Journal <- The name of the AAS journal.
+---
+title: 'xTorch: A High-Level C++ Extension Library for PyTorch (LibTorch)'
+tags:
+- C++
+- machine learning
+- deep learning
+- libtorch
+- PyTorch
+- AI
+- training
+  authors:
+- name: Kamal Saberi
+  orcid: 0000-0000-0000-0000
+  affiliation: 1
+  affiliations:
+- name: Independent Developer
+  index: 1
+  date: 2025-04-04
+  software_repository_url: https://github.com/kamisaberi/libtorch-extended
+  archive_url: https://zenodo.org/  # Replace this with Zenodo DOI once archived
+  paper_url: https://github.com/kamisaberi/libtorch-extended/blob/main/paper.md
 ---
 
 # Summary
 
-xTorch is a modular, high-level C++ extension to the PyTorch C++ frontend (LibTorch). It significantly simplifies the
-process of model definition, training, data loading, and deployment by introducing practical abstractions missing in
-LibTorch after 2019. While LibTorch exposes the full power of the PyTorch backend, it lacks user-friendly APIs available
-in Python. xTorch fills this usability gap and enables developers to create deep learning pipelines directly in C++ with
-ease and clarity.
+**xTorch** is a high-level extension to PyTorch’s C++ API (LibTorch) that simplifies model development, training, evaluation, and deployment workflows. While LibTorch offers powerful low-level access to PyTorch’s engine, many high-level utilities available in the Python API were deprecated or removed after 2019. xTorch bridges this usability gap by providing an organized set of abstractions for defining neural networks, managing data, training loops, device management, and serialization.
 
-xTorch introduces structured components for neural network architecture (XTModule), training management (Trainer),
-dataset handling (ImageFolder, CSVDataset, and transformations), model checkpointing, and TorchScript export. It
-enhances developer productivity without sacrificing the performance and flexibility of LibTorch.
+xTorch enhances developer productivity by reintroducing a “batteries-included” ethos for C++, similar to PyTorch’s Python experience. It is modular, extensible, and built entirely on top of LibTorch without modifying the core, ensuring compatibility and performance. It supports tasks such as CNN model training, JIT export, and inference pipelines — all from native C++ code.
 
-# Statement of need
+# Statement of Need
 
-Although Python remains the primary language for machine learning, many real-world systems are written in C++ due to its
-speed, compatibility, and suitability for embedded, robotics, game engines, and high-performance environments. PyTorch’s
-C++ frontend (LibTorch) enables such integration, but lacks many high-level abstractions that make Python so productive.
+C++ remains a critical language for high-performance machine learning systems, robotics, embedded applications, and large-scale deployment. However, PyTorch’s C++ frontend (LibTorch) is difficult to use on its own due to the lack of high-level APIs, forcing users to write verbose and repetitive code.
 
-xTorch addresses this gap by wrapping LibTorch’s low-level tools into a modular and extensible framework that is more
-intuitive to use. With xTorch, C++ developers no longer need to reinvent training loops or manually register every
-neural module. Instead, they can prototype, train, evaluate, and export models using a syntax close to PyTorch in
-Python. This drastically reduces development time, increases adoption of C++ for ML, and aligns the C++ experience with
-modern deep learning workflows.
+xTorch was created to fill this gap by wrapping LibTorch with practical utilities such as `Trainer`, `XTModule`, `DataLoader`, and `export_to_jit()`. These abstractions drastically reduce boilerplate, increase accessibility, and allow developers to build, train, and deploy models entirely in C++. Unlike other frameworks that require switching to Python or writing extensive C++ glue code, xTorch makes the entire ML workflow intuitive and modular in C++.
 
-# Citations
+# Functionality
 
-If citing relevant work in the paper (optional but encouraged), you can include citations like:
+xTorch provides:
 
-Paszke et al., 2019. PyTorch: An Imperative Style, High-Performance Deep Learning Library. NeurIPS.
+- High-level neural network module definitions
+- Trainer class for managing training, loss, metrics, and callbacks
+- Data loaders with support for image datasets, CSVs, and transformations
+- Model serialization and JIT export helpers
+- Support for CPU and CUDA backends (via LibTorch)
+- Clean separation of layers: Models, Data, Utils, and Training
+- Compatibility with the PyTorch ecosystem
 
-PyTorch C++ API Documentation. https://pytorch.org/cppdocs/
+# Example Use
 
-TorchScript export guide: https://pytorch.org/tutorials/advanced/cpp_export.html
-
-Let me know if you want these turned into BibTeX or @citation markdown style.
-
-[//]: # (# Figures)
-
-[//]: # ()
-[//]: # (Figures can be included like this:)
-
-[//]: # (![Caption for example figure.\label{fig:example}]&#40;figure.png&#41;)
-
-[//]: # (and referenced from text using \autoref{fig:example}.)
-
-[//]: # ()
-[//]: # (Figure sizes can be customized by adding an optional second parameter:)
-
-[//]: # (![Caption for example figure.]&#40;figure.png&#41;{ width=20% })
+```cpp
+auto trainData = xt::datasets::ImageFolder("data/train", xt::transforms::Compose({ ... }));
+auto model = xt::models::ResNet18(10);
+xt::Trainer trainer;
+trainer.setMaxEpochs(20).fit(model, trainLoader, valLoader);
+xt::export_to_jit(model, "model.pt");
+```
 
 # Acknowledgements
 
-This project builds upon the open-source work of the PyTorch community. Special thanks to the developers of LibTorch,
-whose computational backend powers this library. The xTorch project also thanks the broader machine learning and C++
-community for providing open tools and knowledge that make development and research more accessible.
+The xTorch project builds upon the PyTorch (LibTorch) C++ API. Thanks to the open-source contributors to PyTorch for enabling access to their high-performance machine learning framework via C++.
 
 # References
 
-[1] Paszke, A., et al. (2019). PyTorch: An Imperative Style, High-Performance Deep Learning Library. NeurIPS.
-
-[2] PyTorch C++ API Documentation: https://pytorch.org/cppdocs/
-
-[3] TorchScript Export Tutorial: https://pytorch.org/tutorials/advanced/cpp_export.html
+- PyTorch C++ API Documentation: https://pytorch.org/cppdocs/
+- TorchScript for Deployment: https://pytorch.org/tutorials/advanced/cpp_export.html
