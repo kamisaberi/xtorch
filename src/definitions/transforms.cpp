@@ -1,8 +1,6 @@
 #include "../../include/definitions/transforms.h"
 
 namespace xt::data::transforms {
-
-
     std::function<torch::Tensor(torch::Tensor input)> create_resize_transform(std::vector<int64_t> size) {
         auto resize_fn = [size](torch::Tensor img) -> torch::Tensor {
             img = img.unsqueeze(0); // Add batch dimension
@@ -17,9 +15,6 @@ namespace xt::data::transforms {
         };
         return resize_fn;
     }
-
-
-
 
 
     torch::Tensor resize_tensor(const torch::Tensor &tensor, const std::vector<int64_t> &size) {
@@ -96,10 +91,6 @@ namespace xt::data::transforms {
     }
 
 
-
-
-
-
     /**
      * @brief Alias for a transformation function that takes a tensor and returns a tensor.
      *
@@ -146,6 +137,22 @@ namespace xt::data::transforms {
     }
 
 
+    /**
+     * @brief Converts a grayscale tensor to an RGB tensor.
+     * @param tensor The input grayscale tensor, expected in format [N, H, W] or [N, 1, H, W].
+     * @return A new tensor in RGB format [N, 3, H, W], with the grayscale values replicated across channels.
+     *
+     * This function transforms a grayscale tensor into an RGB tensor by ensuring the input has a channel
+     * dimension and then replicating that channel three times to form RGB channels. If the input tensor
+     * is 3D ([N, H, W]), it adds a channel dimension to make it [N, 1, H, W]. If it’s already 4D ([N, 1, H, W]),
+     * it uses it as is. The `repeat` operation then duplicates the single channel into three, producing
+     * an output tensor of shape [N, 3, H, W], where N is the batch size, H is height, and W is width.
+     * This is useful for converting batched grayscale images to RGB format in LibTorch workflows.
+     */
+    torch::Tensor GrayscaleToRGB::operator()(const torch::Tensor &tensor) {
+        torch::Tensor gray = tensor.dim() == 3 ? tensor.unsqueeze(1) : tensor; // Ensure [N, 1, H, W]
+        return gray.repeat({1, 3, 1, 1}); // [N, 1, H, W] -> [N, 3, H, W]
+    }
 
 
     /**
@@ -155,7 +162,8 @@ namespace xt::data::transforms {
      * Initializes the Resize object by storing the provided size vector, which will be used
      * to resize input tensors in subsequent calls to the operator() function.
      */
-    Resize::Resize(std::vector<int64_t> size) : size(size) {}
+    Resize::Resize(std::vector<int64_t> size) : size(size) {
+    }
 
     /**
      * @brief Resizes the input tensor image to the target size using bilinear interpolation.
@@ -179,6 +187,25 @@ namespace xt::data::transforms {
         );
         return img.squeeze(0); // Remove batch dimension
     }
+
+
+    Pad::Pad(std::vector<int64_t> padding) : padding(padding) {
+    }
+
+    torch::Tensor Pad::operator()(torch::Tensor input) {
+        return torch::nn::functional::pad(input, padding);
+    }
+
+
+
+
+
+
+
+
+
+
+
 
 
 
