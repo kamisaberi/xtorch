@@ -1,5 +1,5 @@
 
-# Libtorch-Extended: Bridging the Usability Gap in PyTorch’s C++ API
+# xTorch: Bridging the Usability Gap in PyTorch’s C++ API
 
 ## Motivation
 
@@ -11,11 +11,11 @@ Another factor was PyTorch’s emphasis on the Python-to-C++ workflow. The offic
 
 As a result, developers who preferred or needed to work in C++ (for integration with existing systems, performance, or deployment constraints) found LibTorch cumbersome. Simple tasks like data augmentation (e.g. random crops or flips) had no built-in support in LibTorch C++. Defining neural network modules in C++ involved boilerplate macros and manual registration, an awkward process compared to Python’s concise syntax. Crucial functionality for model serialization was limited – for instance, LibTorch could load Python-exported models but not easily export its own models to a portable format.
 
-Libtorch-Extended was created to address this gap. It is a C++ library that extends LibTorch with the high-level abstractions and utilities that were missing or removed after 2019. By building on LibTorch’s robust computational core, libtorch-extended restores ease-of-use without sacrificing performance. The motivation is to empower C++ developers with a productive experience similar to PyTorch in Python – enabling them to build, train, and deploy models with minimal fuss. In essence, libtorch-extended revives and modernizes the “batteries-included” ethos for C++ deep learning, providing an all-in-one toolkit where the base library left off.
+xTorch was created to address this gap. It is a C++ library that extends LibTorch with the high-level abstractions and utilities that were missing or removed after 2019. By building on LibTorch’s robust computational core, xTorch restores ease-of-use without sacrificing performance. The motivation is to empower C++ developers with a productive experience similar to PyTorch in Python – enabling them to build, train, and deploy models with minimal fuss. In essence, xTorch revives and modernizes the “batteries-included” ethos for C++ deep learning, providing an all-in-one toolkit where the base library left off.
 
 ## Design and Architecture
 
-Libtorch-Extended is architected as a thin layer on top of LibTorch’s C++ API, carefully integrating with it rather than reinventing it. The design follows a modular approach, adding a higher-level API that wraps around LibTorch’s lower-level classes. At its core, libtorch-extended relies on LibTorch for tensor operations, autograd, and neural network primitives – effectively using LibTorch as the computational engine. The extended library then introduces its own set of C++ classes that encapsulate common patterns (model definitions, training loops, data handling, etc.), providing a cleaner interface to the developer.
+xTorch is architected as a thin layer on top of LibTorch’s C++ API, carefully integrating with it rather than reinventing it. The design follows a modular approach, adding a higher-level API that wraps around LibTorch’s lower-level classes. At its core, xTorch relies on LibTorch for tensor operations, autograd, and neural network primitives – effectively using LibTorch as the computational engine. The extended library then introduces its own set of C++ classes that encapsulate common patterns (model definitions, training loops, data handling, etc.), providing a cleaner interface to the developer.
 
 ### Architecture Layers
 - **LibTorch Core (Bottom Layer):** Provides `torch::Tensor`, `torch::autograd`, `torch::nn`, optimizers, etc.
@@ -91,7 +91,7 @@ std::cout << "Predicted class = " << predictedClass << std::endl;
 
 ## Comparison with Related Tools
 
-| Feature                     | LibTorch | Libtorch-Extended | PyTorch Lightning (Python) |
+| Feature                     | LibTorch | xTorch | PyTorch Lightning (Python) |
 |----------------------------|----------|-------------------|-----------------------------|
 | Training Loop Abstraction  | ❌       | ✅                | ✅                          |
 | Data Augmentation Built-in | ❌       | ✅                | ✅                          |
@@ -99,5 +99,5 @@ std::cout << "Predicted class = " << predictedClass << std::endl;
 | Target Language            | C++      | C++               | Python                      |
 | TorchScript Export         | Limited  | ✅                | ✅                          |
 
-Libtorch-Extended complements PyTorch’s C++ API like PyTorch Lightning does in Python, enabling expressive ML development in C++ with clean, modular code structures.
+xTorch complements PyTorch’s C++ API like PyTorch Lightning does in Python, enabling expressive ML development in C++ with clean, modular code structures.
 
