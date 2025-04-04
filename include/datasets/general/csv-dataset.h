@@ -20,8 +20,15 @@ namespace xt::data::datasets {
 
         CSVDataset(const std::string &file_path, DataMode mode, vector<string> x_titles, vector<string> y_titles);
 
-        CSVDataset(const std::string &file_path, DataMode mode,
-                   vector<std::function<torch::Tensor(torch::Tensor)> > transforms);
+        CSVDataset(const std::string &file_path, DataMode mode, TransformType transforms);
+
+        CSVDataset(const std::string &file_path, DataMode mode, vector<int> x_indices, int y_index, TransformType transforms);
+
+        CSVDataset(const std::string &file_path, DataMode mode, vector<int> x_indices, vector<int> y_indices, TransformType transforms);
+
+        CSVDataset(const std::string &file_path, DataMode mode, vector<string> x_titles, string y_title, TransformType transforms);
+
+        CSVDataset(const std::string &file_path, DataMode mode, vector<string> x_titles, vector<string> y_titles, TransformType transforms);
 
     private:
         vector<int> x_indices;
