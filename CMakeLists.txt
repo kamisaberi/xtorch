@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.28 FATAL_ERROR)
 
-project(xTorch VERSION 0.1.0 LANGUAGES CXX)
+project(xTorch VERSION 0.2.0 LANGUAGES CXX)
 
 # List Of All CPP Files By Category
 file(GLOB_RECURSE UTILITY_FILES CONFIGURE_DEPENDS src/utils/*.cpp)
