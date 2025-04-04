@@ -13,17 +13,18 @@ int main() {
     std::cout.precision(10);
     torch::Device device(torch::kCPU);
 
-    auto dataset = xt::data::datasets::Imagenette("/home/kami/Documents/temp/", DataMode::TRAIN, true,xt::data::datasets::ImageType::PX160 );
+    auto dataset = xt::data::datasets::Imagenette("/home/kami/Documents/temp/", DataMode::TRAIN, true,
+                                                  xt::data::datasets::ImageType::PX160);
 
     auto transformed_dataset = dataset
             .map(xt::data::transforms::resize(size))
-            .map(xt::data::transforms::normalize(0.5, 0.5))
+            .map(torch::data::transforms::Normalize<>(0.5, 0.5))
             .map(torch::data::transforms::Stack<>());
 
     auto train_loader = torch::data::make_data_loader<torch::data::samplers::SequentialSampler>(
         std::move(transformed_dataset), 64);
 
-    xt::models::AlexNet model(10,3);
+    xt::models::AlexNet model(10, 3);
     model.to(device);
     model.train();
     torch::optim::Adam optimizer(model.parameters(), torch::optim::AdamOptions(1e-3));
