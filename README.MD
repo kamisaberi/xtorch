@@ -46,25 +46,33 @@ xTorch is architected as a thin layer on top of LibTorch’s C++ API, carefully 
 
 int main() {
     std::cout.precision(10);
-    auto dataset = xt::data::datasets::MNIST("/home/kami/Documents/temp/", DataMode::TRAIN, true,
-                                             {
-                                                 xt::data::transforms::Resize({32, 32}),
-                                                 torch::data::transforms::Normalize<>(0.5, 0.5)
-                                             }).map(torch::data::transforms::Stack<>());
-    xt::DataLoader<decltype(dataset)> loader(std::move(dataset),
-                                             torch::data::DataLoaderOptions().batch_size(64).drop_last(false),
-                                             true);
+    auto dataset = xt::data::datasets::MNIST(
+        "/home/kami/Documents/temp/", DataMode::TRAIN, true,
+        {
+            xt::data::transforms::Resize({32, 32}),
+            torch::data::transforms::Normalize<>(0.5, 0.5)
+        }).map(torch::data::transforms::Stack<>());
+
+
+    xt::DataLoader<decltype(dataset)> loader(
+        std::move(dataset),
+        torch::data::DataLoaderOptions().batch_size(64).drop_last(false),
+        true);
+    
     xt::models::LeNet5 model(10);
     model.to(torch::Device(torch::kCPU));
     model.train();
+
     torch::optim::Adam optimizer(model.parameters(), torch::optim::AdamOptions(1e-3));
+
     xt::Trainer trainer;
     trainer.set_optimizer(&optimizer)
-        .set_max_epochs(5)
-        .set_loss_fn([](auto output, auto target) {
-          return torch::nll_loss(output, target);
-        });
-    trainer.fit<decltype(dataset)>(&model ,loader );
+            .set_max_epochs(5)
+            .set_loss_fn([](auto output, auto target) {
+                return torch::nll_loss(output, target);
+            });
+    
+    trainer.fit<decltype(dataset)>(&model, loader);
 
     return 0;
 }
