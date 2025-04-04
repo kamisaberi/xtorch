@@ -3,6 +3,8 @@
 
 #include "../base/base.h"
 #include "../../headers/datasets.h"
+#include "../../../third_party/csv2/reader.hpp"
+
 
 
 namespace xt::data::datasets {
