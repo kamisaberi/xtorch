@@ -48,6 +48,7 @@ packages["liblzma-dev"]="xz"
 packages["libarchive-dev"]="libarchive"
 packages["libtar-dev"]="libtar"
 packages["libzip-dev"]="libzip"
+packages["libsndfile1-dev"]="libsndfile"
 
 # Check and install each package
 for ubuntu_pkg in "${!packages[@]}"; do
