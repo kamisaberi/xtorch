@@ -22,13 +22,13 @@ authors:
     surname: Beethoven
     affiliation: 3
 affiliations:
- - name: Lyman Spitzer, Jr. Fellow, Princeton University, United States
-   index: 1
-   ror: 00hx57361
- - name: Institution Name, Country
-   index: 2
- - name: Independent Researcher, Country
-   index: 3
+  - name: Lyman Spitzer, Jr. Fellow, Princeton University, United States
+    index: 1
+    ror: 00hx57361
+  - name: Institution Name, Country
+    index: 2
+  - name: Independent Researcher, Country
+    index: 3
 date: 13 August 2017
 bibliography: paper.bib
 
@@ -40,81 +40,64 @@ aas-journal: Astrophysical Journal <- The name of the AAS journal.
 
 # Summary
 
-The forces on stars, galaxies, and dark matter under external gravitational
-fields lead to the dynamical evolution of structures in the universe. The orbits
-of these bodies are therefore key to understanding the formation, history, and
-future state of galaxies. The field of "galactic dynamics," which aims to model
-the gravitating components of galaxies to study their structure and evolution,
-is now well-established, commonly taught, and frequently used in astronomy.
-Aside from toy problems and demonstrations, the majority of problems require
-efficient numerical tools, many of which require the same base code (e.g., for
-performing numerical orbit integration).
+xTorch is a modular, high-level C++ extension to the PyTorch C++ frontend (LibTorch). It significantly simplifies the
+process of model definition, training, data loading, and deployment by introducing practical abstractions missing in
+LibTorch after 2019. While LibTorch exposes the full power of the PyTorch backend, it lacks user-friendly APIs available
+in Python. xTorch fills this usability gap and enables developers to create deep learning pipelines directly in C++ with
+ease and clarity.
+
+xTorch introduces structured components for neural network architecture (XTModule), training management (Trainer),
+dataset handling (ImageFolder, CSVDataset, and transformations), model checkpointing, and TorchScript export. It
+enhances developer productivity without sacrificing the performance and flexibility of LibTorch.
 
 # Statement of need
 
-`Gala` is an Astropy-affiliated Python package for galactic dynamics. Python
-enables wrapping low-level languages (e.g., C) for speed without losing
-flexibility or ease-of-use in the user-interface. The API for `Gala` was
-designed to provide a class-based and user-friendly interface to fast (C or
-Cython-optimized) implementations of common operations such as gravitational
-potential and force evaluation, orbit integration, dynamical transformations,
-and chaos indicators for nonlinear dynamics. `Gala` also relies heavily on and
-interfaces well with the implementations of physical units and astronomical
-coordinate systems in the `Astropy` package [@astropy] (`astropy.units` and
-`astropy.coordinates`).
+Although Python remains the primary language for machine learning, many real-world systems are written in C++ due to its
+speed, compatibility, and suitability for embedded, robotics, game engines, and high-performance environments. PyTorch’s
+C++ frontend (LibTorch) enables such integration, but lacks many high-level abstractions that make Python so productive.
 
-`Gala` was designed to be used by both astronomical researchers and by
-students in courses on gravitational dynamics or astronomy. It has already been
-used in a number of scientific publications [@Pearson:2017] and has also been
-used in graduate courses on Galactic dynamics to, e.g., provide interactive
-visualizations of textbook material [@Binney:2008]. The combination of speed,
-design, and support for Astropy functionality in `Gala` will enable exciting
-scientific explorations of forthcoming data releases from the *Gaia* mission
-[@gaia] by students and experts alike.
-
-# Mathematics
-
-Single dollars ($) are required for inline mathematics e.g. $f(x) = e^{\pi/x}$
-
-Double dollars make self-standing equations:
-
-$$\Theta(x) = \left\{\begin{array}{l}
-0\textrm{ if } x < 0\cr
-1\textrm{ else}
-\end{array}\right.$$
-
-You can also use plain \LaTeX for equations
-\begin{equation}\label{eq:fourier}
-\hat f(\omega) = \int_{-\infty}^{\infty} f(x) e^{i\omega x} dx
-\end{equation}
-and refer to \autoref{eq:fourier} from text.
+xTorch addresses this gap by wrapping LibTorch’s low-level tools into a modular and extensible framework that is more
+intuitive to use. With xTorch, C++ developers no longer need to reinvent training loops or manually register every
+neural module. Instead, they can prototype, train, evaluate, and export models using a syntax close to PyTorch in
+Python. This drastically reduces development time, increases adoption of C++ for ML, and aligns the C++ experience with
+modern deep learning workflows.
 
 # Citations
 
-Citations to entries in paper.bib should be in
-[rMarkdown](http://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html)
-format.
+If citing relevant work in the paper (optional but encouraged), you can include citations like:
 
-If you want to cite a software repository URL (e.g. something on GitHub without a preferred
-citation) then you can do it with the example BibTeX entry below for @fidgit.
+Paszke et al., 2019. PyTorch: An Imperative Style, High-Performance Deep Learning Library. NeurIPS.
 
-For a quick reference, the following citation commands can be used:
-- `@author:2001`  ->  "Author et al. (2001)"
-- `[@author:2001]` -> "(Author et al., 2001)"
-- `[@author1:2001; @author2:2001]` -> "(Author1 et al., 2001; Author2 et al., 2002)"
+PyTorch C++ API Documentation. https://pytorch.org/cppdocs/
 
-# Figures
+TorchScript export guide: https://pytorch.org/tutorials/advanced/cpp_export.html
 
-Figures can be included like this:
-![Caption for example figure.\label{fig:example}](figure.png)
-and referenced from text using \autoref{fig:example}.
+Let me know if you want these turned into BibTeX or @citation markdown style.
 
-Figure sizes can be customized by adding an optional second parameter:
-![Caption for example figure.](figure.png){ width=20% }
+[//]: # (# Figures)
+
+[//]: # ()
+[//]: # (Figures can be included like this:)
+
+[//]: # (![Caption for example figure.\label{fig:example}]&#40;figure.png&#41;)
+
+[//]: # (and referenced from text using \autoref{fig:example}.)
+
+[//]: # ()
+[//]: # (Figure sizes can be customized by adding an optional second parameter:)
+
+[//]: # (![Caption for example figure.]&#40;figure.png&#41;{ width=20% })
 
 # Acknowledgements
 
-We acknowledge contributions from Brigitta Sipocz, Syrtis Major, and Semyeong
-Oh, and support from Kathryn Johnston during the genesis of this project.
+This project builds upon the open-source work of the PyTorch community. Special thanks to the developers of LibTorch,
+whose computational backend powers this library. The xTorch project also thanks the broader machine learning and C++
+community for providing open tools and knowledge that make development and research more accessible.
 
 # References
+
+[1] Paszke, A., et al. (2019). PyTorch: An Imperative Style, High-Performance Deep Learning Library. NeurIPS.
+
+[2] PyTorch C++ API Documentation: https://pytorch.org/cppdocs/
+
+[3] TorchScript Export Tutorial: https://pytorch.org/tutorials/advanced/cpp_export.html
