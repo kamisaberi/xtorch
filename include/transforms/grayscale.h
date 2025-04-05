@@ -31,5 +31,16 @@ namespace xt::data::transforms {
         torch::Tensor operator()(const torch::Tensor &tensor);
     };
 
+    struct Grayscale {
+    public:
+        Grayscale();
+
+        torch::Tensor operator()(torch::Tensor input);
+    };
+
+    struct ToGray {
+        torch::Tensor operator()(const torch::Tensor& color_tensor) const;
+    };
+
 
 }
