@@ -13,15 +13,6 @@ namespace xt::data::transforms {
     torch::data::transforms::Lambda<torch::data::Example<> > normalize(double mean, double stddev);
 
 
-    struct CenterCrop {
-    public:
-        CenterCrop(std::vector<int64_t> size);
-
-        torch::Tensor operator()(torch::Tensor input);
-
-    private:
-        std::vector<int64_t> size;
-    };
 
 
 
