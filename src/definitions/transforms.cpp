@@ -315,4 +315,23 @@ namespace xt::data::transforms {
         // Scale by std and shift by mean, then add to input
         return input + (noise * std + mean);
     }
+
+
+
+    struct HorizontalFlip {
+    public:
+        // Constructor: No parameters needed for deterministic flip
+        HorizontalFlip() {}
+
+        // Operator: Horizontally flip the input tensor
+        torch::Tensor operator()(torch::Tensor input) {
+            int64_t input_dims = input.dim();
+            if (input_dims < 2) {
+                throw std::runtime_error("Input tensor must have at least 2 dimensions (e.g., [H, W]).");
+            }
+
+            // Flip along the last dimension (width)
+            return torch::flip(input, {-1});
+        }
+    };
 }
