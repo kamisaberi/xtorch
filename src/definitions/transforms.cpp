@@ -233,14 +233,7 @@ namespace xt::data::transforms {
     }
 
 
-
-
-
-
-struct GaussianBlur {
-public:
-    // Constructor: Initialize kernel size and sigma, validate inputs
-    GaussianBlur(std::vector<int64_t> kernel_size, float sigma)
+    GaussianBlur::GaussianBlur(std::vector<int64_t> kernel_size, float sigma)
         : kernel_size(kernel_size), sigma(sigma) {
         if (kernel_size.size() != 2) {
             throw std::invalid_argument("Kernel size must have exactly 2 elements (height, width).");
@@ -253,8 +246,7 @@ public:
         }
     }
 
-    // Operator: Apply Gaussian blur to the input tensor
-    torch::Tensor operator()(torch::Tensor input) {
+    torch::Tensor GaussianBlur::operator()(torch::Tensor input) {
         int64_t input_dims = input.dim();
         if (input_dims < 3 || input_dims > 4) {
             throw std::runtime_error("Input tensor must be 3D ([C, H, W]) or 4D ([N, C, H, W]).");
@@ -284,11 +276,11 @@ public:
 
         // Apply convolution with "same" padding
         torch::Tensor output = torch::conv2d(input, kernel,
-                                            /*bias=*/torch::Tensor(),
-                                            /*stride=*/1,
-                                            /*padding=*/{(k_h - 1) / 2, (k_w - 1) / 2},
-                                            /*dilation=*/1,
-                                            /*groups=*/channels);
+                                             /*bias=*/torch::Tensor(),
+                                             /*stride=*/1,
+                                             /*padding=*/{(k_h - 1) / 2, (k_w - 1) / 2},
+                                             /*dilation=*/1,
+                                             /*groups=*/channels);
 
         // Remove batch dimension if added
         if (is_3d) {
@@ -298,12 +290,7 @@ public:
         return output;
     }
 
-private:
-    std::vector<int64_t> kernel_size; // Kernel size {height, width}
-    float sigma;                      // Gaussian sigma
-
-    // Helper to generate 2D Gaussian kernel
-    torch::Tensor generate_gaussian_kernel(int64_t k_h, int64_t k_w, float sigma, torch::Device device) {
+    torch::Tensor GaussianBlur::generate_gaussian_kernel(int64_t k_h, int64_t k_w, float sigma, torch::Device device) {
         torch::Tensor x = torch::arange(-(k_w / 2), k_w / 2 + 1, torch::dtype(torch::kFloat32).device(device));
         torch::Tensor y = torch::arange(-(k_h / 2), k_h / 2 + 1, torch::dtype(torch::kFloat32).device(device));
         auto [x_grid, y_grid] = torch::meshgrid({x, y}, "ij");
@@ -311,13 +298,4 @@ private:
         kernel = kernel / kernel.sum(); // Normalize
         return kernel;
     }
-};
-
-
-
-
-
-
-
-
 }
