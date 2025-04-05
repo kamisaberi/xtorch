@@ -31,15 +31,6 @@ namespace xt::data::transforms {
     //     float angle;
     // };
 
-    struct Rotation {
-    public:
-        Rotation(double angle_deg);
-
-        torch::Tensor operator()(const torch::Tensor &input_tensor);
-
-    private :
-        double angle; // Rotation angle in degrees
-    };
 
 
     struct RandomCrop2 {

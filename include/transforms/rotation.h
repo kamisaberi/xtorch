@@ -1,8 +1,16 @@
-//
-// Created by kami on 4/5/25.
-//
 
-#ifndef ROTATION_H
-#define ROTATION_H
+#include "../headers/transforms.h"
 
-#endif //ROTATION_H
+namespace xt::data::transforms {
+
+    struct Rotation {
+    public:
+        Rotation(double angle_deg);
+
+        torch::Tensor operator()(const torch::Tensor &input_tensor);
+
+        private :
+            double angle; // Rotation angle in degrees
+    };
+
+}
