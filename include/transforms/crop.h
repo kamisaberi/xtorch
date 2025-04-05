@@ -16,6 +16,17 @@ namespace xt::data::transforms {
     };
 
 
+    struct RandomCrop {
+    public:
+        RandomCrop(std::vector<int64_t> size);
+
+        torch::Tensor operator()(torch::Tensor input);
+
+    private:
+        std::vector<int64_t> size;
+    };
+
+
 
 
 

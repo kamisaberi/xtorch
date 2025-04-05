@@ -18,31 +18,6 @@ namespace xt::data::transforms {
 
 
 
-    struct HorizontalFlip {
-    public:
-        HorizontalFlip();
-
-        torch::Tensor operator()(torch::Tensor input);
-    };
-
-
-    struct VerticalFlip {
-    public:
-        VerticalFlip();
-
-        torch::Tensor operator()(torch::Tensor input);
-    };
-
-
-    struct RandomCrop {
-    public:
-        RandomCrop(std::vector<int64_t> size);
-
-        torch::Tensor operator()(torch::Tensor input);
-
-    private:
-        std::vector<int64_t> size;
-    };
 
     struct Lambda {
     public:
