@@ -382,4 +382,24 @@ namespace xt::data::transforms {
         return input.slice(input_dims - 2, h_start, h_end)
                 .slice(input_dims - 1, w_start, w_end);
     }
+
+
+
+
+    struct Lambda {
+    public:
+        // Constructor: Initialize with a user-defined transformation
+        Lambda(std::function<torch::Tensor(torch::Tensor)> transform)
+            : transform(transform) {}
+
+        // Operator: Apply the stored transformation to the input tensor
+        torch::Tensor operator()(torch::Tensor input) {
+            return transform(input);
+        }
+
+    private:
+        std::function<torch::Tensor(torch::Tensor)> transform; // Stored transformation
+    };
+
+
 }
