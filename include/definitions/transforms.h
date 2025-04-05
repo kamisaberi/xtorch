@@ -206,37 +206,14 @@ namespace xt::data::transforms {
     };
 
 
-
-
     struct GaussianNoise {
     public:
-        // Constructor: Initialize mean and standard deviation, validate std
-        GaussianNoise(float mean, float std) : mean(mean), std(std) {
-            if (std < 0) {
-                throw std::invalid_argument("Standard deviation must be non-negative.");
-            }
-        }
+        GaussianNoise(float mean, float std);
 
-        // Operator: Add Gaussian noise to the input tensor
-        torch::Tensor operator()(torch::Tensor input) {
-            // Generate noise ~ N(0, 1) with the same shape as input
-            torch::Tensor noise = torch::randn_like(input, torch::TensorOptions()
-                .dtype(input.dtype())
-                .device(input.device()));
-
-            // Scale by std and shift by mean, then add to input
-            return input + (noise * std + mean);
-        }
+        torch::Tensor operator()(torch::Tensor input);
 
     private:
-        float mean; // Mean of the Gaussian noise
-        float std;  // Standard deviation of the Gaussian noise
+        float mean;
+        float std;
     };
-
-
-
-
-
-
-
 }
