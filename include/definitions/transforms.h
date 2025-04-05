@@ -326,4 +326,13 @@ namespace xt::data::transforms {
 
         torch::Tensor operator()(const torch::Tensor &input_tensor);
     };
+
+
+    struct ToTensor {
+    public:
+        torch::Tensor operator()(const cv::Mat& image) const;
+    };
+
+
+
 }
