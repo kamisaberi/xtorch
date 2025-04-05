@@ -232,4 +232,63 @@ namespace xt::data::transforms {
 
         torch::Tensor operator()(torch::Tensor input);
     };
+
+
+
+
+
+
+#include <torch/torch.h>
+#include <vector>
+#include <stdexcept>
+
+    struct RandomCrop {
+    public:
+        // Constructor: Initialize crop size and validate it has 2 positive elements
+        RandomCrop(std::vector<int64_t> size) : size(size) {
+            if (size.size() != 2) {
+                throw std::invalid_argument("Crop size must have exactly 2 elements (height, width).");
+            }
+            if (size[0] <= 0 || size[1] <= 0) {
+                throw std::invalid_argument("Crop dimensions must be positive.");
+            }
+        }
+
+        // Operator: Randomly crop the input tensor to the target size
+        torch::Tensor operator()(torch::Tensor input) {
+            int64_t input_dims = input.dim();
+            if (input_dims < 2) {
+                throw std::runtime_error("Input tensor must have at least 2 dimensions (e.g., [H, W]).");
+            }
+
+            // Get input height and width (last two dimensions)
+            int64_t input_h = input.size(input_dims - 2);
+            int64_t input_w = input.size(input_dims - 1);
+            int64_t crop_h = size[0];
+            int64_t crop_w = size[1];
+
+            // Validate input size is large enough
+            if (input_h < crop_h || input_w < crop_w) {
+                throw std::runtime_error("Input dimensions must be >= crop size.");
+            }
+
+            // Generate random start indices
+            int64_t h_start = torch::randint(0, input_h - crop_h + 1, {1}).item<int64_t>();
+            int64_t w_start = torch::randint(0, input_w - crop_w + 1, {1}).item<int64_t>();
+            int64_t h_end = h_start + crop_h;
+            int64_t w_end = w_start + crop_w;
+
+            // Crop height (dim -2) and width (dim -1)
+            return input.slice(input_dims - 2, h_start, h_end)
+                        .slice(input_dims - 1, w_start, w_end);
+        }
+
+    private:
+        std::vector<int64_t> size; // Target crop size {height, width}
+    };
+
+
+
+
+
 }
