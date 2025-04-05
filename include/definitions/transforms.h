@@ -100,12 +100,6 @@ namespace xt::data::transforms {
     };
 
 
-    struct Grayscale {
-    public:
-        Grayscale();
-
-        torch::Tensor operator()(torch::Tensor input);
-    };
 
 
     struct GaussianBlur {
@@ -258,9 +252,6 @@ namespace xt::data::transforms {
     };
 
 
-    struct ToGray {
-        torch::Tensor operator()(const torch::Tensor& color_tensor) const;
-    };
 
 
 
