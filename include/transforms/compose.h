@@ -1,6 +1,5 @@
 #pragma once
 
-
 #include <torch/torch.h>
 #include <torch/data/datasets/mnist.h>
 #include <iostream>
