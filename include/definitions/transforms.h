@@ -304,27 +304,19 @@ namespace xt::data::transforms {
     };
 
 
-    struct RandomCrop {
+    struct RandomCrop2 {
+    private:
         int crop_height;
         int crop_width;
 
-        RandomCrop(int height, int width)
-            : crop_height(height), crop_width(width) {}
-
-        torch::Tensor operator()(const torch::Tensor& input_tensor) const {
-            static thread_local std::mt19937 gen(std::random_device{}());
-
-            int C = input_tensor.size(0);
-            int H = input_tensor.size(1);
-            int W = input_tensor.size(2);
-
-            int y = std::uniform_int_distribution<>(0, H - crop_height)(gen);
-            int x = std::uniform_int_distribution<>(0, W - crop_width)(gen);
-
-            return input_tensor.slice(1, y, y + crop_height)
-                               .slice(2, x, x + crop_width);
-        }
+    public:
+        RandomCrop2(int height, int width);
+        torch::Tensor operator()(const torch::Tensor& input_tensor) ;
     };
+
+
+
+
 
 
 
