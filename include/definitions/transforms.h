@@ -8,6 +8,8 @@
 #include <functional>
 #include <stdexcept>
 #include <cmath>
+#include <opencv2/opencv.hpp>
+
 
 namespace xt::data::transforms {
     std::function<torch::Tensor(torch::Tensor input)> create_resize_transform(std::vector<int64_t> size);
@@ -206,6 +208,18 @@ namespace xt::data::transforms {
     };
 
 
+    struct GaussianBlurOpenCV {
+    public:
+        GaussianBlurOpenCV(int ksize, double sigma_val);
+
+        torch::Tensor operator()(const torch::Tensor &input_tensor);
+
+    private:
+        cv::Size kernel_size;
+        double sigma;
+    };
+
+
     struct GaussianNoise {
     public:
         GaussianNoise(float mean, float std);
@@ -265,5 +279,13 @@ namespace xt::data::transforms {
     //     float angle;
     // };
 
+    struct Rotation {
+    public:
+        Rotation(double angle_deg);
 
+        torch::Tensor operator()(const torch::Tensor &input_tensor);
+
+    private :
+        double angle; // Rotation angle in degrees
+    };
 }
