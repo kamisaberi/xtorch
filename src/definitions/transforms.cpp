@@ -172,54 +172,63 @@ namespace xt::data::transforms {
     }
 
 
+    CenterCrop::CenterCrop(std::vector<int64_t> size) : size(size) {
+        if (size.size() != 2) {
+            throw std::invalid_argument("CenterCrop size must have exactly 2 elements (height, width).");
+        }
+    }
 
-
-
-
-
-
-
-
-        CenterCrop::CenterCrop(std::vector<int64_t> size) : size(size) {
-            if (size.size() != 2) {
-                throw std::invalid_argument("CenterCrop size must have exactly 2 elements (height, width).");
-            }
+    torch::Tensor CenterCrop::operator()(torch::Tensor input) {
+        int64_t input_dims = input.dim();
+        if (input_dims < 2) {
+            throw std::runtime_error("Input tensor must have at least 2 dimensions for cropping.");
         }
 
-        torch::Tensor CenterCrop::operator()(torch::Tensor input) {
-            int64_t input_dims = input.dim();
-            if (input_dims < 2) {
-                throw std::runtime_error("Input tensor must have at least 2 dimensions for cropping.");
-            }
+        // Get input height and width (last two dimensions)
+        int64_t input_h = input.size(input_dims - 2);
+        int64_t input_w = input.size(input_dims - 1);
+        int64_t target_h = size[0];
+        int64_t target_w = size[1];
 
-            // Get input height and width (last two dimensions)
-            int64_t input_h = input.size(input_dims - 2);
-            int64_t input_w = input.size(input_dims - 1);
-            int64_t target_h = size[0];
-            int64_t target_w = size[1];
-
-            // Validate input size is large enough
-            if (input_h < target_h || input_w < target_w) {
-                throw std::runtime_error("Input dimensions must be >= target size for cropping.");
-            }
-
-            // Calculate crop start and end indices
-            int64_t h_start = (input_h - target_h) / 2;
-            int64_t h_end = h_start + target_h;
-            int64_t w_start = (input_w - target_w) / 2;
-            int64_t w_end = w_start + target_w;
-
-            // Crop height (dim -2) and width (dim -1)
-            return input.slice(input_dims - 2, h_start, h_end)
-                        .slice(input_dims - 1, w_start, w_end);
+        // Validate input size is large enough
+        if (input_h < target_h || input_w < target_w) {
+            throw std::runtime_error("Input dimensions must be >= target size for cropping.");
         }
 
+        // Calculate crop start and end indices
+        int64_t h_start = (input_h - target_h) / 2;
+        int64_t h_end = h_start + target_h;
+        int64_t w_start = (input_w - target_w) / 2;
+        int64_t w_end = w_start + target_w;
+
+        // Crop height (dim -2) and width (dim -1)
+        return input.slice(input_dims - 2, h_start, h_end)
+                .slice(input_dims - 1, w_start, w_end);
+    }
 
 
+    Grayscale::Grayscale() {
+    }
 
+    torch::Tensor Grayscale::operator()(torch::Tensor input) {
+        int64_t input_dims = input.dim();
+        if (input_dims < 3) {
+            throw std::runtime_error("Input tensor must have at least 3 dimensions (e.g., [C, H, W]).");
+        }
 
+        // Get channel dimension (assumed as dim 0 or dim 1 for batched)
+        int64_t channel_dim = (input_dims == 3) ? 0 : 1;
+        int64_t channels = input.size(channel_dim);
+        if (channels != 3) {
+            throw std::runtime_error("Input tensor must have exactly 3 channels (RGB).");
+        }
 
+        // Define grayscale weights (ITU-R 601-2 luma transform)
+        auto weights = torch::tensor({0.2989, 0.5870, 0.1140},
+                                     torch::TensorOptions().dtype(input.dtype()).device(input.device()));
 
-
-
+        // Compute weighted sum across channels
+        torch::Tensor gray = (input * weights.view({channels, 1, 1})).sum(channel_dim, true);
+        return gray; // Output shape: e.g., [1, H, W] or [N, 1, H, W]
+    }
 }
