@@ -1,8 +1,7 @@
-//
-// Created by kami on 4/5/25.
-//
 
-#ifndef LAMBDA_H
-#define LAMBDA_H
+#include "../headers/transforms.h"
 
-#endif //LAMBDA_H
+namespace xt::data::transforms {
+
+
+}
