@@ -293,7 +293,10 @@ namespace xt::data::transforms {
     torch::Tensor GaussianBlur::generate_gaussian_kernel(int64_t k_h, int64_t k_w, float sigma, torch::Device device) {
         torch::Tensor x = torch::arange(-(k_w / 2), k_w / 2 + 1, torch::dtype(torch::kFloat32).device(device));
         torch::Tensor y = torch::arange(-(k_h / 2), k_h / 2 + 1, torch::dtype(torch::kFloat32).device(device));
-        auto [x_grid, y_grid] = torch::meshgrid({x, y}, "ij");
+        // auto [x_grid, y_grid] = torch::meshgrid({x, y}, "ij");
+        std::vector<torch::Tensor> grids = torch::meshgrid({x, y}, "ij");
+        torch::Tensor x_grid = grids[0];
+        torch::Tensor y_grid = grids[1];
         torch::Tensor kernel = torch::exp(-(x_grid.pow(2) + y_grid.pow(2)) / (2 * sigma * sigma));
         kernel = kernel / kernel.sum(); // Normalize
         return kernel;
