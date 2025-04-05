@@ -6,6 +6,8 @@
 #include <vector>
 #include <torch/data/transforms/base.h>
 #include <functional>
+#include <stdexcept>
+#include <cmath>
 
 namespace xt::data::transforms {
     std::function<torch::Tensor(torch::Tensor input)> create_resize_transform(std::vector<int64_t> size);
@@ -187,5 +189,19 @@ namespace xt::data::transforms {
         Grayscale();
 
         torch::Tensor operator()(torch::Tensor input);
+    };
+
+
+    struct GaussianBlur {
+    public:
+        GaussianBlur(std::vector<int64_t> kernel_size, float sigma);
+
+        torch::Tensor operator()(torch::Tensor input);
+
+    private:
+        std::vector<int64_t> kernel_size;
+        float sigma;
+
+        torch::Tensor generate_gaussian_kernel(int64_t k_h, int64_t k_w, float sigma, torch::Device device);
     };
 }
