@@ -234,19 +234,11 @@ namespace xt::data::transforms {
     };
 
 
-
-
-
-
-#include <torch/torch.h>
-#include <vector>
-#include <stdexcept>
-
     struct RandomCrop {
     public:
         RandomCrop(std::vector<int64_t> size);
 
-        torch::Tensor operator()(torch::Tensor input) ;
+        torch::Tensor operator()(torch::Tensor input);
 
     private:
         std::vector<int64_t> size;
@@ -255,9 +247,75 @@ namespace xt::data::transforms {
     struct Lambda {
     public:
         Lambda(std::function<torch::Tensor(torch::Tensor)> transform);
-        torch::Tensor operator()(torch::Tensor input) ;
+
+        torch::Tensor operator()(torch::Tensor input);
+
     private:
         std::function<torch::Tensor(torch::Tensor)> transform;
     };
 
+
+    struct Rotation {
+    public:
+        // Constructor: Initialize rotation angle in degrees
+        Rotation(float angle) : angle(angle) {
+        }
+
+        // Operator: Rotate the input tensor by the specified angle
+        torch::Tensor operator()(torch::Tensor input) {
+            int64_t input_dims = input.dim();
+            if (input_dims < 3 || input_dims > 4) {
+                throw std::runtime_error("Input tensor must be 3D ([C, H, W]) or 4D ([N, C, H, W]).");
+            }
+
+            // Get spatial dimensions
+            int64_t h = input.size(input_dims - 2);
+            int64_t w = input.size(input_dims - 1);
+
+            // Convert angle to radians
+            float rad = angle * M_PI / 180.0;
+            float cos_val = std::cos(rad);
+            float sin_val = std::sin(rad);
+
+            // Create 2x3 affine matrix: [cos, -sin, 0; sin, cos, 0]
+            torch::Tensor theta = torch::tensor({
+                                                    {cos_val, -sin_val, 0.0},
+                                                    {sin_val, cos_val, 0.0}
+                                                }, input.options()).reshape({1, 2, 3}).repeat({
+                input_dims == 4 ? input.size(0) : 1, 1, 1
+            });
+
+            // Generate grid for sampling
+            auto grid = torch::nn::functional::affine_grid(theta,
+                                                           input_dims == 4
+                                                               ? torch::IntArrayRef(
+                                                                   {input.size(0), input.size(1), h, w})
+                                                               : torch::IntArrayRef({1, input.size(0), h, w}),
+                                                           torch::nn::functional::AffineGridFuncOptions().align_corners(
+                                                               false));
+
+            // Add batch dimension if 3D
+            bool is_3d = (input_dims == 3);
+            if (is_3d) {
+                input = input.unsqueeze(0);
+            }
+
+            // Sample the input with the rotated grid
+            torch::Tensor output = torch::nn::functional::grid_sample(input, grid,
+                                                                      torch::nn::functional::GridSampleFuncOptions()
+                                                                      .mode(torch::kBilinear)
+                                                                      .padding_mode(torch::kZeros)
+                                                                      .align_corners(false));
+
+            // Remove batch dimension if added
+            if (is_3d) {
+                output = output.squeeze(0);
+            }
+
+            return output;
+        }
+
+    private:
+        float angle; // Rotation angle in degrees
+    };
 }
