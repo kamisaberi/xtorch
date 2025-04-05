@@ -226,4 +226,21 @@ namespace xt::data::transforms {
     };
 
 
+    struct VerticalFlip {
+    public:
+        // Constructor: No parameters needed for deterministic flip
+        VerticalFlip() {}
+
+        // Operator: Vertically flip the input tensor
+        torch::Tensor operator()(torch::Tensor input) {
+            int64_t input_dims = input.dim();
+            if (input_dims < 2) {
+                throw std::runtime_error("Input tensor must have at least 2 dimensions (e.g., [H, W]).");
+            }
+
+            // Flip along the second-to-last dimension (height)
+            return torch::flip(input, {-2});
+        }
+    };
+
 }
