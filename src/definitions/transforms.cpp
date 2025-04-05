@@ -384,22 +384,14 @@ namespace xt::data::transforms {
     }
 
 
+    Lambda::Lambda(std::function<torch::Tensor(torch::Tensor)> transform)
+        : transform(transform) {
+    }
 
+    torch::Tensor Lambda::operator()(torch::Tensor input) {
+        return transform(input);
+    }
 
-    struct Lambda {
-    public:
-        // Constructor: Initialize with a user-defined transformation
-        Lambda(std::function<torch::Tensor(torch::Tensor)> transform)
-            : transform(transform) {}
-
-        // Operator: Apply the stored transformation to the input tensor
-        torch::Tensor operator()(torch::Tensor input) {
-            return transform(input);
-        }
-
-    private:
-        std::function<torch::Tensor(torch::Tensor)> transform; // Stored transformation
-    };
 
 
 }
