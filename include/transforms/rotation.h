@@ -13,4 +13,17 @@ namespace xt::data::transforms {
             double angle; // Rotation angle in degrees
     };
 
+
+    // struct Rotation {
+    // public:
+    //     Rotation(float angle);
+    //
+    //     torch::Tensor operator()(torch::Tensor input);
+    //
+    // private:
+    //     float angle;
+    // };
+
+
+
 }

@@ -21,16 +21,6 @@ namespace xt::data::transforms {
 
 
 
-    // struct Rotation {
-    // public:
-    //     Rotation(float angle);
-    //
-    //     torch::Tensor operator()(torch::Tensor input);
-    //
-    // private:
-    //     float angle;
-    // };
-
 
 
 
