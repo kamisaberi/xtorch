@@ -1,8 +1,15 @@
-//
-// Created by kami on 4/5/25.
-//
 
-#ifndef NORMALIZE_H
-#define NORMALIZE_H
+#include "../headers/transforms.h"
 
-#endif //NORMALIZE_H
+namespace xt::data::transforms {
+    struct Normalize {
+    public:
+        Normalize(std::vector<float> mean, std::vector<float> std);
+        torch::Tensor operator()(const torch::Tensor& tensor) const;
+    private:
+        std::vector<float> mean;
+        std::vector<float> std;
+
+    };
+
+}
