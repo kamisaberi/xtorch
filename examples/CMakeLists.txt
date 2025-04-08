@@ -19,6 +19,10 @@ set(BASE_SOURCE_FILES
 #        ../src/datasets/mnist.cpp
 #        ../src/models/cnn/lenet5.cpp
         ../src/definitions/transforms.cpp
+        ../src/transforms/compose.cpp
+        ../src/transforms/normalize.cpp
+        ../src/transforms/resize.cpp
+        ../src/transforms/lambda.cpp
         ../src/datasets/base/base.cpp
         ../src/datasets/definitions/functions.cpp
         ../src/models/base.cpp
