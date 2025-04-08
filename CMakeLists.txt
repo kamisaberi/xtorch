@@ -27,6 +27,7 @@ project(xTorch VERSION 0.2.0 LANGUAGES CXX)
 #   - Definition files
 #   - Model files
 #   - Dataloader files
+#   - Transform files
 file(GLOB_RECURSE UTILITY_FILES CONFIGURE_DEPENDS src/utils/*.cpp)
 file(GLOB_RECURSE MEDIA_FILES CONFIGURE_DEPENDS src/media/*.cpp)
 file(GLOB_RECURSE DATASET_FILES CONFIGURE_DEPENDS src/datasets/*.cpp)
