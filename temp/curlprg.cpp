@@ -35,8 +35,8 @@ int progress_callback(void* ptr, curl_off_t total, curl_off_t now, curl_off_t, c
 }
 
 int main() {
-    const string url = "https://speed.hetzner.de/100MB.bin"; // Example large file
-    const string output_file = "downloaded_file.bin";
+    const string url = "https://www.cs.toronto.edu/~kriz/cifar-10-binary.tar.gz"; // Example large file
+    const string output_file = "cifar-10-binary.tar.gz";
 
     CURL* curl;
     CURLcode res;
