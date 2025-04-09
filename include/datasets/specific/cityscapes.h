@@ -6,7 +6,7 @@
 namespace xt::data::datasets {
     class Cityscapes : public BaseDataset {
     public :
-        Cityscapes(const std::string &root);
+        explicit  Cityscapes(const std::string &root);
         Cityscapes(const std::string &root, DataMode mode);
         Cityscapes(const std::string &root, DataMode mode , bool download);
         Cityscapes(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
