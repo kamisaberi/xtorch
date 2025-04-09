@@ -109,9 +109,10 @@ public:
 int main() {
     curl_global_init(CURL_GLOBAL_ALL);
 
+
     vector<pair<string, string>> downloads = {
-        {"https://speed.hetzner.de/100MB.bin", "file1.bin"},
-        {"https://speed.hetzner.de/100MB.bin", "file2.bin"}
+        {"https://www.cs.toronto.edu/~kriz/cifar-10-binary.tar.gz", "cifar-10-binary.tar.gz"},
+        {"https://www.cs.toronto.edu/~kriz/cifar-100-binary.tar.gz", "cifar-100-binary.tar.gz"}
     };
 
     vector<thread> threads;
