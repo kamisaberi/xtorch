@@ -1,7 +1,10 @@
 #pragma once
 #include <torch/torch.h>
-#include "../../exceptions/implementation.h"
-#include <c10/util/Exception.h>
+#include <iostream>
+#include <vector>
+#include <fstream>
+#include <string>
+#include "../base.h"
 
 
 namespace xt::models {
@@ -171,7 +174,7 @@ namespace xt::models {
 //        x = self.classifier(x)
 //        return x
 
-    struct MobileNetV3 : torch::nn::Module {
+    struct MobileNetV3 :BaseModel {
     public:
         MobileNetV3();
 
