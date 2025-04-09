@@ -53,7 +53,7 @@ int progress_callback(void*, curl_off_t total, curl_off_t now, curl_off_t, curl_
 
 int main() {
     const string url = "https://www.cs.toronto.edu/~kriz/cifar-10-binary.tar.gz"; // Example large file
-    const string output_file = "cifar-10-binary.tar.gz";
+    const string out = "cifar-10-binary.tar.gz";
 
     CURL* curl;
     CURLcode res;
