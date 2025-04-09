@@ -1,5 +1,5 @@
 // curl_downloader.cpp
-// A multithreaded libcurl-based downloader with pip-style progress bars and emoji spinners
+// A multithreaded libcurl-based downloader with per-row pip-style progress bars and emoji spinners
 
 #include <iostream>
 #include <fstream>
@@ -54,7 +54,8 @@ public:
 
         {
             lock_guard<mutex> lock(cout_mutex);
-            cout << "\r" << id << ": " << emoji_spinner[spinner_index % emoji_spinner.size()] << " [";
+            cout << "\033[" << id + 2 << ";1H"; // Move cursor to line for this downloader
+            cout << id << ": " << emoji_spinner[spinner_index % emoji_spinner.size()] << " [";
             for (int i = 0; i < bar_width; ++i)
                 cout << (i < filled ? "━" : " ");
             cout << "] " << fixed << setprecision(1)
@@ -88,11 +89,12 @@ public:
             auto res = curl_easy_perform(curl);
 
             lock_guard<mutex> lock(cout_mutex);
+            cout << "\033[" << id + 2 << ";1H"; // Move back to correct line
             if (res == CURLE_OK) {
-                cout << "\n✅ File " << id << " downloaded: " << filename << endl;
+                cout << "✅ File " << id << " downloaded: " << filename << "\n";
                 log << "Success: " << filename << endl;
             } else {
-                cerr << "\n❌ Error downloading file " << id << ": " << curl_easy_strerror(res) << endl;
+                cerr << "❌ Error downloading file " << id << ": " << curl_easy_strerror(res) << endl;
                 log << "Error: " << curl_easy_strerror(res) << endl;
             }
 
@@ -109,6 +111,9 @@ public:
 int main() {
     curl_global_init(CURL_GLOBAL_ALL);
 
+    // Clear screen and move to top
+    cout << "\033[2J\033[1;1H";
+    cout << "📦 Multi-Download Progress\n";
 
     vector<pair<string, string>> downloads = {
         {"https://www.cs.toronto.edu/~kriz/cifar-10-binary.tar.gz", "cifar-10-binary.tar.gz"},
@@ -126,6 +131,7 @@ int main() {
     for (auto& t : threads) t.join();
 
     curl_global_cleanup();
+    cout << "\033[" << downloads.size() + 3 << ";1H"; // Move cursor below all progress bars
     cout << "\n🎉 All downloads finished." << endl;
     return 0;
 }
