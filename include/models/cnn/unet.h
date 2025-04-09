@@ -1,5 +1,11 @@
 #pragma once
 #include <torch/torch.h>
+#include <iostream>
+#include <vector>
+#include <fstream>
+#include <string>
+#include "../base.h"
+
 #include "../../exceptions/implementation.h"
 
 namespace xt::models {
@@ -96,7 +102,7 @@ namespace xt::models {
 //
 
 
-    struct UNet : torch::nn::Module {
+    struct UNet : BaseModel  {
     public:
         UNet();
 
