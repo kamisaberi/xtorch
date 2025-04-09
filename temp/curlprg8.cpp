@@ -1,5 +1,5 @@
 // curl_downloader.cpp
-// A multithreaded libcurl-based downloader with tqdm-style spinners and progress bars
+// A multithreaded libcurl-based downloader with tqdm-style spinners and per-row progress bars
 
 #include <iostream>
 #include <fstream>
@@ -15,10 +15,9 @@ using namespace std::chrono;
 
 mutex cout_mutex;
 
-// TQDM spinner style
+// TQDM-style spinner
 const vector<string> tqdm_spinner = {"⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"};
 
-// Write data callback
 size_t write_data(void* ptr, size_t size, size_t nmemb, void* stream) {
     ofstream* file = static_cast<ofstream*>(stream);
     size_t written = size * nmemb;
@@ -26,7 +25,6 @@ size_t write_data(void* ptr, size_t size, size_t nmemb, void* stream) {
     return written;
 }
 
-// Downloader class per file
 class Downloader {
     string url, filename, logname;
     int id;
@@ -43,6 +41,7 @@ public:
 
     void update_progress(curl_off_t total, curl_off_t now) {
         if (total == 0) return;
+
         float ratio = static_cast<float>(now) / total;
         int filled = static_cast<int>(ratio * bar_width);
         float percent = ratio * 100;
@@ -54,13 +53,15 @@ public:
 
         {
             lock_guard<mutex> lock(cout_mutex);
-            cout << "\r" << id << ": " << tqdm_spinner[spinner_index % tqdm_spinner.size()] << " [";
+            cout << "\033[" << id + 2 << ";1H"; // Move to correct row (id+2 to account for header)
+            cout << id << ": " << tqdm_spinner[spinner_index % tqdm_spinner.size()] << " [";
             for (int i = 0; i < bar_width; ++i)
                 cout << (i < filled ? "━" : " ");
             cout << "] " << fixed << setprecision(1)
                  << setw(5) << percent << "% "
                  << setw(6) << setprecision(0) << speed << " KB/s ETA: " << setw(3) << eta << "s" << flush;
         }
+
         spinner_index++;
         this_thread::sleep_for(milliseconds(80));
     }
@@ -87,13 +88,16 @@ public:
 
             auto res = curl_easy_perform(curl);
 
-            lock_guard<mutex> lock(cout_mutex);
-            if (res == CURLE_OK) {
-                cout << "\n✅ File " << id << " downloaded: " << filename << endl;
-                log << "Success: " << filename << endl;
-            } else {
-                cerr << "\n❌ Error downloading file " << id << ": " << curl_easy_strerror(res) << endl;
-                log << "Error: " << curl_easy_strerror(res) << endl;
+            {
+                lock_guard<mutex> lock(cout_mutex);
+                cout << "\033[" << id + 2 << ";1H"; // Move to the same row
+                if (res == CURLE_OK) {
+                    cout << "✅ File " << id << " downloaded: " << filename << "                   \n";
+                    log << "Success: " << filename << endl;
+                } else {
+                    cerr << "❌ Error downloading file " << id << ": " << curl_easy_strerror(res) << endl;
+                    log << "Error: " << curl_easy_strerror(res) << endl;
+                }
             }
 
             curl_easy_cleanup(curl);
@@ -108,6 +112,10 @@ public:
 
 int main() {
     curl_global_init(CURL_GLOBAL_ALL);
+
+    // Clear screen and move cursor to top-left
+    cout << "\033[2J\033[1;1H";
+    cout << "📦 Multi-Download Progress\n";
 
     vector<pair<string, string>> downloads = {
         {"https://www.cs.toronto.edu/~kriz/cifar-10-binary.tar.gz", "cifar-10-binary.tar.gz"},
@@ -125,6 +133,7 @@ int main() {
     for (auto& t : threads) t.join();
 
     curl_global_cleanup();
-    cout << "\n🎉 All downloads finished." << endl;
+    cout << "\033[" << downloads.size() + 3 << ";1H"; // Move cursor below all progress rows
+    cout << "🎉 All downloads finished.\n";
     return 0;
 }
