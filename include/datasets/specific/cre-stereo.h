@@ -23,7 +23,7 @@ namespace xt::data::datasets {
 
     class CREStereo : public BaseDataset {
     public :
-        CREStereo(const std::string &root);
+        explicit  CREStereo(const std::string &root);
         CREStereo(const std::string &root, DataMode mode);
         CREStereo(const std::string &root, DataMode mode , bool download);
         CREStereo(const std::string &root, DataMode mode , bool download, TransformType transforms);

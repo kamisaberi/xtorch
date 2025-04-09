@@ -9,7 +9,7 @@ namespace fs = std::filesystem;
 namespace xt::data::datasets {
     class Country211 : public BaseDataset {
     public:
-        Country211(const std::string &root);
+        explicit  Country211(const std::string &root);
         Country211(const std::string &root, DataMode mode);
         Country211(const std::string &root, DataMode mode , bool download);
         Country211(const std::string &root, DataMode mode , bool download, TransformType transforms);

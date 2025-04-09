@@ -9,7 +9,7 @@ namespace fs = std::filesystem;
 namespace xt::data::datasets {
     class CIFAR10 : public BaseDataset {
     public:
-        CIFAR10(const std::string &root);
+        explicit  CIFAR10(const std::string &root);
         CIFAR10(const std::string &root, DataMode mode);
         CIFAR10(const std::string &root, DataMode mode , bool download);
         CIFAR10(const std::string &root, DataMode mode , bool download, TransformType transforms);
@@ -43,7 +43,7 @@ namespace xt::data::datasets {
 
     class CIFAR100 : public BaseDataset {
     public:
-        CIFAR100(const std::string &root);
+        explicit  CIFAR100(const std::string &root);
         CIFAR100(const std::string &root, DataMode mode);
         CIFAR100(const std::string &root, DataMode mode , bool download);
         CIFAR100(const std::string &root, DataMode mode , bool download, TransformType transforms);
