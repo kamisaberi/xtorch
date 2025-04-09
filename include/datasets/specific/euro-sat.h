@@ -10,7 +10,7 @@ namespace fs = std::filesystem;
 namespace xt::data::datasets {
     class EuroSAT :public BaseDataset {
     public :
-        EuroSAT(const std::string &root);
+        explicit EuroSAT(const std::string &root);
         EuroSAT(const std::string &root, DataMode mode);
         EuroSAT(const std::string &root, DataMode mode , bool download);
         EuroSAT(const std::string &root, DataMode mode , bool download, TransformType transforms);
