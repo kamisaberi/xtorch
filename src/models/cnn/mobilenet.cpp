@@ -4,6 +4,6 @@ namespace xt::models {
 
 
     MobileNetV3::MobileNetV3() {
-        throw NotImplementedException();
+        throw std::runtime_error("MobileNetV3::MobileNetV3()");
     }
 }
