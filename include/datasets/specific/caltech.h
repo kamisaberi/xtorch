@@ -11,7 +11,7 @@ namespace fs = std::filesystem;
 namespace xt::data::datasets {
     class Caltech101 : public BaseDataset {
     public :
-        Caltech101(const std::string &root);
+        explicit Caltech101(const std::string &root);
         Caltech101(const std::string &root, DataMode mode);
         Caltech101(const std::string &root, DataMode mode , bool download);
         Caltech101(const std::string &root, DataMode mode , bool download, TransformType transforms);
@@ -35,7 +35,7 @@ namespace xt::data::datasets {
 
     class Caltech256 : public BaseDataset {
     public :
-        Caltech256(const std::string &root);
+        explicit  Caltech256(const std::string &root);
         Caltech256(const std::string &root, DataMode mode);
         Caltech256(const std::string &root, DataMode mode , bool download);
         Caltech256(const std::string &root, DataMode mode , bool download, TransformType transforms);
