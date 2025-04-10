@@ -44,7 +44,7 @@ namespace xt::data::datasets {
                     ...
          */
     public :
-        FallingThingsStereo(const std::string &root);
+        explicit  FallingThingsStereo(const std::string &root);
         FallingThingsStereo(const std::string &root, DataMode mode);
         FallingThingsStereo(const std::string &root, DataMode mode , bool download);
         FallingThingsStereo(const std::string &root, DataMode mode , bool download, TransformType transforms);
