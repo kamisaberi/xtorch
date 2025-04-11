@@ -33,7 +33,7 @@ namespace xt::data::datasets {
 
          */
     public :
-        PhotoTour(const std::string &root);
+        explicit PhotoTour(const std::string &root);
         PhotoTour(const std::string &root, DataMode mode);
         PhotoTour(const std::string &root, DataMode mode , bool download);
         PhotoTour(const std::string &root, DataMode mode , bool download, TransformType transforms);

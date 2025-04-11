@@ -36,7 +36,7 @@ namespace xt::data::datasets {
 
         */
    public :
-       Places365(const std::string &root);
+       explicit Places365(const std::string &root);
        Places365(const std::string &root, DataMode mode);
        Places365(const std::string &root, DataMode mode , bool download);
        Places365(const std::string &root, DataMode mode , bool download, TransformType transforms);
