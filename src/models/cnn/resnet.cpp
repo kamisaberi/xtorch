@@ -68,49 +68,50 @@ namespace xt::models {
     }
 
 
-    // ResNet::ResNet(std::vector<int> layers, int num_classes, int in_channels, std::vector<int64_t> input_shape)
-    //     : BaseModel() {
-    //     inplanes = 64;
-    //
-    //     conv1 = torch::nn::Sequential(
-    //         torch::nn::Conv2d(torch::nn::Conv2dOptions(in_channels, 64, 7).stride(2).padding(3)),
-    //         torch::nn::BatchNorm2d(64),
-    //         torch::nn::ReLU()
-    //     );
-    //     maxpool = torch::nn::MaxPool2d(torch::nn::MaxPool2dOptions(3).stride(2).padding(1));
-    //
-    //     layer0 = makeLayerFromResidualBlock(64, layers[0], 1);
-    //     layer1 = makeLayerFromResidualBlock(128, layers[1], 2);
-    //     layer2 = makeLayerFromResidualBlock(256, layers[2], 2);
-    //     layer3 = makeLayerFromResidualBlock(512, layers[3], 2);
-    //
-    //     register_module("conv1", conv1);
-    //     register_module("layer0", layer0);
-    //     register_module("layer1", layer1);
-    //     register_module("layer2", layer2);
-    //     register_module("layer3", layer3);
-    //
-    //     // Compute flattened size dynamically
-    //     torch::NoGradGuard no_grad;
-    //     auto dummy_input = torch::zeros({1, in_channels, input_shape[0], input_shape[1]});
-    //     auto x = conv1->forward(dummy_input);
-    //     x = maxpool->forward(x);
-    //     x = layer0->forward(x);
-    //     x = layer1->forward(x);
-    //     x = layer2->forward(x);
-    //     x = layer3->forward(x);
-    //
-    //     // Adaptive pooling instead of fixed 7x7 pooling
-    //     auto spatial_dims = x.sizes().slice(2); // Get H and W after all convs
-    //     avgpool = torch::nn::AdaptiveAvgPool2d(torch::nn::AdaptiveAvgPool2dOptions({1, 1}));
-    //     x = avgpool->forward(x);
-    //     int flattened_size = x.numel() / x.size(0);
-    //
-    //     fc = torch::nn::Linear(flattened_size, num_classes);
-    //
-    //     register_module("avgpool", avgpool);
-    //     register_module("fc", fc);
-    // }
+    ResNet::ResNet(std::vector<int> layers, int num_classes, int in_channels, std::vector<int64_t> input_shape)
+        : BaseModel() {
+        inplanes = 64;
+
+        conv1 = torch::nn::Sequential(
+            torch::nn::Conv2d(torch::nn::Conv2dOptions(in_channels, 64, 7).stride(2).padding(3)),
+            torch::nn::BatchNorm2d(64),
+            torch::nn::ReLU()
+        );
+        maxpool = torch::nn::MaxPool2d(torch::nn::MaxPool2dOptions(3).stride(2).padding(1));
+
+        layer0 = makeLayerFromResidualBlock(64, layers[0], 1);
+        layer1 = makeLayerFromResidualBlock(128, layers[1], 2);
+        layer2 = makeLayerFromResidualBlock(256, layers[2], 2);
+        layer3 = makeLayerFromResidualBlock(512, layers[3], 2);
+
+        register_module("conv1", conv1);
+        register_module("layer0", layer0);
+        register_module("layer1", layer1);
+        register_module("layer2", layer2);
+        register_module("layer3", layer3);
+
+        // Compute flattened size dynamically
+        torch::NoGradGuard no_grad;
+        auto dummy_input = torch::zeros({1, in_channels, input_shape[0], input_shape[1]});
+        auto x = conv1->forward(dummy_input);
+        x = maxpool->forward(x);
+        x = layer0->forward(x);
+        x = layer1->forward(x);
+        x = layer2->forward(x);
+        x = layer3->forward(x);
+
+        // Adaptive pooling instead of fixed 7x7 pooling
+        auto spatial_dims = x.sizes().slice(2); // Get H and W after all convs
+        // avgpool = torch::nn::AdaptiveAvgPool2d(torch::nn::AdaptiveAvgPool2dOptions({1, 1}));
+        avgpool = torch::nn::AvgPool2d(torch::nn::AvgPool2dOptions(7).stride(1));
+        x = avgpool->forward(x);
+        int flattened_size = x.numel() / x.size(0);
+
+        fc = torch::nn::Linear(flattened_size, num_classes);
+
+        register_module("avgpool", avgpool);
+        register_module("fc", fc);
+    }
 
     // torch::nn::Sequential ResNet::makeLayerFromResidualBlock(int planes, int blocks, int stride) {
     //     torch::nn::Sequential downsample = nullptr;
