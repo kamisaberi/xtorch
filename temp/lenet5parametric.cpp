@@ -16,7 +16,7 @@ using namespace std;
 using Example = torch::data::Example<torch::Tensor, torch::Tensor>;
 
 int main() {
-    std::vector<int64_t> size = {32, 32};
+    std::vector<int64_t> size = {100, 100};
 
     std::cout.precision(10);
     torch::Device device(torch::kCPU);
@@ -24,14 +24,14 @@ int main() {
     auto dataset = xt::data::datasets::MNIST("/home/kami/Documents/temp/", DataMode::TRAIN, true);
 
     auto transformed_dataset = dataset
-            .map(xt::data::transforms::resize({32, 32}))
+            .map(xt::data::transforms::resize(size))
             .map(torch::data::transforms::Normalize<>(0.5, 0.5))
             .map(torch::data::transforms::Stack<>());
 
     auto train_loader = torch::data::make_data_loader<torch::data::samplers::SequentialSampler>(
         std::move(transformed_dataset), 64);
 
-    xt::models::LeNet5 model(10);
+    xt::models::LeNet5 model(10, 1 , size);
     model.to(device);
     model.train();
     torch::optim::Adam optimizer(model.parameters(), torch::optim::AdamOptions(1e-3));
