@@ -6,7 +6,7 @@
 namespace xt::data::datasets {
     class FGVCAircraft :public BaseDataset {
     public :
-        FGVCAircraft(const std::string &root);
+        explicit FGVCAircraft(const std::string &root);
         FGVCAircraft(const std::string &root, DataMode mode);
         FGVCAircraft(const std::string &root, DataMode mode , bool download);
         FGVCAircraft(const std::string &root, DataMode mode , bool download, TransformType transforms);
