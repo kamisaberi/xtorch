@@ -47,7 +47,7 @@ namespace xt::data::datasets {
             """
          */
     public :
-        HMDB51(const std::string &root);
+        explicit  HMDB51(const std::string &root);
         HMDB51(const std::string &root, DataMode mode);
         HMDB51(const std::string &root, DataMode mode , bool download);
         HMDB51(const std::string &root, DataMode mode , bool download, TransformType transforms);
