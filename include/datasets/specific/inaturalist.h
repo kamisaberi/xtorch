@@ -43,7 +43,7 @@ namespace xt::data::datasets {
         """
          */
     public :
-        INaturalist(const std::string &root);
+        explicit  INaturalist(const std::string &root);
         INaturalist(const std::string &root, DataMode mode);
         INaturalist(const std::string &root, DataMode mode , bool download);
         INaturalist(const std::string &root, DataMode mode , bool download, TransformType transforms);
