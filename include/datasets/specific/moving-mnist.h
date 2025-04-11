@@ -25,7 +25,7 @@ namespace xt::data::datasets {
 
          */
     public :
-        MovingMNIST(const std::string &root);
+        explicit MovingMNIST(const std::string &root);
         MovingMNIST(const std::string &root, DataMode mode);
         MovingMNIST(const std::string &root, DataMode mode , bool download);
         MovingMNIST(const std::string &root, DataMode mode , bool download, TransformType transforms);

@@ -24,7 +24,7 @@ namespace xt::data::datasets {
         """
          */
     public :
-        Omniglot(const std::string &root);
+        explicit Omniglot(const std::string &root);
         Omniglot(const std::string &root, DataMode mode);
         Omniglot(const std::string &root, DataMode mode , bool download);
         Omniglot(const std::string &root, DataMode mode , bool download, TransformType transforms);
