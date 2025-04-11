@@ -20,7 +20,7 @@ namespace xt::data::datasets {
         """
          */
     public :
-        GTSRB(const std::string &root);
+        explicit GTSRB(const std::string &root);
         GTSRB(const std::string &root, DataMode mode);
         GTSRB(const std::string &root, DataMode mode , bool download);
         GTSRB(const std::string &root, DataMode mode , bool download, TransformType transforms);
