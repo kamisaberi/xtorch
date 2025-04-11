@@ -29,12 +29,13 @@ namespace xt::models {
         mutable torch::nn::Sequential conv1 = nullptr;
         mutable torch::nn::MaxPool2d maxpool = nullptr;
         mutable torch::nn::AvgPool2d avgpool = nullptr;
+
         mutable torch::nn::Sequential layer0 = nullptr, layer1 = nullptr, layer2 = nullptr, layer3 = nullptr;
         mutable torch::nn::Linear fc = nullptr;
 
         ResNet(vector<int> layers, int num_classes = 10, int in_channels = 3 /* input channels */);
 
-        ResNet(std::vector<int> layers, int num_classes, int in_channels, std::vector<int64_t> input_shape);
+        // ResNet(std::vector<int> layers, int num_classes, int in_channels, std::vector<int64_t> input_shape);
 
         torch::nn::Sequential makeLayerFromResidualBlock(int planes, int blocks, int stride = 1);
 
