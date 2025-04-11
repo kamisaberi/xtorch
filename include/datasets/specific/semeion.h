@@ -28,7 +28,7 @@ namespace xt::data::datasets {
 
         */
    public :
-       SEMEION(const std::string &root);
+       explicit SEMEION(const std::string &root);
        SEMEION(const std::string &root, DataMode mode);
        SEMEION(const std::string &root, DataMode mode , bool download);
        SEMEION(const std::string &root, DataMode mode , bool download, TransformType transforms);
