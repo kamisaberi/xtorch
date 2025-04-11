@@ -6,7 +6,7 @@
 namespace xt::data::datasets {
     class Flowers102 : public BaseDataset {
     public :
-        Flowers102(const std::string &root);
+        explicit Flowers102(const std::string &root);
         Flowers102(const std::string &root, DataMode mode);
         Flowers102(const std::string &root, DataMode mode , bool download);
         Flowers102(const std::string &root, DataMode mode , bool download, TransformType transforms);
