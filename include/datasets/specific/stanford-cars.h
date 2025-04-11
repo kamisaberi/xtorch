@@ -37,7 +37,7 @@ namespace xt::data::datasets {
 
  */
    public :
-       StanfordCars(const std::string &root);
+       explicit StanfordCars(const std::string &root);
        StanfordCars(const std::string &root, DataMode mode);
        StanfordCars(const std::string &root, DataMode mode , bool download);
        StanfordCars(const std::string &root, DataMode mode , bool download, TransformType transforms);

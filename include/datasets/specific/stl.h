@@ -30,7 +30,7 @@ namespace xt::data::datasets {
 
          */
     public :
-        STL10(const std::string &root);
+        explicit STL10(const std::string &root);
         STL10(const std::string &root, DataMode mode);
         STL10(const std::string &root, DataMode mode , bool download);
         STL10(const std::string &root, DataMode mode , bool download, TransformType transforms);
