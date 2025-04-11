@@ -64,7 +64,7 @@ namespace xt::data::datasets {
 
          */
     public :
-        Middlebury2014Stereo(const std::string &root);
+        explicit Middlebury2014Stereo(const std::string &root);
         Middlebury2014Stereo(const std::string &root, DataMode mode);
         Middlebury2014Stereo(const std::string &root, DataMode mode , bool download);
         Middlebury2014Stereo(const std::string &root, DataMode mode , bool download, TransformType transforms);
