@@ -50,7 +50,7 @@ namespace xt::data::datasets {
 
         */
    public :
-       UCF101(const std::string &root);
+       explicit UCF101(const std::string &root);
        UCF101(const std::string &root, DataMode mode);
        UCF101(const std::string &root, DataMode mode , bool download);
        UCF101(const std::string &root, DataMode mode , bool download, TransformType transforms);
