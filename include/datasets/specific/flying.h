@@ -29,7 +29,7 @@ namespace xt::data::datasets {
         """
         */
     public :
-        FlyingChairs(const std::string &root);
+        explicit FlyingChairs(const std::string &root);
         FlyingChairs(const std::string &root, DataMode mode);
         FlyingChairs(const std::string &root, DataMode mode , bool download);
         FlyingChairs(const std::string &root, DataMode mode , bool download, TransformType transforms);
@@ -69,7 +69,7 @@ namespace xt::data::datasets {
         """
     */
     public :
-        FlyingThings3D(const std::string &root);
+        explicit FlyingThings3D(const std::string &root);
         FlyingThings3D(const std::string &root, DataMode mode);
         FlyingThings3D(const std::string &root, DataMode mode , bool download);
         FlyingThings3D(const std::string &root, DataMode mode , bool download, TransformType transforms);
