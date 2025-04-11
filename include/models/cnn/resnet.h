@@ -35,7 +35,7 @@ namespace xt::models {
 
         ResNet(vector<int> layers, int num_classes = 10, int in_channels = 3 /* input channels */);
 
-        // ResNet(std::vector<int> layers, int num_classes, int in_channels, std::vector<int64_t> input_shape);
+        ResNet(std::vector<int> layers, int num_classes, int in_channels, std::vector<int64_t> input_shape);
 
         torch::nn::Sequential makeLayerFromResidualBlock(int planes, int blocks, int stride = 1);
 
