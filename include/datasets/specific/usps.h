@@ -32,7 +32,7 @@ namespace xt::data::datasets {
 
          */
     public :
-        USPS(const std::string &root);
+        explicit USPS(const std::string &root);
         USPS(const std::string &root, DataMode mode);
         USPS(const std::string &root, DataMode mode , bool download);
         USPS(const std::string &root, DataMode mode , bool download, TransformType transforms);

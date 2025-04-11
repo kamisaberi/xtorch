@@ -34,7 +34,7 @@ namespace xt::data::datasets {
 
          */
     public :
-        SVHN(const std::string &root);
+        explicit SVHN(const std::string &root);
         SVHN(const std::string &root, DataMode mode);
         SVHN(const std::string &root, DataMode mode , bool download);
         SVHN(const std::string &root, DataMode mode , bool download, TransformType transforms);
