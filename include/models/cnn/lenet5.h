@@ -15,6 +15,7 @@ namespace xt::models {
 
     public:
         LeNet5(int num_classes/* classes */, int in_channels = 1/*  input channels */);
+        LeNet5(int num_classes, int in_channels, std::vector<int64_t> input_shape);
 
         torch::Tensor forward(torch::Tensor x) const override;
     };
