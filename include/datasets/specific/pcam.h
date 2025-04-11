@@ -32,7 +32,7 @@ namespace xt::data::datasets {
 
          */
     public :
-        PCAM(const std::string &root);
+        explicit PCAM(const std::string &root);
         PCAM(const std::string &root, DataMode mode);
         PCAM(const std::string &root, DataMode mode , bool download);
         PCAM(const std::string &root, DataMode mode , bool download, TransformType transforms);

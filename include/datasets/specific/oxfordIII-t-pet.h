@@ -29,7 +29,7 @@ namespace xt::data::datasets {
 
          */
     public :
-        OxfordIIITPet(const std::string &root);
+        explicit OxfordIIITPet(const std::string &root);
         OxfordIIITPet(const std::string &root, DataMode mode);
         OxfordIIITPet(const std::string &root, DataMode mode , bool download);
         OxfordIIITPet(const std::string &root, DataMode mode , bool download, TransformType transforms);
