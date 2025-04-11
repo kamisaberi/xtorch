@@ -32,7 +32,7 @@ namespace xt::data::datasets {
 
          */
     public :
-        RenderedSST2(const std::string &root);
+        explicit RenderedSST2(const std::string &root);
         RenderedSST2(const std::string &root, DataMode mode);
         RenderedSST2(const std::string &root, DataMode mode , bool download);
         RenderedSST2(const std::string &root, DataMode mode , bool download, TransformType transforms);

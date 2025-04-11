@@ -26,7 +26,7 @@ namespace xt::data::datasets {
 
          */
     public :
-        SBU(const std::string &root);
+        explicit SBU(const std::string &root);
         SBU(const std::string &root, DataMode mode);
         SBU(const std::string &root, DataMode mode , bool download);
         SBU(const std::string &root, DataMode mode , bool download, TransformType transforms);
