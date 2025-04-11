@@ -42,7 +42,7 @@ namespace xt::data::datasets {
 
          */
     public :
-        SBDataset(const std::string &root);
+        explicit SBDataset(const std::string &root);
         SBDataset(const std::string &root, DataMode mode);
         SBDataset(const std::string &root, DataMode mode , bool download);
         SBDataset(const std::string &root, DataMode mode , bool download, TransformType transforms);
