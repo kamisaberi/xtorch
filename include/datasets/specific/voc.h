@@ -29,7 +29,7 @@ namespace xt::data::datasets {
          */
 
     public :
-        VOCDetection(const std::string &root);
+        explicit VOCDetection(const std::string &root);
 
         VOCDetection(const std::string &root, DataMode mode);
 
@@ -67,7 +67,7 @@ namespace xt::data::datasets {
          */
 
     public :
-        VOCSegmentation(const std::string &root);
+        explicit VOCSegmentation(const std::string &root);
         VOCSegmentation(const std::string &root, DataMode mode);
         VOCSegmentation(const std::string &root, DataMode mode , bool download);
         VOCSegmentation(const std::string &root, DataMode mode , bool download, TransformType transforms);
