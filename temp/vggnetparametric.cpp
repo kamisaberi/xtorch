@@ -9,7 +9,7 @@
 #include <functional>
 
 #include "../include/datasets/specific/mnist.h"
-#include "../include/models/cnn/lenet5.h"
+#include "../include/models/cnn/vggnet.h"
 #include "../include/definitions/transforms.h"
 
 using namespace std;
@@ -31,7 +31,7 @@ int main() {
     auto train_loader = torch::data::make_data_loader<torch::data::samplers::SequentialSampler>(
         std::move(transformed_dataset), 64);
 
-    xt::models::LeNet5 model(10, 1 , size);
+    xt::models::VggNet16 model(10, 1 , size);
     model.to(device);
     model.train();
     torch::optim::Adam optimizer(model.parameters(), torch::optim::AdamOptions(1e-3));
