@@ -62,7 +62,7 @@ namespace xt::data::datasets {
         */
 
    public :
-       SceneFlowStereo(const std::string &root);
+       explicit SceneFlowStereo(const std::string &root);
        SceneFlowStereo(const std::string &root, DataMode mode);
        SceneFlowStereo(const std::string &root, DataMode mode , bool download);
        SceneFlowStereo(const std::string &root, DataMode mode , bool download, TransformType transforms);

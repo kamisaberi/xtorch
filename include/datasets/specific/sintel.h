@@ -48,7 +48,7 @@ namespace xt::data::datasets {
 
  */
    public :
-       Sintel(const std::string &root);
+       explicit Sintel(const std::string &root);
        Sintel(const std::string &root, DataMode mode);
        Sintel(const std::string &root, DataMode mode , bool download);
        Sintel(const std::string &root, DataMode mode , bool download, TransformType transforms);
