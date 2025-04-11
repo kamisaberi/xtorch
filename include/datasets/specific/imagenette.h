@@ -29,7 +29,7 @@ namespace xt::data::datasets {
 
     class Imagenette : public BaseDataset {
     public :
-        Imagenette(const std::string &root);
+        explicit  Imagenette(const std::string &root);
         Imagenette(const std::string &root, DataMode mode);
         Imagenette(const std::string &root, DataMode mode , bool download);
         Imagenette(const std::string &root, DataMode mode , bool download, ImageType type );
