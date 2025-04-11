@@ -13,6 +13,26 @@ file(GLOB_RECURSE TRAINER_FILES CONFIGURE_DEPENDS ../src/trainers/*.cpp)
 file(GLOB_RECURSE TRANSFORM_FILES CONFIGURE_DEPENDS ../src/transforms/*.cpp)
 
 
+set(BASE_SOURCE_FILES
+        ../src/utils/extract.cpp
+        ../src/utils/downloader.cpp
+        ../src/utils/filesystem.cpp
+        ../src/utils/md5.cpp
+        ../src/utils/string.cpp
+        ../src/media/image/processing.cpp
+        ../src/media/opencv/images.cpp
+        #        ../src/datasets/mnist.cpp
+        #        ../src/models/cnn/lenet5.cpp
+        ../src/definitions/transforms.cpp
+        ../src/transforms/compose.cpp
+        ../src/transforms/normalize.cpp
+        ../src/transforms/resize.cpp
+        ../src/transforms/lambda.cpp
+        ../src/datasets/base/base.cpp
+        ../src/datasets/definitions/functions.cpp
+        ../src/models/base.cpp
+)
+
 
 ####################################### TEST #######################################
 
@@ -693,7 +713,7 @@ find_package(LibArchive REQUIRED)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} ${MODEL_FILES} ${TRAINER_FILES} ${DATA_LOADER_FILES} ${TRANSFORM_FILES} ../third_party/cnpy/cnpy.cpp cnpytest.cpp)
+set(TEST_SOURCE_FILES  ../third_party/cnpy/cnpy.cpp cnpytest.cpp)
 
 add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
 target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
@@ -1270,6 +1290,44 @@ target_link_libraries(${PROJECT_NAME}
 )
 
 
+
+####################################### LENET5PARAMETRIC #######################################
+
+project(lenet5parametric)
+list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
+find_package(Torch REQUIRED)
+#find_package(xTorch REQUIRED)
+find_package(OpenCV REQUIRED)
+find_package(LibLZMA REQUIRED)
+find_package(LibArchive REQUIRED)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
+
+set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} ${DATASET_FILES} ${MODEL_FILES}  ${BASE_SOURCE_FILES}   lenet5parametric.cpp)
+
+add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
+target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
+#
+set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
+
+include_directories(/usr/include)
+
+target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
+target_link_libraries(${PROJECT_NAME}
+        ${CURL_LIBRARIES}
+        ${TORCH_LIBRARIES}
+        ${OpenCV_LIBS}
+        ${ZLIB_LIBS}
+        ${ZIP_LIBRARIES}
+        zip
+        ${ZLIB_LIBRARIES}
+        ${LIBTAR_LIBRARY}
+        OpenSSL::SSL
+        OpenSSL::Crypto
+        LibLZMA::LibLZMA
+        ${LibArchive_LIBRARIES}
+)
 
 
 
