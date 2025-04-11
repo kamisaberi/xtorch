@@ -57,7 +57,7 @@ namespace xt::data::datasets {
 
         */
     public :
-        HD1K(const std::string &root);
+        explicit HD1K(const std::string &root);
         HD1K(const std::string &root, DataMode mode);
         HD1K(const std::string &root, DataMode mode , bool download);
         HD1K(const std::string &root, DataMode mode , bool download, TransformType transforms);

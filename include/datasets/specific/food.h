@@ -14,7 +14,7 @@ namespace xt::data::datasets {
     class Food101 : public BaseDataset {
     public :
 
-        Food101(const std::string &root);
+        explicit Food101(const std::string &root);
         Food101(const std::string &root, DataMode mode);
         Food101(const std::string &root, DataMode mode , bool download);
         Food101(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
