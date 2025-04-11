@@ -11,7 +11,7 @@ namespace xt::data::datasets {
 
     class MNISTBase : public BaseDataset {
     public:
-        MNISTBase(const std::string &root);
+        explicit MNISTBase(const std::string &root);
         MNISTBase(const std::string &root, DataMode mode);
         MNISTBase(const std::string &root, DataMode mode , bool download);
         MNISTBase(const std::string &root, DataMode mode , bool download , vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
@@ -43,7 +43,7 @@ namespace xt::data::datasets {
 
     class MNIST : public MNISTBase {
     public :
-        MNIST(const std::string &root);
+        explicit MNIST(const std::string &root);
         MNIST(const std::string &root, DataMode mode);
         MNIST(const std::string &root, DataMode mode , bool download);
         MNIST(const std::string &root, DataMode mode , bool download , vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
@@ -80,7 +80,7 @@ namespace xt::data::datasets {
     class FashionMNIST : public MNISTBase {
     public:
 
-        FashionMNIST(const std::string &root);
+        explicit FashionMNIST(const std::string &root);
         FashionMNIST(const std::string &root, DataMode mode);
         FashionMNIST(const std::string &root, DataMode mode , bool download);
         FashionMNIST(const std::string &root, DataMode mode , bool download , vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
