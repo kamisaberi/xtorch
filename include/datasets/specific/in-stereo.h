@@ -38,7 +38,7 @@ namespace xt::data::datasets {
         """
          */
     public :
-        InStereo2k(const std::string &root);
+        explicit  InStereo2k(const std::string &root);
         InStereo2k(const std::string &root, DataMode mode);
         InStereo2k(const std::string &root, DataMode mode , bool download);
         InStereo2k(const std::string &root, DataMode mode , bool download, TransformType transforms);
