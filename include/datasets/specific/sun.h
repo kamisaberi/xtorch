@@ -27,7 +27,7 @@ namespace xt::data::datasets {
 
          */
     public :
-        SUN397(const std::string &root);
+        explicit SUN397(const std::string &root);
         SUN397(const std::string &root, DataMode mode);
         SUN397(const std::string &root, DataMode mode , bool download);
         SUN397(const std::string &root, DataMode mode , bool download, TransformType transforms);
