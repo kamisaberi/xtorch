@@ -42,7 +42,7 @@ namespace xt::data::datasets {
 
          */
     public :
-        WIDERFace(const std::string &root);
+        explicit WIDERFace(const std::string &root);
         WIDERFace(const std::string &root, DataMode mode);
         WIDERFace(const std::string &root, DataMode mode , bool download);
         WIDERFace(const std::string &root, DataMode mode , bool download, TransformType transforms);
