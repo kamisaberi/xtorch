@@ -41,7 +41,7 @@ namespace xt::data::datasets {
 
          */
     public :
-        Kitti(const std::string &root);
+        explicit Kitti(const std::string &root);
         Kitti(const std::string &root, DataMode mode);
         Kitti(const std::string &root, DataMode mode , bool download);
         Kitti(const std::string &root, DataMode mode , bool download, TransformType transforms);
@@ -85,7 +85,7 @@ namespace xt::data::datasets {
 
          */
     public :
-        KittiFlow(const std::string &root);
+        explicit  KittiFlow(const std::string &root);
         KittiFlow(const std::string &root, DataMode mode);
         KittiFlow(const std::string &root, DataMode mode , bool download);
         KittiFlow(const std::string &root, DataMode mode , bool download, TransformType transforms);
@@ -139,7 +139,7 @@ namespace xt::data::datasets {
 
          */
     public :
-        Kitti2012Stereo(const std::string &root);
+        explicit  Kitti2012Stereo(const std::string &root);
         Kitti2012Stereo(const std::string &root, DataMode mode);
         Kitti2012Stereo(const std::string &root, DataMode mode , bool download);
         Kitti2012Stereo(const std::string &root, DataMode mode , bool download, TransformType transforms);
@@ -196,7 +196,7 @@ namespace xt::data::datasets {
 
          */
     public :
-        Kitti2015Stereo(const std::string &root);
+        explicit Kitti2015Stereo(const std::string &root);
         Kitti2015Stereo(const std::string &root, DataMode mode);
         Kitti2015Stereo(const std::string &root, DataMode mode , bool download);
         Kitti2015Stereo(const std::string &root, DataMode mode , bool download, TransformType transforms);
