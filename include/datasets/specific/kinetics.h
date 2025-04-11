@@ -67,7 +67,7 @@ namespace xt::data::datasets {
 
          */
     public :
-        Kinetics(const std::string &root);
+        explicit Kinetics(const std::string &root);
         Kinetics(const std::string &root, DataMode mode);
         Kinetics(const std::string &root, DataMode mode , bool download);
         Kinetics(const std::string &root, DataMode mode , bool download, TransformType transforms);
