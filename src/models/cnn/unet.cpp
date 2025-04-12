@@ -22,12 +22,29 @@ namespace xt::models {
     }
 
     torch::Tensor DownSample::forward(torch::Tensor input) {
-        torch::Tensor x =  this->conv.forward(input);
+        torch::Tensor x = this->conv.forward(input);
         x = this->pool->forward(x);
         return x;
     }
 
+    //        self.up = nn.ConvTranspose2d(in_channels, in_channels//2, kernel_size=2, stride=2)
+    //        self.conv = DoubleConv(in_channels, out_channels)
 
+    UpSample::UpSample(int in_channels, int out_channels) {
+        this->conv = DoubleConv(in_channels, out_channels);
+        this->up = torch::nn::ConvTranspose2d(
+            torch::nn::ConvTranspose2dOptions(in_channels, in_channels / 2, 2).stride(2));
+    }
+
+    torch::Tensor UpSample::forward(torch::Tensor x1, torch::Tensor x2) {
+        x1 = this->up(x1);
+        torch::Tensor x = torch::cat({x1, x2});
+        return this->conv.forward(x);
+        // def forward(self, x1, x2):
+        //     x1 = self.up(x1)
+        //     x = torch.cat([x1, x2], 1)
+        //     return self.conv(x)
+    }
 
 
     UNet::UNet() {

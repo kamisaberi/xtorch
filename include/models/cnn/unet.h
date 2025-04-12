@@ -64,15 +64,15 @@ namespace xt::models {
 //        self.up = nn.ConvTranspose2d(in_channels, in_channels//2, kernel_size=2, stride=2)
 //        self.conv = DoubleConv(in_channels, out_channels)
 //
-//    def forward(self, x1, x2):
-//        x1 = self.up(x1)
-//        x = torch.cat([x1, x2], 1)
-//        return self.conv(x)
+    // def forward(self, x1, x2):
+    //     x1 = self.up(x1)
+    //     x = torch.cat([x1, x2], 1)
+    //     return self.conv(x)
 
     struct UpSample : torch::nn::Module {
     public:
         UpSample(int in_channels, int out_channels);
-        torch::Tensor forward(torch::Tensor input);
+        torch::Tensor forward(torch::Tensor x1, torch::Tensor x2 );
     private:
         DoubleConv conv{0,0} ;
         torch::nn::ConvTranspose2d up= nullptr;
