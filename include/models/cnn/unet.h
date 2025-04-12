@@ -123,17 +123,17 @@ namespace xt::models {
         torch::Tensor forward(torch::Tensor input) const override;
 
     private:
-        DownSample down_convolution_1;
-        DownSample down_convolution_2;
-        DownSample down_convolution_3;
-        DownSample down_convolution_4;
+        DownSample down_convolution_1{0,0};
+        DownSample down_convolution_2{0,0};
+        DownSample down_convolution_3{0,0};
+        DownSample down_convolution_4{0,0};
 
-        DoubleConv bottle_neck;
+        DoubleConv bottle_neck{0,0};
 
-        UpSample up_convolution_1;
-        UpSample up_convolution_2;
-        UpSample up_convolution_3;
-        UpSample up_convolution_4;
+        UpSample up_convolution_1{0,0};
+        UpSample up_convolution_2{0,0};
+        UpSample up_convolution_3{0,0};
+        UpSample up_convolution_4{0,0};
 
         torch::nn::Conv2d out = nullptr;
     };
