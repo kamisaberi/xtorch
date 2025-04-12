@@ -22,8 +22,13 @@ namespace xt::models {
     }
 
     torch::Tensor DownSample::forward(torch::Tensor input) {
-
+        torch::Tensor x =  this->conv.forward(input);
+        x = this->pool->forward(x);
+        return x;
     }
+
+
+
 
     UNet::UNet() {
         throw std::runtime_error("MobileNetV3::MobileNetV3()");
