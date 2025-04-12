@@ -24,12 +24,22 @@ namespace xt::models {
     // --------------------------------------------------------------------
 
     SqueezeExcite::SqueezeExcite(int input_channels, int squeeze) {
-
-
         this->SE = torch::nn::Sequential(
+            torch::nn::AdaptiveAvgPool2d(torch::nn::AdaptiveAvgPool2dOptions(1)),
+            torch::nn::Conv2d(
+                torch::nn::Conv2dOptions(input_channels, input_channels / squeeze, 1).stride(1).bias(false)),
+            torch::nn::BatchNorm2d(input_channels / squeeze),
+            torch::nn::ReLU(torch::nn::ReLUOptions(true)),
+            torch::nn::Conv2d(
+                torch::nn::Conv2dOptions(input_channels / squeeze, input_channels, 1).stride(1).bias(false)),
+            torch::nn::BatchNorm2d(input_channels),
+            HSigmoid::HSigmoid()
+        );
+    }
 
-
-            );
+    torch::Tensor SqueezeExcite::forward(torch::Tensor x) {
+        x = this->SE->forward(x);
+        return x;
     }
 
 
