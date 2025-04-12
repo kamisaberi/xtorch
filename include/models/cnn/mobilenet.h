@@ -84,7 +84,7 @@ namespace xt::models {
         torch::Tensor forward(torch::Tensor x);
 
     private:
-        torch::nn::Sequential SE;
+        torch::nn::Sequential SE = nullptr;
     };
 
 
