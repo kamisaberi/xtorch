@@ -52,7 +52,7 @@ namespace xt::models {
         DownSample(int in_channels, int out_channels);
         torch::Tensor forward(torch::Tensor input);
     private:
-        DoubleConv conv ;
+        DoubleConv conv{0,0} ;
         torch::nn::MaxPool2d pool = nullptr;
     };
 

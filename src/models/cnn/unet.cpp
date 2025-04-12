@@ -16,6 +16,15 @@ namespace xt::models {
     }
 
 
+    DownSample::DownSample(int in_channels, int out_channels) {
+        this->conv = DoubleConv(in_channels, out_channels);
+        this->pool = torch::nn::MaxPool2d(torch::nn::MaxPool2dOptions(2).stride(2));
+    }
+
+    torch::Tensor DownSample::forward(torch::Tensor input) {
+
+    }
+
     UNet::UNet() {
         throw std::runtime_error("MobileNetV3::MobileNetV3()");
     }
