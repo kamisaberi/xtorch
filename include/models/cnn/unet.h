@@ -71,6 +71,11 @@ namespace xt::models {
 
     struct UpSample : torch::nn::Module {
     public:
+        UpSample(int in_channels, int out_channels);
+        torch::Tensor forward(torch::Tensor input);
+    private:
+        DoubleConv conv{0,0} ;
+        torch::nn::ConvTranspose2d up= nullptr;
 
     };
 
