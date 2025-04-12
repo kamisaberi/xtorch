@@ -52,7 +52,16 @@ namespace xt::models {
         return x;
     }
 
-    MobileNetV3::MobileNetV3() {
-        throw std::runtime_error("MobileNetV3::MobileNetV3()");
+
+    // --------------------------------------------------------------------
+
+    MobileNetV3::MobileNetV3(int input_channels, int num_classes, float dropout_prob) {
+
     }
+
+    torch::Tensor MobileNetV3::forward(torch::Tensor x) {
+        return x;
+    }
+
+
 }
