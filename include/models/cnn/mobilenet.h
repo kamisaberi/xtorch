@@ -144,6 +144,15 @@ namespace xt::models {
     //
     //        return output
 
+    struct Bottleneck : torch::nn::Module {
+    public:
+        Bottleneck(int input_channels,int kernel,int stride,int expansion,int output_channels,torch::nn::Module activation ,bool se = false);
+        torch::Tensor forward(torch::Tensor x);
+
+    private:
+
+    };
+
 
     //---------------------------------------------------------------------------
 
