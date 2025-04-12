@@ -26,6 +26,10 @@ namespace xt::models {
     SqueezeExcite::SqueezeExcite(int input_channels, int squeeze) {
 
 
+        this->SE = torch::nn::Sequential(
+
+
+            );
     }
 
 
