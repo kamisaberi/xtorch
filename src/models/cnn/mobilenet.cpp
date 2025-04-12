@@ -46,10 +46,11 @@ namespace xt::models {
 
     Bottleneck::Bottleneck(int input_channels, int kernel, int stride, int expansion, int output_channels,
                            torch::nn::Module activation, bool se) {
-
-
     }
 
+    torch::Tensor Bottleneck::forward(torch::Tensor x) {
+        return x;
+    }
 
     MobileNetV3::MobileNetV3() {
         throw std::runtime_error("MobileNetV3::MobileNetV3()");
