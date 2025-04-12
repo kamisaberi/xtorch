@@ -2,7 +2,7 @@
 
 namespace xt::models {
     HSigmoid::HSigmoid() {
-        this->relu6 = torch::nn::ReLU6();
+        this->relu6 = torch::nn::ReLU6(torch::nn::ReLU6Options(true));
     }
 
     torch::Tensor HSigmoid::forward(torch::Tensor x) {
@@ -13,7 +13,7 @@ namespace xt::models {
     // --------------------------------------------------------------------
 
     HSwish::HSwish() {
-        this->relu6 = torch::nn::ReLU6();
+        this->relu6 = torch::nn::ReLU6(torch::nn::ReLU6Options(true));
     }
 
     torch::Tensor HSwish::forward(torch::Tensor x) {
@@ -40,6 +40,14 @@ namespace xt::models {
     torch::Tensor SqueezeExcite::forward(torch::Tensor x) {
         x = this->SE->forward(x);
         return x;
+    }
+
+    // --------------------------------------------------------------------
+
+    Bottleneck::Bottleneck(int input_channels, int kernel, int stride, int expansion, int output_channels,
+                           torch::nn::Module activation, bool se) {
+
+
     }
 
 
