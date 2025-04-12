@@ -28,9 +28,10 @@ namespace xt::models {
     struct DoubleConv : torch::nn::Module {
     public:
         DoubleConv(int in_channels, int out_channels);
+        torch::Tensor forward(torch::Tensor input);
     private:
         torch::nn::Sequential conv_op = nullptr;
-        torch::Tensor forward(torch::Tensor input);
+
 
     };
 
@@ -48,7 +49,11 @@ namespace xt::models {
 
     struct DownSample : torch::nn::Module {
     public:
-
+        DownSample(int in_channels, int out_channels);
+        torch::Tensor forward(torch::Tensor input);
+    private:
+        DoubleConv conv ;
+        torch::nn::MaxPool2d pool = nullptr;
     };
 
 
