@@ -58,11 +58,24 @@ namespace xt::models {
 
     UNet::UNet(int num_classes, int in_channels) {
 
+        this->down_convolution_1 = DownSample(in_channels, 64);
+        this->down_convolution_2 = DownSample(64, 128);
+        this->down_convolution_3 = DownSample(128, 256);
+        this->down_convolution_4 = DownSample(256, 512);
+
+        this->bottle_neck = DoubleConv(512, 1024);
+
+        this->up_convolution_1 = UpSample(1024, 512);
+        this->up_convolution_2 = UpSample(512, 256);
+        this->up_convolution_3 = UpSample(256, 128);
+        this->up_convolution_4 = UpSample(128, 64);
+
+        this->out = torch::nn::Conv2d(torch::nn::Conv2dOptions(in_channels, num_classes, 1));
+        //
+        //        self.out = nn.Conv2d(in_channels=64, out_channels=num_classes, kernel_size=1)
+
     }
 
-    UNet::UNet() {
-        throw std::runtime_error("MobileNetV3::MobileNetV3()");
-    }
 
     torch::Tensor UNet::forward(torch::Tensor input) const {
         return input;

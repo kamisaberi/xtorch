@@ -117,8 +117,6 @@ namespace xt::models {
 
     struct UNet : BaseModel {
     public:
-        UNet();
-
         UNet(int num_classes/* classes */, int in_channels = 1/*  input channels */);
         torch::Tensor forward(torch::Tensor input) const override;
 
