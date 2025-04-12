@@ -9,6 +9,9 @@ namespace xt::models {
             torch::nn::Conv2d(torch::nn::Conv2dOptions(out_channels, out_channels, 3).padding(1)),
             torch::nn::ReLU()
         );
+
+
+        register_module("conv_op", this->conv_op);
     }
 
     torch::Tensor DoubleConv::forward(torch::Tensor input) {
@@ -19,6 +22,9 @@ namespace xt::models {
     DownSample::DownSample(int in_channels, int out_channels) {
         this->conv = DoubleConv(in_channels, out_channels);
         this->pool = torch::nn::MaxPool2d(torch::nn::MaxPool2dOptions(2).stride(2));
+        // register_module("conv", conv);
+        register_module("conv", std::make_shared<DoubleConv>(conv));
+        register_module("pool", pool);
     }
 
     torch::Tensor DownSample::forward(torch::Tensor input) {
@@ -34,6 +40,9 @@ namespace xt::models {
         this->conv = DoubleConv(in_channels, out_channels);
         this->up = torch::nn::ConvTranspose2d(
             torch::nn::ConvTranspose2dOptions(in_channels, in_channels / 2, 2).stride(2));
+
+        register_module("conv", std::make_shared<DoubleConv>(conv));
+        register_module("up", up);
     }
 
     torch::Tensor UpSample::forward(torch::Tensor x1, torch::Tensor x2) {
@@ -47,7 +56,15 @@ namespace xt::models {
     }
 
 
+    UNet::UNet(int num_classes, int in_channels) {
+
+    }
+
     UNet::UNet() {
         throw std::runtime_error("MobileNetV3::MobileNetV3()");
+    }
+
+    torch::Tensor UNet::forward(torch::Tensor input) const {
+        return input;
     }
 }
