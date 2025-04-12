@@ -27,7 +27,10 @@ namespace xt::models {
 
     struct DoubleConv : torch::nn::Module {
     public:
-
+        DoubleConv(int in_channels, int out_channels);
+    private:
+        torch::nn::Sequential conv_op = nullptr;
+        torch::Tensor forward(torch::Tensor input);
 
     };
 
