@@ -60,7 +60,13 @@ namespace xt::models {
     }
 
     torch::Tensor MobileNetV3::forward(torch::Tensor x) {
-        return x;
+        x = this->initial_conv->forward(x);
+        x = this->bottlenecks->forward(x);
+        x = this->final_conv->forward(x);
+        x = this->pool(x);
+   //        x = torch.flatten(x, 1)
+   //        x = self.classifier(x)
+   //        return x
     }
 
 
