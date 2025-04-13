@@ -81,7 +81,12 @@ namespace xt::models {
         this->pool = torch::nn::AdaptiveAvgPool2d(torch::nn::AdaptiveAvgPool2dOptions(2));
 
 
-        this->classifier = torch::nn::Sequential();
+        this->classifier = torch::nn::Sequential(
+            torch::nn::Linear(960, 1200),
+            HSwish(),
+            torch::nn::Dropout(torch::nn::DropoutOptions(dropout_prob).inplace(true)),
+            torch::nn::Linear(1200, num_classes)
+        );
     }
 
     torch::Tensor MobileNetV3::forward(torch::Tensor x) {
