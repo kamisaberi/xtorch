@@ -182,13 +182,19 @@ namespace xt::models {
     //                Bottleneck(input_channels=16, kernel=3, stride=1, expansion=16, output_channels=16, activation=nn.ReLU(inplace=True)),
     //                Bottleneck(input_channels=16, kernel=3, stride=2, expansion=64, output_channels=24, activation=nn.ReLU(inplace=True)),
     //                Bottleneck(input_channels=24, kernel=3, stride=1, expansion=72, output_channels=24, activation=nn.ReLU(inplace=True)),
+
     //                Bottleneck(input_channels=24, kernel=5, stride=2, expansion=72, output_channels=40, activation=nn.ReLU(inplace=True), se=True),
     //                Bottleneck(input_channels=40, kernel=5, stride=1, expansion=120, output_channels=40, activation=nn.ReLU(inplace=True), se=True),
     //                Bottleneck(input_channels=40, kernel=5, stride=1, expansion=120, output_channels=40, activation=nn.ReLU(inplace=True), se=True),
+
+
     //                Bottleneck(input_channels=40, kernel=3, stride=2, expansion=240, output_channels=80, activation=HSwish()),
     //                Bottleneck(input_channels=80, kernel=3, stride=1, expansion=200, output_channels=80, activation=HSwish()),
     //                Bottleneck(input_channels=80, kernel=3, stride=1, expansion=184, output_channels=80, activation=HSwish()),
     //                Bottleneck(input_channels=80, kernel=3, stride=1, expansion=184, output_channels=80, activation=HSwish()),
+
+
+
     //                Bottleneck(input_channels=80, kernel=3, stride=1, expansion=480, output_channels=112, activation=HSwish(), se=True),
     //                Bottleneck(input_channels=112, kernel=3, stride=1, expansion=672, output_channels=112, activation=HSwish(), se=True),
     //                Bottleneck(input_channels=112, kernel=5, stride=2, expansion=672, output_channels=160, activation=HSwish(), se=True),
