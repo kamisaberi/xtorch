@@ -64,7 +64,18 @@ namespace xt::models {
         );
 
         this->bottlenecks = torch::nn::Sequential(
-            Bottleneck(16, 3, 1, 16, 16, *torch::nn::ReLU(torch::nn::ReLUOptions(true)))
+            Bottleneck(16, 3, 1, 16, 16, *torch::nn::ReLU(torch::nn::ReLUOptions(true))),
+            Bottleneck(16, 3, 2, 64, 24, *torch::nn::ReLU(torch::nn::ReLUOptions(true))),
+            Bottleneck(24, 3, 1, 72, 24, *torch::nn::ReLU(torch::nn::ReLUOptions(true))),
+
+
+            Bottleneck(24, 5, 2, 72, 40, *torch::nn::ReLU(torch::nn::ReLUOptions(true))),
+            Bottleneck(40, 5, 1, 120, 40, *torch::nn::ReLU(torch::nn::ReLUOptions(true))),
+            Bottleneck(40, 5, 1, 120, 40, *torch::nn::ReLU(torch::nn::ReLUOptions(true))),
+
+
+
+
 
 
         );
