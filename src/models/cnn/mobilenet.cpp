@@ -63,8 +63,11 @@ namespace xt::models {
             HSwish()
         );
 
-        this->bottlenecks = torch::nn::Sequential();
+        this->bottlenecks = torch::nn::Sequential(
+            Bottleneck(16, 3, 1, 16, 16, *torch::nn::ReLU(torch::nn::ReLUOptions(true)))
 
+
+        );
 
 
         this->final_conv = torch::nn::Sequential();
