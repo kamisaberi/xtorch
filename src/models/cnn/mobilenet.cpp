@@ -81,7 +81,13 @@ namespace xt::models {
     }
 
     torch::Tensor Bottleneck::forward(torch::Tensor x) {
-        return x;
+        torch::Tensor residual = x;
+        torch::Tensor output = this->bottleneck->forward(x);
+        if (this->downsample->size() != 0) {
+            residual = this->downsample->forward(output);
+        }
+        output = output + residual;
+        return output;
     }
 
 
