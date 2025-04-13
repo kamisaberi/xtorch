@@ -46,6 +46,35 @@ namespace xt::models {
 
     Bottleneck::Bottleneck(int input_channels, int kernel, int stride, int expansion, int output_channels,
                            torch::nn::Module activation, bool se) {
+        this->bottleneck = torch::nn::Sequential(
+            torch::nn::Conv2d(
+                torch::nn::Conv2dOptions(input_channels, expansion, 1).stride(1).bias(false)),
+            torch::nn::BatchNorm2d(expansion),
+            activation,
+
+
+            torch::nn::Conv2d(
+                torch::nn::Conv2dOptions(expansion, expansion, kernel).stride(stride).padding(kernel / 2).
+                groups(expansion).bias(false)),
+            torch::nn::BatchNorm2d(expansion),
+            activation,
+
+            SqueezeExcite(expansion),
+
+
+            torch::nn::Conv2d(
+                torch::nn::Conv2dOptions(expansion, output_channels, 1).stride(1).bias(false)),
+            torch::nn::BatchNorm2d(expansion),
+            activation
+        );
+
+
+        if (input_channels == output_channels) {
+            this->downsample = torch::nn::Sequential();
+        }else {
+
+        }
+
     }
 
     torch::Tensor Bottleneck::forward(torch::Tensor x) {
