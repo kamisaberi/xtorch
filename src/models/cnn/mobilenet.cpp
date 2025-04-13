@@ -64,21 +64,21 @@ namespace xt::models {
         );
 
         this->bottlenecks = torch::nn::Sequential(
-            Bottleneck(16, 3, 1, 16, 16, *torch::nn::ReLU(torch::nn::ReLUOptions(true))),
+            Bottleneck(16, 3, 1, 16, 16, static_cast<Module>(*torch::nn::ReLU(torch::nn::ReLUOptions(true)))),
             Bottleneck(16, 3, 2, 64, 24, *torch::nn::ReLU(torch::nn::ReLUOptions(true))),
             Bottleneck(24, 3, 1, 72, 24, *torch::nn::ReLU(torch::nn::ReLUOptions(true))),
             Bottleneck(24, 5, 2, 72, 40, *torch::nn::ReLU(torch::nn::ReLUOptions(true))),
             Bottleneck(40, 5, 1, 120, 40, *torch::nn::ReLU(torch::nn::ReLUOptions(true))),
             Bottleneck(40, 5, 1, 120, 40, *torch::nn::ReLU(torch::nn::ReLUOptions(true))),
-            Bottleneck(40, 3, 2, 240, 80, HSwish()),
-            Bottleneck(80, 3, 1, 200, 80, HSwish()),
-            Bottleneck(80, 3, 1, 184, 80, HSwish()),
-            Bottleneck(80, 3, 1, 184, 80, HSwish()),
-            Bottleneck(80, 3, 1, 480, 112, HSwish(), true),
-            Bottleneck(112, 3, 1, 672, 112, HSwish(), true),
-            Bottleneck(112, 5, 2, 672, 160, HSwish(), true),
-            Bottleneck(160, 5, 1, 960, 160, HSwish(), true),
-            Bottleneck(160, 5, 1, 960, 160, HSwish(), true)
+            Bottleneck(40, 3, 2, 240, 80, static_cast<Module>(HSwish())),
+            Bottleneck(80, 3, 1, 200, 80, static_cast<Module>(HSwish())),
+            Bottleneck(80, 3, 1, 184, 80, static_cast<Module>(HSwish())),
+            Bottleneck(80, 3, 1, 184, 80, static_cast<Module>(HSwish())),
+            Bottleneck(80, 3, 1, 480, 112, static_cast<Module>(HSwish()), true),
+            Bottleneck(112, 3, 1, 672, 112, static_cast<Module>(HSwish()), true),
+            Bottleneck(112, 5, 2, 672, 160, static_cast<Module>(HSwish()), true),
+            Bottleneck(160, 5, 1, 960, 160, static_cast<Module>(HSwish()), true),
+            Bottleneck(160, 5, 1, 960, 160, static_cast<Module>(HSwish()), true)
         );
 
 
