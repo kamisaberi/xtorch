@@ -70,7 +70,12 @@ namespace xt::models {
         );
 
 
-        this->final_conv = torch::nn::Sequential();
+        this->final_conv = torch::nn::Sequential(
+            torch::nn::Conv2d(
+                torch::nn::Conv2dOptions(160, 960, 1).stride(1).bias(false)),
+            torch::nn::BatchNorm2d(960),
+            HSwish()
+        );
 
 
         this->pool = torch::nn::AdaptiveAvgPool2d(torch::nn::AdaptiveAvgPool2dOptions(2));
