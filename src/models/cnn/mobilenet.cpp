@@ -94,8 +94,9 @@ namespace xt::models {
         x = this->bottlenecks->forward(x);
         x = this->final_conv->forward(x);
         x = this->pool(x);
+        x = x.view({x.size(0), -1});
         //        x = torch.flatten(x, 1)
-        //        x = self.classifier(x)
-        //        return x
+        x = this->classifier->forward(x);
+        return x;
     }
 }
