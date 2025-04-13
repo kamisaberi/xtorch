@@ -56,7 +56,24 @@ namespace xt::models {
     // --------------------------------------------------------------------
 
     MobileNetV3::MobileNetV3(int input_channels, int num_classes, float dropout_prob) {
+        this->initial_conv = torch::nn::Sequential(
+            torch::nn::Conv2d(
+                torch::nn::Conv2dOptions(input_channels, 16, 3).stride(2)),
+            torch::nn::BatchNorm2d(16),
+            HSwish()
+        );
 
+        this->bottlenecks = torch::nn::Sequential();
+
+
+
+        this->final_conv = torch::nn::Sequential();
+
+
+        this->pool = torch::nn::AdaptiveAvgPool2d(torch::nn::AdaptiveAvgPool2dOptions(2));
+
+
+        this->classifier = torch::nn::Sequential();
     }
 
     torch::Tensor MobileNetV3::forward(torch::Tensor x) {
@@ -64,10 +81,8 @@ namespace xt::models {
         x = this->bottlenecks->forward(x);
         x = this->final_conv->forward(x);
         x = this->pool(x);
-   //        x = torch.flatten(x, 1)
-   //        x = self.classifier(x)
-   //        return x
+        //        x = torch.flatten(x, 1)
+        //        x = self.classifier(x)
+        //        return x
     }
-
-
 }
