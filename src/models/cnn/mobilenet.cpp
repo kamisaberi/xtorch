@@ -74,8 +74,18 @@ namespace xt::models {
             Bottleneck(40, 5, 1, 120, 40, *torch::nn::ReLU(torch::nn::ReLUOptions(true))),
 
 
+            Bottleneck(40, 3, 2, 240, 80, HSwish()),
+            Bottleneck(80, 3, 1, 200, 80, HSwish()),
+            Bottleneck(80, 3, 1, 184, 80, HSwish()),
+            Bottleneck(80, 3, 1, 184, 80, HSwish()),
 
 
+            Bottleneck(80, 3, 1, 480, 112, HSwish(), true),
+            Bottleneck(112, 3, 1, 672, 112, HSwish(), true),
+
+            Bottleneck(112, 5, 2, 672, 160, HSwish(), true),
+            Bottleneck(160, 5, 1, 960, 160, HSwish(), true),
+            Bottleneck(160, 5, 1, 960, 160, HSwish(), true)
 
 
         );
