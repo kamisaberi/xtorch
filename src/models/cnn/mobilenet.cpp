@@ -69,12 +69,15 @@ namespace xt::models {
         );
 
 
-        if (input_channels == output_channels) {
+        if (input_channels == output_channels && stride == 1) {
             this->downsample = torch::nn::Sequential();
-        }else {
-
+        } else {
+            this->downsample = torch::nn::Sequential(
+                torch::nn::Conv2d(
+                    torch::nn::Conv2dOptions(input_channels, output_channels, 1).stride(stride).bias(false)),
+                torch::nn::BatchNorm2d(expansion)
+            );
         }
-
     }
 
     torch::Tensor Bottleneck::forward(torch::Tensor x) {
