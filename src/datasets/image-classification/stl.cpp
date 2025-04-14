@@ -1,4 +1,4 @@
-#include "../../../include/datasets/specific/stl.h"
+#include "../../../include/datasets/image-classification/stl.h"
 
 namespace xt::data::datasets {
 
