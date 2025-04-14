@@ -99,7 +99,7 @@ target_link_libraries(alexnet-cifar100 ${TEST_LIBRARIES})
 
 # AlexNet Imagenette
 set(SOURCE_FILES
-        ../src/datasets/specific/imagenette.cpp
+        ../src/datasets/image-classification/imagenette.cpp
         ../src/models/cnn/alexnet.cpp
 )
 add_executable(alexnet-imagenette ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/alexnet-imagenette.cpp)
@@ -177,7 +177,7 @@ target_link_libraries(lenet5-cifar100 ${TEST_LIBRARIES})
 
 # LeNet5 Imagenette
 set(SOURCE_FILES
-        ../src/datasets/specific/imagenette.cpp
+        ../src/datasets/image-classification/imagenette.cpp
         ../src/models/cnn/lenet5.cpp
 )
 add_executable(lenet5-imagenette ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/lenet5-imagenette.cpp)
@@ -254,7 +254,7 @@ target_link_libraries(resnet-cifar100 ${TEST_LIBRARIES})
 
 # ResNet Imagenette
 set(SOURCE_FILES
-        ../src/datasets/specific/imagenette.cpp
+        ../src/datasets/image-classification/imagenette.cpp
         ../src/models/cnn/resnet.cpp
 )
 add_executable(resnet-imagenette ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/resnet-imagenette.cpp)
@@ -327,7 +327,7 @@ target_link_libraries(vggnet16-cifar100 ${TEST_LIBRARIES})
 
 # VggNet Imagenette
 set(SOURCE_FILES
-        ../src/datasets/specific/imagenette.cpp
+        ../src/datasets/image-classification/imagenette.cpp
         ../src/models/cnn/vggnet.cpp
 )
 add_executable(vggnet16-imagenette ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/vggnet16-imagenette.cpp)
