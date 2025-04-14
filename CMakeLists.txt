@@ -38,7 +38,7 @@ file(GLOB_RECURSE DATALOADER_FILES CONFIGURE_DEPENDS src/data-loaders/*.tpp)
 file(GLOB_RECURSE TRANSFORM_FILES CONFIGURE_DEPENDS src/transforms/*.cpp)
 
 # Combine all source files into one variable for easy access
-set(LIBRARY_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DATASET_FILIES} ${DEFINITION_FILES} ${MODEL_FILES}  ${DATALOADER_FILES} ${TRANSFORM_FILES} include/datasets/audio-speech/librispeech.h include/datasets/audio-speech/common-voice.h src/datasets/audio-speech/common-voice.cpp)
+set(LIBRARY_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DATASET_FILIES} ${DEFINITION_FILES} ${MODEL_FILES}  ${DATALOADER_FILES} ${TRANSFORM_FILES} )
 
 # -----------------------------------------------------------------------------
 # Library Setup
