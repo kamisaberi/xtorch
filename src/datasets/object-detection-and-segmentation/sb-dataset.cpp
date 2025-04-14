@@ -1,4 +1,4 @@
-#include "../../../include/datasets/specific/sb-dataset.h"
+#include "../../../include/datasets/object-detection-and-segmentation/sb-dataset.h"
 
 namespace xt::data::datasets {
 
