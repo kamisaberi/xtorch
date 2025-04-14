@@ -2,7 +2,7 @@
 #include <torch/data/datasets/mnist.h>
 #include <iostream>
 #include <vector>
-#include "../include/datasets/specific/imagenette.h"
+#include "../include/datasets/image-classification/imagenette.h"
 #include "../include/models/cnn/lenet5.h"
 #include <torch/data/transforms/base.h>
 #include <functional>

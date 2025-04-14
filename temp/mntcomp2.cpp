@@ -10,7 +10,7 @@
 
 #include "../include/datasets/image-classification/mnist.h"
 #include "../include/datasets/image-classification/cifar.h"
-#include "../include/datasets/specific/imagenette.h"
+#include "../include/datasets/image-classification/imagenette.h"
 #include "../include/models/cnn/lenet5.h"
 #include "../include/definitions/transforms.h"
 #include "../include/data-loaders/data-loader.h"

@@ -1,4 +1,4 @@
-#include "../../../include/datasets/specific/imagenet.h"
+#include "../../../include/datasets/image-classification/imagenet.h"
 
 namespace xt::data::datasets {
 
