@@ -52,7 +52,7 @@ set(TEST_LIBRARIES ${CURL_LIBRARIES}
 
 # AlexNet MNIST
 set(SOURCE_FILES
-        ../src/datasets/specific/mnist.cpp
+        ../src/datasets/image-classification/mnist.cpp
         ../src/models/cnn/alexnet.cpp
 )
 add_executable(alexnet-mnist ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/alexnet-mnist.cpp)
@@ -65,7 +65,7 @@ target_link_libraries(alexnet-mnist ${TEST_LIBRARIES})
 
 # AlexNet FashionMNIST
 set(SOURCE_FILES
-        ../src/datasets/specific/mnist.cpp
+        ../src/datasets/image-classification/mnist.cpp
         ../src/models/cnn/alexnet.cpp
 )
 add_executable(alexnet-fashionmnist ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/alexnet-fashionmnist.cpp)
@@ -129,7 +129,7 @@ target_link_libraries(alexnet-food101 ${TEST_LIBRARIES})
 
 # LeNet5 MNIST
 set(SOURCE_FILES
-        ../src/datasets/specific/mnist.cpp
+        ../src/datasets/image-classification/mnist.cpp
         ../src/models/cnn/lenet5.cpp
 
 )
@@ -141,7 +141,7 @@ target_link_libraries(lenet5-mnist ${TEST_LIBRARIES})
 
 # LeNet5 FashionMNIST
 set(SOURCE_FILES
-        ../src/datasets/specific/mnist.cpp
+        ../src/datasets/image-classification/mnist.cpp
         ../src/models/cnn/lenet5.cpp
 
 )
@@ -208,7 +208,7 @@ target_link_libraries(lenet5-food101 ${TEST_LIBRARIES})
 
 # ResNet MNIST
 set(SOURCE_FILES
-        ../src/datasets/specific/mnist.cpp
+        ../src/datasets/image-classification/mnist.cpp
         ../src/models/cnn/resnet.cpp
 )
 add_executable(resnet-mnist ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/resnet-mnist.cpp)
@@ -220,7 +220,7 @@ target_link_libraries(resnet-mnist ${TEST_LIBRARIES})
 
 # ResNet FashionMNIST
 set(SOURCE_FILES
-        ../src/datasets/specific/mnist.cpp
+        ../src/datasets/image-classification/mnist.cpp
         ../src/models/cnn/resnet.cpp
 )
 add_executable(resnet-fashionmnist ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/resnet-fashionmnist.cpp)
@@ -280,7 +280,7 @@ target_link_libraries(resnet-food101 ${TEST_LIBRARIES})
 
 # VggNet MNIST
 set(SOURCE_FILES
-        ../src/datasets/specific/mnist.cpp
+        ../src/datasets/image-classification/mnist.cpp
         ../src/models/cnn/vggnet.cpp
 )
 add_executable(vggnet16-mnist ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/vggnet16-mnist.cpp)
@@ -293,7 +293,7 @@ target_link_libraries(vggnet16-mnist ${TEST_LIBRARIES})
 
 # VggNet FashionMNIST
 set(SOURCE_FILES
-        ../src/datasets/specific/mnist.cpp
+        ../src/datasets/image-classification/mnist.cpp
         ../src/models/cnn/vggnet.cpp
 )
 add_executable(vggnet16-fashionmnist ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/vggnet16-fashionmnist.cpp)
@@ -354,7 +354,7 @@ target_link_libraries(vggnet16-food101 ${TEST_LIBRARIES})
 
 # Trainer Simple
 set(SOURCE_FILES
-        ../src/datasets/specific/mnist.cpp
+        ../src/datasets/image-classification/mnist.cpp
         ../src/models/cnn/lenet5.cpp
         ../src/trainers/trainer.cpp
         ../src/data-loaders/data-loader.tpp

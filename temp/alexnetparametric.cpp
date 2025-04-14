@@ -8,7 +8,7 @@
 #include <torch/data/transforms/base.h>
 #include <functional>
 
-#include "../include/datasets/specific/mnist.h"
+#include "../include/datasets/image-classification/mnist.h"
 #include "../include/models/cnn/alexnet.h"
 #include "../include/definitions/transforms.h"
 

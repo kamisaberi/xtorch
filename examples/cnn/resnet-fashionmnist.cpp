@@ -1,6 +1,6 @@
 #include "includes/base.h"
 
-#include "../../include/datasets/specific/mnist.h"
+#include "../../include/datasets/image-classification/mnist.h"
 #include "../../include/models/cnn/resnet.h"
 #include "../../include/definitions/transforms.h"
 
