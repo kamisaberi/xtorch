@@ -1,4 +1,4 @@
-#include "../../../include/datasets/specific/country.h"
+#include "../../../include/datasets/image-classification/country.h"
 
 namespace xt::data::datasets {
 
