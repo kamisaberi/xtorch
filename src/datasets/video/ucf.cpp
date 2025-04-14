@@ -1,4 +1,4 @@
-#include "../../../include/datasets/specific/ucf.h"
+#include "../../../include/datasets/video/ucf.h"
 
 namespace xt::data::datasets {
 
