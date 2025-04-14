@@ -2,13 +2,13 @@
 #include <torch/data/datasets/mnist.h>
 #include <iostream>
 #include <vector>
-#include "../include/datasets/specific/mnist.h"
+#include "../include/datasets/image-classification/mnist.h"
 #include "../include/models/cnn/lenet5.h"
 #include <torch/data/transforms/base.h>
 #include <functional>
 #include "../include/definitions/transforms.h"
 
-#include "../include/datasets/specific/mnist.h"
+#include "../include/datasets/image-classification/mnist.h"
 #include "../include/datasets/image-classification/cifar.h"
 #include "../include/datasets/specific/imagenette.h"
 #include "../include/models/cnn/lenet5.h"

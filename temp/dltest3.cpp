@@ -1,4 +1,4 @@
-#include "../include/datasets/specific/mnist.h"
+#include "../include/datasets/image-classification/mnist.h"
 #include "../include/models/cnn/lenet5.h"
 #include "../include/definitions/transforms.h"
 #include <torch/torch.h>
