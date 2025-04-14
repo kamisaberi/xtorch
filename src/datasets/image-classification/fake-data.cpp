@@ -1,4 +1,4 @@
-#include "../../../include/datasets/specific/fake-data.h"
+#include "../../../include/datasets/image-classification/fake-data.h"
 
 namespace xt::data::datasets {
     FakeData::FakeData(): FakeData::FakeData(1000, {3, 24, 24}) {
