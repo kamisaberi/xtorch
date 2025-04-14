@@ -1,4 +1,4 @@
-#include "../../../include/datasets/specific/gtsrb.h"
+#include "../../../include/datasets/image-classification/gtsrb.h"
 
 namespace xt::data::datasets {
 
