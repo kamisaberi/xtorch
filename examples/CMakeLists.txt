@@ -76,7 +76,7 @@ target_link_libraries(alexnet-fashionmnist ${TEST_LIBRARIES})
 
 # AlexNet CIFAR10
 set(SOURCE_FILES
-        ../src/datasets/specific/cifar.cpp
+        ../src/datasets/image-classification/cifar.cpp
         ../src/models/cnn/alexnet.cpp
 )
 add_executable(alexnet-cifar10 ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/alexnet-cifar10.cpp)
@@ -88,7 +88,7 @@ target_link_libraries(alexnet-cifar10 ${TEST_LIBRARIES})
 
 # AlexNet CIFAR100
 set(SOURCE_FILES
-        ../src/datasets/specific/cifar.cpp
+        ../src/datasets/image-classification/cifar.cpp
         ../src/models/cnn/alexnet.cpp
 )
 add_executable(alexnet-cifar100 ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/alexnet-cifar100.cpp)
@@ -154,7 +154,7 @@ target_link_libraries(lenet5-fashionmnist ${TEST_LIBRARIES})
 
 # LeNet5 CIFAR10
 set(SOURCE_FILES
-        ../src/datasets/specific/cifar.cpp
+        ../src/datasets/image-classification/cifar.cpp
         ../src/models/cnn/lenet5.cpp
 )
 add_executable(lenet5-cifar10 ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/lenet5-cifar10.cpp)
@@ -165,7 +165,7 @@ target_link_libraries(lenet5-cifar10 ${TEST_LIBRARIES})
 
 # LeNet5 CIFAR100
 set(SOURCE_FILES
-        ../src/datasets/specific/cifar.cpp
+        ../src/datasets/image-classification/cifar.cpp
         ../src/models/cnn/lenet5.cpp
 )
 add_executable(lenet5-cifar100 ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/lenet5-cifar100.cpp)
@@ -231,7 +231,7 @@ target_link_libraries(resnet-fashionmnist ${TEST_LIBRARIES})
 
 # ResNet CIFAR10
 set(SOURCE_FILES
-        ../src/datasets/specific/cifar.cpp
+        ../src/datasets/image-classification/cifar.cpp
         ../src/models/cnn/resnet.cpp
 )
 add_executable(resnet-cifar10 ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/resnet-cifar10.cpp)
@@ -243,7 +243,7 @@ target_link_libraries(resnet-cifar10 ${TEST_LIBRARIES})
 
 # ResNet CIFAR100
 set(SOURCE_FILES
-        ../src/datasets/specific/cifar.cpp
+        ../src/datasets/image-classification/cifar.cpp
         ../src/models/cnn/resnet.cpp
 )
 add_executable(resnet-cifar100 ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/resnet-cifar100.cpp)
@@ -304,7 +304,7 @@ target_link_libraries(vggnet16-fashionmnist ${TEST_LIBRARIES})
 
 # VggNet CIFAR10
 set(SOURCE_FILES
-        ../src/datasets/specific/cifar.cpp
+        ../src/datasets/image-classification/cifar.cpp
         ../src/models/cnn/vggnet.cpp
 )
 add_executable(vggnet16-cifar10 ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/vggnet16-cifar10.cpp)
@@ -316,7 +316,7 @@ target_link_libraries(vggnet16-cifar10 ${TEST_LIBRARIES})
 
 # VggNet CIFAR100
 set(SOURCE_FILES
-        ../src/datasets/specific/cifar.cpp
+        ../src/datasets/image-classification/cifar.cpp
         ../src/models/cnn/vggnet.cpp
 )
 add_executable(vggnet16-cifar100 ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/vggnet16-cifar100.cpp)
