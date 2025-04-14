@@ -1,4 +1,4 @@
-#include "../../../include/datasets/specific/cityscapes.h"
+#include "../../../include/datasets/object-detection-and-segmentation/cityscapes.h"
 
 namespace xt::data::datasets {
 
