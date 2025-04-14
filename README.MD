@@ -1,5 +1,5 @@
 ![Logo](https://github.com/user-attachments/assets/70527c02-c73e-429b-9d86-0b43172dccb2)
-# 🔴 **LIBRARY UNDER DEVELOPMENT SITUATION PLEASE ONLY USE RELEASE VERSION **  
+# 🔴 _LIBRARY UNDER DEVELOPMENT SITUATION PLEASE ONLY USE RELEASE VERSION_  
 # xTorch: Bridging the Usability Gap in PyTorch’s C++ API
 
 ## Motivation
