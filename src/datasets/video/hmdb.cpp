@@ -1,4 +1,4 @@
-#include "../../../include/datasets/specific/hmdb.h"
+#include "../../../include/datasets/video/hmdb.h"
 
 namespace xt::data::datasets {
 
