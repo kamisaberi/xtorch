@@ -1,6 +1,5 @@
 ![Logo](https://github.com/user-attachments/assets/70527c02-c73e-429b-9d86-0b43172dccb2)
-<h1 style="color:red">LIBRARY UNDER DEVELOPMENT SITUATION PLEASE ONLY USE RELEASE VERSION  </h1>
-
+# 🔴 **LIBRARY UNDER DEVELOPMENT SITUATION PLEASE ONLY USE RELEASE VERSION **  
 # xTorch: Bridging the Usability Gap in PyTorch’s C++ API
 
 ## Motivation
