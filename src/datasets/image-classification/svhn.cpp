@@ -1,4 +1,4 @@
-#include "../../../include/datasets/specific/svhn.h"
+#include "../../../include/datasets/image-classification/svhn.h"
 
 namespace xt::data::datasets {
 
