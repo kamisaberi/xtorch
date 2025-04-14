@@ -111,7 +111,7 @@ target_link_libraries(alexnet-imagenette ${TEST_LIBRARIES})
 
 # AlexNet Food101
 set(SOURCE_FILES
-        ../src/datasets/specific/food.cpp
+        ../src/datasets/image-classification/food.cpp
         ../src/models/cnn/alexnet.cpp
 )
 add_executable(alexnet-food101 ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/alexnet-food101.cpp)
@@ -189,7 +189,7 @@ target_link_libraries(lenet5-imagenette ${TEST_LIBRARIES})
 
 # LeNet5 Food101
 set(SOURCE_FILES
-        ../src/datasets/specific/food.cpp
+        ../src/datasets/image-classification/food.cpp
         ../src/models/cnn/lenet5.cpp
 )
 add_executable(lenet5-food101 ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/lenet5-food101.cpp)
@@ -266,7 +266,7 @@ target_link_libraries(resnet-imagenette ${TEST_LIBRARIES})
 
 # ResNet Food101
 set(SOURCE_FILES
-        ../src/datasets/specific/food.cpp
+        ../src/datasets/image-classification/food.cpp
         ../src/models/cnn/resnet.cpp
 )
 add_executable(resnet-food101 ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/resnet-food101.cpp)
@@ -338,7 +338,7 @@ target_link_libraries(vggnet16-imagenette ${TEST_LIBRARIES})
 
 # VggNet Food101
 set(SOURCE_FILES
-        ../src/datasets/specific/food.cpp
+        ../src/datasets/image-classification/food.cpp
         ../src/models/cnn/vggnet.cpp
 )
 add_executable(vggnet16-food101 ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/vggnet16-food101.cpp)

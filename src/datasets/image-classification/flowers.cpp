@@ -1,4 +1,4 @@
-#include "../../../include/datasets/specific/flowers.h"
+#include "../../../include/datasets/image-classification/flowers.h"
 
 namespace xt::data::datasets {
 
