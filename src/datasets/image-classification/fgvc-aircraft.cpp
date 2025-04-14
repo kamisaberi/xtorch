@@ -1,4 +1,4 @@
-#include "../../../include/datasets/specific/fgvc-aircraft.h"
+#include "../../../include/datasets/image-classification/fgvc-aircraft.h"
 
 namespace xt::data::datasets {
 
