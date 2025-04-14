@@ -673,7 +673,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} ${MODEL_FILES} ${TRAINER_FILES} ${DATA_LOADER_FILES} ${TRANSFORM_FILES}
         ../src/trainers/trainer.cpp ../src/data-loaders/data-loader.tpp
         ../src/datasets/base/base.cpp ../src/datasets/specific/mnist.cpp
-        ../src/datasets/specific/cifar.cpp ../src/datasets/specific/imagenette.cpp
+        ../src/datasets/image-classification/cifar.cpp ../src/datasets/specific/imagenette.cpp
         ../src/datasets/base/base.cpp mntcomp2.cpp)
 
 add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
