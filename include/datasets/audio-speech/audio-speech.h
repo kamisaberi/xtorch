@@ -1,8 +1,15 @@
-//
-// Created by kami on 4/18/25.
-//
-
-#ifndef AUDIO_SPEECH_H
-#define AUDIO_SPEECH_H
-
-#endif //AUDIO_SPEECH_H
+#pragma once
+#include "cmu-arctic.h"
+#include "common-voice.h"
+#include "crema-d.h"
+#include "esc.h"
+#include "gtzan.h"
+#include "librispeech.h"
+#include "lj-speech.h"
+#include "speech-commands.h"
+#include "tedlium.h"
+#include "timit.h"
+#include "urban-sound.h"
+#include "vctk.h"
+#include "vox-celeb.h"
+#include "yes-no.h"
