@@ -1,8 +1,3 @@
-//
-// Created by kami on 4/18/25.
-//
+#pragma once
 
-#ifndef PATCH_MATCHING_DESCRIPTOR_LEARNING_H
-#define PATCH_MATCHING_DESCRIPTOR_LEARNING_H
-
-#endif //PATCH_MATCHING_DESCRIPTOR_LEARNING_H
+#include "photo-tour.h"
