@@ -1,8 +1,3 @@
-//
-// Created by kami on 4/18/25.
-//
+#pragma once
 
-#ifndef SCENE_FLOW_H
-#define SCENE_FLOW_H
-
-#endif //SCENE_FLOW_H
+#include "flying-things-3d.h"
