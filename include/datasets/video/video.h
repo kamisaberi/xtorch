@@ -1,8 +1,6 @@
-//
-// Created by kami on 4/18/25.
-//
+#pragma once
 
-#ifndef VIDEO_H
-#define VIDEO_H
-
-#endif //VIDEO_H
+#include "hmdb.h"
+#include "kinetics.h"
+#include "moving-mnist.h"
+#include "ucf.h"
