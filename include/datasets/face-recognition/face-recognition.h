@@ -1,8 +1,6 @@
-//
-// Created by kami on 4/18/25.
-//
+#pragma once
 
-#ifndef FACE_RECOGNITION_H
-#define FACE_RECOGNITION_H
 
-#endif //FACE_RECOGNITION_H
+
+#include "lfw.h"
+#include "wider-face.h"
