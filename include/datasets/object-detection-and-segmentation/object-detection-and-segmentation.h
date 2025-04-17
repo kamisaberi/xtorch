@@ -1,8 +1,6 @@
-//
-// Created by kami on 4/18/25.
-//
+#pragma once
 
-#ifndef OBJECT_DETECTION_AND_SEGMENTATION_H
-#define OBJECT_DETECTION_AND_SEGMENTATION_H
-
-#endif //OBJECT_DETECTION_AND_SEGMENTATION_H
+#include "cityscapes.h"
+#include "coco.h"
+#include "oxfordIII-t-pet.h"
+#include "sb-dataset.h"
