@@ -15,7 +15,7 @@
 cmake_minimum_required(VERSION 3.28 FATAL_ERROR)
 
 # Define the project name and version
-project(xtorch VERSION 0.2.0 LANGUAGES CXX)
+project(xTorch VERSION 0.2.0 LANGUAGES CXX)
 
 # -----------------------------------------------------------------------------
 # Source Files
