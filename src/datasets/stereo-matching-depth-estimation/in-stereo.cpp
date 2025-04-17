@@ -1,4 +1,4 @@
-#include "../../../include/datasets/specific/in-stereo.h"
+#include "../../../include/datasets/stereo-matching-depth-estimation/in-stereo.h"
 
 namespace xt::data::datasets {
 
