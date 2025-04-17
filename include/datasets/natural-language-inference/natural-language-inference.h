@@ -1,8 +1,11 @@
-//
-// Created by kami on 4/18/25.
-//
+#pragma once
 
-#ifndef NATURAL_LANGUAGE_INFERENCE_H
-#define NATURAL_LANGUAGE_INFERENCE_H
-
-#endif //NATURAL_LANGUAGE_INFERENCE_H
+#include "cola.h"
+#include "mnli.h"
+#include "mrpc.h"
+#include "qnli.h"
+#include "qqp.h"
+#include "rte.h"
+#include "snli.h"
+#include "stsb.h"
+#include "wnli.h"
