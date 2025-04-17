@@ -1,4 +1,4 @@
-#include "../../../include/datasets/specific/rendered-sst2.h"
+#include "../../../include/datasets/image-classification/rendered-sst2.h"
 
 namespace xt::data::datasets {
 
