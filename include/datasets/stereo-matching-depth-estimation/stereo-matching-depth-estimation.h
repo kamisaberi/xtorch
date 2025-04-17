@@ -1,8 +1,8 @@
-//
-// Created by kami on 4/18/25.
-//
+#pragma once
 
-#ifndef STEREO_MATCHING_DEPTH_ESTIMATION_H
-#define STEREO_MATCHING_DEPTH_ESTIMATION_H
-
-#endif //STEREO_MATCHING_DEPTH_ESTIMATION_H
+#include "cre-stereo.h"
+#include "eth-3d-stereo.h"
+#include "falling-things-stereo.h"
+#include "in-stereo.h"
+#include "middlebury.h"
+#include "scene-flow-stereo.h"
