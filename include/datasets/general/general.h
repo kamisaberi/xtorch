@@ -1,8 +1,11 @@
-//
-// Created by kami on 4/18/25.
-//
+#pragma once
 
-#ifndef GENERAL_H
-#define GENERAL_H
 
-#endif //GENERAL_H
+#include "audio-dataset.h"
+#include "csv-dataset.h"
+#include "edf-dataset.h"
+#include "image-folder.h"
+#include "tensor-dataset.h"
+#include "text-dataset.h"
+#include "time-series-dataset.h"
+#include "video-dataset.h"
