@@ -1,8 +1,5 @@
-//
-// Created by kami on 4/18/25.
-//
+#pragma once
 
-#ifndef LANGUAGE_MODELING_H
-#define LANGUAGE_MODELING_H
-
-#endif //LANGUAGE_MODELING_H
+#include "en-wik.h"
+#include "penn-treebank.h"
+#include "wiki-text.h"
