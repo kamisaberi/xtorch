@@ -6,4 +6,5 @@
 #include "trainers/trainers.h"
 #include "models/models.h"
 #include "media/media.h"
+#include "data-loaders/data-loaders.h"
 
