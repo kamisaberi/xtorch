@@ -1,4 +1,4 @@
-#include "../../../include/datasets/specific/middlebury.h"
+#include "../../../include/datasets/stereo-matching-depth-estimation/middlebury.h"
 
 namespace xt::data::datasets {
 
