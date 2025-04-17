@@ -1,8 +1,5 @@
-//
-// Created by kami on 4/18/25.
-//
+#pragma once
 
-#ifndef MACHINE_TRANSLATION_H
-#define MACHINE_TRANSLATION_H
-
-#endif //MACHINE_TRANSLATION_H
+#include "iwslt.h"
+#include "multi.h"
+#include "wmt.h"
