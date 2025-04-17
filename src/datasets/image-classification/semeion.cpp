@@ -1,4 +1,4 @@
-#include "../../../include/datasets/specific/semeion.h"
+#include "../../../include/datasets/image-classification/semeion.h"
 
 namespace xt::data::datasets {
 
