@@ -8,7 +8,7 @@ class TestDataset {
 
   public:
     TestDataset();
-    ~TestDataset();
+//    ~TestDataset();
     torch::Tensor forward(torch::Tensor input);
 };
 
