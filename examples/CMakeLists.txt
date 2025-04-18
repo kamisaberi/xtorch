@@ -352,28 +352,12 @@ target_link_libraries(vggnet16-food101 ${TEST_LIBRARIES})
 #--------------------------------------- Trainer ---------------------------------------#
 
 
-
-
-#file(GLOB_RECURSE UTILITY_FILES CONFIGURE_DEPENDS ../src/utils/*.cpp)
-#file(GLOB_RECURSE MEDIA_FILES CONFIGURE_DEPENDS ../src/media/*.cpp)
-#file(GLOB_RECURSE DATASET_FILES CONFIGURE_DEPENDS ../src/datasets/*.cpp)
-#file(GLOB_RECURSE DEFINITION_FILES CONFIGURE_DEPENDS ../src/definitions/*.cpp)
-#file(GLOB_RECURSE MODEL_FILES CONFIGURE_DEPENDS ../src/models/*.cpp)
-#file(GLOB_RECURSE MODEL_CNN_FILES CONFIGURE_DEPENDS ../src/models/cnn/*.cpp)
-#file(GLOB_RECURSE DATALOADER_FILES CONFIGURE_DEPENDS ../src/data-loaders/*.tpp)
-#file(GLOB_RECURSE TRANSFORM_FILES CONFIGURE_DEPENDS ../src/transforms/*.cpp)
-## Combine all source files into one variable for easy access
-#set(LIBRARY_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DATASET_FILIES} ${DEFINITION_FILES} ${MODEL_FILES}  ${DATALOADER_FILES} ${TRANSFORM_FILES} )
-
-
 # Trainer Simple
-set(SOURCE_FILES ${LIBRARY_SOURCE_FILES}
+set(SOURCE_FILES
         ../src/datasets/image-classification/mnist.cpp
         ../src/models/cnn/lenet5.cpp
         ../src/trainers/trainer.cpp
-        ../src/datasets/base/base.cpp
-
-        ../src/data-loaders/data-loader.cpp
+        ../src/data-loaders/data-loader.tpp
 
 )
 add_executable(trainer-simple ${BASE_SOURCE_FILES} ${SOURCE_FILES} trainer/simple.cpp)
