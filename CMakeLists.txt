@@ -154,4 +154,4 @@ export(TARGETS ${PROJECT_NAME} FILE xTorchConfig.cmake)
 # -----------------------------------------------------------------------------
 # Add subdirectories for example and temporary code
 add_subdirectory(examples)
-add_subdirectory(temp)
+#add_subdirectory(temp)
