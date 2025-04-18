@@ -20,6 +20,11 @@ namespace xt::data::datasets {
     }
 
 
+
+    // BaseDataset::~BaseDataset() {}
+
+
+
     torch::data::Example<> BaseDataset::get(size_t index) {
         return {data[index], torch::tensor(labels[index])};
     }

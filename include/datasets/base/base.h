@@ -18,6 +18,8 @@ namespace xt::data::datasets {
         BaseDataset(const std::string &root, DataMode mode , bool download , vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
 
 
+            // virtual ~BaseDataset() = 0;
+
         // BaseDataset(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
 
         torch::data::Example<> get(size_t index) override;
