@@ -15,6 +15,7 @@ namespace xt::data::datasets {
         MNISTBase(const std::string &root, DataMode mode);
         MNISTBase(const std::string &root, DataMode mode , bool download);
         MNISTBase(const std::string &root, DataMode mode , bool download , vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
+        // ~MNISTBase() override;
 
         void read_images(const std::string &file_path, int num_images);
 

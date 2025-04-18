@@ -19,6 +19,8 @@ namespace xt::data::datasets {
         }
     }
 
+    // MNISTBase::~MNISTBase() {}
+
     void MNISTBase::read_images(const std::string &file_path, int num_images) {
         std::ifstream file(file_path, std::ios::binary);
         if (!file.is_open()) {
