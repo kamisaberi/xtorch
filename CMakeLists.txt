@@ -137,11 +137,20 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
         SOVERSION 1)
 
 # Install the library and include files
+#install(TARGETS ${PROJECT_NAME} EXPORT xTorchConfig
+#        ARCHIVE  DESTINATION ${CMAKE_INSTALL_LIBDIR}
+#        LIBRARY  DESTINATION ${CMAKE_INSTALL_LIBDIR}
+#        RUNTIME  DESTINATION ${CMAKE_INSTALL_BINDIR})
+#install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME})
+
+# Install the library and include files
 install(TARGETS ${PROJECT_NAME} EXPORT xTorchConfig
         ARCHIVE  DESTINATION ${CMAKE_INSTALL_LIBDIR}
         LIBRARY  DESTINATION ${CMAKE_INSTALL_LIBDIR}
         RUNTIME  DESTINATION ${CMAKE_INSTALL_BINDIR})
-install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME})
+install(DIRECTORY include DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME})
+install(DIRECTORY third_party DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME})
+
 
 # Install CMake configuration
 install(EXPORT xTorchConfig DESTINATION share/xTorch/cmake)
@@ -149,9 +158,28 @@ install(EXPORT xTorchConfig DESTINATION share/xTorch/cmake)
 # Export the target for use in other projects
 export(TARGETS ${PROJECT_NAME} FILE xTorchConfig.cmake)
 
+
+# -----------------------------------------------------------------------------
+# Uninstall Configuration
+# -----------------------------------------------------------------------------
+# Add uninstall target
+if(NOT TARGET uninstall)
+    configure_file(
+            "${CMAKE_CURRENT_SOURCE_DIR}/cmake_uninstall.cmake.in"
+            "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake"
+            IMMEDIATE @ONLY
+    )
+
+    add_custom_target(uninstall
+            COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake
+    )
+endif()
+
+
+
 # -----------------------------------------------------------------------------
 # Subdirectories
 # -----------------------------------------------------------------------------
 # Add subdirectories for example and temporary code
 add_subdirectory(examples)
-add_subdirectory(temp)
+#add_subdirectory(temp)
