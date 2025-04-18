@@ -37,8 +37,12 @@ file(GLOB_RECURSE MODEL_CNN_FILES CONFIGURE_DEPENDS src/models/cnn/*.cpp)
 file(GLOB_RECURSE DATALOADER_FILES CONFIGURE_DEPENDS src/data-loaders/*.tpp)
 file(GLOB_RECURSE TRANSFORM_FILES CONFIGURE_DEPENDS src/transforms/*.cpp)
 
+
+
+file(GLOB_RECURSE TEMP_FILES CONFIGURE_DEPENDS src/temp/*.cpp)
+
 # Combine all source files into one variable for easy access
-set(LIBRARY_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DATASET_FILIES} ${DEFINITION_FILES} ${MODEL_FILES}  ${DATALOADER_FILES} ${TRANSFORM_FILES} ${DATASET_FILES} )
+set(LIBRARY_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DATASET_FILIES} ${DEFINITION_FILES} ${MODEL_FILES}  ${DATALOADER_FILES} ${TRANSFORM_FILES} ${DATASET_FILES} ${TEMP_FILES} )
 
 # -----------------------------------------------------------------------------
 # Library Setup
