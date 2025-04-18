@@ -3,9 +3,9 @@
 namespace xt::temp {
 
     TestDataset::TestDataset(){}
-    TestDataset::~TestDataset(){}
+//    TestDataset::~TestDataset(){}
 
-    torch::Tensor forward(torch::Tensor input){
+    torch::Tensor TestDataset::forward(torch::Tensor input){
         return input;
     }
 
