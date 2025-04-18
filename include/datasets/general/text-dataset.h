@@ -9,11 +9,11 @@ namespace xt::data::datasets {
 
 
 
-    class CSVDataset : public BaseDataset {
+    class TextDataset : public BaseDataset {
     public :
-        CSVDataset(const std::string &file_path);
-        CSVDataset(const std::string &file_path,DataMode mode);
-        CSVDataset(const std::string &file_path,DataMode mode , vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
+        TextDataset(const std::string &file_path);
+        TextDataset(const std::string &file_path,DataMode mode);
+        TextDataset(const std::string &file_path,DataMode mode , vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
 
     private:
         vector<string> labels_name;
