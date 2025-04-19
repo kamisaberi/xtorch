@@ -1,3 +1,22 @@
-//
-// Created by kami on 4/15/25.
-//
+#include "../../../include/datasets/audio-speech/speech-commands.h"
+
+namespace xt::data::datasets {
+
+    SpeechCommands::SpeechCommands(const std::string &root): CMUArctic::CMUArctic(root, DataMode::TRAIN, false) {
+    }
+
+    SpeechCommands::SpeechCommands(const std::string &root, DataMode mode): CMUArctic::CMUArctic(root, mode, false) {
+    }
+
+    SpeechCommands::SpeechCommands(const std::string &root, DataMode mode, bool download) : BaseDataset(root, mode, download) {
+        throw std::runtime_error("SpeechCommands: SpeechCommands not implemented");
+    }
+
+
+    SpeechCommands::SpeechCommands(const std::string &root, DataMode mode, bool download,
+                         TransformType transforms) : BaseDataset(root, mode, download, transforms) {
+        throw std::runtime_error("SpeechCommands: SpeechCommands not implemented");
+    }
+
+
+}
