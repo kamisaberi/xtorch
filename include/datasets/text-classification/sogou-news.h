@@ -1,8 +1,19 @@
-//
-// Created by kami on 4/15/25.
-//
+#pragma once
+#include "../base/base.h"
+#include "../../headers/datasets.h"
 
-#ifndef SOGOU_NEWS_H
-#define SOGOU_NEWS_H
 
-#endif //SOGOU_NEWS_H
+namespace xt::data::datasets {
+    class SogouNews : BaseDataset {
+        public :
+            explicit SogouNews(const std::string &root);
+        SogouNews(const std::string &root, DataMode mode);
+        SogouNews(const std::string &root, DataMode mode , bool download);
+        SogouNews(const std::string &root, DataMode mode , bool download, TransformType transforms);
+
+        private :
+            void load_data();
+
+        void check_resources();
+    };
+}
