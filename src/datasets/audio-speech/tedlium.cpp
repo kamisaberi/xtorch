@@ -1,8 +1,22 @@
-//
-// Created by kami on 4/15/25.
-//
+#include "../../../include/datasets/audio-speech/tedlium.h"
 
-#ifndef TEDLIUM_H
-#define TEDLIUM_H
+namespace xt::data::datasets {
 
-#endif //TEDLIUM_H
+    Tedlium::Tedlium(const std::string &root): CMUArctic::CMUArctic(root, DataMode::TRAIN, false) {
+    }
+
+    Tedlium::Tedlium(const std::string &root, DataMode mode): CMUArctic::CMUArctic(root, mode, false) {
+    }
+
+    Tedlium::Tedlium(const std::string &root, DataMode mode, bool download) : BaseDataset(root, mode, download) {
+        throw std::runtime_error("Tedlium: Tedlium not implemented");
+    }
+
+
+    Tedlium::Tedlium(const std::string &root, DataMode mode, bool download,
+                         TransformType transforms) : BaseDataset(root, mode, download, transforms) {
+        throw std::runtime_error("Tedlium: Tedlium not implemented");
+    }
+
+
+}
