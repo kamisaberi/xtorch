@@ -1,8 +1,19 @@
-//
-// Created by kami on 4/15/25.
-//
+#pragma once
+#include "../base/base.h"
+#include "../../headers/datasets.h"
 
-#ifndef STSB_H
-#define STSB_H
 
-#endif //STSB_H
+namespace xt::data::datasets {
+    class STSB : BaseDataset {
+        public :
+            explicit STSB(const std::string &root);
+        STSB(const std::string &root, DataMode mode);
+        STSB(const std::string &root, DataMode mode , bool download);
+        STSB(const std::string &root, DataMode mode , bool download, TransformType transforms);
+
+        private :
+            void load_data();
+
+        void check_resources();
+    };
+}
