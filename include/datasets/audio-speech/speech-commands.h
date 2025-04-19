@@ -1,8 +1,23 @@
-//
-// Created by kami on 4/15/25.
-//
+#pragma once
 
-#ifndef SPEECH_COMMANDS_H
-#define SPEECH_COMMANDS_H
+#include "../base/base.h"
+#include "../../headers/datasets.h"
 
-#endif //SPEECH_COMMANDS_H
+
+namespace xt::data::datasets {
+    class SpeechCommands : BaseDataset {
+    public :
+        explicit SpeechCommands(const std::string &root);
+
+        SpeechCommands(const std::string &root, DataMode mode);
+
+        SpeechCommands(const std::string &root, DataMode mode, bool download);
+
+        SpeechCommands(const std::string &root, DataMode mode, bool download, TransformType transforms);
+
+    private :
+        void load_data();
+
+        void check_resources();
+    };
+}
