@@ -1,8 +1,19 @@
-//
-// Created by pc on 4/14/2025.
-//
+#pragma once
+#include "../base/base.h"
+#include "../../headers/datasets.h"
 
-#ifndef XTORCH_COMMON_VOICE_H
-#define XTORCH_COMMON_VOICE_H
 
-#endif //XTORCH_COMMON_VOICE_H
+namespace xt::data::datasets {
+    class CMUArctic : BaseDataset {
+    public :
+        explicit CMUArctic(const std::string &root);
+        CMUArctic(const std::string &root, DataMode mode);
+        CMUArctic(const std::string &root, DataMode mode , bool download);
+        CMUArctic(const std::string &root, DataMode mode , bool download, TransformType transforms);
+
+    private :
+        void load_data();
+
+        void check_resources();
+    };
+}
