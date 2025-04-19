@@ -1,8 +1,23 @@
-//
-// Created by kami on 4/15/25.
-//
+#pragma once
 
-#ifndef URBAN_SOUND_H
-#define URBAN_SOUND_H
+#include "../base/base.h"
+#include "../../headers/datasets.h"
 
-#endif //URBAN_SOUND_H
+
+namespace xt::data::datasets {
+    class UrbanSound : BaseDataset {
+    public :
+        explicit UrbanSound(const std::string &root);
+
+        UrbanSound(const std::string &root, DataMode mode);
+
+        UrbanSound(const std::string &root, DataMode mode, bool download);
+
+        UrbanSound(const std::string &root, DataMode mode, bool download, TransformType transforms);
+
+    private :
+        void load_data();
+
+        void check_resources();
+    };
+}
