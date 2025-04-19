@@ -2,10 +2,10 @@
 
 namespace xt::data::datasets {
 
-    Tedlium::Tedlium(const std::string &root): CMUArctic::CMUArctic(root, DataMode::TRAIN, false) {
+    Tedlium::Tedlium(const std::string &root): Tedlium::Tedlium(root, DataMode::TRAIN, false) {
     }
 
-    Tedlium::Tedlium(const std::string &root, DataMode mode): CMUArctic::CMUArctic(root, mode, false) {
+    Tedlium::Tedlium(const std::string &root, DataMode mode): Tedlium::Tedlium(root, mode, false) {
     }
 
     Tedlium::Tedlium(const std::string &root, DataMode mode, bool download) : BaseDataset(root, mode, download) {
