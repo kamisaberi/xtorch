@@ -1,8 +1,23 @@
-//
-// Created by kami on 4/15/25.
-//
+#pragma once
 
-#ifndef TIMIT_H
-#define TIMIT_H
+#include "../base/base.h"
+#include "../../headers/datasets.h"
 
-#endif //TIMIT_H
+
+namespace xt::data::datasets {
+    class TIMIT : BaseDataset {
+    public :
+        explicit TIMIT(const std::string &root);
+
+        TIMIT(const std::string &root, DataMode mode);
+
+        TIMIT(const std::string &root, DataMode mode, bool download);
+
+        TIMIT(const std::string &root, DataMode mode, bool download, TransformType transforms);
+
+    private :
+        void load_data();
+
+        void check_resources();
+    };
+}
