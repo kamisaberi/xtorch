@@ -1,8 +1,19 @@
-//
-// Created by kami on 4/15/25.
-//
+#pragma once
+#include "../base/base.h"
+#include "../../headers/datasets.h"
 
-#ifndef YES_NO_H
-#define YES_NO_H
 
-#endif //YES_NO_H
+namespace xt::data::datasets {
+    class YesNo : BaseDataset {
+        public :
+            explicit YesNo(const std::string &root);
+        YesNo(const std::string &root, DataMode mode);
+        YesNo(const std::string &root, DataMode mode , bool download);
+        YesNo(const std::string &root, DataMode mode , bool download, TransformType transforms);
+
+        private :
+            void load_data();
+
+        void check_resources();
+    };
+}
