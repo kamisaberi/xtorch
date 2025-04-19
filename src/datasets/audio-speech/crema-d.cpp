@@ -2,10 +2,10 @@
 
 namespace xt::data::datasets {
 
-    CremaD::CremaD(const std::string &root): CMUArctic::CMUArctic(root, DataMode::TRAIN, false) {
+    CremaD::CremaD(const std::string &root): CremaD::CremaD(root, DataMode::TRAIN, false) {
     }
 
-    CremaD::CremaD(const std::string &root, DataMode mode): CMUArctic::CMUArctic(root, mode, false) {
+    CremaD::CremaD(const std::string &root, DataMode mode): CremaD::CremaD(root, mode, false) {
     }
 
     CremaD::CremaD(const std::string &root, DataMode mode, bool download) : BaseDataset(root, mode, download) {
