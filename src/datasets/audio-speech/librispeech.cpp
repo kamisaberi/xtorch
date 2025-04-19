@@ -2,10 +2,10 @@
 
 namespace xt::data::datasets {
 
-    LibriSpeech::LibriSpeech(const std::string &root): CMUArctic::CMUArctic(root, DataMode::TRAIN, false) {
+    LibriSpeech::LibriSpeech(const std::string &root): LibriSpeech::LibriSpeech(root, DataMode::TRAIN, false) {
     }
 
-    LibriSpeech::LibriSpeech(const std::string &root, DataMode mode): CMUArctic::CMUArctic(root, mode, false) {
+    LibriSpeech::LibriSpeech(const std::string &root, DataMode mode): LibriSpeech::LibriSpeech(root, mode, false) {
     }
 
     LibriSpeech::LibriSpeech(const std::string &root, DataMode mode, bool download) : BaseDataset(root, mode, download) {
