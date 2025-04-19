@@ -2,3 +2,5 @@
 site_name: xTorch
 theme:
   name: readthedocs  # looks clean and modern
+nav:
+  - Home: index.md
