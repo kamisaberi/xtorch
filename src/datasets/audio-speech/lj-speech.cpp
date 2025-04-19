@@ -2,10 +2,10 @@
 
 namespace xt::data::datasets {
 
-    LjSpeech::LjSpeech(const std::string &root): CMUArctic::CMUArctic(root, DataMode::TRAIN, false) {
+    LjSpeech::LjSpeech(const std::string &root): LjSpeech::LjSpeech(root, DataMode::TRAIN, false) {
     }
 
-    LjSpeech::LjSpeech(const std::string &root, DataMode mode): CMUArctic::CMUArctic(root, mode, false) {
+    LjSpeech::LjSpeech(const std::string &root, DataMode mode): LjSpeech::LjSpeech(root, mode, false) {
     }
 
     LjSpeech::LjSpeech(const std::string &root, DataMode mode, bool download) : BaseDataset(root, mode, download) {
