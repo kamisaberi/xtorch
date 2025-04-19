@@ -2,10 +2,10 @@
 
 namespace xt::data::datasets {
 
-    GTZAN::GTZAN(const std::string &root): CMUArctic::CMUArctic(root, DataMode::TRAIN, false) {
+    GTZAN::GTZAN(const std::string &root): GTZAN::GTZAN(root, DataMode::TRAIN, false) {
     }
 
-    GTZAN::GTZAN(const std::string &root, DataMode mode): CMUArctic::CMUArctic(root, mode, false) {
+    GTZAN::GTZAN(const std::string &root, DataMode mode): GTZAN::GTZAN(root, mode, false) {
     }
 
     GTZAN::GTZAN(const std::string &root, DataMode mode, bool download) : BaseDataset(root, mode, download) {

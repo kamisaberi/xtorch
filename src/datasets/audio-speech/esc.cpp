@@ -2,10 +2,10 @@
 
 namespace xt::data::datasets {
 
-    ESC::ESC(const std::string &root): CMUArctic::CMUArctic(root, DataMode::TRAIN, false) {
+    ESC::ESC(const std::string &root): ESC::ESC(root, DataMode::TRAIN, false) {
     }
 
-    ESC::ESC(const std::string &root, DataMode mode): CMUArctic::CMUArctic(root, mode, false) {
+    ESC::ESC(const std::string &root, DataMode mode): ESC::ESC(root, mode, false) {
     }
 
     ESC::ESC(const std::string &root, DataMode mode, bool download) : BaseDataset(root, mode, download) {
