@@ -20,3 +20,7 @@ mkdocs:
     # python:
     #    install:
     #    - requirements: requirements.txt
+python:
+  install:
+    - method: pip
+      requirements: requirements.txt
