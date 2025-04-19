@@ -4,12 +4,12 @@
 
 
 namespace xt::data::datasets {
-    class CMUArctic : BaseDataset {
+    class CommonVoice : BaseDataset {
     public :
-        explicit CMUArctic(const std::string &root);
-        CMUArctic(const std::string &root, DataMode mode);
-        CMUArctic(const std::string &root, DataMode mode , bool download);
-        CMUArctic(const std::string &root, DataMode mode , bool download, TransformType transforms);
+        explicit CommonVoice(const std::string &root);
+        CommonVoice(const std::string &root, DataMode mode);
+        CommonVoice(const std::string &root, DataMode mode , bool download);
+        CommonVoice(const std::string &root, DataMode mode , bool download, TransformType transforms);
 
     private :
         void load_data();
