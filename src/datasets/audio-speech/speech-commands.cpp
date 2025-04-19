@@ -2,10 +2,10 @@
 
 namespace xt::data::datasets {
 
-    SpeechCommands::SpeechCommands(const std::string &root): CMUArctic::CMUArctic(root, DataMode::TRAIN, false) {
+    SpeechCommands::SpeechCommands(const std::string &root): SpeechCommands::SpeechCommands(root, DataMode::TRAIN, false) {
     }
 
-    SpeechCommands::SpeechCommands(const std::string &root, DataMode mode): CMUArctic::CMUArctic(root, mode, false) {
+    SpeechCommands::SpeechCommands(const std::string &root, DataMode mode): SpeechCommands::SpeechCommands(root, mode, false) {
     }
 
     SpeechCommands::SpeechCommands(const std::string &root, DataMode mode, bool download) : BaseDataset(root, mode, download) {
