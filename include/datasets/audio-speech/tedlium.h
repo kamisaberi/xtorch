@@ -1,8 +1,23 @@
-//
-// Created by kami on 4/15/25.
-//
+#pragma once
 
-#ifndef TEDLIUM_H
-#define TEDLIUM_H
+#include "../base/base.h"
+#include "../../headers/datasets.h"
 
-#endif //TEDLIUM_H
+
+namespace xt::data::datasets {
+    class Tedlium : BaseDataset {
+    public :
+        explicit Tedlium(const std::string &root);
+
+        Tedlium(const std::string &root, DataMode mode);
+
+        Tedlium(const std::string &root, DataMode mode, bool download);
+
+        Tedlium(const std::string &root, DataMode mode, bool download, TransformType transforms);
+
+    private :
+        void load_data();
+
+        void check_resources();
+    };
+}
