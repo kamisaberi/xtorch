@@ -1,8 +1,19 @@
-//
-// Created by kami on 4/15/25.
-//
+#pragma once
+#include "../base/base.h"
+#include "../../headers/datasets.h"
 
-#ifndef VCTK_H
-#define VCTK_H
 
-#endif //VCTK_H
+namespace xt::data::datasets {
+    class VCTK : BaseDataset {
+        public :
+            explicit VCTK(const std::string &root);
+        VCTK(const std::string &root, DataMode mode);
+        VCTK(const std::string &root, DataMode mode , bool download);
+        VCTK(const std::string &root, DataMode mode , bool download, TransformType transforms);
+
+        private :
+            void load_data();
+
+        void check_resources();
+    };
+}
