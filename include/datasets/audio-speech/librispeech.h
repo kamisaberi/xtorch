@@ -1,8 +1,23 @@
-//
-// Created by pc on 4/14/2025.
-//
+#pragma once
 
-#ifndef XTORCH_LIBRISPEECH_H
-#define XTORCH_LIBRISPEECH_H
+#include "../base/base.h"
+#include "../../headers/datasets.h"
 
-#endif //XTORCH_LIBRISPEECH_H
+
+namespace xt::data::datasets {
+    class LibriSpeech : BaseDataset {
+    public :
+        explicit LibriSpeech(const std::string &root);
+
+        LibriSpeech(const std::string &root, DataMode mode);
+
+        LibriSpeech(const std::string &root, DataMode mode, bool download);
+
+        LibriSpeech(const std::string &root, DataMode mode, bool download, TransformType transforms);
+
+    private :
+        void load_data();
+
+        void check_resources();
+    };
+}
