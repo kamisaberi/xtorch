@@ -2,10 +2,10 @@
 
 namespace xt::data::datasets {
 
-    UrbanSound::UrbanSound(const std::string &root): CMUArctic::CMUArctic(root, DataMode::TRAIN, false) {
+    UrbanSound::UrbanSound(const std::string &root): UrbanSound::UrbanSound(root, DataMode::TRAIN, false) {
     }
 
-    UrbanSound::UrbanSound(const std::string &root, DataMode mode): CMUArctic::CMUArctic(root, mode, false) {
+    UrbanSound::UrbanSound(const std::string &root, DataMode mode): UrbanSound::UrbanSound(root, mode, false) {
     }
 
     UrbanSound::UrbanSound(const std::string &root, DataMode mode, bool download) : BaseDataset(root, mode, download) {
