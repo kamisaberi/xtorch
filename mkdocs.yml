@@ -1,1 +1,4 @@
-mkdocs build
+#mkdocs build
+site_name: xTorch
+theme:
+  name: material  # looks clean and modern
