@@ -1,8 +1,23 @@
-//
-// Created by kami on 4/15/25.
-//
+#pragma once
 
-#ifndef LJ_SPEECH_H
-#define LJ_SPEECH_H
+#include "../base/base.h"
+#include "../../headers/datasets.h"
 
-#endif //LJ_SPEECH_H
+
+namespace xt::data::datasets {
+    class LjSpeech : BaseDataset {
+    public :
+        explicit LjSpeech(const std::string &root);
+
+        LjSpeech(const std::string &root, DataMode mode);
+
+        LjSpeech(const std::string &root, DataMode mode, bool download);
+
+        LjSpeech(const std::string &root, DataMode mode, bool download, TransformType transforms);
+
+    private :
+        void load_data();
+
+        void check_resources();
+    };
+}
