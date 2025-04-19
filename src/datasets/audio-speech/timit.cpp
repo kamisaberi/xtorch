@@ -2,10 +2,10 @@
 
 namespace xt::data::datasets {
 
-    TIMIT::TIMIT(const std::string &root): CMUArctic::CMUArctic(root, DataMode::TRAIN, false) {
+    TIMIT::TIMIT(const std::string &root): TIMIT::TIMIT(root, DataMode::TRAIN, false) {
     }
 
-    TIMIT::TIMIT(const std::string &root, DataMode mode): CMUArctic::CMUArctic(root, mode, false) {
+    TIMIT::TIMIT(const std::string &root, DataMode mode): TIMIT::TIMIT(root, mode, false) {
     }
 
     TIMIT::TIMIT(const std::string &root, DataMode mode, bool download) : BaseDataset(root, mode, download) {
