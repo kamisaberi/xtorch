@@ -281,7 +281,7 @@ target_link_libraries(resnet-food101 ${TEST_LIBRARIES})
 # VggNet MNIST
 set(SOURCE_FILES
         ../src/datasets/image-classification/mnist.cpp
-        ../src/models/cnn/vggnet.cpp
+        ../src/models/cnn/vggnet/vggnet.cpp
 )
 add_executable(vggnet16-mnist ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/vggnet16-mnist.cpp)
 target_link_libraries(vggnet16-mnist "${TORCH_LIBRARIES}")
@@ -294,7 +294,7 @@ target_link_libraries(vggnet16-mnist ${TEST_LIBRARIES})
 # VggNet FashionMNIST
 set(SOURCE_FILES
         ../src/datasets/image-classification/mnist.cpp
-        ../src/models/cnn/vggnet.cpp
+        ../src/models/cnn/vggnet/vggnet.cpp
 )
 add_executable(vggnet16-fashionmnist ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/vggnet16-fashionmnist.cpp)
 target_link_libraries(vggnet16-fashionmnist "${TORCH_LIBRARIES}")
@@ -305,7 +305,7 @@ target_link_libraries(vggnet16-fashionmnist ${TEST_LIBRARIES})
 # VggNet CIFAR10
 set(SOURCE_FILES
         ../src/datasets/image-classification/cifar.cpp
-        ../src/models/cnn/vggnet.cpp
+        ../src/models/cnn/vggnet/vggnet.cpp
 )
 add_executable(vggnet16-cifar10 ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/vggnet16-cifar10.cpp)
 target_link_libraries(vggnet16-cifar10 "${TORCH_LIBRARIES}")
@@ -317,7 +317,7 @@ target_link_libraries(vggnet16-cifar10 ${TEST_LIBRARIES})
 # VggNet CIFAR100
 set(SOURCE_FILES
         ../src/datasets/image-classification/cifar.cpp
-        ../src/models/cnn/vggnet.cpp
+        ../src/models/cnn/vggnet/vggnet.cpp
 )
 add_executable(vggnet16-cifar100 ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/vggnet16-cifar100.cpp)
 target_link_libraries(vggnet16-cifar100 "${TORCH_LIBRARIES}")
@@ -328,7 +328,7 @@ target_link_libraries(vggnet16-cifar100 ${TEST_LIBRARIES})
 # VggNet Imagenette
 set(SOURCE_FILES
         ../src/datasets/image-classification/imagenette.cpp
-        ../src/models/cnn/vggnet.cpp
+        ../src/models/cnn/vggnet/vggnet.cpp
 )
 add_executable(vggnet16-imagenette ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/vggnet16-imagenette.cpp)
 target_link_libraries(vggnet16-imagenette "${TORCH_LIBRARIES}")
@@ -339,7 +339,7 @@ target_link_libraries(vggnet16-imagenette ${TEST_LIBRARIES})
 # VggNet Food101
 set(SOURCE_FILES
         ../src/datasets/image-classification/food.cpp
-        ../src/models/cnn/vggnet.cpp
+        ../src/models/cnn/vggnet/vggnet.cpp
 )
 add_executable(vggnet16-food101 ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/vggnet16-food101.cpp)
 target_link_libraries(vggnet16-food101 "${TORCH_LIBRARIES}")
