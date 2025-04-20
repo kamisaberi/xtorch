@@ -1,4 +1,6 @@
 site_name: xTorch
+site_url: https://kamisaberi.github.io/xtorch/
+repo_url: https://github.com/kamisaberi/xtorch
 theme:
   name: material  # looks clean and modern
 nav:
