@@ -1,5 +1,6 @@
 cmake-build-debug/
 build/
 .idea/
+tutorial/.venv
 #torch-extension/build/
 #torch-extension/cmake-build-debug/
