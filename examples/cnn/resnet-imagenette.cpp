@@ -1,6 +1,6 @@
 #include "includes/base.h"
 #include "../../include/datasets/image-classification/imagenette.h"
-#include "../../include/models/cnn/resnet/resnet.h"
+#include "../../include/models/cnn/resnet/resnet18.h"
 #include "../../include/definitions/transforms.h"
 
 
