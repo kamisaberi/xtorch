@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="dir_510c6254a6be63fdcb0b1e5d731b55b5" kind="dir">
+    <compoundname>/home/kami/Documents/cpp/models/include/datasets/face-recognition</compoundname>
+    <innerfile refid="face-recognition_8h">face-recognition.h</innerfile>
+    <innerfile refid="lfw_8h">lfw.h</innerfile>
+    <innerfile refid="wider-face_8h">wider-face.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/kami/Documents/cpp/models/include/datasets/face-recognition/"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="filesystem_8h" kind="file" language="C++">
+    <compoundname>filesystem.h</compoundname>
+    <includes local="no">filesystem</includes>
+    <includes local="no">algorithm</includes>
+    <includes local="no">iostream</includes>
+    <includedby refid="food_8h" local="yes">/home/kami/Documents/cpp/models/include/datasets/image-classification/food.h</includedby>
+    <includedby refid="utils_8h" local="yes">/home/kami/Documents/cpp/models/include/utils/utils.h</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>/home/kami/Documents/cpp/models/include/utils/filesystem.h</label>
+        <link refid="filesystem_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>algorithm</label>
+      </node>
+      <node id="2">
+        <label>filesystem</label>
+      </node>
+      <node id="4">
+        <label>iostream</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="4">
+        <label>/home/kami/Documents/cpp/models/include/datasets/datasets.h</label>
+        <link refid="datasets_2datasets_8h_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>/home/kami/Documents/cpp/models/include/datasets/image-classification/food.h</label>
+        <link refid="food_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>/home/kami/Documents/cpp/models/include/datasets/image-classification/image-classification.h</label>
+        <link refid="image-classification_8h_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>/home/kami/Documents/cpp/models/include/utils/filesystem.h</label>
+        <link refid="filesystem_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>/home/kami/Documents/cpp/models/include/utils/utils.h</label>
+        <link refid="utils_8h_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>/home/kami/Documents/cpp/models/include/xtorch.h</label>
+        <link refid="xtorch_8h_source"/>
+      </node>
+    </invincdepgraph>
+    <innernamespace refid="namespacext">xt</innernamespace>
+    <innernamespace refid="namespacext_1_1utils">xt::utils</innernamespace>
+    <innernamespace refid="namespacext_1_1utils_1_1fs">xt::utils::fs</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;filesystem&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;algorithm&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;iostream&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">fs<sp/>=<sp/>std::filesystem;</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">xt::utils::fs<sp/>{</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/>std::size_t<sp/>countFiles(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::filesystem::path&amp;<sp/>path<sp/>,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>recursive<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="/home/kami/Documents/cpp/models/include/utils/filesystem.h"/>
+  </compounddef>
+</doxygen>

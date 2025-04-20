@@ -1,0 +1,324 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classxt_1_1data_1_1datasets_1_1CIFAR100" kind="class" language="C++" prot="public">
+    <compoundname>xt::data::datasets::CIFAR100</compoundname>
+    <basecompoundref refid="classxt_1_1data_1_1datasets_1_1BaseDataset" prot="public" virt="non-virtual">xt::data::datasets::BaseDataset</basecompoundref>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classxt_1_1data_1_1datasets_1_1CIFAR100_1aa7a82e92f4f4ce8d7d95bd8358724e84" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string xt::data::datasets::CIFAR100::url</definition>
+        <argsstring></argsstring>
+        <name>url</name>
+        <qualifiedname>xt::data::datasets::CIFAR100::url</qualifiedname>
+        <initializer>= &quot;https://www.cs.toronto.edu/~kriz/cifar-100-binary.tar.gz&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/cifar.h" line="58" column="21" bodyfile="/home/kami/Documents/cpp/models/include/datasets/image-classification/cifar.h" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classxt_1_1data_1_1datasets_1_1CIFAR100_1a2185051212e1c418f0cb66376c6d19fd" prot="private" static="no" mutable="no">
+        <type>fs::path</type>
+        <definition>fs::path xt::data::datasets::CIFAR100::archive_file_name</definition>
+        <argsstring></argsstring>
+        <name>archive_file_name</name>
+        <qualifiedname>xt::data::datasets::CIFAR100::archive_file_name</qualifiedname>
+        <initializer>= &quot;cifar-100-binary.tar.gz&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/cifar.h" line="59" column="18" bodyfile="/home/kami/Documents/cpp/models/include/datasets/image-classification/cifar.h" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classxt_1_1data_1_1datasets_1_1CIFAR100_1a854b9b9e127800aa88b97c1075edceeb" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string xt::data::datasets::CIFAR100::archive_file_md5</definition>
+        <argsstring></argsstring>
+        <name>archive_file_md5</name>
+        <qualifiedname>xt::data::datasets::CIFAR100::archive_file_md5</qualifiedname>
+        <initializer>= &quot;03b5dce01913d631647c71ecec9e9cb8&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/cifar.h" line="60" column="21" bodyfile="/home/kami/Documents/cpp/models/include/datasets/image-classification/cifar.h" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classxt_1_1data_1_1datasets_1_1CIFAR100_1a9bcfb79655a2b7699fd7784255ff6eed" prot="private" static="no" mutable="no">
+        <type>fs::path</type>
+        <definition>fs::path xt::data::datasets::CIFAR100::dataset_folder_name</definition>
+        <argsstring></argsstring>
+        <name>dataset_folder_name</name>
+        <qualifiedname>xt::data::datasets::CIFAR100::dataset_folder_name</qualifiedname>
+        <initializer>= &quot;cifar-100-binary&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/cifar.h" line="63" column="18" bodyfile="/home/kami/Documents/cpp/models/include/datasets/image-classification/cifar.h" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classxt_1_1data_1_1datasets_1_1CIFAR100_1a6723b3a7c74c3ba530a5d93cd9eb679a" prot="private" static="no" mutable="no">
+        <type>fs::path</type>
+        <definition>fs::path xt::data::datasets::CIFAR100::train_file_name</definition>
+        <argsstring></argsstring>
+        <name>train_file_name</name>
+        <qualifiedname>xt::data::datasets::CIFAR100::train_file_name</qualifiedname>
+        <initializer>= &quot;train.bin&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/cifar.h" line="64" column="18" bodyfile="/home/kami/Documents/cpp/models/include/datasets/image-classification/cifar.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classxt_1_1data_1_1datasets_1_1CIFAR100_1aadaf920f1dcc289166ebbd519adaec5f" prot="private" static="no" mutable="no">
+        <type>fs::path</type>
+        <definition>fs::path xt::data::datasets::CIFAR100::test_file_name</definition>
+        <argsstring></argsstring>
+        <name>test_file_name</name>
+        <qualifiedname>xt::data::datasets::CIFAR100::test_file_name</qualifiedname>
+        <initializer>= &quot;test.bin&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/cifar.h" line="65" column="18" bodyfile="/home/kami/Documents/cpp/models/include/datasets/image-classification/cifar.h" bodystart="65" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1CIFAR100_1acd9462008838b8187880ecdd696c3ed9" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::datasets::CIFAR100::CIFAR100</definition>
+        <argsstring>(const std::string &amp;root)</argsstring>
+        <name>CIFAR100</name>
+        <qualifiedname>xt::data::datasets::CIFAR100::CIFAR100</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/cifar.h" line="46" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1CIFAR100_1adbf4fc6b840f044754aa3a921c8da617" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::datasets::CIFAR100::CIFAR100</definition>
+        <argsstring>(const std::string &amp;root, DataMode mode)</argsstring>
+        <name>CIFAR100</name>
+        <qualifiedname>xt::data::datasets::CIFAR100::CIFAR100</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type>DataMode</type>
+          <declname>mode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/cifar.h" line="47" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1CIFAR100_1ae76fb63a9ffbd3bb68ec9e7773656c6f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::datasets::CIFAR100::CIFAR100</definition>
+        <argsstring>(const std::string &amp;root, DataMode mode, bool download)</argsstring>
+        <name>CIFAR100</name>
+        <qualifiedname>xt::data::datasets::CIFAR100::CIFAR100</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type>DataMode</type>
+          <declname>mode</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>download</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/cifar.h" line="48" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1CIFAR100_1a1ac5a3e746666497ae1f1c025c183e73" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::datasets::CIFAR100::CIFAR100</definition>
+        <argsstring>(const std::string &amp;root, DataMode mode, bool download, TransformType transforms)</argsstring>
+        <name>CIFAR100</name>
+        <qualifiedname>xt::data::datasets::CIFAR100::CIFAR100</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type>DataMode</type>
+          <declname>mode</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>download</declname>
+        </param>
+        <param>
+          <type>TransformType</type>
+          <declname>transforms</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/cifar.h" line="49" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1CIFAR100_1a7cd9a32ddba4fc711fa5c5d0ea999fcb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>torch::data::Example</type>
+        <definition>torch::data::Example xt::data::datasets::CIFAR100::get</definition>
+        <argsstring>(size_t index) override</argsstring>
+        <name>get</name>
+        <qualifiedname>xt::data::datasets::CIFAR100::get</qualifiedname>
+        <param>
+          <type>size_t</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/cifar.h" line="51" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1CIFAR100_1ae9c54c4e34fba374bfbce4d35a7cce9d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>torch::optional&lt; size_t &gt;</type>
+        <definition>torch::optional&lt; size_t &gt; xt::data::datasets::CIFAR100::size</definition>
+        <argsstring>() const override</argsstring>
+        <name>size</name>
+        <qualifiedname>xt::data::datasets::CIFAR100::size</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/cifar.h" line="53" column="25"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1CIFAR100_1a36953b26121f1b631bb38505799fd613" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void xt::data::datasets::CIFAR100::load_data</definition>
+        <argsstring>(DataMode mode=DataMode::TRAIN)</argsstring>
+        <name>load_data</name>
+        <qualifiedname>xt::data::datasets::CIFAR100::load_data</qualifiedname>
+        <param>
+          <type>DataMode</type>
+          <declname>mode</declname>
+          <defval>DataMode::TRAIN</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/cifar.h" line="67" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>torch::data::Dataset&lt; BaseDataset &gt;</label>
+      </node>
+      <node id="2">
+        <label>xt::data::datasets::BaseDataset</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1BaseDataset"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>xt::data::datasets::CIFAR100</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1CIFAR100"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>torch::data::Dataset&lt; BaseDataset &gt;</label>
+      </node>
+      <node id="2">
+        <label>xt::data::datasets::BaseDataset</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1BaseDataset"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>compose</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>xt::data::datasets::CIFAR100</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1CIFAR100"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>xt::data::transforms::Compose</label>
+        <link refid="classxt_1_1data_1_1transforms_1_1Compose"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/cifar.h" line="44" column="5" bodyfile="/home/kami/Documents/cpp/models/include/datasets/image-classification/cifar.h" bodystart="44" bodyend="68"/>
+    <listofallmembers>
+      <member refid="classxt_1_1data_1_1datasets_1_1CIFAR100_1a854b9b9e127800aa88b97c1075edceeb" prot="private" virt="non-virtual"><scope>xt::data::datasets::CIFAR100</scope><name>archive_file_md5</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1CIFAR100_1a2185051212e1c418f0cb66376c6d19fd" prot="private" virt="non-virtual"><scope>xt::data::datasets::CIFAR100</scope><name>archive_file_name</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a9ba5b50134bc2f16bf392097296c9b5f" prot="public" virt="non-virtual"><scope>xt::data::datasets::CIFAR100</scope><name>BaseDataset</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a0b87cdd7fb205c851dd517ba76270f2d" prot="public" virt="non-virtual"><scope>xt::data::datasets::CIFAR100</scope><name>BaseDataset</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a7ef3cd4e7bc4182562495b64fa266242" prot="public" virt="non-virtual"><scope>xt::data::datasets::CIFAR100</scope><name>BaseDataset</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a103cf530c2ebf093e3273feabccbd050" prot="public" virt="non-virtual"><scope>xt::data::datasets::CIFAR100</scope><name>BaseDataset</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1CIFAR100_1acd9462008838b8187880ecdd696c3ed9" prot="public" virt="non-virtual"><scope>xt::data::datasets::CIFAR100</scope><name>CIFAR100</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1CIFAR100_1adbf4fc6b840f044754aa3a921c8da617" prot="public" virt="non-virtual"><scope>xt::data::datasets::CIFAR100</scope><name>CIFAR100</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1CIFAR100_1ae76fb63a9ffbd3bb68ec9e7773656c6f" prot="public" virt="non-virtual"><scope>xt::data::datasets::CIFAR100</scope><name>CIFAR100</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1CIFAR100_1a1ac5a3e746666497ae1f1c025c183e73" prot="public" virt="non-virtual"><scope>xt::data::datasets::CIFAR100</scope><name>CIFAR100</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1acd46827630da2d3e3f209ccad0a3c08d" prot="public" virt="non-virtual"><scope>xt::data::datasets::CIFAR100</scope><name>compose</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1abe0b531e8cd00b80062ba867b741e12b" prot="public" virt="non-virtual"><scope>xt::data::datasets::CIFAR100</scope><name>data</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1CIFAR100_1a9bcfb79655a2b7699fd7784255ff6eed" prot="private" virt="non-virtual"><scope>xt::data::datasets::CIFAR100</scope><name>dataset_folder_name</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1ac8114ca7f09c2a2b8410f452dc87d252" prot="public" virt="non-virtual"><scope>xt::data::datasets::CIFAR100</scope><name>dataset_path</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1ad3491f80e83d0f19a6251006da5f438d" prot="public" virt="non-virtual"><scope>xt::data::datasets::CIFAR100</scope><name>download</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1CIFAR100_1a7cd9a32ddba4fc711fa5c5d0ea999fcb" prot="public" virt="non-virtual"><scope>xt::data::datasets::CIFAR100</scope><name>get</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1aa7e88f0cc433116b978a59c74ec60726" prot="public" virt="non-virtual"><scope>xt::data::datasets::CIFAR100</scope><name>labels</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1CIFAR100_1a36953b26121f1b631bb38505799fd613" prot="private" virt="non-virtual"><scope>xt::data::datasets::CIFAR100</scope><name>load_data</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1acc7205b8f6b73437a5d7aa048029f186" prot="public" virt="non-virtual"><scope>xt::data::datasets::CIFAR100</scope><name>mode</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a8b19517cc2da31c2fdfc1688afac5f1d" prot="public" virt="non-virtual"><scope>xt::data::datasets::CIFAR100</scope><name>root</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1CIFAR100_1ae9c54c4e34fba374bfbce4d35a7cce9d" prot="public" virt="non-virtual"><scope>xt::data::datasets::CIFAR100</scope><name>size</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1CIFAR100_1aadaf920f1dcc289166ebbd519adaec5f" prot="private" virt="non-virtual"><scope>xt::data::datasets::CIFAR100</scope><name>test_file_name</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1CIFAR100_1a6723b3a7c74c3ba530a5d93cd9eb679a" prot="private" virt="non-virtual"><scope>xt::data::datasets::CIFAR100</scope><name>train_file_name</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1afc0c6d9b9749a5b20df7c08bb9266bb8" prot="public" virt="non-virtual"><scope>xt::data::datasets::CIFAR100</scope><name>transforms</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a38513e29e2014882a6148fc0e81aa84e" prot="public" virt="non-virtual"><scope>xt::data::datasets::CIFAR100</scope><name>TransformType</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1CIFAR100_1aa7a82e92f4f4ce8d7d95bd8358724e84" prot="private" virt="non-virtual"><scope>xt::data::datasets::CIFAR100</scope><name>url</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

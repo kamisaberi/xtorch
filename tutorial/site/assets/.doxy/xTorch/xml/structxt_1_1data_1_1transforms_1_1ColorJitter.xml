@@ -1,0 +1,111 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="structxt_1_1data_1_1transforms_1_1ColorJitter" kind="struct" language="C++" prot="public">
+    <compoundname>xt::data::transforms::ColorJitter</compoundname>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="structxt_1_1data_1_1transforms_1_1ColorJitter_1afcd549781a9f54d68196fc3559d0e51a" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float xt::data::transforms::ColorJitter::brightness</definition>
+        <argsstring></argsstring>
+        <name>brightness</name>
+        <qualifiedname>xt::data::transforms::ColorJitter::brightness</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/transforms/jitter.h" line="17" column="15" bodyfile="/home/kami/Documents/cpp/models/include/transforms/jitter.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structxt_1_1data_1_1transforms_1_1ColorJitter_1a8ee0db737f7427f30756696ddf870510" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float xt::data::transforms::ColorJitter::contrast</definition>
+        <argsstring></argsstring>
+        <name>contrast</name>
+        <qualifiedname>xt::data::transforms::ColorJitter::contrast</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/transforms/jitter.h" line="18" column="15" bodyfile="/home/kami/Documents/cpp/models/include/transforms/jitter.h" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structxt_1_1data_1_1transforms_1_1ColorJitter_1a600b9a95920240222aa0e66743fdfbb3" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float xt::data::transforms::ColorJitter::saturation</definition>
+        <argsstring></argsstring>
+        <name>saturation</name>
+        <qualifiedname>xt::data::transforms::ColorJitter::saturation</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/transforms/jitter.h" line="19" column="15" bodyfile="/home/kami/Documents/cpp/models/include/transforms/jitter.h" bodystart="19" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structxt_1_1data_1_1transforms_1_1ColorJitter_1a9f8b3a60a7c5fab4d631b9bd970f111b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::transforms::ColorJitter::ColorJitter</definition>
+        <argsstring>(float brightness=0.0f, float contrast=0.0f, float saturation=0.0f)</argsstring>
+        <name>ColorJitter</name>
+        <qualifiedname>xt::data::transforms::ColorJitter::ColorJitter</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>brightness</declname>
+          <defval>0.0f</defval>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>contrast</declname>
+          <defval>0.0f</defval>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>saturation</declname>
+          <defval>0.0f</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/transforms/jitter.h" line="10" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="structxt_1_1data_1_1transforms_1_1ColorJitter_1ad0d4cd0c13f915a04180391a2c214438" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>torch::Tensor</type>
+        <definition>torch::Tensor xt::data::transforms::ColorJitter::operator()</definition>
+        <argsstring>(const torch::Tensor &amp;input_tensor) const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>xt::data::transforms::ColorJitter::operator()</qualifiedname>
+        <param>
+          <type>const torch::Tensor &amp;</type>
+          <declname>input_tensor</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/transforms/jitter.h" line="14" column="23"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/kami/Documents/cpp/models/include/transforms/jitter.h" line="8" column="5" bodyfile="/home/kami/Documents/cpp/models/include/transforms/jitter.h" bodystart="8" bodyend="21"/>
+    <listofallmembers>
+      <member refid="structxt_1_1data_1_1transforms_1_1ColorJitter_1afcd549781a9f54d68196fc3559d0e51a" prot="private" virt="non-virtual"><scope>xt::data::transforms::ColorJitter</scope><name>brightness</name></member>
+      <member refid="structxt_1_1data_1_1transforms_1_1ColorJitter_1a9f8b3a60a7c5fab4d631b9bd970f111b" prot="public" virt="non-virtual"><scope>xt::data::transforms::ColorJitter</scope><name>ColorJitter</name></member>
+      <member refid="structxt_1_1data_1_1transforms_1_1ColorJitter_1a8ee0db737f7427f30756696ddf870510" prot="private" virt="non-virtual"><scope>xt::data::transforms::ColorJitter</scope><name>contrast</name></member>
+      <member refid="structxt_1_1data_1_1transforms_1_1ColorJitter_1ad0d4cd0c13f915a04180391a2c214438" prot="public" virt="non-virtual"><scope>xt::data::transforms::ColorJitter</scope><name>operator()</name></member>
+      <member refid="structxt_1_1data_1_1transforms_1_1ColorJitter_1a600b9a95920240222aa0e66743fdfbb3" prot="private" virt="non-virtual"><scope>xt::data::transforms::ColorJitter</scope><name>saturation</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

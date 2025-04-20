@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="dir_d44c64559bbebec7f509842c48db8b23" kind="dir">
+    <compoundname>/home/kami/Documents/cpp/models/include</compoundname>
+    <innerdir refid="dir_83fc80326b80dce73692b3bd70d110c8">/home/kami/Documents/cpp/models/include/data-loaders</innerdir>
+    <innerdir refid="dir_29ff4802398ba4a572b958e731c7adb4">/home/kami/Documents/cpp/models/include/datasets</innerdir>
+    <innerdir refid="dir_11d78a78cbacc94abc067fbb8f3d9498">/home/kami/Documents/cpp/models/include/definitions</innerdir>
+    <innerdir refid="dir_06ec884a0825782b323e4577406ae7aa">/home/kami/Documents/cpp/models/include/exceptions</innerdir>
+    <innerdir refid="dir_8e6593a601935323ccb6c1a5a439ec0c">/home/kami/Documents/cpp/models/include/headers</innerdir>
+    <innerdir refid="dir_aa03a1d12037901d4378cbd73498762d">/home/kami/Documents/cpp/models/include/media</innerdir>
+    <innerdir refid="dir_828b612f8450ccb3091aade92090c8e3">/home/kami/Documents/cpp/models/include/models</innerdir>
+    <innerdir refid="dir_9b1ced676d335869719a7bfb99e201c3">/home/kami/Documents/cpp/models/include/temp</innerdir>
+    <innerdir refid="dir_73f622148a13e0576f0e4ec926ecde91">/home/kami/Documents/cpp/models/include/trainers</innerdir>
+    <innerdir refid="dir_de1d6215dd8b8d2c901daadc91a23b6e">/home/kami/Documents/cpp/models/include/transforms</innerdir>
+    <innerdir refid="dir_0ad255a918b7fba820a1ddafed6fa637">/home/kami/Documents/cpp/models/include/types</innerdir>
+    <innerdir refid="dir_821002d4f10779a80d4fb17bc32f21f1">/home/kami/Documents/cpp/models/include/utils</innerdir>
+    <innerfile refid="xtorch_8h">xtorch.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/kami/Documents/cpp/models/include/"/>
+  </compounddef>
+</doxygen>

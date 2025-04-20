@@ -1,0 +1,273 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classxt_1_1data_1_1datasets_1_1ImageFolder" kind="class" language="C++" prot="public">
+    <compoundname>xt::data::datasets::ImageFolder</compoundname>
+    <basecompoundref refid="classxt_1_1data_1_1datasets_1_1BaseDataset" prot="public" virt="non-virtual">xt::data::datasets::BaseDataset</basecompoundref>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classxt_1_1data_1_1datasets_1_1ImageFolder_1a2cf073126cc4310638d00ca3cd1a5a1a" prot="private" static="no" mutable="no">
+        <type>vector&lt; string &gt;</type>
+        <definition>vector&lt;string&gt; xt::data::datasets::ImageFolder::labels_name</definition>
+        <argsstring></argsstring>
+        <name>labels_name</name>
+        <qualifiedname>xt::data::datasets::ImageFolder::labels_name</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/general/image-folder.h" line="24" column="16" bodyfile="/home/kami/Documents/cpp/models/include/datasets/general/image-folder.h" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classxt_1_1data_1_1datasets_1_1ImageFolder_1a413ed81a259780cb3607d630eff5dbdd" prot="private" static="no" mutable="no">
+        <type>LabelsType</type>
+        <definition>LabelsType xt::data::datasets::ImageFolder::label_type</definition>
+        <argsstring></argsstring>
+        <name>label_type</name>
+        <qualifiedname>xt::data::datasets::ImageFolder::label_type</qualifiedname>
+        <initializer>= LabelsType::BY_FOLDER</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/general/image-folder.h" line="25" column="20" bodyfile="/home/kami/Documents/cpp/models/include/datasets/general/image-folder.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classxt_1_1data_1_1datasets_1_1ImageFolder_1ac4bbe3a87a8383464454eff073dbb89c" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool xt::data::datasets::ImageFolder::load_sub_folders</definition>
+        <argsstring></argsstring>
+        <name>load_sub_folders</name>
+        <qualifiedname>xt::data::datasets::ImageFolder::load_sub_folders</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/general/image-folder.h" line="26" column="14" bodyfile="/home/kami/Documents/cpp/models/include/datasets/general/image-folder.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1ImageFolder_1a6a4ccdf50d81e92392a7838a5e2193dd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::datasets::ImageFolder::ImageFolder</definition>
+        <argsstring>(const std::string &amp;root)</argsstring>
+        <name>ImageFolder</name>
+        <qualifiedname>xt::data::datasets::ImageFolder::ImageFolder</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/general/image-folder.h" line="17" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1ImageFolder_1ac6cd8e243c2a811c67465f90868381c9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::datasets::ImageFolder::ImageFolder</definition>
+        <argsstring>(const std::string &amp;root, bool load_sub_folders)</argsstring>
+        <name>ImageFolder</name>
+        <qualifiedname>xt::data::datasets::ImageFolder::ImageFolder</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>load_sub_folders</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/general/image-folder.h" line="18" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1ImageFolder_1aaa4724f6e73983bb94dc20c65d4bfa79" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::datasets::ImageFolder::ImageFolder</definition>
+        <argsstring>(const std::string &amp;root, bool load_sub_folders, DataMode mode)</argsstring>
+        <name>ImageFolder</name>
+        <qualifiedname>xt::data::datasets::ImageFolder::ImageFolder</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>load_sub_folders</declname>
+        </param>
+        <param>
+          <type>DataMode</type>
+          <declname>mode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/general/image-folder.h" line="19" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1ImageFolder_1abffbcc51c0915afcf1f1b0a831e0d7ef" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::datasets::ImageFolder::ImageFolder</definition>
+        <argsstring>(const std::string &amp;root, bool load_sub_folders, DataMode mode, LabelsType label_type)</argsstring>
+        <name>ImageFolder</name>
+        <qualifiedname>xt::data::datasets::ImageFolder::ImageFolder</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>load_sub_folders</declname>
+        </param>
+        <param>
+          <type>DataMode</type>
+          <declname>mode</declname>
+        </param>
+        <param>
+          <type>LabelsType</type>
+          <declname>label_type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/general/image-folder.h" line="20" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1ImageFolder_1a7f247c394c55f52ee115c10c08ae7d51" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::datasets::ImageFolder::ImageFolder</definition>
+        <argsstring>(const std::string &amp;root, bool load_sub_folders, DataMode mode, LabelsType label_type, vector&lt; std::function&lt; torch::Tensor(torch::Tensor)&gt; &gt; transforms)</argsstring>
+        <name>ImageFolder</name>
+        <qualifiedname>xt::data::datasets::ImageFolder::ImageFolder</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>load_sub_folders</declname>
+        </param>
+        <param>
+          <type>DataMode</type>
+          <declname>mode</declname>
+        </param>
+        <param>
+          <type>LabelsType</type>
+          <declname>label_type</declname>
+        </param>
+        <param>
+          <type>vector&lt; std::function&lt; torch::Tensor(torch::Tensor)&gt; &gt;</type>
+          <declname>transforms</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/general/image-folder.h" line="21" column="9"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1ImageFolder_1a2455bf7ef926612270d5d3a01f78559f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void xt::data::datasets::ImageFolder::load_data</definition>
+        <argsstring>()</argsstring>
+        <name>load_data</name>
+        <qualifiedname>xt::data::datasets::ImageFolder::load_data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/general/image-folder.h" line="27" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>torch::data::Dataset&lt; BaseDataset &gt;</label>
+      </node>
+      <node id="2">
+        <label>xt::data::datasets::BaseDataset</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1BaseDataset"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>xt::data::datasets::ImageFolder</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1ImageFolder"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>torch::data::Dataset&lt; BaseDataset &gt;</label>
+      </node>
+      <node id="2">
+        <label>xt::data::datasets::BaseDataset</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1BaseDataset"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>compose</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>xt::data::datasets::ImageFolder</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1ImageFolder"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>xt::data::transforms::Compose</label>
+        <link refid="classxt_1_1data_1_1transforms_1_1Compose"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/kami/Documents/cpp/models/include/datasets/general/image-folder.h" line="14" column="5" bodyfile="/home/kami/Documents/cpp/models/include/datasets/general/image-folder.h" bodystart="14" bodyend="28"/>
+    <listofallmembers>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a9ba5b50134bc2f16bf392097296c9b5f" prot="public" virt="non-virtual"><scope>xt::data::datasets::ImageFolder</scope><name>BaseDataset</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a0b87cdd7fb205c851dd517ba76270f2d" prot="public" virt="non-virtual"><scope>xt::data::datasets::ImageFolder</scope><name>BaseDataset</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a7ef3cd4e7bc4182562495b64fa266242" prot="public" virt="non-virtual"><scope>xt::data::datasets::ImageFolder</scope><name>BaseDataset</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a103cf530c2ebf093e3273feabccbd050" prot="public" virt="non-virtual"><scope>xt::data::datasets::ImageFolder</scope><name>BaseDataset</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1acd46827630da2d3e3f209ccad0a3c08d" prot="public" virt="non-virtual"><scope>xt::data::datasets::ImageFolder</scope><name>compose</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1abe0b531e8cd00b80062ba867b741e12b" prot="public" virt="non-virtual"><scope>xt::data::datasets::ImageFolder</scope><name>data</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1ac8114ca7f09c2a2b8410f452dc87d252" prot="public" virt="non-virtual"><scope>xt::data::datasets::ImageFolder</scope><name>dataset_path</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1ad3491f80e83d0f19a6251006da5f438d" prot="public" virt="non-virtual"><scope>xt::data::datasets::ImageFolder</scope><name>download</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a47ecdca2ada0317831cd68be7533ae7f" prot="public" virt="non-virtual"><scope>xt::data::datasets::ImageFolder</scope><name>get</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1ImageFolder_1a6a4ccdf50d81e92392a7838a5e2193dd" prot="public" virt="non-virtual"><scope>xt::data::datasets::ImageFolder</scope><name>ImageFolder</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1ImageFolder_1ac6cd8e243c2a811c67465f90868381c9" prot="public" virt="non-virtual"><scope>xt::data::datasets::ImageFolder</scope><name>ImageFolder</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1ImageFolder_1aaa4724f6e73983bb94dc20c65d4bfa79" prot="public" virt="non-virtual"><scope>xt::data::datasets::ImageFolder</scope><name>ImageFolder</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1ImageFolder_1abffbcc51c0915afcf1f1b0a831e0d7ef" prot="public" virt="non-virtual"><scope>xt::data::datasets::ImageFolder</scope><name>ImageFolder</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1ImageFolder_1a7f247c394c55f52ee115c10c08ae7d51" prot="public" virt="non-virtual"><scope>xt::data::datasets::ImageFolder</scope><name>ImageFolder</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1ImageFolder_1a413ed81a259780cb3607d630eff5dbdd" prot="private" virt="non-virtual"><scope>xt::data::datasets::ImageFolder</scope><name>label_type</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1aa7e88f0cc433116b978a59c74ec60726" prot="public" virt="non-virtual"><scope>xt::data::datasets::ImageFolder</scope><name>labels</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1ImageFolder_1a2cf073126cc4310638d00ca3cd1a5a1a" prot="private" virt="non-virtual"><scope>xt::data::datasets::ImageFolder</scope><name>labels_name</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1ImageFolder_1a2455bf7ef926612270d5d3a01f78559f" prot="private" virt="non-virtual"><scope>xt::data::datasets::ImageFolder</scope><name>load_data</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1ImageFolder_1ac4bbe3a87a8383464454eff073dbb89c" prot="private" virt="non-virtual"><scope>xt::data::datasets::ImageFolder</scope><name>load_sub_folders</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1acc7205b8f6b73437a5d7aa048029f186" prot="public" virt="non-virtual"><scope>xt::data::datasets::ImageFolder</scope><name>mode</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a8b19517cc2da31c2fdfc1688afac5f1d" prot="public" virt="non-virtual"><scope>xt::data::datasets::ImageFolder</scope><name>root</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a04e88dd1f1e59c6e719397fe251c4457" prot="public" virt="non-virtual"><scope>xt::data::datasets::ImageFolder</scope><name>size</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1afc0c6d9b9749a5b20df7c08bb9266bb8" prot="public" virt="non-virtual"><scope>xt::data::datasets::ImageFolder</scope><name>transforms</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a38513e29e2014882a6148fc0e81aa84e" prot="public" virt="non-virtual"><scope>xt::data::datasets::ImageFolder</scope><name>TransformType</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

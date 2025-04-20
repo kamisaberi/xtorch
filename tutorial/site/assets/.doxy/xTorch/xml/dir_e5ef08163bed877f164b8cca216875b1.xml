@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="dir_e5ef08163bed877f164b8cca216875b1" kind="dir">
+    <compoundname>/home/kami/Documents/cpp/models/include/datasets/specific</compoundname>
+    <innerfile refid="kitti_8h">kitti.h</innerfile>
+    <innerfile refid="lsun_8h">lsun.h</innerfile>
+    <innerfile refid="sbu_8h">sbu.h</innerfile>
+    <innerfile refid="sintel_8h">sintel.h</innerfile>
+    <innerfile refid="specific_8h">specific.h</innerfile>
+    <innerfile refid="voc_8h">voc.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/kami/Documents/cpp/models/include/datasets/specific/"/>
+  </compounddef>
+</doxygen>

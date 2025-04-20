@@ -1,0 +1,269 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="structxt_1_1models_1_1Bottleneck" kind="struct" language="C++" prot="public">
+    <compoundname>xt::models::Bottleneck</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">torch::nn::Module</basecompoundref>
+    <basecompoundref prot="public" virt="non-virtual">torch::nn::Module</basecompoundref>
+    <basecompoundref prot="public" virt="non-virtual">torch::nn::Module</basecompoundref>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="structxt_1_1models_1_1Bottleneck_1a870b93f2adba5c6e463996f2f32a8ca5" prot="private" static="no" mutable="no">
+        <type>torch::nn::Sequential</type>
+        <definition>torch::nn::Sequential xt::models::Bottleneck::bottleneck</definition>
+        <argsstring></argsstring>
+        <name>bottleneck</name>
+        <qualifiedname>xt::models::Bottleneck::bottleneck</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/models/cnn/mobilenet/mobilenet-v1.h" line="155" column="31" bodyfile="/home/kami/Documents/cpp/models/include/models/cnn/mobilenet/mobilenet-v1.h" bodystart="155" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structxt_1_1models_1_1Bottleneck_1a2fc34f8f7bbaedac25d203d286cf9c8a" prot="private" static="no" mutable="no">
+        <type>torch::nn::Sequential</type>
+        <definition>torch::nn::Sequential xt::models::Bottleneck::downsample</definition>
+        <argsstring></argsstring>
+        <name>downsample</name>
+        <qualifiedname>xt::models::Bottleneck::downsample</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/models/cnn/mobilenet/mobilenet-v1.h" line="156" column="31" bodyfile="/home/kami/Documents/cpp/models/include/models/cnn/mobilenet/mobilenet-v1.h" bodystart="156" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structxt_1_1models_1_1Bottleneck_1ad2d53797b7e19edb700d2b68c3a90560" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::models::Bottleneck::Bottleneck</definition>
+        <argsstring>(int input_channels, int kernel, int stride, int expansion, int output_channels, torch::nn::Module activation, bool se=false)</argsstring>
+        <name>Bottleneck</name>
+        <qualifiedname>xt::models::Bottleneck::Bottleneck</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>input_channels</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>kernel</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>stride</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>expansion</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>output_channels</declname>
+        </param>
+        <param>
+          <type>torch::nn::Module</type>
+          <declname>activation</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>se</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/models/cnn/mobilenet/mobilenet-v1.h" line="149" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="structxt_1_1models_1_1Bottleneck_1a50d0f7c3f67156dfb0846145e5e7f258" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>torch::Tensor</type>
+        <definition>torch::Tensor xt::models::Bottleneck::forward</definition>
+        <argsstring>(torch::Tensor x)</argsstring>
+        <name>forward</name>
+        <qualifiedname>xt::models::Bottleneck::forward</qualifiedname>
+        <param>
+          <type>torch::Tensor</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/models/cnn/mobilenet/mobilenet-v1.h" line="152" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="structxt_1_1models_1_1Bottleneck_1ad2d53797b7e19edb700d2b68c3a90560" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::models::Bottleneck::Bottleneck</definition>
+        <argsstring>(int input_channels, int kernel, int stride, int expansion, int output_channels, torch::nn::Module activation, bool se=false)</argsstring>
+        <name>Bottleneck</name>
+        <qualifiedname>xt::models::Bottleneck::Bottleneck</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>input_channels</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>kernel</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>stride</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>expansion</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>output_channels</declname>
+        </param>
+        <param>
+          <type>torch::nn::Module</type>
+          <declname>activation</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>se</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/models/cnn/mobilenet/mobilenet-v2.h" line="149" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="structxt_1_1models_1_1Bottleneck_1a50d0f7c3f67156dfb0846145e5e7f258" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>torch::Tensor</type>
+        <definition>torch::Tensor xt::models::Bottleneck::forward</definition>
+        <argsstring>(torch::Tensor x)</argsstring>
+        <name>forward</name>
+        <qualifiedname>xt::models::Bottleneck::forward</qualifiedname>
+        <param>
+          <type>torch::Tensor</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/models/cnn/mobilenet/mobilenet-v2.h" line="152" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="structxt_1_1models_1_1Bottleneck_1ad2d53797b7e19edb700d2b68c3a90560" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::models::Bottleneck::Bottleneck</definition>
+        <argsstring>(int input_channels, int kernel, int stride, int expansion, int output_channels, torch::nn::Module activation, bool se=false)</argsstring>
+        <name>Bottleneck</name>
+        <qualifiedname>xt::models::Bottleneck::Bottleneck</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>input_channels</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>kernel</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>stride</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>expansion</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>output_channels</declname>
+        </param>
+        <param>
+          <type>torch::nn::Module</type>
+          <declname>activation</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>se</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/models/cnn/mobilenet/mobilenet-v3.h" line="149" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="structxt_1_1models_1_1Bottleneck_1a50d0f7c3f67156dfb0846145e5e7f258" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>torch::Tensor</type>
+        <definition>torch::Tensor xt::models::Bottleneck::forward</definition>
+        <argsstring>(torch::Tensor x)</argsstring>
+        <name>forward</name>
+        <qualifiedname>xt::models::Bottleneck::forward</qualifiedname>
+        <param>
+          <type>torch::Tensor</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/models/cnn/mobilenet/mobilenet-v3.h" line="152" column="23"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>torch::nn::Module</label>
+      </node>
+      <node id="1">
+        <label>xt::models::Bottleneck</label>
+        <link refid="structxt_1_1models_1_1Bottleneck"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>torch::nn::Module</label>
+      </node>
+      <node id="1">
+        <label>xt::models::Bottleneck</label>
+        <link refid="structxt_1_1models_1_1Bottleneck"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/kami/Documents/cpp/models/include/models/cnn/mobilenet/mobilenet-v1.h" line="147" column="5" bodyfile="/home/kami/Documents/cpp/models/include/models/cnn/mobilenet/mobilenet-v1.h" bodystart="147" bodyend="157"/>
+    <listofallmembers>
+      <member refid="structxt_1_1models_1_1Bottleneck_1ad2d53797b7e19edb700d2b68c3a90560" prot="public" virt="non-virtual"><scope>xt::models::Bottleneck</scope><name>Bottleneck</name></member>
+      <member refid="structxt_1_1models_1_1Bottleneck_1ad2d53797b7e19edb700d2b68c3a90560" prot="public" virt="non-virtual"><scope>xt::models::Bottleneck</scope><name>Bottleneck</name></member>
+      <member refid="structxt_1_1models_1_1Bottleneck_1ad2d53797b7e19edb700d2b68c3a90560" prot="public" virt="non-virtual"><scope>xt::models::Bottleneck</scope><name>Bottleneck</name></member>
+      <member refid="structxt_1_1models_1_1Bottleneck_1a870b93f2adba5c6e463996f2f32a8ca5" prot="private" virt="non-virtual"><scope>xt::models::Bottleneck</scope><name>bottleneck</name></member>
+      <member refid="structxt_1_1models_1_1Bottleneck_1a2fc34f8f7bbaedac25d203d286cf9c8a" prot="private" virt="non-virtual"><scope>xt::models::Bottleneck</scope><name>downsample</name></member>
+      <member refid="structxt_1_1models_1_1Bottleneck_1a50d0f7c3f67156dfb0846145e5e7f258" prot="public" virt="non-virtual"><scope>xt::models::Bottleneck</scope><name>forward</name></member>
+      <member refid="structxt_1_1models_1_1Bottleneck_1a50d0f7c3f67156dfb0846145e5e7f258" prot="public" virt="non-virtual"><scope>xt::models::Bottleneck</scope><name>forward</name></member>
+      <member refid="structxt_1_1models_1_1Bottleneck_1a50d0f7c3f67156dfb0846145e5e7f258" prot="public" virt="non-virtual"><scope>xt::models::Bottleneck</scope><name>forward</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

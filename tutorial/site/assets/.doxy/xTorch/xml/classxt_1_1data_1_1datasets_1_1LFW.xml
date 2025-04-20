@@ -1,0 +1,335 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classxt_1_1data_1_1datasets_1_1LFW" kind="class" language="C++" prot="public">
+    <compoundname>xt::data::datasets::LFW</compoundname>
+    <basecompoundref refid="classxt_1_1data_1_1datasets_1_1BaseDataset" prot="public" virt="non-virtual">xt::data::datasets::BaseDataset</basecompoundref>
+    <derivedcompoundref refid="classxt_1_1data_1_1datasets_1_1LFWPairs" prot="public" virt="non-virtual">xt::data::datasets::LFWPairs</derivedcompoundref>
+    <derivedcompoundref refid="classxt_1_1data_1_1datasets_1_1LFWPeople" prot="public" virt="non-virtual">xt::data::datasets::LFWPeople</derivedcompoundref>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classxt_1_1data_1_1datasets_1_1LFW_1ac60f2ec2c07f0d9856d07b7762612998" prot="private" static="no" mutable="no">
+        <type>fs::path</type>
+        <definition>fs::path xt::data::datasets::LFW::dataset_folder_name</definition>
+        <argsstring></argsstring>
+        <name>dataset_folder_name</name>
+        <qualifiedname>xt::data::datasets::LFW::dataset_folder_name</qualifiedname>
+        <initializer>= fs::path(&quot;lfw-py&quot;)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/face-recognition/lfw.h" line="19" column="18" bodyfile="/home/kami/Documents/cpp/models/include/datasets/face-recognition/lfw.h" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classxt_1_1data_1_1datasets_1_1LFW_1a890dbb18d1b83cab08440de0fb0c8d39" prot="private" static="no" mutable="no">
+        <type>fs::path</type>
+        <definition>fs::path xt::data::datasets::LFW::url</definition>
+        <argsstring></argsstring>
+        <name>url</name>
+        <qualifiedname>xt::data::datasets::LFW::url</qualifiedname>
+        <initializer>= fs::path(&quot;http://vis-www.cs.umass.edu/lfw/&quot;)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/face-recognition/lfw.h" line="20" column="18" bodyfile="/home/kami/Documents/cpp/models/include/datasets/face-recognition/lfw.h" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classxt_1_1data_1_1datasets_1_1LFW_1aa0395cbbe17f1233c62d80f8391ad309" prot="private" static="no" mutable="no">
+        <type>std::map&lt; std::string, std::tuple&lt; std::string, fs::path, std::string &gt; &gt;</type>
+        <definition>std::map&lt;std::string, std::tuple&lt;std::string, fs::path, std::string&gt; &gt; xt::data::datasets::LFW::file_dict</definition>
+        <argsstring></argsstring>
+        <name>file_dict</name>
+        <qualifiedname>xt::data::datasets::LFW::file_dict</qualifiedname>
+        <initializer>= {
+            {&quot;original&quot;, {&quot;lfw&quot;, fs::path(&quot;lfw.tgz&quot;), &quot;a17d05bd522c52d84eca14327a23d494&quot;}},
+            {&quot;funneled&quot;, {&quot;lfw_funneled&quot;, fs::path(&quot;lfw-funneled.tgz&quot;), &quot;1b42dfed7d15c9b2dd63d5e5840c86ad&quot;}},
+            {
+                &quot;deepfunneled&quot;,
+                {&quot;lfw-deepfunneled&quot;, fs::path(&quot;lfw-deepfunneled.tgz&quot;), &quot;68331da3eb755a505a502b5aacb3c201&quot;}
+            }
+        }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/face-recognition/lfw.h" line="21" column="18" bodyfile="/home/kami/Documents/cpp/models/include/datasets/face-recognition/lfw.h" bodystart="21" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="variable" id="classxt_1_1data_1_1datasets_1_1LFW_1a4cd244cbf2487ff85902f03c15e8c5c2" prot="private" static="no" mutable="no">
+        <type>std::map&lt; std::string, std::string &gt;</type>
+        <definition>std::map&lt;std::string, std::string&gt; xt::data::datasets::LFW::checksums</definition>
+        <argsstring></argsstring>
+        <name>checksums</name>
+        <qualifiedname>xt::data::datasets::LFW::checksums</qualifiedname>
+        <initializer>= {
+            {&quot;pairs.txt&quot;, &quot;9f1ba174e4e1c508ff7cdf10ac338a7d&quot;},
+            {&quot;pairsDevTest.txt&quot;, &quot;5132f7440eb68cf58910c8a45a2ac10b&quot;},
+            {&quot;pairsDevTrain.txt&quot;, &quot;4f27cbf15b2da4a85c1907eb4181ad21&quot;},
+            {&quot;people.txt&quot;, &quot;450f0863dd89e85e73936a6d71a3474b&quot;},
+            {&quot;peopleDevTest.txt&quot;, &quot;e4bf5be0a43b5dcd9dc5ccfcb8fb19c5&quot;},
+            {&quot;peopleDevTrain.txt&quot;, &quot;54eaac34beb6d042ed3a7d883e247a21&quot;},
+            {&quot;lfw-names.txt&quot;, &quot;a6d0a479bd074669f656265a6e693f6d&quot;}
+        }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/face-recognition/lfw.h" line="30" column="18" bodyfile="/home/kami/Documents/cpp/models/include/datasets/face-recognition/lfw.h" bodystart="30" bodyend="38"/>
+      </memberdef>
+      <memberdef kind="variable" id="classxt_1_1data_1_1datasets_1_1LFW_1a3fa63087f22416bdd1a72873c2eaa079" prot="private" static="no" mutable="no">
+        <type>std::map&lt; std::string, std::string &gt;</type>
+        <definition>std::map&lt;std::string, std::string&gt; xt::data::datasets::LFW::annot_file</definition>
+        <argsstring></argsstring>
+        <name>annot_file</name>
+        <qualifiedname>xt::data::datasets::LFW::annot_file</qualifiedname>
+        <initializer>= {
+            {&quot;10fold&quot;, &quot;&quot;},
+            {&quot;train&quot;, &quot;DevTrain&quot;},
+            {&quot;test&quot;, &quot;DevTest&quot;}
+        }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/face-recognition/lfw.h" line="40" column="18" bodyfile="/home/kami/Documents/cpp/models/include/datasets/face-recognition/lfw.h" bodystart="40" bodyend="44"/>
+      </memberdef>
+      <memberdef kind="variable" id="classxt_1_1data_1_1datasets_1_1LFW_1a40591b59c838f39037cf7e70b3458989" prot="private" static="no" mutable="no">
+        <type>fs::path</type>
+        <definition>fs::path xt::data::datasets::LFW::names</definition>
+        <argsstring></argsstring>
+        <name>names</name>
+        <qualifiedname>xt::data::datasets::LFW::names</qualifiedname>
+        <initializer>= fs::path(&quot;lfw-names.txt&quot;)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/face-recognition/lfw.h" line="45" column="18" bodyfile="/home/kami/Documents/cpp/models/include/datasets/face-recognition/lfw.h" bodystart="45" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1LFW_1a72975e92bf9cb4693b4d0128e30d9f3b" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::datasets::LFW::LFW</definition>
+        <argsstring>(const std::string &amp;root)</argsstring>
+        <name>LFW</name>
+        <qualifiedname>xt::data::datasets::LFW::LFW</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/face-recognition/lfw.h" line="12" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1LFW_1a279ba5d8f8a1cdf2e01121a735bd078c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::datasets::LFW::LFW</definition>
+        <argsstring>(const std::string &amp;root, DataMode mode)</argsstring>
+        <name>LFW</name>
+        <qualifiedname>xt::data::datasets::LFW::LFW</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type>DataMode</type>
+          <declname>mode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/face-recognition/lfw.h" line="13" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1LFW_1a8ffe20bff465210d952635959f64b247" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::datasets::LFW::LFW</definition>
+        <argsstring>(const std::string &amp;root, DataMode mode, bool download)</argsstring>
+        <name>LFW</name>
+        <qualifiedname>xt::data::datasets::LFW::LFW</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type>DataMode</type>
+          <declname>mode</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>download</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/face-recognition/lfw.h" line="14" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1LFW_1a9f7871b0101653d561fba3f07b864f0e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::datasets::LFW::LFW</definition>
+        <argsstring>(const std::string &amp;root, DataMode mode, bool download, TransformType transforms)</argsstring>
+        <name>LFW</name>
+        <qualifiedname>xt::data::datasets::LFW::LFW</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type>DataMode</type>
+          <declname>mode</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>download</declname>
+        </param>
+        <param>
+          <type>TransformType</type>
+          <declname>transforms</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/face-recognition/lfw.h" line="15" column="9"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1LFW_1a2a31cd3646d87013694fe9d6a25064aa" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void xt::data::datasets::LFW::load_data</definition>
+        <argsstring>()</argsstring>
+        <name>load_data</name>
+        <qualifiedname>xt::data::datasets::LFW::load_data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/face-recognition/lfw.h" line="47" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1LFW_1a5b5d75e95020006b5be0ddead4b87754" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void xt::data::datasets::LFW::check_resources</definition>
+        <argsstring>()</argsstring>
+        <name>check_resources</name>
+        <qualifiedname>xt::data::datasets::LFW::check_resources</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/face-recognition/lfw.h" line="49" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>torch::data::Dataset&lt; BaseDataset &gt;</label>
+      </node>
+      <node id="2">
+        <label>xt::data::datasets::BaseDataset</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1BaseDataset"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>xt::data::datasets::LFW</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1LFW"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>xt::data::datasets::LFWPairs</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1LFWPairs"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>xt::data::datasets::LFWPeople</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1LFWPeople"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>torch::data::Dataset&lt; BaseDataset &gt;</label>
+      </node>
+      <node id="2">
+        <label>xt::data::datasets::BaseDataset</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1BaseDataset"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>compose</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>xt::data::datasets::LFW</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1LFW"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>xt::data::transforms::Compose</label>
+        <link refid="classxt_1_1data_1_1transforms_1_1Compose"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/kami/Documents/cpp/models/include/datasets/face-recognition/lfw.h" line="10" column="5" bodyfile="/home/kami/Documents/cpp/models/include/datasets/face-recognition/lfw.h" bodystart="10" bodyend="50"/>
+    <listofallmembers>
+      <member refid="classxt_1_1data_1_1datasets_1_1LFW_1a3fa63087f22416bdd1a72873c2eaa079" prot="private" virt="non-virtual"><scope>xt::data::datasets::LFW</scope><name>annot_file</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a9ba5b50134bc2f16bf392097296c9b5f" prot="public" virt="non-virtual"><scope>xt::data::datasets::LFW</scope><name>BaseDataset</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a0b87cdd7fb205c851dd517ba76270f2d" prot="public" virt="non-virtual"><scope>xt::data::datasets::LFW</scope><name>BaseDataset</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a7ef3cd4e7bc4182562495b64fa266242" prot="public" virt="non-virtual"><scope>xt::data::datasets::LFW</scope><name>BaseDataset</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a103cf530c2ebf093e3273feabccbd050" prot="public" virt="non-virtual"><scope>xt::data::datasets::LFW</scope><name>BaseDataset</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1LFW_1a5b5d75e95020006b5be0ddead4b87754" prot="private" virt="non-virtual"><scope>xt::data::datasets::LFW</scope><name>check_resources</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1LFW_1a4cd244cbf2487ff85902f03c15e8c5c2" prot="private" virt="non-virtual"><scope>xt::data::datasets::LFW</scope><name>checksums</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1acd46827630da2d3e3f209ccad0a3c08d" prot="public" virt="non-virtual"><scope>xt::data::datasets::LFW</scope><name>compose</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1abe0b531e8cd00b80062ba867b741e12b" prot="public" virt="non-virtual"><scope>xt::data::datasets::LFW</scope><name>data</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1LFW_1ac60f2ec2c07f0d9856d07b7762612998" prot="private" virt="non-virtual"><scope>xt::data::datasets::LFW</scope><name>dataset_folder_name</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1ac8114ca7f09c2a2b8410f452dc87d252" prot="public" virt="non-virtual"><scope>xt::data::datasets::LFW</scope><name>dataset_path</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1ad3491f80e83d0f19a6251006da5f438d" prot="public" virt="non-virtual"><scope>xt::data::datasets::LFW</scope><name>download</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1LFW_1aa0395cbbe17f1233c62d80f8391ad309" prot="private" virt="non-virtual"><scope>xt::data::datasets::LFW</scope><name>file_dict</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a47ecdca2ada0317831cd68be7533ae7f" prot="public" virt="non-virtual"><scope>xt::data::datasets::LFW</scope><name>get</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1aa7e88f0cc433116b978a59c74ec60726" prot="public" virt="non-virtual"><scope>xt::data::datasets::LFW</scope><name>labels</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1LFW_1a72975e92bf9cb4693b4d0128e30d9f3b" prot="public" virt="non-virtual"><scope>xt::data::datasets::LFW</scope><name>LFW</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1LFW_1a279ba5d8f8a1cdf2e01121a735bd078c" prot="public" virt="non-virtual"><scope>xt::data::datasets::LFW</scope><name>LFW</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1LFW_1a8ffe20bff465210d952635959f64b247" prot="public" virt="non-virtual"><scope>xt::data::datasets::LFW</scope><name>LFW</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1LFW_1a9f7871b0101653d561fba3f07b864f0e" prot="public" virt="non-virtual"><scope>xt::data::datasets::LFW</scope><name>LFW</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1LFW_1a2a31cd3646d87013694fe9d6a25064aa" prot="private" virt="non-virtual"><scope>xt::data::datasets::LFW</scope><name>load_data</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1acc7205b8f6b73437a5d7aa048029f186" prot="public" virt="non-virtual"><scope>xt::data::datasets::LFW</scope><name>mode</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1LFW_1a40591b59c838f39037cf7e70b3458989" prot="private" virt="non-virtual"><scope>xt::data::datasets::LFW</scope><name>names</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a8b19517cc2da31c2fdfc1688afac5f1d" prot="public" virt="non-virtual"><scope>xt::data::datasets::LFW</scope><name>root</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a04e88dd1f1e59c6e719397fe251c4457" prot="public" virt="non-virtual"><scope>xt::data::datasets::LFW</scope><name>size</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1afc0c6d9b9749a5b20df7c08bb9266bb8" prot="public" virt="non-virtual"><scope>xt::data::datasets::LFW</scope><name>transforms</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a38513e29e2014882a6148fc0e81aa84e" prot="public" virt="non-virtual"><scope>xt::data::datasets::LFW</scope><name>TransformType</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1LFW_1a890dbb18d1b83cab08440de0fb0c8d39" prot="private" virt="non-virtual"><scope>xt::data::datasets::LFW</scope><name>url</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

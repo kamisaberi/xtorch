@@ -1,0 +1,114 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="structxt_1_1models_1_1DownSample" kind="struct" language="C++" prot="public">
+    <compoundname>xt::models::DownSample</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">torch::nn::Module</basecompoundref>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="structxt_1_1models_1_1DownSample_1a28bf11892085df296a44f1521617013f" prot="private" static="no" mutable="no">
+        <type><ref refid="structxt_1_1models_1_1DoubleConv" kindref="compound">DoubleConv</ref></type>
+        <definition>DoubleConv xt::models::DownSample::conv</definition>
+        <argsstring></argsstring>
+        <name>conv</name>
+        <qualifiedname>xt::models::DownSample::conv</qualifiedname>
+        <initializer>{0, 0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/models/cnn/unet/unet.h" line="55" column="20" bodyfile="/home/kami/Documents/cpp/models/include/models/cnn/unet/unet.h" bodystart="55" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="variable" id="structxt_1_1models_1_1DownSample_1ae2bc1ff7a774749a00b6fb72ee7124f7" prot="private" static="no" mutable="no">
+        <type>torch::nn::MaxPool2d</type>
+        <definition>torch::nn::MaxPool2d xt::models::DownSample::pool</definition>
+        <argsstring></argsstring>
+        <name>pool</name>
+        <qualifiedname>xt::models::DownSample::pool</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/models/cnn/unet/unet.h" line="56" column="30" bodyfile="/home/kami/Documents/cpp/models/include/models/cnn/unet/unet.h" bodystart="56" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structxt_1_1models_1_1DownSample_1aa2cf335b8cb08f4afd383d9a9c29c3b3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::models::DownSample::DownSample</definition>
+        <argsstring>(int in_channels, int out_channels)</argsstring>
+        <name>DownSample</name>
+        <qualifiedname>xt::models::DownSample::DownSample</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>in_channels</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>out_channels</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/models/cnn/unet/unet.h" line="50" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="structxt_1_1models_1_1DownSample_1ad9cd3470481708abb65f6c79af3b92fa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>torch::Tensor</type>
+        <definition>torch::Tensor xt::models::DownSample::forward</definition>
+        <argsstring>(torch::Tensor input)</argsstring>
+        <name>forward</name>
+        <qualifiedname>xt::models::DownSample::forward</qualifiedname>
+        <param>
+          <type>torch::Tensor</type>
+          <declname>input</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/models/cnn/unet/unet.h" line="52" column="23"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>torch::nn::Module</label>
+      </node>
+      <node id="1">
+        <label>xt::models::DownSample</label>
+        <link refid="structxt_1_1models_1_1DownSample"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>torch::nn::Module</label>
+      </node>
+      <node id="1">
+        <label>xt::models::DownSample</label>
+        <link refid="structxt_1_1models_1_1DownSample"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/kami/Documents/cpp/models/include/models/cnn/unet/unet.h" line="48" column="5" bodyfile="/home/kami/Documents/cpp/models/include/models/cnn/unet/unet.h" bodystart="48" bodyend="57"/>
+    <listofallmembers>
+      <member refid="structxt_1_1models_1_1DownSample_1a28bf11892085df296a44f1521617013f" prot="private" virt="non-virtual"><scope>xt::models::DownSample</scope><name>conv</name></member>
+      <member refid="structxt_1_1models_1_1DownSample_1aa2cf335b8cb08f4afd383d9a9c29c3b3" prot="public" virt="non-virtual"><scope>xt::models::DownSample</scope><name>DownSample</name></member>
+      <member refid="structxt_1_1models_1_1DownSample_1ad9cd3470481708abb65f6c79af3b92fa" prot="public" virt="non-virtual"><scope>xt::models::DownSample</scope><name>forward</name></member>
+      <member refid="structxt_1_1models_1_1DownSample_1ae2bc1ff7a774749a00b6fb72ee7124f7" prot="private" virt="non-virtual"><scope>xt::models::DownSample</scope><name>pool</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

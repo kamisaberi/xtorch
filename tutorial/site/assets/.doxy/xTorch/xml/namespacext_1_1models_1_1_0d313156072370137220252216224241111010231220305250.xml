@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="namespacext_1_1models_1_1_0d313156072370137220252216224241111010231220305250" kind="namespace" language="C++">
+    <compoundname>xt::models</compoundname>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/kami/Documents/cpp/models/include/models/cnn/resnet/resnet101.h" line="13" column="5"/>
+  </compounddef>
+</doxygen>

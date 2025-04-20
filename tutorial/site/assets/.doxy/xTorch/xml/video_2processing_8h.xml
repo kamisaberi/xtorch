@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="video_2processing_8h" kind="file" language="C++">
+    <compoundname>processing.h</compoundname>
+    <includedby refid="media_2video_2video_8h" local="yes">/home/kami/Documents/cpp/models/include/media/video/video.h</includedby>
+    <invincdepgraph>
+      <node id="3">
+        <label>/home/kami/Documents/cpp/models/include/media/media.h</label>
+        <link refid="media_8h_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>/home/kami/Documents/cpp/models/include/media/video/processing.h</label>
+        <link refid="video_2processing_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>/home/kami/Documents/cpp/models/include/media/video/video.h</label>
+        <link refid="media_2video_2video_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>/home/kami/Documents/cpp/models/include/xtorch.h</label>
+        <link refid="xtorch_8h_source"/>
+      </node>
+    </invincdepgraph>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight></codeline>
+    </programlisting>
+    <location file="/home/kami/Documents/cpp/models/include/media/video/processing.h"/>
+  </compounddef>
+</doxygen>

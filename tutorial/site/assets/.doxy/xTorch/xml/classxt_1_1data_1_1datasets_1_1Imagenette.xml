@@ -1,0 +1,343 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classxt_1_1data_1_1datasets_1_1Imagenette" kind="class" language="C++" prot="public">
+    <compoundname>xt::data::datasets::Imagenette</compoundname>
+    <basecompoundref refid="classxt_1_1data_1_1datasets_1_1BaseDataset" prot="public" virt="non-virtual">xt::data::datasets::BaseDataset</basecompoundref>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classxt_1_1data_1_1datasets_1_1Imagenette_1a33e570d54755a2463894e420adc5b5a0" prot="private" static="no" mutable="no">
+        <type>std::map&lt; string, std::tuple&lt; fs::path, fs::path, fs::path, std::string &gt; &gt;</type>
+        <definition>std::map&lt;string, std::tuple&lt;fs::path, fs::path, fs::path, std::string&gt; &gt; xt::data::datasets::Imagenette::resources</definition>
+        <argsstring></argsstring>
+        <name>resources</name>
+        <qualifiedname>xt::data::datasets::Imagenette::resources</qualifiedname>
+        <initializer>= {
+            {
+                &quot;full&quot;, {
+                    fs::path(&quot;https://s3.amazonaws.com/fast-ai-imageclas/imagenette2.tgz&quot;),
+                    fs::path(&quot;imagenette2.tgz&quot;),
+                    fs::path(&quot;imagenette2&quot;),
+                    &quot;fe2fc210e6bb7c5664d602c3cd71e612&quot;
+                }
+            },
+            {
+                &quot;320px&quot;, {
+                    fs::path(&quot;https://s3.amazonaws.com/fast-ai-imageclas/imagenette2-320.tgz&quot;),
+                    fs::path(&quot;imagenette2-320.tgz&quot;),
+                    fs::path(&quot;imagenette2-320&quot;),
+                    &quot;3df6f0d01a2c9592104656642f5e78a3&quot;
+                }
+            },
+            {
+                &quot;160px&quot;, {
+                    fs::path(&quot;https://s3.amazonaws.com/fast-ai-imageclas/imagenette2-160.tgz&quot;),
+                    fs::path(&quot;imagenette2-160.tgz&quot;),
+                    fs::path(&quot;imagenette2-160&quot;),
+                    &quot;e793b78cc4c9e9a4ccc0c1155377a412&quot;
+                }
+            }
+        }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/imagenette.h" line="39" column="18" bodyfile="/home/kami/Documents/cpp/models/include/datasets/image-classification/imagenette.h" bodystart="39" bodyend="64"/>
+      </memberdef>
+      <memberdef kind="variable" id="classxt_1_1data_1_1datasets_1_1Imagenette_1a072da1a44a240f0df5658751ef8d7ec8" prot="private" static="no" mutable="no">
+        <type>ImageType</type>
+        <definition>ImageType xt::data::datasets::Imagenette::type</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <qualifiedname>xt::data::datasets::Imagenette::type</qualifiedname>
+        <initializer>= ImageType::PX160</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/imagenette.h" line="65" column="19" bodyfile="/home/kami/Documents/cpp/models/include/datasets/image-classification/imagenette.h" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classxt_1_1data_1_1datasets_1_1Imagenette_1a0ce2909e0c73483bd75f12956858790c" prot="private" static="no" mutable="no">
+        <type>fs::path</type>
+        <definition>fs::path xt::data::datasets::Imagenette::dataset_folder_name</definition>
+        <argsstring></argsstring>
+        <name>dataset_folder_name</name>
+        <qualifiedname>xt::data::datasets::Imagenette::dataset_folder_name</qualifiedname>
+        <initializer>= &quot;imagenette&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/imagenette.h" line="66" column="18" bodyfile="/home/kami/Documents/cpp/models/include/datasets/image-classification/imagenette.h" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classxt_1_1data_1_1datasets_1_1Imagenette_1a36ae14792ed7ce7f5b3e067ce4b7ea5d" prot="private" static="no" mutable="no">
+        <type>vector&lt; string &gt;</type>
+        <definition>vector&lt;string&gt; xt::data::datasets::Imagenette::labels_name</definition>
+        <argsstring></argsstring>
+        <name>labels_name</name>
+        <qualifiedname>xt::data::datasets::Imagenette::labels_name</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/imagenette.h" line="67" column="16" bodyfile="/home/kami/Documents/cpp/models/include/datasets/image-classification/imagenette.h" bodystart="67" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1Imagenette_1ae6a13f32f23bf68fd83a97d3a5befbe7" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::datasets::Imagenette::Imagenette</definition>
+        <argsstring>(const std::string &amp;root)</argsstring>
+        <name>Imagenette</name>
+        <qualifiedname>xt::data::datasets::Imagenette::Imagenette</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/imagenette.h" line="32" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1Imagenette_1a1a91f23c53c9ca03a8fa95eefdee3a0d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::datasets::Imagenette::Imagenette</definition>
+        <argsstring>(const std::string &amp;root, DataMode mode)</argsstring>
+        <name>Imagenette</name>
+        <qualifiedname>xt::data::datasets::Imagenette::Imagenette</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type>DataMode</type>
+          <declname>mode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/imagenette.h" line="33" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1Imagenette_1aee9f739927b85b3d9e10a2d4203dd55c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::datasets::Imagenette::Imagenette</definition>
+        <argsstring>(const std::string &amp;root, DataMode mode, bool download)</argsstring>
+        <name>Imagenette</name>
+        <qualifiedname>xt::data::datasets::Imagenette::Imagenette</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type>DataMode</type>
+          <declname>mode</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>download</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/imagenette.h" line="34" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1Imagenette_1aef02f22e0934fe8a90fc3d75b0e0d62f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::datasets::Imagenette::Imagenette</definition>
+        <argsstring>(const std::string &amp;root, DataMode mode, bool download, ImageType type)</argsstring>
+        <name>Imagenette</name>
+        <qualifiedname>xt::data::datasets::Imagenette::Imagenette</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type>DataMode</type>
+          <declname>mode</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>download</declname>
+        </param>
+        <param>
+          <type>ImageType</type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/imagenette.h" line="35" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1Imagenette_1a2dc5356aab0ad40884f224c62ff43df3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::datasets::Imagenette::Imagenette</definition>
+        <argsstring>(const std::string &amp;root, DataMode mode, bool download, ImageType type, TransformType transforms)</argsstring>
+        <name>Imagenette</name>
+        <qualifiedname>xt::data::datasets::Imagenette::Imagenette</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type>DataMode</type>
+          <declname>mode</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>download</declname>
+        </param>
+        <param>
+          <type>ImageType</type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>TransformType</type>
+          <declname>transforms</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/imagenette.h" line="36" column="9"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1Imagenette_1a56b9a84155c99e993277a9c349ac71d2" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void xt::data::datasets::Imagenette::load_data</definition>
+        <argsstring>(DataMode mode=DataMode::TRAIN)</argsstring>
+        <name>load_data</name>
+        <qualifiedname>xt::data::datasets::Imagenette::load_data</qualifiedname>
+        <param>
+          <type>DataMode</type>
+          <declname>mode</declname>
+          <defval>DataMode::TRAIN</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/imagenette.h" line="69" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1Imagenette_1a789ec66ce2fb5664476da04ff533c45e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void xt::data::datasets::Imagenette::check_resources</definition>
+        <argsstring>(const std::string &amp;root, bool download=false)</argsstring>
+        <name>check_resources</name>
+        <qualifiedname>xt::data::datasets::Imagenette::check_resources</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>download</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/imagenette.h" line="71" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>torch::data::Dataset&lt; BaseDataset &gt;</label>
+      </node>
+      <node id="2">
+        <label>xt::data::datasets::BaseDataset</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1BaseDataset"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>xt::data::datasets::Imagenette</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1Imagenette"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>torch::data::Dataset&lt; BaseDataset &gt;</label>
+      </node>
+      <node id="2">
+        <label>xt::data::datasets::BaseDataset</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1BaseDataset"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>compose</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>xt::data::datasets::Imagenette</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1Imagenette"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>xt::data::transforms::Compose</label>
+        <link refid="classxt_1_1data_1_1transforms_1_1Compose"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/imagenette.h" line="30" column="5" bodyfile="/home/kami/Documents/cpp/models/include/datasets/image-classification/imagenette.h" bodystart="30" bodyend="72"/>
+    <listofallmembers>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a9ba5b50134bc2f16bf392097296c9b5f" prot="public" virt="non-virtual"><scope>xt::data::datasets::Imagenette</scope><name>BaseDataset</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a0b87cdd7fb205c851dd517ba76270f2d" prot="public" virt="non-virtual"><scope>xt::data::datasets::Imagenette</scope><name>BaseDataset</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a7ef3cd4e7bc4182562495b64fa266242" prot="public" virt="non-virtual"><scope>xt::data::datasets::Imagenette</scope><name>BaseDataset</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a103cf530c2ebf093e3273feabccbd050" prot="public" virt="non-virtual"><scope>xt::data::datasets::Imagenette</scope><name>BaseDataset</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1Imagenette_1a789ec66ce2fb5664476da04ff533c45e" prot="private" virt="non-virtual"><scope>xt::data::datasets::Imagenette</scope><name>check_resources</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1acd46827630da2d3e3f209ccad0a3c08d" prot="public" virt="non-virtual"><scope>xt::data::datasets::Imagenette</scope><name>compose</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1abe0b531e8cd00b80062ba867b741e12b" prot="public" virt="non-virtual"><scope>xt::data::datasets::Imagenette</scope><name>data</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1Imagenette_1a0ce2909e0c73483bd75f12956858790c" prot="private" virt="non-virtual"><scope>xt::data::datasets::Imagenette</scope><name>dataset_folder_name</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1ac8114ca7f09c2a2b8410f452dc87d252" prot="public" virt="non-virtual"><scope>xt::data::datasets::Imagenette</scope><name>dataset_path</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1ad3491f80e83d0f19a6251006da5f438d" prot="public" virt="non-virtual"><scope>xt::data::datasets::Imagenette</scope><name>download</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a47ecdca2ada0317831cd68be7533ae7f" prot="public" virt="non-virtual"><scope>xt::data::datasets::Imagenette</scope><name>get</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1Imagenette_1ae6a13f32f23bf68fd83a97d3a5befbe7" prot="public" virt="non-virtual"><scope>xt::data::datasets::Imagenette</scope><name>Imagenette</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1Imagenette_1a1a91f23c53c9ca03a8fa95eefdee3a0d" prot="public" virt="non-virtual"><scope>xt::data::datasets::Imagenette</scope><name>Imagenette</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1Imagenette_1aee9f739927b85b3d9e10a2d4203dd55c" prot="public" virt="non-virtual"><scope>xt::data::datasets::Imagenette</scope><name>Imagenette</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1Imagenette_1aef02f22e0934fe8a90fc3d75b0e0d62f" prot="public" virt="non-virtual"><scope>xt::data::datasets::Imagenette</scope><name>Imagenette</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1Imagenette_1a2dc5356aab0ad40884f224c62ff43df3" prot="public" virt="non-virtual"><scope>xt::data::datasets::Imagenette</scope><name>Imagenette</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1aa7e88f0cc433116b978a59c74ec60726" prot="public" virt="non-virtual"><scope>xt::data::datasets::Imagenette</scope><name>labels</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1Imagenette_1a36ae14792ed7ce7f5b3e067ce4b7ea5d" prot="private" virt="non-virtual"><scope>xt::data::datasets::Imagenette</scope><name>labels_name</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1Imagenette_1a56b9a84155c99e993277a9c349ac71d2" prot="private" virt="non-virtual"><scope>xt::data::datasets::Imagenette</scope><name>load_data</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1acc7205b8f6b73437a5d7aa048029f186" prot="public" virt="non-virtual"><scope>xt::data::datasets::Imagenette</scope><name>mode</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1Imagenette_1a33e570d54755a2463894e420adc5b5a0" prot="private" virt="non-virtual"><scope>xt::data::datasets::Imagenette</scope><name>resources</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a8b19517cc2da31c2fdfc1688afac5f1d" prot="public" virt="non-virtual"><scope>xt::data::datasets::Imagenette</scope><name>root</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a04e88dd1f1e59c6e719397fe251c4457" prot="public" virt="non-virtual"><scope>xt::data::datasets::Imagenette</scope><name>size</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1afc0c6d9b9749a5b20df7c08bb9266bb8" prot="public" virt="non-virtual"><scope>xt::data::datasets::Imagenette</scope><name>transforms</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a38513e29e2014882a6148fc0e81aa84e" prot="public" virt="non-virtual"><scope>xt::data::datasets::Imagenette</scope><name>TransformType</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1Imagenette_1a072da1a44a240f0df5658751ef8d7ec8" prot="private" virt="non-virtual"><scope>xt::data::datasets::Imagenette</scope><name>type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,189 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classxt_1_1data_1_1datasets_1_1STSB" kind="class" language="C++" prot="public">
+    <compoundname>xt::data::datasets::STSB</compoundname>
+    <basecompoundref refid="classxt_1_1data_1_1datasets_1_1BaseDataset" prot="private" virt="non-virtual">xt::data::datasets::BaseDataset</basecompoundref>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1STSB_1a19ffd77221cba970ca7010bf614a1dab" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::datasets::STSB::STSB</definition>
+        <argsstring>(const std::string &amp;root)</argsstring>
+        <name>STSB</name>
+        <qualifiedname>xt::data::datasets::STSB::STSB</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/natural-language-inference/stsb.h" line="9" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1STSB_1a5e06ad3ca963af38728caf747ab44b44" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::datasets::STSB::STSB</definition>
+        <argsstring>(const std::string &amp;root, DataMode mode)</argsstring>
+        <name>STSB</name>
+        <qualifiedname>xt::data::datasets::STSB::STSB</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type>DataMode</type>
+          <declname>mode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/natural-language-inference/stsb.h" line="10" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1STSB_1a9b4b09cdc7f17672b0613f012aa2740f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::datasets::STSB::STSB</definition>
+        <argsstring>(const std::string &amp;root, DataMode mode, bool download)</argsstring>
+        <name>STSB</name>
+        <qualifiedname>xt::data::datasets::STSB::STSB</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type>DataMode</type>
+          <declname>mode</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>download</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/natural-language-inference/stsb.h" line="11" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1STSB_1af38251feaa1e6dbfa0befe5d087d04be" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::datasets::STSB::STSB</definition>
+        <argsstring>(const std::string &amp;root, DataMode mode, bool download, TransformType transforms)</argsstring>
+        <name>STSB</name>
+        <qualifiedname>xt::data::datasets::STSB::STSB</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type>DataMode</type>
+          <declname>mode</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>download</declname>
+        </param>
+        <param>
+          <type>TransformType</type>
+          <declname>transforms</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/natural-language-inference/stsb.h" line="12" column="9"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1STSB_1aa51f5a620baf68809d65d38c1dc758bd" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void xt::data::datasets::STSB::load_data</definition>
+        <argsstring>()</argsstring>
+        <name>load_data</name>
+        <qualifiedname>xt::data::datasets::STSB::load_data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/natural-language-inference/stsb.h" line="15" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1STSB_1a4be4b46b95667f20d62c9b18666ea4e6" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void xt::data::datasets::STSB::check_resources</definition>
+        <argsstring>()</argsstring>
+        <name>check_resources</name>
+        <qualifiedname>xt::data::datasets::STSB::check_resources</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/natural-language-inference/stsb.h" line="17" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>torch::data::Dataset&lt; BaseDataset &gt;</label>
+      </node>
+      <node id="2">
+        <label>xt::data::datasets::BaseDataset</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1BaseDataset"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>xt::data::datasets::STSB</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1STSB"/>
+        <childnode refid="2" relation="private-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>torch::data::Dataset&lt; BaseDataset &gt;</label>
+      </node>
+      <node id="2">
+        <label>xt::data::datasets::BaseDataset</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1BaseDataset"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>compose</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>xt::data::datasets::STSB</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1STSB"/>
+        <childnode refid="2" relation="private-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>xt::data::transforms::Compose</label>
+        <link refid="classxt_1_1data_1_1transforms_1_1Compose"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/kami/Documents/cpp/models/include/datasets/natural-language-inference/stsb.h" line="7" column="5" bodyfile="/home/kami/Documents/cpp/models/include/datasets/natural-language-inference/stsb.h" bodystart="7" bodyend="18"/>
+    <listofallmembers>
+      <member refid="classxt_1_1data_1_1datasets_1_1STSB_1a4be4b46b95667f20d62c9b18666ea4e6" prot="private" virt="non-virtual"><scope>xt::data::datasets::STSB</scope><name>check_resources</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1STSB_1aa51f5a620baf68809d65d38c1dc758bd" prot="private" virt="non-virtual"><scope>xt::data::datasets::STSB</scope><name>load_data</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1STSB_1a19ffd77221cba970ca7010bf614a1dab" prot="public" virt="non-virtual"><scope>xt::data::datasets::STSB</scope><name>STSB</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1STSB_1a5e06ad3ca963af38728caf747ab44b44" prot="public" virt="non-virtual"><scope>xt::data::datasets::STSB</scope><name>STSB</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1STSB_1a9b4b09cdc7f17672b0613f012aa2740f" prot="public" virt="non-virtual"><scope>xt::data::datasets::STSB</scope><name>STSB</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1STSB_1af38251feaa1e6dbfa0befe5d087d04be" prot="public" virt="non-virtual"><scope>xt::data::datasets::STSB</scope><name>STSB</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

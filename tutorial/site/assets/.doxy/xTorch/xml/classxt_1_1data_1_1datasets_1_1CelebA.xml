@@ -1,0 +1,245 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classxt_1_1data_1_1datasets_1_1CelebA" kind="class" language="C++" prot="public">
+    <compoundname>xt::data::datasets::CelebA</compoundname>
+    <basecompoundref refid="classxt_1_1data_1_1datasets_1_1BaseDataset" prot="public" virt="non-virtual">xt::data::datasets::BaseDataset</basecompoundref>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classxt_1_1data_1_1datasets_1_1CelebA_1a7c4bd631cc7fbe39347bd82ecfb5845d" prot="private" static="no" mutable="no">
+        <type>vector&lt; std::tuple&lt; string, string, fs::path &gt; &gt;</type>
+        <definition>vector&lt;std::tuple&lt;string, string, fs::path&gt; &gt; xt::data::datasets::CelebA::resources</definition>
+        <argsstring></argsstring>
+        <name>resources</name>
+        <qualifiedname>xt::data::datasets::CelebA::resources</qualifiedname>
+        <initializer>= {
+            {&quot;0B7EVK8r0v71pZjFTYXZWM3FlRnM&quot;, &quot;00d2c5bc6d35e252742224ab0c1e8fcb&quot;, &quot;img_align_celeba.zip&quot;},
+            {&quot;0B7EVK8r0v71pblRyaVFSWGxPY0U&quot;, &quot;75e246fa4810816ffd6ee81facbd244c&quot;, &quot;list_attr_celeba.txt&quot;},
+            {&quot;1_ee_0u7vcNLOfNLegJRHmolfH5ICW-XS&quot;, &quot;32bd1bd63d3c78cd57e08160ec5ed1e2&quot;, &quot;identity_CelebA.txt&quot;},
+            {&quot;0B7EVK8r0v71pbThiMVRxWXZ4dU0&quot;, &quot;00566efa6fedff7a56946cd1c10f1c16&quot;, &quot;list_bbox_celeba.txt&quot;},
+            {&quot;0B7EVK8r0v71pd0FJY3Blby1HUTQ&quot;, &quot;cc24ecafdb5b50baae59b03474781f8c&quot;, &quot;list_landmarks_align_celeba.txt&quot;},
+            {&quot;0B7EVK8r0v71pY0NSMzRuSXJEVkk&quot;, &quot;d32c9cbf5e040fd4025c592c306e6668&quot;, &quot;list_eval_partition.txt&quot;}
+        }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/celeba.h" line="19" column="16" bodyfile="/home/kami/Documents/cpp/models/include/datasets/image-classification/celeba.h" bodystart="19" bodyend="26"/>
+      </memberdef>
+      <memberdef kind="variable" id="classxt_1_1data_1_1datasets_1_1CelebA_1a90a3a8fce8ae6d776dfd1414a3f43ec2" prot="private" static="no" mutable="no">
+        <type>fs::path</type>
+        <definition>fs::path xt::data::datasets::CelebA::dataset_folder_name</definition>
+        <argsstring></argsstring>
+        <name>dataset_folder_name</name>
+        <qualifiedname>xt::data::datasets::CelebA::dataset_folder_name</qualifiedname>
+        <initializer>= &quot;celeba&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/celeba.h" line="28" column="18" bodyfile="/home/kami/Documents/cpp/models/include/datasets/image-classification/celeba.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1CelebA_1a9587d8150ab6b36af28d9c90c81eccdb" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::datasets::CelebA::CelebA</definition>
+        <argsstring>(const std::string &amp;root)</argsstring>
+        <name>CelebA</name>
+        <qualifiedname>xt::data::datasets::CelebA::CelebA</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/celeba.h" line="13" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1CelebA_1ae1cc55e20979ff21e7c291fcd6cded32" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::datasets::CelebA::CelebA</definition>
+        <argsstring>(const std::string &amp;root, DataMode mode)</argsstring>
+        <name>CelebA</name>
+        <qualifiedname>xt::data::datasets::CelebA::CelebA</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type>DataMode</type>
+          <declname>mode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/celeba.h" line="14" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1CelebA_1a3376778f53c42113209cf4de3862f738" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::datasets::CelebA::CelebA</definition>
+        <argsstring>(const std::string &amp;root, DataMode mode, bool download)</argsstring>
+        <name>CelebA</name>
+        <qualifiedname>xt::data::datasets::CelebA::CelebA</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type>DataMode</type>
+          <declname>mode</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>download</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/celeba.h" line="15" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1CelebA_1a6220dfe49ba2e455ec588611e611a413" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::datasets::CelebA::CelebA</definition>
+        <argsstring>(const std::string &amp;root, DataMode mode, bool download, vector&lt; std::function&lt; torch::Tensor(torch::Tensor)&gt; &gt; transforms)</argsstring>
+        <name>CelebA</name>
+        <qualifiedname>xt::data::datasets::CelebA::CelebA</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type>DataMode</type>
+          <declname>mode</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>download</declname>
+        </param>
+        <param>
+          <type>vector&lt; std::function&lt; torch::Tensor(torch::Tensor)&gt; &gt;</type>
+          <declname>transforms</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/celeba.h" line="16" column="9"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1CelebA_1ae3af100468bd9f9d258ca9f39f4a31fa" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void xt::data::datasets::CelebA::load_data</definition>
+        <argsstring>()</argsstring>
+        <name>load_data</name>
+        <qualifiedname>xt::data::datasets::CelebA::load_data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/celeba.h" line="29" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1CelebA_1a99c785ebb1499f2503e5e4ef30fdb4df" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void xt::data::datasets::CelebA::check_resources</definition>
+        <argsstring>()</argsstring>
+        <name>check_resources</name>
+        <qualifiedname>xt::data::datasets::CelebA::check_resources</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/celeba.h" line="31" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>torch::data::Dataset&lt; BaseDataset &gt;</label>
+      </node>
+      <node id="2">
+        <label>xt::data::datasets::BaseDataset</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1BaseDataset"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>xt::data::datasets::CelebA</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1CelebA"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>torch::data::Dataset&lt; BaseDataset &gt;</label>
+      </node>
+      <node id="2">
+        <label>xt::data::datasets::BaseDataset</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1BaseDataset"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>compose</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>xt::data::datasets::CelebA</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1CelebA"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>xt::data::transforms::Compose</label>
+        <link refid="classxt_1_1data_1_1transforms_1_1Compose"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/celeba.h" line="11" column="5" bodyfile="/home/kami/Documents/cpp/models/include/datasets/image-classification/celeba.h" bodystart="11" bodyend="32"/>
+    <listofallmembers>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a9ba5b50134bc2f16bf392097296c9b5f" prot="public" virt="non-virtual"><scope>xt::data::datasets::CelebA</scope><name>BaseDataset</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a0b87cdd7fb205c851dd517ba76270f2d" prot="public" virt="non-virtual"><scope>xt::data::datasets::CelebA</scope><name>BaseDataset</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a7ef3cd4e7bc4182562495b64fa266242" prot="public" virt="non-virtual"><scope>xt::data::datasets::CelebA</scope><name>BaseDataset</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a103cf530c2ebf093e3273feabccbd050" prot="public" virt="non-virtual"><scope>xt::data::datasets::CelebA</scope><name>BaseDataset</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1CelebA_1a9587d8150ab6b36af28d9c90c81eccdb" prot="public" virt="non-virtual"><scope>xt::data::datasets::CelebA</scope><name>CelebA</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1CelebA_1ae1cc55e20979ff21e7c291fcd6cded32" prot="public" virt="non-virtual"><scope>xt::data::datasets::CelebA</scope><name>CelebA</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1CelebA_1a3376778f53c42113209cf4de3862f738" prot="public" virt="non-virtual"><scope>xt::data::datasets::CelebA</scope><name>CelebA</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1CelebA_1a6220dfe49ba2e455ec588611e611a413" prot="public" virt="non-virtual"><scope>xt::data::datasets::CelebA</scope><name>CelebA</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1CelebA_1a99c785ebb1499f2503e5e4ef30fdb4df" prot="private" virt="non-virtual"><scope>xt::data::datasets::CelebA</scope><name>check_resources</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1acd46827630da2d3e3f209ccad0a3c08d" prot="public" virt="non-virtual"><scope>xt::data::datasets::CelebA</scope><name>compose</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1abe0b531e8cd00b80062ba867b741e12b" prot="public" virt="non-virtual"><scope>xt::data::datasets::CelebA</scope><name>data</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1CelebA_1a90a3a8fce8ae6d776dfd1414a3f43ec2" prot="private" virt="non-virtual"><scope>xt::data::datasets::CelebA</scope><name>dataset_folder_name</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1ac8114ca7f09c2a2b8410f452dc87d252" prot="public" virt="non-virtual"><scope>xt::data::datasets::CelebA</scope><name>dataset_path</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1ad3491f80e83d0f19a6251006da5f438d" prot="public" virt="non-virtual"><scope>xt::data::datasets::CelebA</scope><name>download</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a47ecdca2ada0317831cd68be7533ae7f" prot="public" virt="non-virtual"><scope>xt::data::datasets::CelebA</scope><name>get</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1aa7e88f0cc433116b978a59c74ec60726" prot="public" virt="non-virtual"><scope>xt::data::datasets::CelebA</scope><name>labels</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1CelebA_1ae3af100468bd9f9d258ca9f39f4a31fa" prot="private" virt="non-virtual"><scope>xt::data::datasets::CelebA</scope><name>load_data</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1acc7205b8f6b73437a5d7aa048029f186" prot="public" virt="non-virtual"><scope>xt::data::datasets::CelebA</scope><name>mode</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1CelebA_1a7c4bd631cc7fbe39347bd82ecfb5845d" prot="private" virt="non-virtual"><scope>xt::data::datasets::CelebA</scope><name>resources</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a8b19517cc2da31c2fdfc1688afac5f1d" prot="public" virt="non-virtual"><scope>xt::data::datasets::CelebA</scope><name>root</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a04e88dd1f1e59c6e719397fe251c4457" prot="public" virt="non-virtual"><scope>xt::data::datasets::CelebA</scope><name>size</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1afc0c6d9b9749a5b20df7c08bb9266bb8" prot="public" virt="non-virtual"><scope>xt::data::datasets::CelebA</scope><name>transforms</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a38513e29e2014882a6148fc0e81aa84e" prot="public" virt="non-virtual"><scope>xt::data::datasets::CelebA</scope><name>TransformType</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

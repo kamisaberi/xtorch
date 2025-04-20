@@ -1,0 +1,3 @@
+INPUT = ./include
+OUTPUT_DIRECTORY = docs
+GENERATE_XML = YES

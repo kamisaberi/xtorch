@@ -1,0 +1,238 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classxt_1_1data_1_1datasets_1_1Country211" kind="class" language="C++" prot="public">
+    <compoundname>xt::data::datasets::Country211</compoundname>
+    <basecompoundref refid="classxt_1_1data_1_1datasets_1_1BaseDataset" prot="public" virt="non-virtual">xt::data::datasets::BaseDataset</basecompoundref>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classxt_1_1data_1_1datasets_1_1Country211_1a1215d50b3e616b738b0b8a4272a3e360" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string xt::data::datasets::Country211::url</definition>
+        <argsstring></argsstring>
+        <name>url</name>
+        <qualifiedname>xt::data::datasets::Country211::url</qualifiedname>
+        <initializer>= &quot;https://openaipublic.azureedge.net/clip/data/&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/country.h" line="19" column="21" bodyfile="/home/kami/Documents/cpp/models/include/datasets/image-classification/country.h" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classxt_1_1data_1_1datasets_1_1Country211_1a607f0ad0da268deb454b0b0941b6df9e" prot="private" static="no" mutable="no">
+        <type>fs::path</type>
+        <definition>fs::path xt::data::datasets::Country211::dataset_file_name</definition>
+        <argsstring></argsstring>
+        <name>dataset_file_name</name>
+        <qualifiedname>xt::data::datasets::Country211::dataset_file_name</qualifiedname>
+        <initializer>= &quot;country211.tgz&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/country.h" line="20" column="18" bodyfile="/home/kami/Documents/cpp/models/include/datasets/image-classification/country.h" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classxt_1_1data_1_1datasets_1_1Country211_1aa49343e0cf55fa644e0433c250c5cfec" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string xt::data::datasets::Country211::dataset_file_md5</definition>
+        <argsstring></argsstring>
+        <name>dataset_file_md5</name>
+        <qualifiedname>xt::data::datasets::Country211::dataset_file_md5</qualifiedname>
+        <initializer>= &quot;84988d7644798601126c29e9877aab6a&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/country.h" line="21" column="21" bodyfile="/home/kami/Documents/cpp/models/include/datasets/image-classification/country.h" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classxt_1_1data_1_1datasets_1_1Country211_1ac9e9be0cb61e5bff92d8a0bf21d245fd" prot="private" static="no" mutable="no">
+        <type>fs::path</type>
+        <definition>fs::path xt::data::datasets::Country211::dataset_folder_name</definition>
+        <argsstring></argsstring>
+        <name>dataset_folder_name</name>
+        <qualifiedname>xt::data::datasets::Country211::dataset_folder_name</qualifiedname>
+        <initializer>= &quot;country211&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/country.h" line="22" column="18" bodyfile="/home/kami/Documents/cpp/models/include/datasets/image-classification/country.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1Country211_1a9e05457474bcfc794b127b9b8058ade2" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::datasets::Country211::Country211</definition>
+        <argsstring>(const std::string &amp;root)</argsstring>
+        <name>Country211</name>
+        <qualifiedname>xt::data::datasets::Country211::Country211</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/country.h" line="12" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1Country211_1a92b70bda9a72ae682e5a8ee7f981865d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::datasets::Country211::Country211</definition>
+        <argsstring>(const std::string &amp;root, DataMode mode)</argsstring>
+        <name>Country211</name>
+        <qualifiedname>xt::data::datasets::Country211::Country211</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type>DataMode</type>
+          <declname>mode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/country.h" line="13" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1Country211_1a1bc5e2ae6ec0650f3b9a2bc7056626b9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::datasets::Country211::Country211</definition>
+        <argsstring>(const std::string &amp;root, DataMode mode, bool download)</argsstring>
+        <name>Country211</name>
+        <qualifiedname>xt::data::datasets::Country211::Country211</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type>DataMode</type>
+          <declname>mode</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>download</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/country.h" line="14" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1Country211_1a7bad2a80d7fa505b6759058fadd39e6c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::datasets::Country211::Country211</definition>
+        <argsstring>(const std::string &amp;root, DataMode mode, bool download, TransformType transforms)</argsstring>
+        <name>Country211</name>
+        <qualifiedname>xt::data::datasets::Country211::Country211</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type>DataMode</type>
+          <declname>mode</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>download</declname>
+        </param>
+        <param>
+          <type>TransformType</type>
+          <declname>transforms</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/country.h" line="15" column="9"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>torch::data::Dataset&lt; BaseDataset &gt;</label>
+      </node>
+      <node id="2">
+        <label>xt::data::datasets::BaseDataset</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1BaseDataset"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>xt::data::datasets::Country211</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1Country211"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>torch::data::Dataset&lt; BaseDataset &gt;</label>
+      </node>
+      <node id="2">
+        <label>xt::data::datasets::BaseDataset</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1BaseDataset"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>compose</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>xt::data::datasets::Country211</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1Country211"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>xt::data::transforms::Compose</label>
+        <link refid="classxt_1_1data_1_1transforms_1_1Compose"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/country.h" line="10" column="5" bodyfile="/home/kami/Documents/cpp/models/include/datasets/image-classification/country.h" bodystart="10" bodyend="24"/>
+    <listofallmembers>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a9ba5b50134bc2f16bf392097296c9b5f" prot="public" virt="non-virtual"><scope>xt::data::datasets::Country211</scope><name>BaseDataset</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a0b87cdd7fb205c851dd517ba76270f2d" prot="public" virt="non-virtual"><scope>xt::data::datasets::Country211</scope><name>BaseDataset</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a7ef3cd4e7bc4182562495b64fa266242" prot="public" virt="non-virtual"><scope>xt::data::datasets::Country211</scope><name>BaseDataset</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a103cf530c2ebf093e3273feabccbd050" prot="public" virt="non-virtual"><scope>xt::data::datasets::Country211</scope><name>BaseDataset</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1acd46827630da2d3e3f209ccad0a3c08d" prot="public" virt="non-virtual"><scope>xt::data::datasets::Country211</scope><name>compose</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1Country211_1a9e05457474bcfc794b127b9b8058ade2" prot="public" virt="non-virtual"><scope>xt::data::datasets::Country211</scope><name>Country211</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1Country211_1a92b70bda9a72ae682e5a8ee7f981865d" prot="public" virt="non-virtual"><scope>xt::data::datasets::Country211</scope><name>Country211</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1Country211_1a1bc5e2ae6ec0650f3b9a2bc7056626b9" prot="public" virt="non-virtual"><scope>xt::data::datasets::Country211</scope><name>Country211</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1Country211_1a7bad2a80d7fa505b6759058fadd39e6c" prot="public" virt="non-virtual"><scope>xt::data::datasets::Country211</scope><name>Country211</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1abe0b531e8cd00b80062ba867b741e12b" prot="public" virt="non-virtual"><scope>xt::data::datasets::Country211</scope><name>data</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1Country211_1aa49343e0cf55fa644e0433c250c5cfec" prot="private" virt="non-virtual"><scope>xt::data::datasets::Country211</scope><name>dataset_file_md5</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1Country211_1a607f0ad0da268deb454b0b0941b6df9e" prot="private" virt="non-virtual"><scope>xt::data::datasets::Country211</scope><name>dataset_file_name</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1Country211_1ac9e9be0cb61e5bff92d8a0bf21d245fd" prot="private" virt="non-virtual"><scope>xt::data::datasets::Country211</scope><name>dataset_folder_name</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1ac8114ca7f09c2a2b8410f452dc87d252" prot="public" virt="non-virtual"><scope>xt::data::datasets::Country211</scope><name>dataset_path</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1ad3491f80e83d0f19a6251006da5f438d" prot="public" virt="non-virtual"><scope>xt::data::datasets::Country211</scope><name>download</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a47ecdca2ada0317831cd68be7533ae7f" prot="public" virt="non-virtual"><scope>xt::data::datasets::Country211</scope><name>get</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1aa7e88f0cc433116b978a59c74ec60726" prot="public" virt="non-virtual"><scope>xt::data::datasets::Country211</scope><name>labels</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1acc7205b8f6b73437a5d7aa048029f186" prot="public" virt="non-virtual"><scope>xt::data::datasets::Country211</scope><name>mode</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a8b19517cc2da31c2fdfc1688afac5f1d" prot="public" virt="non-virtual"><scope>xt::data::datasets::Country211</scope><name>root</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a04e88dd1f1e59c6e719397fe251c4457" prot="public" virt="non-virtual"><scope>xt::data::datasets::Country211</scope><name>size</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1afc0c6d9b9749a5b20df7c08bb9266bb8" prot="public" virt="non-virtual"><scope>xt::data::datasets::Country211</scope><name>transforms</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a38513e29e2014882a6148fc0e81aa84e" prot="public" virt="non-virtual"><scope>xt::data::datasets::Country211</scope><name>TransformType</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1Country211_1a1215d50b3e616b738b0b8a4272a3e360" prot="private" virt="non-virtual"><scope>xt::data::datasets::Country211</scope><name>url</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="dir_40be95ab8912b8deac694fbe2f8f2654" kind="dir">
+    <compoundname>/home/kami/Documents/cpp/models/include/models/cnn</compoundname>
+    <innerdir refid="dir_3b7157f900ab20c97880c9a0f5c25c82">/home/kami/Documents/cpp/models/include/models/cnn/alexnet</innerdir>
+    <innerdir refid="dir_45ae9a97fc80830746290ec1b5654b3d">/home/kami/Documents/cpp/models/include/models/cnn/dense-net</innerdir>
+    <innerdir refid="dir_430257895ecd3668c9128fdd3dfcb853">/home/kami/Documents/cpp/models/include/models/cnn/efficient-net</innerdir>
+    <innerdir refid="dir_b2aa8ff22ef72860ed32a476dd9404fe">/home/kami/Documents/cpp/models/include/models/cnn/inception</innerdir>
+    <innerdir refid="dir_7143ffcf272660e648740977d1bb606b">/home/kami/Documents/cpp/models/include/models/cnn/lenet</innerdir>
+    <innerdir refid="dir_a57691a5251d223bcea69c863aa2200a">/home/kami/Documents/cpp/models/include/models/cnn/mobilenet</innerdir>
+    <innerdir refid="dir_bae22fedf60f254e94c1517ab3741a15">/home/kami/Documents/cpp/models/include/models/cnn/nas-net</innerdir>
+    <innerdir refid="dir_d8f74afeea28456534a43cd406cb744b">/home/kami/Documents/cpp/models/include/models/cnn/reg-net</innerdir>
+    <innerdir refid="dir_43ab8c30072399f09a02fdd1f785b21c">/home/kami/Documents/cpp/models/include/models/cnn/resnet</innerdir>
+    <innerdir refid="dir_3c5228e53245123408496854d41e9c05">/home/kami/Documents/cpp/models/include/models/cnn/shuffle-net</innerdir>
+    <innerdir refid="dir_adf2b6225f9d04a14b4e30d5f88c6526">/home/kami/Documents/cpp/models/include/models/cnn/squeeze-net</innerdir>
+    <innerdir refid="dir_b3c9663c6f1b69d0648274f31dad4bbc">/home/kami/Documents/cpp/models/include/models/cnn/unet</innerdir>
+    <innerdir refid="dir_ef7a937debe30c3ca367a3d686ce12d7">/home/kami/Documents/cpp/models/include/models/cnn/vggnet</innerdir>
+    <innerfile refid="cnn_8h">cnn.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/kami/Documents/cpp/models/include/models/cnn/"/>
+  </compounddef>
+</doxygen>

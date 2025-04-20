@@ -1,0 +1,189 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classxt_1_1data_1_1datasets_1_1CommonVoice" kind="class" language="C++" prot="public">
+    <compoundname>xt::data::datasets::CommonVoice</compoundname>
+    <basecompoundref refid="classxt_1_1data_1_1datasets_1_1BaseDataset" prot="private" virt="non-virtual">xt::data::datasets::BaseDataset</basecompoundref>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1CommonVoice_1a502713a813e5c2dcb38a0d2f161cf2e5" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::datasets::CommonVoice::CommonVoice</definition>
+        <argsstring>(const std::string &amp;root)</argsstring>
+        <name>CommonVoice</name>
+        <qualifiedname>xt::data::datasets::CommonVoice::CommonVoice</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/audio-speech/common-voice.h" line="9" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1CommonVoice_1a12f13721739f63d1d9eac65821ae6ff9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::datasets::CommonVoice::CommonVoice</definition>
+        <argsstring>(const std::string &amp;root, DataMode mode)</argsstring>
+        <name>CommonVoice</name>
+        <qualifiedname>xt::data::datasets::CommonVoice::CommonVoice</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type>DataMode</type>
+          <declname>mode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/audio-speech/common-voice.h" line="10" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1CommonVoice_1a032f7e71211f794069a654f56be92f60" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::datasets::CommonVoice::CommonVoice</definition>
+        <argsstring>(const std::string &amp;root, DataMode mode, bool download)</argsstring>
+        <name>CommonVoice</name>
+        <qualifiedname>xt::data::datasets::CommonVoice::CommonVoice</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type>DataMode</type>
+          <declname>mode</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>download</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/audio-speech/common-voice.h" line="11" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1CommonVoice_1ae5f023db80216477172b47786f231b66" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::datasets::CommonVoice::CommonVoice</definition>
+        <argsstring>(const std::string &amp;root, DataMode mode, bool download, TransformType transforms)</argsstring>
+        <name>CommonVoice</name>
+        <qualifiedname>xt::data::datasets::CommonVoice::CommonVoice</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type>DataMode</type>
+          <declname>mode</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>download</declname>
+        </param>
+        <param>
+          <type>TransformType</type>
+          <declname>transforms</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/audio-speech/common-voice.h" line="12" column="9"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1CommonVoice_1ac2204658e96f47eb1f1c452b4ffa2b97" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void xt::data::datasets::CommonVoice::load_data</definition>
+        <argsstring>()</argsstring>
+        <name>load_data</name>
+        <qualifiedname>xt::data::datasets::CommonVoice::load_data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/audio-speech/common-voice.h" line="15" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1CommonVoice_1a701877e2f93699b22a17cf76d3087d18" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void xt::data::datasets::CommonVoice::check_resources</definition>
+        <argsstring>()</argsstring>
+        <name>check_resources</name>
+        <qualifiedname>xt::data::datasets::CommonVoice::check_resources</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/audio-speech/common-voice.h" line="17" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>torch::data::Dataset&lt; BaseDataset &gt;</label>
+      </node>
+      <node id="2">
+        <label>xt::data::datasets::BaseDataset</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1BaseDataset"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>xt::data::datasets::CommonVoice</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1CommonVoice"/>
+        <childnode refid="2" relation="private-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>torch::data::Dataset&lt; BaseDataset &gt;</label>
+      </node>
+      <node id="2">
+        <label>xt::data::datasets::BaseDataset</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1BaseDataset"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>compose</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>xt::data::datasets::CommonVoice</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1CommonVoice"/>
+        <childnode refid="2" relation="private-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>xt::data::transforms::Compose</label>
+        <link refid="classxt_1_1data_1_1transforms_1_1Compose"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/kami/Documents/cpp/models/include/datasets/audio-speech/common-voice.h" line="7" column="5" bodyfile="/home/kami/Documents/cpp/models/include/datasets/audio-speech/common-voice.h" bodystart="7" bodyend="18"/>
+    <listofallmembers>
+      <member refid="classxt_1_1data_1_1datasets_1_1CommonVoice_1a701877e2f93699b22a17cf76d3087d18" prot="private" virt="non-virtual"><scope>xt::data::datasets::CommonVoice</scope><name>check_resources</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1CommonVoice_1a502713a813e5c2dcb38a0d2f161cf2e5" prot="public" virt="non-virtual"><scope>xt::data::datasets::CommonVoice</scope><name>CommonVoice</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1CommonVoice_1a12f13721739f63d1d9eac65821ae6ff9" prot="public" virt="non-virtual"><scope>xt::data::datasets::CommonVoice</scope><name>CommonVoice</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1CommonVoice_1a032f7e71211f794069a654f56be92f60" prot="public" virt="non-virtual"><scope>xt::data::datasets::CommonVoice</scope><name>CommonVoice</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1CommonVoice_1ae5f023db80216477172b47786f231b66" prot="public" virt="non-virtual"><scope>xt::data::datasets::CommonVoice</scope><name>CommonVoice</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1CommonVoice_1ac2204658e96f47eb1f1c452b4ffa2b97" prot="private" virt="non-virtual"><scope>xt::data::datasets::CommonVoice</scope><name>load_data</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

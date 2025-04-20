@@ -1,0 +1,287 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classxt_1_1data_1_1datasets_1_1QMNIST" kind="class" language="C++" prot="public">
+    <compoundname>xt::data::datasets::QMNIST</compoundname>
+    <basecompoundref refid="classxt_1_1data_1_1datasets_1_1MNISTBase" prot="public" virt="non-virtual">xt::data::datasets::MNISTBase</basecompoundref>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classxt_1_1data_1_1datasets_1_1QMNIST_1a86ba719442dbbeb2b57942912aebce5a" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string xt::data::datasets::QMNIST::url</definition>
+        <argsstring></argsstring>
+        <name>url</name>
+        <qualifiedname>xt::data::datasets::QMNIST::url</qualifiedname>
+        <initializer>= &quot;https://raw.githubusercontent.com/facebookresearch/qmnist/master/&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/mnist.h" line="166" column="21" bodyfile="/home/kami/Documents/cpp/models/include/datasets/image-classification/mnist.h" bodystart="166" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classxt_1_1data_1_1datasets_1_1QMNIST_1a27a6db688adbb29f26976a0aa851800a" prot="private" static="no" mutable="no">
+        <type>fs::path</type>
+        <definition>fs::path xt::data::datasets::QMNIST::dataset_path</definition>
+        <argsstring></argsstring>
+        <name>dataset_path</name>
+        <qualifiedname>xt::data::datasets::QMNIST::dataset_path</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/mnist.h" line="167" column="18" bodyfile="/home/kami/Documents/cpp/models/include/datasets/image-classification/mnist.h" bodystart="167" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classxt_1_1data_1_1datasets_1_1QMNIST_1a26c99fa1857f610fee2312240faab003" prot="private" static="no" mutable="no">
+        <type>fs::path</type>
+        <definition>fs::path xt::data::datasets::QMNIST::dataset_folder_name</definition>
+        <argsstring></argsstring>
+        <name>dataset_folder_name</name>
+        <qualifiedname>xt::data::datasets::QMNIST::dataset_folder_name</qualifiedname>
+        <initializer>= &quot;QMNIST/raw&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/mnist.h" line="168" column="18" bodyfile="/home/kami/Documents/cpp/models/include/datasets/image-classification/mnist.h" bodystart="168" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classxt_1_1data_1_1datasets_1_1QMNIST_1a9e0580e0263e9e5fd8a965da1f896763" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string xt::data::datasets::QMNIST::archive_file_md5</definition>
+        <argsstring></argsstring>
+        <name>archive_file_md5</name>
+        <qualifiedname>xt::data::datasets::QMNIST::archive_file_md5</qualifiedname>
+        <initializer>= &quot;58c8d27c78d21e728a6bc7b3cc06412e&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/mnist.h" line="169" column="21" bodyfile="/home/kami/Documents/cpp/models/include/datasets/image-classification/mnist.h" bodystart="169" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classxt_1_1data_1_1datasets_1_1QMNIST_1ab0babd1e1ee2dd19b385cbe745d3b43f" prot="private" static="no" mutable="no">
+        <type>std::map&lt; string, std::vector&lt; std::tuple&lt; fs::path, std::string &gt; &gt; &gt;</type>
+        <definition>std::map&lt;string, std::vector&lt;std::tuple&lt;fs::path, std::string&gt; &gt; &gt; xt::data::datasets::QMNIST::resources</definition>
+        <argsstring></argsstring>
+        <name>resources</name>
+        <qualifiedname>xt::data::datasets::QMNIST::resources</qualifiedname>
+        <initializer>= {
+            {
+                &quot;train&quot;, {
+                    {fs::path(&quot;qmnist-train-images-idx3-ubyte.gz&quot;), &quot;ed72d4157d28c017586c42bc6afe6370&quot;},
+                    {fs::path(&quot;qmnist-train-labels-idx2-int.gz&quot;), &quot;0058f8dd561b90ffdd0f734c6a30e5e4&quot;}
+                }
+            },
+            {
+                &quot;test&quot;, {
+                    {fs::path(&quot;qmnist-test-images-idx3-ubyte.gz&quot;), &quot;1394631089c404de565df7b7aeaf9412&quot;},
+                    {fs::path(&quot;qmnist-test-labels-idx2-int.gz&quot;), &quot;5b5b05890a5e13444e108efe57b788aa&quot;}
+                }
+            },
+            {
+                &quot;nist&quot;, {
+                    {fs::path(&quot;xnist-images-idx3-ubyte.xz&quot;), &quot;7f124b3b8ab81486c9d8c2749c17f834&quot;},
+                    {fs::path(&quot;xnist-labels-idx2-int.xz&quot;), &quot;5ed0e788978e45d4a8bd4b7caec3d79d&quot;}
+                }
+            }
+        }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/mnist.h" line="170" column="18" bodyfile="/home/kami/Documents/cpp/models/include/datasets/image-classification/mnist.h" bodystart="170" bodyend="189"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1QMNIST_1a3c94a6d8fd1729a5e9451600f99009c7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::datasets::QMNIST::QMNIST</definition>
+        <argsstring>(const std::string &amp;root, DataMode mode=DataMode::TRAIN, bool download=false)</argsstring>
+        <name>QMNIST</name>
+        <qualifiedname>xt::data::datasets::QMNIST::QMNIST</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type>DataMode</type>
+          <declname>mode</declname>
+          <defval>DataMode::TRAIN</defval>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>download</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/mnist.h" line="162" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1QMNIST_1aa872e6c43f9456ef0fa88cd909c44c1c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::datasets::QMNIST::QMNIST</definition>
+        <argsstring>(const fs::path &amp;root, DatasetArguments args)</argsstring>
+        <name>QMNIST</name>
+        <qualifiedname>xt::data::datasets::QMNIST::QMNIST</qualifiedname>
+        <param>
+          <type>const fs::path &amp;</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type><ref refid="structDatasetArguments" kindref="compound">DatasetArguments</ref></type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/mnist.h" line="163" column="9"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1QMNIST_1a5088d01869cb39d883c9940378d2a5c0" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void xt::data::datasets::QMNIST::load_data</definition>
+        <argsstring>(DataMode mode=DataMode::TRAIN)</argsstring>
+        <name>load_data</name>
+        <qualifiedname>xt::data::datasets::QMNIST::load_data</qualifiedname>
+        <param>
+          <type>DataMode</type>
+          <declname>mode</declname>
+          <defval>DataMode::TRAIN</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/mnist.h" line="190" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1QMNIST_1a3785904d5f49942a1744b6fba92e6228" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void xt::data::datasets::QMNIST::check_resources</definition>
+        <argsstring>(const std::string &amp;root, bool download=false)</argsstring>
+        <name>check_resources</name>
+        <qualifiedname>xt::data::datasets::QMNIST::check_resources</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>download</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/mnist.h" line="192" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="4">
+        <label>torch::data::Dataset&lt; BaseDataset &gt;</label>
+      </node>
+      <node id="3">
+        <label>xt::data::datasets::BaseDataset</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1BaseDataset"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>xt::data::datasets::MNISTBase</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1MNISTBase"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>xt::data::datasets::QMNIST</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1QMNIST"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="4">
+        <label>torch::data::Dataset&lt; BaseDataset &gt;</label>
+      </node>
+      <node id="3">
+        <label>xt::data::datasets::BaseDataset</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1BaseDataset"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>compose</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>xt::data::datasets::MNISTBase</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1MNISTBase"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>xt::data::datasets::QMNIST</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1QMNIST"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>xt::data::transforms::Compose</label>
+        <link refid="classxt_1_1data_1_1transforms_1_1Compose"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/mnist.h" line="160" column="5" bodyfile="/home/kami/Documents/cpp/models/include/datasets/image-classification/mnist.h" bodystart="160" bodyend="194"/>
+    <listofallmembers>
+      <member refid="classxt_1_1data_1_1datasets_1_1QMNIST_1a9e0580e0263e9e5fd8a965da1f896763" prot="private" virt="non-virtual"><scope>xt::data::datasets::QMNIST</scope><name>archive_file_md5</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a9ba5b50134bc2f16bf392097296c9b5f" prot="public" virt="non-virtual"><scope>xt::data::datasets::QMNIST</scope><name>BaseDataset</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a0b87cdd7fb205c851dd517ba76270f2d" prot="public" virt="non-virtual"><scope>xt::data::datasets::QMNIST</scope><name>BaseDataset</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a7ef3cd4e7bc4182562495b64fa266242" prot="public" virt="non-virtual"><scope>xt::data::datasets::QMNIST</scope><name>BaseDataset</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a103cf530c2ebf093e3273feabccbd050" prot="public" virt="non-virtual"><scope>xt::data::datasets::QMNIST</scope><name>BaseDataset</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1QMNIST_1a3785904d5f49942a1744b6fba92e6228" prot="private" virt="non-virtual"><scope>xt::data::datasets::QMNIST</scope><name>check_resources</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1acd46827630da2d3e3f209ccad0a3c08d" prot="public" virt="non-virtual"><scope>xt::data::datasets::QMNIST</scope><name>compose</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1abe0b531e8cd00b80062ba867b741e12b" prot="public" virt="non-virtual"><scope>xt::data::datasets::QMNIST</scope><name>data</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1QMNIST_1a26c99fa1857f610fee2312240faab003" prot="private" virt="non-virtual"><scope>xt::data::datasets::QMNIST</scope><name>dataset_folder_name</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1QMNIST_1a27a6db688adbb29f26976a0aa851800a" prot="private" virt="non-virtual"><scope>xt::data::datasets::QMNIST</scope><name>dataset_path</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1ad3491f80e83d0f19a6251006da5f438d" prot="public" virt="non-virtual"><scope>xt::data::datasets::QMNIST</scope><name>download</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a47ecdca2ada0317831cd68be7533ae7f" prot="public" virt="non-virtual"><scope>xt::data::datasets::QMNIST</scope><name>get</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1aa7e88f0cc433116b978a59c74ec60726" prot="public" virt="non-virtual"><scope>xt::data::datasets::QMNIST</scope><name>labels</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1QMNIST_1a5088d01869cb39d883c9940378d2a5c0" prot="private" virt="non-virtual"><scope>xt::data::datasets::QMNIST</scope><name>load_data</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1MNISTBase_1af6ddaeea04ef0bb1f3ad0a1395cbc761" prot="public" virt="non-virtual"><scope>xt::data::datasets::QMNIST</scope><name>MNISTBase</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1MNISTBase_1a09070a1986b89b8d30a852713dab0d68" prot="public" virt="non-virtual"><scope>xt::data::datasets::QMNIST</scope><name>MNISTBase</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1MNISTBase_1a09c867be3ca820da99aa0fda4b3d29c6" prot="public" virt="non-virtual"><scope>xt::data::datasets::QMNIST</scope><name>MNISTBase</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1MNISTBase_1a9b68e8c789ac4107f546384242fb0161" prot="public" virt="non-virtual"><scope>xt::data::datasets::QMNIST</scope><name>MNISTBase</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1acc7205b8f6b73437a5d7aa048029f186" prot="public" virt="non-virtual"><scope>xt::data::datasets::QMNIST</scope><name>mode</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1QMNIST_1a3c94a6d8fd1729a5e9451600f99009c7" prot="public" virt="non-virtual"><scope>xt::data::datasets::QMNIST</scope><name>QMNIST</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1QMNIST_1aa872e6c43f9456ef0fa88cd909c44c1c" prot="public" virt="non-virtual"><scope>xt::data::datasets::QMNIST</scope><name>QMNIST</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1MNISTBase_1ad4f12221bb929ab0f9f3605cb5de05f1" prot="public" virt="non-virtual"><scope>xt::data::datasets::QMNIST</scope><name>read_images</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1MNISTBase_1a4beee5bced4b977612f5dc8cacb59d8d" prot="public" virt="non-virtual"><scope>xt::data::datasets::QMNIST</scope><name>read_labels</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1QMNIST_1ab0babd1e1ee2dd19b385cbe745d3b43f" prot="private" virt="non-virtual"><scope>xt::data::datasets::QMNIST</scope><name>resources</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a8b19517cc2da31c2fdfc1688afac5f1d" prot="public" virt="non-virtual"><scope>xt::data::datasets::QMNIST</scope><name>root</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a04e88dd1f1e59c6e719397fe251c4457" prot="public" virt="non-virtual"><scope>xt::data::datasets::QMNIST</scope><name>size</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1afc0c6d9b9749a5b20df7c08bb9266bb8" prot="public" virt="non-virtual"><scope>xt::data::datasets::QMNIST</scope><name>transforms</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a38513e29e2014882a6148fc0e81aa84e" prot="public" virt="non-virtual"><scope>xt::data::datasets::QMNIST</scope><name>TransformType</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1QMNIST_1a86ba719442dbbeb2b57942912aebce5a" prot="private" virt="non-virtual"><scope>xt::data::datasets::QMNIST</scope><name>url</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
