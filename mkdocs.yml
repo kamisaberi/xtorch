@@ -3,7 +3,7 @@ theme:
   name: material  # looks clean and modern
 nav:
   - Home: index.md
-  - Install: installation.md
+  - Installation: installation.md
   - Tutorials:
       - Hello World: tutorials/hello_world.md
       - Settings: tutorials/settings.md
