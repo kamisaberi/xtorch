@@ -43,7 +43,7 @@ nav:
 
   - Community:
       - FAQ: community/faq.md
-      - Code of Conduct: community/code_of_conduct.md#plugins:
+      - Code of Conduct: community/code_of_conduct.md
 #  - mkdocstrings:
 #      handlers:
 #        cpp:
