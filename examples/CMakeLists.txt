@@ -209,7 +209,7 @@ target_link_libraries(lenet5-food101 ${TEST_LIBRARIES})
 # ResNet MNIST
 set(SOURCE_FILES
         ../src/datasets/image-classification/mnist.cpp
-        ../src/models/cnn/resnet.cpp
+        ../src/models/cnn/resnet/resnet.cpp
 )
 add_executable(resnet-mnist ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/resnet-mnist.cpp)
 target_link_libraries(resnet-mnist "${TORCH_LIBRARIES}")
@@ -221,7 +221,7 @@ target_link_libraries(resnet-mnist ${TEST_LIBRARIES})
 # ResNet FashionMNIST
 set(SOURCE_FILES
         ../src/datasets/image-classification/mnist.cpp
-        ../src/models/cnn/resnet.cpp
+        ../src/models/cnn/resnet/resnet.cpp
 )
 add_executable(resnet-fashionmnist ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/resnet-fashionmnist.cpp)
 target_link_libraries(resnet-fashionmnist "${TORCH_LIBRARIES}")
@@ -232,7 +232,7 @@ target_link_libraries(resnet-fashionmnist ${TEST_LIBRARIES})
 # ResNet CIFAR10
 set(SOURCE_FILES
         ../src/datasets/image-classification/cifar.cpp
-        ../src/models/cnn/resnet.cpp
+        ../src/models/cnn/resnet/resnet.cpp
 )
 add_executable(resnet-cifar10 ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/resnet-cifar10.cpp)
 target_link_libraries(resnet-cifar10 "${TORCH_LIBRARIES}")
@@ -244,7 +244,7 @@ target_link_libraries(resnet-cifar10 ${TEST_LIBRARIES})
 # ResNet CIFAR100
 set(SOURCE_FILES
         ../src/datasets/image-classification/cifar.cpp
-        ../src/models/cnn/resnet.cpp
+        ../src/models/cnn/resnet/resnet.cpp
 )
 add_executable(resnet-cifar100 ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/resnet-cifar100.cpp)
 target_link_libraries(resnet-cifar100 "${TORCH_LIBRARIES}")
@@ -255,7 +255,7 @@ target_link_libraries(resnet-cifar100 ${TEST_LIBRARIES})
 # ResNet Imagenette
 set(SOURCE_FILES
         ../src/datasets/image-classification/imagenette.cpp
-        ../src/models/cnn/resnet.cpp
+        ../src/models/cnn/resnet/resnet.cpp
 )
 add_executable(resnet-imagenette ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/resnet-imagenette.cpp)
 target_link_libraries(resnet-imagenette "${TORCH_LIBRARIES}")
@@ -267,7 +267,7 @@ target_link_libraries(resnet-imagenette ${TEST_LIBRARIES})
 # ResNet Food101
 set(SOURCE_FILES
         ../src/datasets/image-classification/food.cpp
-        ../src/models/cnn/resnet.cpp
+        ../src/models/cnn/resnet/resnet.cpp
 )
 add_executable(resnet-food101 ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/resnet-food101.cpp)
 target_link_libraries(resnet-food101 "${TORCH_LIBRARIES}")
