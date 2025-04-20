@@ -7,3 +7,11 @@ nav:
   - Tutorials:
       - Hello World: tutorials/hello_world.md
       - Settings: tutorials/settings.md
+plugins:
+  - mkdocstrings:
+      handlers:
+        cpp:
+          options:
+            include_paths: ["include/"]  # Path to C++ headers
+            clang:
+              args: ["-std=c++17", "-I./include"]  # Compiler flags
