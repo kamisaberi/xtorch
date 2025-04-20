@@ -4,6 +4,12 @@ theme:
 nav:
   - Home: index.md
   - Installation: installation.md
+  - Quick Start: quickstart.md
+  - Core Features: features.md
+  - API Reference: api.md
+  - Examples: examples.md
+  - Contributing: contributing.md
+  - License: license.md
   - Tutorials:
       - Hello World: tutorials/hello_world.md
       - Settings: tutorials/settings.md
