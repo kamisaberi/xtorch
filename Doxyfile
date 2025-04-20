@@ -1,0 +1,3 @@
+INPUT = path/to/your/cpp/source
+OUTPUT_DIRECTORY = path/to/output
+GENERATE_XML = YES
