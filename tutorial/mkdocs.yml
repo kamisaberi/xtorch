@@ -53,3 +53,13 @@ nav:
 #            include_paths: ["include/"]  # Path to C++ headers
 #            clang:
 #              args: ["-std=c++17", "-I./include"]  # Compiler flags
+#plugins:
+#  - search
+#  - mkdoxy:
+#      projects:
+#        myCppProject:
+#          src-dirs: ../
+#          full-doc: true
+#          doxy-cfg:
+#            FILE_PATTERNS: "*.cpp *.h*"
+#            RECURSIVE: true
