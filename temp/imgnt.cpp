@@ -3,7 +3,7 @@
 #include <iostream>
 #include <vector>
 #include "../include/datasets/image-classification/imagenette.h"
-#include "../include/models/cnn/lenet5.h"
+#include "../include/models/cnn/lenet/lenet5.h"
 #include <torch/data/transforms/base.h>
 #include <functional>
 #include "../include/definitions/transforms.h"
