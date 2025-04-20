@@ -3,4 +3,3 @@ mkdocs-material
 mkdocs-material-extensions
 pymdown-extensions
 mkdocstrings-python
-mkdocstrings-cpp
