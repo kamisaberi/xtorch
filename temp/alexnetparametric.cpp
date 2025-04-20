@@ -9,7 +9,7 @@
 #include <functional>
 
 #include "../include/datasets/image-classification/mnist.h"
-#include "../include/models/cnn/alexnet.h"
+#include "../include/models/cnn/alexnet/alexnet.h"
 #include "../include/definitions/transforms.h"
 
 using namespace std;

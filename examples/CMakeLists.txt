@@ -53,7 +53,7 @@ set(TEST_LIBRARIES ${CURL_LIBRARIES}
 # AlexNet MNIST
 set(SOURCE_FILES
         ../src/datasets/image-classification/mnist.cpp
-        ../src/models/cnn/alexnet.cpp
+        ../src/models/cnn/alexnet/alexnet.cpp
 )
 add_executable(alexnet-mnist ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/alexnet-mnist.cpp)
 target_link_libraries(alexnet-mnist "${TORCH_LIBRARIES}")
@@ -66,7 +66,7 @@ target_link_libraries(alexnet-mnist ${TEST_LIBRARIES})
 # AlexNet FashionMNIST
 set(SOURCE_FILES
         ../src/datasets/image-classification/mnist.cpp
-        ../src/models/cnn/alexnet.cpp
+        ../src/models/cnn/alexnet/alexnet.cpp
 )
 add_executable(alexnet-fashionmnist ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/alexnet-fashionmnist.cpp)
 target_link_libraries(alexnet-fashionmnist "${TORCH_LIBRARIES}")
@@ -77,7 +77,7 @@ target_link_libraries(alexnet-fashionmnist ${TEST_LIBRARIES})
 # AlexNet CIFAR10
 set(SOURCE_FILES
         ../src/datasets/image-classification/cifar.cpp
-        ../src/models/cnn/alexnet.cpp
+        ../src/models/cnn/alexnet/alexnet.cpp
 )
 add_executable(alexnet-cifar10 ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/alexnet-cifar10.cpp)
 target_link_libraries(alexnet-cifar10 "${TORCH_LIBRARIES}")
@@ -89,7 +89,7 @@ target_link_libraries(alexnet-cifar10 ${TEST_LIBRARIES})
 # AlexNet CIFAR100
 set(SOURCE_FILES
         ../src/datasets/image-classification/cifar.cpp
-        ../src/models/cnn/alexnet.cpp
+        ../src/models/cnn/alexnet/alexnet.cpp
 )
 add_executable(alexnet-cifar100 ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/alexnet-cifar100.cpp)
 target_link_libraries(alexnet-cifar100 "${TORCH_LIBRARIES}")
@@ -100,7 +100,7 @@ target_link_libraries(alexnet-cifar100 ${TEST_LIBRARIES})
 # AlexNet Imagenette
 set(SOURCE_FILES
         ../src/datasets/image-classification/imagenette.cpp
-        ../src/models/cnn/alexnet.cpp
+        ../src/models/cnn/alexnet/alexnet.cpp
 )
 add_executable(alexnet-imagenette ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/alexnet-imagenette.cpp)
 target_link_libraries(alexnet-imagenette "${TORCH_LIBRARIES}")
@@ -112,7 +112,7 @@ target_link_libraries(alexnet-imagenette ${TEST_LIBRARIES})
 # AlexNet Food101
 set(SOURCE_FILES
         ../src/datasets/image-classification/food.cpp
-        ../src/models/cnn/alexnet.cpp
+        ../src/models/cnn/alexnet/alexnet.cpp
 )
 add_executable(alexnet-food101 ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/alexnet-food101.cpp)
 target_link_libraries(alexnet-food101 "${TORCH_LIBRARIES}")
