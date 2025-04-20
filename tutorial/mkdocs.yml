@@ -11,6 +11,7 @@ nav:
       - Migration from PyTorch: getting_started/migration_guide.md
 
   - API Reference:
+      - Index:  api/index.md
       - Python API:
           - Core: api/python/core.md
           - NN Modules: api/python/nn.md
@@ -53,13 +54,13 @@ nav:
 #            include_paths: ["include/"]  # Path to C++ headers
 #            clang:
 #              args: ["-std=c++17", "-I./include"]  # Compiler flags
-#plugins:
-#  - search
-#  - mkdoxy:
-#      projects:
-#        myCppProject:
-#          src-dirs: ../
-#          full-doc: true
-#          doxy-cfg:
-#            FILE_PATTERNS: "*.cpp *.h*"
-#            RECURSIVE: true
+plugins:
+  - search
+  - mkdoxy:
+      projects:
+        xTorch:
+          src-dirs: ../include
+          full-doc: true
+          doxy-cfg:
+            FILE_PATTERNS: "*.cpp *.h*"
+            RECURSIVE: true

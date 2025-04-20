@@ -1,2 +1,2 @@
-::: doxy.myCppProject.Class
-name: MyNamespace::MyClass
+::: doxy.xTorch.Class
+name: xt::data::transforms::Compose

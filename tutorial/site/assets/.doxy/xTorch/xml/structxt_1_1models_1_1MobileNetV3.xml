@@ -1,0 +1,280 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="structxt_1_1models_1_1MobileNetV3" kind="struct" language="C++" prot="public">
+    <compoundname>xt::models::MobileNetV3</compoundname>
+    <basecompoundref refid="classxt_1_1models_1_1BaseModel" prot="public" virt="non-virtual">xt::models::BaseModel</basecompoundref>
+    <basecompoundref refid="classxt_1_1models_1_1BaseModel" prot="public" virt="non-virtual">xt::models::BaseModel</basecompoundref>
+    <basecompoundref refid="classxt_1_1models_1_1BaseModel" prot="public" virt="non-virtual">xt::models::BaseModel</basecompoundref>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="structxt_1_1models_1_1MobileNetV3_1aa1ffdbeddcc93b22381cf5fd2e805e62" prot="private" static="no" mutable="no">
+        <type>torch::nn::Sequential</type>
+        <definition>torch::nn::Sequential xt::models::MobileNetV3::initial_conv</definition>
+        <argsstring></argsstring>
+        <name>initial_conv</name>
+        <qualifiedname>xt::models::MobileNetV3::initial_conv</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/models/cnn/mobilenet/mobilenet-v1.h" line="235" column="31" bodyfile="/home/kami/Documents/cpp/models/include/models/cnn/mobilenet/mobilenet-v1.h" bodystart="235" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structxt_1_1models_1_1MobileNetV3_1a30dd6a2ae47f87a9fc675ee4b32157bd" prot="private" static="no" mutable="no">
+        <type>torch::nn::Sequential</type>
+        <definition>torch::nn::Sequential xt::models::MobileNetV3::bottlenecks</definition>
+        <argsstring></argsstring>
+        <name>bottlenecks</name>
+        <qualifiedname>xt::models::MobileNetV3::bottlenecks</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/models/cnn/mobilenet/mobilenet-v1.h" line="236" column="31" bodyfile="/home/kami/Documents/cpp/models/include/models/cnn/mobilenet/mobilenet-v1.h" bodystart="236" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structxt_1_1models_1_1MobileNetV3_1afa6495ff6ac8e5902d8caf3cc182a9e2" prot="private" static="no" mutable="no">
+        <type>torch::nn::Sequential</type>
+        <definition>torch::nn::Sequential xt::models::MobileNetV3::final_conv</definition>
+        <argsstring></argsstring>
+        <name>final_conv</name>
+        <qualifiedname>xt::models::MobileNetV3::final_conv</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/models/cnn/mobilenet/mobilenet-v1.h" line="237" column="31" bodyfile="/home/kami/Documents/cpp/models/include/models/cnn/mobilenet/mobilenet-v1.h" bodystart="237" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structxt_1_1models_1_1MobileNetV3_1a9da9cc7870426979ecd6bb57f38e7836" prot="private" static="no" mutable="no">
+        <type>torch::nn::AdaptiveAvgPool2d</type>
+        <definition>torch::nn::AdaptiveAvgPool2d xt::models::MobileNetV3::pool</definition>
+        <argsstring></argsstring>
+        <name>pool</name>
+        <qualifiedname>xt::models::MobileNetV3::pool</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/models/cnn/mobilenet/mobilenet-v1.h" line="238" column="38" bodyfile="/home/kami/Documents/cpp/models/include/models/cnn/mobilenet/mobilenet-v1.h" bodystart="238" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structxt_1_1models_1_1MobileNetV3_1a12f229282b0dffe5d292e9e68eb3e641" prot="private" static="no" mutable="no">
+        <type>torch::nn::Sequential</type>
+        <definition>torch::nn::Sequential xt::models::MobileNetV3::classifier</definition>
+        <argsstring></argsstring>
+        <name>classifier</name>
+        <qualifiedname>xt::models::MobileNetV3::classifier</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/models/cnn/mobilenet/mobilenet-v1.h" line="239" column="31" bodyfile="/home/kami/Documents/cpp/models/include/models/cnn/mobilenet/mobilenet-v1.h" bodystart="239" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structxt_1_1models_1_1MobileNetV3_1a176c4b5380a15872317976ea188c252c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::models::MobileNetV3::MobileNetV3</definition>
+        <argsstring>(int input_channels, int num_classes, float dropout_prob=0.5)</argsstring>
+        <name>MobileNetV3</name>
+        <qualifiedname>xt::models::MobileNetV3::MobileNetV3</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>input_channels</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>num_classes</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>dropout_prob</declname>
+          <defval>0.5</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/models/cnn/mobilenet/mobilenet-v1.h" line="231" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="structxt_1_1models_1_1MobileNetV3_1a480855f11d3180e7dc2e119fcd7cb193" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>torch::Tensor</type>
+        <definition>torch::Tensor xt::models::MobileNetV3::forward</definition>
+        <argsstring>(torch::Tensor x)</argsstring>
+        <name>forward</name>
+        <qualifiedname>xt::models::MobileNetV3::forward</qualifiedname>
+        <param>
+          <type>torch::Tensor</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/models/cnn/mobilenet/mobilenet-v1.h" line="232" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="structxt_1_1models_1_1MobileNetV3_1a176c4b5380a15872317976ea188c252c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::models::MobileNetV3::MobileNetV3</definition>
+        <argsstring>(int input_channels, int num_classes, float dropout_prob=0.5)</argsstring>
+        <name>MobileNetV3</name>
+        <qualifiedname>xt::models::MobileNetV3::MobileNetV3</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>input_channels</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>num_classes</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>dropout_prob</declname>
+          <defval>0.5</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/models/cnn/mobilenet/mobilenet-v2.h" line="231" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="structxt_1_1models_1_1MobileNetV3_1a480855f11d3180e7dc2e119fcd7cb193" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>torch::Tensor</type>
+        <definition>torch::Tensor xt::models::MobileNetV3::forward</definition>
+        <argsstring>(torch::Tensor x)</argsstring>
+        <name>forward</name>
+        <qualifiedname>xt::models::MobileNetV3::forward</qualifiedname>
+        <param>
+          <type>torch::Tensor</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/models/cnn/mobilenet/mobilenet-v2.h" line="232" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="structxt_1_1models_1_1MobileNetV3_1a176c4b5380a15872317976ea188c252c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::models::MobileNetV3::MobileNetV3</definition>
+        <argsstring>(int input_channels, int num_classes, float dropout_prob=0.5)</argsstring>
+        <name>MobileNetV3</name>
+        <qualifiedname>xt::models::MobileNetV3::MobileNetV3</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>input_channels</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>num_classes</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>dropout_prob</declname>
+          <defval>0.5</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/models/cnn/mobilenet/mobilenet-v3.h" line="231" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="structxt_1_1models_1_1MobileNetV3_1a480855f11d3180e7dc2e119fcd7cb193" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>torch::Tensor</type>
+        <definition>torch::Tensor xt::models::MobileNetV3::forward</definition>
+        <argsstring>(torch::Tensor x)</argsstring>
+        <name>forward</name>
+        <qualifiedname>xt::models::MobileNetV3::forward</qualifiedname>
+        <param>
+          <type>torch::Tensor</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/models/cnn/mobilenet/mobilenet-v3.h" line="232" column="23"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>torch::nn::Module</label>
+      </node>
+      <node id="2">
+        <label>xt::models::BaseModel</label>
+        <link refid="classxt_1_1models_1_1BaseModel"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>xt::models::MobileNetV3</label>
+        <link refid="structxt_1_1models_1_1MobileNetV3"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>torch::nn::Module</label>
+      </node>
+      <node id="2">
+        <label>xt::models::BaseModel</label>
+        <link refid="classxt_1_1models_1_1BaseModel"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>xt::models::MobileNetV3</label>
+        <link refid="structxt_1_1models_1_1MobileNetV3"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/kami/Documents/cpp/models/include/models/cnn/mobilenet/mobilenet-v1.h" line="229" column="5" bodyfile="/home/kami/Documents/cpp/models/include/models/cnn/mobilenet/mobilenet-v1.h" bodystart="229" bodyend="240"/>
+    <listofallmembers>
+      <member refid="classxt_1_1models_1_1BaseModel_1a424b9786408b930036de62233b6dd1f3" prot="public" virt="non-virtual"><scope>xt::models::MobileNetV3</scope><name>BaseModel</name></member>
+      <member refid="structxt_1_1models_1_1MobileNetV3_1a30dd6a2ae47f87a9fc675ee4b32157bd" prot="private" virt="non-virtual"><scope>xt::models::MobileNetV3</scope><name>bottlenecks</name></member>
+      <member refid="structxt_1_1models_1_1MobileNetV3_1a12f229282b0dffe5d292e9e68eb3e641" prot="private" virt="non-virtual"><scope>xt::models::MobileNetV3</scope><name>classifier</name></member>
+      <member refid="structxt_1_1models_1_1MobileNetV3_1afa6495ff6ac8e5902d8caf3cc182a9e2" prot="private" virt="non-virtual"><scope>xt::models::MobileNetV3</scope><name>final_conv</name></member>
+      <member refid="structxt_1_1models_1_1MobileNetV3_1a480855f11d3180e7dc2e119fcd7cb193" prot="public" virt="non-virtual"><scope>xt::models::MobileNetV3</scope><name>forward</name></member>
+      <member refid="structxt_1_1models_1_1MobileNetV3_1a480855f11d3180e7dc2e119fcd7cb193" prot="public" virt="non-virtual"><scope>xt::models::MobileNetV3</scope><name>forward</name></member>
+      <member refid="structxt_1_1models_1_1MobileNetV3_1a480855f11d3180e7dc2e119fcd7cb193" prot="public" virt="non-virtual"><scope>xt::models::MobileNetV3</scope><name>forward</name></member>
+      <member refid="classxt_1_1models_1_1BaseModel_1a575d29b32b0aaeacbd1b82d19dc23e36" prot="public" virt="pure-virtual" ambiguityscope="xt::models::BaseModel::"><scope>xt::models::MobileNetV3</scope><name>forward</name></member>
+      <member refid="structxt_1_1models_1_1MobileNetV3_1aa1ffdbeddcc93b22381cf5fd2e805e62" prot="private" virt="non-virtual"><scope>xt::models::MobileNetV3</scope><name>initial_conv</name></member>
+      <member refid="structxt_1_1models_1_1MobileNetV3_1a176c4b5380a15872317976ea188c252c" prot="public" virt="non-virtual"><scope>xt::models::MobileNetV3</scope><name>MobileNetV3</name></member>
+      <member refid="structxt_1_1models_1_1MobileNetV3_1a176c4b5380a15872317976ea188c252c" prot="public" virt="non-virtual"><scope>xt::models::MobileNetV3</scope><name>MobileNetV3</name></member>
+      <member refid="structxt_1_1models_1_1MobileNetV3_1a176c4b5380a15872317976ea188c252c" prot="public" virt="non-virtual"><scope>xt::models::MobileNetV3</scope><name>MobileNetV3</name></member>
+      <member refid="structxt_1_1models_1_1MobileNetV3_1a9da9cc7870426979ecd6bb57f38e7836" prot="private" virt="non-virtual"><scope>xt::models::MobileNetV3</scope><name>pool</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,243 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classxt_1_1data_1_1datasets_1_1Caltech256" kind="class" language="C++" prot="public">
+    <compoundname>xt::data::datasets::Caltech256</compoundname>
+    <basecompoundref refid="classxt_1_1data_1_1datasets_1_1BaseDataset" prot="public" virt="non-virtual">xt::data::datasets::BaseDataset</basecompoundref>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classxt_1_1data_1_1datasets_1_1Caltech256_1af5fe0fb2823935892af2c5696631fcbb" prot="private" static="no" mutable="no">
+        <type>vector&lt; std::tuple&lt; string, string, string &gt; &gt;</type>
+        <definition>vector&lt;std::tuple&lt;string, string, string&gt; &gt; xt::data::datasets::Caltech256::resources</definition>
+        <argsstring></argsstring>
+        <name>resources</name>
+        <qualifiedname>xt::data::datasets::Caltech256::resources</qualifiedname>
+        <initializer>= {
+            {
+                &quot;https://drive.google.com/file/d/1r6o0pSROcV1_VwT4oSjA2FBUSCWGuxLK&quot;, &quot;256_ObjectCategories.tar&quot;,
+                &quot;67b4f42ca05d46448c6bb8ecd2220f6d&quot;
+            },
+        }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/caltech.h" line="45" column="16" bodyfile="/home/kami/Documents/cpp/models/include/datasets/image-classification/caltech.h" bodystart="45" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="variable" id="classxt_1_1data_1_1datasets_1_1Caltech256_1a7552fbe19a44b0a1a2454e1db3811728" prot="private" static="no" mutable="no">
+        <type>fs::path</type>
+        <definition>fs::path xt::data::datasets::Caltech256::dataset_folder_name</definition>
+        <argsstring></argsstring>
+        <name>dataset_folder_name</name>
+        <qualifiedname>xt::data::datasets::Caltech256::dataset_folder_name</qualifiedname>
+        <initializer>= &quot;caltech256&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/caltech.h" line="51" column="18" bodyfile="/home/kami/Documents/cpp/models/include/datasets/image-classification/caltech.h" bodystart="51" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1Caltech256_1a2adb0643d7b78524a3d5fc1c6335767c" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::datasets::Caltech256::Caltech256</definition>
+        <argsstring>(const std::string &amp;root)</argsstring>
+        <name>Caltech256</name>
+        <qualifiedname>xt::data::datasets::Caltech256::Caltech256</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/caltech.h" line="38" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1Caltech256_1aca92ca09ed2dd3a2c5c5ce6899e8622b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::datasets::Caltech256::Caltech256</definition>
+        <argsstring>(const std::string &amp;root, DataMode mode)</argsstring>
+        <name>Caltech256</name>
+        <qualifiedname>xt::data::datasets::Caltech256::Caltech256</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type>DataMode</type>
+          <declname>mode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/caltech.h" line="39" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1Caltech256_1ad021c722d83ff8eb1ece7d52ce0c9d88" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::datasets::Caltech256::Caltech256</definition>
+        <argsstring>(const std::string &amp;root, DataMode mode, bool download)</argsstring>
+        <name>Caltech256</name>
+        <qualifiedname>xt::data::datasets::Caltech256::Caltech256</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type>DataMode</type>
+          <declname>mode</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>download</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/caltech.h" line="40" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1Caltech256_1a546660d5392172b730841492a40c3763" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::datasets::Caltech256::Caltech256</definition>
+        <argsstring>(const std::string &amp;root, DataMode mode, bool download, TransformType transforms)</argsstring>
+        <name>Caltech256</name>
+        <qualifiedname>xt::data::datasets::Caltech256::Caltech256</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type>DataMode</type>
+          <declname>mode</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>download</declname>
+        </param>
+        <param>
+          <type>TransformType</type>
+          <declname>transforms</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/caltech.h" line="41" column="9"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1Caltech256_1a8bb4c6233ed32957360d8ed91e9e2278" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void xt::data::datasets::Caltech256::load_data</definition>
+        <argsstring>()</argsstring>
+        <name>load_data</name>
+        <qualifiedname>xt::data::datasets::Caltech256::load_data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/caltech.h" line="53" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1Caltech256_1ab56470a9eb59e8d135f2b89a33420388" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void xt::data::datasets::Caltech256::check_resources</definition>
+        <argsstring>()</argsstring>
+        <name>check_resources</name>
+        <qualifiedname>xt::data::datasets::Caltech256::check_resources</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/caltech.h" line="55" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>torch::data::Dataset&lt; BaseDataset &gt;</label>
+      </node>
+      <node id="2">
+        <label>xt::data::datasets::BaseDataset</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1BaseDataset"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>xt::data::datasets::Caltech256</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1Caltech256"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>torch::data::Dataset&lt; BaseDataset &gt;</label>
+      </node>
+      <node id="2">
+        <label>xt::data::datasets::BaseDataset</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1BaseDataset"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>compose</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>xt::data::datasets::Caltech256</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1Caltech256"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>xt::data::transforms::Compose</label>
+        <link refid="classxt_1_1data_1_1transforms_1_1Compose"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/caltech.h" line="36" column="5" bodyfile="/home/kami/Documents/cpp/models/include/datasets/image-classification/caltech.h" bodystart="36" bodyend="56"/>
+    <listofallmembers>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a9ba5b50134bc2f16bf392097296c9b5f" prot="public" virt="non-virtual"><scope>xt::data::datasets::Caltech256</scope><name>BaseDataset</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a0b87cdd7fb205c851dd517ba76270f2d" prot="public" virt="non-virtual"><scope>xt::data::datasets::Caltech256</scope><name>BaseDataset</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a7ef3cd4e7bc4182562495b64fa266242" prot="public" virt="non-virtual"><scope>xt::data::datasets::Caltech256</scope><name>BaseDataset</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a103cf530c2ebf093e3273feabccbd050" prot="public" virt="non-virtual"><scope>xt::data::datasets::Caltech256</scope><name>BaseDataset</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1Caltech256_1a2adb0643d7b78524a3d5fc1c6335767c" prot="public" virt="non-virtual"><scope>xt::data::datasets::Caltech256</scope><name>Caltech256</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1Caltech256_1aca92ca09ed2dd3a2c5c5ce6899e8622b" prot="public" virt="non-virtual"><scope>xt::data::datasets::Caltech256</scope><name>Caltech256</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1Caltech256_1ad021c722d83ff8eb1ece7d52ce0c9d88" prot="public" virt="non-virtual"><scope>xt::data::datasets::Caltech256</scope><name>Caltech256</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1Caltech256_1a546660d5392172b730841492a40c3763" prot="public" virt="non-virtual"><scope>xt::data::datasets::Caltech256</scope><name>Caltech256</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1Caltech256_1ab56470a9eb59e8d135f2b89a33420388" prot="private" virt="non-virtual"><scope>xt::data::datasets::Caltech256</scope><name>check_resources</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1acd46827630da2d3e3f209ccad0a3c08d" prot="public" virt="non-virtual"><scope>xt::data::datasets::Caltech256</scope><name>compose</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1abe0b531e8cd00b80062ba867b741e12b" prot="public" virt="non-virtual"><scope>xt::data::datasets::Caltech256</scope><name>data</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1Caltech256_1a7552fbe19a44b0a1a2454e1db3811728" prot="private" virt="non-virtual"><scope>xt::data::datasets::Caltech256</scope><name>dataset_folder_name</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1ac8114ca7f09c2a2b8410f452dc87d252" prot="public" virt="non-virtual"><scope>xt::data::datasets::Caltech256</scope><name>dataset_path</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1ad3491f80e83d0f19a6251006da5f438d" prot="public" virt="non-virtual"><scope>xt::data::datasets::Caltech256</scope><name>download</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a47ecdca2ada0317831cd68be7533ae7f" prot="public" virt="non-virtual"><scope>xt::data::datasets::Caltech256</scope><name>get</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1aa7e88f0cc433116b978a59c74ec60726" prot="public" virt="non-virtual"><scope>xt::data::datasets::Caltech256</scope><name>labels</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1Caltech256_1a8bb4c6233ed32957360d8ed91e9e2278" prot="private" virt="non-virtual"><scope>xt::data::datasets::Caltech256</scope><name>load_data</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1acc7205b8f6b73437a5d7aa048029f186" prot="public" virt="non-virtual"><scope>xt::data::datasets::Caltech256</scope><name>mode</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1Caltech256_1af5fe0fb2823935892af2c5696631fcbb" prot="private" virt="non-virtual"><scope>xt::data::datasets::Caltech256</scope><name>resources</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a8b19517cc2da31c2fdfc1688afac5f1d" prot="public" virt="non-virtual"><scope>xt::data::datasets::Caltech256</scope><name>root</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a04e88dd1f1e59c6e719397fe251c4457" prot="public" virt="non-virtual"><scope>xt::data::datasets::Caltech256</scope><name>size</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1afc0c6d9b9749a5b20df7c08bb9266bb8" prot="public" virt="non-virtual"><scope>xt::data::datasets::Caltech256</scope><name>transforms</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a38513e29e2014882a6148fc0e81aa84e" prot="public" virt="non-virtual"><scope>xt::data::datasets::Caltech256</scope><name>TransformType</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

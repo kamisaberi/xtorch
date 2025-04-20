@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="dir_2b794fa5f0369c1c80752771b4d33858" kind="dir">
+    <compoundname>/home/kami/Documents/cpp/models/include/media/opencv</compoundname>
+    <innerfile refid="images_8h">images.h</innerfile>
+    <innerfile refid="opencv_8h">opencv.h</innerfile>
+    <innerfile refid="videos_8h">videos.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/kami/Documents/cpp/models/include/media/opencv/"/>
+  </compounddef>
+</doxygen>

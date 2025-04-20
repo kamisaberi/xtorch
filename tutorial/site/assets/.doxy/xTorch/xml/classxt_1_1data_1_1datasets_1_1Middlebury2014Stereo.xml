@@ -1,0 +1,207 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classxt_1_1data_1_1datasets_1_1Middlebury2014Stereo" kind="class" language="C++" prot="public">
+    <compoundname>xt::data::datasets::Middlebury2014Stereo</compoundname>
+    <basecompoundref refid="classxt_1_1data_1_1datasets_1_1BaseDataset" prot="private" virt="non-virtual">xt::data::datasets::BaseDataset</basecompoundref>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classxt_1_1data_1_1datasets_1_1Middlebury2014Stereo_1aa08168f8ca57490c02a08149f2bd4891" prot="private" static="no" mutable="no">
+        <type>fs::path</type>
+        <definition>fs::path xt::data::datasets::Middlebury2014Stereo::dataset_folder_name</definition>
+        <argsstring></argsstring>
+        <name>dataset_folder_name</name>
+        <qualifiedname>xt::data::datasets::Middlebury2014Stereo::dataset_folder_name</qualifiedname>
+        <initializer>= fs::path(&quot;Middlebury2014&quot;)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/stereo-matching-depth-estimation/middlebury.h" line="74" column="18" bodyfile="/home/kami/Documents/cpp/models/include/datasets/stereo-matching-depth-estimation/middlebury.h" bodystart="74" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1Middlebury2014Stereo_1a9f499631b908368aa0018356421544fc" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::datasets::Middlebury2014Stereo::Middlebury2014Stereo</definition>
+        <argsstring>(const std::string &amp;root)</argsstring>
+        <name>Middlebury2014Stereo</name>
+        <qualifiedname>xt::data::datasets::Middlebury2014Stereo::Middlebury2014Stereo</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/stereo-matching-depth-estimation/middlebury.h" line="67" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1Middlebury2014Stereo_1af7760fa09025590244d87831a8d0bbd7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::datasets::Middlebury2014Stereo::Middlebury2014Stereo</definition>
+        <argsstring>(const std::string &amp;root, DataMode mode)</argsstring>
+        <name>Middlebury2014Stereo</name>
+        <qualifiedname>xt::data::datasets::Middlebury2014Stereo::Middlebury2014Stereo</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type>DataMode</type>
+          <declname>mode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/stereo-matching-depth-estimation/middlebury.h" line="68" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1Middlebury2014Stereo_1a25be5e73950a0952031156b71f43ed07" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::datasets::Middlebury2014Stereo::Middlebury2014Stereo</definition>
+        <argsstring>(const std::string &amp;root, DataMode mode, bool download)</argsstring>
+        <name>Middlebury2014Stereo</name>
+        <qualifiedname>xt::data::datasets::Middlebury2014Stereo::Middlebury2014Stereo</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type>DataMode</type>
+          <declname>mode</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>download</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/stereo-matching-depth-estimation/middlebury.h" line="69" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1Middlebury2014Stereo_1a9a38e2864ac6d444b2cb6081797c4352" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::datasets::Middlebury2014Stereo::Middlebury2014Stereo</definition>
+        <argsstring>(const std::string &amp;root, DataMode mode, bool download, TransformType transforms)</argsstring>
+        <name>Middlebury2014Stereo</name>
+        <qualifiedname>xt::data::datasets::Middlebury2014Stereo::Middlebury2014Stereo</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type>DataMode</type>
+          <declname>mode</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>download</declname>
+        </param>
+        <param>
+          <type>TransformType</type>
+          <declname>transforms</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/stereo-matching-depth-estimation/middlebury.h" line="70" column="9"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1Middlebury2014Stereo_1a7de4b25ce6327aab9c5ecd61cb24488a" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void xt::data::datasets::Middlebury2014Stereo::load_data</definition>
+        <argsstring>()</argsstring>
+        <name>load_data</name>
+        <qualifiedname>xt::data::datasets::Middlebury2014Stereo::load_data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/stereo-matching-depth-estimation/middlebury.h" line="75" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1Middlebury2014Stereo_1aa46ed7d0178adb0e28f6e68f03558850" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void xt::data::datasets::Middlebury2014Stereo::check_resources</definition>
+        <argsstring>()</argsstring>
+        <name>check_resources</name>
+        <qualifiedname>xt::data::datasets::Middlebury2014Stereo::check_resources</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/stereo-matching-depth-estimation/middlebury.h" line="77" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>torch::data::Dataset&lt; BaseDataset &gt;</label>
+      </node>
+      <node id="2">
+        <label>xt::data::datasets::BaseDataset</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1BaseDataset"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>xt::data::datasets::Middlebury2014Stereo</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1Middlebury2014Stereo"/>
+        <childnode refid="2" relation="private-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>torch::data::Dataset&lt; BaseDataset &gt;</label>
+      </node>
+      <node id="2">
+        <label>xt::data::datasets::BaseDataset</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1BaseDataset"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>compose</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>xt::data::datasets::Middlebury2014Stereo</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1Middlebury2014Stereo"/>
+        <childnode refid="2" relation="private-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>xt::data::transforms::Compose</label>
+        <link refid="classxt_1_1data_1_1transforms_1_1Compose"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/kami/Documents/cpp/models/include/datasets/stereo-matching-depth-estimation/middlebury.h" line="7" column="5" bodyfile="/home/kami/Documents/cpp/models/include/datasets/stereo-matching-depth-estimation/middlebury.h" bodystart="7" bodyend="78"/>
+    <listofallmembers>
+      <member refid="classxt_1_1data_1_1datasets_1_1Middlebury2014Stereo_1aa46ed7d0178adb0e28f6e68f03558850" prot="private" virt="non-virtual"><scope>xt::data::datasets::Middlebury2014Stereo</scope><name>check_resources</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1Middlebury2014Stereo_1aa08168f8ca57490c02a08149f2bd4891" prot="private" virt="non-virtual"><scope>xt::data::datasets::Middlebury2014Stereo</scope><name>dataset_folder_name</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1Middlebury2014Stereo_1a7de4b25ce6327aab9c5ecd61cb24488a" prot="private" virt="non-virtual"><scope>xt::data::datasets::Middlebury2014Stereo</scope><name>load_data</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1Middlebury2014Stereo_1a9f499631b908368aa0018356421544fc" prot="public" virt="non-virtual"><scope>xt::data::datasets::Middlebury2014Stereo</scope><name>Middlebury2014Stereo</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1Middlebury2014Stereo_1af7760fa09025590244d87831a8d0bbd7" prot="public" virt="non-virtual"><scope>xt::data::datasets::Middlebury2014Stereo</scope><name>Middlebury2014Stereo</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1Middlebury2014Stereo_1a25be5e73950a0952031156b71f43ed07" prot="public" virt="non-virtual"><scope>xt::data::datasets::Middlebury2014Stereo</scope><name>Middlebury2014Stereo</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1Middlebury2014Stereo_1a9a38e2864ac6d444b2cb6081797c4352" prot="public" virt="non-virtual"><scope>xt::data::datasets::Middlebury2014Stereo</scope><name>Middlebury2014Stereo</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

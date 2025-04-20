@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="dir_9d21d6f83a70094db43fe94b096ae893" kind="dir">
+    <compoundname>/home/kami/Documents/cpp/models/include/datasets/image-classification</compoundname>
+    <innerfile refid="caltech_8h">caltech.h</innerfile>
+    <innerfile refid="celeba_8h">celeba.h</innerfile>
+    <innerfile refid="cifar_8h">cifar.h</innerfile>
+    <innerfile refid="country_8h">country.h</innerfile>
+    <innerfile refid="dtd_8h">dtd.h</innerfile>
+    <innerfile refid="euro-sat_8h">euro-sat.h</innerfile>
+    <innerfile refid="fake-data_8h">fake-data.h</innerfile>
+    <innerfile refid="fer_8h">fer.h</innerfile>
+    <innerfile refid="fgvc-aircraft_8h">fgvc-aircraft.h</innerfile>
+    <innerfile refid="flickr_8h">flickr.h</innerfile>
+    <innerfile refid="flowers_8h">flowers.h</innerfile>
+    <innerfile refid="food_8h">food.h</innerfile>
+    <innerfile refid="gtsrb_8h">gtsrb.h</innerfile>
+    <innerfile refid="image-classification_8h">image-classification.h</innerfile>
+    <innerfile refid="imagenet_8h">imagenet.h</innerfile>
+    <innerfile refid="imagenette_8h">imagenette.h</innerfile>
+    <innerfile refid="inaturalist_8h">inaturalist.h</innerfile>
+    <innerfile refid="mnist_8h">mnist.h</innerfile>
+    <innerfile refid="omniglot_8h">omniglot.h</innerfile>
+    <innerfile refid="pcam_8h">pcam.h</innerfile>
+    <innerfile refid="places_8h">places.h</innerfile>
+    <innerfile refid="rendered-sst2_8h">rendered-sst2.h</innerfile>
+    <innerfile refid="semeion_8h">semeion.h</innerfile>
+    <innerfile refid="stanford-cars_8h">stanford-cars.h</innerfile>
+    <innerfile refid="stl_8h">stl.h</innerfile>
+    <innerfile refid="sun_8h">sun.h</innerfile>
+    <innerfile refid="svhn_8h">svhn.h</innerfile>
+    <innerfile refid="usps_8h">usps.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/"/>
+  </compounddef>
+</doxygen>

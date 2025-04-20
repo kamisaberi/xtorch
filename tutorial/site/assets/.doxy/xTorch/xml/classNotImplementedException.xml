@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classNotImplementedException" kind="class" language="C++" prot="public">
+    <compoundname>NotImplementedException</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">std::logic_error</basecompoundref>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classNotImplementedException_1ae276d530bf858eb3eb5026a1c016a8d2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>NotImplementedException::NotImplementedException</definition>
+        <argsstring>()</argsstring>
+        <name>NotImplementedException</name>
+        <qualifiedname>NotImplementedException::NotImplementedException</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/exceptions/implementation.h" line="8" column="5" bodyfile="/home/kami/Documents/cpp/models/include/exceptions/implementation.h" bodystart="8" bodyend="8"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>NotImplementedException</label>
+        <link refid="classNotImplementedException"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::logic_error</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>NotImplementedException</label>
+        <link refid="classNotImplementedException"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::logic_error</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/kami/Documents/cpp/models/include/exceptions/implementation.h" line="6" column="1" bodyfile="/home/kami/Documents/cpp/models/include/exceptions/implementation.h" bodystart="6" bodyend="9"/>
+    <listofallmembers>
+      <member refid="classNotImplementedException_1ae276d530bf858eb3eb5026a1c016a8d2" prot="public" virt="non-virtual"><scope>NotImplementedException</scope><name>NotImplementedException</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

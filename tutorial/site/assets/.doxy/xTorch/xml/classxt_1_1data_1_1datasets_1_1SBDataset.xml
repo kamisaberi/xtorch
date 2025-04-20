@@ -1,0 +1,287 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classxt_1_1data_1_1datasets_1_1SBDataset" kind="class" language="C++" prot="public">
+    <compoundname>xt::data::datasets::SBDataset</compoundname>
+    <basecompoundref refid="classxt_1_1data_1_1datasets_1_1BaseDataset" prot="private" virt="non-virtual">xt::data::datasets::BaseDataset</basecompoundref>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classxt_1_1data_1_1datasets_1_1SBDataset_1a1c40f72944035a545e04f6d3ae5d91b1" prot="private" static="no" mutable="no">
+        <type>fs::path</type>
+        <definition>fs::path xt::data::datasets::SBDataset::url</definition>
+        <argsstring></argsstring>
+        <name>url</name>
+        <qualifiedname>xt::data::datasets::SBDataset::url</qualifiedname>
+        <initializer>= fs::path(&quot;https://www2.eecs.berkeley.edu/Research/Projects/CS/vision/grouping/semantic_contours/benchmark.tgz&quot;)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/object-detection-and-segmentation/sb-dataset.h" line="52" column="18" bodyfile="/home/kami/Documents/cpp/models/include/datasets/object-detection-and-segmentation/sb-dataset.h" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classxt_1_1data_1_1datasets_1_1SBDataset_1ad5d54683ed2b6ef699ee43fbe290bf3d" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string xt::data::datasets::SBDataset::md5</definition>
+        <argsstring></argsstring>
+        <name>md5</name>
+        <qualifiedname>xt::data::datasets::SBDataset::md5</qualifiedname>
+        <initializer>= &quot;82b4d87ceb2ed10f6038a1cba92111cb&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/object-detection-and-segmentation/sb-dataset.h" line="53" column="21" bodyfile="/home/kami/Documents/cpp/models/include/datasets/object-detection-and-segmentation/sb-dataset.h" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classxt_1_1data_1_1datasets_1_1SBDataset_1a4ab0a0c0161cad2e967a1ca70fd39f70" prot="private" static="no" mutable="no">
+        <type>fs::path</type>
+        <definition>fs::path xt::data::datasets::SBDataset::filename</definition>
+        <argsstring></argsstring>
+        <name>filename</name>
+        <qualifiedname>xt::data::datasets::SBDataset::filename</qualifiedname>
+        <initializer>= fs::path(&quot;benchmark.tgz&quot;)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/object-detection-and-segmentation/sb-dataset.h" line="54" column="18" bodyfile="/home/kami/Documents/cpp/models/include/datasets/object-detection-and-segmentation/sb-dataset.h" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classxt_1_1data_1_1datasets_1_1SBDataset_1a706ef469e102b7f980774dc59a1ffa92" prot="private" static="no" mutable="no">
+        <type>fs::path</type>
+        <definition>fs::path xt::data::datasets::SBDataset::voc_train_url</definition>
+        <argsstring></argsstring>
+        <name>voc_train_url</name>
+        <qualifiedname>xt::data::datasets::SBDataset::voc_train_url</qualifiedname>
+        <initializer>= fs::path(&quot;https://www.cs.cornell.edu/~bharathh/train_noval.txt&quot;)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/object-detection-and-segmentation/sb-dataset.h" line="56" column="18" bodyfile="/home/kami/Documents/cpp/models/include/datasets/object-detection-and-segmentation/sb-dataset.h" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classxt_1_1data_1_1datasets_1_1SBDataset_1a7ca42d223451ad5ea39bb49aec942f7d" prot="private" static="no" mutable="no">
+        <type>fs::path</type>
+        <definition>fs::path xt::data::datasets::SBDataset::voc_split_filename</definition>
+        <argsstring></argsstring>
+        <name>voc_split_filename</name>
+        <qualifiedname>xt::data::datasets::SBDataset::voc_split_filename</qualifiedname>
+        <initializer>= fs::path(&quot;train_noval.txt&quot;)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/object-detection-and-segmentation/sb-dataset.h" line="57" column="18" bodyfile="/home/kami/Documents/cpp/models/include/datasets/object-detection-and-segmentation/sb-dataset.h" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classxt_1_1data_1_1datasets_1_1SBDataset_1a997e4605a494d4d1d814fc59abe0c63d" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string xt::data::datasets::SBDataset::voc_split_md5</definition>
+        <argsstring></argsstring>
+        <name>voc_split_md5</name>
+        <qualifiedname>xt::data::datasets::SBDataset::voc_split_md5</qualifiedname>
+        <initializer>= &quot;79bff800c5f0b1ec6b21080a3c066722&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/object-detection-and-segmentation/sb-dataset.h" line="58" column="21" bodyfile="/home/kami/Documents/cpp/models/include/datasets/object-detection-and-segmentation/sb-dataset.h" bodystart="58" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1SBDataset_1a0c9b0a490d59b47139bc1bcef68e045a" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::datasets::SBDataset::SBDataset</definition>
+        <argsstring>(const std::string &amp;root)</argsstring>
+        <name>SBDataset</name>
+        <qualifiedname>xt::data::datasets::SBDataset::SBDataset</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/object-detection-and-segmentation/sb-dataset.h" line="45" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1SBDataset_1a88c6f902ff025482d84cfaabe4c5979f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::datasets::SBDataset::SBDataset</definition>
+        <argsstring>(const std::string &amp;root, DataMode mode)</argsstring>
+        <name>SBDataset</name>
+        <qualifiedname>xt::data::datasets::SBDataset::SBDataset</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type>DataMode</type>
+          <declname>mode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/object-detection-and-segmentation/sb-dataset.h" line="46" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1SBDataset_1a0383e7b36af824cf596ed842649ba4ff" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::datasets::SBDataset::SBDataset</definition>
+        <argsstring>(const std::string &amp;root, DataMode mode, bool download)</argsstring>
+        <name>SBDataset</name>
+        <qualifiedname>xt::data::datasets::SBDataset::SBDataset</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type>DataMode</type>
+          <declname>mode</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>download</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/object-detection-and-segmentation/sb-dataset.h" line="47" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1SBDataset_1af2293c4378c5cfafbc1efb0e602c0a9a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::datasets::SBDataset::SBDataset</definition>
+        <argsstring>(const std::string &amp;root, DataMode mode, bool download, TransformType transforms)</argsstring>
+        <name>SBDataset</name>
+        <qualifiedname>xt::data::datasets::SBDataset::SBDataset</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type>DataMode</type>
+          <declname>mode</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>download</declname>
+        </param>
+        <param>
+          <type>TransformType</type>
+          <declname>transforms</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/object-detection-and-segmentation/sb-dataset.h" line="48" column="9"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1SBDataset_1ad20e4824f6b860ef4681f02c0dc1a7df" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void xt::data::datasets::SBDataset::load_data</definition>
+        <argsstring>()</argsstring>
+        <name>load_data</name>
+        <qualifiedname>xt::data::datasets::SBDataset::load_data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/object-detection-and-segmentation/sb-dataset.h" line="59" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1SBDataset_1a7c4454159f5a5c4db7594254071a0f01" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void xt::data::datasets::SBDataset::check_resources</definition>
+        <argsstring>()</argsstring>
+        <name>check_resources</name>
+        <qualifiedname>xt::data::datasets::SBDataset::check_resources</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/object-detection-and-segmentation/sb-dataset.h" line="61" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>torch::data::Dataset&lt; BaseDataset &gt;</label>
+      </node>
+      <node id="2">
+        <label>xt::data::datasets::BaseDataset</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1BaseDataset"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>xt::data::datasets::SBDataset</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1SBDataset"/>
+        <childnode refid="2" relation="private-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>torch::data::Dataset&lt; BaseDataset &gt;</label>
+      </node>
+      <node id="2">
+        <label>xt::data::datasets::BaseDataset</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1BaseDataset"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>compose</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>xt::data::datasets::SBDataset</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1SBDataset"/>
+        <childnode refid="2" relation="private-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>xt::data::transforms::Compose</label>
+        <link refid="classxt_1_1data_1_1transforms_1_1Compose"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/kami/Documents/cpp/models/include/datasets/object-detection-and-segmentation/sb-dataset.h" line="10" column="5" bodyfile="/home/kami/Documents/cpp/models/include/datasets/object-detection-and-segmentation/sb-dataset.h" bodystart="10" bodyend="64"/>
+    <listofallmembers>
+      <member refid="classxt_1_1data_1_1datasets_1_1SBDataset_1a7c4454159f5a5c4db7594254071a0f01" prot="private" virt="non-virtual"><scope>xt::data::datasets::SBDataset</scope><name>check_resources</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1SBDataset_1a4ab0a0c0161cad2e967a1ca70fd39f70" prot="private" virt="non-virtual"><scope>xt::data::datasets::SBDataset</scope><name>filename</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1SBDataset_1ad20e4824f6b860ef4681f02c0dc1a7df" prot="private" virt="non-virtual"><scope>xt::data::datasets::SBDataset</scope><name>load_data</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1SBDataset_1ad5d54683ed2b6ef699ee43fbe290bf3d" prot="private" virt="non-virtual"><scope>xt::data::datasets::SBDataset</scope><name>md5</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1SBDataset_1a0c9b0a490d59b47139bc1bcef68e045a" prot="public" virt="non-virtual"><scope>xt::data::datasets::SBDataset</scope><name>SBDataset</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1SBDataset_1a88c6f902ff025482d84cfaabe4c5979f" prot="public" virt="non-virtual"><scope>xt::data::datasets::SBDataset</scope><name>SBDataset</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1SBDataset_1a0383e7b36af824cf596ed842649ba4ff" prot="public" virt="non-virtual"><scope>xt::data::datasets::SBDataset</scope><name>SBDataset</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1SBDataset_1af2293c4378c5cfafbc1efb0e602c0a9a" prot="public" virt="non-virtual"><scope>xt::data::datasets::SBDataset</scope><name>SBDataset</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1SBDataset_1a1c40f72944035a545e04f6d3ae5d91b1" prot="private" virt="non-virtual"><scope>xt::data::datasets::SBDataset</scope><name>url</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1SBDataset_1a7ca42d223451ad5ea39bb49aec942f7d" prot="private" virt="non-virtual"><scope>xt::data::datasets::SBDataset</scope><name>voc_split_filename</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1SBDataset_1a997e4605a494d4d1d814fc59abe0c63d" prot="private" virt="non-virtual"><scope>xt::data::datasets::SBDataset</scope><name>voc_split_md5</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1SBDataset_1a706ef469e102b7f980774dc59a1ffa92" prot="private" virt="non-virtual"><scope>xt::data::datasets::SBDataset</scope><name>voc_train_url</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

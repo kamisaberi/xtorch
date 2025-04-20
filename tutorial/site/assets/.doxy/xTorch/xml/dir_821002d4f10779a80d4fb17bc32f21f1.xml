@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="dir_821002d4f10779a80d4fb17bc32f21f1" kind="dir">
+    <compoundname>/home/kami/Documents/cpp/models/include/utils</compoundname>
+    <innerfile refid="utils_2base_8h">base.h</innerfile>
+    <innerfile refid="downloader_8h">downloader.h</innerfile>
+    <innerfile refid="extract_8h">extract.h</innerfile>
+    <innerfile refid="filesystem_8h">filesystem.h</innerfile>
+    <innerfile refid="md5_8h">md5.h</innerfile>
+    <innerfile refid="string_8h">string.h</innerfile>
+    <innerfile refid="utils_8h">utils.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/kami/Documents/cpp/models/include/utils/"/>
+  </compounddef>
+</doxygen>

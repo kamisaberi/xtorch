@@ -1,0 +1,255 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classxt_1_1data_1_1datasets_1_1SEMEION" kind="class" language="C++" prot="public">
+    <compoundname>xt::data::datasets::SEMEION</compoundname>
+    <basecompoundref refid="classxt_1_1data_1_1datasets_1_1BaseDataset" prot="private" virt="non-virtual">xt::data::datasets::BaseDataset</basecompoundref>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classxt_1_1data_1_1datasets_1_1SEMEION_1ae83f831c049c929240ec3032a873e5e4" prot="private" static="no" mutable="no">
+        <type>fs::path</type>
+        <definition>fs::path xt::data::datasets::SEMEION::url</definition>
+        <argsstring></argsstring>
+        <name>url</name>
+        <qualifiedname>xt::data::datasets::SEMEION::url</qualifiedname>
+        <initializer>= fs::path(&quot;http://archive.ics.uci.edu/ml/machine-learning-databases/semeion/semeion.data&quot;)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/semeion.h" line="38" column="17" bodyfile="/home/kami/Documents/cpp/models/include/datasets/image-classification/semeion.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classxt_1_1data_1_1datasets_1_1SEMEION_1a3858ee6de9f2b7332deb34f2efa1b5a1" prot="private" static="no" mutable="no">
+        <type>fs::path</type>
+        <definition>fs::path xt::data::datasets::SEMEION::dataset_file_name</definition>
+        <argsstring></argsstring>
+        <name>dataset_file_name</name>
+        <qualifiedname>xt::data::datasets::SEMEION::dataset_file_name</qualifiedname>
+        <initializer>= fs::path(&quot;semeion.data&quot;)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/semeion.h" line="39" column="17" bodyfile="/home/kami/Documents/cpp/models/include/datasets/image-classification/semeion.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classxt_1_1data_1_1datasets_1_1SEMEION_1ae585872e3d474c39f274c3b36c6832aa" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string xt::data::datasets::SEMEION::dataset_file_md5</definition>
+        <argsstring></argsstring>
+        <name>dataset_file_md5</name>
+        <qualifiedname>xt::data::datasets::SEMEION::dataset_file_md5</qualifiedname>
+        <initializer>= &quot;cb545d371d2ce14ec121470795a77432&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/semeion.h" line="40" column="20" bodyfile="/home/kami/Documents/cpp/models/include/datasets/image-classification/semeion.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classxt_1_1data_1_1datasets_1_1SEMEION_1a462e44df6fed1db56702af1fb455ad7e" prot="private" static="no" mutable="no">
+        <type>fs::path</type>
+        <definition>fs::path xt::data::datasets::SEMEION::dataset_folder_name</definition>
+        <argsstring></argsstring>
+        <name>dataset_folder_name</name>
+        <qualifiedname>xt::data::datasets::SEMEION::dataset_folder_name</qualifiedname>
+        <initializer>= &quot;semeion&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/semeion.h" line="41" column="17" bodyfile="/home/kami/Documents/cpp/models/include/datasets/image-classification/semeion.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1SEMEION_1ab61bd1d09419832048e38a3116821cf6" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::datasets::SEMEION::SEMEION</definition>
+        <argsstring>(const std::string &amp;root)</argsstring>
+        <name>SEMEION</name>
+        <qualifiedname>xt::data::datasets::SEMEION::SEMEION</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/semeion.h" line="31" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1SEMEION_1a6fc6e5e400aa96a13b0ef0206ebd499b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::datasets::SEMEION::SEMEION</definition>
+        <argsstring>(const std::string &amp;root, DataMode mode)</argsstring>
+        <name>SEMEION</name>
+        <qualifiedname>xt::data::datasets::SEMEION::SEMEION</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type>DataMode</type>
+          <declname>mode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/semeion.h" line="32" column="8"/>
+      </memberdef>
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1SEMEION_1a5217467be5189c7e837d992760cfeafa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::datasets::SEMEION::SEMEION</definition>
+        <argsstring>(const std::string &amp;root, DataMode mode, bool download)</argsstring>
+        <name>SEMEION</name>
+        <qualifiedname>xt::data::datasets::SEMEION::SEMEION</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type>DataMode</type>
+          <declname>mode</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>download</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/semeion.h" line="33" column="8"/>
+      </memberdef>
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1SEMEION_1a40ccf89816b849bdd516108a168f6ffb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::datasets::SEMEION::SEMEION</definition>
+        <argsstring>(const std::string &amp;root, DataMode mode, bool download, TransformType transforms)</argsstring>
+        <name>SEMEION</name>
+        <qualifiedname>xt::data::datasets::SEMEION::SEMEION</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type>DataMode</type>
+          <declname>mode</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>download</declname>
+        </param>
+        <param>
+          <type>TransformType</type>
+          <declname>transforms</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/semeion.h" line="34" column="8"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1SEMEION_1a8f3f394f5978541cb261002afbbc1da8" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void xt::data::datasets::SEMEION::load_data</definition>
+        <argsstring>()</argsstring>
+        <name>load_data</name>
+        <qualifiedname>xt::data::datasets::SEMEION::load_data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/semeion.h" line="43" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1SEMEION_1a46caf9ae371d1cacf6c498f60920622f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void xt::data::datasets::SEMEION::check_resources</definition>
+        <argsstring>()</argsstring>
+        <name>check_resources</name>
+        <qualifiedname>xt::data::datasets::SEMEION::check_resources</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/semeion.h" line="45" column="13"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>torch::data::Dataset&lt; BaseDataset &gt;</label>
+      </node>
+      <node id="2">
+        <label>xt::data::datasets::BaseDataset</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1BaseDataset"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>xt::data::datasets::SEMEION</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1SEMEION"/>
+        <childnode refid="2" relation="private-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>torch::data::Dataset&lt; BaseDataset &gt;</label>
+      </node>
+      <node id="2">
+        <label>xt::data::datasets::BaseDataset</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1BaseDataset"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>compose</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>xt::data::datasets::SEMEION</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1SEMEION"/>
+        <childnode refid="2" relation="private-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>xt::data::transforms::Compose</label>
+        <link refid="classxt_1_1data_1_1transforms_1_1Compose"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/semeion.h" line="12" column="4" bodyfile="/home/kami/Documents/cpp/models/include/datasets/image-classification/semeion.h" bodystart="12" bodyend="47"/>
+    <listofallmembers>
+      <member refid="classxt_1_1data_1_1datasets_1_1SEMEION_1a46caf9ae371d1cacf6c498f60920622f" prot="private" virt="non-virtual"><scope>xt::data::datasets::SEMEION</scope><name>check_resources</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1SEMEION_1ae585872e3d474c39f274c3b36c6832aa" prot="private" virt="non-virtual"><scope>xt::data::datasets::SEMEION</scope><name>dataset_file_md5</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1SEMEION_1a3858ee6de9f2b7332deb34f2efa1b5a1" prot="private" virt="non-virtual"><scope>xt::data::datasets::SEMEION</scope><name>dataset_file_name</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1SEMEION_1a462e44df6fed1db56702af1fb455ad7e" prot="private" virt="non-virtual"><scope>xt::data::datasets::SEMEION</scope><name>dataset_folder_name</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1SEMEION_1a8f3f394f5978541cb261002afbbc1da8" prot="private" virt="non-virtual"><scope>xt::data::datasets::SEMEION</scope><name>load_data</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1SEMEION_1ab61bd1d09419832048e38a3116821cf6" prot="public" virt="non-virtual"><scope>xt::data::datasets::SEMEION</scope><name>SEMEION</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1SEMEION_1a6fc6e5e400aa96a13b0ef0206ebd499b" prot="public" virt="non-virtual"><scope>xt::data::datasets::SEMEION</scope><name>SEMEION</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1SEMEION_1a5217467be5189c7e837d992760cfeafa" prot="public" virt="non-virtual"><scope>xt::data::datasets::SEMEION</scope><name>SEMEION</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1SEMEION_1a40ccf89816b849bdd516108a168f6ffb" prot="public" virt="non-virtual"><scope>xt::data::datasets::SEMEION</scope><name>SEMEION</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1SEMEION_1ae83f831c049c929240ec3032a873e5e4" prot="private" virt="non-virtual"><scope>xt::data::datasets::SEMEION</scope><name>url</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

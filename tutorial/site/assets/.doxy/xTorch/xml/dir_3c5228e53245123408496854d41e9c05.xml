@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="dir_3c5228e53245123408496854d41e9c05" kind="dir">
+    <compoundname>/home/kami/Documents/cpp/models/include/models/cnn/shuffle-net</compoundname>
+    <innerfile refid="shuffle-net-v1_8h">shuffle-net-v1.h</innerfile>
+    <innerfile refid="shuffle-net-v2_8h">shuffle-net-v2.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/kami/Documents/cpp/models/include/models/cnn/shuffle-net/"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="dir_d8f74afeea28456534a43cd406cb744b" kind="dir">
+    <compoundname>/home/kami/Documents/cpp/models/include/models/cnn/reg-net</compoundname>
+    <innerfile refid="reg-net-x_8h">reg-net-x.h</innerfile>
+    <innerfile refid="reg-net-y_8h">reg-net-y.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/kami/Documents/cpp/models/include/models/cnn/reg-net/"/>
+  </compounddef>
+</doxygen>

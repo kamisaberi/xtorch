@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="namespacext_1_1utils_1_1string" kind="namespace" language="C++">
+    <compoundname>xt::utils::string</compoundname>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="string_8h_1a106ab9c28e3a70c2ed70df7d6e33e9e4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>vector&lt; std::string &gt;</type>
+        <definition>vector&lt; std::string &gt; xt::utils::string::split</definition>
+        <argsstring>(const std::string &amp;str, const std::string &amp;delim)</argsstring>
+        <name>split</name>
+        <qualifiedname>xt::utils::string::split</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>str</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>delim</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/utils/string.h" line="8" column="12" declfile="/home/kami/Documents/cpp/models/include/utils/string.h" declline="8" declcolumn="12"/>
+      </memberdef>
+      <memberdef kind="function" id="string_8h_1aec2e435803f27a29227b2b2f8de8fb24" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string xt::utils::string::trim</definition>
+        <argsstring>(std::string &amp;str)</argsstring>
+        <name>trim</name>
+        <qualifiedname>xt::utils::string::trim</qualifiedname>
+        <param>
+          <type>std::string &amp;</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/utils/string.h" line="9" column="17" declfile="/home/kami/Documents/cpp/models/include/utils/string.h" declline="9" declcolumn="17"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/kami/Documents/cpp/models/include/utils/string.h" line="7" column="1"/>
+  </compounddef>
+</doxygen>

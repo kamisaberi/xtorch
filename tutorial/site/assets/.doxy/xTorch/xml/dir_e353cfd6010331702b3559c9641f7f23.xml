@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="dir_e353cfd6010331702b3559c9641f7f23" kind="dir">
+    <compoundname>/home/kami/Documents/cpp/models/include/datasets/stereo-matching-depth-estimation</compoundname>
+    <innerfile refid="cre-stereo_8h">cre-stereo.h</innerfile>
+    <innerfile refid="eth-3d-stereo_8h">eth-3d-stereo.h</innerfile>
+    <innerfile refid="falling-things-stereo_8h">falling-things-stereo.h</innerfile>
+    <innerfile refid="in-stereo_8h">in-stereo.h</innerfile>
+    <innerfile refid="middlebury_8h">middlebury.h</innerfile>
+    <innerfile refid="scene-flow-stereo_8h">scene-flow-stereo.h</innerfile>
+    <innerfile refid="stereo-matching-depth-estimation_8h">stereo-matching-depth-estimation.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/kami/Documents/cpp/models/include/datasets/stereo-matching-depth-estimation/"/>
+  </compounddef>
+</doxygen>

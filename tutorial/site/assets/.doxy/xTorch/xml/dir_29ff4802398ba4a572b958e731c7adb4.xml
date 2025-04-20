@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="dir_29ff4802398ba4a572b958e731c7adb4" kind="dir">
+    <compoundname>/home/kami/Documents/cpp/models/include/datasets</compoundname>
+    <innerdir refid="dir_3f959236e5b642d039994a38a6e55324">/home/kami/Documents/cpp/models/include/datasets/audio-speech</innerdir>
+    <innerdir refid="dir_9657a40feeddef1c88c156c7806ef467">/home/kami/Documents/cpp/models/include/datasets/base</innerdir>
+    <innerdir refid="dir_92610beb03a79c6b2c32aee384ba5d92">/home/kami/Documents/cpp/models/include/datasets/definitions</innerdir>
+    <innerdir refid="dir_510c6254a6be63fdcb0b1e5d731b55b5">/home/kami/Documents/cpp/models/include/datasets/face-recognition</innerdir>
+    <innerdir refid="dir_3e490c73b2bbc01f3b90ef3b6e284c64">/home/kami/Documents/cpp/models/include/datasets/general</innerdir>
+    <innerdir refid="dir_9d21d6f83a70094db43fe94b096ae893">/home/kami/Documents/cpp/models/include/datasets/image-classification</innerdir>
+    <innerdir refid="dir_2ee0048eab60d09605b89e5e753a33b4">/home/kami/Documents/cpp/models/include/datasets/language-modeling</innerdir>
+    <innerdir refid="dir_91ef7b38e4721f67f17b6805785cb95a">/home/kami/Documents/cpp/models/include/datasets/machine-translation</innerdir>
+    <innerdir refid="dir_cecfbd08ba907cb0c98c6ffe5c1549f6">/home/kami/Documents/cpp/models/include/datasets/natural-language-inference</innerdir>
+    <innerdir refid="dir_6e95aff3cb8ce7a70a5f1e2f7dd69202">/home/kami/Documents/cpp/models/include/datasets/object-detection-and-segmentation</innerdir>
+    <innerdir refid="dir_c5272f5a689662c2c5c28882f7ac0097">/home/kami/Documents/cpp/models/include/datasets/optical-flow</innerdir>
+    <innerdir refid="dir_16503b39329efc9391e88fd543051250">/home/kami/Documents/cpp/models/include/datasets/patch-matching-descriptor-learning</innerdir>
+    <innerdir refid="dir_991b5a5a02a118bdd45c478eaaf6557d">/home/kami/Documents/cpp/models/include/datasets/scene-flow</innerdir>
+    <innerdir refid="dir_2c5adc0a1688a9a1937194391138274f">/home/kami/Documents/cpp/models/include/datasets/sentiment-analysis</innerdir>
+    <innerdir refid="dir_c4dca688f613c914aa3d806c1f628e0e">/home/kami/Documents/cpp/models/include/datasets/sequence-tagging</innerdir>
+    <innerdir refid="dir_e5ef08163bed877f164b8cca216875b1">/home/kami/Documents/cpp/models/include/datasets/specific</innerdir>
+    <innerdir refid="dir_e353cfd6010331702b3559c9641f7f23">/home/kami/Documents/cpp/models/include/datasets/stereo-matching-depth-estimation</innerdir>
+    <innerdir refid="dir_50f41150f848aea77b9741968a6098a5">/home/kami/Documents/cpp/models/include/datasets/text-classification</innerdir>
+    <innerdir refid="dir_424049e583f42f721b040286e87ec464">/home/kami/Documents/cpp/models/include/datasets/video</innerdir>
+    <innerfile refid="datasets_2datasets_8h">datasets.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/kami/Documents/cpp/models/include/datasets/"/>
+  </compounddef>
+</doxygen>

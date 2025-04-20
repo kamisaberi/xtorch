@@ -1,0 +1,189 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classxt_1_1data_1_1datasets_1_1VOCDetection" kind="class" language="C++" prot="public">
+    <compoundname>xt::data::datasets::VOCDetection</compoundname>
+    <basecompoundref refid="classxt_1_1data_1_1datasets_1_1BaseDataset" prot="private" virt="non-virtual">xt::data::datasets::BaseDataset</basecompoundref>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1VOCDetection_1ac0f64c7e8e0e9922294fac4e43bdc402" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::datasets::VOCDetection::VOCDetection</definition>
+        <argsstring>(const std::string &amp;root)</argsstring>
+        <name>VOCDetection</name>
+        <qualifiedname>xt::data::datasets::VOCDetection::VOCDetection</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/specific/voc.h" line="32" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1VOCDetection_1a0bd6b10c75d14a6e5cd0d257d6a03303" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::datasets::VOCDetection::VOCDetection</definition>
+        <argsstring>(const std::string &amp;root, DataMode mode)</argsstring>
+        <name>VOCDetection</name>
+        <qualifiedname>xt::data::datasets::VOCDetection::VOCDetection</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type>DataMode</type>
+          <declname>mode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/specific/voc.h" line="34" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1VOCDetection_1a8f81db65ed013cdcc57ff630c05302b2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::datasets::VOCDetection::VOCDetection</definition>
+        <argsstring>(const std::string &amp;root, DataMode mode, bool download)</argsstring>
+        <name>VOCDetection</name>
+        <qualifiedname>xt::data::datasets::VOCDetection::VOCDetection</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type>DataMode</type>
+          <declname>mode</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>download</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/specific/voc.h" line="36" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1VOCDetection_1aa3af4824ae512f96f209ee316cbf74c8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::datasets::VOCDetection::VOCDetection</definition>
+        <argsstring>(const std::string &amp;root, DataMode mode, bool download, TransformType transforms)</argsstring>
+        <name>VOCDetection</name>
+        <qualifiedname>xt::data::datasets::VOCDetection::VOCDetection</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type>DataMode</type>
+          <declname>mode</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>download</declname>
+        </param>
+        <param>
+          <type>TransformType</type>
+          <declname>transforms</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/specific/voc.h" line="38" column="9"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1VOCDetection_1adcce2d1ca0dc4e7802d31e4dad9f7c3b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void xt::data::datasets::VOCDetection::load_data</definition>
+        <argsstring>()</argsstring>
+        <name>load_data</name>
+        <qualifiedname>xt::data::datasets::VOCDetection::load_data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/specific/voc.h" line="42" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1VOCDetection_1a3c834126394c2cb25458d745c04db36c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void xt::data::datasets::VOCDetection::check_resources</definition>
+        <argsstring>()</argsstring>
+        <name>check_resources</name>
+        <qualifiedname>xt::data::datasets::VOCDetection::check_resources</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/specific/voc.h" line="44" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>torch::data::Dataset&lt; BaseDataset &gt;</label>
+      </node>
+      <node id="2">
+        <label>xt::data::datasets::BaseDataset</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1BaseDataset"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>xt::data::datasets::VOCDetection</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1VOCDetection"/>
+        <childnode refid="2" relation="private-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>torch::data::Dataset&lt; BaseDataset &gt;</label>
+      </node>
+      <node id="2">
+        <label>xt::data::datasets::BaseDataset</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1BaseDataset"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>compose</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>xt::data::datasets::VOCDetection</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1VOCDetection"/>
+        <childnode refid="2" relation="private-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>xt::data::transforms::Compose</label>
+        <link refid="classxt_1_1data_1_1transforms_1_1Compose"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/kami/Documents/cpp/models/include/datasets/specific/voc.h" line="8" column="5" bodyfile="/home/kami/Documents/cpp/models/include/datasets/specific/voc.h" bodystart="8" bodyend="45"/>
+    <listofallmembers>
+      <member refid="classxt_1_1data_1_1datasets_1_1VOCDetection_1a3c834126394c2cb25458d745c04db36c" prot="private" virt="non-virtual"><scope>xt::data::datasets::VOCDetection</scope><name>check_resources</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1VOCDetection_1adcce2d1ca0dc4e7802d31e4dad9f7c3b" prot="private" virt="non-virtual"><scope>xt::data::datasets::VOCDetection</scope><name>load_data</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1VOCDetection_1ac0f64c7e8e0e9922294fac4e43bdc402" prot="public" virt="non-virtual"><scope>xt::data::datasets::VOCDetection</scope><name>VOCDetection</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1VOCDetection_1a0bd6b10c75d14a6e5cd0d257d6a03303" prot="public" virt="non-virtual"><scope>xt::data::datasets::VOCDetection</scope><name>VOCDetection</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1VOCDetection_1a8f81db65ed013cdcc57ff630c05302b2" prot="public" virt="non-virtual"><scope>xt::data::datasets::VOCDetection</scope><name>VOCDetection</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1VOCDetection_1aa3af4824ae512f96f209ee316cbf74c8" prot="public" virt="non-virtual"><scope>xt::data::datasets::VOCDetection</scope><name>VOCDetection</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

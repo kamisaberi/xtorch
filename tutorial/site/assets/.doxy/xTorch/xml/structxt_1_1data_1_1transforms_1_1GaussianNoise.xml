@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="structxt_1_1data_1_1transforms_1_1GaussianNoise" kind="struct" language="C++" prot="public">
+    <compoundname>xt::data::transforms::GaussianNoise</compoundname>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="structxt_1_1data_1_1transforms_1_1GaussianNoise_1acceccdaf31907bd8f287b1057c1be87e" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float xt::data::transforms::GaussianNoise::mean</definition>
+        <argsstring></argsstring>
+        <name>mean</name>
+        <qualifiedname>xt::data::transforms::GaussianNoise::mean</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/transforms/gaussian.h" line="53" column="15" bodyfile="/home/kami/Documents/cpp/models/include/transforms/gaussian.h" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structxt_1_1data_1_1transforms_1_1GaussianNoise_1a2b73a4121c6c8683f2a125fc4a34bacb" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float xt::data::transforms::GaussianNoise::std</definition>
+        <argsstring></argsstring>
+        <name>std</name>
+        <qualifiedname>xt::data::transforms::GaussianNoise::std</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/transforms/gaussian.h" line="54" column="15" bodyfile="/home/kami/Documents/cpp/models/include/transforms/gaussian.h" bodystart="54" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structxt_1_1data_1_1transforms_1_1GaussianNoise_1a75fed3499a803ff55a002ed203f6e476" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::transforms::GaussianNoise::GaussianNoise</definition>
+        <argsstring>(float mean, float std)</argsstring>
+        <name>GaussianNoise</name>
+        <qualifiedname>xt::data::transforms::GaussianNoise::GaussianNoise</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>mean</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>std</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/transforms/gaussian.h" line="48" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="structxt_1_1data_1_1transforms_1_1GaussianNoise_1a629ed82ea3ac3b32c6ee1fb60c6c4373" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>torch::Tensor</type>
+        <definition>torch::Tensor xt::data::transforms::GaussianNoise::operator()</definition>
+        <argsstring>(torch::Tensor input)</argsstring>
+        <name>operator()</name>
+        <qualifiedname>xt::data::transforms::GaussianNoise::operator()</qualifiedname>
+        <param>
+          <type>torch::Tensor</type>
+          <declname>input</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/transforms/gaussian.h" line="50" column="23"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/kami/Documents/cpp/models/include/transforms/gaussian.h" line="46" column="5" bodyfile="/home/kami/Documents/cpp/models/include/transforms/gaussian.h" bodystart="46" bodyend="55"/>
+    <listofallmembers>
+      <member refid="structxt_1_1data_1_1transforms_1_1GaussianNoise_1a75fed3499a803ff55a002ed203f6e476" prot="public" virt="non-virtual"><scope>xt::data::transforms::GaussianNoise</scope><name>GaussianNoise</name></member>
+      <member refid="structxt_1_1data_1_1transforms_1_1GaussianNoise_1acceccdaf31907bd8f287b1057c1be87e" prot="private" virt="non-virtual"><scope>xt::data::transforms::GaussianNoise</scope><name>mean</name></member>
+      <member refid="structxt_1_1data_1_1transforms_1_1GaussianNoise_1a629ed82ea3ac3b32c6ee1fb60c6c4373" prot="public" virt="non-virtual"><scope>xt::data::transforms::GaussianNoise</scope><name>operator()</name></member>
+      <member refid="structxt_1_1data_1_1transforms_1_1GaussianNoise_1a2b73a4121c6c8683f2a125fc4a34bacb" prot="private" virt="non-virtual"><scope>xt::data::transforms::GaussianNoise</scope><name>std</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

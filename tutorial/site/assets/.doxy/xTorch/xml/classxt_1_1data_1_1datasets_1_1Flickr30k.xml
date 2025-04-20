@@ -1,0 +1,170 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classxt_1_1data_1_1datasets_1_1Flickr30k" kind="class" language="C++" prot="public">
+    <compoundname>xt::data::datasets::Flickr30k</compoundname>
+    <basecompoundref refid="classxt_1_1data_1_1datasets_1_1BaseDataset" prot="public" virt="non-virtual">xt::data::datasets::BaseDataset</basecompoundref>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1Flickr30k_1a10e6130e88e8f7432896b5184768c993" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::datasets::Flickr30k::Flickr30k</definition>
+        <argsstring>(const std::string &amp;root, DataMode mode=DataMode::TRAIN, bool download=false)</argsstring>
+        <name>Flickr30k</name>
+        <qualifiedname>xt::data::datasets::Flickr30k::Flickr30k</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type>DataMode</type>
+          <declname>mode</declname>
+          <defval>DataMode::TRAIN</defval>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>download</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/flickr.h" line="24" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1Flickr30k_1a96781637583247f64b8f6c9547fdecf3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::datasets::Flickr30k::Flickr30k</definition>
+        <argsstring>(const fs::path &amp;root, DatasetArguments args)</argsstring>
+        <name>Flickr30k</name>
+        <qualifiedname>xt::data::datasets::Flickr30k::Flickr30k</qualifiedname>
+        <param>
+          <type>const fs::path &amp;</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type><ref refid="structDatasetArguments" kindref="compound">DatasetArguments</ref></type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/flickr.h" line="26" column="9"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1Flickr30k_1a7a5e22c8f574c7f3226d709dc60b3dca" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void xt::data::datasets::Flickr30k::load_data</definition>
+        <argsstring>(DataMode mode=DataMode::TRAIN)</argsstring>
+        <name>load_data</name>
+        <qualifiedname>xt::data::datasets::Flickr30k::load_data</qualifiedname>
+        <param>
+          <type>DataMode</type>
+          <declname>mode</declname>
+          <defval>DataMode::TRAIN</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/flickr.h" line="29" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1Flickr30k_1ab1034978ff9afb278837d427e3d2e7af" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void xt::data::datasets::Flickr30k::check_resources</definition>
+        <argsstring>(const std::string &amp;root, bool download=false)</argsstring>
+        <name>check_resources</name>
+        <qualifiedname>xt::data::datasets::Flickr30k::check_resources</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>download</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/flickr.h" line="31" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>torch::data::Dataset&lt; BaseDataset &gt;</label>
+      </node>
+      <node id="2">
+        <label>xt::data::datasets::BaseDataset</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1BaseDataset"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>xt::data::datasets::Flickr30k</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1Flickr30k"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>torch::data::Dataset&lt; BaseDataset &gt;</label>
+      </node>
+      <node id="2">
+        <label>xt::data::datasets::BaseDataset</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1BaseDataset"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>compose</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>xt::data::datasets::Flickr30k</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1Flickr30k"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>xt::data::transforms::Compose</label>
+        <link refid="classxt_1_1data_1_1transforms_1_1Compose"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/kami/Documents/cpp/models/include/datasets/image-classification/flickr.h" line="22" column="5" bodyfile="/home/kami/Documents/cpp/models/include/datasets/image-classification/flickr.h" bodystart="22" bodyend="32"/>
+    <listofallmembers>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a9ba5b50134bc2f16bf392097296c9b5f" prot="public" virt="non-virtual"><scope>xt::data::datasets::Flickr30k</scope><name>BaseDataset</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a0b87cdd7fb205c851dd517ba76270f2d" prot="public" virt="non-virtual"><scope>xt::data::datasets::Flickr30k</scope><name>BaseDataset</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a7ef3cd4e7bc4182562495b64fa266242" prot="public" virt="non-virtual"><scope>xt::data::datasets::Flickr30k</scope><name>BaseDataset</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a103cf530c2ebf093e3273feabccbd050" prot="public" virt="non-virtual"><scope>xt::data::datasets::Flickr30k</scope><name>BaseDataset</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1Flickr30k_1ab1034978ff9afb278837d427e3d2e7af" prot="private" virt="non-virtual"><scope>xt::data::datasets::Flickr30k</scope><name>check_resources</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1acd46827630da2d3e3f209ccad0a3c08d" prot="public" virt="non-virtual"><scope>xt::data::datasets::Flickr30k</scope><name>compose</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1abe0b531e8cd00b80062ba867b741e12b" prot="public" virt="non-virtual"><scope>xt::data::datasets::Flickr30k</scope><name>data</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1ac8114ca7f09c2a2b8410f452dc87d252" prot="public" virt="non-virtual"><scope>xt::data::datasets::Flickr30k</scope><name>dataset_path</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1ad3491f80e83d0f19a6251006da5f438d" prot="public" virt="non-virtual"><scope>xt::data::datasets::Flickr30k</scope><name>download</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1Flickr30k_1a10e6130e88e8f7432896b5184768c993" prot="public" virt="non-virtual"><scope>xt::data::datasets::Flickr30k</scope><name>Flickr30k</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1Flickr30k_1a96781637583247f64b8f6c9547fdecf3" prot="public" virt="non-virtual"><scope>xt::data::datasets::Flickr30k</scope><name>Flickr30k</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a47ecdca2ada0317831cd68be7533ae7f" prot="public" virt="non-virtual"><scope>xt::data::datasets::Flickr30k</scope><name>get</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1aa7e88f0cc433116b978a59c74ec60726" prot="public" virt="non-virtual"><scope>xt::data::datasets::Flickr30k</scope><name>labels</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1Flickr30k_1a7a5e22c8f574c7f3226d709dc60b3dca" prot="private" virt="non-virtual"><scope>xt::data::datasets::Flickr30k</scope><name>load_data</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1acc7205b8f6b73437a5d7aa048029f186" prot="public" virt="non-virtual"><scope>xt::data::datasets::Flickr30k</scope><name>mode</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a8b19517cc2da31c2fdfc1688afac5f1d" prot="public" virt="non-virtual"><scope>xt::data::datasets::Flickr30k</scope><name>root</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a04e88dd1f1e59c6e719397fe251c4457" prot="public" virt="non-virtual"><scope>xt::data::datasets::Flickr30k</scope><name>size</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1afc0c6d9b9749a5b20df7c08bb9266bb8" prot="public" virt="non-virtual"><scope>xt::data::datasets::Flickr30k</scope><name>transforms</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1BaseDataset_1a38513e29e2014882a6148fc0e81aa84e" prot="public" virt="non-virtual"><scope>xt::data::datasets::Flickr30k</scope><name>TransformType</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

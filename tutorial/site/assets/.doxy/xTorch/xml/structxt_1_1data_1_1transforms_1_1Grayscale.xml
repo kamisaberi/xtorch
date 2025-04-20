@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="structxt_1_1data_1_1transforms_1_1Grayscale" kind="struct" language="C++" prot="public">
+    <compoundname>xt::data::transforms::Grayscale</compoundname>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structxt_1_1data_1_1transforms_1_1Grayscale_1a5fc26f8602f10805c4fe6581e70bc852" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::transforms::Grayscale::Grayscale</definition>
+        <argsstring>()</argsstring>
+        <name>Grayscale</name>
+        <qualifiedname>xt::data::transforms::Grayscale::Grayscale</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/transforms/grayscale.h" line="36" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="structxt_1_1data_1_1transforms_1_1Grayscale_1a41ddc3b0feb0e581c6c0a197e4f7c65d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>torch::Tensor</type>
+        <definition>torch::Tensor xt::data::transforms::Grayscale::operator()</definition>
+        <argsstring>(torch::Tensor input)</argsstring>
+        <name>operator()</name>
+        <qualifiedname>xt::data::transforms::Grayscale::operator()</qualifiedname>
+        <param>
+          <type>torch::Tensor</type>
+          <declname>input</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/transforms/grayscale.h" line="38" column="23"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/kami/Documents/cpp/models/include/transforms/grayscale.h" line="34" column="5" bodyfile="/home/kami/Documents/cpp/models/include/transforms/grayscale.h" bodystart="34" bodyend="39"/>
+    <listofallmembers>
+      <member refid="structxt_1_1data_1_1transforms_1_1Grayscale_1a5fc26f8602f10805c4fe6581e70bc852" prot="public" virt="non-virtual"><scope>xt::data::transforms::Grayscale</scope><name>Grayscale</name></member>
+      <member refid="structxt_1_1data_1_1transforms_1_1Grayscale_1a41ddc3b0feb0e581c6c0a197e4f7c65d" prot="public" virt="non-virtual"><scope>xt::data::transforms::Grayscale</scope><name>operator()</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

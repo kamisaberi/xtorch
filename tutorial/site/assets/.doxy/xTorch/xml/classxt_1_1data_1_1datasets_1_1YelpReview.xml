@@ -1,0 +1,189 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classxt_1_1data_1_1datasets_1_1YelpReview" kind="class" language="C++" prot="public">
+    <compoundname>xt::data::datasets::YelpReview</compoundname>
+    <basecompoundref refid="classxt_1_1data_1_1datasets_1_1BaseDataset" prot="private" virt="non-virtual">xt::data::datasets::BaseDataset</basecompoundref>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1YelpReview_1a398f0e586b25c7cbf07a0509cb2c36ea" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::datasets::YelpReview::YelpReview</definition>
+        <argsstring>(const std::string &amp;root)</argsstring>
+        <name>YelpReview</name>
+        <qualifiedname>xt::data::datasets::YelpReview::YelpReview</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/text-classification/yelp-review.h" line="9" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1YelpReview_1af291c15ac342606c2b1b307bee780770" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::datasets::YelpReview::YelpReview</definition>
+        <argsstring>(const std::string &amp;root, DataMode mode)</argsstring>
+        <name>YelpReview</name>
+        <qualifiedname>xt::data::datasets::YelpReview::YelpReview</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type>DataMode</type>
+          <declname>mode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/text-classification/yelp-review.h" line="10" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1YelpReview_1a413d48168089fe5bfba8f61a69cfd513" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::datasets::YelpReview::YelpReview</definition>
+        <argsstring>(const std::string &amp;root, DataMode mode, bool download)</argsstring>
+        <name>YelpReview</name>
+        <qualifiedname>xt::data::datasets::YelpReview::YelpReview</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type>DataMode</type>
+          <declname>mode</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>download</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/text-classification/yelp-review.h" line="11" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1YelpReview_1a0b89d3e57ca813edaaac3a4117402cf0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::data::datasets::YelpReview::YelpReview</definition>
+        <argsstring>(const std::string &amp;root, DataMode mode, bool download, TransformType transforms)</argsstring>
+        <name>YelpReview</name>
+        <qualifiedname>xt::data::datasets::YelpReview::YelpReview</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type>DataMode</type>
+          <declname>mode</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>download</declname>
+        </param>
+        <param>
+          <type>TransformType</type>
+          <declname>transforms</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/text-classification/yelp-review.h" line="12" column="9"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1YelpReview_1a8dbc92a2861fce2bcd9780c923b4e1db" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void xt::data::datasets::YelpReview::load_data</definition>
+        <argsstring>()</argsstring>
+        <name>load_data</name>
+        <qualifiedname>xt::data::datasets::YelpReview::load_data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/text-classification/yelp-review.h" line="15" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classxt_1_1data_1_1datasets_1_1YelpReview_1aa1ec7d6389073ceabff376a3afa6a9eb" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void xt::data::datasets::YelpReview::check_resources</definition>
+        <argsstring>()</argsstring>
+        <name>check_resources</name>
+        <qualifiedname>xt::data::datasets::YelpReview::check_resources</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/datasets/text-classification/yelp-review.h" line="17" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>torch::data::Dataset&lt; BaseDataset &gt;</label>
+      </node>
+      <node id="2">
+        <label>xt::data::datasets::BaseDataset</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1BaseDataset"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>xt::data::datasets::YelpReview</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1YelpReview"/>
+        <childnode refid="2" relation="private-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>torch::data::Dataset&lt; BaseDataset &gt;</label>
+      </node>
+      <node id="2">
+        <label>xt::data::datasets::BaseDataset</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1BaseDataset"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>compose</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>xt::data::datasets::YelpReview</label>
+        <link refid="classxt_1_1data_1_1datasets_1_1YelpReview"/>
+        <childnode refid="2" relation="private-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>xt::data::transforms::Compose</label>
+        <link refid="classxt_1_1data_1_1transforms_1_1Compose"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/kami/Documents/cpp/models/include/datasets/text-classification/yelp-review.h" line="7" column="5" bodyfile="/home/kami/Documents/cpp/models/include/datasets/text-classification/yelp-review.h" bodystart="7" bodyend="18"/>
+    <listofallmembers>
+      <member refid="classxt_1_1data_1_1datasets_1_1YelpReview_1aa1ec7d6389073ceabff376a3afa6a9eb" prot="private" virt="non-virtual"><scope>xt::data::datasets::YelpReview</scope><name>check_resources</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1YelpReview_1a8dbc92a2861fce2bcd9780c923b4e1db" prot="private" virt="non-virtual"><scope>xt::data::datasets::YelpReview</scope><name>load_data</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1YelpReview_1a398f0e586b25c7cbf07a0509cb2c36ea" prot="public" virt="non-virtual"><scope>xt::data::datasets::YelpReview</scope><name>YelpReview</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1YelpReview_1af291c15ac342606c2b1b307bee780770" prot="public" virt="non-virtual"><scope>xt::data::datasets::YelpReview</scope><name>YelpReview</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1YelpReview_1a413d48168089fe5bfba8f61a69cfd513" prot="public" virt="non-virtual"><scope>xt::data::datasets::YelpReview</scope><name>YelpReview</name></member>
+      <member refid="classxt_1_1data_1_1datasets_1_1YelpReview_1a0b89d3e57ca813edaaac3a4117402cf0" prot="public" virt="non-virtual"><scope>xt::data::datasets::YelpReview</scope><name>YelpReview</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

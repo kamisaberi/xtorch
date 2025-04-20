@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="structxt_1_1models_1_1UpSample" kind="struct" language="C++" prot="public">
+    <compoundname>xt::models::UpSample</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">torch::nn::Module</basecompoundref>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="structxt_1_1models_1_1UpSample_1a0cfdfd8149cb19ee9c6113f92ad195a3" prot="private" static="no" mutable="no">
+        <type><ref refid="structxt_1_1models_1_1DoubleConv" kindref="compound">DoubleConv</ref></type>
+        <definition>DoubleConv xt::models::UpSample::conv</definition>
+        <argsstring></argsstring>
+        <name>conv</name>
+        <qualifiedname>xt::models::UpSample::conv</qualifiedname>
+        <initializer>{0, 0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/models/cnn/unet/unet.h" line="78" column="20" bodyfile="/home/kami/Documents/cpp/models/include/models/cnn/unet/unet.h" bodystart="78" bodyend="78"/>
+      </memberdef>
+      <memberdef kind="variable" id="structxt_1_1models_1_1UpSample_1aec7458540464c03ffa12f88357f21890" prot="private" static="no" mutable="no">
+        <type>torch::nn::ConvTranspose2d</type>
+        <definition>torch::nn::ConvTranspose2d xt::models::UpSample::up</definition>
+        <argsstring></argsstring>
+        <name>up</name>
+        <qualifiedname>xt::models::UpSample::up</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/models/cnn/unet/unet.h" line="79" column="36" bodyfile="/home/kami/Documents/cpp/models/include/models/cnn/unet/unet.h" bodystart="79" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structxt_1_1models_1_1UpSample_1acba2cab2acd17317dbb111d4b42f8ebf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>xt::models::UpSample::UpSample</definition>
+        <argsstring>(int in_channels, int out_channels)</argsstring>
+        <name>UpSample</name>
+        <qualifiedname>xt::models::UpSample::UpSample</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>in_channels</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>out_channels</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/models/cnn/unet/unet.h" line="73" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="structxt_1_1models_1_1UpSample_1a20b9057ed7a78d15b2e032c712be9b45" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>torch::Tensor</type>
+        <definition>torch::Tensor xt::models::UpSample::forward</definition>
+        <argsstring>(torch::Tensor x1, torch::Tensor x2)</argsstring>
+        <name>forward</name>
+        <qualifiedname>xt::models::UpSample::forward</qualifiedname>
+        <param>
+          <type>torch::Tensor</type>
+          <declname>x1</declname>
+        </param>
+        <param>
+          <type>torch::Tensor</type>
+          <declname>x2</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/kami/Documents/cpp/models/include/models/cnn/unet/unet.h" line="75" column="23"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>torch::nn::Module</label>
+      </node>
+      <node id="1">
+        <label>xt::models::UpSample</label>
+        <link refid="structxt_1_1models_1_1UpSample"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>torch::nn::Module</label>
+      </node>
+      <node id="1">
+        <label>xt::models::UpSample</label>
+        <link refid="structxt_1_1models_1_1UpSample"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/kami/Documents/cpp/models/include/models/cnn/unet/unet.h" line="71" column="5" bodyfile="/home/kami/Documents/cpp/models/include/models/cnn/unet/unet.h" bodystart="71" bodyend="80"/>
+    <listofallmembers>
+      <member refid="structxt_1_1models_1_1UpSample_1a0cfdfd8149cb19ee9c6113f92ad195a3" prot="private" virt="non-virtual"><scope>xt::models::UpSample</scope><name>conv</name></member>
+      <member refid="structxt_1_1models_1_1UpSample_1a20b9057ed7a78d15b2e032c712be9b45" prot="public" virt="non-virtual"><scope>xt::models::UpSample</scope><name>forward</name></member>
+      <member refid="structxt_1_1models_1_1UpSample_1aec7458540464c03ffa12f88357f21890" prot="private" virt="non-virtual"><scope>xt::models::UpSample</scope><name>up</name></member>
+      <member refid="structxt_1_1models_1_1UpSample_1acba2cab2acd17317dbb111d4b42f8ebf" prot="public" virt="non-virtual"><scope>xt::models::UpSample</scope><name>UpSample</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
