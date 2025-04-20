@@ -21,6 +21,7 @@ nav:
 
   - Tutorials:
       - Basics:
+          - Hello World: tutorials/basics/hello_world.md
           - Tensors: tutorials/basics/working_with_tensors.md
           - Custom Layers: tutorials/basics/custom_layers.md
       - Intermediate:
