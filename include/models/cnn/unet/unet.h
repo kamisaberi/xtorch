@@ -4,9 +4,9 @@
 #include <vector>
 #include <fstream>
 #include <string>
-#include "../base.h"
+#include "../../base.h"
 
-#include "../../exceptions/implementation.h"
+#include "../../../exceptions/implementation.h"
 
 namespace xt::models {
     //class DoubleConv(nn.Module):
