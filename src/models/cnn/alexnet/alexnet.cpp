@@ -1,4 +1,4 @@
-#include "../../../include/models/cnn/alexnet.h"
+#include "../../../../include/models/cnn/alexnet/alexnet.h"
 
 
 using namespace std;

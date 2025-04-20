@@ -1,6 +1,6 @@
 #include "includes/base.h"
 #include "../../include/datasets/image-classification/imagenette.h"
-#include "../../include/models/cnn/alexnet.h"
+#include "../../include/models/cnn/alexnet/alexnet.h"
 #include "../../include/definitions/transforms.h"
 
 
