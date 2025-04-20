@@ -6,4 +6,4 @@
 #include "mobilenet.h"
 #include "resnet/resnet18.h"
 #include "unet.h"
-#include "vggnet.h"
+#include "vggnet/vggnet.h"

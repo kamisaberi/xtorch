@@ -1,7 +1,7 @@
 #include "includes/base.h"
 
 #include "../../include/datasets/image-classification/mnist.h"
-#include "../../include/models/cnn/vggnet.h"
+#include "../../include/models/cnn/vggnet/vggnet.h"
 #include "../../include/definitions/transforms.h"
 
 
