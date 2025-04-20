@@ -130,7 +130,7 @@ target_link_libraries(alexnet-food101 ${TEST_LIBRARIES})
 # LeNet5 MNIST
 set(SOURCE_FILES
         ../src/datasets/image-classification/mnist.cpp
-        ../src/models/cnn/lenet5.cpp
+        ../src/models/cnn/lenet/lenet5.cpp
 
 )
 add_executable(lenet5-mnist ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/lenet5-mnist.cpp)
@@ -142,7 +142,7 @@ target_link_libraries(lenet5-mnist ${TEST_LIBRARIES})
 # LeNet5 FashionMNIST
 set(SOURCE_FILES
         ../src/datasets/image-classification/mnist.cpp
-        ../src/models/cnn/lenet5.cpp
+        ../src/models/cnn/lenet/lenet5.cpp
 
 )
 add_executable(lenet5-fashionmnist ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/lenet5-fashionmnist.cpp)
@@ -155,7 +155,7 @@ target_link_libraries(lenet5-fashionmnist ${TEST_LIBRARIES})
 # LeNet5 CIFAR10
 set(SOURCE_FILES
         ../src/datasets/image-classification/cifar.cpp
-        ../src/models/cnn/lenet5.cpp
+        ../src/models/cnn/lenet/lenet5.cpp
 )
 add_executable(lenet5-cifar10 ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/lenet5-cifar10.cpp)
 target_link_libraries(lenet5-cifar10 "${TORCH_LIBRARIES}")
@@ -166,7 +166,7 @@ target_link_libraries(lenet5-cifar10 ${TEST_LIBRARIES})
 # LeNet5 CIFAR100
 set(SOURCE_FILES
         ../src/datasets/image-classification/cifar.cpp
-        ../src/models/cnn/lenet5.cpp
+        ../src/models/cnn/lenet/lenet5.cpp
 )
 add_executable(lenet5-cifar100 ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/lenet5-cifar100.cpp)
 target_link_libraries(lenet5-cifar100 "${TORCH_LIBRARIES}")
@@ -178,7 +178,7 @@ target_link_libraries(lenet5-cifar100 ${TEST_LIBRARIES})
 # LeNet5 Imagenette
 set(SOURCE_FILES
         ../src/datasets/image-classification/imagenette.cpp
-        ../src/models/cnn/lenet5.cpp
+        ../src/models/cnn/lenet/lenet5.cpp
 )
 add_executable(lenet5-imagenette ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/lenet5-imagenette.cpp)
 target_link_libraries(lenet5-imagenette "${TORCH_LIBRARIES}")
@@ -190,7 +190,7 @@ target_link_libraries(lenet5-imagenette ${TEST_LIBRARIES})
 # LeNet5 Food101
 set(SOURCE_FILES
         ../src/datasets/image-classification/food.cpp
-        ../src/models/cnn/lenet5.cpp
+        ../src/models/cnn/lenet/lenet5.cpp
 )
 add_executable(lenet5-food101 ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/lenet5-food101.cpp)
 target_link_libraries(lenet5-food101 "${TORCH_LIBRARIES}")
@@ -355,7 +355,7 @@ target_link_libraries(vggnet16-food101 ${TEST_LIBRARIES})
 # Trainer Simple
 set(SOURCE_FILES
         ../src/datasets/image-classification/mnist.cpp
-        ../src/models/cnn/lenet5.cpp
+        ../src/models/cnn/lenet/lenet5.cpp
         ../src/trainers/trainer.cpp
 #        ../src/data-loaders/data-loader.tpp
 
