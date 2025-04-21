@@ -13,6 +13,3 @@ python:
 
 mkdocs:
   configuration: tutorial/mkdocs.yml
-
-exclude:
-  - docs/api/index.md
