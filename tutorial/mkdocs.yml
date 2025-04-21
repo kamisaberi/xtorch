@@ -64,3 +64,5 @@ plugins:
           doxy-cfg:
             FILE_PATTERNS: "*.cpp *.h*"
             RECURSIVE: true
+system_packages:
+  - doxygen
