@@ -58,7 +58,7 @@ plugins:
   - search
   - mkdoxy:
       projects:
-        xTorch:
+        xtorch:
           src-dirs: ../include
           full-doc: true
           doxy-cfg:
