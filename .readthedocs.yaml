@@ -11,3 +11,6 @@ python:
 
 mkdocs:
   configuration: tutorial/mkdocs.yml
+
+system_packages:
+  - doxygen
