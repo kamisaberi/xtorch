@@ -38,7 +38,7 @@ namespace xt::models {
     }
 
 
-    ResNet::ResNet(vector<int> layers, int num_classes, int in_channels) : BaseModel() {
+    ResNet34::ResNet34(vector<int> layers, int num_classes, int in_channels) : BaseModel() {
         inplanes = 64;
 
 
@@ -68,7 +68,7 @@ namespace xt::models {
     }
 
 
-    ResNet::ResNet(std::vector<int> layers, int num_classes, int in_channels, std::vector<int64_t> input_shape)
+    ResNet34::ResNet34(std::vector<int> layers, int num_classes, int in_channels, std::vector<int64_t> input_shape)
         : BaseModel() {
         inplanes = 64;
 
@@ -131,7 +131,7 @@ namespace xt::models {
     // }
 
 
-    torch::nn::Sequential ResNet::makeLayerFromResidualBlock(int planes, int blocks, int stride) {
+    torch::nn::Sequential ResNet34::makeLayerFromResidualBlock(int planes, int blocks, int stride) {
         torch::nn::Sequential downsample = nullptr;
         if (stride != 1 || inplanes != planes) {
             downsample = torch::nn::Sequential();
@@ -154,7 +154,7 @@ namespace xt::models {
         return layers;
     }
 
-    torch::Tensor ResNet::forward(torch::Tensor x) const {
+    torch::Tensor ResNet34::forward(torch::Tensor x) const {
         x = conv1->forward(x);
         x = maxpool->forward(x);
         x = layer0->forward(x);
