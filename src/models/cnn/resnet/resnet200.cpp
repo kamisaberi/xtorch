@@ -1,4 +1,4 @@
-#include "../../../../include/models/cnn/resnet/resnet18.h"
+#include "../../../../include/models/cnn/resnet/resnet200.h"
 
 namespace xt::models {
     namespace {
@@ -38,7 +38,7 @@ namespace xt::models {
     }
 
 
-    ResNet::ResNet(vector<int> layers, int num_classes, int in_channels) : BaseModel() {
+    ResNet200::ResNet200(vector<int> layers, int num_classes, int in_channels) : BaseModel() {
         inplanes = 64;
 
 
@@ -68,7 +68,7 @@ namespace xt::models {
     }
 
 
-    ResNet::ResNet(std::vector<int> layers, int num_classes, int in_channels, std::vector<int64_t> input_shape)
+    ResNet200::ResNet200(std::vector<int> layers, int num_classes, int in_channels, std::vector<int64_t> input_shape)
         : BaseModel() {
         inplanes = 64;
 
@@ -131,7 +131,7 @@ namespace xt::models {
     // }
 
 
-    torch::nn::Sequential ResNet::makeLayerFromResidualBlock(int planes, int blocks, int stride) {
+    torch::nn::Sequential ResNet200::makeLayerFromResidualBlock(int planes, int blocks, int stride) {
         torch::nn::Sequential downsample = nullptr;
         if (stride != 1 || inplanes != planes) {
             downsample = torch::nn::Sequential();
@@ -154,7 +154,7 @@ namespace xt::models {
         return layers;
     }
 
-    torch::Tensor ResNet::forward(torch::Tensor x) const {
+    torch::Tensor ResNet200::forward(torch::Tensor x) const {
         x = conv1->forward(x);
         x = maxpool->forward(x);
         x = layer0->forward(x);
