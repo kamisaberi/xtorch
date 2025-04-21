@@ -42,7 +42,6 @@ def define_env(env):
             {"FAQ": "community/faq.md"},
             {"Code of Conduct": "community/code_of_conduct.md"},
         ]},
-        {"API Reference": []},
     ]
     if not is_rtd:
         api_ref = {"API Reference": []}
