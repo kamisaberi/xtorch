@@ -1,0 +1,68 @@
+\doxysection{csv-\/dataset.h}
+\hypertarget{csv-dataset_8h_source}{}\label{csv-dataset_8h_source}\index{csv-\/dataset.h@{csv-\/dataset.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}../base/base.h"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}../../headers/datasets.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}../../../third\_party/csv2/reader.hpp"{}}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{namespace\ }xt::data::datasets\ \{}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keyword}{class\ }CSVDataset\ :\ \textcolor{keyword}{public}\ BaseDataset\ \{}
+\DoxyCodeLine{00012\ \ \ \ \ public\ :}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ CSVDataset(\textcolor{keyword}{const}\ std::string\ \&file\_path);}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ CSVDataset(\textcolor{keyword}{const}\ std::string\ \&file\_path,\ DataMode\ mode);}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ CSVDataset(\textcolor{keyword}{const}\ std::string\ \&file\_path,\ DataMode\ mode,\ vector<int>\ x\_indices,\ \textcolor{keywordtype}{int}\ y\_index);}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ CSVDataset(\textcolor{keyword}{const}\ std::string\ \&file\_path,\ DataMode\ mode,\ vector<int>\ x\_indices,\ vector<int>\ y\_indices);}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ CSVDataset(\textcolor{keyword}{const}\ std::string\ \&file\_path,\ DataMode\ mode,\ vector<string>\ x\_titles,\ \textcolor{keywordtype}{string}\ y\_title);}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ CSVDataset(\textcolor{keyword}{const}\ std::string\ \&file\_path,\ DataMode\ mode,\ vector<string>\ x\_titles,\ vector<string>\ y\_titles);}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ CSVDataset(\textcolor{keyword}{const}\ std::string\ \&file\_path,\ DataMode\ mode,\ TransformType\ transforms);}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ CSVDataset(\textcolor{keyword}{const}\ std::string\ \&file\_path,\ DataMode\ mode,\ vector<int>\ x\_indices,\ \textcolor{keywordtype}{int}\ y\_index,\ TransformType\ transforms);}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ CSVDataset(\textcolor{keyword}{const}\ std::string\ \&file\_path,\ DataMode\ mode,\ vector<int>\ x\_indices,\ vector<int>\ y\_indices,\ TransformType\ transforms);}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ CSVDataset(\textcolor{keyword}{const}\ std::string\ \&file\_path,\ DataMode\ mode,\ vector<string>\ x\_titles,\ \textcolor{keywordtype}{string}\ y\_title,\ TransformType\ transforms);}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ CSVDataset(\textcolor{keyword}{const}\ std::string\ \&file\_path,\ DataMode\ mode,\ vector<string>\ x\_titles,\ vector<string>\ y\_titles,\ TransformType\ transforms);}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ vector<int>\ x\_indices;}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ vector<int>\ y\_indices;}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ vector<string>\ labels\_name;}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ load\_sub\_folders\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ load\_data();}
+\DoxyCodeLine{00042\ \ \ \ \ \};}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keyword}{class\ }StackedCSVDataset\ :\ \textcolor{keyword}{public}\ BaseDataset\ \{}
+\DoxyCodeLine{00046\ \ \ \ \ public\ :}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ StackedCSVDataset(\textcolor{keyword}{const}\ std::string\ \&folder\_path);}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ StackedCSVDataset(\textcolor{keyword}{const}\ std::string\ \&folder\_path,\ DataMode\ mode);}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ StackedCSVDataset(\textcolor{keyword}{const}\ std::string\ \&folder\_path,\ DataMode\ mode,\ \textcolor{keywordtype}{bool}\ load\_sub\_folders);}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ StackedCSVDataset(\textcolor{keyword}{const}\ std::string\ \&folder\_path,\ DataMode\ mode,\ \textcolor{keywordtype}{bool}\ load\_sub\_folders,}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vector<std::function<torch::Tensor(torch::Tensor)>\ >\ transforms);}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ vector<string>\ labels\_name;}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ load\_sub\_folders\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ load\_data();}
+\DoxyCodeLine{00061\ \ \ \ \ \};}
+\DoxyCodeLine{00062\ \}}
+
+\end{DoxyCode}

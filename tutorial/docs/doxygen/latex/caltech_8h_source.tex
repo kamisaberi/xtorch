@@ -1,0 +1,63 @@
+\doxysection{caltech.\+h}
+\hypertarget{caltech_8h_source}{}\label{caltech_8h_source}\index{caltech.h@{caltech.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}../base/base.h"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}../../headers/datasets.h"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00008\ \textcolor{keyword}{namespace\ }fs\ =\ std::filesystem;}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{namespace\ }xt::data::datasets\ \{}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keyword}{class\ }Caltech101\ :\ \textcolor{keyword}{public}\ BaseDataset\ \{}
+\DoxyCodeLine{00013\ \ \ \ \ public\ :}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ Caltech101(\textcolor{keyword}{const}\ std::string\ \&root);}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ Caltech101(\textcolor{keyword}{const}\ std::string\ \&root,\ DataMode\ mode);}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ Caltech101(\textcolor{keyword}{const}\ std::string\ \&root,\ DataMode\ mode\ ,\ \textcolor{keywordtype}{bool}\ download);}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ Caltech101(\textcolor{keyword}{const}\ std::string\ \&root,\ DataMode\ mode\ ,\ \textcolor{keywordtype}{bool}\ download,\ TransformType\ transforms);}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ vector<std::tuple<string,\ string,\ string>\ >\ resources\ =\ \{}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}https://drive.google.com/file/d/137RyRjvTBkBiIfeYBNZBtViDHQ6\_Ewsp"{}},\ \textcolor{stringliteral}{"{}101\_ObjectCategories.tar.gz"{}},}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}b224c7392d521a49829488ab0f1120d9"{}}}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \ \ \ \ \},}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}https://drive.google.com/file/d/175kQy3UsZ0wUEHZjqkUDdNVssr7bgh\_m"{}},\ \textcolor{stringliteral}{"{}Annotations.tar"{}},}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}6f83eeb1f24d99cab4eb377263132c91"{}}}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ fs::path\ dataset\_folder\_name\ =\ \textcolor{stringliteral}{"{}caltech101"{}};}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ load\_data();}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ check\_resources();}
+\DoxyCodeLine{00034\ \ \ \ \ \};}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keyword}{class\ }Caltech256\ :\ \textcolor{keyword}{public}\ BaseDataset\ \{}
+\DoxyCodeLine{00037\ \ \ \ \ public\ :}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ \ Caltech256(\textcolor{keyword}{const}\ std::string\ \&root);}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ Caltech256(\textcolor{keyword}{const}\ std::string\ \&root,\ DataMode\ mode);}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ Caltech256(\textcolor{keyword}{const}\ std::string\ \&root,\ DataMode\ mode\ ,\ \textcolor{keywordtype}{bool}\ download);}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ Caltech256(\textcolor{keyword}{const}\ std::string\ \&root,\ DataMode\ mode\ ,\ \textcolor{keywordtype}{bool}\ download,\ TransformType\ transforms);}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ vector<std::tuple<string,\ string,\ string>\ >\ resources\ =\ \{}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}https://drive.google.com/file/d/1r6o0pSROcV1\_VwT4oSjA2FBUSCWGuxLK"{}},\ \textcolor{stringliteral}{"{}256\_ObjectCategories.tar"{}},}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}67b4f42ca05d46448c6bb8ecd2220f6d"{}}}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \},}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ fs::path\ dataset\_folder\_name\ =\ \textcolor{stringliteral}{"{}caltech256"{}};}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ load\_data();}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ check\_resources();}
+\DoxyCodeLine{00056\ \ \ \ \ \};}
+\DoxyCodeLine{00057\ \}}
+
+\end{DoxyCode}

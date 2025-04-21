@@ -1,0 +1,21 @@
+\doxysection{normalize.\+h}
+\hypertarget{normalize_8h_source}{}\label{normalize_8h_source}\index{normalize.h@{normalize.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ "{}../headers/transforms.h"{}}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{keyword}{namespace\ }xt::data::transforms\ \{}
+\DoxyCodeLine{00005\ \ \ \ \ \textcolor{keyword}{struct\ }Normalize\ \{}
+\DoxyCodeLine{00006\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00007\ \ \ \ \ \ \ \ \ Normalize(std::vector<float>\ mean,\ std::vector<float>\ std);}
+\DoxyCodeLine{00008\ \ \ \ \ \ \ \ \ torch::Tensor\ operator()(\textcolor{keyword}{const}\ torch::Tensor\&\ tensor)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00009\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00010\ \ \ \ \ \ \ \ \ std::vector<float>\ mean;}
+\DoxyCodeLine{00011\ \ \ \ \ \ \ \ \ std::vector<float>\ std;}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \ \ \ \ \};}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \}}
+
+\end{DoxyCode}

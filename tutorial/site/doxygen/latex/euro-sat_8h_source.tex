@@ -1,0 +1,36 @@
+\doxysection{euro-\/sat.h}
+\hypertarget{euro-sat_8h_source}{}\label{euro-sat_8h_source}\index{euro-\/sat.h@{euro-\/sat.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}../base/base.h"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}../../headers/datasets.h"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }fs\ =\ std::filesystem;}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{namespace\ }xt::data::datasets\ \{}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keyword}{class\ }EuroSAT\ :\textcolor{keyword}{public}\ BaseDataset\ \{}
+\DoxyCodeLine{00012\ \ \ \ \ public\ :}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ EuroSAT(\textcolor{keyword}{const}\ std::string\ \&root);}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ EuroSAT(\textcolor{keyword}{const}\ std::string\ \&root,\ DataMode\ mode);}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ EuroSAT(\textcolor{keyword}{const}\ std::string\ \&root,\ DataMode\ mode\ ,\ \textcolor{keywordtype}{bool}\ download);}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ EuroSAT(\textcolor{keyword}{const}\ std::string\ \&root,\ DataMode\ mode\ ,\ \textcolor{keywordtype}{bool}\ download,\ TransformType\ transforms);}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ std::string\ url\ =}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}https://huggingface.co/datasets/torchgeo/eurosat/resolve/c877bcd43f099cd0196738f714544e355477f3fd/EuroSAT.zip"{}};}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ fs::path\ archive\_file\_name\ =\ \textcolor{stringliteral}{"{}EuroSAT.zip"{}};}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ std::string\ archive\_file\_md5\ =\ \textcolor{stringliteral}{"{}c8fa014336c82ac7804f0398fcb19387"{}};}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ fs::path\ dataset\_folder\_name\ =\ \textcolor{stringliteral}{"{}euro-\/sat"{}};}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ load\_data();}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ check\_resources();}
+\DoxyCodeLine{00029\ \ \ \ \ \};}
+\DoxyCodeLine{00030\ \}}
+
+\end{DoxyCode}

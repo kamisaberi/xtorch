@@ -1,0 +1,47 @@
+\doxysection{xt\+::data\+::transforms\+::Grayscale\+To\+RGB Struct Reference}
+\hypertarget{structxt_1_1data_1_1transforms_1_1GrayscaleToRGB}{}\label{structxt_1_1data_1_1transforms_1_1GrayscaleToRGB}\index{xt::data::transforms::GrayscaleToRGB@{xt::data::transforms::GrayscaleToRGB}}
+
+
+A functor to convert a grayscale tensor to an RGB tensor.  
+
+
+
+
+{\ttfamily \#include $<$grayscale.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+torch\+::\+Tensor \mbox{\hyperlink{structxt_1_1data_1_1transforms_1_1GrayscaleToRGB_a85201cad2c8e53fa60b53a588f47bf54}{operator()}} (const torch\+::\+Tensor \&tensor)
+\begin{DoxyCompactList}\small\item\em Converts a grayscale tensor to an RGB tensor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A functor to convert a grayscale tensor to an RGB tensor. 
+
+This struct provides a callable object that transforms a grayscale tensor, typically with a single channel (e.\+g., \mbox{[}H, W\mbox{]} or \mbox{[}1, H, W\mbox{]}), into an RGB tensor with three channels (e.\+g., \mbox{[}3, H, W\mbox{]}). The conversion is performed by replicating the grayscale channel across the RGB dimensions, suitable for preprocessing grayscale images in machine learning workflows using Lib\+Torch. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{structxt_1_1data_1_1transforms_1_1GrayscaleToRGB_a85201cad2c8e53fa60b53a588f47bf54}\index{xt::data::transforms::GrayscaleToRGB@{xt::data::transforms::GrayscaleToRGB}!operator()@{operator()}}
+\index{operator()@{operator()}!xt::data::transforms::GrayscaleToRGB@{xt::data::transforms::GrayscaleToRGB}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}}
+{\footnotesize\ttfamily \label{structxt_1_1data_1_1transforms_1_1GrayscaleToRGB_a85201cad2c8e53fa60b53a588f47bf54} 
+torch\+::\+Tensor xt\+::data\+::transforms\+::\+Grayscale\+To\+RGB\+::operator() (\begin{DoxyParamCaption}\item[{const torch\+::\+Tensor \&}]{tensor}{}\end{DoxyParamCaption})}
+
+
+
+Converts a grayscale tensor to an RGB tensor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tensor} & The input grayscale tensor, expected in format \mbox{[}H, W\mbox{]} or \mbox{[}1, H, W\mbox{]}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A new tensor in RGB format \mbox{[}3, H, W\mbox{]}, with the grayscale values replicated across channels.
+\end{DoxyReturn}
+This operator takes a grayscale tensor and produces an RGB tensor by duplicating the single channel’s values into three identical channels (red, green, blue). The input tensor must have a single channel, either as a 2D tensor \mbox{[}H, W\mbox{]} or a 3D tensor with one channel \mbox{[}1, H, W\mbox{]}. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+grayscale.\+h\end{DoxyCompactItemize}

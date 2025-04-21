@@ -1,0 +1,71 @@
+\doxysection{ucf.\+h}
+\hypertarget{ucf_8h_source}{}\label{ucf_8h_source}\index{ucf.h@{ucf.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ "{}../base/base.h"{}}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}../../headers/datasets.h"{}}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{namespace\ }xt::data::datasets\ \{}
+\DoxyCodeLine{00007\ \ \ \ \textcolor{keyword}{class\ }UCF101\ :\ \textcolor{keyword}{public}\ BaseDataset\ \{}
+\DoxyCodeLine{00008\ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ \ \ \ \`{}UCF101\ <https://www.crcv.ucf.edu/data/UCF101.php>`\_\ dataset.}}
+\DoxyCodeLine{00011\ \textcolor{comment}{}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ \ \ \ UCF101\ is\ an\ action\ recognition\ video\ dataset.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ \ \ \ This\ dataset\ consider\ every\ video\ as\ a\ collection\ of\ video\ clips\ of\ fixed\ size,\ specified}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ \ \ \ by\ \`{}\`{}frames\_per\_clip``,\ where\ the\ step\ in\ frames\ between\ each\ clip\ is\ given\ by}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ \ \ \ \`{}\`{}step\_between\_clips``.\ The\ dataset\ itself\ can\ be\ downloaded\ from\ the\ dataset\ website;}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ \ \ \ annotations\ that\ \`{}\`{}annotation\_path``\ should\ be\ pointing\ to\ can\ be\ downloaded\ from\ \`{}here}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ \ \ \ <https://www.crcv.ucf.edu/data/UCF101/UCF101TrainTestSplits-\/RecognitionTask.zip>`\_.}}
+\DoxyCodeLine{00018\ \textcolor{comment}{}}
+\DoxyCodeLine{00019\ \textcolor{comment}{\ \ \ \ To\ give\ an\ example,\ for\ 2\ videos\ with\ 10\ and\ 15\ frames\ respectively,\ if\ \`{}\`{}frames\_per\_clip=5``}}
+\DoxyCodeLine{00020\ \textcolor{comment}{\ \ \ \ and\ \`{}\`{}step\_between\_clips=5``,\ the\ dataset\ size\ will\ be\ (2\ +\ 3)\ =\ 5,\ where\ the\ first\ two}}
+\DoxyCodeLine{00021\ \textcolor{comment}{\ \ \ \ elements\ will\ come\ from\ video\ 1,\ and\ the\ next\ three\ elements\ from\ video\ 2.}}
+\DoxyCodeLine{00022\ \textcolor{comment}{\ \ \ \ Note\ that\ we\ drop\ clips\ which\ do\ not\ have\ exactly\ \`{}\`{}frames\_per\_clip``\ elements,\ so\ not\ all}}
+\DoxyCodeLine{00023\ \textcolor{comment}{\ \ \ \ frames\ in\ a\ video\ might\ be\ present.}}
+\DoxyCodeLine{00024\ \textcolor{comment}{}}
+\DoxyCodeLine{00025\ \textcolor{comment}{\ \ \ \ Internally,\ it\ uses\ a\ VideoClips\ object\ to\ handle\ clip\ creation.}}
+\DoxyCodeLine{00026\ \textcolor{comment}{}}
+\DoxyCodeLine{00027\ \textcolor{comment}{\ \ \ \ Args:}}
+\DoxyCodeLine{00028\ \textcolor{comment}{\ \ \ \ \ \ \ \ root\ (str\ or\ \`{}\`{}pathlib.Path``):\ Root\ directory\ of\ the\ UCF101\ Dataset.}}
+\DoxyCodeLine{00029\ \textcolor{comment}{\ \ \ \ \ \ \ \ annotation\_path\ (str):\ path\ to\ the\ folder\ containing\ the\ split\ files;}}
+\DoxyCodeLine{00030\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ see\ docstring\ above\ for\ download\ instructions\ of\ these\ files}}
+\DoxyCodeLine{00031\ \textcolor{comment}{\ \ \ \ \ \ \ \ frames\_per\_clip\ (int):\ number\ of\ frames\ in\ a\ clip.}}
+\DoxyCodeLine{00032\ \textcolor{comment}{\ \ \ \ \ \ \ \ step\_between\_clips\ (int,\ optional):\ number\ of\ frames\ between\ each\ clip.}}
+\DoxyCodeLine{00033\ \textcolor{comment}{\ \ \ \ \ \ \ \ fold\ (int,\ optional):\ which\ fold\ to\ use.\ Should\ be\ between\ 1\ and\ 3.}}
+\DoxyCodeLine{00034\ \textcolor{comment}{\ \ \ \ \ \ \ \ train\ (bool,\ optional):\ if\ \`{}\`{}True``,\ creates\ a\ dataset\ from\ the\ train\ split,}}
+\DoxyCodeLine{00035\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ otherwise\ from\ the\ \`{}\`{}test``\ split.}}
+\DoxyCodeLine{00036\ \textcolor{comment}{\ \ \ \ \ \ \ \ transform\ (callable,\ optional):\ A\ function/transform\ that\ takes\ in\ a\ TxHxWxC\ video}}
+\DoxyCodeLine{00037\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ and\ returns\ a\ transformed\ version.}}
+\DoxyCodeLine{00038\ \textcolor{comment}{\ \ \ \ \ \ \ \ output\_format\ (str,\ optional):\ The\ format\ of\ the\ output\ video\ tensors\ (before\ transforms).}}
+\DoxyCodeLine{00039\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ Can\ be\ either\ "{}THWC"{}\ (default)\ or\ "{}TCHW"{}.}}
+\DoxyCodeLine{00040\ \textcolor{comment}{}}
+\DoxyCodeLine{00041\ \textcolor{comment}{\ \ \ \ Returns:}}
+\DoxyCodeLine{00042\ \textcolor{comment}{\ \ \ \ \ \ \ \ tuple:\ A\ 3-\/tuple\ with\ the\ following\ entries:}}
+\DoxyCodeLine{00043\ \textcolor{comment}{}}
+\DoxyCodeLine{00044\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ -\/\ video\ (Tensor[T,\ H,\ W,\ C]\ or\ Tensor[T,\ C,\ H,\ W]):\ The\ \`{}T`\ video\ frames}}
+\DoxyCodeLine{00045\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ -\/\ \ audio(Tensor[K,\ L]):\ the\ audio\ frames,\ where\ \`{}K`\ is\ the\ number\ of\ channels}}
+\DoxyCodeLine{00046\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ and\ \`{}L`\ is\ the\ number\ of\ points}}
+\DoxyCodeLine{00047\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ -\/\ label\ (int):\ class\ of\ the\ video\ clip}}
+\DoxyCodeLine{00048\ \textcolor{comment}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00049\ \textcolor{comment}{}}
+\DoxyCodeLine{00050\ \textcolor{comment}{}}
+\DoxyCodeLine{00051\ \textcolor{comment}{\ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00052\ \ \ \ public\ :}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ UCF101(\textcolor{keyword}{const}\ std::string\ \&root);}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ UCF101(\textcolor{keyword}{const}\ std::string\ \&root,\ DataMode\ mode);}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ UCF101(\textcolor{keyword}{const}\ std::string\ \&root,\ DataMode\ mode\ ,\ \textcolor{keywordtype}{bool}\ download);}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ UCF101(\textcolor{keyword}{const}\ std::string\ \&root,\ DataMode\ mode\ ,\ \textcolor{keywordtype}{bool}\ download,\ TransformType\ transforms);}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \ private\ :}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ load\_data();}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ check\_resources();}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \ \ \ \ \};}
+\DoxyCodeLine{00065\ \}}
+
+\end{DoxyCode}

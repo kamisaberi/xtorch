@@ -1,0 +1,31 @@
+\doxysection{fgvc-\/aircraft.h}
+\hypertarget{fgvc-aircraft_8h_source}{}\label{fgvc-aircraft_8h_source}\index{fgvc-\/aircraft.h@{fgvc-\/aircraft.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ "{}../base/base.h"{}}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}../../headers/datasets.h"{}}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{namespace\ }xt::data::datasets\ \{}
+\DoxyCodeLine{00007\ \ \ \ \ \textcolor{keyword}{class\ }FGVCAircraft\ :\textcolor{keyword}{public}\ BaseDataset\ \{}
+\DoxyCodeLine{00008\ \ \ \ \ public\ :}
+\DoxyCodeLine{00009\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ FGVCAircraft(\textcolor{keyword}{const}\ std::string\ \&root);}
+\DoxyCodeLine{00010\ \ \ \ \ \ \ \ \ FGVCAircraft(\textcolor{keyword}{const}\ std::string\ \&root,\ DataMode\ mode);}
+\DoxyCodeLine{00011\ \ \ \ \ \ \ \ \ FGVCAircraft(\textcolor{keyword}{const}\ std::string\ \&root,\ DataMode\ mode\ ,\ \textcolor{keywordtype}{bool}\ download);}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ FGVCAircraft(\textcolor{keyword}{const}\ std::string\ \&root,\ DataMode\ mode\ ,\ \textcolor{keywordtype}{bool}\ download,\ TransformType\ transforms);}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \ \ \ \ private\ :}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ fs::path\ url\ =\ \textcolor{stringliteral}{"{}https://www.robots.ox.ac.uk/\string~vgg/data/fgvc-\/aircraft/archives/fgvc-\/aircraft-\/2013b.tar.gz"{}};}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ std::string\ dataset\_file\_md5\ =\ \textcolor{stringliteral}{"{}85eeb15f3717b99a5da872d97d918f87"{}};}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ std::string\ dataset\_file\_name\ =\ \textcolor{stringliteral}{"{}fgvc-\/aircraft-\/2013b.tar.gz"{}};}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ fs::path\ dataset\_folder\_name\ =\ \textcolor{stringliteral}{"{}fgvc-\/aircraft-\/2013b"{}};}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ load\_data(DataMode\ mode\ =\ DataMode::TRAIN);}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ check\_resources(\textcolor{keyword}{const}\ std::string\ \&root,\ \textcolor{keywordtype}{bool}\ download\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00024\ \ \ \ \ \};}
+\DoxyCodeLine{00025\ \}}
+
+\end{DoxyCode}

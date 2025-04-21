@@ -1,0 +1,67 @@
+\doxysection{xt\+::data\+::transforms\+::Resize Struct Reference}
+\hypertarget{structxt_1_1data_1_1transforms_1_1Resize}{}\label{structxt_1_1data_1_1transforms_1_1Resize}\index{xt::data::transforms::Resize@{xt::data::transforms::Resize}}
+
+
+A functor to resize a tensor image to a specified size.  
+
+
+
+
+{\ttfamily \#include $<$resize.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structxt_1_1data_1_1transforms_1_1Resize_a7da50f162b21e41fd9dc7d9b2ef44821}{Resize}} (std\+::vector$<$ int64\+\_\+t $>$ size)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{structxt_1_1data_1_1transforms_1_1Resize}{Resize} object with the target size. \end{DoxyCompactList}\item 
+torch\+::\+Tensor \mbox{\hyperlink{structxt_1_1data_1_1transforms_1_1Resize_ada747ff9073092d65e9b1eb32d4b72b8}{operator()}} (torch\+::\+Tensor img)
+\begin{DoxyCompactList}\small\item\em Resizes the input tensor image to the target size. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A functor to resize a tensor image to a specified size. 
+
+This struct provides a callable object that resizes a {\ttfamily torch\+::\+Tensor} representing an image to a target size specified as a vector of 64-\/bit integers. It uses the call operator to perform the resizing operation, making it suitable for use in functional pipelines or transformations. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{structxt_1_1data_1_1transforms_1_1Resize_a7da50f162b21e41fd9dc7d9b2ef44821}\index{xt::data::transforms::Resize@{xt::data::transforms::Resize}!Resize@{Resize}}
+\index{Resize@{Resize}!xt::data::transforms::Resize@{xt::data::transforms::Resize}}
+\doxysubsubsection{\texorpdfstring{Resize()}{Resize()}}
+{\footnotesize\ttfamily \label{structxt_1_1data_1_1transforms_1_1Resize_a7da50f162b21e41fd9dc7d9b2ef44821} 
+xt\+::data\+::transforms\+::\+Resize\+::\+Resize (\begin{DoxyParamCaption}\item[{std\+::vector$<$ int64\+\_\+t $>$}]{size}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a \doxylink{structxt_1_1data_1_1transforms_1_1Resize}{Resize} object with the target size. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em size} & A vector of 64-\/bit integers specifying the target dimensions (e.\+g., \{height, width\}). \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{structxt_1_1data_1_1transforms_1_1Resize_ada747ff9073092d65e9b1eb32d4b72b8}\index{xt::data::transforms::Resize@{xt::data::transforms::Resize}!operator()@{operator()}}
+\index{operator()@{operator()}!xt::data::transforms::Resize@{xt::data::transforms::Resize}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}}
+{\footnotesize\ttfamily \label{structxt_1_1data_1_1transforms_1_1Resize_ada747ff9073092d65e9b1eb32d4b72b8} 
+torch\+::\+Tensor xt\+::data\+::transforms\+::\+Resize\+::operator() (\begin{DoxyParamCaption}\item[{torch\+::\+Tensor}]{img}{}\end{DoxyParamCaption})}
+
+
+
+Resizes the input tensor image to the target size. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em img} & The input tensor image to be resized. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A new tensor with the resized dimensions. 
+\end{DoxyReturn}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+resize.\+h\end{DoxyCompactItemize}

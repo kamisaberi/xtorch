@@ -1,0 +1,19 @@
+\doxysection{arguments.\+h}
+\hypertarget{arguments_8h_source}{}\label{arguments_8h_source}\index{arguments.h@{arguments.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <torch/data.h>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}enums.h"{}}}
+\DoxyCodeLine{00005\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structDatasetArguments}{DatasetArguments}}\ \{}
+\DoxyCodeLine{00009\ \ \ \ \ DataMode\ mode\ =\ DataMode::TRAIN;}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keywordtype}{bool}\ download\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00011\ \ \ \ \ vector<torch::data::transforms::Lambda<torch::data::Example<>\ >\ >\ transforms\ \ =\ \{\};}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \};}
+
+\end{DoxyCode}

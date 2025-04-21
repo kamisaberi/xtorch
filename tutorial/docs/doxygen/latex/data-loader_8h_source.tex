@@ -1,0 +1,76 @@
+\doxysection{data-\/loader.h}
+\hypertarget{data-loader_8h_source}{}\label{data-loader_8h_source}\index{data-\/loader.h@{data-\/loader.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <torch/torch.h>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <filesystem>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <torch/torch.h>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <algorithm>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <random>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <torch/torch.h>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <optional>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ "{}../datasets/base/base.h"{}}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00018\ \textcolor{keyword}{namespace\ }fs\ =\ std::filesystem;}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{namespace\ }xt\ \{}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ Dataset>}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{bool}\ is\_transformed\_dataset(\textcolor{keyword}{const}\ Dataset\&\ dataset)\ \{}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_same\_v<Dataset,\ torch::data::datasets::MapDataset<xt::data::datasets::BaseDataset,\ torch::data::transforms::Stack<>>>)\ \{}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00030\ \ \ \ \ \}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ Dataset>}
+\DoxyCodeLine{00034\ \textcolor{keyword}{class\ }DataLoader\ :\ \textcolor{keyword}{public}\ torch::data::DataLoaderBase<Dataset,\ typename\ Dataset::BatchType,\ std::vector<size\_t>>\ \{}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keyword}{using\ }BatchType\ \ \ \ \ \ \ \ =\ \textcolor{keyword}{typename}\ Dataset::BatchType;\ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ e.g.,\ Example<Tensor,\ Tensor>}}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keyword}{using\ }BatchRequestType\ =\ std::vector<size\_t>;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ list\ of\ indices\ for\ one\ batch}}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keyword}{using\ }Base\ =\ torch::data::DataLoaderBase<Dataset,\ BatchType,\ BatchRequestType>;}
+\DoxyCodeLine{00040\ \ \ \ \ DataLoader(Dataset\ dataset,\ \textcolor{keyword}{const}\ torch::data::DataLoaderOptions\&\ options,\ \textcolor{keywordtype}{bool}\ shuffle\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \textcolor{comment}{//\ \ \ \ //\ Iterator\ support\ for\ range-\/for\ loops}}
+\DoxyCodeLine{00043\ \textcolor{comment}{//\ \ \ \ typename\ Base::iterator\ begin()\ \{}}
+\DoxyCodeLine{00044\ \textcolor{comment}{//\ \ \ \ \ \ \ \ this-\/>reset();\ \ \ \ \ \ \ //\ reset\ (and\ shuffle\ if\ needed)\ at\ start\ of\ epoch}}
+\DoxyCodeLine{00045\ \textcolor{comment}{//\ \ \ \ \ \ \ \ return\ Base::begin();}}
+\DoxyCodeLine{00046\ \textcolor{comment}{//\ \ \ \ \}}}
+\DoxyCodeLine{00047\ \textcolor{comment}{//\ \ \ \ typename\ Base::iterator\ end()\ \{}}
+\DoxyCodeLine{00048\ \textcolor{comment}{//\ \ \ \ \ \ \ \ return\ Base::end();}}
+\DoxyCodeLine{00049\ \textcolor{comment}{//\ \ \ \ \}}}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{comment}{//\ Provide\ the\ next\ batch\ of\ indices\ to\ fetch\ from\ the\ dataset}}
+\DoxyCodeLine{00053\ \ \ \ \ std::optional<BatchRequestType>\ get\_batch\_request()\ \textcolor{keyword}{override}\ ;}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{comment}{//\ Reset\ and\ (optionally)\ shuffle\ indices\ for\ a\ new\ epoch}}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{void}\ reset\_indices();}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{comment}{//\ Override\ base\ class\ reset()\ to\ shuffle\ indices\ each\ epoch\ (if\ enabled)}}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordtype}{void}\ reset()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00058\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00059\ \ \ \ \ Dataset*\ dataset\_ptr\_;\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ raw\ pointer\ to\ the\ dataset\ (owned\ by\ base\ class)}}
+\DoxyCodeLine{00060\ \ \ \ \ std::vector<size\_t>\ indices\_;\ \ \ \ \textcolor{comment}{//\ sequence\ of\ indices\ to\ iterate\ over}}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ current\_index\_\ =\ 0;\ \ \ \ \ \ \ \textcolor{comment}{//\ current\ position\ in\ indices\_\ vector}}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ batch\_size\_;}
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{bool}\ shuffle\_;}
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordtype}{bool}\ drop\_last\_;}
+\DoxyCodeLine{00065\ \};}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \}}
+\DoxyCodeLine{00069\ \textcolor{preprocessor}{\#include\ "{}data-\/loader.tpp"{}}}
+\DoxyCodeLine{00070\ }
+
+\end{DoxyCode}

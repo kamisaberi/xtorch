@@ -1,3 +1,0 @@
-INPUT = ./include
-OUTPUT_DIRECTORY = tutorial/docs
-GENERATE_XML = YES

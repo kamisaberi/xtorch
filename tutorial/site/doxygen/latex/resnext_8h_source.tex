@@ -1,0 +1,50 @@
+\doxysection{resnext.\+h}
+\hypertarget{resnext_8h_source}{}\label{resnext_8h_source}\index{resnext.h@{resnext.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <torch/torch.h>}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <fstream>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}../../base.h"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{namespace\ }xt::models\ \{}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keyword}{namespace\ }\{}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }ResidualBlock\ :\ torch::nn::Module\ \{}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \ \ \ \ torch::nn::Sequential\ conv1\ =\ \textcolor{keyword}{nullptr},\ conv2\ =\ \textcolor{keyword}{nullptr},\ downsample\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ out\_channels;}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \ \ \ \ torch::nn::ReLU\ relu\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \ \ \ \ torch::Tensor\ residual;}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \ \ \ \ ResidualBlock(\textcolor{keywordtype}{int}\ in\_channels,\ \textcolor{keywordtype}{int}\ out\_channels,\ \textcolor{keywordtype}{int}\ stride\ =\ 1,}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ torch::nn::Sequential\ downsample\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \ \ \ \ torch::Tensor\ forward(torch::Tensor\ x);}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00025\ \ \ \ \ \}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structxt_1_1models_1_1ResNet}{ResNet}}\ :\ \mbox{\hyperlink{classxt_1_1models_1_1BaseModel}{BaseModel}}\ \{}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{keyword}{mutable}\ \textcolor{keywordtype}{int}\ inplanes\ =\ 64;}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keyword}{mutable}\ torch::nn::Sequential\ conv1\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keyword}{mutable}\ torch::nn::MaxPool2d\ maxpool\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keyword}{mutable}\ torch::nn::AvgPool2d\ avgpool\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \textcolor{keyword}{mutable}\ torch::nn::Sequential\ layer0\ =\ \textcolor{keyword}{nullptr},\ layer1\ =\ \textcolor{keyword}{nullptr},\ layer2\ =\ \textcolor{keyword}{nullptr},\ layer3\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \textcolor{keyword}{mutable}\ torch::nn::Linear\ fc\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ ResNet(vector<int>\ layers,\ \textcolor{keywordtype}{int}\ num\_classes\ =\ 10,\ \textcolor{keywordtype}{int}\ in\_channels\ =\ 3\ \textcolor{comment}{/*\ input\ channels\ */});}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ ResNet(std::vector<int>\ layers,\ \textcolor{keywordtype}{int}\ num\_classes,\ \textcolor{keywordtype}{int}\ in\_channels,\ std::vector<int64\_t>\ input\_shape);}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ torch::nn::Sequential\ makeLayerFromResidualBlock(\textcolor{keywordtype}{int}\ planes,\ \textcolor{keywordtype}{int}\ blocks,\ \textcolor{keywordtype}{int}\ stride\ =\ 1);}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ torch::Tensor\ forward(torch::Tensor\ x)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00043\ \ \ \ \ \};}
+\DoxyCodeLine{00044\ \}}
+
+\end{DoxyCode}

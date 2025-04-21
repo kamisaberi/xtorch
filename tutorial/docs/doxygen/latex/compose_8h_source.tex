@@ -1,0 +1,26 @@
+\doxysection{compose.\+h}
+\hypertarget{compose_8h_source}{}\label{compose_8h_source}\index{compose.h@{compose.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}../headers/transforms.h"{}}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{keyword}{namespace\ }xt::data::transforms\ \{}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classxt_1_1data_1_1transforms_1_1Compose_ad7d277db74572350bcd2d008bfd6b845}{Compose}}\ \{}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classxt_1_1data_1_1transforms_1_1Compose_a7577a6eac92063cde3d6021715b12377}{TransformFunc}}\ =\ std::function<torch::Tensor(torch::Tensor)>;}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classxt_1_1data_1_1transforms_1_1Compose_ad7d277db74572350bcd2d008bfd6b845}{Compose}}();}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classxt_1_1data_1_1transforms_1_1Compose_abba2130edfe936c3e1f7054cb01d0f05}{Compose}}(std::vector<TransformFunc>\ transforms);}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ torch::Tensor\ \mbox{\hyperlink{classxt_1_1data_1_1transforms_1_1Compose_a40074254792ab21a36ca2b64666cd2d3}{operator()}}(torch::Tensor\ input)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ std::vector<TransformFunc>\ transforms;}
+\DoxyCodeLine{00060\ \ \ \ \ \};}
+\DoxyCodeLine{00061\ \}}
+
+\end{DoxyCode}

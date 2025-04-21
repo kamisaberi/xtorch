@@ -1,0 +1,74 @@
+\doxysection{xt\+::data\+::datasets\+::CIFAR10 Class Reference}
+\hypertarget{classxt_1_1data_1_1datasets_1_1CIFAR10}{}\label{classxt_1_1data_1_1datasets_1_1CIFAR10}\index{xt::data::datasets::CIFAR10@{xt::data::datasets::CIFAR10}}
+Inheritance diagram for xt\+::data\+::datasets\+::CIFAR10\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classxt_1_1data_1_1datasets_1_1CIFAR10}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classxt_1_1data_1_1datasets_1_1CIFAR10_acdc9a46d2063061a1424fbf5e8bf129e}\label{classxt_1_1data_1_1datasets_1_1CIFAR10_acdc9a46d2063061a1424fbf5e8bf129e} 
+{\bfseries CIFAR10} (const std\+::string \&root)
+\item 
+\Hypertarget{classxt_1_1data_1_1datasets_1_1CIFAR10_aaa5c5028a954f97be208a40aca1af956}\label{classxt_1_1data_1_1datasets_1_1CIFAR10_aaa5c5028a954f97be208a40aca1af956} 
+{\bfseries CIFAR10} (const std\+::string \&root, Data\+Mode mode)
+\item 
+\Hypertarget{classxt_1_1data_1_1datasets_1_1CIFAR10_aaa9ce66d9e4842ac3ccceaedddf268e8}\label{classxt_1_1data_1_1datasets_1_1CIFAR10_aaa9ce66d9e4842ac3ccceaedddf268e8} 
+{\bfseries CIFAR10} (const std\+::string \&root, Data\+Mode mode, bool download)
+\item 
+\Hypertarget{classxt_1_1data_1_1datasets_1_1CIFAR10_a76f50860353559c5a14029faf42a5885}\label{classxt_1_1data_1_1datasets_1_1CIFAR10_a76f50860353559c5a14029faf42a5885} 
+{\bfseries CIFAR10} (const std\+::string \&root, Data\+Mode mode, bool download, Transform\+Type transforms)
+\item 
+\Hypertarget{classxt_1_1data_1_1datasets_1_1CIFAR10_abaf900595d6237751ba4a85a8ddef52a}\label{classxt_1_1data_1_1datasets_1_1CIFAR10_abaf900595d6237751ba4a85a8ddef52a} 
+torch\+::data\+::\+Example {\bfseries get} (size\+\_\+t index) override
+\item 
+\Hypertarget{classxt_1_1data_1_1datasets_1_1CIFAR10_a98524cbc3c1e21922212499ffbe021d4}\label{classxt_1_1data_1_1datasets_1_1CIFAR10_a98524cbc3c1e21922212499ffbe021d4} 
+torch\+::optional$<$ size\+\_\+t $>$ {\bfseries size} () const override
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classxt_1_1data_1_1datasets_1_1BaseDataset}{xt\+::data\+::datasets\+::\+Base\+Dataset}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Base\+Dataset} (const std\+::string \&root)
+\item 
+{\bfseries Base\+Dataset} (const std\+::string \&root, Data\+Mode mode)
+\item 
+{\bfseries Base\+Dataset} (const std\+::string \&root, Data\+Mode mode, bool download)
+\item 
+{\bfseries Base\+Dataset} (const std\+::string \&root, Data\+Mode mode, bool download, vector$<$ std\+::function$<$ torch\+::\+Tensor(torch\+::\+Tensor)$>$ $>$ transforms)
+\item 
+torch\+::data\+::\+Example {\bfseries get} (size\+\_\+t index) override
+\item 
+torch\+::optional$<$ size\+\_\+t $>$ {\bfseries size} () const override
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Public Types inherited from \mbox{\hyperlink{classxt_1_1data_1_1datasets_1_1BaseDataset}{xt\+::data\+::datasets\+::\+Base\+Dataset}}}
+\begin{DoxyCompactItemize}
+\item 
+using {\bfseries Transform\+Type} = vector$<$std\+::function$<$torch\+::\+Tensor(torch\+::\+Tensor)$>$ $>$
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes inherited from \mbox{\hyperlink{classxt_1_1data_1_1datasets_1_1BaseDataset}{xt\+::data\+::datasets\+::\+Base\+Dataset}}}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ torch\+::\+Tensor $>$ {\bfseries data}
+\item 
+std\+::vector$<$ uint8\+\_\+t $>$ {\bfseries labels}
+\item 
+Data\+Mode {\bfseries mode} = Data\+Mode\+::\+TRAIN
+\item 
+bool {\bfseries download} = false
+\item 
+fs\+::path {\bfseries root}
+\item 
+fs\+::path {\bfseries dataset\+\_\+path}
+\item 
+\mbox{\hyperlink{classxt_1_1data_1_1transforms_1_1Compose}{xt\+::data\+::transforms\+::\+Compose}} {\bfseries compose}
+\item 
+vector$<$ std\+::function$<$ torch\+::\+Tensor(torch\+::\+Tensor)$>$ $>$ {\bfseries transforms} = \{\}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+cifar.\+h\end{DoxyCompactItemize}
