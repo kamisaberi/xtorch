@@ -14,3 +14,5 @@ python:
 mkdocs:
   configuration: tutorial/mkdocs.yml
 
+exclude:
+  - tutorial/docs/api/index.md
