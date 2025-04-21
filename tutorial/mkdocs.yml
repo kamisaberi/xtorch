@@ -18,4 +18,4 @@ plugins:
             RECURSIVE: true
 
 # Move nav to a separate file for conditional logic
-nav: !macro xtorch_nav()
+#nav: !macro xtorch_nav()

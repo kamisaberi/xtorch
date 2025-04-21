@@ -18,7 +18,7 @@
     
     
       
-        <title>File stl.h - xTorch</title>
+        <title>Macro Syntax Error - xTorch</title>
       
     
     
@@ -60,7 +60,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#file-stlh" class="md-skip">
+        <a href="#macro-syntax-error" class="md-skip">
           Skip to content
         </a>
       
@@ -96,7 +96,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              File stl.h
+              Macro Syntax Error
             
           </span>
         </div>
@@ -1366,75 +1366,10 @@
   
 
 
-<h1 id="file-stlh">File stl.h</h1>
-<p><a href="../files/"><strong>File List</strong></a> <strong>&gt;</strong> <a href="../dir_29ff4802398ba4a572b958e731c7adb4/"><strong>datasets</strong></a> <strong>&gt;</strong> <a href="../dir_9d21d6f83a70094db43fe94b096ae893/"><strong>image-classification</strong></a> <strong>&gt;</strong> <a href="../stl_8h/"><strong>stl.h</strong></a></p>
-<p><a href="../stl_8h/">Go to the documentation of this file</a></p>
-<pre><code class="language-C++">#pragma once
-#include &quot;../base/base.h&quot;
-#include &quot;../../headers/datasets.h&quot;
-
-using namespace std;
-namespace fs = std::filesystem;
-
-
-namespace xt::data::datasets {
-    class STL10 : BaseDataset {
-        /*
-        &quot;&quot;&quot;`STL10 &lt;https://cs.stanford.edu/~acoates/stl10/&gt;`_ Dataset.
-
-    Args:
-        root (str or ``pathlib.Path``): Root directory of dataset where directory
-            ``stl10_binary`` exists.
-        split (string): One of {'train', 'test', 'unlabeled', 'train+unlabeled'}.
-            Accordingly, dataset is selected.
-        folds (int, optional): One of {0-9} or None.
-            For training, loads one of the 10 pre-defined folds of 1k samples for the
-            standard evaluation procedure. If no value is passed, loads the 5k samples.
-        transform (callable, optional): A function/transform that takes in a PIL image
-            and returns a transformed version. E.g, ``transforms.RandomCrop``
-        target_transform (callable, optional): A function/transform that takes in the
-            target and transforms it.
-        download (bool, optional): If true, downloads the dataset from the internet and
-            puts it in root directory. If dataset is already downloaded, it is not
-            downloaded again.
-    &quot;&quot;&quot;
-
-         */
-    public :
-        explicit STL10(const std::string &amp;root);
-        STL10(const std::string &amp;root, DataMode mode);
-        STL10(const std::string &amp;root, DataMode mode , bool download);
-        STL10(const std::string &amp;root, DataMode mode , bool download, TransformType transforms);
-
-
-    private :
-
-        fs::path dataset_folder_name = fs::path(&quot;stl10_binary&quot;);
-        fs::path url = fs::path(&quot;http://ai.stanford.edu/~acoates/stl10/stl10_binary.tar.gz&quot;);
-        fs::path dataset_file_name = fs::path(&quot;stl10_binary.tar.gz&quot;);
-        std::string dataset_file_md5 = &quot;91f7769df0f17e558f3565bffb0c7dfb&quot;;
-
-
-        fs::path class_names_file = fs::path(&quot;class_names.txt&quot;);
-        fs::path folds_list_file = fs::path(&quot;fold_indices.txt&quot;);
-
-        std::vector&lt;std::tuple&lt;fs::path, std::string &gt;&gt; train_list = {
-                {&quot;train_X.bin&quot;, &quot;918c2871b30a85fa023e0c44e0bee87f&quot;},
-                {&quot;train_y.bin&quot;, &quot;5a34089d4802c674881badbb80307741&quot;},
-                {&quot;unlabeled_X.bin&quot;, &quot;5242ba1fed5e4be9e1e742405eb56ca4&quot;}
-        };
-
-        std::vector&lt;std::tuple&lt;fs::path, std::string &gt;&gt; test_list = {{&quot;test_X.bin&quot;, &quot;7f263ba9f9e0b06b93213547f721ac82&quot;},
-                                                                     {&quot;test_y.bin&quot;, &quot;36f9794fa4beb8a2c72628de14fa638e&quot;}};
-        std::vector&lt;std::string&gt; splits = {&quot;train&quot;, &quot;train+unlabeled&quot;, &quot;unlabeled&quot;, &quot;test&quot;};
-        void load_data();
-
-        void check_resources();
-
-
-
-    };
-}
+<h1 id="macro-syntax-error"><em>Macro Syntax Error</em></h1>
+<p><em>File</em>: <code>xtorch/stl_8h_source.md</code></p>
+<p><em>Line 64 in Markdown file:</em> <strong>unexpected '}'</strong></p>
+<pre><code class="language-markdown">        std::vector&lt;std::tuple&lt;fs::path, std::string &gt;&gt; test_list = {{&quot;test_X.bin&quot;, &quot;7f263ba9f9e0b06b93213547f721ac82&quot;},
 </code></pre>
 
 
