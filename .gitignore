@@ -3,6 +3,7 @@ build/
 .idea/
 tutorial/.venv
 tutorial/site
+tutorial/docs/doxygen
 
 #torch-extension/build/
 #torch-extension/cmake-build-debug/
