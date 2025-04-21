@@ -62,6 +62,9 @@ def define_env(env):
                 {"Native Extensions": "api/cpp/native.md"},
             ]}
         ])
-        nav.append(api_ref)
+        # nav.append(api_ref)
+    else :
+        api_ref = {"API Reference": "api/ref.md"}
+    nav.append(api_ref)
     # Set the navigation
     env.conf["nav"] = nav
