@@ -13,7 +13,6 @@ def define_env(env):
             {"Quickstart": "getting_started/quickstart_tutorial.md"},
             {"Migration from PyTorch": "getting_started/migration_guide.md"},
         ]},
-        {"API Reference": []},
         {"Tutorials": [
             {"Basics": [
                 {"Hello World": "tutorials/basics/hello_world.md"},
@@ -42,28 +41,28 @@ def define_env(env):
         {"Community": [
             {"FAQ": "community/faq.md"},
             {"Code of Conduct": "community/code_of_conduct.md"},
-        ]}
+        ]},
+        {"API Reference": []},
     ]
-
-    # Add API Reference entries
-    api_ref = nav[2]["API Reference"]
-
     if not is_rtd:
+        api_ref = {"API Reference": []}
+        # Add API Reference entries
+        # api_ref = nav[2]["API Reference"]
         api_ref.append({"Index": "api/index.md"})
 
-    api_ref.extend([
-        {"Python API": [
-            {"Core": "api/python/core.md"},
-            {"NN Modules": "api/python/nn.md"},
-            {"Optimizers": "api/python/optim.md"},
-            {"Utilities": "api/python/utils.md"},
-        ]},
-        {"C++ API": [
-            {"Tensor Operations": "api/cpp/tensor.md"},
-            {"Core Classes": "api/cpp/core_classes.md"},
-            {"Native Extensions": "api/cpp/native.md"},
-        ]}
-    ])
-
+        api_ref.extend([
+            {"Python API": [
+                {"Core": "api/python/core.md"},
+                {"NN Modules": "api/python/nn.md"},
+                {"Optimizers": "api/python/optim.md"},
+                {"Utilities": "api/python/utils.md"},
+            ]},
+            {"C++ API": [
+                {"Tensor Operations": "api/cpp/tensor.md"},
+                {"Core Classes": "api/cpp/core_classes.md"},
+                {"Native Extensions": "api/cpp/native.md"},
+            ]}
+        ])
+        nav.append(api_ref)
     # Set the navigation
     env.conf["nav"] = nav
