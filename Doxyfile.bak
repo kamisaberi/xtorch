@@ -1,3 +1,3 @@
 INPUT = ./include
-OUTPUT_DIRECTORY = docs
+OUTPUT_DIRECTORY = tutorial/docs
 GENERATE_XML = YES
