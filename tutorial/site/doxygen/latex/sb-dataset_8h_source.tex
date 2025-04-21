@@ -1,0 +1,71 @@
+\doxysection{sb-\/dataset.h}
+\hypertarget{sb-dataset_8h_source}{}\label{sb-dataset_8h_source}\index{sb-\/dataset.h@{sb-\/dataset.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ "{}../base/base.h"{}}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}../../headers/datasets.h"{}}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00006\ \textcolor{keyword}{namespace\ }fs\ =\ std::filesystem;}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }xt::data::datasets\ \{}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keyword}{class\ }SBDataset\ :\ BaseDataset\ \{}
+\DoxyCodeLine{00011\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ \ \ \ \ \ \ \ "{}"{}"{}`Semantic\ Boundaries\ Dataset\ <http://home.bharathh.info/pubs/codes/SBD/download.html>`\_}}
+\DoxyCodeLine{00013\ \textcolor{comment}{}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ \ \ \ The\ SBD\ currently\ contains\ annotations\ from\ 11355\ images\ taken\ from\ the\ PASCAL\ VOC\ 2011\ dataset.}}
+\DoxyCodeLine{00015\ \textcolor{comment}{}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ \ \ \ ..\ note\ ::}}
+\DoxyCodeLine{00017\ \textcolor{comment}{}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ \ \ \ \ \ \ \ Please\ note\ that\ the\ train\ and\ val\ splits\ included\ with\ this\ dataset\ are\ different\ from}}
+\DoxyCodeLine{00019\ \textcolor{comment}{\ \ \ \ \ \ \ \ the\ splits\ in\ the\ PASCAL\ VOC\ dataset.\ In\ particular\ some\ "{}train"{}\ images\ might\ be\ part\ of}}
+\DoxyCodeLine{00020\ \textcolor{comment}{\ \ \ \ \ \ \ \ VOC2012\ val.}}
+\DoxyCodeLine{00021\ \textcolor{comment}{\ \ \ \ \ \ \ \ If\ you\ are\ interested\ in\ testing\ on\ VOC\ 2012\ val,\ then\ use\ \`{}image\_set='train\_noval'`,}}
+\DoxyCodeLine{00022\ \textcolor{comment}{\ \ \ \ \ \ \ \ which\ excludes\ all\ val\ images.}}
+\DoxyCodeLine{00023\ \textcolor{comment}{}}
+\DoxyCodeLine{00024\ \textcolor{comment}{\ \ \ \ ..\ warning::}}
+\DoxyCodeLine{00025\ \textcolor{comment}{}}
+\DoxyCodeLine{00026\ \textcolor{comment}{\ \ \ \ \ \ \ \ This\ class\ needs\ \`{}scipy\ <https://docs.scipy.org/doc/>`\_\ to\ load\ target\ files\ from\ \`{}.mat`\ format.}}
+\DoxyCodeLine{00027\ \textcolor{comment}{}}
+\DoxyCodeLine{00028\ \textcolor{comment}{\ \ \ \ Args:}}
+\DoxyCodeLine{00029\ \textcolor{comment}{\ \ \ \ \ \ \ \ root\ (str\ or\ \`{}\`{}pathlib.Path``):\ Root\ directory\ of\ the\ Semantic\ Boundaries\ Dataset}}
+\DoxyCodeLine{00030\ \textcolor{comment}{\ \ \ \ \ \ \ \ image\_set\ (string,\ optional):\ Select\ the\ image\_set\ to\ use,\ \`{}\`{}train``,\ \`{}\`{}val``\ or\ \`{}\`{}train\_noval``.}}
+\DoxyCodeLine{00031\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ Image\ set\ \`{}\`{}train\_noval``\ excludes\ VOC\ 2012\ val\ images.}}
+\DoxyCodeLine{00032\ \textcolor{comment}{\ \ \ \ \ \ \ \ mode\ (string,\ optional):\ Select\ target\ type.\ Possible\ values\ 'boundaries'\ or\ 'segmentation'.}}
+\DoxyCodeLine{00033\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ In\ case\ of\ 'boundaries',\ the\ target\ is\ an\ array\ of\ shape\ \`{}[num\_classes,\ H,\ W]`,}}
+\DoxyCodeLine{00034\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ where\ \`{}num\_classes=20`.}}
+\DoxyCodeLine{00035\ \textcolor{comment}{\ \ \ \ \ \ \ \ download\ (bool,\ optional):\ If\ true,\ downloads\ the\ dataset\ from\ the\ internet\ and}}
+\DoxyCodeLine{00036\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ puts\ it\ in\ root\ directory.\ If\ dataset\ is\ already\ downloaded,\ it\ is\ not}}
+\DoxyCodeLine{00037\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ downloaded\ again.}}
+\DoxyCodeLine{00038\ \textcolor{comment}{\ \ \ \ \ \ \ \ transforms\ (callable,\ optional):\ A\ function/transform\ that\ takes\ input\ sample\ and\ its\ target\ as\ entry}}
+\DoxyCodeLine{00039\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ and\ returns\ a\ transformed\ version.\ Input\ sample\ is\ PIL\ image\ and\ target\ is\ a\ numpy\ array}}
+\DoxyCodeLine{00040\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ if\ \`{}mode='boundaries'`\ or\ PIL\ image\ if\ \`{}mode='segmentation'`.}}
+\DoxyCodeLine{00041\ \textcolor{comment}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00042\ \textcolor{comment}{}}
+\DoxyCodeLine{00043\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00044\ \ \ \ \ public\ :}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ SBDataset(\textcolor{keyword}{const}\ std::string\ \&root);}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ SBDataset(\textcolor{keyword}{const}\ std::string\ \&root,\ DataMode\ mode);}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ SBDataset(\textcolor{keyword}{const}\ std::string\ \&root,\ DataMode\ mode\ ,\ \textcolor{keywordtype}{bool}\ download);}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ SBDataset(\textcolor{keyword}{const}\ std::string\ \&root,\ DataMode\ mode\ ,\ \textcolor{keywordtype}{bool}\ download,\ TransformType\ transforms);}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ fs::path\ url\ =\ fs::path(\textcolor{stringliteral}{"{}https://www2.eecs.berkeley.edu/Research/Projects/CS/vision/grouping/semantic\_contours/benchmark.tgz"{}});}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ std::string\ md5\ =\ \textcolor{stringliteral}{"{}82b4d87ceb2ed10f6038a1cba92111cb"{}};}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ fs::path\ filename\ =\ fs::path(\textcolor{stringliteral}{"{}benchmark.tgz"{}});}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ fs::path\ voc\_train\_url\ =\ fs::path(\textcolor{stringliteral}{"{}https://www.cs.cornell.edu/\string~bharathh/train\_noval.txt"{}});}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ fs::path\ voc\_split\_filename\ =\ fs::path(\textcolor{stringliteral}{"{}train\_noval.txt"{}});}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ std::string\ voc\_split\_md5\ =\ \textcolor{stringliteral}{"{}79bff800c5f0b1ec6b21080a3c066722"{}};}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ load\_data();}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ check\_resources();}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \ \ \ \ \};}
+\DoxyCodeLine{00065\ \}}
+
+\end{DoxyCode}

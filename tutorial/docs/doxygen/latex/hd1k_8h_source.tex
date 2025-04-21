@@ -1,0 +1,77 @@
+\doxysection{hd1k.\+h}
+\hypertarget{hd1k_8h_source}{}\label{hd1k_8h_source}\index{hd1k.h@{hd1k.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ "{}../base/base.h"{}}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}../../headers/datasets.h"{}}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{namespace\ }xt::data::datasets\ \{}
+\DoxyCodeLine{00007\ \ \ \ \ \textcolor{keyword}{class\ }HD1K\ :\ BaseDataset\ \{}
+\DoxyCodeLine{00008\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ \ \ \ \ \ \ \ Hello,}}
+\DoxyCodeLine{00010\ \textcolor{comment}{}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ \ \ \ \ \ \ \ Thanks\ for\ your\ interest\ in\ our\ dataset.}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ \ \ \ \ \ \ \ You\ may\ download\ our\ packages\ using\ the\ following\ links:}}
+\DoxyCodeLine{00013\ \textcolor{comment}{}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ \ \ \ \ \ \ \ Complete\ package\ with\ all\ available\ data\ (ca.\ 8\ GB):}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ \ \ \ \ \ \ \ http://hci-\/benchmark.iwr.uni-\/heidelberg.de/media/downloads/hd1k\_full\_package.zip}}
+\DoxyCodeLine{00016\ \textcolor{comment}{}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ \ \ \ \ \ \ \ Individual\ packages:}}
+\DoxyCodeLine{00018\ \textcolor{comment}{}}
+\DoxyCodeLine{00019\ \textcolor{comment}{\ \ \ \ \ \ \ \ Benchmark\ package\ with\ input\ images\ of\ the\ test\ frames:}}
+\DoxyCodeLine{00020\ \textcolor{comment}{\ \ \ \ \ \ \ \ http://hci-\/benchmark.iwr.uni-\/heidelberg.de/media/downloads/hd1k\_challenge.zip}}
+\DoxyCodeLine{00021\ \textcolor{comment}{}}
+\DoxyCodeLine{00022\ \textcolor{comment}{\ \ \ \ \ \ \ \ Input\ images\ for\ optical\ flow:}}
+\DoxyCodeLine{00023\ \textcolor{comment}{\ \ \ \ \ \ \ \ http://hci-\/benchmark.iwr.uni-\/heidelberg.de/media/downloads/hd1k\_input.zip}}
+\DoxyCodeLine{00024\ \textcolor{comment}{}}
+\DoxyCodeLine{00025\ \textcolor{comment}{\ \ \ \ \ \ \ \ Ground\ truth\ for\ optical\ flow:}}
+\DoxyCodeLine{00026\ \textcolor{comment}{\ \ \ \ \ \ \ \ http://hci-\/benchmark.iwr.uni-\/heidelberg.de/media/downloads/hd1k\_flow\_gt.zip}}
+\DoxyCodeLine{00027\ \textcolor{comment}{}}
+\DoxyCodeLine{00028\ \textcolor{comment}{\ \ \ \ \ \ \ \ Ground\ truth\ uncertainty\ maps\ for\ optical\ flow:}}
+\DoxyCodeLine{00029\ \textcolor{comment}{\ \ \ \ \ \ \ \ http://hci-\/benchmark.iwr.uni-\/heidelberg.de/media/downloads/hd1k\_flow\_uncertainty.zip}}
+\DoxyCodeLine{00030\ \textcolor{comment}{}}
+\DoxyCodeLine{00031\ \textcolor{comment}{}}
+\DoxyCodeLine{00032\ \textcolor{comment}{\ \ \ \ \ \ \ \ For\ more\ information,\ visit\ www.hci-\/benchmark.org\ or\ contact\ us\ via\ email.}}
+\DoxyCodeLine{00033\ \textcolor{comment}{\ \ \ \ \ \ \ \ We\ are\ happy\ to\ hear\ about\ your\ feedback,\ wishes,\ and\ bug\ reports.}}
+\DoxyCodeLine{00034\ \textcolor{comment}{}}
+\DoxyCodeLine{00035\ \textcolor{comment}{\ \ \ \ \ \ \ \ Yours,}}
+\DoxyCodeLine{00036\ \textcolor{comment}{\ \ \ \ \ \ \ \ The\ HD1K\ Benchmark\ Team}}
+\DoxyCodeLine{00037\ \textcolor{comment}{}}
+\DoxyCodeLine{00038\ \textcolor{comment}{\ \ \ \ \ \ \ \ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00039\ \textcolor{comment}{\ \ \ \ \ \ \ \ "{}"{}"{}`HD1K\ <http://hci-\/benchmark.iwr.uni-\/heidelberg.de/>`\_\_\ dataset\ for\ optical\ flow.}}
+\DoxyCodeLine{00040\ \textcolor{comment}{\ \ \ \ \ \ \ \ The\ dataset\ is\ expected\ to\ have\ the\ following\ structure:\ ::}}
+\DoxyCodeLine{00041\ \textcolor{comment}{}}
+\DoxyCodeLine{00042\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ root}}
+\DoxyCodeLine{00043\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ hd1k}}
+\DoxyCodeLine{00044\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ hd1k\_challenge}}
+\DoxyCodeLine{00045\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ image\_2}}
+\DoxyCodeLine{00046\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ hd1k\_flow\_gt}}
+\DoxyCodeLine{00047\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ flow\_occ}}
+\DoxyCodeLine{00048\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ hd1k\_input}}
+\DoxyCodeLine{00049\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ image\_2}}
+\DoxyCodeLine{00050\ \textcolor{comment}{\ \ \ \ \ \ \ \ Args:}}
+\DoxyCodeLine{00051\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ root\ (str\ or\ \`{}\`{}pathlib.Path``):\ Root\ directory\ of\ the\ HD1K\ Dataset.}}
+\DoxyCodeLine{00052\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ split\ (string,\ optional):\ The\ dataset\ split,\ either\ "{}train"{}\ (default)\ or\ "{}test"{}}}
+\DoxyCodeLine{00053\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ transforms\ (callable,\ optional):\ A\ function/transform\ that\ takes\ in}}
+\DoxyCodeLine{00054\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \`{}\`{}img1,\ img2,\ flow,\ valid\_flow\_mask``\ and\ returns\ a\ transformed\ version.}}
+\DoxyCodeLine{00055\ \textcolor{comment}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00056\ \textcolor{comment}{}}
+\DoxyCodeLine{00057\ \textcolor{comment}{}}
+\DoxyCodeLine{00058\ \textcolor{comment}{\ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00059\ \ \ \ \ public\ :}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ HD1K(\textcolor{keyword}{const}\ std::string\ \&root);}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ HD1K(\textcolor{keyword}{const}\ std::string\ \&root,\ DataMode\ mode);}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ HD1K(\textcolor{keyword}{const}\ std::string\ \&root,\ DataMode\ mode\ ,\ \textcolor{keywordtype}{bool}\ download);}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ HD1K(\textcolor{keyword}{const}\ std::string\ \&root,\ DataMode\ mode\ ,\ \textcolor{keywordtype}{bool}\ download,\ TransformType\ transforms);}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \ \ \ \ private\ :}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ load\_data();}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ check\_resources();}
+\DoxyCodeLine{00070\ \ \ \ \ \};}
+\DoxyCodeLine{00071\ \}}
+
+\end{DoxyCode}

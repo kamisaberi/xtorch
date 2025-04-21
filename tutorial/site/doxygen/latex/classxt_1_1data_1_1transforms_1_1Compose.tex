@@ -1,0 +1,97 @@
+\doxysection{xt\+::data\+::transforms\+::Compose Class Reference}
+\hypertarget{classxt_1_1data_1_1transforms_1_1Compose}{}\label{classxt_1_1data_1_1transforms_1_1Compose}\index{xt::data::transforms::Compose@{xt::data::transforms::Compose}}
+
+
+A class to compose multiple tensor transformations into a single callable pipeline.  
+
+
+
+
+{\ttfamily \#include $<$compose.\+h$>$}
+
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{classxt_1_1data_1_1transforms_1_1Compose_a7577a6eac92063cde3d6021715b12377}{Transform\+Func}} = std\+::function$<$torch\+::\+Tensor(torch\+::\+Tensor)$>$
+\begin{DoxyCompactList}\small\item\em Alias for a transformation function that takes a tensor and returns a tensor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classxt_1_1data_1_1transforms_1_1Compose_ad7d277db74572350bcd2d008bfd6b845}{Compose}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor, initializing an empty transformation pipeline. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classxt_1_1data_1_1transforms_1_1Compose_abba2130edfe936c3e1f7054cb01d0f05}{Compose}} (std\+::vector$<$ \mbox{\hyperlink{classxt_1_1data_1_1transforms_1_1Compose_a7577a6eac92063cde3d6021715b12377}{Transform\+Func}} $>$ transforms)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classxt_1_1data_1_1transforms_1_1Compose}{Compose} object with a vector of transformation functions. \end{DoxyCompactList}\item 
+torch\+::\+Tensor \mbox{\hyperlink{classxt_1_1data_1_1transforms_1_1Compose_a40074254792ab21a36ca2b64666cd2d3}{operator()}} (torch\+::\+Tensor input) const
+\begin{DoxyCompactList}\small\item\em Applies the sequence of transformations to the input tensor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class to compose multiple tensor transformations into a single callable pipeline. 
+
+The \doxylink{classxt_1_1data_1_1transforms_1_1Compose}{Compose} class allows chaining of multiple transformation functions, each operating on a {\ttfamily torch\+::\+Tensor}, into a single operation. It is designed to facilitate preprocessing or augmentation of tensor data (e.\+g., images) by applying a sequence of transforms in the order they are provided. The transformations are stored as a vector of function objects and applied via the call operator. 
+
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{classxt_1_1data_1_1transforms_1_1Compose_a7577a6eac92063cde3d6021715b12377}\index{xt::data::transforms::Compose@{xt::data::transforms::Compose}!TransformFunc@{TransformFunc}}
+\index{TransformFunc@{TransformFunc}!xt::data::transforms::Compose@{xt::data::transforms::Compose}}
+\doxysubsubsection{\texorpdfstring{TransformFunc}{TransformFunc}}
+{\footnotesize\ttfamily \label{classxt_1_1data_1_1transforms_1_1Compose_a7577a6eac92063cde3d6021715b12377} 
+using \mbox{\hyperlink{classxt_1_1data_1_1transforms_1_1Compose_a7577a6eac92063cde3d6021715b12377}{xt\+::data\+::transforms\+::\+Compose\+::\+Transform\+Func}} = std\+::function$<$torch\+::\+Tensor(torch\+::\+Tensor)$>$}
+
+
+
+Alias for a transformation function that takes a tensor and returns a tensor. 
+
+This type alias defines a function signature for transformations that operate on {\ttfamily torch\+::\+Tensor} objects, enabling flexible composition of operations. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classxt_1_1data_1_1transforms_1_1Compose_ad7d277db74572350bcd2d008bfd6b845}\index{xt::data::transforms::Compose@{xt::data::transforms::Compose}!Compose@{Compose}}
+\index{Compose@{Compose}!xt::data::transforms::Compose@{xt::data::transforms::Compose}}
+\doxysubsubsection{\texorpdfstring{Compose()}{Compose()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classxt_1_1data_1_1transforms_1_1Compose_ad7d277db74572350bcd2d008bfd6b845} 
+xt\+::data\+::transforms\+::\+Compose\+::\+Compose (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Default constructor, initializing an empty transformation pipeline. 
+
+Creates a \doxylink{classxt_1_1data_1_1transforms_1_1Compose}{Compose} object with no transformations, allowing subsequent addition of transforms if needed. \Hypertarget{classxt_1_1data_1_1transforms_1_1Compose_abba2130edfe936c3e1f7054cb01d0f05}\index{xt::data::transforms::Compose@{xt::data::transforms::Compose}!Compose@{Compose}}
+\index{Compose@{Compose}!xt::data::transforms::Compose@{xt::data::transforms::Compose}}
+\doxysubsubsection{\texorpdfstring{Compose()}{Compose()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classxt_1_1data_1_1transforms_1_1Compose_abba2130edfe936c3e1f7054cb01d0f05} 
+xt\+::data\+::transforms\+::\+Compose\+::\+Compose (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{classxt_1_1data_1_1transforms_1_1Compose_a7577a6eac92063cde3d6021715b12377}{Transform\+Func}} $>$}]{transforms}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a \doxylink{classxt_1_1data_1_1transforms_1_1Compose}{Compose} object with a vector of transformation functions. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em transforms} & A vector of \doxylink{classxt_1_1data_1_1transforms_1_1Compose_a7577a6eac92063cde3d6021715b12377}{Transform\+Func} objects specifying the sequence of transformations.\\
+\hline
+\end{DoxyParams}
+Initializes the \doxylink{classxt_1_1data_1_1transforms_1_1Compose}{Compose} object with a predefined set of transformations to be applied in order. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classxt_1_1data_1_1transforms_1_1Compose_a40074254792ab21a36ca2b64666cd2d3}\index{xt::data::transforms::Compose@{xt::data::transforms::Compose}!operator()@{operator()}}
+\index{operator()@{operator()}!xt::data::transforms::Compose@{xt::data::transforms::Compose}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}}
+{\footnotesize\ttfamily \label{classxt_1_1data_1_1transforms_1_1Compose_a40074254792ab21a36ca2b64666cd2d3} 
+torch\+::\+Tensor xt\+::data\+::transforms\+::\+Compose\+::operator() (\begin{DoxyParamCaption}\item[{torch\+::\+Tensor}]{input}{}\end{DoxyParamCaption}) const}
+
+
+
+Applies the sequence of transformations to the input tensor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em input} & The input tensor to be transformed. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A tensor resulting from applying all transformations in sequence.
+\end{DoxyReturn}
+This operator applies each transformation in the {\ttfamily transforms} vector to the input tensor, passing the output of one transformation as the input to the next, and returns the final result. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+compose.\+h\end{DoxyCompactItemize}

@@ -1,0 +1,57 @@
+\doxysection{rendered-\/sst2.h}
+\hypertarget{rendered-sst2_8h_source}{}\label{rendered-sst2_8h_source}\index{rendered-\/sst2.h@{rendered-\/sst2.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ "{}../base/base.h"{}}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}../../headers/datasets.h"{}}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00006\ \textcolor{keyword}{namespace\ }fs\ =\ std::filesystem;}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }xt::data::datasets\ \{}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keyword}{class\ }RenderedSST2\ :\ BaseDataset\ \{}
+\DoxyCodeLine{00011\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ \ \ \ \ \ \ \ "{}"{}"{}`The\ Rendered\ SST2\ Dataset\ <https://github.com/openai/CLIP/blob/main/data/rendered-\/sst2.md>`\_.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ \ \ \ Rendered\ SST2\ is\ an\ image\ classification\ dataset\ used\ to\ evaluate\ the\ models\ capability\ on\ optical}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ \ \ \ character\ recognition.\ This\ dataset\ was\ generated\ by\ rendering\ sentences\ in\ the\ Standford\ Sentiment}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ \ \ \ Treebank\ v2\ dataset.}}
+\DoxyCodeLine{00017\ \textcolor{comment}{}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ \ \ \ This\ dataset\ contains\ two\ classes\ (positive\ and\ negative)\ and\ is\ divided\ in\ three\ splits:\ a\ \ train}}
+\DoxyCodeLine{00019\ \textcolor{comment}{\ \ \ \ split\ containing\ 6920\ images\ (3610\ positive\ and\ 3310\ negative),\ a\ validation\ split\ containing\ 872\ images}}
+\DoxyCodeLine{00020\ \textcolor{comment}{\ \ \ \ (444\ positive\ and\ 428\ negative),\ and\ a\ test\ split\ containing\ 1821\ images\ (909\ positive\ and\ 912\ negative).}}
+\DoxyCodeLine{00021\ \textcolor{comment}{}}
+\DoxyCodeLine{00022\ \textcolor{comment}{\ \ \ \ Args:}}
+\DoxyCodeLine{00023\ \textcolor{comment}{\ \ \ \ \ \ \ \ root\ (str\ or\ \`{}\`{}pathlib.Path``):\ Root\ directory\ of\ the\ dataset.}}
+\DoxyCodeLine{00024\ \textcolor{comment}{\ \ \ \ \ \ \ \ split\ (string,\ optional):\ The\ dataset\ split,\ supports\ \`{}\`{}"{}train"{}``\ (default),\ \`{}"{}val"{}`\ and\ \`{}\`{}"{}test"{}``.}}
+\DoxyCodeLine{00025\ \textcolor{comment}{\ \ \ \ \ \ \ \ transform\ (callable,\ optional):\ A\ function/transform\ that\ takes\ in\ a\ PIL\ image\ and\ returns\ a\ transformed}}
+\DoxyCodeLine{00026\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ version.\ E.g,\ \`{}\`{}transforms.RandomCrop``.}}
+\DoxyCodeLine{00027\ \textcolor{comment}{\ \ \ \ \ \ \ \ target\_transform\ (callable,\ optional):\ A\ function/transform\ that\ takes\ in\ the\ target\ and\ transforms\ it.}}
+\DoxyCodeLine{00028\ \textcolor{comment}{\ \ \ \ \ \ \ \ download\ (bool,\ optional):\ If\ True,\ downloads\ the\ dataset\ from\ the\ internet\ and}}
+\DoxyCodeLine{00029\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ puts\ it\ in\ root\ directory.\ If\ dataset\ is\ already\ downloaded,\ it\ is\ not}}
+\DoxyCodeLine{00030\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ downloaded\ again.\ Default\ is\ False.}}
+\DoxyCodeLine{00031\ \textcolor{comment}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00032\ \textcolor{comment}{}}
+\DoxyCodeLine{00033\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00034\ \ \ \ \ public\ :}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ RenderedSST2(\textcolor{keyword}{const}\ std::string\ \&root);}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ RenderedSST2(\textcolor{keyword}{const}\ std::string\ \&root,\ DataMode\ mode);}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ RenderedSST2(\textcolor{keyword}{const}\ std::string\ \&root,\ DataMode\ mode\ ,\ \textcolor{keywordtype}{bool}\ download);}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ RenderedSST2(\textcolor{keyword}{const}\ std::string\ \&root,\ DataMode\ mode\ ,\ \textcolor{keywordtype}{bool}\ download,\ TransformType\ transforms);}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ fs::path\ url\ =\ fs::path(\textcolor{stringliteral}{"{}https://openaipublic.azureedge.net/clip/data/rendered-\/sst2.tgz"{}});}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ fs::path\ dataset\_file\_name\ =\ \textcolor{stringliteral}{"{}rendered-\/sst2.tgz"{}};}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ std::string\ dataset\_file\_md5\ =\ \textcolor{stringliteral}{"{}2384d08e9dcfa4bd55b324e610496ee5"{}};}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ fs::path\ dataset\_folder\_name\ =\ \textcolor{stringliteral}{"{}rendered-\/sst2"{}};}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ load\_data();}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ check\_resources();}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ \};}
+\DoxyCodeLine{00051\ \}}
+
+\end{DoxyCode}

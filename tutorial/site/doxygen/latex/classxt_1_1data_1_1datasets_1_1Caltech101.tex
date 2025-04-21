@@ -1,0 +1,68 @@
+\doxysection{xt\+::data\+::datasets\+::Caltech101 Class Reference}
+\hypertarget{classxt_1_1data_1_1datasets_1_1Caltech101}{}\label{classxt_1_1data_1_1datasets_1_1Caltech101}\index{xt::data::datasets::Caltech101@{xt::data::datasets::Caltech101}}
+Inheritance diagram for xt\+::data\+::datasets\+::Caltech101\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classxt_1_1data_1_1datasets_1_1Caltech101}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classxt_1_1data_1_1datasets_1_1Caltech101_ad7f56634b27392f44ac091c1684cfaa2}\label{classxt_1_1data_1_1datasets_1_1Caltech101_ad7f56634b27392f44ac091c1684cfaa2} 
+{\bfseries Caltech101} (const std\+::string \&root)
+\item 
+\Hypertarget{classxt_1_1data_1_1datasets_1_1Caltech101_a9bd7da66be32811a29df32eee89b5b23}\label{classxt_1_1data_1_1datasets_1_1Caltech101_a9bd7da66be32811a29df32eee89b5b23} 
+{\bfseries Caltech101} (const std\+::string \&root, Data\+Mode mode)
+\item 
+\Hypertarget{classxt_1_1data_1_1datasets_1_1Caltech101_a473d6d03a52921273646f404949bb737}\label{classxt_1_1data_1_1datasets_1_1Caltech101_a473d6d03a52921273646f404949bb737} 
+{\bfseries Caltech101} (const std\+::string \&root, Data\+Mode mode, bool download)
+\item 
+\Hypertarget{classxt_1_1data_1_1datasets_1_1Caltech101_ac9f10dd9f8c14ff202dc9a9f38c7bc4a}\label{classxt_1_1data_1_1datasets_1_1Caltech101_ac9f10dd9f8c14ff202dc9a9f38c7bc4a} 
+{\bfseries Caltech101} (const std\+::string \&root, Data\+Mode mode, bool download, Transform\+Type transforms)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classxt_1_1data_1_1datasets_1_1BaseDataset}{xt\+::data\+::datasets\+::\+Base\+Dataset}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Base\+Dataset} (const std\+::string \&root)
+\item 
+{\bfseries Base\+Dataset} (const std\+::string \&root, Data\+Mode mode)
+\item 
+{\bfseries Base\+Dataset} (const std\+::string \&root, Data\+Mode mode, bool download)
+\item 
+{\bfseries Base\+Dataset} (const std\+::string \&root, Data\+Mode mode, bool download, vector$<$ std\+::function$<$ torch\+::\+Tensor(torch\+::\+Tensor)$>$ $>$ transforms)
+\item 
+torch\+::data\+::\+Example {\bfseries get} (size\+\_\+t index) override
+\item 
+torch\+::optional$<$ size\+\_\+t $>$ {\bfseries size} () const override
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Public Types inherited from \mbox{\hyperlink{classxt_1_1data_1_1datasets_1_1BaseDataset}{xt\+::data\+::datasets\+::\+Base\+Dataset}}}
+\begin{DoxyCompactItemize}
+\item 
+using {\bfseries Transform\+Type} = vector$<$std\+::function$<$torch\+::\+Tensor(torch\+::\+Tensor)$>$ $>$
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes inherited from \mbox{\hyperlink{classxt_1_1data_1_1datasets_1_1BaseDataset}{xt\+::data\+::datasets\+::\+Base\+Dataset}}}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ torch\+::\+Tensor $>$ {\bfseries data}
+\item 
+std\+::vector$<$ uint8\+\_\+t $>$ {\bfseries labels}
+\item 
+Data\+Mode {\bfseries mode} = Data\+Mode\+::\+TRAIN
+\item 
+bool {\bfseries download} = false
+\item 
+fs\+::path {\bfseries root}
+\item 
+fs\+::path {\bfseries dataset\+\_\+path}
+\item 
+\mbox{\hyperlink{classxt_1_1data_1_1transforms_1_1Compose}{xt\+::data\+::transforms\+::\+Compose}} {\bfseries compose}
+\item 
+vector$<$ std\+::function$<$ torch\+::\+Tensor(torch\+::\+Tensor)$>$ $>$ {\bfseries transforms} = \{\}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+caltech.\+h\end{DoxyCompactItemize}

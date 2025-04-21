@@ -1,0 +1,34 @@
+\doxysection{grayscale.\+h}
+\hypertarget{grayscale_8h_source}{}\label{grayscale_8h_source}\index{grayscale.h@{grayscale.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}../headers/transforms.h"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }xt::data::transforms\ \{}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structxt_1_1data_1_1transforms_1_1GrayscaleToRGB}{GrayscaleToRGB}}\ \{}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ torch::Tensor\ \mbox{\hyperlink{structxt_1_1data_1_1transforms_1_1GrayscaleToRGB_a85201cad2c8e53fa60b53a588f47bf54}{operator()}}(\textcolor{keyword}{const}\ torch::Tensor\ \&tensor);}
+\DoxyCodeLine{00032\ \ \ \ \ \};}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keyword}{struct\ }Grayscale\ \{}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ Grayscale();}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ torch::Tensor\ operator()(torch::Tensor\ input);}
+\DoxyCodeLine{00039\ \ \ \ \ \};}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structxt_1_1data_1_1transforms_1_1ToGray}{ToGray}}\ \{}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ torch::Tensor\ operator()(\textcolor{keyword}{const}\ torch::Tensor\&\ color\_tensor)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00043\ \ \ \ \ \};}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \}}
+
+\end{DoxyCode}

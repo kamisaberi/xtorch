@@ -1,0 +1,128 @@
+\doxysection{lfw.\+h}
+\hypertarget{lfw_8h_source}{}\label{lfw_8h_source}\index{lfw.h@{lfw.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ "{}../base/base.h"{}}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}../../headers/datasets.h"{}}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }fs\ =\ std::filesystem;}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }xt::data::datasets\ \{}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keyword}{class\ }LFW\ :\ \textcolor{keyword}{public}\ BaseDataset\ \{}
+\DoxyCodeLine{00011\ \ \ \ \ public\ :}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ LFW(\textcolor{keyword}{const}\ std::string\ \&root);}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ LFW(\textcolor{keyword}{const}\ std::string\ \&root,\ DataMode\ mode);}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ LFW(\textcolor{keyword}{const}\ std::string\ \&root,\ DataMode\ mode\ ,\ \textcolor{keywordtype}{bool}\ download);}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ LFW(\textcolor{keyword}{const}\ std::string\ \&root,\ DataMode\ mode\ ,\ \textcolor{keywordtype}{bool}\ download,\ TransformType\ transforms);}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \ \ \ \ private\ :}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ fs::path\ dataset\_folder\_name\ =\ fs::path(\textcolor{stringliteral}{"{}lfw-\/py"{}});}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ fs::path\ url\ =\ fs::path(\textcolor{stringliteral}{"{}http://vis-\/www.cs.umass.edu/lfw/"{}});}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ std::map<std::string,\ std::tuple<std::string,\ fs::path,\ std::string>\ >\ file\_dict\ =\ \{}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}original"{}},\ \{\textcolor{stringliteral}{"{}lfw"{}},\ fs::path(\textcolor{stringliteral}{"{}lfw.tgz"{}}),\ \textcolor{stringliteral}{"{}a17d05bd522c52d84eca14327a23d494"{}}\}\},}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}funneled"{}},\ \{\textcolor{stringliteral}{"{}lfw\_funneled"{}},\ fs::path(\textcolor{stringliteral}{"{}lfw-\/funneled.tgz"{}}),\ \textcolor{stringliteral}{"{}1b42dfed7d15c9b2dd63d5e5840c86ad"{}}\}\},}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}deepfunneled"{}},}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}lfw-\/deepfunneled"{}},\ fs::path(\textcolor{stringliteral}{"{}lfw-\/deepfunneled.tgz"{}}),\ \textcolor{stringliteral}{"{}68331da3eb755a505a502b5aacb3c201"{}}\}}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ std::map<std::string,\ std::string>\ checksums\ =\ \{}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}pairs.txt"{}},\ \textcolor{stringliteral}{"{}9f1ba174e4e1c508ff7cdf10ac338a7d"{}}\},}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}pairsDevTest.txt"{}},\ \textcolor{stringliteral}{"{}5132f7440eb68cf58910c8a45a2ac10b"{}}\},}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}pairsDevTrain.txt"{}},\ \textcolor{stringliteral}{"{}4f27cbf15b2da4a85c1907eb4181ad21"{}}\},}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}people.txt"{}},\ \textcolor{stringliteral}{"{}450f0863dd89e85e73936a6d71a3474b"{}}\},}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}peopleDevTest.txt"{}},\ \textcolor{stringliteral}{"{}e4bf5be0a43b5dcd9dc5ccfcb8fb19c5"{}}\},}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}peopleDevTrain.txt"{}},\ \textcolor{stringliteral}{"{}54eaac34beb6d042ed3a7d883e247a21"{}}\},}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}lfw-\/names.txt"{}},\ \textcolor{stringliteral}{"{}a6d0a479bd074669f656265a6e693f6d"{}}\}}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ std::map<std::string,\ std::string>\ annot\_file\ =\ \{}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}10fold"{}},\ \textcolor{stringliteral}{"{}"{}}\},}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}train"{}},\ \textcolor{stringliteral}{"{}DevTrain"{}}\},}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}test"{}},\ \textcolor{stringliteral}{"{}DevTest"{}}\}}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ fs::path\ names\ =\ fs::path(\textcolor{stringliteral}{"{}lfw-\/names.txt"{}});}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ load\_data();}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ check\_resources();}
+\DoxyCodeLine{00050\ \ \ \ \ \};}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keyword}{class\ }LFWPeople\ :\ \textcolor{keyword}{public}\ LFW\ \{}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00054\ \textcolor{comment}{\ \ \ \ \ \ \ \ "{}"{}"{}`LFW\ <http://vis-\/www.cs.umass.edu/lfw/>`\_\ Dataset.}}
+\DoxyCodeLine{00055\ \textcolor{comment}{}}
+\DoxyCodeLine{00056\ \textcolor{comment}{\ \ \ \ Args:}}
+\DoxyCodeLine{00057\ \textcolor{comment}{\ \ \ \ \ \ \ \ root\ (str\ or\ \`{}\`{}pathlib.Path``):\ Root\ directory\ of\ dataset\ where\ directory}}
+\DoxyCodeLine{00058\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \`{}\`{}lfw-\/py``\ exists\ or\ will\ be\ saved\ to\ if\ download\ is\ set\ to\ True.}}
+\DoxyCodeLine{00059\ \textcolor{comment}{\ \ \ \ \ \ \ \ split\ (string,\ optional):\ The\ image\ split\ to\ use.\ Can\ be\ one\ of\ \`{}\`{}train``,\ \`{}\`{}test``,}}
+\DoxyCodeLine{00060\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \`{}\`{}10fold``\ (default).}}
+\DoxyCodeLine{00061\ \textcolor{comment}{\ \ \ \ \ \ \ \ image\_set\ (str,\ optional):\ Type\ of\ image\ funneling\ to\ use,\ \`{}\`{}original``,\ \`{}\`{}funneled``\ or}}
+\DoxyCodeLine{00062\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \`{}\`{}deepfunneled``.\ Defaults\ to\ \`{}\`{}funneled``.}}
+\DoxyCodeLine{00063\ \textcolor{comment}{\ \ \ \ \ \ \ \ transform\ (callable,\ optional):\ A\ function/transform\ that\ \ takes\ in\ a\ PIL\ image}}
+\DoxyCodeLine{00064\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ and\ returns\ a\ transformed\ version.\ E.g,\ \`{}\`{}transforms.RandomRotation``}}
+\DoxyCodeLine{00065\ \textcolor{comment}{\ \ \ \ \ \ \ \ target\_transform\ (callable,\ optional):\ A\ function/transform\ that\ takes\ in\ the}}
+\DoxyCodeLine{00066\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ target\ and\ transforms\ it.}}
+\DoxyCodeLine{00067\ \textcolor{comment}{\ \ \ \ \ \ \ \ download\ (bool,\ optional):\ If\ true,\ downloads\ the\ dataset\ from\ the\ internet\ and}}
+\DoxyCodeLine{00068\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ puts\ it\ in\ root\ directory.\ If\ dataset\ is\ already\ downloaded,\ it\ is\ not}}
+\DoxyCodeLine{00069\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ downloaded\ again.}}
+\DoxyCodeLine{00070\ \textcolor{comment}{}}
+\DoxyCodeLine{00071\ \textcolor{comment}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00072\ \textcolor{comment}{}}
+\DoxyCodeLine{00073\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00074\ \ \ \ \ public\ :}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ LFWPeople(\textcolor{keyword}{const}\ std::string\ \&root);}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ LFWPeople(\textcolor{keyword}{const}\ std::string\ \&root,\ DataMode\ mode);}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ LFWPeople(\textcolor{keyword}{const}\ std::string\ \&root,\ DataMode\ mode\ ,\ \textcolor{keywordtype}{bool}\ download);}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ LFWPeople(\textcolor{keyword}{const}\ std::string\ \&root,\ DataMode\ mode\ ,\ \textcolor{keywordtype}{bool}\ download,\ TransformType\ transforms);}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \ \ \ \ private\ :}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ load\_data();}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ check\_resources();}
+\DoxyCodeLine{00085\ \ \ \ \ \};}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keyword}{class\ }LFWPairs\ :\ \textcolor{keyword}{public}\ LFW\ \{}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00089\ \textcolor{comment}{\ \ \ \ \ \ \ \ "{}"{}"{}`LFW\ <http://vis-\/www.cs.umass.edu/lfw/>`\_\ Dataset.}}
+\DoxyCodeLine{00090\ \textcolor{comment}{}}
+\DoxyCodeLine{00091\ \textcolor{comment}{\ \ \ \ Args:}}
+\DoxyCodeLine{00092\ \textcolor{comment}{\ \ \ \ \ \ \ \ root\ (str\ or\ \`{}\`{}pathlib.Path``):\ Root\ directory\ of\ dataset\ where\ directory}}
+\DoxyCodeLine{00093\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \`{}\`{}lfw-\/py``\ exists\ or\ will\ be\ saved\ to\ if\ download\ is\ set\ to\ True.}}
+\DoxyCodeLine{00094\ \textcolor{comment}{\ \ \ \ \ \ \ \ split\ (string,\ optional):\ The\ image\ split\ to\ use.\ Can\ be\ one\ of\ \`{}\`{}train``,\ \`{}\`{}test``,}}
+\DoxyCodeLine{00095\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \`{}\`{}10fold``.\ Defaults\ to\ \`{}\`{}10fold``.}}
+\DoxyCodeLine{00096\ \textcolor{comment}{\ \ \ \ \ \ \ \ image\_set\ (str,\ optional):\ Type\ of\ image\ funneling\ to\ use,\ \`{}\`{}original``,\ \`{}\`{}funneled``\ or}}
+\DoxyCodeLine{00097\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \`{}\`{}deepfunneled``.\ Defaults\ to\ \`{}\`{}funneled``.}}
+\DoxyCodeLine{00098\ \textcolor{comment}{\ \ \ \ \ \ \ \ transform\ (callable,\ optional):\ A\ function/transform\ that\ takes\ in\ a\ PIL\ image}}
+\DoxyCodeLine{00099\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ and\ returns\ a\ transformed\ version.\ E.g,\ \`{}\`{}transforms.RandomRotation``}}
+\DoxyCodeLine{00100\ \textcolor{comment}{\ \ \ \ \ \ \ \ target\_transform\ (callable,\ optional):\ A\ function/transform\ that\ takes\ in\ the}}
+\DoxyCodeLine{00101\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ target\ and\ transforms\ it.}}
+\DoxyCodeLine{00102\ \textcolor{comment}{\ \ \ \ \ \ \ \ download\ (bool,\ optional):\ If\ true,\ downloads\ the\ dataset\ from\ the\ internet\ and}}
+\DoxyCodeLine{00103\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ puts\ it\ in\ root\ directory.\ If\ dataset\ is\ already\ downloaded,\ it\ is\ not}}
+\DoxyCodeLine{00104\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ downloaded\ again.}}
+\DoxyCodeLine{00105\ \textcolor{comment}{}}
+\DoxyCodeLine{00106\ \textcolor{comment}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00107\ \textcolor{comment}{}}
+\DoxyCodeLine{00108\ \textcolor{comment}{}}
+\DoxyCodeLine{00109\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00110\ \ \ \ \ public\ :}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ \ LFWPairs(\textcolor{keyword}{const}\ std::string\ \&root);}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ LFWPairs(\textcolor{keyword}{const}\ std::string\ \&root,\ DataMode\ mode);}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ LFWPairs(\textcolor{keyword}{const}\ std::string\ \&root,\ DataMode\ mode\ ,\ \textcolor{keywordtype}{bool}\ download);}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ LFWPairs(\textcolor{keyword}{const}\ std::string\ \&root,\ DataMode\ mode\ ,\ \textcolor{keywordtype}{bool}\ download,\ TransformType\ transforms);}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ \ \ \ \ private\ :}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ load\_data();}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ check\_resources();}
+\DoxyCodeLine{00121\ \ \ \ \ \};}
+\DoxyCodeLine{00122\ \}}
+
+\end{DoxyCode}

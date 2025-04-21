@@ -1,0 +1,73 @@
+\doxysection{svhn.\+h}
+\hypertarget{svhn_8h_source}{}\label{svhn_8h_source}\index{svhn.h@{svhn.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ "{}../base/base.h"{}}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}../../headers/datasets.h"{}}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00006\ \textcolor{keyword}{namespace\ }fs\ =\ std::filesystem;}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }xt::data::datasets\ \{}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keyword}{class\ }SVHN\ :\ BaseDataset\ \{}
+\DoxyCodeLine{00011\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ \ \ \ \ \ \ \ "{}"{}"{}`SVHN\ <http://ufldl.stanford.edu/housenumbers/>`\_\ Dataset.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ \ \ \ Note:\ The\ SVHN\ dataset\ assigns\ the\ label\ \`{}10`\ to\ the\ digit\ \`{}0`.\ However,\ in\ this\ Dataset,}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ \ \ \ we\ assign\ the\ label\ \`{}0`\ to\ the\ digit\ \`{}0`\ to\ be\ compatible\ with\ PyTorch\ loss\ functions\ which}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ \ \ \ expect\ the\ class\ labels\ to\ be\ in\ the\ range\ \`{}[0,\ C-\/1]`}}
+\DoxyCodeLine{00016\ \textcolor{comment}{}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ \ \ \ ..\ warning::}}
+\DoxyCodeLine{00018\ \textcolor{comment}{}}
+\DoxyCodeLine{00019\ \textcolor{comment}{\ \ \ \ \ \ \ \ This\ class\ needs\ \`{}scipy\ <https://docs.scipy.org/doc/>`\_\ to\ load\ data\ from\ \`{}.mat`\ format.}}
+\DoxyCodeLine{00020\ \textcolor{comment}{}}
+\DoxyCodeLine{00021\ \textcolor{comment}{\ \ \ \ Args:}}
+\DoxyCodeLine{00022\ \textcolor{comment}{\ \ \ \ \ \ \ \ root\ (str\ or\ \`{}\`{}pathlib.Path``):\ Root\ directory\ of\ the\ dataset\ where\ the\ data\ is\ stored.}}
+\DoxyCodeLine{00023\ \textcolor{comment}{\ \ \ \ \ \ \ \ split\ (string):\ One\ of\ \{'train',\ 'test',\ 'extra'\}.}}
+\DoxyCodeLine{00024\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ Accordingly\ dataset\ is\ selected.\ 'extra'\ is\ Extra\ training\ set.}}
+\DoxyCodeLine{00025\ \textcolor{comment}{\ \ \ \ \ \ \ \ transform\ (callable,\ optional):\ A\ function/transform\ that\ takes\ in\ a\ PIL\ image}}
+\DoxyCodeLine{00026\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ and\ returns\ a\ transformed\ version.\ E.g,\ \`{}\`{}transforms.RandomCrop``}}
+\DoxyCodeLine{00027\ \textcolor{comment}{\ \ \ \ \ \ \ \ target\_transform\ (callable,\ optional):\ A\ function/transform\ that\ takes\ in\ the}}
+\DoxyCodeLine{00028\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ target\ and\ transforms\ it.}}
+\DoxyCodeLine{00029\ \textcolor{comment}{\ \ \ \ \ \ \ \ download\ (bool,\ optional):\ If\ true,\ downloads\ the\ dataset\ from\ the\ internet\ and}}
+\DoxyCodeLine{00030\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ puts\ it\ in\ root\ directory.\ If\ dataset\ is\ already\ downloaded,\ it\ is\ not}}
+\DoxyCodeLine{00031\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ downloaded\ again.}}
+\DoxyCodeLine{00032\ \textcolor{comment}{}}
+\DoxyCodeLine{00033\ \textcolor{comment}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00034\ \textcolor{comment}{}}
+\DoxyCodeLine{00035\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00036\ \ \ \ \ public\ :}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ SVHN(\textcolor{keyword}{const}\ std::string\ \&root);}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ SVHN(\textcolor{keyword}{const}\ std::string\ \&root,\ DataMode\ mode);}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ SVHN(\textcolor{keyword}{const}\ std::string\ \&root,\ DataMode\ mode\ ,\ \textcolor{keywordtype}{bool}\ download);}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ SVHN(\textcolor{keyword}{const}\ std::string\ \&root,\ DataMode\ mode\ ,\ \textcolor{keywordtype}{bool}\ download,\ TransformType\ transforms);}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ std::map<std::string,\ std::tuple<fs::path,\ fs::path,\ std::string>>\ resources\ =\ \{}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}train"{}},\ \{}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fs::path(\textcolor{stringliteral}{"{}http://ufldl.stanford.edu/housenumbers/train\_32x32.mat"{}}),}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fs::path(\textcolor{stringliteral}{"{}train\_32x32.mat"{}}),}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}e26dedcc434d2e4c54c9b2d4a06d8373"{}}\}}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \},}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}test"{}},\ \ \{}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fs::path(\textcolor{stringliteral}{"{}http://ufldl.stanford.edu/housenumbers/test\_32x32.mat"{}}),}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fs::path(\textcolor{stringliteral}{"{}test\_32x32.mat"{}}),}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}eb5a983be6a315427106f1b164d9cef3"{}}\}}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \},}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}extra"{}},\ \{}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fs::path(\textcolor{stringliteral}{"{}http://ufldl.stanford.edu/housenumbers/extra\_32x32.mat"{}}),}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fs::path(\textcolor{stringliteral}{"{}extra\_32x32.mat"{}}),}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}a93ce644f1a588dc4d68dda5feec44a7"{}}}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ load\_data();}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ check\_resources();}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \ \ \ \ \};}
+\DoxyCodeLine{00067\ \}}
+
+\end{DoxyCode}

@@ -1,0 +1,216 @@
+\doxysection{kitti.\+h}
+\hypertarget{kitti_8h_source}{}\label{kitti_8h_source}\index{kitti.h@{kitti.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}../base/base.h"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}../../headers/datasets.h"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }xt::data::datasets\ \{}
+\DoxyCodeLine{00008\ \ \ \ \ \textcolor{keyword}{class\ }Kitti\ :\ BaseDataset\ \{}
+\DoxyCodeLine{00009\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ \ \ \ \ \ \ \ "{}"{}"{}`KITTI\ <http://www.cvlibs.net/datasets/kitti/eval\_object.php?obj\_benchmark>`\_\ Dataset.}}
+\DoxyCodeLine{00011\ \textcolor{comment}{}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ \ \ \ It\ corresponds\ to\ the\ "{}left\ color\ images\ of\ object"{}\ dataset,\ for\ object\ detection.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ \ \ \ Args:}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ \ \ \ \ \ \ \ root\ (str\ or\ \`{}\`{}pathlib.Path``):\ Root\ directory\ where\ images\ are\ downloaded\ to.}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ Expects\ the\ following\ folder\ structure\ if\ download=False:}}
+\DoxyCodeLine{00017\ \textcolor{comment}{}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ ..\ code::}}
+\DoxyCodeLine{00019\ \textcolor{comment}{}}
+\DoxyCodeLine{00020\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <root>}}
+\DoxyCodeLine{00021\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ └──\ Kitti}}
+\DoxyCodeLine{00022\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ └─\ raw}}
+\DoxyCodeLine{00023\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ├──\ training}}
+\DoxyCodeLine{00024\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ \ \ ├──\ image\_2}}
+\DoxyCodeLine{00025\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ \ \ └──\ label\_2}}
+\DoxyCodeLine{00026\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ └──\ testing}}
+\DoxyCodeLine{00027\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ └──\ image\_2}}
+\DoxyCodeLine{00028\ \textcolor{comment}{\ \ \ \ \ \ \ \ train\ (bool,\ optional):\ Use\ \`{}\`{}train``\ split\ if\ true,\ else\ \`{}\`{}test``\ split.}}
+\DoxyCodeLine{00029\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ Defaults\ to\ \`{}\`{}train``.}}
+\DoxyCodeLine{00030\ \textcolor{comment}{\ \ \ \ \ \ \ \ transform\ (callable,\ optional):\ A\ function/transform\ that\ takes\ in\ a\ PIL\ image}}
+\DoxyCodeLine{00031\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ and\ returns\ a\ transformed\ version.\ E.g,\ \`{}\`{}transforms.PILToTensor``}}
+\DoxyCodeLine{00032\ \textcolor{comment}{\ \ \ \ \ \ \ \ target\_transform\ (callable,\ optional):\ A\ function/transform\ that\ takes\ in\ the}}
+\DoxyCodeLine{00033\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ target\ and\ transforms\ it.}}
+\DoxyCodeLine{00034\ \textcolor{comment}{\ \ \ \ \ \ \ \ transforms\ (callable,\ optional):\ A\ function/transform\ that\ takes\ input\ sample}}
+\DoxyCodeLine{00035\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ and\ its\ target\ as\ entry\ and\ returns\ a\ transformed\ version.}}
+\DoxyCodeLine{00036\ \textcolor{comment}{\ \ \ \ \ \ \ \ download\ (bool,\ optional):\ If\ true,\ downloads\ the\ dataset\ from\ the\ internet\ and}}
+\DoxyCodeLine{00037\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ puts\ it\ in\ root\ directory.\ If\ dataset\ is\ already\ downloaded,\ it\ is\ not}}
+\DoxyCodeLine{00038\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ downloaded\ again.}}
+\DoxyCodeLine{00039\ \textcolor{comment}{}}
+\DoxyCodeLine{00040\ \textcolor{comment}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00041\ \textcolor{comment}{}}
+\DoxyCodeLine{00042\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00043\ \ \ \ \ public\ :}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ Kitti(\textcolor{keyword}{const}\ std::string\ \&root);}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ Kitti(\textcolor{keyword}{const}\ std::string\ \&root,\ DataMode\ mode);}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ Kitti(\textcolor{keyword}{const}\ std::string\ \&root,\ DataMode\ mode\ ,\ \textcolor{keywordtype}{bool}\ download);}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ Kitti(\textcolor{keyword}{const}\ std::string\ \&root,\ DataMode\ mode\ ,\ \textcolor{keywordtype}{bool}\ download,\ TransformType\ transforms);}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ fs::path\ url\ =\ fs::path(\textcolor{stringliteral}{"{}https://s3.eu-\/central-\/1.amazonaws.com/avg-\/kitti/"{}});}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ vector<std::string>\ resources\ =\ \{}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}data\_object\_image\_2.zip"{}},}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}data\_object\_label\_2.zip"{}}}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ fs::path\ image\_dir\_name\ =\ fs::path(\textcolor{stringliteral}{"{}image\_2"{}});}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ fs::path\ labels\_dir\_name\ =\ fs::path(\textcolor{stringliteral}{"{}label\_2"{}});}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ fs::path\ dataset\_folder\_name\ =\ \textcolor{stringliteral}{"{}kitti"{}};}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ load\_data();}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ check\_resources();}
+\DoxyCodeLine{00063\ \ \ \ \ \};}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keyword}{class\ }KittiFlow\ :\ BaseDataset\ \{}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00067\ \textcolor{comment}{\ \ \ \ \ \ \ \ "{}"{}"{}`KITTI\ <http://www.cvlibs.net/datasets/kitti/eval\_scene\_flow.php?benchmark=flow>`\_\_\ dataset\ for\ optical\ flow\ (2015).}}
+\DoxyCodeLine{00068\ \textcolor{comment}{}}
+\DoxyCodeLine{00069\ \textcolor{comment}{\ \ \ \ The\ dataset\ is\ expected\ to\ have\ the\ following\ structure:\ ::}}
+\DoxyCodeLine{00070\ \textcolor{comment}{}}
+\DoxyCodeLine{00071\ \textcolor{comment}{\ \ \ \ \ \ \ \ root}}
+\DoxyCodeLine{00072\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ KittiFlow}}
+\DoxyCodeLine{00073\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ testing}}
+\DoxyCodeLine{00074\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ image\_2}}
+\DoxyCodeLine{00075\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ training}}
+\DoxyCodeLine{00076\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ image\_2}}
+\DoxyCodeLine{00077\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ flow\_occ}}
+\DoxyCodeLine{00078\ \textcolor{comment}{}}
+\DoxyCodeLine{00079\ \textcolor{comment}{\ \ \ \ Args:}}
+\DoxyCodeLine{00080\ \textcolor{comment}{\ \ \ \ \ \ \ \ root\ (str\ or\ \`{}\`{}pathlib.Path``):\ Root\ directory\ of\ the\ KittiFlow\ Dataset.}}
+\DoxyCodeLine{00081\ \textcolor{comment}{\ \ \ \ \ \ \ \ split\ (string,\ optional):\ The\ dataset\ split,\ either\ "{}train"{}\ (default)\ or\ "{}test"{}}}
+\DoxyCodeLine{00082\ \textcolor{comment}{\ \ \ \ \ \ \ \ transforms\ (callable,\ optional):\ A\ function/transform\ that\ takes\ in}}
+\DoxyCodeLine{00083\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \`{}\`{}img1,\ img2,\ flow,\ valid\_flow\_mask``\ and\ returns\ a\ transformed\ version.}}
+\DoxyCodeLine{00084\ \textcolor{comment}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00085\ \textcolor{comment}{}}
+\DoxyCodeLine{00086\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00087\ \ \ \ \ public\ :}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ \ KittiFlow(\textcolor{keyword}{const}\ std::string\ \&root);}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ KittiFlow(\textcolor{keyword}{const}\ std::string\ \&root,\ DataMode\ mode);}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ KittiFlow(\textcolor{keyword}{const}\ std::string\ \&root,\ DataMode\ mode\ ,\ \textcolor{keywordtype}{bool}\ download);}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ KittiFlow(\textcolor{keyword}{const}\ std::string\ \&root,\ DataMode\ mode\ ,\ \textcolor{keywordtype}{bool}\ download,\ TransformType\ transforms);}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \ \ \ \ private\ :}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ load\_data();}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ check\_resources();}
+\DoxyCodeLine{00098\ \ \ \ \ \};}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keyword}{class\ }Kitti2012Stereo\ :\ BaseDataset\ \{}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00102\ \textcolor{comment}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00103\ \textcolor{comment}{\ \ \ \ KITTI\ dataset\ from\ the\ \`{}2012\ stereo\ evaluation\ benchmark\ <http://www.cvlibs.net/datasets/kitti/eval\_stereo\_flow.php>`\_.}}
+\DoxyCodeLine{00104\ \textcolor{comment}{\ \ \ \ Uses\ the\ RGB\ images\ for\ consistency\ with\ KITTI\ 2015.}}
+\DoxyCodeLine{00105\ \textcolor{comment}{}}
+\DoxyCodeLine{00106\ \textcolor{comment}{\ \ \ \ The\ dataset\ is\ expected\ to\ have\ the\ following\ structure:\ ::}}
+\DoxyCodeLine{00107\ \textcolor{comment}{}}
+\DoxyCodeLine{00108\ \textcolor{comment}{\ \ \ \ \ \ \ \ root}}
+\DoxyCodeLine{00109\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ Kitti2012}}
+\DoxyCodeLine{00110\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ testing}}
+\DoxyCodeLine{00111\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ colored\_0}}
+\DoxyCodeLine{00112\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1\_10.png}}
+\DoxyCodeLine{00113\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 2\_10.png}}
+\DoxyCodeLine{00114\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ...}}
+\DoxyCodeLine{00115\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ colored\_1}}
+\DoxyCodeLine{00116\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1\_10.png}}
+\DoxyCodeLine{00117\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 2\_10.png}}
+\DoxyCodeLine{00118\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ...}}
+\DoxyCodeLine{00119\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ training}}
+\DoxyCodeLine{00120\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ colored\_0}}
+\DoxyCodeLine{00121\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1\_10.png}}
+\DoxyCodeLine{00122\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 2\_10.png}}
+\DoxyCodeLine{00123\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ...}}
+\DoxyCodeLine{00124\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ colored\_1}}
+\DoxyCodeLine{00125\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1\_10.png}}
+\DoxyCodeLine{00126\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 2\_10.png}}
+\DoxyCodeLine{00127\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ...}}
+\DoxyCodeLine{00128\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ disp\_noc}}
+\DoxyCodeLine{00129\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1.png}}
+\DoxyCodeLine{00130\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 2.png}}
+\DoxyCodeLine{00131\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ...}}
+\DoxyCodeLine{00132\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ calib}}
+\DoxyCodeLine{00133\ \textcolor{comment}{}}
+\DoxyCodeLine{00134\ \textcolor{comment}{\ \ \ \ Args:}}
+\DoxyCodeLine{00135\ \textcolor{comment}{\ \ \ \ \ \ \ \ root\ (str\ or\ \`{}\`{}pathlib.Path``):\ Root\ directory\ where\ \`{}Kitti2012`\ is\ located.}}
+\DoxyCodeLine{00136\ \textcolor{comment}{\ \ \ \ \ \ \ \ split\ (string,\ optional):\ The\ dataset\ split\ of\ scenes,\ either\ "{}train"{}\ (default)\ or\ "{}test"{}.}}
+\DoxyCodeLine{00137\ \textcolor{comment}{\ \ \ \ \ \ \ \ transforms\ (callable,\ optional):\ A\ function/transform\ that\ takes\ in\ a\ sample\ and\ returns\ a\ transformed\ version.}}
+\DoxyCodeLine{00138\ \textcolor{comment}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00139\ \textcolor{comment}{}}
+\DoxyCodeLine{00140\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00141\ \ \ \ \ public\ :}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ \ Kitti2012Stereo(\textcolor{keyword}{const}\ std::string\ \&root);}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ Kitti2012Stereo(\textcolor{keyword}{const}\ std::string\ \&root,\ DataMode\ mode);}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ Kitti2012Stereo(\textcolor{keyword}{const}\ std::string\ \&root,\ DataMode\ mode\ ,\ \textcolor{keywordtype}{bool}\ download);}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ Kitti2012Stereo(\textcolor{keyword}{const}\ std::string\ \&root,\ DataMode\ mode\ ,\ \textcolor{keywordtype}{bool}\ download,\ TransformType\ transforms);}
+\DoxyCodeLine{00146\ }
+\DoxyCodeLine{00147\ }
+\DoxyCodeLine{00148\ \ \ \ \ private\ :}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ load\_data();}
+\DoxyCodeLine{00150\ }
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ check\_resources();}
+\DoxyCodeLine{00152\ \ \ \ \ \};}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00154\ \ \ \ \ \textcolor{keyword}{class\ }Kitti2015Stereo\ :\ BaseDataset\ \{}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00156\ \textcolor{comment}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00157\ \textcolor{comment}{\ \ \ \ KITTI\ dataset\ from\ the\ \`{}2015\ stereo\ evaluation\ benchmark\ <http://www.cvlibs.net/datasets/kitti/eval\_scene\_flow.php>`\_.}}
+\DoxyCodeLine{00158\ \textcolor{comment}{}}
+\DoxyCodeLine{00159\ \textcolor{comment}{\ \ \ \ The\ dataset\ is\ expected\ to\ have\ the\ following\ structure:\ ::}}
+\DoxyCodeLine{00160\ \textcolor{comment}{}}
+\DoxyCodeLine{00161\ \textcolor{comment}{\ \ \ \ \ \ \ \ root}}
+\DoxyCodeLine{00162\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ Kitti2015}}
+\DoxyCodeLine{00163\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ testing}}
+\DoxyCodeLine{00164\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ image\_2}}
+\DoxyCodeLine{00165\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ img1.png}}
+\DoxyCodeLine{00166\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ img2.png}}
+\DoxyCodeLine{00167\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ...}}
+\DoxyCodeLine{00168\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ image\_3}}
+\DoxyCodeLine{00169\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ img1.png}}
+\DoxyCodeLine{00170\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ img2.png}}
+\DoxyCodeLine{00171\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ...}}
+\DoxyCodeLine{00172\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ training}}
+\DoxyCodeLine{00173\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ image\_2}}
+\DoxyCodeLine{00174\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ img1.png}}
+\DoxyCodeLine{00175\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ img2.png}}
+\DoxyCodeLine{00176\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ...}}
+\DoxyCodeLine{00177\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ image\_3}}
+\DoxyCodeLine{00178\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ img1.png}}
+\DoxyCodeLine{00179\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ img2.png}}
+\DoxyCodeLine{00180\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ...}}
+\DoxyCodeLine{00181\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ disp\_occ\_0}}
+\DoxyCodeLine{00182\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ img1.png}}
+\DoxyCodeLine{00183\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ img2.png}}
+\DoxyCodeLine{00184\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ...}}
+\DoxyCodeLine{00185\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ disp\_occ\_1}}
+\DoxyCodeLine{00186\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ img1.png}}
+\DoxyCodeLine{00187\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ img2.png}}
+\DoxyCodeLine{00188\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ...}}
+\DoxyCodeLine{00189\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ calib}}
+\DoxyCodeLine{00190\ \textcolor{comment}{}}
+\DoxyCodeLine{00191\ \textcolor{comment}{\ \ \ \ Args:}}
+\DoxyCodeLine{00192\ \textcolor{comment}{\ \ \ \ \ \ \ \ root\ (str\ or\ \`{}\`{}pathlib.Path``):\ Root\ directory\ where\ \`{}Kitti2015`\ is\ located.}}
+\DoxyCodeLine{00193\ \textcolor{comment}{\ \ \ \ \ \ \ \ split\ (string,\ optional):\ The\ dataset\ split\ of\ scenes,\ either\ "{}train"{}\ (default)\ or\ "{}test"{}.}}
+\DoxyCodeLine{00194\ \textcolor{comment}{\ \ \ \ \ \ \ \ transforms\ (callable,\ optional):\ A\ function/transform\ that\ takes\ in\ a\ sample\ and\ returns\ a\ transformed\ version.}}
+\DoxyCodeLine{00195\ \textcolor{comment}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00196\ \textcolor{comment}{}}
+\DoxyCodeLine{00197\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00198\ \ \ \ \ public\ :}
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ Kitti2015Stereo(\textcolor{keyword}{const}\ std::string\ \&root);}
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ Kitti2015Stereo(\textcolor{keyword}{const}\ std::string\ \&root,\ DataMode\ mode);}
+\DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ Kitti2015Stereo(\textcolor{keyword}{const}\ std::string\ \&root,\ DataMode\ mode\ ,\ \textcolor{keywordtype}{bool}\ download);}
+\DoxyCodeLine{00202\ \ \ \ \ \ \ \ \ Kitti2015Stereo(\textcolor{keyword}{const}\ std::string\ \&root,\ DataMode\ mode\ ,\ \textcolor{keywordtype}{bool}\ download,\ TransformType\ transforms);}
+\DoxyCodeLine{00203\ }
+\DoxyCodeLine{00204\ }
+\DoxyCodeLine{00205\ \ \ \ \ private\ :}
+\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ load\_data();}
+\DoxyCodeLine{00207\ }
+\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ check\_resources();}
+\DoxyCodeLine{00209\ \ \ \ \ \};}
+\DoxyCodeLine{00210\ \}}
+
+\end{DoxyCode}

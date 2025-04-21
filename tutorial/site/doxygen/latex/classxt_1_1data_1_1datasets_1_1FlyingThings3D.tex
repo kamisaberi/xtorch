@@ -1,0 +1,68 @@
+\doxysection{xt\+::data\+::datasets\+::Flying\+Things3D Class Reference}
+\hypertarget{classxt_1_1data_1_1datasets_1_1FlyingThings3D}{}\label{classxt_1_1data_1_1datasets_1_1FlyingThings3D}\index{xt::data::datasets::FlyingThings3D@{xt::data::datasets::FlyingThings3D}}
+Inheritance diagram for xt\+::data\+::datasets\+::Flying\+Things3D\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classxt_1_1data_1_1datasets_1_1FlyingThings3D}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classxt_1_1data_1_1datasets_1_1FlyingThings3D_aa73db3b2a8849aed6df79b3542691e85}\label{classxt_1_1data_1_1datasets_1_1FlyingThings3D_aa73db3b2a8849aed6df79b3542691e85} 
+{\bfseries Flying\+Things3D} (const std\+::string \&root)
+\item 
+\Hypertarget{classxt_1_1data_1_1datasets_1_1FlyingThings3D_a5321a5dd0c4529fc7c99f1b39e637e3d}\label{classxt_1_1data_1_1datasets_1_1FlyingThings3D_a5321a5dd0c4529fc7c99f1b39e637e3d} 
+{\bfseries Flying\+Things3D} (const std\+::string \&root, Data\+Mode mode)
+\item 
+\Hypertarget{classxt_1_1data_1_1datasets_1_1FlyingThings3D_ac8ca8e1b2cf03e721fe1a32f92fa28ed}\label{classxt_1_1data_1_1datasets_1_1FlyingThings3D_ac8ca8e1b2cf03e721fe1a32f92fa28ed} 
+{\bfseries Flying\+Things3D} (const std\+::string \&root, Data\+Mode mode, bool download)
+\item 
+\Hypertarget{classxt_1_1data_1_1datasets_1_1FlyingThings3D_a07632b4efd4ad2858896b64509d5e842}\label{classxt_1_1data_1_1datasets_1_1FlyingThings3D_a07632b4efd4ad2858896b64509d5e842} 
+{\bfseries Flying\+Things3D} (const std\+::string \&root, Data\+Mode mode, bool download, Transform\+Type transforms)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classxt_1_1data_1_1datasets_1_1BaseDataset}{xt\+::data\+::datasets\+::\+Base\+Dataset}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Base\+Dataset} (const std\+::string \&root)
+\item 
+{\bfseries Base\+Dataset} (const std\+::string \&root, Data\+Mode mode)
+\item 
+{\bfseries Base\+Dataset} (const std\+::string \&root, Data\+Mode mode, bool download)
+\item 
+{\bfseries Base\+Dataset} (const std\+::string \&root, Data\+Mode mode, bool download, vector$<$ std\+::function$<$ torch\+::\+Tensor(torch\+::\+Tensor)$>$ $>$ transforms)
+\item 
+torch\+::data\+::\+Example {\bfseries get} (size\+\_\+t index) override
+\item 
+torch\+::optional$<$ size\+\_\+t $>$ {\bfseries size} () const override
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Public Types inherited from \mbox{\hyperlink{classxt_1_1data_1_1datasets_1_1BaseDataset}{xt\+::data\+::datasets\+::\+Base\+Dataset}}}
+\begin{DoxyCompactItemize}
+\item 
+using {\bfseries Transform\+Type} = vector$<$std\+::function$<$torch\+::\+Tensor(torch\+::\+Tensor)$>$ $>$
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes inherited from \mbox{\hyperlink{classxt_1_1data_1_1datasets_1_1BaseDataset}{xt\+::data\+::datasets\+::\+Base\+Dataset}}}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ torch\+::\+Tensor $>$ {\bfseries data}
+\item 
+std\+::vector$<$ uint8\+\_\+t $>$ {\bfseries labels}
+\item 
+Data\+Mode {\bfseries mode} = Data\+Mode\+::\+TRAIN
+\item 
+bool {\bfseries download} = false
+\item 
+fs\+::path {\bfseries root}
+\item 
+fs\+::path {\bfseries dataset\+\_\+path}
+\item 
+\mbox{\hyperlink{classxt_1_1data_1_1transforms_1_1Compose}{xt\+::data\+::transforms\+::\+Compose}} {\bfseries compose}
+\item 
+vector$<$ std\+::function$<$ torch\+::\+Tensor(torch\+::\+Tensor)$>$ $>$ {\bfseries transforms} = \{\}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+flying-\/things-\/3d.\+h\end{DoxyCompactItemize}

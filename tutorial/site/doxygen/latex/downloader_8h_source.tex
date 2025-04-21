@@ -1,0 +1,23 @@
+\doxysection{downloader.\+h}
+\hypertarget{downloader_8h_source}{}\label{downloader_8h_source}\index{downloader.h@{downloader.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <fstream>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <filesystem>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <curl/curl.h>}}
+\DoxyCodeLine{00008\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }fs\ =\ std::filesystem;}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{namespace\ }xt::utils\ \{}
+\DoxyCodeLine{00012\ \ \ \ \ std::tuple<bool,\ std::string>\ download(std::string\ \&url,\ std::string\ outPath);}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \ \ \ \ std::string\ rebuild\_google\_drive\_link(std::string\ gid);}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \ \ \ \ std::tuple<bool,\ std::string>\ download\_from\_gdrive(std::string\ gid,\ std::string\ outPath);}
+\DoxyCodeLine{00017\ \}}
+
+\end{DoxyCode}

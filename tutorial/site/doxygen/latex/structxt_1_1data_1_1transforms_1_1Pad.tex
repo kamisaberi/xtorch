@@ -1,0 +1,67 @@
+\doxysection{xt\+::data\+::transforms\+::Pad Struct Reference}
+\hypertarget{structxt_1_1data_1_1transforms_1_1Pad}{}\label{structxt_1_1data_1_1transforms_1_1Pad}\index{xt::data::transforms::Pad@{xt::data::transforms::Pad}}
+
+
+A functor to pad a tensor with a specified padding configuration.  
+
+
+
+
+{\ttfamily \#include $<$pad.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structxt_1_1data_1_1transforms_1_1Pad_ac47c367b111eb645a2b4d7cd73070c2a}{Pad}} (std\+::vector$<$ int64\+\_\+t $>$ padding)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{structxt_1_1data_1_1transforms_1_1Pad}{Pad} object with the specified padding sizes. \end{DoxyCompactList}\item 
+torch\+::\+Tensor \mbox{\hyperlink{structxt_1_1data_1_1transforms_1_1Pad_a7d3b954ba01189ca79db71cda6980f95}{operator()}} (torch\+::\+Tensor input)
+\begin{DoxyCompactList}\small\item\em Applies padding to the input tensor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A functor to pad a tensor with a specified padding configuration. 
+
+This struct provides a callable object that applies padding to a {\ttfamily torch\+::\+Tensor} based on a vector of padding sizes. It is designed to extend the dimensions of a tensor (e.\+g., images in machine learning workflows) by adding values (typically zeros) around its boundaries, using the padding amounts specified during construction. The padding is applied using Lib\+Torch\textquotesingle{}s functional padding utilities. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{structxt_1_1data_1_1transforms_1_1Pad_ac47c367b111eb645a2b4d7cd73070c2a}\index{xt::data::transforms::Pad@{xt::data::transforms::Pad}!Pad@{Pad}}
+\index{Pad@{Pad}!xt::data::transforms::Pad@{xt::data::transforms::Pad}}
+\doxysubsubsection{\texorpdfstring{Pad()}{Pad()}}
+{\footnotesize\ttfamily \label{structxt_1_1data_1_1transforms_1_1Pad_ac47c367b111eb645a2b4d7cd73070c2a} 
+xt\+::data\+::transforms\+::\+Pad\+::\+Pad (\begin{DoxyParamCaption}\item[{std\+::vector$<$ int64\+\_\+t $>$}]{padding}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a \doxylink{structxt_1_1data_1_1transforms_1_1Pad}{Pad} object with the specified padding sizes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em padding} & A vector of 64-\/bit integers defining the padding amounts, in pairs (e.\+g., \{left, right, top, bottom\}).\\
+\hline
+\end{DoxyParams}
+Initializes the \doxylink{structxt_1_1data_1_1transforms_1_1Pad}{Pad} object with a vector specifying the padding to be applied to the tensor’s dimensions. The vector must contain an even number of elements, where each pair corresponds to the left and right padding for a dimension, applied to the tensor’s last dimensions in reverse order (e.\+g., width, then height for a 2D tensor). 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{structxt_1_1data_1_1transforms_1_1Pad_a7d3b954ba01189ca79db71cda6980f95}\index{xt::data::transforms::Pad@{xt::data::transforms::Pad}!operator()@{operator()}}
+\index{operator()@{operator()}!xt::data::transforms::Pad@{xt::data::transforms::Pad}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}}
+{\footnotesize\ttfamily \label{structxt_1_1data_1_1transforms_1_1Pad_a7d3b954ba01189ca79db71cda6980f95} 
+torch\+::\+Tensor xt\+::data\+::transforms\+::\+Pad\+::operator() (\begin{DoxyParamCaption}\item[{torch\+::\+Tensor}]{input}{}\end{DoxyParamCaption})}
+
+
+
+Applies padding to the input tensor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em input} & The input tensor to be padded, typically in format \mbox{[}N, C, H, W\mbox{]} or \mbox{[}H, W\mbox{]}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A new tensor with padded dimensions according to the stored padding configuration.
+\end{DoxyReturn}
+This operator pads the input tensor using the padding sizes provided at construction, typically with zeros using constant mode padding. For a 4D tensor \mbox{[}N, C, H, W\mbox{]} and padding \{p\+\_\+left, p\+\_\+right, p\+\_\+top, p\+\_\+bottom\}, it pads width (W) and height (H), resulting in \mbox{[}N, C, H + p\+\_\+top + p\+\_\+bottom, W + p\+\_\+left + p\+\_\+right\mbox{]}. The padding is applied to the last dimensions corresponding to the number of pairs in the padding vector. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+pad.\+h\end{DoxyCompactItemize}

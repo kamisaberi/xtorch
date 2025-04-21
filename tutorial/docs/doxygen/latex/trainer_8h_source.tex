@@ -1,0 +1,92 @@
+\doxysection{trainer.\+h}
+\hypertarget{trainer_8h_source}{}\label{trainer_8h_source}\index{trainer.h@{trainer.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <torch/torch.h>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <filesystem>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <memory>}\ \ \textcolor{comment}{//\ For\ std::shared\_ptr}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <string>}\ \ \textcolor{comment}{//\ For\ std::string}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}../data-\/loaders/data-\/loader.h"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}../models/base.h"{}}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}../datasets/base/base.h"{}}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{comment}{//\ Forward\ declarations\ (assume\ these\ classes\ exist\ elsewhere)}}
+\DoxyCodeLine{00015\ \textcolor{comment}{//class\ Optimizer;}}
+\DoxyCodeLine{00016\ \textcolor{comment}{//class\ LossFunction;}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{keyword}{namespace\ }xt\ \{}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{comment}{//\ \ \ \ template\ <typename\ Dataset>}}
+\DoxyCodeLine{00021\ \textcolor{comment}{//\ \ \ \ void\ check\_dataset\_type(const\ Dataset\&\ dataset)\ \{}}
+\DoxyCodeLine{00022\ \textcolor{comment}{//\ \ \ \ \ \ \ \ if\ constexpr\ (std::is\_same\_v<Dataset,\ xt::data::datasets::BaseDataset>)\ \{}}
+\DoxyCodeLine{00023\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ "{}The\ object\ is\ a\ MNIST\ dataset"{}\ <<\ std::endl;}}
+\DoxyCodeLine{00024\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \}\ else\ if\ constexpr\ (std::is\_same\_v<Dataset,\ torch::data::datasets::MapDataset<xt::data::datasets::BaseDataset,\ torch::data::transforms::Stack<>>>)\ \{}}
+\DoxyCodeLine{00025\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ "{}The\ object\ is\ a\ transformed\ MNIST\ dataset"{}\ <<\ std::endl;}}
+\DoxyCodeLine{00026\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00027\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ "{}The\ object\ is\ of\ an\ unknown\ type"{}\ <<\ std::endl;}}
+\DoxyCodeLine{00028\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00029\ \textcolor{comment}{//\ \ \ \ \}}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keyword}{class\ }Trainer\ \{}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Default\ constructor}}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ Trainer();}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Setter\ methods\ with\ fluent\ interface}}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ Trainer\&\ set\_max\_epochs(\textcolor{keywordtype}{int}\ maxEpochs);}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ Trainer\&\ set\_optimizer(torch::optim::Optimizer\ *optimizer);}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ Trainer\&\ set\_loss\_fn(std::function<torch::Tensor(torch::Tensor,\ torch::Tensor)>\ lossFn);}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ Trainer\&\ enable\_checkpoint(\textcolor{keyword}{const}\ std::string\&\ path,\ \textcolor{keywordtype}{int}\ interval);}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ Dataset>}
+\DoxyCodeLine{00044\ \textcolor{comment}{//\ \ \ \ \ \ \ \ void\ fit(torch::ext::models::BaseModel\ *model\ ,\ xt::DataLoader<Dataset>\&\ \ train\_loader);}}
+\DoxyCodeLine{00045\ \textcolor{comment}{//\ \ \ \ \ \ \ \ template\ <typename\ Dataset>}}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ fit(\mbox{\hyperlink{classxt_1_1models_1_1BaseModel}{xt::models::BaseModel}}\ *model\ ,\ \mbox{\hyperlink{classxt_1_1DataLoader}{xt::DataLoader<Dataset>}}\&\ \ train\_loader)\ \{}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ torch::Device\ device(torch::kCPU);}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ model-\/>to(device);}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ model-\/>train();}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ epoch\ =\ 0;\ epoch\ !=\ this-\/>max\_epochs\_;\ ++epoch)\ \{}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}epoch:\ "{}}\ <<\ epoch\ <<\ endl;}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ a\ =\ 1;}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ batch\ :\ train\_loader)\ \{}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ torch::Tensor\ data,\ targets;}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ data\ =\ batch.data;}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ targets\ =\ batch.target;}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ this-\/>optimizer\_-\/>zero\_grad();}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ torch::Tensor\ output;}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ output\ =\ model-\/>forward(data);}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ torch::Tensor\ loss;}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ loss\ =\ this-\/>loss\_fn\_(output,\ targets);}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ loss.backward();}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ this-\/>optimizer\_-\/>step();}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ a++;}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}interval:\ "{}}\ <<\ a\ <<\ endl;}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ max\_epochs\_;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Maximum\ number\ of\ training\ epochs}}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ torch::optim::Optimizer\ *optimizer\_;\ \ \textcolor{comment}{//\ Optimizer\ object}}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ std::function<torch::Tensor(torch::Tensor,\ torch::Tensor)>\ loss\_fn\_;}
+\DoxyCodeLine{00077\ \textcolor{comment}{//\ \ \ \ \ \ \ \ std::shared\_ptr<torch::nn::CrossEntropyLoss>\ lossFn\_;\ \ //\ Loss\ function\ object}}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ checkpoint\_enabled\_;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Flag\ for\ checkpointing\ status}}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ std::string\ checkpoint\_path\_;\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Path\ for\ saving\ checkpoints}}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ checkpoint\_interval\_;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Interval\ for\ checkpointing}}
+\DoxyCodeLine{00081\ \ \ \ \ \};}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \}\ \textcolor{comment}{//\ namespace\ xt}}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ }
+
+\end{DoxyCode}

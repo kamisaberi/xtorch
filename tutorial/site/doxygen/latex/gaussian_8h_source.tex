@@ -1,0 +1,64 @@
+\doxysection{gaussian.\+h}
+\hypertarget{gaussian_8h_source}{}\label{gaussian_8h_source}\index{gaussian.h@{gaussian.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ "{}../headers/transforms.h"{}}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{keyword}{namespace\ }xt::data::transforms\ \{}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \ \ \ \ \textcolor{keyword}{struct\ }GaussianBlur\ \{}
+\DoxyCodeLine{00008\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00009\ \ \ \ \ \ \ \ \ GaussianBlur(std::vector<int64\_t>\ kernel\_size,\ \textcolor{keywordtype}{float}\ sigma);}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \ \ \ \ \ \ \ \ torch::Tensor\ operator()(torch::Tensor\ input);}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ std::vector<int64\_t>\ kernel\_size;}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ sigma;}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ torch::Tensor\ generate\_gaussian\_kernel(int64\_t\ k\_h,\ int64\_t\ k\_w,\ \textcolor{keywordtype}{float}\ sigma,\ torch::Device\ device);}
+\DoxyCodeLine{00018\ \ \ \ \ \};}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{struct\ }GaussianBlurOpenCV\ \{}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ GaussianBlurOpenCV(\textcolor{keywordtype}{int}\ ksize,\ \textcolor{keywordtype}{double}\ sigma\_val);}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ torch::Tensor\ operator()(\textcolor{keyword}{const}\ torch::Tensor\ \&input\_tensor);}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ cv::Size\ kernel\_size;}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ sigma;}
+\DoxyCodeLine{00030\ \ \ \ \ \};}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keyword}{struct\ }RandomGaussianBlur\ \{}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ std::vector<int>\ kernel\_sizes;\ \textcolor{comment}{//\ List\ of\ odd\ kernel\ sizes\ to\ choose\ from}}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ sigma\_min;}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ sigma\_max;}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ RandomGaussianBlur(std::vector<int>\ sizes\ =\ \{3,\ 5\},\ \textcolor{keywordtype}{double}\ sigma\_min\ =\ 0.1,\ \textcolor{keywordtype}{double}\ sigma\_max\ =\ 2.0);}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ torch::Tensor\ operator()(\textcolor{keyword}{const}\ torch::Tensor\ \&input\_tensor);}
+\DoxyCodeLine{00043\ \ \ \ \ \};}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keyword}{struct\ }GaussianNoise\ \{}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ GaussianNoise(\textcolor{keywordtype}{float}\ mean,\ \textcolor{keywordtype}{float}\ std);}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ torch::Tensor\ operator()(torch::Tensor\ input);}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ mean;}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ std;}
+\DoxyCodeLine{00055\ \ \ \ \ \};}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \}}
+
+\end{DoxyCode}

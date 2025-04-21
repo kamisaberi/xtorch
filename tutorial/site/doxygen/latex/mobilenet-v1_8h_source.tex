@@ -1,0 +1,247 @@
+\doxysection{mobilenet-\/v1.h}
+\hypertarget{mobilenet-v1_8h_source}{}\label{mobilenet-v1_8h_source}\index{mobilenet-\/v1.h@{mobilenet-\/v1.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <torch/torch.h>}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <fstream>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}../../base.h"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{namespace\ }xt::models\ \{}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{comment}{//class\ HSigmoid(nn.Module):}}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{comment}{//\ \ \ \ def\ \_\_init\_\_(self):}}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ "{}"{}"{}Hard\ Sigmoid\ activation\ function."{}"{}"{}}}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ super().\_\_init\_\_()}}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ self.relu6\ =\ nn.ReLU6(inplace=True)}}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{comment}{//\ \ \ \ def\ forward(self,\ x):}}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ x\ =\ self.relu6(x\ +\ 3)\ /\ 6}}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ return\ x}}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keyword}{struct\ }HSigmoid\ :\ torch::nn::Module\ \{}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ HSigmoid();}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ torch::Tensor\ forward(torch::Tensor\ x);}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ torch::nn::ReLU6\ relu6;}
+\DoxyCodeLine{00028\ \ \ \ \ \};}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{comment}{//class\ HSwish(nn.Module):}}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{comment}{//\ \ \ \ def\ \_\_init\_\_(self):}}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ "{}"{}"{}Hard\ Swish\ activation\ function."{}"{}"{}}}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ super().\_\_init\_\_()}}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ self.relu6\ =\ nn.ReLU6(inplace=True)}}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{comment}{//\ \ \ \ def\ forward(self,\ x):}}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ x\ =\ x\ *\ self.relu6(x\ +\ 3)\ /\ 6}}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ return\ x}}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keyword}{struct\ }HSwish\ :\ torch::nn::Module\ \{}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ HSwish();}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ torch::Tensor\ forward(torch::Tensor\ x);}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ torch::nn::ReLU6\ relu6;}
+\DoxyCodeLine{00051\ \ \ \ \ \};}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{comment}{//class\ SqueezeExcite(nn.Module):}}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{comment}{//\ \ \ \ def\ \_\_init\_\_(self,input\_channels:\ int,squeeze:\ int\ =\ 4,)\ -\/>\ None:}}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ Squeeze-\/and-\/Excitation\ block.}}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ Args:}}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ input\_channels\ (`int`):\ Number\ of\ input\ channels.}}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ squeeze\ (`int`,\ optional):\ Squeeze\ ratio.\ Defaults\ to\ 4.}}
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ super().\_\_init\_\_()}}
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ self.SE\ =\ nn.Sequential(}}
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ nn.AdaptiveAvgPool2d(output\_size=1),}}
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ nn.Conv2d(input\_channels,\ out\_channels=input\_channels//squeeze,\ kernel\_size=1,\ stride=1,\ bias=False),}}
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ nn.BatchNorm2d(input\_channels//squeeze),}}
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ nn.ReLU(inplace=True),}}
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ nn.Conv2d(input\_channels//squeeze,\ input\_channels,\ kernel\_size=1,\ stride=1,\ bias=False),}}
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ nn.BatchNorm2d(input\_channels),}}
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ HSigmoid(),}}
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ )}}
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{comment}{//\ \ \ \ def\ forward(self,\ x):}}
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ x\ =\ x\ *\ self.SE(x)}}
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ return\ x}}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keyword}{struct\ }SqueezeExcite\ :\ torch::nn::Module\ \{}
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ SqueezeExcite(\textcolor{keywordtype}{int}\ input\_channels,\ \textcolor{keywordtype}{int}\ squeeze\ =\ 4);}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ torch::Tensor\ forward(torch::Tensor\ x);}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ torch::nn::Sequential\ SE\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00088\ \ \ \ \ \};}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{comment}{//class\ Bottleneck(nn.Module):}}
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{comment}{//\ \ \ \ def\ \_\_init\_\_(self,input\_channels:\ int,kernel:\ int,stride:\ int,expansion:\ int,output\_channels:\ int,activation:\ nn.Module,se:\ bool\ =\ False,)\ -\/>\ None:}}
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ MobileNetV3\ bottleneck\ block.}}
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ Args:}}
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ input\_channels\ (`int`):\ Number\ of\ input\ channels.}}
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ kernel\ (`int`):\ Convolution\ kernel\ size.}}
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ stride\ (`int`):\ Convolution\ stride.}}
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ expansion\ (`int`):\ Expansion\ size,\ indicating\ the\ middle\ layer's\ output\ channels.}}
+\DoxyCodeLine{00103\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ output\_channels\ (`int`):\ Number\ of\ final\ output\ channels.}}
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ activation\ (`nn.Module`):\ Activation\ function.}}
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ se\ (`bool`,\ optional):\ Whether\ to\ use\ Squeeze-\/and-\/Excitation.\ Defaults\ to\ False.}}
+\DoxyCodeLine{00106\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00107\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ super().\_\_init\_\_()}}
+\DoxyCodeLine{00108\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ self.bottleneck\ =\ nn.Sequential(}}
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \#\ expansion}}
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ nn.Conv2d(input\_channels,\ expansion,\ kernel\_size=1,\ stride=1,\ bias=False),}}
+\DoxyCodeLine{00112\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ nn.BatchNorm2d(expansion),}}
+\DoxyCodeLine{00113\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ activation,}}
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{00115\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \#\ depth-\/wise\ convolution}}
+\DoxyCodeLine{00116\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ nn.Conv2d(expansion,\ expansion,\ kernel\_size=kernel,\ stride=stride,\ padding=kernel//2,\ groups=expansion,\ bias=False),}}
+\DoxyCodeLine{00117\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ nn.BatchNorm2d(expansion),}}
+\DoxyCodeLine{00118\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ activation,}}
+\DoxyCodeLine{00119\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{00120\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \#\ squeeze-\/and-\/excite}}
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ SqueezeExcite(expansion)\ if\ se\ else\ nn.Identity(),}}
+\DoxyCodeLine{00122\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{00123\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \#\ point-\/wise\ convolution}}
+\DoxyCodeLine{00124\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ nn.Conv2d(expansion,\ output\_channels,\ kernel\_size=1,\ stride=1,\ bias=False),}}
+\DoxyCodeLine{00125\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ nn.BatchNorm2d(output\_channels),}}
+\DoxyCodeLine{00126\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ activation,}}
+\DoxyCodeLine{00127\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ )}}
+\DoxyCodeLine{00128\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{00129\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \#\ for\ residual\ skip\ connecting\ when\ the\ input\ size\ is\ different\ from\ output\ size}}
+\DoxyCodeLine{00130\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ self.downsample\ =\ None\ if\ input\_channels\ ==\ output\_channels\ and\ stride\ ==\ 1\ else\ nn.Sequential(}}
+\DoxyCodeLine{00131\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ nn.Conv2d(input\_channels,\ output\_channels,\ kernel\_size=1,\ stride=stride,\ bias=False),}}
+\DoxyCodeLine{00132\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ nn.BatchNorm2d(output\_channels),}}
+\DoxyCodeLine{00133\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ )}}
+\DoxyCodeLine{00134\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{00135\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{00136\ \ \ \ \ \textcolor{comment}{//\ \ \ \ def\ forward(self,\ x):}}
+\DoxyCodeLine{00137\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ residual\ =\ x}}
+\DoxyCodeLine{00138\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ output\ =\ self.bottleneck(x)}}
+\DoxyCodeLine{00139\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{00140\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ if\ self.downsample:}}
+\DoxyCodeLine{00141\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ residual\ =\ self.downsample(x)}}
+\DoxyCodeLine{00142\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{00143\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ output\ =\ output\ +\ residual}}
+\DoxyCodeLine{00144\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{00145\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ return\ output}}
+\DoxyCodeLine{00146\ }
+\DoxyCodeLine{00147\ \ \ \ \ \textcolor{keyword}{struct\ }Bottleneck\ :\ torch::nn::Module\ \{}
+\DoxyCodeLine{00148\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ Bottleneck(\textcolor{keywordtype}{int}\ input\_channels,\ \textcolor{keywordtype}{int}\ kernel,\ \textcolor{keywordtype}{int}\ stride,\ \textcolor{keywordtype}{int}\ expansion,\ \textcolor{keywordtype}{int}\ output\_channels,}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ torch::nn::Module\ activation,\ \textcolor{keywordtype}{bool}\ se\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00151\ }
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ torch::Tensor\ forward(torch::Tensor\ x);}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00154\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ torch::nn::Sequential\ bottleneck;}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ torch::nn::Sequential\ downsample;}
+\DoxyCodeLine{00157\ \ \ \ \ \};}
+\DoxyCodeLine{00158\ }
+\DoxyCodeLine{00159\ }
+\DoxyCodeLine{00160\ \ \ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00161\ }
+\DoxyCodeLine{00162\ }
+\DoxyCodeLine{00163\ \ \ \ \ \textcolor{comment}{//class\ MobileNetV3(nn.Module):}}
+\DoxyCodeLine{00164\ \ \ \ \ \textcolor{comment}{//\ \ \ \ def\ \_\_init\_\_(self,input\_channels:\ int,num\_classes:\ int,dropout\_prob:\ float\ =\ 0.5,)\ -\/>\ None:}}
+\DoxyCodeLine{00165\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00166\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ MobileNetV3\ (Large)\ model.}}
+\DoxyCodeLine{00167\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{00168\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ Args:}}
+\DoxyCodeLine{00169\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ input\_channels\ (`int`):\ Number\ of\ input\ channels.}}
+\DoxyCodeLine{00170\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ num\_classes\ (`int`):\ Number\ of\ classes.}}
+\DoxyCodeLine{00171\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ dropout\_prob\ (`float`,\ optional):\ Dropout\ probability.\ Defaults\ to\ 0.5.}}
+\DoxyCodeLine{00172\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00173\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ super().\_\_init\_\_()}}
+\DoxyCodeLine{00174\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{00175\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ self.initial\_conv\ =\ nn.Sequential(}}
+\DoxyCodeLine{00176\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ nn.Conv2d(in\_channels=input\_channels,\ out\_channels=16,\ kernel\_size=3,\ stride=2),}}
+\DoxyCodeLine{00177\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ nn.BatchNorm2d(16),}}
+\DoxyCodeLine{00178\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ HSwish(),}}
+\DoxyCodeLine{00179\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ )}}
+\DoxyCodeLine{00180\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{00181\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ self.bottlenecks\ =\ nn.Sequential(}}
+\DoxyCodeLine{00182\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Bottleneck(input\_channels=16,\ kernel=3,\ stride=1,\ expansion=16,\ output\_channels=16,\ activation=nn.ReLU(inplace=True)),}}
+\DoxyCodeLine{00183\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Bottleneck(input\_channels=16,\ kernel=3,\ stride=2,\ expansion=64,\ output\_channels=24,\ activation=nn.ReLU(inplace=True)),}}
+\DoxyCodeLine{00184\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Bottleneck(input\_channels=24,\ kernel=3,\ stride=1,\ expansion=72,\ output\_channels=24,\ activation=nn.ReLU(inplace=True)),}}
+\DoxyCodeLine{00185\ }
+\DoxyCodeLine{00186\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Bottleneck(input\_channels=24,\ kernel=5,\ stride=2,\ expansion=72,\ output\_channels=40,\ activation=nn.ReLU(inplace=True),\ se=True),}}
+\DoxyCodeLine{00187\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Bottleneck(input\_channels=40,\ kernel=5,\ stride=1,\ expansion=120,\ output\_channels=40,\ activation=nn.ReLU(inplace=True),\ se=True),}}
+\DoxyCodeLine{00188\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Bottleneck(input\_channels=40,\ kernel=5,\ stride=1,\ expansion=120,\ output\_channels=40,\ activation=nn.ReLU(inplace=True),\ se=True),}}
+\DoxyCodeLine{00189\ }
+\DoxyCodeLine{00190\ }
+\DoxyCodeLine{00191\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Bottleneck(input\_channels=40,\ kernel=3,\ stride=2,\ expansion=240,\ output\_channels=80,\ activation=HSwish()),}}
+\DoxyCodeLine{00192\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Bottleneck(input\_channels=80,\ kernel=3,\ stride=1,\ expansion=200,\ output\_channels=80,\ activation=HSwish()),}}
+\DoxyCodeLine{00193\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Bottleneck(input\_channels=80,\ kernel=3,\ stride=1,\ expansion=184,\ output\_channels=80,\ activation=HSwish()),}}
+\DoxyCodeLine{00194\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Bottleneck(input\_channels=80,\ kernel=3,\ stride=1,\ expansion=184,\ output\_channels=80,\ activation=HSwish()),}}
+\DoxyCodeLine{00195\ }
+\DoxyCodeLine{00196\ }
+\DoxyCodeLine{00197\ }
+\DoxyCodeLine{00198\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Bottleneck(input\_channels=80,\ kernel=3,\ stride=1,\ expansion=480,\ output\_channels=112,\ activation=HSwish(),\ se=True),}}
+\DoxyCodeLine{00199\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Bottleneck(input\_channels=112,\ kernel=3,\ stride=1,\ expansion=672,\ output\_channels=112,\ activation=HSwish(),\ se=True),}}
+\DoxyCodeLine{00200\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Bottleneck(input\_channels=112,\ kernel=5,\ stride=2,\ expansion=672,\ output\_channels=160,\ activation=HSwish(),\ se=True),}}
+\DoxyCodeLine{00201\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Bottleneck(input\_channels=160,\ kernel=5,\ stride=1,\ expansion=960,\ output\_channels=160,\ activation=HSwish(),\ se=True),}}
+\DoxyCodeLine{00202\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Bottleneck(input\_channels=160,\ kernel=5,\ stride=1,\ expansion=960,\ output\_channels=160,\ activation=HSwish(),\ se=True),}}
+\DoxyCodeLine{00203\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ )}}
+\DoxyCodeLine{00204\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{00205\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ self.final\_conv\ =\ nn.Sequential(}}
+\DoxyCodeLine{00206\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ nn.Conv2d(in\_channels=160,\ out\_channels=960,\ kernel\_size=1,\ stride=1,\ bias=False),}}
+\DoxyCodeLine{00207\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ nn.BatchNorm2d(960),}}
+\DoxyCodeLine{00208\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ HSwish(),}}
+\DoxyCodeLine{00209\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ )}}
+\DoxyCodeLine{00210\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{00211\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ self.pool\ =\ nn.AdaptiveAvgPool2d(output\_size=1)}}
+\DoxyCodeLine{00212\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{00213\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ self.classifier\ =\ nn.Sequential(}}
+\DoxyCodeLine{00214\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ nn.Linear(960,\ 1280),}}
+\DoxyCodeLine{00215\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ HSwish(),}}
+\DoxyCodeLine{00216\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ nn.Dropout(p=dropout\_prob,\ inplace=True),}}
+\DoxyCodeLine{00217\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ nn.Linear(1280,\ num\_classes),}}
+\DoxyCodeLine{00218\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ )}}
+\DoxyCodeLine{00219\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{00220\ \ \ \ \ \textcolor{comment}{//\ \ \ \ def\ forward(self,\ x):}}
+\DoxyCodeLine{00221\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ x\ =\ self.initial\_conv(x)}}
+\DoxyCodeLine{00222\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ x\ =\ self.bottlenecks(x)}}
+\DoxyCodeLine{00223\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ x\ =\ self.final\_conv(x)}}
+\DoxyCodeLine{00224\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ x\ =\ self.pool(x)}}
+\DoxyCodeLine{00225\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ x\ =\ torch.flatten(x,\ 1)}}
+\DoxyCodeLine{00226\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ x\ =\ self.classifier(x)}}
+\DoxyCodeLine{00227\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ return\ x}}
+\DoxyCodeLine{00228\ }
+\DoxyCodeLine{00229\ \ \ \ \ \textcolor{keyword}{struct\ }MobileNetV3\ :\ BaseModel\ \{}
+\DoxyCodeLine{00230\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00231\ \ \ \ \ \ \ \ \ MobileNetV3(\textcolor{keywordtype}{int}\ input\_channels,\ \textcolor{keywordtype}{int}\ num\_classes,\ \textcolor{keywordtype}{float}\ dropout\_prob\ =\ 0.5);}
+\DoxyCodeLine{00232\ \ \ \ \ \ \ \ \ torch::Tensor\ forward(torch::Tensor\ x);}
+\DoxyCodeLine{00233\ }
+\DoxyCodeLine{00234\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00235\ \ \ \ \ \ \ \ \ torch::nn::Sequential\ initial\_conv;}
+\DoxyCodeLine{00236\ \ \ \ \ \ \ \ \ torch::nn::Sequential\ bottlenecks;}
+\DoxyCodeLine{00237\ \ \ \ \ \ \ \ \ torch::nn::Sequential\ final\_conv;}
+\DoxyCodeLine{00238\ \ \ \ \ \ \ \ \ torch::nn::AdaptiveAvgPool2d\ pool;}
+\DoxyCodeLine{00239\ \ \ \ \ \ \ \ \ torch::nn::Sequential\ classifier;}
+\DoxyCodeLine{00240\ \ \ \ \ \};}
+\DoxyCodeLine{00241\ \}}
+
+\end{DoxyCode}

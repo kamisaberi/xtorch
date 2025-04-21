@@ -1,0 +1,55 @@
+\doxysection{xt\+::models\+::Le\+Net5 Struct Reference}
+\hypertarget{structxt_1_1models_1_1LeNet5}{}\label{structxt_1_1models_1_1LeNet5}\index{xt::models::LeNet5@{xt::models::LeNet5}}
+Inheritance diagram for xt\+::models\+::Le\+Net5\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{structxt_1_1models_1_1LeNet5}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{structxt_1_1models_1_1LeNet5_a8b158805b6f43ee401433cef9bdbd65d}\label{structxt_1_1models_1_1LeNet5_a8b158805b6f43ee401433cef9bdbd65d} 
+{\bfseries Le\+Net5} (int num\+\_\+classes, int in\+\_\+channels=1)
+\item 
+\Hypertarget{structxt_1_1models_1_1LeNet5_adebd796b4432ca06e37e798d2064a319}\label{structxt_1_1models_1_1LeNet5_adebd796b4432ca06e37e798d2064a319} 
+{\bfseries Le\+Net5} (int num\+\_\+classes, int in\+\_\+channels, std\+::vector$<$ int64\+\_\+t $>$ input\+\_\+shape)
+\item 
+torch\+::\+Tensor \mbox{\hyperlink{structxt_1_1models_1_1LeNet5_a123f411f10836f2ed3151e637c2017e1}{forward}} (torch\+::\+Tensor x) const override
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{structxt_1_1models_1_1LeNet5_a0006ef4a48c232e8cd0af5dee3cd2b65}\label{structxt_1_1models_1_1LeNet5_a0006ef4a48c232e8cd0af5dee3cd2b65} 
+torch\+::nn\+::\+Sequential {\bfseries layer1} = nullptr
+\item 
+\Hypertarget{structxt_1_1models_1_1LeNet5_aec2ef541fa71fde725e7f8904d323e0d}\label{structxt_1_1models_1_1LeNet5_aec2ef541fa71fde725e7f8904d323e0d} 
+torch\+::nn\+::\+Sequential {\bfseries layer2} = nullptr
+\item 
+\Hypertarget{structxt_1_1models_1_1LeNet5_a7ee2f89f858d4d4fa2983c112db009e9}\label{structxt_1_1models_1_1LeNet5_a7ee2f89f858d4d4fa2983c112db009e9} 
+torch\+::nn\+::\+Linear {\bfseries fc1} = nullptr
+\item 
+\Hypertarget{structxt_1_1models_1_1LeNet5_a4c8b88b143773df3dff28764ad63f601}\label{structxt_1_1models_1_1LeNet5_a4c8b88b143773df3dff28764ad63f601} 
+torch\+::nn\+::\+Linear {\bfseries fc2} = nullptr
+\item 
+\Hypertarget{structxt_1_1models_1_1LeNet5_a8da6180c712c00d916fbdb17806b7a8f}\label{structxt_1_1models_1_1LeNet5_a8da6180c712c00d916fbdb17806b7a8f} 
+torch\+::nn\+::\+Linear {\bfseries fc3} = nullptr
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{structxt_1_1models_1_1LeNet5_a123f411f10836f2ed3151e637c2017e1}\index{xt::models::LeNet5@{xt::models::LeNet5}!forward@{forward}}
+\index{forward@{forward}!xt::models::LeNet5@{xt::models::LeNet5}}
+\doxysubsubsection{\texorpdfstring{forward()}{forward()}}
+{\footnotesize\ttfamily \label{structxt_1_1models_1_1LeNet5_a123f411f10836f2ed3151e637c2017e1} 
+torch\+::\+Tensor xt\+::models\+::\+Le\+Net5\+::forward (\begin{DoxyParamCaption}\item[{torch\+::\+Tensor}]{x}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classxt_1_1models_1_1BaseModel}{xt\+::models\+::\+Base\+Model}}.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lenet5.\+h\end{DoxyCompactItemize}

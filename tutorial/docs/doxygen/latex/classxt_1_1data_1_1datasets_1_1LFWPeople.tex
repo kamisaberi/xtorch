@@ -1,0 +1,79 @@
+\doxysection{xt\+::data\+::datasets\+::LFWPeople Class Reference}
+\hypertarget{classxt_1_1data_1_1datasets_1_1LFWPeople}{}\label{classxt_1_1data_1_1datasets_1_1LFWPeople}\index{xt::data::datasets::LFWPeople@{xt::data::datasets::LFWPeople}}
+Inheritance diagram for xt\+::data\+::datasets\+::LFWPeople\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{classxt_1_1data_1_1datasets_1_1LFWPeople}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classxt_1_1data_1_1datasets_1_1LFWPeople_a756cc846beeaec9adca07ec0efa0e7b7}\label{classxt_1_1data_1_1datasets_1_1LFWPeople_a756cc846beeaec9adca07ec0efa0e7b7} 
+{\bfseries LFWPeople} (const std\+::string \&root)
+\item 
+\Hypertarget{classxt_1_1data_1_1datasets_1_1LFWPeople_aba003690b0b5db307c0928bc6e8feb25}\label{classxt_1_1data_1_1datasets_1_1LFWPeople_aba003690b0b5db307c0928bc6e8feb25} 
+{\bfseries LFWPeople} (const std\+::string \&root, Data\+Mode mode)
+\item 
+\Hypertarget{classxt_1_1data_1_1datasets_1_1LFWPeople_a8c56acc97f205294cbb8b5e9cf2b5692}\label{classxt_1_1data_1_1datasets_1_1LFWPeople_a8c56acc97f205294cbb8b5e9cf2b5692} 
+{\bfseries LFWPeople} (const std\+::string \&root, Data\+Mode mode, bool download)
+\item 
+\Hypertarget{classxt_1_1data_1_1datasets_1_1LFWPeople_aa9e90c884976690f69dcf7a2ede35cfc}\label{classxt_1_1data_1_1datasets_1_1LFWPeople_aa9e90c884976690f69dcf7a2ede35cfc} 
+{\bfseries LFWPeople} (const std\+::string \&root, Data\+Mode mode, bool download, Transform\+Type transforms)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classxt_1_1data_1_1datasets_1_1LFW}{xt\+::data\+::datasets\+::\+LFW}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries LFW} (const std\+::string \&root)
+\item 
+{\bfseries LFW} (const std\+::string \&root, Data\+Mode mode)
+\item 
+{\bfseries LFW} (const std\+::string \&root, Data\+Mode mode, bool download)
+\item 
+{\bfseries LFW} (const std\+::string \&root, Data\+Mode mode, bool download, Transform\+Type transforms)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classxt_1_1data_1_1datasets_1_1BaseDataset}{xt\+::data\+::datasets\+::\+Base\+Dataset}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Base\+Dataset} (const std\+::string \&root)
+\item 
+{\bfseries Base\+Dataset} (const std\+::string \&root, Data\+Mode mode)
+\item 
+{\bfseries Base\+Dataset} (const std\+::string \&root, Data\+Mode mode, bool download)
+\item 
+{\bfseries Base\+Dataset} (const std\+::string \&root, Data\+Mode mode, bool download, vector$<$ std\+::function$<$ torch\+::\+Tensor(torch\+::\+Tensor)$>$ $>$ transforms)
+\item 
+torch\+::data\+::\+Example {\bfseries get} (size\+\_\+t index) override
+\item 
+torch\+::optional$<$ size\+\_\+t $>$ {\bfseries size} () const override
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Public Types inherited from \mbox{\hyperlink{classxt_1_1data_1_1datasets_1_1BaseDataset}{xt\+::data\+::datasets\+::\+Base\+Dataset}}}
+\begin{DoxyCompactItemize}
+\item 
+using {\bfseries Transform\+Type} = vector$<$std\+::function$<$torch\+::\+Tensor(torch\+::\+Tensor)$>$ $>$
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes inherited from \mbox{\hyperlink{classxt_1_1data_1_1datasets_1_1BaseDataset}{xt\+::data\+::datasets\+::\+Base\+Dataset}}}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ torch\+::\+Tensor $>$ {\bfseries data}
+\item 
+std\+::vector$<$ uint8\+\_\+t $>$ {\bfseries labels}
+\item 
+Data\+Mode {\bfseries mode} = Data\+Mode\+::\+TRAIN
+\item 
+bool {\bfseries download} = false
+\item 
+fs\+::path {\bfseries root}
+\item 
+fs\+::path {\bfseries dataset\+\_\+path}
+\item 
+\mbox{\hyperlink{classxt_1_1data_1_1transforms_1_1Compose}{xt\+::data\+::transforms\+::\+Compose}} {\bfseries compose}
+\item 
+vector$<$ std\+::function$<$ torch\+::\+Tensor(torch\+::\+Tensor)$>$ $>$ {\bfseries transforms} = \{\}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lfw.\+h\end{DoxyCompactItemize}

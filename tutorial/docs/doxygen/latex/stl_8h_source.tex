@@ -1,0 +1,72 @@
+\doxysection{stl.\+h}
+\hypertarget{stl_8h_source}{}\label{stl_8h_source}\index{stl.h@{stl.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ "{}../base/base.h"{}}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}../../headers/datasets.h"{}}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00006\ \textcolor{keyword}{namespace\ }fs\ =\ std::filesystem;}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }xt::data::datasets\ \{}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keyword}{class\ }STL10\ :\ BaseDataset\ \{}
+\DoxyCodeLine{00011\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ \ \ \ \ \ \ \ "{}"{}"{}`STL10\ <https://cs.stanford.edu/\string~acoates/stl10/>`\_\ Dataset.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ \ \ \ Args:}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ \ \ \ \ \ \ \ root\ (str\ or\ \`{}\`{}pathlib.Path``):\ Root\ directory\ of\ dataset\ where\ directory}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \`{}\`{}stl10\_binary``\ exists.}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ \ \ \ \ \ \ \ split\ (string):\ One\ of\ \{'train',\ 'test',\ 'unlabeled',\ 'train+unlabeled'\}.}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ Accordingly,\ dataset\ is\ selected.}}
+\DoxyCodeLine{00019\ \textcolor{comment}{\ \ \ \ \ \ \ \ folds\ (int,\ optional):\ One\ of\ \{0-\/9\}\ or\ None.}}
+\DoxyCodeLine{00020\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ For\ training,\ loads\ one\ of\ the\ 10\ pre-\/defined\ folds\ of\ 1k\ samples\ for\ the}}
+\DoxyCodeLine{00021\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ standard\ evaluation\ procedure.\ If\ no\ value\ is\ passed,\ loads\ the\ 5k\ samples.}}
+\DoxyCodeLine{00022\ \textcolor{comment}{\ \ \ \ \ \ \ \ transform\ (callable,\ optional):\ A\ function/transform\ that\ takes\ in\ a\ PIL\ image}}
+\DoxyCodeLine{00023\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ and\ returns\ a\ transformed\ version.\ E.g,\ \`{}\`{}transforms.RandomCrop``}}
+\DoxyCodeLine{00024\ \textcolor{comment}{\ \ \ \ \ \ \ \ target\_transform\ (callable,\ optional):\ A\ function/transform\ that\ takes\ in\ the}}
+\DoxyCodeLine{00025\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ target\ and\ transforms\ it.}}
+\DoxyCodeLine{00026\ \textcolor{comment}{\ \ \ \ \ \ \ \ download\ (bool,\ optional):\ If\ true,\ downloads\ the\ dataset\ from\ the\ internet\ and}}
+\DoxyCodeLine{00027\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ puts\ it\ in\ root\ directory.\ If\ dataset\ is\ already\ downloaded,\ it\ is\ not}}
+\DoxyCodeLine{00028\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ downloaded\ again.}}
+\DoxyCodeLine{00029\ \textcolor{comment}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00030\ \textcolor{comment}{}}
+\DoxyCodeLine{00031\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00032\ \ \ \ \ public\ :}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ STL10(\textcolor{keyword}{const}\ std::string\ \&root);}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ STL10(\textcolor{keyword}{const}\ std::string\ \&root,\ DataMode\ mode);}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ STL10(\textcolor{keyword}{const}\ std::string\ \&root,\ DataMode\ mode\ ,\ \textcolor{keywordtype}{bool}\ download);}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ STL10(\textcolor{keyword}{const}\ std::string\ \&root,\ DataMode\ mode\ ,\ \textcolor{keywordtype}{bool}\ download,\ TransformType\ transforms);}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \ \ private\ :}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ fs::path\ dataset\_folder\_name\ =\ fs::path(\textcolor{stringliteral}{"{}stl10\_binary"{}});}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ fs::path\ url\ =\ fs::path(\textcolor{stringliteral}{"{}http://ai.stanford.edu/\string~acoates/stl10/stl10\_binary.tar.gz"{}});}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ fs::path\ dataset\_file\_name\ =\ fs::path(\textcolor{stringliteral}{"{}stl10\_binary.tar.gz"{}});}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ std::string\ dataset\_file\_md5\ =\ \textcolor{stringliteral}{"{}91f7769df0f17e558f3565bffb0c7dfb"{}};}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ fs::path\ class\_names\_file\ =\ fs::path(\textcolor{stringliteral}{"{}class\_names.txt"{}});}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ fs::path\ folds\_list\_file\ =\ fs::path(\textcolor{stringliteral}{"{}fold\_indices.txt"{}});}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ std::vector<std::tuple<fs::path,\ std::string\ >>\ train\_list\ =\ \{}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}train\_X.bin"{}},\ \textcolor{stringliteral}{"{}918c2871b30a85fa023e0c44e0bee87f"{}}\},}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}train\_y.bin"{}},\ \textcolor{stringliteral}{"{}5a34089d4802c674881badbb80307741"{}}\},}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}unlabeled\_X.bin"{}},\ \textcolor{stringliteral}{"{}5242ba1fed5e4be9e1e742405eb56ca4"{}}\}}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ std::vector<std::tuple<fs::path,\ std::string\ >>\ test\_list\ =\ \{\{\textcolor{stringliteral}{"{}test\_X.bin"{}},\ \textcolor{stringliteral}{"{}7f263ba9f9e0b06b93213547f721ac82"{}}\},}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}test\_y.bin"{}},\ \textcolor{stringliteral}{"{}36f9794fa4beb8a2c72628de14fa638e"{}}\}\};}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ std::vector<std::string>\ splits\ =\ \{\textcolor{stringliteral}{"{}train"{}},\ \textcolor{stringliteral}{"{}train+unlabeled"{}},\ \textcolor{stringliteral}{"{}unlabeled"{}},\ \textcolor{stringliteral}{"{}test"{}}\};}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ load\_data();}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ check\_resources();}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \ \ \};}
+\DoxyCodeLine{00066\ \}}
+
+\end{DoxyCode}

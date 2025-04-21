@@ -1,0 +1,54 @@
+\doxysection{flying-\/things-\/3d.h}
+\hypertarget{flying-things-3d_8h_source}{}\label{flying-things-3d_8h_source}\index{flying-\/things-\/3d.h@{flying-\/things-\/3d.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}../base/base.h"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}../../headers/datasets.h"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }xt::data::datasets\ \{}
+\DoxyCodeLine{00008\ \ \ \ \ \textcolor{keyword}{class\ }FlyingThings3D\ :\ \textcolor{keyword}{public}\ BaseDataset\ \{}
+\DoxyCodeLine{00009\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ \ \ \ \ \ \ \ "{}"{}"{}`FlyingThings3D\ <https://lmb.informatik.uni-\/freiburg.de/resources/datasets/SceneFlowDatasets.en.html>`\_\ dataset\ for\ optical\ flow.}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ \ \ \ \ \ \ The\ dataset\ is\ expected\ to\ have\ the\ following\ structure:\ ::}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ root}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FlyingThings3D}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ frames\_cleanpass}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ TEST}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ TRAIN}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ frames\_finalpass}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ TEST}}
+\DoxyCodeLine{00019\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ TRAIN}}
+\DoxyCodeLine{00020\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ optical\_flow}}
+\DoxyCodeLine{00021\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ TEST}}
+\DoxyCodeLine{00022\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ TRAIN}}
+\DoxyCodeLine{00023\ \textcolor{comment}{}}
+\DoxyCodeLine{00024\ \textcolor{comment}{\ \ \ \ \ \ \ \ Args:}}
+\DoxyCodeLine{00025\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ root\ (str\ or\ \`{}\`{}pathlib.Path``):\ Root\ directory\ of\ the\ intel\ FlyingThings3D\ Dataset.}}
+\DoxyCodeLine{00026\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ split\ (string,\ optional):\ The\ dataset\ split,\ either\ "{}train"{}\ (default)\ or\ "{}test"{}}}
+\DoxyCodeLine{00027\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ pass\_name\ (string,\ optional):\ The\ pass\ to\ use,\ either\ "{}clean"{}\ (default)\ or\ "{}final"{}\ or\ "{}both"{}.\ See\ link\ above\ for}}
+\DoxyCodeLine{00028\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ details\ on\ the\ different\ passes.}}
+\DoxyCodeLine{00029\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ camera\ (string,\ optional):\ Which\ camera\ to\ return\ images\ from.\ Can\ be\ either\ "{}left"{}\ (default)\ or\ "{}right"{}\ or\ "{}both"{}.}}
+\DoxyCodeLine{00030\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ transforms\ (callable,\ optional):\ A\ function/transform\ that\ takes\ in}}
+\DoxyCodeLine{00031\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \`{}\`{}img1,\ img2,\ flow,\ valid\_flow\_mask``\ and\ returns\ a\ transformed\ version.}}
+\DoxyCodeLine{00032\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \`{}\`{}valid\_flow\_mask``\ is\ expected\ for\ consistency\ with\ other\ datasets\ which}}
+\DoxyCodeLine{00033\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return\ a\ built-\/in\ valid\ mask,\ such\ as\ :class:`\string~torchvision.datasets.KittiFlow`.}}
+\DoxyCodeLine{00034\ \textcolor{comment}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{00035\ \textcolor{comment}{\ \ \ \ */}}
+\DoxyCodeLine{00036\ \ \ \ \ public\ :}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ FlyingThings3D(\textcolor{keyword}{const}\ std::string\ \&root);}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ FlyingThings3D(\textcolor{keyword}{const}\ std::string\ \&root,\ DataMode\ mode);}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ FlyingThings3D(\textcolor{keyword}{const}\ std::string\ \&root,\ DataMode\ mode\ ,\ \textcolor{keywordtype}{bool}\ download);}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ FlyingThings3D(\textcolor{keyword}{const}\ std::string\ \&root,\ DataMode\ mode\ ,\ \textcolor{keywordtype}{bool}\ download,\ TransformType\ transforms);}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ private\ :}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ load\_data();}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ check\_resources();}
+\DoxyCodeLine{00047\ \ \ \ \ \};}
+\DoxyCodeLine{00048\ \}}
+
+\end{DoxyCode}

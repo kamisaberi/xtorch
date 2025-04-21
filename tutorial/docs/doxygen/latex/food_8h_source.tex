@@ -1,0 +1,44 @@
+\doxysection{food.\+h}
+\hypertarget{food_8h_source}{}\label{food_8h_source}\index{food.h@{food.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ "{}../base/base.h"{}}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}../../headers/datasets.h"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ \ "{}../../utils/filesystem.h"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ \ "{}../../utils/string.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <fstream>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <map>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00011\ \textcolor{keyword}{namespace\ }fs\ =\ std::filesystem;}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{namespace\ }xt::data::datasets\ \{}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keyword}{class\ }Food101\ :\ \textcolor{keyword}{public}\ BaseDataset\ \{}
+\DoxyCodeLine{00015\ \ \ \ \ public\ :}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ Food101(\textcolor{keyword}{const}\ std::string\ \&root);}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ Food101(\textcolor{keyword}{const}\ std::string\ \&root,\ DataMode\ mode);}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ Food101(\textcolor{keyword}{const}\ std::string\ \&root,\ DataMode\ mode\ ,\ \textcolor{keywordtype}{bool}\ download);}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ Food101(\textcolor{keyword}{const}\ std::string\ \&root,\ DataMode\ mode\ ,\ \textcolor{keywordtype}{bool}\ download,\ vector<std::function<torch::Tensor(torch::Tensor)>>\ transforms);}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \ \ \ private\ :}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ std::string\ url\ =\ \textcolor{stringliteral}{"{}http://data.vision.ee.ethz.ch/cvl/food-\/101.tar.gz"{}};}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ fs::path\ dataset\_file\_name\ =\ \textcolor{stringliteral}{"{}food-\/101.tar.gz"{}};}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ std::string\ dataset\_file\_md5\ =\ \textcolor{stringliteral}{"{}85eeb15f3717b99a5da872d97d918f87"{}};}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ fs::path\ dataset\_folder\_name\ =\ \textcolor{stringliteral}{"{}food-\/101"{}};}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ std::size\_t\ images\_number\ =\ 101'000;}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ std::vector<string>\ classes\_name;}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ std::map<string,\ int>\ classes\_map;}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ load\_data();}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ load\_classes();}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ check\_resources();}
+\DoxyCodeLine{00037\ \ \ \ \ \};}
+\DoxyCodeLine{00038\ \}}
+
+\end{DoxyCode}

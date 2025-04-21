@@ -1,0 +1,48 @@
+\doxysection{extract.\+h}
+\hypertarget{extract_8h_source}{}\label{extract_8h_source}\index{extract.h@{extract.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <zip.h>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <filesystem>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <zlib.h>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <fstream>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <tar.h>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <archive.h>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <archive\_entry.h>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <sys/stat.h>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <unistd.h>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <libtar.h>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <fcntl.h>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <lzma.h>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <fstream>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ <stdexcept>}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ <archive.h>}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ <archive\_entry.h>}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ <fstream>}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ <filesystem>}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00027\ \textcolor{keyword}{namespace\ }fs\ =\ std::filesystem;}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{keyword}{namespace\ }xt::utils\ \{}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{void}\ extractXZ(\textcolor{keyword}{const}\ std::string\ \&inputFile,\ \textcolor{keyword}{const}\ std::string\ \&outputFile);}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ std::tuple<bool,\ string>\ extractGzip(\textcolor{keyword}{const}\ std::string\ \&inFile,\ \textcolor{keyword}{const}\ std::string\ \&outFile\ =\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{bool}\ extractTar(\textcolor{keyword}{const}\ std::string\ \&tarFile,\ \textcolor{keyword}{const}\ std::string\ \&outPath\ =\ \textcolor{stringliteral}{"{}./"{}});}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{bool}\ extractZip(\textcolor{keyword}{const}\ std::string\ \&inFile,\ \textcolor{keyword}{const}\ std::string\ \&outPath\ =\ \textcolor{stringliteral}{"{}./"{}});}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{bool}\ extractTgz(\textcolor{keyword}{const}\ std::string\ \&inFile,\ \textcolor{keyword}{const}\ std::string\ \&outPath\ =\ \textcolor{stringliteral}{"{}./"{}});}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{bool}\ extract(\textcolor{keyword}{const}\ std::string\ \&inFile,\ \textcolor{keyword}{const}\ std::string\ \&outFile\ =\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \}}
+
+\end{DoxyCode}
