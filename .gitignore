@@ -2,5 +2,7 @@ cmake-build-debug/
 build/
 .idea/
 tutorial/.venv
+tutorial/site
+
 #torch-extension/build/
 #torch-extension/cmake-build-debug/
