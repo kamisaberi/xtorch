@@ -4,3 +4,4 @@ mkdocs-material-extensions
 pymdown-extensions
 mkdocstrings-python
 mkdoxy
+mkdocs-macros-plugin
