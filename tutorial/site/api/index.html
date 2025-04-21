@@ -1609,7 +1609,7 @@
 
 
 <h1 id="class-xtdatatransformscompose">Class xt::data::transforms::Compose</h1>
-<p><a href="xTorch/annotated.md"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="xTorch/namespacext.md"><strong>xt</strong></a> <strong>&gt;</strong> <a href="xTorch/namespacext_1_1data.md"><strong>data</strong></a> <strong>&gt;</strong> <a href="xTorch/namespacext_1_1data_1_1transforms.md"><strong>transforms</strong></a> <strong>&gt;</strong> <a href="xTorch/classxt_1_1data_1_1transforms_1_1Compose.md"><strong>Compose</strong></a></p>
+<p><a href="xtorch/annotated.md"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="xtorch/namespacext.md"><strong>xt</strong></a> <strong>&gt;</strong> <a href="xtorch/namespacext_1_1data.md"><strong>data</strong></a> <strong>&gt;</strong> <a href="xtorch/namespacext_1_1data_1_1transforms.md"><strong>transforms</strong></a> <strong>&gt;</strong> <a href="xtorch/classxt_1_1data_1_1transforms_1_1Compose.md"><strong>Compose</strong></a></p>
 <p><em>A class to compose multiple tensor transformations into a single callable pipeline.</em> <a href="#detailed-description">More...</a></p>
 <ul>
 <li><code>#include &lt;compose.h&gt;</code></li>
@@ -1644,7 +1644,7 @@
 </tr>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-compose-22"><strong>Compose</strong></a> (std::vector&lt; <a href="xTorch/classxt_1_1data_1_1transforms_1_1Compose.md#typedef-transformfunc"><strong>TransformFunc</strong></a> &gt; transforms) <br><em>Constructs a</em> <a href="xTorch/classxt_1_1data_1_1transforms_1_1Compose.md"><em><strong>Compose</strong></em></a> <em>object with a vector of transformation functions.</em></td>
+<td style="text-align: left;"><a href="#function-compose-22"><strong>Compose</strong></a> (std::vector&lt; <a href="xtorch/classxt_1_1data_1_1transforms_1_1Compose.md#typedef-transformfunc"><strong>TransformFunc</strong></a> &gt; transforms) <br><em>Constructs a</em> <a href="xtorch/classxt_1_1data_1_1transforms_1_1Compose.md"><em><strong>Compose</strong></em></a> <em>object with a vector of transformation functions.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">torch::Tensor</td>
@@ -1653,7 +1653,7 @@
 </tbody>
 </table>
 <h2 id="detailed-description">Detailed Description</h2>
-<p>The <a href="xTorch/classxt_1_1data_1_1transforms_1_1Compose.md"><strong>Compose</strong></a> class allows chaining of multiple transformation functions, each operating on a <code>torch::Tensor</code>, into a single operation. It is designed to facilitate preprocessing or augmentation of tensor data (e.g., images) by applying a sequence of transforms in the order they are provided. The transformations are stored as a vector of function objects and applied via the call operator. </p>
+<p>The <a href="xtorch/classxt_1_1data_1_1transforms_1_1Compose.md"><strong>Compose</strong></a> class allows chaining of multiple transformation functions, each operating on a <code>torch::Tensor</code>, into a single operation. It is designed to facilitate preprocessing or augmentation of tensor data (e.g., images) by applying a sequence of transforms in the order they are provided. The transformations are stored as a vector of function objects and applied via the call operator. </p>
 <h2 id="public-types-documentation">Public Types Documentation</h2>
 <h3 id="typedef-transformfunc">typedef TransformFunc</h3>
 <p><em>Alias for a transformation function that takes a tensor and returns a tensor.</em> </p>
@@ -1666,20 +1666,20 @@
 <p><em>Default constructor, initializing an empty transformation pipeline.</em> </p>
 <pre><code class="language-C++">xt::data::transforms::Compose::Compose () 
 </code></pre>
-<p>Creates a <a href="xTorch/classxt_1_1data_1_1transforms_1_1Compose.md"><strong>Compose</strong></a> object with no transformations, allowing subsequent addition of transforms if needed. </p>
+<p>Creates a <a href="xtorch/classxt_1_1data_1_1transforms_1_1Compose.md"><strong>Compose</strong></a> object with no transformations, allowing subsequent addition of transforms if needed. </p>
 <hr>
 
 <h3 id="function-compose-22">function Compose [2/2]</h3>
-<p><em>Constructs a</em> <a href="xTorch/classxt_1_1data_1_1transforms_1_1Compose.md"><em><strong>Compose</strong></em></a> <em>object with a vector of transformation functions.</em></p>
+<p><em>Constructs a</em> <a href="xtorch/classxt_1_1data_1_1transforms_1_1Compose.md"><em><strong>Compose</strong></em></a> <em>object with a vector of transformation functions.</em></p>
 <pre><code class="language-C++">xt::data::transforms::Compose::Compose (
     std::vector&lt; TransformFunc &gt; transforms
 ) 
 </code></pre>
 <p><strong>Parameters:</strong></p>
 <ul>
-<li><code>transforms</code> A vector of <a href="xTorch/classxt_1_1data_1_1transforms_1_1Compose.md#typedef-transformfunc"><strong>TransformFunc</strong></a> objects specifying the sequence of transformations.</li>
+<li><code>transforms</code> A vector of <a href="xtorch/classxt_1_1data_1_1transforms_1_1Compose.md#typedef-transformfunc"><strong>TransformFunc</strong></a> objects specifying the sequence of transformations.</li>
 </ul>
-<p>Initializes the <a href="xTorch/classxt_1_1data_1_1transforms_1_1Compose.md"><strong>Compose</strong></a> object with a predefined set of transformations to be applied in order. </p>
+<p>Initializes the <a href="xtorch/classxt_1_1data_1_1transforms_1_1Compose.md"><strong>Compose</strong></a> object with a predefined set of transformations to be applied in order. </p>
 <hr>
 
 <h3 id="function-operator">function operator()</h3>
