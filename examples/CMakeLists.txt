@@ -1,5 +1,5 @@
 project(examples)
-list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
+list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/cpp/libtorch/)
 find_package(Torch REQUIRED)
 #find_package(TorchExtension REQUIRED)
 find_package(LibLZMA REQUIRED)
