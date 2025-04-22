@@ -218,6 +218,8 @@ target_include_directories(resnet-mnist PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_IN
 target_link_libraries(resnet-mnist ${TEST_LIBRARIES})
 
 
+
+
 # ResNet FashionMNIST
 set(SOURCE_FILES
         ../src/datasets/image-classification/mnist.cpp
