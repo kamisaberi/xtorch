@@ -28,7 +28,7 @@ set_target_properties(xTorch PROPERTIES CXX_STANDARD 17 CXX_STANDARD_REQUIRED YE
 
 # ----------------------------------------------------------------------------
 # Dependencies
-list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
+list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/cpp/libtorch/)
 
 find_package(Torch REQUIRED)
 find_package(CURL REQUIRED)
