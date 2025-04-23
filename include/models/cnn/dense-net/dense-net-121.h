@@ -1,8 +1,26 @@
-//
-// Created by kami on 4/21/25.
-//
+#pragma once
+#include <torch/torch.h>
+#include <iostream>
+#include <vector>
+#include <fstream>
+#include <string>
+#include "../../base.h"
 
-#ifndef DENSE_NET_121_H
-#define DENSE_NET_121_H
 
-#endif //DENSE_NET_121_H
+using namespace std;
+
+
+namespace xt::models {
+    struct DenseNet121 : BaseModel {
+        mutable torch::nn::Sequential layer1 = nullptr, layer2 = nullptr, layer3 = nullptr, layer4 = nullptr, layer5 =
+                nullptr;
+        mutable torch::nn::Sequential fc = nullptr, fc1 = nullptr, fc2 = nullptr;
+
+    public:
+        DenseNet121(int num_classes /* classes */, int in_channels = 3/* input channels */);
+
+        DenseNet121(int num_classes, int in_channels, std::vector<int64_t> input_shape);
+
+        torch::Tensor forward(torch::Tensor x) const override;
+    };
+}
