@@ -10,7 +10,7 @@
 using namespace std;
 
 namespace xt::models {
-    struct VggNet16 : BaseModel {
+    struct VggNet13 : BaseModel {
         mutable torch::nn::Sequential layer1 = nullptr, layer2 = nullptr, layer3 = nullptr, layer4 = nullptr;
         mutable torch::nn::Sequential layer5 = nullptr;
         mutable torch::nn::Sequential layer6 = nullptr, layer7 = nullptr, layer8 = nullptr, layer9 = nullptr;
