@@ -1,6 +1,6 @@
 #include "includes/base.h"
 #include "../../include/datasets/image-classification/food.h"
-#include "../../include/models/cnn/vggnet/vggnet.h"
+#include "../../include/models/cnn/vggnet/vggnet16.h"
 #include "../../include/definitions/transforms.h"
 
 
