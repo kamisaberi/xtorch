@@ -1,8 +1,26 @@
-//
-// Created by kami on 4/21/25.
-//
+#pragma once
+#include <torch/torch.h>
+#include <iostream>
+#include <vector>
+#include <fstream>
+#include <string>
+#include "../../base.h"
 
-#ifndef INCEPTION_V1_H
-#define INCEPTION_V1_H
 
-#endif //INCEPTION_V1_H
+using namespace std;
+
+
+namespace xt::models {
+    struct InceptionResNet : BaseModel {
+        mutable torch::nn::Sequential layer1 = nullptr, layer2 = nullptr, layer3 = nullptr, layer4 = nullptr, layer5 =
+                nullptr;
+        mutable torch::nn::Sequential fc = nullptr, fc1 = nullptr, fc2 = nullptr;
+
+    public:
+        InceptionResNet(int num_classes /* classes */, int in_channels = 3/* input channels */);
+
+        InceptionResNet(int num_classes, int in_channels, std::vector<int64_t> input_shape);
+
+        torch::Tensor forward(torch::Tensor x) const override;
+    };
+}
