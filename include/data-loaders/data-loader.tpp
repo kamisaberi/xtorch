@@ -2,12 +2,27 @@
 
 #include "data-loader.h"
 
+/**
+ * @namespace xt
+ * @brief Namespace for custom data loading utilities and dataset handling in the xt framework.
+ */
+namespace xt {
+    // using BatchType        = typename Dataset::BatchType;          // e.g., Example<Tensor, Tensor>
+    // using BatchRequestType = std::vector<size_t>;                  // list of indices for one batch
+    // using Base = torch::data::DataLoaderBase<Dataset, BatchType, BatchRequestType>;
 
-namespace xt{
-//    using BatchType        = typename Dataset::BatchType;          // e.g., Example<Tensor, Tensor>
-//    using BatchRequestType = std::vector<size_t>;                  // list of indices for one batch
-//    using Base = torch::data::DataLoaderBase<Dataset, BatchType, BatchRequestType>;
-
+    /**
+     * @brief Constructs a DataLoader for the given dataset with specified options.
+     *
+     * Initializes the DataLoader with the dataset, batch size, and shuffling options.
+     * Only single-threaded operation is supported (workers=0).
+     *
+     * @tparam Dataset The type of the dataset to load.
+     * @param dataset The dataset to load.
+     * @param options DataLoader options (e.g., batch size, number of workers).
+     * @param shuffle Whether to shuffle the dataset indices each epoch.
+     * @throws std::runtime_error If the number of workers is not zero.
+     */
     template <typename Dataset>
     DataLoader<Dataset>::DataLoader(Dataset dataset, const torch::data::DataLoaderOptions& options, bool shuffle)
         : Base(options, std::make_unique<Dataset>(std::move(dataset))), shuffle_(shuffle) {
@@ -21,22 +36,26 @@ namespace xt{
         reset_indices();                                      // initialize index sequence
     }
 
-//    // Iterator support for range-for loops
-//    typename Base::iterator begin() {
-//        this->reset();       // reset (and shuffle if needed) at start of epoch
-//        return Base::begin();
-//    }
-//    typename Base::iterator end() {
-//        return Base::end();
-//    }
+    // Iterator support for range-for loops
+    // typename Base::iterator begin() {
+    //     this->reset();       // reset (and shuffle if needed) at start of epoch
+    //     return Base::begin();
+    // }
+    // typename Base::iterator end() {
+    //     return Base::end();
+    // }
 
-    // Provide the next batch of indices to fetch from the dataset
+    /**
+     * @brief Provides the next batch of indices to fetch from the dataset.
+     *
+     * Returns a vector of indices for the next batch, or nullopt if no more batches are available.
+     * If drop_last_ is true, incomplete batches smaller than batch_size_ are discarded.
+     *
+     * @tparam Dataset The type of the dataset to load.
+     * @return std::optional<BatchRequestType> A vector of indices for the next batch, or nullopt if no more batches are available.
+     */
     template <typename Dataset>
-//    using BatchType        = typename Dataset::BatchType;          // e.g., Example<Tensor, Tensor>
-//    using BatchRequestType = std::vector<size_t>;                  // list of indices for one batch
-//    using Base = torch::data::DataLoaderBase<Dataset, BatchType, BatchRequestType>;
-
-    std::optional<typename  DataLoader<Dataset>::BatchRequestType> DataLoader<Dataset>::get_batch_request()  {
+    std::optional<typename DataLoader<Dataset>::BatchRequestType> DataLoader<Dataset>::get_batch_request() {
         if (current_index_ >= indices_.size()) {
             // No more indices -> signal end of data
             return std::nullopt;
@@ -54,9 +73,16 @@ namespace xt{
         return batch_indices;
     }
 
-    // Reset and (optionally) shuffle indices for a new epoch
+    /**
+     * @brief Resets and optionally shuffles the indices for a new epoch.
+     *
+     * Reinitializes the index sequence (0 to N-1) and shuffles it if shuffle_ is enabled.
+     * Resets the current index to 0.
+     *
+     * @tparam Dataset The type of the dataset to load.
+     */
     template <typename Dataset>
-    void  DataLoader<Dataset>::reset_indices() {
+    void DataLoader<Dataset>::reset_indices() {
         const size_t N = dataset_ptr_->size().value();
         indices_.resize(N);
         std::iota(indices_.begin(), indices_.end(), 0);  // fill with 0,1,...,N-1
@@ -68,16 +94,17 @@ namespace xt{
         current_index_ = 0;
     }
 
-    // Override base class reset() to shuffle indices each epoch (if enabled)
+    /**
+     * @brief Resets the DataLoader for a new epoch, shuffling indices if enabled.
+     *
+     * Calls reset_indices() to reinitialize the index sequence and invokes the base class reset.
+     *
+     * @tparam Dataset The type of the dataset to load.
+     */
     template <typename Dataset>
     void DataLoader<Dataset>::reset() {
         reset_indices();
         Base::reset();  // let DataLoaderBase handle internal reset (e.g., for iterator state)
     }
-
-
-
-
-
 
 }
