@@ -18,8 +18,8 @@ namespace xt::models {
         mutable torch::nn::Sequential layer11 = nullptr, layer12 = nullptr, layer13 = nullptr;
         mutable torch::nn::Sequential fc = nullptr, fc1 = nullptr, fc2 = nullptr;
 
-        VggNet16(int num_classes /* classes */, int in_channels  /* input channels */);
-        VggNet16(int num_classes, int in_channels, std::vector<int64_t> input_shape);
+        VggNet13(int num_classes /* classes */, int in_channels  /* input channels */);
+        VggNet13(int num_classes, int in_channels, std::vector<int64_t> input_shape);
 
         torch::Tensor forward(torch::Tensor x) const override;
     };
