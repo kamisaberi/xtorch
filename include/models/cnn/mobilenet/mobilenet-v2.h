@@ -226,7 +226,7 @@ namespace xt::models {
     //        x = self.classifier(x)
     //        return x
 
-    struct MobileNetV3 : BaseModel {
+    struct MobileNetV2 : BaseModel {
     public:
         MobileNetV2(int input_channels, int num_classes, float dropout_prob = 0.5);
         torch::Tensor forward(torch::Tensor x);
