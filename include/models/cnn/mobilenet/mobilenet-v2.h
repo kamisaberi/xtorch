@@ -228,7 +228,7 @@ namespace xt::models {
 
     struct MobileNetV3 : BaseModel {
     public:
-        MobileNetV3(int input_channels, int num_classes, float dropout_prob = 0.5);
+        MobileNetV2(int input_channels, int num_classes, float dropout_prob = 0.5);
         torch::Tensor forward(torch::Tensor x);
 
     private:
