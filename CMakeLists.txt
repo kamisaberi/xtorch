@@ -57,6 +57,11 @@ target_link_libraries(xTorch
         ${LIBTAR_LIBRARY} OpenSSL::SSL OpenSSL::Crypto LibLZMA::LibLZMA
         ${LibArchive_LIBRARIES} ${SndFile_LIBRARIES})
 
+
+
+list(APPEND DCUDA_TOOLKIT_ROOT_DIR /opt/cuda)
+list(APPEND Dnvtx3_dir /opt/cuda/include/nvtx3)
+
 # ----------------------------------------------------------------------------
 # Install Setup
 include(GNUInstallDirs)
@@ -115,5 +120,5 @@ endif()
 # Subdirectories
 # -----------------------------------------------------------------------------
 # Add subdirectories for example and temporary code
-add_subdirectory(examples)
+#add_subdirectory(examples)
 #add_subdirectory(temp)
