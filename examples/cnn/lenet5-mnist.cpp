@@ -10,9 +10,11 @@ int main() {
     std::vector<int64_t> size = {32, 32};
 
     std::cout.precision(10);
-    torch::Device device(torch::kCPU);
+    torch::Device device(torch::cuda::is_available() ? torch::kCUDA : torch::kCPU);
+    // cout << device<< endl;
+    // return 0;
 
-    auto dataset = xt::data::datasets::MNIST("/home/kami/Documents/temp/", DataMode::TRAIN, true);
+    auto dataset = xt::data::datasets::MNIST("/home/kami/Documents/datasets/", DataMode::TRAIN, true);
 
     auto transformed_dataset = dataset
             .map(xt::data::transforms::resize({32, 32}))
@@ -35,6 +37,8 @@ int main() {
             auto batch = *train_loader_iterator;
             data = batch.data;
             targets = batch.target;
+            data = data.to(device);
+            targets =targets.to(device);
             optimizer.zero_grad();
             torch::Tensor output;
             output = model.forward(data);
