@@ -1,4 +1,4 @@
-#include "../../../../include/models/cnn/mobilenet/mobilenet.h"
+#include "../../../../include/models/cnn/mobilenet/mobilenet-v3.h"
 
 namespace xt::models {
     HSigmoid::HSigmoid() {
