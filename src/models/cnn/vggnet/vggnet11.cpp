@@ -1,7 +1,7 @@
-#include "../../../../include/models/cnn/vggnet/vggnet.h"
+#include "../../../../include/models/cnn/vggnet/vggnet11.h"
 
 namespace xt::models {
-    VggNet16::VggNet16(int num_classes,int in_channels) : BaseModel() {
+    VggNet11::VggNet11(int num_classes,int in_channels) : BaseModel() {
         //TODO layer1 DONE
         layer1 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(in_channels, 64, 3).stride(1).padding(1)),
@@ -146,7 +146,7 @@ namespace xt::models {
     }
 
 
-    VggNet16::VggNet16(int num_classes, int in_channels, std::vector<int64_t> input_shape)
+    VggNet11::VggNet11(int num_classes, int in_channels, std::vector<int64_t> input_shape)
         : BaseModel() {
 
         //TODO layer1 DONE
@@ -315,7 +315,7 @@ namespace xt::models {
 
 
 
-    torch::Tensor VggNet16::forward(torch::Tensor x) const {
+    torch::Tensor VggNet11::forward(torch::Tensor x) const {
         x = layer1->forward(x);
         x = layer2->forward(x);
         x = layer3->forward(x);
