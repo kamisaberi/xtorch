@@ -1,4 +1,4 @@
-#include "../../../include/datasets/object-detection-and-segmentation/coco.h"
+#include "../../../include/datasets/object_detection_and_segmentation/coco.h"
 
 namespace xt::data::datasets {
 
