@@ -14,10 +14,15 @@ file(GLOB_RECURSE DATALOADER_FILES CONFIGURE_DEPENDS src/data-loaders/*.tpp)
 file(GLOB_RECURSE TRANSFORM_FILES CONFIGURE_DEPENDS src/transforms/*.cpp)
 file(GLOB_RECURSE TEMP_FILES CONFIGURE_DEPENDS src/temp/*.cpp)
 
+
+
+file(GLOB_RECURSE HEADER_FILES CONFIGURE_DEPENDS ./include/*.h)
+
+
 set(LIBRARY_SOURCE_FILES
         ${UTILITY_FILES} ${MEDIA_FILES} ${DATASET_FILES} ${DEFINITION_FILES}
         ${MODEL_FILES} ${MODEL_CNN_FILES} ${DATALOADER_FILES}
-        ${TRANSFORM_FILES} ${TEMP_FILES})
+        ${TRANSFORM_FILES} ${TEMP_FILES} ${HEADER_FILES})
 
 
 #include_directories(./*)
@@ -124,5 +129,5 @@ endif()
 # Subdirectories
 # -----------------------------------------------------------------------------
 # Add subdirectories for example and temporary code
-add_subdirectory(examples)
+#add_subdirectory(examples)
 #add_subdirectory(temp)
