@@ -211,7 +211,7 @@ set(SOURCE_FILES
         ../src/datasets/image-classification/mnist.cpp
         ../src/models/cnn/resnet/resnet18.cpp
 )
-add_executable(resnet-mnist ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/resnet-mnist.cpp)
+add_executable(resnet-mnist ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/resnet_mnist.cpp)
 target_link_libraries(resnet-mnist "${TORCH_LIBRARIES}")
 set_property(TARGET resnet-mnist PROPERTY CXX_STANDARD 17)
 target_include_directories(resnet-mnist PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
@@ -230,7 +230,7 @@ set(SOURCE_FILES
         ../src/datasets/image-classification/mnist.cpp
         ../src/models/cnn/resnet/resnet18.cpp
 )
-add_executable(resnet-fashionmnist ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/resnet-fashionmnist.cpp)
+add_executable(resnet-fashionmnist ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/resnet_fashionmnist.cpp)
 target_link_libraries(resnet-fashionmnist "${TORCH_LIBRARIES}")
 set_property(TARGET resnet-fashionmnist PROPERTY CXX_STANDARD 17)
 target_include_directories(resnet-fashionmnist PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
@@ -241,7 +241,7 @@ set(SOURCE_FILES
         ../src/datasets/image-classification/cifar.cpp
         ../src/models/cnn/resnet/resnet18.cpp
 )
-add_executable(resnet-cifar10 ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/resnet-cifar10.cpp)
+add_executable(resnet-cifar10 ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/resnet_cifar10.cpp)
 target_link_libraries(resnet-cifar10 "${TORCH_LIBRARIES}")
 set_property(TARGET resnet-cifar10 PROPERTY CXX_STANDARD 17)
 target_include_directories(resnet-cifar10 PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
@@ -253,7 +253,7 @@ set(SOURCE_FILES
         ../src/datasets/image-classification/cifar.cpp
         ../src/models/cnn/resnet/resnet18.cpp
 )
-add_executable(resnet-cifar100 ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/resnet-cifar100.cpp)
+add_executable(resnet-cifar100 ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/resnet_cifar100.cpp)
 target_link_libraries(resnet-cifar100 "${TORCH_LIBRARIES}")
 set_property(TARGET resnet-cifar100 PROPERTY CXX_STANDARD 17)
 target_include_directories(resnet-cifar100 PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
@@ -264,7 +264,7 @@ set(SOURCE_FILES
         ../src/datasets/image-classification/imagenette.cpp
         ../src/models/cnn/resnet/resnet18.cpp
 )
-add_executable(resnet-imagenette ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/resnet-imagenette.cpp)
+add_executable(resnet-imagenette ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/resnet_imagenette.cpp)
 target_link_libraries(resnet-imagenette "${TORCH_LIBRARIES}")
 set_property(TARGET resnet-imagenette PROPERTY CXX_STANDARD 17)
 target_include_directories(resnet-imagenette PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
@@ -276,7 +276,7 @@ set(SOURCE_FILES
         ../src/datasets/image-classification/food.cpp
         ../src/models/cnn/resnet/resnet18.cpp
 )
-add_executable(resnet-food101 ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/resnet-food101.cpp)
+add_executable(resnet-food101 ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/resnet_food101.cpp)
 target_link_libraries(resnet-food101 "${TORCH_LIBRARIES}")
 set_property(TARGET resnet-food101 PROPERTY CXX_STANDARD 17)
 target_include_directories(resnet-food101 PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
