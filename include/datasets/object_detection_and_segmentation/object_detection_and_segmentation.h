@@ -2,5 +2,5 @@
 
 #include "cityscapes.h"
 #include "coco.h"
-#include "oxfordIII-t-pet.h"
-#include "sb-dataset.h"
+#include "oxfordIII_t_pet.h"
+#include "sb_dataset.h"
