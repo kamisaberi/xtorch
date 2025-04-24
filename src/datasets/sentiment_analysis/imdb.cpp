@@ -1,4 +1,4 @@
-#include "../../../include/datasets/sentiment-analysis/imdb.h"
+#include "../../../include/datasets/sentiment_analysis/imdb.h"
 
 namespace xt::data::datasets {
 

@@ -1,4 +1,4 @@
-#include "../../../include/datasets/sentiment-analysis/sst.h"
+#include "../../../include/datasets/sentiment_analysis/sst.h"
 
 namespace xt::data::datasets {
 

@@ -1,4 +1,4 @@
-#include "../../../include/datasets/sequence-tagging/con-ll-2000-chunking.h"
+#include "../../../include/datasets/sequence_tagging/con_ll_2000_chunking.h"
 
 namespace xt::data::datasets {
 

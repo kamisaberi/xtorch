@@ -1,4 +1,4 @@
-#include "../../../include/datasets/sequence-tagging/udpos.h"
+#include "../../../include/datasets/sequence_tagging/udpos.h"
 
 namespace xt::data::datasets {
 
