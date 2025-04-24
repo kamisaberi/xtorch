@@ -10,7 +10,7 @@ int main() {
     std::vector<int64_t> size = {32, 32};
 
     std::cout.precision(10);
-    torch::Device device(torch::kCPU);
+    torch::Device device(torch::cuda::is_available() ? torch::kCUDA : torch::kCPU);
 
     auto dataset = xt::data::datasets::Food101("/home/kami/Documents/temp/", DataMode::TRAIN, false);
     cout << "DATASET" << endl;
@@ -38,6 +38,8 @@ int main() {
             auto batch = *train_loader_iterator;
             data = batch.data;
             targets = batch.target;
+            data = data.to(device);
+            targets = targets.to(device);
             optimizer.zero_grad();
             torch::Tensor output;
             output = model.forward(data);
