@@ -1,4 +1,4 @@
-#include "../../../include/datasets/optical-flow/hd1k.h"
+#include "../../../include/datasets/optical_flow/hd1k.h"
 
 namespace xt::data::datasets {
 

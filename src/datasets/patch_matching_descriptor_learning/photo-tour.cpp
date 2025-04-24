@@ -1,4 +1,4 @@
-#include "../../../include/datasets/patch-matching-descriptor-learning/photo-tour.h"
+#include "../../../include/datasets/patch_matching_descriptor_learning/photo_tour.h"
 
 namespace xt::data::datasets {
 
