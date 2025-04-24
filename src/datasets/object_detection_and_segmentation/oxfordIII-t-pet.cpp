@@ -1,4 +1,4 @@
-#include "../../../include/datasets/object-detection-and-segmentation/oxfordIII-t-pet.h"
+#include "../../../include/datasets/object_detection_and_segmentation/oxfordIII_t_pet.h"
 
 namespace xt::data::datasets {
 
