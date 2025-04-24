@@ -1,11 +1,11 @@
 #pragma once
 
 
-#include "audio-dataset.h"
-#include "csv-dataset.h"
-#include "edf-dataset.h"
-#include "image-folder.h"
-#include "tensor-dataset.h"
-#include "text-dataset.h"
-#include "time-series-dataset.h"
-#include "video-dataset.h"
+#include "audio_dataset.h"
+#include "csv_dataset.h"
+#include "edf_dataset.h"
+#include "image_folder.h"
+#include "tensor_dataset.h"
+#include "text_dataset.h"
+#include "time_series_dataset.h"
+#include "video_dataset.h"
