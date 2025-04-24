@@ -1,4 +1,4 @@
-#include "../../../include/datasets/optical-flow/flying-chairs.h"
+#include "../../../include/datasets/optical_flow/flying_chairs.h"
 
 namespace xt::data::datasets {
 
