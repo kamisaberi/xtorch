@@ -1,4 +1,4 @@
-#include "../../../include/datasets/image-classification/fer.h"
+#include "../../../include/datasets/image_classification/fer.h"
 
 namespace xt::data::datasets {
 
