@@ -1,4 +1,4 @@
-#include "../../../include/datasets/text-classification/ag-news.h"
+#include "../../../include/datasets/text_classification/ag_news.h"
 
 namespace xt::data::datasets {
 

@@ -1,4 +1,4 @@
-#include "../../../include/datasets/text-classification/yelp-review.h"
+#include "../../../include/datasets/text_classification/yelp_review.h"
 
 namespace xt::data::datasets {
 

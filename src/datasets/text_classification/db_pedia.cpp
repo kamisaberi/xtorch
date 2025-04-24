@@ -1,4 +1,4 @@
-#include "../../../include/datasets/text-classification/db-pedia.h"
+#include "../../../include/datasets/text_classification/db_pedia.h"
 
 namespace xt::data::datasets {
 

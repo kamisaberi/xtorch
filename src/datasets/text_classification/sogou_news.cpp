@@ -1,4 +1,4 @@
-#include "../../../include/datasets/text-classification/sogou-news.h"
+#include "../../../include/datasets/text_classification/sogou_news.h"
 
 namespace xt::data::datasets {
 
