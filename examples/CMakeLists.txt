@@ -55,7 +55,7 @@ set(SOURCE_FILES
         ../src/datasets/image-classification/mnist.cpp
         ../src/models/cnn/alexnet/alexnet.cpp
 )
-add_executable(alexnet-mnist ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/alexnet-mnist.cpp)
+add_executable(alexnet-mnist ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/alexnet_mnist.cpp)
 target_link_libraries(alexnet-mnist "${TORCH_LIBRARIES}")
 set_property(TARGET alexnet-mnist PROPERTY CXX_STANDARD 17)
 target_include_directories(alexnet-mnist PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
@@ -68,7 +68,7 @@ set(SOURCE_FILES
         ../src/datasets/image-classification/mnist.cpp
         ../src/models/cnn/alexnet/alexnet.cpp
 )
-add_executable(alexnet-fashionmnist ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/alexnet-fashionmnist.cpp)
+add_executable(alexnet-fashionmnist ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/alexnet_fashionmnist.cpp)
 target_link_libraries(alexnet-fashionmnist "${TORCH_LIBRARIES}")
 set_property(TARGET alexnet-fashionmnist PROPERTY CXX_STANDARD 17)
 target_include_directories(alexnet-fashionmnist PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
@@ -79,7 +79,7 @@ set(SOURCE_FILES
         ../src/datasets/image-classification/cifar.cpp
         ../src/models/cnn/alexnet/alexnet.cpp
 )
-add_executable(alexnet-cifar10 ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/alexnet-cifar10.cpp)
+add_executable(alexnet-cifar10 ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/alexnet_cifar10.cpp)
 target_link_libraries(alexnet-cifar10 "${TORCH_LIBRARIES}")
 set_property(TARGET alexnet-cifar10 PROPERTY CXX_STANDARD 17)
 target_include_directories(alexnet-cifar10 PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
@@ -91,7 +91,7 @@ set(SOURCE_FILES
         ../src/datasets/image-classification/cifar.cpp
         ../src/models/cnn/alexnet/alexnet.cpp
 )
-add_executable(alexnet-cifar100 ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/alexnet-cifar100.cpp)
+add_executable(alexnet-cifar100 ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/alexnet_cifar100.cpp)
 target_link_libraries(alexnet-cifar100 "${TORCH_LIBRARIES}")
 set_property(TARGET alexnet-cifar100 PROPERTY CXX_STANDARD 17)
 target_include_directories(alexnet-cifar100 PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
@@ -102,7 +102,7 @@ set(SOURCE_FILES
         ../src/datasets/image-classification/imagenette.cpp
         ../src/models/cnn/alexnet/alexnet.cpp
 )
-add_executable(alexnet-imagenette ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/alexnet-imagenette.cpp)
+add_executable(alexnet-imagenette ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/alexnet_imagenette.cpp)
 target_link_libraries(alexnet-imagenette "${TORCH_LIBRARIES}")
 set_property(TARGET alexnet-imagenette PROPERTY CXX_STANDARD 17)
 target_include_directories(alexnet-imagenette PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
@@ -114,7 +114,7 @@ set(SOURCE_FILES
         ../src/datasets/image-classification/food.cpp
         ../src/models/cnn/alexnet/alexnet.cpp
 )
-add_executable(alexnet-food101 ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/alexnet-food101.cpp)
+add_executable(alexnet-food101 ${BASE_SOURCE_FILES} ${SOURCE_FILES} cnn/alexnet_food101.cpp)
 target_link_libraries(alexnet-food101 "${TORCH_LIBRARIES}")
 set_property(TARGET alexnet-food101 PROPERTY CXX_STANDARD 17)
 target_include_directories(alexnet-food101 PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
