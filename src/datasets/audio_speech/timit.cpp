@@ -1,4 +1,4 @@
-#include "../../../include/datasets/audio-speech/timit.h"
+#include "../../../include/datasets/audio_speech/timit.h"
 
 namespace xt::data::datasets {
 

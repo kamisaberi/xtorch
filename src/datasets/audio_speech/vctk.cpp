@@ -1,4 +1,4 @@
-#include "../../../include/datasets/audio-speech/vctk.h"
+#include "../../../include/datasets/audio_speech/vctk.h"
 
 namespace xt::data::datasets {
 

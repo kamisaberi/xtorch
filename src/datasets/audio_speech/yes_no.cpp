@@ -1,4 +1,4 @@
-#include "../../../include/datasets/audio-speech/yes-no.h"
+#include "../../../include/datasets/audio_speech/yes_no.h"
 
 namespace xt::data::datasets {
 
