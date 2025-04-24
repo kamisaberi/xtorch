@@ -19,6 +19,10 @@ set(LIBRARY_SOURCE_FILES
         ${MODEL_FILES} ${MODEL_CNN_FILES} ${DATALOADER_FILES}
         ${TRANSFORM_FILES} ${TEMP_FILES})
 
+
+#include_directories(./*)
+
+
 # ----------------------------------------------------------------------------
 # Library Target
 add_library(xTorch SHARED ${LIBRARY_SOURCE_FILES})
