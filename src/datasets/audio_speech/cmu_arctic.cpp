@@ -1,4 +1,4 @@
-#include "../../../include/datasets/audio_speech/cmu-arctic.h"
+#include "../../../include/datasets/audio_speech/cmu_arctic.h"
 
 namespace xt::data::datasets {
 
