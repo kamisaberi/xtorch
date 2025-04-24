@@ -26,7 +26,7 @@ set(LIBRARY_SOURCE_FILES
 
 
 #include_directories(./*)
-
+include_directories(SYSTEM /usr/include /usr/local/include)
 
 # ----------------------------------------------------------------------------
 # Library Target
