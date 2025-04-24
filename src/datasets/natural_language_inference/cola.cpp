@@ -1,4 +1,4 @@
-#include "../../../include/datasets/natural-language-inference/cola.h"
+#include "../../../include/datasets/natural_language_inference/cola.h"
 
 namespace xt::data::datasets {
 

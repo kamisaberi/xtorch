@@ -1,4 +1,4 @@
-#include "../../../include/datasets/natural-language-inference/qqp.h"
+#include "../../../include/datasets/natural_language_inference/qqp.h"
 
 namespace xt::data::datasets {
 
