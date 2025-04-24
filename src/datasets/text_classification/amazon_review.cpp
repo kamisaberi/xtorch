@@ -1,4 +1,4 @@
-#include "../../../include/datasets/text-classification/amazon-review.h"
+#include "../../../include/datasets/text_classification/amazon_review.h"
 
 namespace xt::data::datasets {
 
