@@ -1,4 +1,4 @@
-#include "../../../include/datasets/image-classification/stanford-cars.h"
+#include "../../../include/datasets/image_classification/stanford_cars.h"
 
 namespace xt::data::datasets {
 
