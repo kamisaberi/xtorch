@@ -1,4 +1,4 @@
-#include "../../../include/datasets/language-modeling/en-wik.h"
+#include "../../../include/datasets/language_modeling/en_wik.h"
 
 namespace xt::data::datasets {
 
