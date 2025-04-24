@@ -1,3 +1,3 @@
 #pragma once
 
-#include "photo-tour.h"
+#include "photo_tour.h"
