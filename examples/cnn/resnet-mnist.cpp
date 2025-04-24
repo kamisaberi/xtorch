@@ -11,7 +11,7 @@ int main() {
     std::vector<int64_t> size = {224, 224};
 
     std::cout.precision(10);
-    torch::Device device(torch::kCPU);
+    torch::Device device(torch::cuda::is_available() ? torch::kCUDA : torch::kCPU);
 
     auto dataset = xt::data::datasets::MNIST("/home/kami/Documents/temp/", DataMode::TRAIN, true);
 
@@ -36,6 +36,8 @@ int main() {
             auto batch = *train_loader_interator;
             data = batch.data;
             targets = batch.target;
+            data = data.to(device);
+            targets = targets.to(device);
             optimizer.zero_grad();
             torch::Tensor output;
             output = model.forward(data);
