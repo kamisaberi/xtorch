@@ -1,4 +1,4 @@
-#include "../../../include/datasets/image-classification/usps.h"
+#include "../../../include/datasets/image_classification/usps.h"
 
 namespace xt::data::datasets {
     USPS::USPS(const std::string &root): USPS::USPS(root, DataMode::TRAIN, false) {
