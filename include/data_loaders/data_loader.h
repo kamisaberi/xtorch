@@ -8,7 +8,6 @@
 #include <random>
 #include <optional>
 #include "../datasets/base/base.h"
-
 using namespace std;
 namespace fs = std::filesystem;
 
