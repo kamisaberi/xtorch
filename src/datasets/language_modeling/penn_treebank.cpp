@@ -1,4 +1,4 @@
-#include "../../../include/datasets/language-modeling/penn-treebank.h"
+#include "../../../include/datasets/language_modeling/penn_treebank.h"
 
 namespace xt::data::datasets {
 
