@@ -364,7 +364,7 @@ set(SOURCE_FILES
         ../src/datasets/image_classification/mnist.cpp
         ../src/models/cnn/lenet/lenet5.cpp
         ../src/trainers/trainer.cpp
-#        ../src/data-loaders/data-loader.tpp
+#        ../src/data_loaders/data_loader.tpp
 
 )
 add_executable(trainer-simple ${BASE_SOURCE_FILES} ${SOURCE_FILES} trainer/simple.cpp)
