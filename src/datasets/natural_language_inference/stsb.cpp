@@ -1,4 +1,4 @@
-#include "../../../include/datasets/natural-language-inference/stsb.h"
+#include "../../../include/datasets/natural_language_inference/stsb.h"
 
 namespace xt::data::datasets {
 

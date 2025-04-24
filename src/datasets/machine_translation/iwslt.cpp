@@ -1,4 +1,4 @@
-#include "../../../include/datasets/machine-translation/iwslt.h"
+#include "../../../include/datasets/machine_translation/iwslt.h"
 
 namespace xt::data::datasets {
 

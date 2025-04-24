@@ -1,4 +1,4 @@
-#include "../../../include/datasets/machine-translation/multi.h"
+#include "../../../include/datasets/machine_translation/multi.h"
 
 namespace xt::data::datasets {
 

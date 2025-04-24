@@ -1,4 +1,4 @@
-#include "../../../include/datasets/natural-language-inference/snli.h"
+#include "../../../include/datasets/natural_language_inference/snli.h"
 
 namespace xt::data::datasets {
 

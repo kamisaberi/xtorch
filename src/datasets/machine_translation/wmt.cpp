@@ -1,4 +1,4 @@
-#include "../../../include/datasets/machine-translation/wmt.h"
+#include "../../../include/datasets/machine_translation/wmt.h"
 
 namespace xt::data::datasets {
 
