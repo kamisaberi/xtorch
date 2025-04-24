@@ -1,4 +1,4 @@
-#include "../../../include/datasets/audio-speech/vox-celeb.h"
+#include "../../../include/datasets/audio_speech/vox_celeb.h"
 
 namespace xt::data::datasets {
 
