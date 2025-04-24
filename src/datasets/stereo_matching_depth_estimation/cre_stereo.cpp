@@ -1,4 +1,4 @@
-#include "../../../include/datasets/stereo-matching-depth-estimation/cre-stereo.h"
+#include "../../../include/datasets/stereo_matching_depth_estimation/cre_stereo.h"
 
 namespace xt::data::datasets {
     // ---------------------- CarlaStereo ---------------------- //
