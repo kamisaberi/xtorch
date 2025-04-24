@@ -1,5 +1,5 @@
 #pragma once
 
-#include "en-wik.h"
-#include "penn-treebank.h"
-#include "wiki-text.h"
+#include "en_wik.h"
+#include "penn_treebank.h"
+#include "wiki_text.h"
