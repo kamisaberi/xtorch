@@ -1,4 +1,4 @@
-#include "../../../include/datasets/image-classification/mnist.h"
+#include "../../../include/datasets/image_classification/mnist.h"
 
 namespace xt::data::datasets {
     MNISTBase::MNISTBase(const std::string &root): MNISTBase::MNISTBase(root, DataMode::TRAIN, false) {

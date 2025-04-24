@@ -1,4 +1,4 @@
-#include "../../../include/datasets/image-classification/pcam.h"
+#include "../../../include/datasets/image_classification/pcam.h"
 
 namespace xt::data::datasets {
 
