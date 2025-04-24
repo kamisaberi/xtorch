@@ -1,4 +1,4 @@
-#include "../../../include/datasets/audio-speech/common-voice.h"
+#include "../../../include/datasets/audio_speech/common_voice.h"
 
 namespace xt::data::datasets {
 

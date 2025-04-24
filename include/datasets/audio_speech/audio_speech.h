@@ -1,7 +1,7 @@
 #pragma once
 #include "cmu_arctic.h"
-#include "common-voice.h"
-#include "crema-d.h"
+#include "common_voice.h"
+#include "crema_d.h"
 #include "esc.h"
 #include "gtzan.h"
 #include "librispeech.h"
