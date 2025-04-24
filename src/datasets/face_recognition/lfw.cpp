@@ -1,4 +1,4 @@
-#include "../../../include/datasets/face-recognition/lfw.h"
+#include "../../../include/datasets/face_recognition/lfw.h"
 
 namespace xt::data::datasets {
 
