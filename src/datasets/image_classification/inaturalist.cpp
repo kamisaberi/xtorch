@@ -1,4 +1,4 @@
-#include "../../../include/datasets/image-classification/inaturalist.h"
+#include "../../../include/datasets/image_classification/inaturalist.h"
 
 namespace xt::data::datasets {
 

@@ -1,4 +1,4 @@
-#include "../../../include/datasets/image-classification/food.h"
+#include "../../../include/datasets/image_classification/food.h"
 
 namespace xt::data::datasets {
     Food101::Food101(const std::string &root): Food101::Food101(root, DataMode::TRAIN, false) {
