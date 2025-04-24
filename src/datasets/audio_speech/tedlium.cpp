@@ -1,4 +1,4 @@
-#include "../../../include/datasets/audio-speech/tedlium.h"
+#include "../../../include/datasets/audio_speech/tedlium.h"
 
 namespace xt::data::datasets {
 

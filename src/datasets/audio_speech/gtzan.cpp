@@ -1,4 +1,4 @@
-#include "../../../include/datasets/audio-speech/gtzan.h"
+#include "../../../include/datasets/audio_speech/gtzan.h"
 
 namespace xt::data::datasets {
 
