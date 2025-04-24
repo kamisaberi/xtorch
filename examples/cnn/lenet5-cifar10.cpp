@@ -12,7 +12,7 @@ int main() {
     std::vector<int64_t> size = {32, 32};
 
     std::cout.precision(10);
-    torch::Device device(torch::kCPU);
+    torch::Device device(torch::cuda::is_available() ? torch::kCUDA : torch::kCPU);
 
     auto dataset = xt::data::datasets::CIFAR10("/home/kami/Documents/temp/", DataMode::TRAIN, true);
     cout << dataset.size().value() << endl;
@@ -32,7 +32,6 @@ int main() {
     model.train();
     torch::optim::Adam optimizer(model.parameters(), torch::optim::AdamOptions(1e-3));
     for (size_t epoch = 0; epoch != 10; ++epoch) {
-        //      cout << "epoch: " << epoch << endl;
         size_t batch_index = 0;
         auto train_loader_interator = train_loader->begin();
         auto train_loader_end = train_loader->end();
@@ -41,6 +40,8 @@ int main() {
             auto batch = *train_loader_interator;
             data = batch.data;
             targets = batch.target;
+            data = data.to(device);
+            targets = targets.to(device);
             optimizer.zero_grad();
             torch::Tensor output;
             output = model.forward(data);
