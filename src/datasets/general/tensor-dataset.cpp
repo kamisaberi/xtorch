@@ -1,5 +1,5 @@
 
-#include "../../../include/datasets/general/csv-dataset.h"
+#include "../../../include/datasets/general/text_dataset.h"
 
 namespace xt::data::datasets {
 
