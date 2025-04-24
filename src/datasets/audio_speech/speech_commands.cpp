@@ -1,4 +1,4 @@
-#include "../../../include/datasets/audio-speech/speech-commands.h"
+#include "../../../include/datasets/audio_speech/speech_commands.h"
 
 namespace xt::data::datasets {
 

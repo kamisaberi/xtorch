@@ -1,4 +1,4 @@
-#include "../../../include/datasets/audio-speech/esc.h"
+#include "../../../include/datasets/audio_speech/esc.h"
 
 namespace xt::data::datasets {
 
