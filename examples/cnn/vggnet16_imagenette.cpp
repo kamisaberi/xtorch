@@ -1,5 +1,5 @@
 #include "includes/base.h"
-#include "../../include/datasets/image-classification/imagenette.h"
+#include "../../include/datasets/image_classification/imagenette.h"
 #include "../../include/models/cnn/vggnet/vggnet16.h"
 #include "../../include/definitions/transforms.h"
 
