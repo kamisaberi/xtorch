@@ -32,7 +32,7 @@ int main() {
      * - Transformations: Resize to 32x32, Normalize with mean 0.5 and std 0.5
      */
     auto dataset = xt::data::datasets::MNIST(
-            "/home/kami/Documents/temp/", DataMode::TRAIN, true,
+            "/home/kami/Documents/datasets/", DataMode::TRAIN, true,
             {
                     xt::data::transforms::Resize({32, 32}),
                     torch::data::transforms::Normalize<>(0.5, 0.5)
