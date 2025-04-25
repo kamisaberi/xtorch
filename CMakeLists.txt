@@ -3,6 +3,12 @@ cmake_minimum_required(VERSION 3.28 FATAL_ERROR)
 project(xTorch VERSION 0.2.0 LANGUAGES CXX)
 
 # ----------------------------------------------------------------------------
+# Set default build type to Release if not specified
+if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
+    set(CMAKE_BUILD_TYPE Release CACHE STRING "Choose the type of build." FORCE)
+    message(STATUS "Setting default build type to: ${CMAKE_BUILD_TYPE}")
+endif()
+# ----------------------------------------------------------------------------
 # Collect source files
 file(GLOB_RECURSE UTILITY_FILES CONFIGURE_DEPENDS src/utils/*.cpp)
 file(GLOB_RECURSE MEDIA_FILES CONFIGURE_DEPENDS src/media/*.cpp)
@@ -12,6 +18,7 @@ file(GLOB_RECURSE MODEL_FILES CONFIGURE_DEPENDS src/models/*.cpp)
 file(GLOB_RECURSE MODEL_CNN_FILES CONFIGURE_DEPENDS src/models/cnn/*.cpp)
 file(GLOB_RECURSE DATALOADER_FILES CONFIGURE_DEPENDS src/data-loaders/*.tpp)
 file(GLOB_RECURSE TRANSFORM_FILES CONFIGURE_DEPENDS src/transforms/*.cpp)
+file(GLOB_RECURSE TRAINER_FILES CONFIGURE_DEPENDS src/trainers/*.cpp)
 file(GLOB_RECURSE TEMP_FILES CONFIGURE_DEPENDS src/temp/*.cpp)
 
 
@@ -22,7 +29,7 @@ file(GLOB_RECURSE HEADER_FILES CONFIGURE_DEPENDS ./include/*.h)
 set(LIBRARY_SOURCE_FILES
         ${UTILITY_FILES} ${MEDIA_FILES} ${DATASET_FILES} ${DEFINITION_FILES}
         ${MODEL_FILES} ${MODEL_CNN_FILES} ${DATALOADER_FILES}
-        ${TRANSFORM_FILES} ${TEMP_FILES} ${HEADER_FILES})
+        ${TRANSFORM_FILES} ${TEMP_FILES} ${HEADER_FILES} ${TRAINER_FILES})
 
 
 #include_directories(./*)

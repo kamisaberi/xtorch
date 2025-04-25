@@ -69,6 +69,34 @@ namespace xt {
             }
         }
 
+        template <typename Dataset>
+        void fit(xt::models::BaseModel *model , xt::DataLoader<Dataset>&  train_loader , torch::Device device) {
+
+            model->to(device);
+            model->train();
+            for (size_t epoch = 0; epoch != this->max_epochs_; ++epoch) {
+                cout << "epoch: " << epoch << endl;
+                int a = 1;
+                for (auto& batch : train_loader) {
+                    torch::Tensor data, targets;
+                    data = batch.data;
+                    targets = batch.target;
+                    data = data.to(device);
+                    targets = targets.to(device);
+                    this->optimizer_->zero_grad();
+                    torch::Tensor output;
+                    output = model->forward(data);
+                    torch::Tensor loss;
+                    loss = this->loss_fn_(output, targets);
+                    loss.backward();
+                    this->optimizer_->step();
+                    a++;
+
+                }
+                cout << "interval: " << a << endl;
+            }
+        }
+
 
     private:
         int max_epochs_;                         // Maximum number of training epochs
