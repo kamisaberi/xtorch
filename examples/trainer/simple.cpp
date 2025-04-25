@@ -2,10 +2,10 @@
 #include <iostream>
 #include <vector>
 #include <functional>
-#include "../../include/datasets/image-classification/mnist.h"
+#include "../../include/datasets/image_classification/mnist.h"
 #include "../../include/models/cnn/lenet/lenet5.h"
 #include "../../include/definitions/transforms.h"
-#include "../../include/data-loaders/data-loader.h"
+#include "../../include/data_loaders/data_loader.h"
 // #include "../../include/data_loaders/data_loader.tpp"
 #include "../../include/trainers/trainer.h"
 

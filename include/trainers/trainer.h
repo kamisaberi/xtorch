@@ -6,7 +6,7 @@
 
 #include <memory>  // For std::shared_ptr
 #include <string>  // For std::string
-#include "../data-loaders/data-loader.h"
+#include "../data_loaders/data_loader.h"
 #include "../models/base.h"
 #include "../datasets/base/base.h"
 
