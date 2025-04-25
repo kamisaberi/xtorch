@@ -129,5 +129,5 @@ endif()
 # Subdirectories
 # -----------------------------------------------------------------------------
 # Add subdirectories for example and temporary code
-#add_subdirectory(examples)
+add_subdirectory(examples)
 #add_subdirectory(temp)
