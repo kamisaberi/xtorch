@@ -1,4 +1,4 @@
-#include "../../../include/datasets/stereo-matching-depth-estimation/falling-things-stereo.h"
+#include "../../../include/datasets/stereo_matching_depth_estimation/falling_things_stereo.h"
 
 namespace xt::data::datasets {
 
