@@ -1,29 +1,29 @@
-FROM debian:bullseye-slim
+FROM ubuntu:22.04
 
-LABEL maintainer="Kamal Saberi"
-LABEL description="Build environment for compiling JOSS papers into PDF"
-
-# Avoids interactive prompts
+# Set non-interactive frontend and timezone
 ENV DEBIAN_FRONTEND=noninteractive
+ENV TZ=Asia/Tehran
 
-# Install system dependencies
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    texlive-latex-recommended \
-    texlive-fonts-recommended \
-    texlive-latex-extra \
+# Install dependencies, including texlive-xetex for xelatex
+RUN apt-get update && apt-get install -y \
+    wget \
+    texlive \
     texlive-xetex \
-    pandoc \
-    make \
-    git \
-    curl \
-    && apt-get clean \
+    texlive-latex-extra \
+    texlive-fonts-extra \
     && rm -rf /var/lib/apt/lists/*
 
-# Default workdir
-WORKDIR /paper
+# Install newer Pandoc version (3.2) that supports --citeproc
+RUN wget https://github.com/jgm/pandoc/releases/download/3.2/pandoc-3.2-linux-amd64.tar.gz \
+    && tar -xzf pandoc-3.2-linux-amd64.tar.gz \
+    && mv pandoc-3.2/bin/pandoc /usr/local/bin/ \
+    && rm -rf pandoc-3.2 pandoc-3.2-linux-amd64.tar.gz
 
-# Copy local files (e.g., paper.md, paper.bib, figures/) into the image
-COPY . /paper
+# Set working directory
+WORKDIR /data
 
-# Build command (optional - can also run manually)
-CMD ["pandoc", "paper.md", "--from", "markdown", "--output", "paper.pdf", "--pdf-engine=xelatex", "--filter", "pandoc-citeproc", "--citeproc", "--bibliography=paper.bib"]
+# Copy paper and bibliography
+COPY paper.md paper.bib ./
+
+# Command to generate PDF
+CMD ["pandoc", "paper.md", "-o", "paper.pdf", "--citeproc", "--bibliography=paper.bib", "--pdf-engine=xelatex"]
