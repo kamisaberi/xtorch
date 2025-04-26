@@ -5,8 +5,8 @@ tags:
   - deep learning
   - artificial intelligence
 authors:
-  - name: kamran saberifard
-    orcid: 0009-0002-7822-6168
+  - name: "kamran saberifard"
+    orcid: "0009-0002-7822-6168"
     equal-contrib: true
     affiliation: "Aryorithm "
 date: 27 April 2025
