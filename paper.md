@@ -1,66 +1,50 @@
+# xTorch: A High-Level C++ Extension Library for PyTorch (LibTorch)
 
----
-title: 'xTorch: A High-Level C++ Extension Library for PyTorch (LibTorch)'
-tags:
-- C++
-- machine learning
-- deep learning
-- libtorch
-- PyTorch
-- AI
-- training
-  authors:
-- name: Kamal Saberi
-  orcid: 0000-0000-0000-0000
-  affiliation: 1
-  affiliations:
-- name: Independent Developer
-  index: 1
-  date: 2025-04-04
-  software_repository_url: https://github.com/kamisaberi/libtorch-extended
-  archive_url: https://zenodo.org/  # Replace this with Zenodo DOI once archived
-  paper_url: https://github.com/kamisaberi/libtorch-extended/blob/main/paper.md
----
+## Tags
 
-# Summary
+## Summary
 
-**xTorch** is a high-level extension to PyTorch’s C++ API (LibTorch) that simplifies model development, training, evaluation, and deployment workflows. While LibTorch offers powerful low-level access to PyTorch’s engine, many high-level utilities available in the Python API were deprecated or removed after 2019. xTorch bridges this usability gap by providing an organized set of abstractions for defining neural networks, managing data, training loops, device management, and serialization.
+xTorch is a C++ library that extends PyTorch's C++ API (LibTorch) with high-level abstractions and utilities, aiming to provide a more user-friendly and productive experience for C++ developers working with deep learning. It bridges the usability gap in PyTorch's C++ API, which had become cumbersome for end-to-end model development after 2019.
 
-xTorch enhances developer productivity by reintroducing a “batteries-included” ethos for C++, similar to PyTorch’s Python experience. It is modular, extensible, and built entirely on top of LibTorch without modifying the core, ensuring compatibility and performance. It supports tasks such as CNN model training, JIT export, and inference pipelines — all from native C++ code.
+## Statement of Need
 
-# Statement of Need
+xTorch addresses the lack of high-level APIs in LibTorch for C++ developers, which is critical for high-performance machine learning, robotics, embedded applications, and large-scale deployment scenarios. By reintroducing high-level utilities that were deprecated in the Python API post-2019, xTorch enables C++ developers to build, train, evaluate, and deploy models more intuitively and efficiently.
 
-C++ remains a critical language for high-performance machine learning systems, robotics, embedded applications, and large-scale deployment. However, PyTorch’s C++ frontend (LibTorch) is difficult to use on its own due to the lack of high-level APIs, forcing users to write verbose and repetitive code.
-
-xTorch was created to fill this gap by wrapping LibTorch with practical utilities such as `Trainer`, `XTModule`, `DataLoader`, and `export_to_jit()`. These abstractions drastically reduce boilerplate, increase accessibility, and allow developers to build, train, and deploy models entirely in C++. Unlike other frameworks that require switching to Python or writing extensive C++ glue code, xTorch makes the entire ML workflow intuitive and modular in C++.
-
-# Functionality
+## Functionality
 
 xTorch provides:
 
-- High-level neural network module definitions
-- Trainer class for managing training, loss, metrics, and callbacks
-- Data loaders with support for image datasets, CSVs, and transformations
-- Model serialization and JIT export helpers
-- Support for CPU and CUDA backends (via LibTorch)
-- Clean separation of layers: Models, Data, Utils, and Training
-- Compatibility with the PyTorch ecosystem
+- High-level neural network module definitions (e.g., XTModule, ResNetExtended, XTCNN)
+- A simplified training loop with the Trainer class, handling loss computation, metrics, and callbacks
+- Enhanced data handling with ImageFolderDataset, CSVDataset, and OpenCV-backed transformations
+- Utility functions for logging, metrics computation, and device management
+- Extended optimizers like AdamW, RAdam, and learning rate schedulers
+- Model serialization and TorchScript export helpers (save_model(), export_to_jit())
+- Inference utilities for loading models and making predictions
 
-# Example Use
+The library is modular and extensible, built on top of LibTorch, and supports both CPU and CUDA devices.
+
+## Example Use
 
 ```cpp
-auto trainData = xt::datasets::ImageFolder("data/train", xt::transforms::Compose({ ... }));
+// Example: CNN Training Pipeline
+auto trainData = xt::datasets::ImageFolder("data/train", xt::transforms::Compose({
+    xt::transforms::Resize({224, 224}),
+    xt::transforms::ToTensor(),
+    xt::transforms::Normalize({0.5, 0.5, 0.5}, {0.5, 0.5, 0.5})
+}));
+
+auto trainLoader = xt::data::DataLoader(trainData, 64, true);
+
 auto model = xt::models::ResNet18(10);
+auto optimizer = xt::optim::Adam(model.parameters(), 1e-3);
+auto criterion = xt::loss::CrossEntropyLoss();
+
 xt::Trainer trainer;
-trainer.setMaxEpochs(20).fit(model, trainLoader, valLoader);
+trainer.setMaxEpochs(20)
+       .setOptimizer(optimizer)
+       .setCriterion(criterion)
+       .fit(model, trainLoader);
+
+// Export model to TorchScript
 xt::export_to_jit(model, "model.pt");
-```
-
-# Acknowledgements
-
-The xTorch project builds upon the PyTorch (LibTorch) C++ API. Thanks to the open-source contributors to PyTorch for enabling access to their high-performance machine learning framework via C++.
-
-# References
-
-- PyTorch C++ API Documentation: https://pytorch.org/cppdocs/
-- TorchScript for Deployment: https://pytorch.org/tutorials/advanced/cpp_export.html
