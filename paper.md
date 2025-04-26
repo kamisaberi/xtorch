@@ -8,7 +8,10 @@ authors:
   - name: "kamran saberifard"
     orcid: "0009-0002-7822-6168"
     equal-contrib: true
-    affiliation: "Aryorithm "
+    affiliation: 1
+affiliations:
+  - name: "Aryorithm"
+    index: 1
 date: 27 April 2025
 bibliography: paper.bib
 ---
