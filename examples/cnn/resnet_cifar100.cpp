@@ -1,5 +1,5 @@
 #include "includes/base.h"
-#include "../../include/datasets/image_classification/cifar.h01"
+#include "../../include/datasets/image_classification/cifar_100.h"
 #include "../../include/models/cnn/resnet/resnet18.h"
 #include "../../include/definitions/transforms.h"
 
