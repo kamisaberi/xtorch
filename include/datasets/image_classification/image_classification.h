@@ -2,7 +2,8 @@
 
 #include "caltech.h"
 #include "celeba.h"
-#include "cifar.h"
+#include "cifar_10.h"
+#include "cifar_100.h"
 #include "country.h"
 #include "dtd.h"
 #include "euro_sat.h"
