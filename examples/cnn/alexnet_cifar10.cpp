@@ -1,5 +1,5 @@
 #include "includes/base.h"
-#include "../../include/datasets/image_classification/cifar.h"
+#include "../../include/datasets/image_classification/cifar_10.h"
 #include "../../include/models/cnn/alexnet/alexnet.h"
 #include "../../include/definitions/transforms.h"
 
