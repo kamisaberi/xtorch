@@ -47,7 +47,8 @@ file(GLOB_RECURSE HEADER_FILES CONFIGURE_DEPENDS ./include/*.h)
 set(LIBRARY_SOURCE_FILES
         ${UTILITY_FILES} ${MEDIA_FILES} ${DATASET_FILES} ${DEFINITION_FILES}
         ${MODEL_FILES} ${MODEL_CNN_FILES} ${DATALOADER_FILES}
-        ${TRANSFORM_FILES} ${TEMP_FILES} ${HEADER_FILES} ${TRAINER_FILES})
+        ${TRANSFORM_FILES} ${TEMP_FILES} ${HEADER_FILES} ${TRAINER_FILES}
+)
 
 # =============================================================================
 # Include Directories
