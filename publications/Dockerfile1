@@ -4,5 +4,5 @@ ENV TZ=Asia/Tehran
 RUN apt-get update && apt-get install -y wget texlive texlive-latex-extra texlive-fonts-extra && rm -rf /var/lib/apt/lists/*
 RUN wget https://github.com/jgm/pandoc/releases/download/3.2/pandoc-3.2-linux-amd64.tar.gz && tar -xzf pandoc-3.2-linux-amd64.tar.gz && mv pandoc-3.2/bin/pandoc /usr/local/bin/ && rm -rf pandoc-3.2 pandoc-3.2-linux-amd64.tar.gz
 WORKDIR /data
-COPY publications/paper.md paper.bib ./
+COPY paper.md paper.bib ./
 CMD ["pandoc", "paper.md", "-o", "paper.pdf", "--citeproc", "--bibliography=paper.bib", "--pdf-engine=xelatex"]

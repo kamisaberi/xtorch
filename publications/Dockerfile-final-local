@@ -23,7 +23,7 @@ RUN wget https://github.com/jgm/pandoc/releases/download/3.2/pandoc-3.2-linux-am
 WORKDIR /data
 
 # Copy paper and bibliography
-COPY publications/paper.md paper.bib ./
+COPY paper.md paper.bib ./
 
 # Command to generate PDF
 CMD ["pandoc", "paper.md", "-o", "paper.pdf", "--citeproc", "--bibliography=paper.bib", "--pdf-engine=xelatex"]
