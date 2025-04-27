@@ -49,6 +49,8 @@ packages["libarchive-dev"]="libarchive"
 packages["libtar-dev"]="libtar"
 packages["libzip-dev"]="libzip"
 packages["libsndfile1-dev"]="libsndfile"
+packages["libhdf5-dev"]="hdf5"  # Required for OpenCV's HDF5 support
+
 
 # Check and install each package
 for ubuntu_pkg in "${!packages[@]}"; do
