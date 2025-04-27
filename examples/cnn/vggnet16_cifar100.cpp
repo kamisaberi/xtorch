@@ -1,5 +1,5 @@
 #include "includes/base.h"
-#include "../../include/datasets/image_classification/cifar.h"
+#include "../../include/datasets/image_classification/cifar.h01"
 #include "../../include/models/cnn/vggnet/vggnet16.h"
 #include "../../include/definitions/transforms.h"
 
