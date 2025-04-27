@@ -1,7 +1,7 @@
 /**
  * @file xt_utils_download.h
  * @brief Utility functions for downloading files, including Google Drive support
- *
+ * 
  * This header provides utility functions for downloading files from URLs and Google Drive.
  * It includes functionality for handling HTTP downloads via libcurl and reconstructing
  * Google Drive download links.
@@ -9,8 +9,6 @@
  * @author Kamran Saberifard
  * @email kamisaberi@gmail.com
  * @github https://github.com/kamisaberi
- * @date Created: 2023-11-15
- * @lastmodified: 2023-11-15
  * @version 1.0
  */
 
@@ -36,7 +34,7 @@ namespace xt::utils {
      *         - string: Success message or error description
      * @note Uses libcurl for HTTP/HTTPS downloads
      * @warning Overwrites existing files at outPath without warning
-     * @example
+     * @example 
      * auto [success, message] = download("https://example.com/file.zip", "downloaded.zip");
      */
     std::tuple<bool, std::string> download(std::string &url, std::string outPath);
@@ -47,7 +45,7 @@ namespace xt::utils {
      * @return A reconstructed direct download URL
      * @throws None
      * @note Handles both file IDs and full Google Drive URLs
-     * @example
+     * @example 
      * string directLink = rebuild_google_drive_link("1a2b3c4d5e6f7g8h9i0j");
      */
     std::string rebuild_google_drive_link(std::string gid);
@@ -61,7 +59,7 @@ namespace xt::utils {
      *         - string: Success message or error description
      * @note Internally uses rebuild_google_drive_link() and download()
      * @warning Google Drive has download quotas that may affect large files
-     * @example
+     * @example 
      * auto [success, message] = download_from_gdrive("1a2b3c4d5e6f7g8h9i0j", "gdrive_file.zip");
      */
     std::tuple<bool, std::string> download_from_gdrive(std::string gid, std::string outPath);
