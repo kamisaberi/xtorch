@@ -1,6 +1,30 @@
+#---------------------------------------------------------------------------
+# Doxyfile Configuration for Project Documentation
+# Author: Kamran Saberifard
+# Email: kamisaberi@gmail.com
+# GitHub: https://github.com/kamisaberi
+#---------------------------------------------------------------------------
+
+# Strip source path prefixes from generated documentation
+# Prevents exposing local directory structure in documentation
 STRIP_FROM_PATH = /home/kami/Documents/cpp
+
+# Disable full path names in file headers
+# Shows only filenames instead of absolute paths
 FULL_PATH_NAMES = NO
+
+# Input source directory containing header/source files
+# Location of files to process for documentation generation
 INPUT = ./include
+
+# Output directory for generated documentation
+# Final documentation will be created in this location
 OUTPUT_DIRECTORY = ./tutorial/docs/doxygen
+
+# Enable recursive scanning of input directories
+# Processes all subdirectories under the INPUT directory
 RECURSIVE = YES
+
+# Enable Markdown support in documentation
+# Allows use of Markdown syntax in comments and separate .md files
 MARKDOWN_SUPPORT = YES
