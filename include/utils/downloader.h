@@ -1,5 +1,5 @@
 /**
- * @file xt_utils_download.h
+ * @file downloader.h
  * @brief Utility functions for downloading files, including Google Drive support
  * 
  * This header provides utility functions for downloading files from URLs and Google Drive.
