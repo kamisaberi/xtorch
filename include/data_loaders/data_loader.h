@@ -13,16 +13,26 @@ namespace fs = std::filesystem;
 
 /**
  * @namespace xt
- * @brief Namespace for custom data loading utilities and dataset handling in the xt framework.
+ * @brief Extended Tensor (xt) framework namespace providing enhanced data loading capabilities
+ *
+ * The xt namespace contains custom implementations of data loading utilities that extend
+ * PyTorch's native functionality with additional features and optimizations while maintaining
+ * compatibility with standard PyTorch datasets and transforms.
  */
 namespace xt {
 
     /**
-     * @brief Checks if a dataset is a transformed dataset of type MapDataset with BaseDataset and Stack transform.
+     * @brief Compile-time check for transformed MapDataset with Stack transform
+     * @tparam Dataset Type of dataset to check
+     * @param dataset Dataset instance (unused in evaluation)
+     * @return constexpr bool True if Dataset is MapDataset<BaseDataset, Stack<>>, false otherwise
      *
-     * @tparam Dataset The type of the dataset to check.
-     * @param dataset The dataset instance to evaluate.
-     * @return bool True if the dataset is a transformed MapDataset, false otherwise.
+     * This type trait is particularly useful for:
+     * - Validating dataset transformations in template code
+     * - Enabling different code paths based on dataset type
+     * - Ensuring proper collation of samples via Stack transform
+     *
+     * @note The dataset parameter is unused in evaluation since this is a compile-time check
      */
     template <typename Dataset>
     bool is_transformed_dataset(const Dataset& dataset) {
@@ -34,61 +44,104 @@ namespace xt {
     }
 
     /**
-     * @brief A custom data loader for iterating over datasets in batches, supporting shuffling and index-based batch requests.
+     * @class DataLoader
+     * @brief Enhanced data loader with extended batch control and shuffling capabilities
+     * @tparam Dataset Type of dataset to load, must satisfy torch::data::Dataset requirements
      *
-     * @tparam Dataset The type of the dataset to load.
+     * This implementation provides:
+     * - Fine-grained control over batch composition through index-based requests
+     * - Optional epoch-level shuffling of samples
+     * - Configurable handling of incomplete batches
+     * - Thread-safe iteration when used with multiple workers
+     * - Seamless integration with standard PyTorch datasets and transforms
+     *
+     * @note Inherits from torch::data::DataLoaderBase to maintain compatibility with
+     *       PyTorch's data loading ecosystem while adding custom functionality.
      */
     template <typename Dataset>
     class DataLoader : public torch::data::DataLoaderBase<Dataset, typename Dataset::BatchType, std::vector<size_t>> {
 
     public:
-        using BatchType        = typename Dataset::BatchType;          ///< Type of a single batch (e.g., Example<Tensor, Tensor>).
-        using BatchRequestType = std::vector<size_t>;                  ///< Type for batch index requests (list of indices).
-        using Base = torch::data::DataLoaderBase<Dataset, BatchType, BatchRequestType>; ///< Base class type.
+        /// Type representing a single batch of data (typically torch::data::Example<Tensor, Tensor>)
+        using BatchType = typename Dataset::BatchType;
+
+        /// Type used to request specific batches (vector of sample indices)
+        using BatchRequestType = std::vector<size_t>;
+
+        /// Base class type alias for cleaner inheritance
+        using Base = torch::data::DataLoaderBase<Dataset, BatchType, BatchRequestType>;
 
         /**
-         * @brief Constructs a DataLoader for the given dataset with specified options.
+         * @brief Constructs a DataLoader instance
+         * @param dataset The dataset to load (moved into the loader)
+         * @param options Configuration options including:
+         *                - batch_size: Number of samples per batch
+         *                - workers: Number of parallel data loading workers
+         *                - timeout: Maximum time to wait for a batch
+         *                - enforce_ordering: Whether to preserve sample order
+         * @param shuffle If true, shuffles sample indices between epochs
          *
-         * @param dataset The dataset to load.
-         * @param options DataLoader options (e.g., batch size, number of workers).
-         * @param shuffle Whether to shuffle the dataset indices each epoch.
+         * The constructor initializes the data loading pipeline and prepares
+         * the initial index sequence based on the dataset size and options.
          */
         DataLoader(Dataset dataset, const torch::data::DataLoaderOptions& options, bool shuffle = false);
 
-        // Iterator support for range-for loops
-        // typename Base::iterator begin() {
-        //     this->reset();       // reset (and shuffle if needed) at start of epoch
-        //     return Base::begin();
-        // }
-        // typename Base::iterator end() {
-        //     return Base::end();
-        // }
-
     protected:
         /**
-         * @brief Provides the next batch of indices to fetch from the dataset.
+         * @brief Generates the next batch request during iteration
+         * @return std::optional<BatchRequestType> Indices for next batch, or nullopt if epoch complete
          *
-         * @return std::optional<BatchRequestType> A vector of indices for the next batch, or nullopt if no more batches are available.
+         * Key responsibilities:
+         * - Manages batch size enforcement
+         * - Handles dataset boundary conditions
+         * - Respects drop_last setting for incomplete batches
+         * - Updates iteration state
+         *
+         * @note This override provides the core batch generation logic and is called
+         *       automatically during iteration.
          */
         std::optional<BatchRequestType> get_batch_request() override;
 
         /**
-         * @brief Resets and optionally shuffles the indices for a new epoch.
+         * @brief Rebuilds the index sequence for a new epoch
+         *
+         * Performs:
+         * - Regeneration of complete index sequence
+         * - Optional shuffling if enabled
+         * - Reset of iteration state
+         *
+         * @note Called automatically at start of each epoch
          */
         void reset_indices();
 
         /**
-         * @brief Resets the DataLoader for a new epoch, shuffling indices if enabled.
+         * @brief Prepares the loader for a new epoch
+         *
+         * This override:
+         * - Ensures proper initialization/reset of base class state
+         * - Delegates to reset_indices() for index management
+         * - Maintains consistency with PyTorch's data loading semantics
          */
         void reset() override;
 
     private:
-        Dataset* dataset_ptr_;           ///< Raw pointer to the dataset (owned by base class).
-        std::vector<size_t> indices_;    ///< Sequence of indices to iterate over.
-        size_t current_index_ = 0;       ///< Current position in the indices_ vector.
-        size_t batch_size_;              ///< Size of each batch.
-        bool shuffle_;                   ///< Whether to shuffle indices each epoch.
-        bool drop_last_;                 ///< Whether to drop the last incomplete batch.
+        /// Non-owning pointer to managed dataset (owned by base class)
+        Dataset* dataset_ptr_;
+
+        /// Current epoch's index sequence (may be shuffled)
+        std::vector<size_t> indices_;
+
+        /// Current position in index sequence
+        size_t current_index_ = 0;
+
+        /// Configured batch size
+        size_t batch_size_;
+
+        /// Shuffle flag (controls whether to shuffle between epochs)
+        bool shuffle_;
+
+        /// Whether to drop incomplete final batch
+        bool drop_last_;
     };
 
 }
