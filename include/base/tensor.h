@@ -1,8 +1,9 @@
-//
-// Created by kami on 4/28/25.
-//
+#pragma once
+#include "datasets/general/tensor_dataset.h"
 
-#ifndef TENSOR_H
-#define TENSOR_H
-
-#endif //TENSOR_H
+namespace xt
+{
+    class Tensor : public torch::Tensor
+    {
+    };
+}
