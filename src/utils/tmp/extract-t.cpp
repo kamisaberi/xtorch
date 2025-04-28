@@ -1,39 +1,9 @@
-/**
- * @file extract.h
- * @brief Archive extraction utilities for various formats
- * @author Kamran Saberifard
- * @email kamisaberi@gmail.com
- * @github https://github.com/kamisaberi
- * @date Created: [Current Date]
- * @version 1.0
- *
- * This file implements extraction utilities for multiple archive formats:
- * - XZ/LZMA compressed files
- * - GZIP compressed files
- * - TAR archives
- * - ZIP archives
- * - TGZ (Gzipped TAR) archives
- * - Automatic format detection
- */
-
 #include "../../include/utils/extract.h"
 
 using namespace std;
 namespace fs = std::filesystem;
 
 namespace xt::utils {
-
-    /**
-     * @brief Extracts XZ/LZMA compressed files
-     * @param inputFile Path to the input XZ file
-     * @param outputFile Path for the decompressed output file
-     * @throws std::runtime_error If extraction fails
-     *
-     * Uses LZMA SDK to decompress XZ files with:
-     * - 8KB input/output buffers
-     * - Error checking at each stage
-     * - Proper resource cleanup
-     */
     void extractXZ(const std::string &inputFile, const std::string &outputFile) {
         // Open the input file
         std::ifstream inFile(inputFile, std::ios::binary);
@@ -98,17 +68,7 @@ namespace xt::utils {
         outFile.close();
     }
 
-    /**
-     * @brief Extracts GZIP compressed files
-     * @param inFile Path to the input GZIP file
-     * @param outFile Output path (empty for auto-determined path)
-     * @return tuple<bool, string> (success status, output file path)
-     *
-     * Handles GZIP extraction with:
-     * - Automatic output path determination
-     * - 4KB read buffer
-     * - Error logging
-     */
+
     std::tuple<bool, string> extractGzip(const std::string &inFile, const std::string &outFile) {
         gzFile gz = gzopen(inFile.c_str(), "rb");
         if (!gz) {
@@ -116,7 +76,9 @@ namespace xt::utils {
             return std::make_tuple(false, "");
         }
 
+
         string destPath = "";
+        //    cout << "out file name: "<< fs::path(outFile).filename().string().size() << endl;
         if (outFile == "") {
             //destination file name and path didn't specify
             destPath = inFile.substr(0, inFile.size() - 3);
@@ -124,6 +86,7 @@ namespace xt::utils {
             //destination file name didn't specify but destination path specified
             string fln = fs::path(inFile).filename().string();
             string destFileName = fln.substr(0, fln.size() - 3);
+            //        cout << destFileName << endl;
             destPath = (fs::path(outFile) / fs::path(destFileName)).string();
         } else if (fs::path(outFile).filename().string() == outFile) {
             //destination file name specified but path didn't specify
@@ -148,16 +111,6 @@ namespace xt::utils {
         return std::make_tuple(true, destPath);
     }
 
-    /**
-     * @brief Extracts TAR archives
-     * @param tarFile Path to the TAR archive
-     * @param outPath Output directory (empty for current directory)
-     * @return bool True if extraction succeeded
-     *
-     * Uses libtar to extract archives with:
-     * - GNU TAR format support
-     * - Basic error reporting
-     */
     bool extractTar(const std::string &tarFile, const std::string &outPath) {
         TAR *tar;
         // Open the tar file
@@ -171,39 +124,35 @@ namespace xt::utils {
             destPath = fs::path(tarFile).parent_path().string();
         }
 
+        // Extract all files from the tar archive
+        cout << outPath << endl;
+        //    if (tar_extract_all(tar, (char *) destPath.c_str()) == -1) { // Extract to current directory
         int res = tar_extract_all(tar, (char *) outPath.c_str());
         cout << "res:" << res;
         if (res == -1) {
+            // Extract to current directory
             std::cerr << "Error extracting tar file: " << tarFile << std::endl;
             tar_close(tar);
             return true;
         }
-
+        // Close the tar file
         tar_close(tar);
         std::cout << "Extraction completed successfully!" << std::endl;
         return true;
     }
 
-    /**
-     * @brief Extracts ZIP archives
-     * @param inFile Path to the ZIP archive
-     * @param outPath Output directory (empty for archive directory)
-     * @return bool True if extraction succeeded
-     *
-     * Uses libzip to extract archives with:
-     * - Directory creation support
-     * - 8KB read buffer
-     * - Comprehensive error reporting
-     */
     bool extractZip(const std::string &inFile, const std::string &outPath) {
         int err = 0;
         zip_t *zip_archive = zip_open(inFile.c_str(), ZIP_RDONLY, &err);
 
         if (!zip_archive) {
+            //        char error_buffer[1024];
             zip_error_t zip_error;
             int error_code = 0;
             zip_error_set(&zip_error, error_code, 0);
+            //        zip_error_to_str(error_buffer, sizeof(error_buffer), err, errno);
             const char *error_buffer = zip_error_strerror(&zip_error);
+
 
             std::cerr << "Failed to open ZIP file: " << error_buffer << std::endl;
             return false;
@@ -240,7 +189,7 @@ namespace xt::utils {
                     std::cerr << "Failed to open file in ZIP: " << filename << std::endl;
                     return false;
                 }
-
+                // Create a new file to write the extracted content
                 string path = (fs::path(destPath) / fs::path(filename)).string();
                 FILE *output_file = fopen(path.c_str(), "wb");
                 if (!output_file) {
@@ -249,6 +198,7 @@ namespace xt::utils {
                     return false;
                 }
 
+                // Read the content from the ZIP file and write to the output file
                 char buffer[8192];
                 zip_int64_t bytes_read;
                 while ((bytes_read = zip_fread(zip_file, buffer, sizeof(buffer))) > 0) {
@@ -263,18 +213,7 @@ namespace xt::utils {
         return true;
     }
 
-    /**
-     * @brief Extracts TGZ (Gzipped TAR) archives
-     * @param filename Path to the TGZ archive
-     * @param output_dir Output directory
-     * @return bool True if extraction succeeded
-     *
-     * Uses libarchive to extract with:
-     * - Automatic directory creation
-     * - 10KB block size
-     * - Preservation of file attributes
-     * - Comprehensive error reporting
-     */
+
     bool extractTgz(const std::string &filename, const std::string &output_dir) {
         struct archive *a = archive_read_new();
         struct archive *ext = archive_write_disk_new();
@@ -282,20 +221,25 @@ namespace xt::utils {
         int flags = ARCHIVE_EXTRACT_TIME | ARCHIVE_EXTRACT_PERM | ARCHIVE_EXTRACT_ACL | ARCHIVE_EXTRACT_FFLAGS;
         int r;
 
+        // Enable support for gzip and tar formats
         archive_read_support_filter_gzip(a);
         archive_read_support_format_tar(a);
 
+        // Set up extraction options
         archive_write_disk_set_options(ext, flags);
         archive_write_disk_set_standard_lookup(ext);
 
-        r = archive_read_open_filename(a, filename.c_str(), 10240);
+        // Open the archive
+        r = archive_read_open_filename(a, filename.c_str(), 10240); // 10KB block size
         if (r != ARCHIVE_OK) {
             std::cerr << "Failed to open archive: " << archive_error_string(a) << std::endl;
             return false;
         }
 
+        // Create output directory if it doesn't exist
         fs::create_directories(output_dir);
 
+        // Extraction loop
         while (true) {
             r = archive_read_next_header(a, &entry);
             if (r == ARCHIVE_EOF)
@@ -305,15 +249,18 @@ namespace xt::utils {
                 return false;
             }
 
+            // Construct full output path
             std::string output_path = output_dir + "/" + archive_entry_pathname(entry);
             archive_entry_set_pathname(entry, output_path.c_str());
 
+            // Extract the entry
             r = archive_write_header(ext, entry);
             if (r != ARCHIVE_OK) {
                 std::cerr << "Error writing header: " << archive_error_string(ext) << std::endl;
                 return false;
             }
 
+            // Write data if it's a file
             if (archive_entry_size(entry) > 0) {
                 const void *buff;
                 size_t size;
@@ -342,6 +289,7 @@ namespace xt::utils {
             }
         }
 
+        // Cleanup
         archive_read_close(a);
         archive_read_free(a);
         archive_write_close(ext);
@@ -350,22 +298,10 @@ namespace xt::utils {
         return true;
     }
 
-    /**
-     * @brief Automatically detects and extracts archive formats
-     * @param inFile Input archive file path
-     * @param outFile Output path/directory
-     * @return bool True if extraction succeeded
-     *
-     * Supports:
-     * - .gz (GZIP)
-     * - .zip (ZIP)
-     * - .tgz (Gzipped TAR)
-     * - .tar (TAR)
-     *
-     * Automatically chains GZIP and TAR extraction when needed.
-     */
+
     bool extract(const std::string &inFile, const std::string &outFile) {
         string ext = fs::path(inFile).filename().extension().string();
+        //    cout << ext << endl;
         if (ext == ".gz") {
             cout << outFile << endl;
             auto [result, path] = extractGzip(inFile, outFile);
@@ -382,20 +318,4 @@ namespace xt::utils {
         }
         return false;
     }
-} // namespace xt::utils
-
-/*
- * Author: Kamran Saberifard
- * Email: kamisaberi@gmail.com
- * GitHub: https://github.com/kamisaberi
- *
- * Dependencies:
- * - liblzma: For XZ/LZMA decompression
- * - zlib: For GZIP decompression
- * - libtar: For TAR archive handling
- * - libzip: For ZIP archive handling
- * - libarchive: For TGZ archive handling
- *
- * License: MIT
- * Copyright (c) 2023 Kamran Saberifard. All rights reserved.
- */
+}
