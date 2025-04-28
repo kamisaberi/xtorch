@@ -1,12 +1,14 @@
 #include <torch/torch.h>
+#include <torch/data/datasets/mnist.h>
 #include <vector>
 #include <algorithm>
 #include <random>
+#include <iostream>
 
 // Struct to hold a batch of data: input tensors and target tensors
 struct Batch {
-    torch::Tensor inputs;
-    torch::Tensor targets;
+    torch::Tensor inputs;  // Batched images, e.g., shape [batch_size, 1, 28, 28]
+    torch::Tensor targets; // Batched labels, e.g., shape [batch_size]
 };
 
 // Forward declaration of the iterator class
@@ -44,36 +46,39 @@ public:
 private:
     // Allow DataLoaderIterator to access private members
     friend class DataLoaderIterator;
-    std::vector<std::pair<torch::Tensor, torch::Tensor>> dataset_; // The dataset
-    int batch_size_;                                               // Size of each batch
-    bool shuffle_;                                                 // Whether to shuffle data
-    std::vector<size_t> indices_;                                  // Shuffled or ordered indices
-    size_t num_batches_;                                           // Total number of batches
+    const std::vector<std::pair<torch::Tensor, torch::Tensor>>& dataset_; // Reference to the dataset
+    int batch_size_;                                                     // Size of each batch
+    bool shuffle_;                                                       // Whether to shuffle data
+    std::vector<size_t> indices_;                                        // Shuffled or ordered indices
+    size_t num_batches_;                                                 // Total number of batches
 };
 
 // Iterator class for DataLoader
 class DataLoaderIterator {
 public:
     // Constructor: takes a pointer to the DataLoader and the current batch index
-    DataLoaderIterator(DataLoader* loader, size_t batch_idx)
+    DataLoaderIterator(const DataLoader* loader, size_t batch_idx)
         : loader_(loader), batch_idx_(batch_idx) {}
 
     // Dereference operator: returns the current batch
     Batch operator*() const {
+        // Calculate the start and end indices for the current batch
         size_t start = batch_idx_ * loader_->batch_size_;
         size_t end = std::min(start + loader_->batch_size_, loader_->dataset_.size());
-        std::vector<torch::Tensor> inputs;
-        std::vector<torch::Tensor> targets;
+
         // Collect tensors for the current batch
+        std::vector<torch::Tensor> inputs_vec;
+        std::vector<torch::Tensor> targets_vec;
         for (size_t i = start; i < end; ++i) {
             size_t idx = loader_->indices_[i];
-            inputs.push_back(loader_->dataset_[idx].first);
-            targets.push_back(loader_->dataset_[idx].second);
+            inputs_vec.push_back(loader_->dataset_[idx].first);  // Image tensor
+            targets_vec.push_back(loader_->dataset_[idx].second); // Label tensor
         }
+
         // Stack the tensors into a single tensor for inputs and targets
-        torch::Tensor input_batch = torch::stack(inputs);
-        torch::Tensor target_batch = torch::stack(targets);
-        return {input_batch, target_batch};
+        torch::Tensor inputs = torch::stack(inputs_vec);
+        torch::Tensor targets = torch::stack(targets_vec);
+        return {inputs, targets};
     }
 
     // Increment operator: moves to the next batch
@@ -88,8 +93,8 @@ public:
     }
 
 private:
-    DataLoader* loader_;  // Pointer to the parent DataLoader
-    size_t batch_idx_;    // Current batch index
+    const DataLoader* loader_;  // Pointer to the parent DataLoader
+    size_t batch_idx_;          // Current batch index
 };
 
 // Implementation of begin() and end() methods
@@ -101,25 +106,31 @@ DataLoaderIterator DataLoader::end() {
     return DataLoaderIterator(this, num_batches_);
 }
 
-// Example usage
+// Main function demonstrating usage with MNIST dataset
 int main() {
-    // Create a sample dataset
-    std::vector<std::pair<torch::Tensor, torch::Tensor>> dataset;
-    for (int i = 0; i < 10; ++i) {
-        torch::Tensor input = torch::ones({2, 2}) * i;
-        torch::Tensor target = torch::tensor(i);
-        dataset.emplace_back(input, target);
+    // Load the MNIST training dataset
+    auto mnist_dataset = torch::data::datasets::MNIST("./data");
+
+    // Collect data into a vector of pairs (image tensor, label tensor)
+    std::vector<std::pair<torch::Tensor, torch::Tensor>> data;
+    for (size_t i = 0; i < mnist_dataset.size().value(); ++i) {
+        auto example = mnist_dataset[i];
+        data.emplace_back(example.data, example.target);
     }
 
-    // Initialize the DataLoader with batch size 4 and shuffling enabled
-    DataLoader loader(dataset, 4, true);
+    // Create the custom DataLoader with batch size 64 and shuffling enabled
+    int batch_size = 64;
+    bool shuffle = true;
+    DataLoader loader(data, batch_size, shuffle);
 
-    // Iterate over batches
+    // Iterate over batches and print the shape of the first batch
+    int count = 0;
     for (auto& batch : loader) {
         torch::Tensor inputs = batch.inputs;
         torch::Tensor targets = batch.targets;
-        std::cout << "Inputs:\n" << inputs << "\n";
-        std::cout << "Targets:\n" << targets << "\n\n";
+        std::cout << "Batch inputs shape: " << inputs.sizes() << "\n";
+        std::cout << "Batch targets shape: " << targets.sizes() << "\n";
+        if (++count >= 1) break;  // Print only the first batch to avoid flooding output
     }
 
     return 0;
