@@ -1,5 +1,5 @@
 /**
- * @file filesystem_utils.h
+ * @file filesystem.h
  * @brief Filesystem utility functions for counting files
  * @author Kamran Saberifard
  * @email kamisaberi@gmail.com
