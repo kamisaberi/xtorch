@@ -1,7 +1,7 @@
 #pragma once
 #include "../base/base.h"
 #include "../../headers/datasets.h"
-#include "datasets/base/mnist_base.h"
+#include "../base/mnist_base.h"
 
 
 using namespace std;
