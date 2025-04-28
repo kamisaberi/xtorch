@@ -9,6 +9,7 @@
 # Description:
 #   Automatically detects operating system and installs required development
 #   libraries for various multimedia and machine learning dependencies.
+#   Prompts for LibTorch path (with validation loop), updates CMakeLists.txt, and runs make install.
 # Supported Systems:
 #   - Ubuntu, Linux Mint (Debian-based)
 #   - Arch Linux, Manjaro (Arch-based)
@@ -209,7 +210,7 @@ esac
 # -----------------------------------------------------------------------------
 # Main Installation Loop
 # -----------------------------------------------------------------------------
-# Iterates through package list and installs system-specific packages
+# Iterates through package list and install system-specific packages
 # Handles Debian-based, Arch-based, macOS, and Windows differently
 # Uses vcpkg for specific Windows packages (e.g., libtar)
 # -----------------------------------------------------------------------------
@@ -237,9 +238,128 @@ for ubuntu_pkg in "${!packages[@]}"; do
 done
 
 # -----------------------------------------------------------------------------
-# LibTorch Special Handling
+# LibTorch Installation and CMakeLists.txt Update
 # -----------------------------------------------------------------------------
-# LibTorch cannot be installed via system package managers
-# Provides manual installation instructions for all systems
+# Prompt user for LibTorch path until valid, update CMakeLists.txt, and run make install
+# - Loops to prompt for absolute path to LibTorch until valid
+# - Validates path is absolute and LibTorch exists
+# - Updates CMakeLists.txt with the provided path
+# - Runs sudo make install (Linux/macOS) or equivalent on Windows
 # -----------------------------------------------------------------------------
 echo "LibTorch is not available via package managers. Please download and install manually from https://pytorch.org/get-started/locally/"
+
+# Loop to prompt for LibTorch path until valid
+while true; do
+    read -p "Enter the absolute path to your LibTorch installation (e.g., /home/user/libtorch or C:\\libtorch, or type 'quit' to exit): " LIBTORCH_PATH
+
+    # Allow user to quit
+    if [[ "$LIBTORCH_PATH" == "quit" || "$LIBTORCH_PATH" == "exit" ]]; then
+        echo "Exiting due to user request."
+        exit 1
+    fi
+
+    # Validate absolute path
+    case "$SYSTEM" in
+        ubuntu|mint|arch|manjaro|macos)
+            if [[ ! "$LIBTORCH_PATH" =~ ^/ ]]; then
+                echo "Error: Path must be absolute (start with '/'). Please try again."
+                continue
+            fi
+            ;;
+        windows)
+            if [[ ! "$LIBTORCH_PATH" =~ ^[a-zA-Z]:\\ ]]; then
+                echo "Error: Path must be absolute (start with drive letter, e.g., C:\\). Please try again."
+                continue
+            fi
+            # Convert Windows path to CMake-compatible format (forward slashes)
+            LIBTORCH_PATH=$(echo "$LIBTORCH_PATH" | sed 's|\\|/|g')
+            ;;
+    esac
+
+    # Validate LibTorch directory exists
+    case "$SYSTEM" in
+        ubuntu|mint|arch|manjaro)
+            if [[ ! -f "$LIBTORCH_PATH/lib/libtorch.so" ]]; then
+                echo "Error: LibTorch not found at $LIBTORCH_PATH. Ensure the path contains a valid LibTorch installation with 'lib/libtorch.so'."
+                continue
+            fi
+            ;;
+        macos)
+            if [[ ! -f "$LIBTORCH_PATH/lib/libtorch.dylib" ]]; then
+                echo "Error: LibTorch not found at $LIBTORCH_PATH. Ensure the path contains a valid LibTorch installation with 'lib/libtorch.dylib'."
+                continue
+            fi
+            ;;
+        windows)
+            if [[ ! -f "$LIBTORCH_PATH/lib/torch.lib" ]]; then
+                echo "Error: LibTorch not found at $LIBTORCH_PATH. Ensure the path contains a valid LibTorch installation with 'lib/torch.lib'."
+                continue
+            fi
+            ;;
+    esac
+
+    # If we reach here, the path is valid
+    echo "Valid LibTorch path provided: $LIBTORCH_PATH"
+    break
+done
+
+# Locate and update CMakeLists.txt
+CMAKELISTS_FILE="CMakeLists.txt"
+if [[ ! -f "$CMAKELISTS_FILE" ]]; then
+    echo "Error: CMakeLists.txt not found in the current directory."
+    read -p "Enter the path to CMakeLists.txt: " CMAKELISTS_FILE
+    if [[ ! -f "$CMAKELISTS_FILE" ]]; then
+        echo "Error: Specified CMakeLists.txt does not exist."
+        exit 1
+    fi
+fi
+
+# Backup CMakeLists.txt
+cp "$CMAKELISTS_FILE" "${CMAKELISTS_FILE}.bak"
+echo "Backed up $CMAKELISTS_FILE to ${CMAKELISTS_FILE}.bak"
+
+# Update CMakeLists.txt
+if grep -q "list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/cpp/libtorch/)" "$CMAKELISTS_FILE"; then
+    sed -i "s|list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/cpp/libtorch/)|list(APPEND CMAKE_PREFIX_PATH $LIBTORCH_PATH)|" "$CMAKELISTS_FILE"
+    echo "Updated CMakeLists.txt with LibTorch path: $LIBTORCH_PATH"
+else
+    echo "Warning: Could not find 'list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/cpp/libtorch/)' in $CMAKELISTS_FILE."
+    echo "Please manually add 'list(APPEND CMAKE_PREFIX_PATH $LIBTORCH_PATH)' to $CMAKELISTS_FILE."
+fi
+
+# Run make install (Linux/macOS) or build on Windows
+case "$SYSTEM" in
+    ubuntu|mint|arch|manjaro)
+        echo "Running sudo make install..."
+        sudo make install
+        if [[ $? -ne 0 ]]; then
+            echo "Error: 'sudo make install' failed."
+            exit 1
+        fi
+        ;;
+    macos)
+        echo "Running make install..."
+        make install
+        if [[ $? -ne 0 ]]; then
+            echo "Error: 'make install' failed."
+            exit 1
+        fi
+        ;;
+    windows)
+        echo "Windows detected. Running CMake build and install..."
+        if [[ -d "build" ]]; then
+            rm -rf build
+        fi
+        mkdir build && cd build
+        cmake ..
+        cmake --build . --config Release
+        cmake --install .
+        if [[ $? -ne 0 ]]; then
+            echo "Error: CMake build/install failed."
+            exit 1
+        fi
+        cd ..
+        ;;
+esac
+
+echo "Installation and configuration completed successfully."
