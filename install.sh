@@ -13,6 +13,8 @@
 # Supported Systems:
 #   - Ubuntu, Linux Mint (Debian-based)
 #   - Arch Linux, Manjaro (Arch-based)
+#   - Fedora (dnf-based)
+#   - openSUSE (zypper-based)
 #   - macOS (Homebrew)
 #   - Windows (Chocolatey, vcpkg for C++ libraries)
 ###############################################################################
@@ -21,7 +23,7 @@
 # System Detection
 # -----------------------------------------------------------------------------
 # Detect operating system by checking uname or /etc/os-release
-# Sets SYSTEM variable to: ubuntu, mint, arch, manjaro, macos, or windows
+# Sets SYSTEM variable to: ubuntu, mint, arch, manjaro, fedora, suse, macos, or windows
 # Exits with error if unsupported system is detected
 # -----------------------------------------------------------------------------
 if [[ "$OSTYPE" == "darwin"* ]]; then
@@ -36,6 +38,10 @@ elif grep -q "ID=manjaro" /etc/os-release 2>/dev/null; then
     SYSTEM="manjaro"
 elif grep -q "ID=linuxmint" /etc/os-release 2>/dev/null; then
     SYSTEM="mint"
+elif grep -q "ID=fedora" /etc/os-release 2>/dev/null; then
+    SYSTEM="fedora"
+elif grep -q "ID=opensuse" /etc/os-release 2>/dev/null || grep -q "ID=suse" /etc/os-release 2>/dev/null; then
+    SYSTEM="suse"
 else
     echo "Unsupported system"
     exit 1
@@ -52,7 +58,7 @@ echo "Detected system: $SYSTEM"
 # Functionality:
 #   - Checks if package is already installed
 #   - Installs package using appropriate package manager
-#   - Supports apt (Debian), pacman (Arch), brew (macOS), choco (Windows)
+#   - Supports apt (Debian), pacman (Arch), dnf (Fedora), zypper (SUSE), brew (macOS), choco/vcpkg (Windows)
 #   - Skips installation if package is already present
 # -----------------------------------------------------------------------------
 check_and_install() {
@@ -76,6 +82,22 @@ check_and_install() {
                 echo "Package $package is already installed"
             fi
             ;;
+        fedora)
+            if ! rpm -q "$package" >/dev/null 2>&1; then
+                echo "Package $package not found, installing..."
+                sudo dnf install -y "$package"
+            else
+                echo "Package $package is already installed"
+            fi
+            ;;
+        suse)
+            if ! zypper se -i "$package" >/dev/null 2>&1; then
+                echo "Package $package not found, installing..."
+                sudo zypper install -y "$package"
+            else
+                echo "Package $package is already installed"
+            fi
+            ;;
         macos)
             if ! brew list "$package" >/dev/null 2>&1; then
                 echo "Package $package not found, installing..."
@@ -86,7 +108,6 @@ check_and_install() {
             ;;
         windows)
             if [[ "$install_cmd" == "vcpkg install"* ]]; then
-                # Check if vcpkg package is already installed
                 if [[ -d "$VCPKG_ROOT/installed/x64-windows/lib" && -n "$(find "$VCPKG_ROOT/installed/x64-windows/lib" -name "*$package*")" ]]; then
                     echo "Package $package is already installed via vcpkg"
                 else
@@ -94,7 +115,6 @@ check_and_install() {
                     $install_cmd
                 fi
             else
-                # Chocolatey package check
                 if ! choco list --local-only | grep -q "$package"; then
                     echo "Package $package not found, installing via Chocolatey..."
                     choco install "$package" -y
@@ -109,8 +129,8 @@ check_and_install() {
 # -----------------------------------------------------------------------------
 # Package Mapping Table
 # -----------------------------------------------------------------------------
-# Maps Ubuntu/Mint package names to Arch, macOS, and Windows equivalents
-# Format: [Ubuntu Package]=Arch Package:macOS Package:Windows Package
+# Maps Ubuntu/Mint package names to Arch, Fedora, SUSE, macOS, and Windows equivalents
+# Format: [Ubuntu Package]=Arch Package:Fedora Package:SUSE Package:macOS Package:Windows Package
 # Windows packages use Chocolatey names where available, vcpkg names otherwise
 # Key Dependencies:
 #   - libopencv-dev: OpenCV computer vision library
@@ -121,18 +141,19 @@ check_and_install() {
 # Notes:
 #   - Windows uses vcpkg for libtar, others use Chocolatey where possible
 #   - vcpkg packages are prefixed with 'vcpkg:' to distinguish them
+#   - Fedora and SUSE use -devel suffix for development packages
 # -----------------------------------------------------------------------------
 declare -A packages
-packages["libcurl4-openssl-dev"]="curl:curl:curl"
-packages["libopencv-dev"]="opencv:opencv:opencv"
-packages["zlib1g-dev"]="zlib:zlib:zlib"
-packages["libssl-dev"]="openssl:openssl:openssl"
-packages["liblzma-dev"]="xz:xz:xz-utils"
-packages["libarchive-dev"]="libarchive:libarchive:libarchive"
-packages["libtar-dev"]="libtar:libtar:vcpkg:libtar"
-packages["libzip-dev"]="libzip:libzip:libzip"
-packages["libsndfile1-dev"]="libsndfile:libsndfile:libsndfile"
-packages["libhdf5-dev"]="hdf5:hdf5:hdf5"
+packages["libcurl4-openssl-dev"]="curl:libcurl-devel:libcurl-devel:curl:curl"
+packages["libopencv-dev"]="opencv:opencv-devel:opencv-devel:opencv:opencv"
+packages["zlib1g-dev"]="zlib:zlib-devel:zlib-devel:zlib:zlib"
+packages["libssl-dev"]="openssl:openssl-devel:libopenssl-devel:openssl:openssl"
+packages["liblzma-dev"]="xz:xz-devel:xz-devel:xz:xz-utils"
+packages["libarchive-dev"]="libarchive:libarchive-devel:libarchive-devel:libarchive:libarchive"
+packages["libtar-dev"]="libtar:libtar-devel:libtar-devel:libtar:vcpkg:libtar"
+packages["libzip-dev"]="libzip:libzip-devel:libzip-devel:libzip:libzip"
+packages["libsndfile1-dev"]="libsndfile:libsndfile-devel:libsndfile-devel:libsndfile:libsndfile"
+packages["libhdf5-dev"]="hdf5:hdf5-devel:hdf5-devel:hdf5:hdf5"
 
 # -----------------------------------------------------------------------------
 # Pre-Installation Checks
@@ -140,7 +161,7 @@ packages["libhdf5-dev"]="hdf5:hdf5:hdf5"
 # Ensure package managers are installed and updated
 # - Homebrew for macOS
 # - Chocolatey and vcpkg for Windows
-# - Update package lists for apt and pacman
+# - Update package lists for apt, pacman, dnf, zypper
 # -----------------------------------------------------------------------------
 case "$SYSTEM" in
     ubuntu|mint)
@@ -150,6 +171,14 @@ case "$SYSTEM" in
     arch|manjaro)
         echo "Updating pacman package lists..."
         sudo pacman -Syu --noconfirm
+        ;;
+    fedora)
+        echo "Updating dnf package lists..."
+        sudo dnf update -y
+        ;;
+    suse)
+        echo "Updating zypper package lists..."
+        sudo zypper refresh
         ;;
     macos)
         if ! command -v brew >/dev/null 2>&1; then
@@ -169,12 +198,10 @@ case "$SYSTEM" in
         brew update
         ;;
     windows)
-        # Check for PowerShell
         if ! command -v powershell >/dev/null 2>&1; then
             echo "PowerShell is required to install Chocolatey/vcpkg. Please install PowerShell first."
             exit 1
         fi
-        # Check for Chocolatey
         if ! command -v choco >/dev/null 2>&1; then
             echo "Chocolatey not found. Installing Chocolatey..."
             powershell -NoProfile -ExecutionPolicy Bypass -Command "[System.Net.WebClient]::new().DownloadString('https://chocolatey.org/install.ps1') | iex"
@@ -185,7 +212,6 @@ case "$SYSTEM" in
         fi
         echo "Refreshing Chocolatey environment..."
         refreshenv
-        # Check for vcpkg
         VCPKG_ROOT="$HOME/vcpkg"
         if [[ ! -f "$VCPKG_ROOT/vcpkg" ]]; then
             echo "vcpkg not found. Installing vcpkg..."
@@ -200,7 +226,6 @@ case "$SYSTEM" in
                 echo "vcpkg installation failed. Please install manually: https://vcpkg.io"
                 exit 1
             fi
-            # Run vcpkg integrate for MSVC
             powershell -NoProfile -ExecutionPolicy Bypass -Command "cd $VCPKG_ROOT; .\vcpkg integrate"
             echo "vcpkg installed. Use 'vcpkg integrate' in your project to link libraries."
         fi
@@ -210,18 +235,24 @@ esac
 # -----------------------------------------------------------------------------
 # Main Installation Loop
 # -----------------------------------------------------------------------------
-# Iterates through package list and install system-specific packages
-# Handles Debian-based, Arch-based, macOS, and Windows differently
+# Iterates through package list and installs system-specific packages
+# Handles Debian-based, Arch-based, Fedora, SUSE, macOS, and Windows differently
 # Uses vcpkg for specific Windows packages (e.g., libtar)
 # -----------------------------------------------------------------------------
 for ubuntu_pkg in "${!packages[@]}"; do
-    IFS=':' read -r arch_pkg macos_pkg windows_pkg <<< "${packages[$ubuntu_pkg]}"
+    IFS=':' read -r arch_pkg fedora_pkg suse_pkg macos_pkg windows_pkg <<< "${packages[$ubuntu_pkg]}"
     case "$SYSTEM" in
         ubuntu|mint)
             check_and_install "$ubuntu_pkg" "apt-get install -y"
             ;;
         arch|manjaro)
             check_and_install "$arch_pkg" "pacman -S --noconfirm"
+            ;;
+        fedora)
+            check_and_install "$fedora_pkg" "dnf install -y"
+            ;;
+        suse)
+            check_and_install "$suse_pkg" "zypper install -y"
             ;;
         macos)
             check_and_install "$macos_pkg" "brew install"
@@ -260,7 +291,7 @@ while true; do
 
     # Validate absolute path
     case "$SYSTEM" in
-        ubuntu|mint|arch|manjaro|macos)
+        ubuntu|mint|arch|manjaro|fedora|suse|macos)
             if [[ ! "$LIBTORCH_PATH" =~ ^/ ]]; then
                 echo "Error: Path must be absolute (start with '/'). Please try again."
                 continue
@@ -278,7 +309,7 @@ while true; do
 
     # Validate LibTorch directory exists
     case "$SYSTEM" in
-        ubuntu|mint|arch|manjaro)
+        ubuntu|mint|arch|manjaro|fedora|suse)
             if [[ ! -f "$LIBTORCH_PATH/lib/libtorch.so" ]]; then
                 echo "Error: LibTorch not found at $LIBTORCH_PATH. Ensure the path contains a valid LibTorch installation with 'lib/libtorch.so'."
                 continue
@@ -329,7 +360,7 @@ fi
 
 # Run make install (Linux/macOS) or build on Windows
 case "$SYSTEM" in
-    ubuntu|mint|arch|manjaro)
+    ubuntu|mint|arch|manjaro|fedora|suse)
         echo "Running sudo make install..."
         sudo make install
         if [[ $? -ne 0 ]]; then
