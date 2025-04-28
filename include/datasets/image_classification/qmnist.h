@@ -1,7 +1,6 @@
 #pragma once
-#include <headers/datasets.h>
-#include "datasets/base/mnist_base.h"
-
+#include "../../headers/datasets.h"
+#include "../../datasets/base/mnist_base.h"
 
 using namespace std;
 namespace fs = std::filesystem;
