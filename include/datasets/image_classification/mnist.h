@@ -1,6 +1,7 @@
 #pragma once
 #include "../base/base.h"
 #include "../../headers/datasets.h"
+#include "datasets/base/mnist_base.h"
 
 
 using namespace std;
@@ -8,38 +9,6 @@ namespace fs = std::filesystem;
 
 
 namespace xt::data::datasets {
-
-    class MNISTBase : public BaseDataset {
-    public:
-        explicit MNISTBase(const std::string &root);
-        MNISTBase(const std::string &root, DataMode mode);
-        MNISTBase(const std::string &root, DataMode mode , bool download);
-        MNISTBase(const std::string &root, DataMode mode , bool download , vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
-        // ~MNISTBase() override;
-
-        void read_images(const std::string &file_path, int num_images);
-
-        void read_labels(const std::string &file_path, int num_labels);
-
-        // torch::data::Example<> get(size_t index) override;
-
-        // torch::optional<size_t> size() const override;
-
-    protected:
-        // std::vector<torch::Tensor> data; // Store image data as tensors
-        // std::vector<uint8_t> labels; // Store labels
-        // DataMode mode = DataMode::TRAIN;
-        // bool download = false;
-        // fs::path root;
-        // fs::path dataset_path;
-        // xt::data::transforms::Compose compose;
-
-
-        // void transform_data(std::vector<torch::data::transforms::Lambda<torch::data::Example<> > > transforms);
-
-    private:
-        // vector<std::function<torch::Tensor(torch::Tensor)>> transforms = {};
-    };
 
 
     class MNIST : public MNISTBase {
