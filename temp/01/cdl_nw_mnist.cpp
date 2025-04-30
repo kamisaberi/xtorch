@@ -9,6 +9,7 @@
 #include <mutex>
 #include <condition_variable>
 #include <atomic>
+#include <chrono>
 
 // Struct to hold a batch of data: input tensors and target tensors
 struct Batch {
@@ -221,9 +222,10 @@ int main() {
     // Create the custom DataLoader with batch size 64, shuffling, and 4 workers
     int batch_size = 64;
     bool shuffle = true;
-    int num_workers = 4; // Adjust based on your CPU
+    int num_workers = 32; // Adjust based on your CPU
     DataLoader loader(data, batch_size, shuffle, num_workers);
 
+    auto start = std::chrono::high_resolution_clock::now();
     // Iterate over batches and print the shape of the first batch
     int count = 0;
     for (const auto& batch : loader) {
@@ -231,8 +233,10 @@ int main() {
         torch::Tensor targets = batch.targets;
         std::cout << "Batch inputs shape: " << inputs.sizes() << "\n";
         std::cout << "Batch targets shape: " << targets.sizes() << "\n";
-        if (++count >= 1) break; // Print only the first batch
+        // if (++count >= 1) break; // Print only the first batch
     }
-
+    auto end = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
+    std::cout << duration << " s\n";
     return 0;
 }
