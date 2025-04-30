@@ -1,8 +1,16 @@
-//
-// Created by kami on 4/28/25.
-//
+#pragma once
+#include <torch/torch.h>
+#include <iostream>
+#include <torch/script.h>
+#include <string>
+#include <vector>
 
-#ifndef MODULE_H
-#define MODULE_H
 
-#endif //MODULE_H
+namespace xt
+{
+    class Module: public torch::nn::Module {
+    public:
+        Module();
+        virtual  torch::Tensor forward(torch::Tensor input) const = 0;
+    };
+}
