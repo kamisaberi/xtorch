@@ -3,7 +3,7 @@
 #include <mpi.h>
 #include <iostream>
 #include <memory>
-#include "../distributed_data_parallel.h"
+#include "distributed_data_parallel.h"
 
 // Neural Network model
 struct Net : torch::nn::Module {
