@@ -3,7 +3,7 @@
 #include <vector>
 #include <algorithm>
 #include <random>
-#include "../include/datasets/image-classification/mnist.h"
+#include "../include/datasets/image_classification/mnist.h"
 #include "../include/models/cnn/lenet/lenet5.h"
 #include "../include/definitions/transforms.h"
 #include <torch/torch.h>
