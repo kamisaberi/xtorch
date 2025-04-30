@@ -540,330 +540,919 @@ target_link_libraries(${PROJECT_NAME}
 #)
 
 
-####################################### TRTEST #######################################
-
-project(trtest)
-list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
-find_package(Torch REQUIRED)
-#find_package(TorchExtension REQUIRED)
-find_package(OpenCV REQUIRED)
-find_package(LibLZMA REQUIRED)
-find_package(LibArchive REQUIRED)
-
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
-
-set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} ${MODEL_FILES} ${TRANSFORM_FILES} ../src/datasets/base/base.cpp ../src/datasets/image_classification/mnist.cpp trtest.cpp)
-
-add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
-target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
+######################################## TRTEST #######################################
 #
-set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
-
-include_directories(/usr/include)
-
-target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
-target_link_libraries(${PROJECT_NAME}
-        ${CURL_LIBRARIES}
-        ${TORCH_LIBRARIES}
-        ${OpenCV_LIBS}
-        ${ZLIB_LIBS}
-        ${ZIP_LIBRARIES}
-        zip
-        ${ZLIB_LIBRARIES}
-        ${LIBTAR_LIBRARY}
-        OpenSSL::SSL
-        OpenSSL::Crypto
-        LibLZMA::LibLZMA
-        ${LibArchive_LIBRARIES}
-)
-
-
-####################################### TRTEST2 #######################################
-
-project(trtest2)
-list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
-find_package(Torch REQUIRED)
-#find_package(TorchExtension REQUIRED)
-find_package(OpenCV REQUIRED)
-find_package(LibLZMA REQUIRED)
-find_package(LibArchive REQUIRED)
-
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
-
-set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} ${MODEL_FILES} ${TRANSFORM_FILES} ../src/datasets/base/base.cpp ../src/datasets/image_classification/mnist.cpp trtest2.cpp)
-
-add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
-target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
+#project(trtest)
+#list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
+#find_package(Torch REQUIRED)
+##find_package(TorchExtension REQUIRED)
+#find_package(OpenCV REQUIRED)
+#find_package(LibLZMA REQUIRED)
+#find_package(LibArchive REQUIRED)
 #
-set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
-
-include_directories(/usr/include)
-
-target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
-target_link_libraries(${PROJECT_NAME}
-        ${CURL_LIBRARIES}
-        ${TORCH_LIBRARIES}
-        ${OpenCV_LIBS}
-        ${ZLIB_LIBS}
-        ${ZIP_LIBRARIES}
-        zip
-        ${ZLIB_LIBRARIES}
-        ${LIBTAR_LIBRARY}
-        OpenSSL::SSL
-        OpenSSL::Crypto
-        LibLZMA::LibLZMA
-        ${LibArchive_LIBRARIES}
-)
-
-
-####################################### MNTCOMP #######################################
-
-project(mntcomp)
-list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
-find_package(Torch REQUIRED)
-#find_package(TorchExtension REQUIRED)
-find_package(OpenCV REQUIRED)
-find_package(LibLZMA REQUIRED)
-find_package(LibArchive REQUIRED)
-
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
-
-set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} ${MODEL_FILES} ${TRANSFORM_FILES}  ../src/datasets/base/base.cpp ../src/datasets/image_classification/mnist.cpp mntcomp.cpp)
-
-add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
-target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
+#set(CMAKE_CXX_STANDARD 17)
+#set(CMAKE_CXX_STANDARD_REQUIRED True)
 #
-set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
-
-include_directories(/usr/include)
-
-target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
-target_link_libraries(${PROJECT_NAME}
-        ${CURL_LIBRARIES}
-        ${TORCH_LIBRARIES}
-        ${OpenCV_LIBS}
-        ${ZLIB_LIBS}
-        ${ZIP_LIBRARIES}
-        zip
-        ${ZLIB_LIBRARIES}
-        ${LIBTAR_LIBRARY}
-        OpenSSL::SSL
-        OpenSSL::Crypto
-        LibLZMA::LibLZMA
-        ${LibArchive_LIBRARIES}
-)
-
-
-####################################### MNTCOMP2 #######################################
-
-project(mntcomp2)
-list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
-find_package(Torch REQUIRED)
-#find_package(TorchExtension REQUIRED)
-find_package(OpenCV REQUIRED)
-find_package(LibLZMA REQUIRED)
-find_package(LibArchive REQUIRED)
-
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
-
-set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} ${MODEL_FILES} ${TRAINER_FILES} ${DATA_LOADER_FILES} ${TRANSFORM_FILES}
-        ../src/trainers/trainer.cpp
-        ../src/datasets/base/base.cpp ../src/datasets/image_classification/mnist.cpp
-        ../src/datasets/image_classification/cifar_10.cpp ../src/datasets/image_classification/imagenette.cpp
-        ../src/datasets/base/base.cpp mntcomp2.cpp)
-
-add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
-target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
+#set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} ${MODEL_FILES} ${TRANSFORM_FILES} ../src/datasets/base/base.cpp ../src/datasets/image_classification/mnist.cpp trtest.cpp)
 #
-set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
-
-include_directories(/usr/include)
-
-target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
-target_link_libraries(${PROJECT_NAME}
-        ${CURL_LIBRARIES}
-        ${TORCH_LIBRARIES}
-        ${OpenCV_LIBS}
-        ${ZLIB_LIBS}
-        ${ZIP_LIBRARIES}
-        zip
-        ${ZLIB_LIBRARIES}
-        ${LIBTAR_LIBRARY}
-        OpenSSL::SSL
-        OpenSSL::Crypto
-        LibLZMA::LibLZMA
-        ${LibArchive_LIBRARIES}
-)
-
-
-####################################### CNPYTEST #######################################
-
-project(cnpytest)
-list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
-find_package(Torch REQUIRED)
-#find_package(TorchExtension REQUIRED)
-find_package(OpenCV REQUIRED)
-find_package(LibLZMA REQUIRED)
-find_package(LibArchive REQUIRED)
-
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
-
-set(TEST_SOURCE_FILES  ../third_party/cnpy/cnpy.cpp cnpytest.cpp)
-
-add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
-target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
+#add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
+#target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
+##
+#set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
 #
-set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
-
-include_directories(/usr/include)
-
-target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
-target_link_libraries(${PROJECT_NAME}
-        ${CURL_LIBRARIES}
-        ${TORCH_LIBRARIES}
-        ${OpenCV_LIBS}
-        ${ZLIB_LIBS}
-        ${ZIP_LIBRARIES}
-        zip
-        ${ZLIB_LIBRARIES}
-        ${LIBTAR_LIBRARY}
-        OpenSSL::SSL
-        OpenSSL::Crypto
-        LibLZMA::LibLZMA
-        ${LibArchive_LIBRARIES}
-)
-
-
-
-
-####################################### CSVTEST #######################################
-
-project(csvtest)
-list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
-find_package(Torch REQUIRED)
-#find_package(TorchExtension REQUIRED)
-find_package(OpenCV REQUIRED)
-find_package(LibLZMA REQUIRED)
-find_package(LibArchive REQUIRED)
-
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
-
-set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} ${MODEL_FILES} ${TRAINER_FILES} ${DATA_LOADER_FILES} ${TRANSFORM_FILES} csvtest.cpp)
-
-add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
-target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
+#include_directories(/usr/include)
 #
-set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
-
-include_directories(/usr/include)
-
-target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
-target_link_libraries(${PROJECT_NAME}
-        ${CURL_LIBRARIES}
-        ${TORCH_LIBRARIES}
-        ${OpenCV_LIBS}
-        ${ZLIB_LIBS}
-        ${ZIP_LIBRARIES}
-        zip
-        ${ZLIB_LIBRARIES}
-        ${LIBTAR_LIBRARY}
-        OpenSSL::SSL
-        OpenSSL::Crypto
-        LibLZMA::LibLZMA
-        ${LibArchive_LIBRARIES}
-)
-
-
-
-
-####################################### EDFWRITER #######################################
-
-project(edfwriter)
-list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
-find_package(Torch REQUIRED)
-#find_package(TorchExtension REQUIRED)
-find_package(OpenCV REQUIRED)
-find_package(LibLZMA REQUIRED)
-find_package(LibArchive REQUIRED)
-
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
-
-set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} ${MODEL_FILES} ${TRAINER_FILES} ${DATA_LOADER_FILES} ${TRANSFORM_FILES} ../third_party/edflib/edflib.c edfwriter.cpp)
-
-add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
-target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
+#target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
+#target_link_libraries(${PROJECT_NAME}
+#        ${CURL_LIBRARIES}
+#        ${TORCH_LIBRARIES}
+#        ${OpenCV_LIBS}
+#        ${ZLIB_LIBS}
+#        ${ZIP_LIBRARIES}
+#        zip
+#        ${ZLIB_LIBRARIES}
+#        ${LIBTAR_LIBRARY}
+#        OpenSSL::SSL
+#        OpenSSL::Crypto
+#        LibLZMA::LibLZMA
+#        ${LibArchive_LIBRARIES}
+#)
 #
-set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
-
-include_directories(/usr/include)
-
-target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
-target_link_libraries(${PROJECT_NAME}
-        ${CURL_LIBRARIES}
-        ${TORCH_LIBRARIES}
-        ${OpenCV_LIBS}
-        ${ZLIB_LIBS}
-        ${ZIP_LIBRARIES}
-        zip
-        ${ZLIB_LIBRARIES}
-        ${LIBTAR_LIBRARY}
-        OpenSSL::SSL
-        OpenSSL::Crypto
-        LibLZMA::LibLZMA
-        ${LibArchive_LIBRARIES}
-)
-
-
-
-####################################### EDFREADER #######################################
-
-project(edfreader)
-list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
-find_package(Torch REQUIRED)
-#find_package(TorchExtension REQUIRED)
-find_package(OpenCV REQUIRED)
-find_package(LibLZMA REQUIRED)
-find_package(LibArchive REQUIRED)
-
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
-
-set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} ${MODEL_FILES} ${TRAINER_FILES} ${DATA_LOADER_FILES} ${TRANSFORM_FILES} ../third_party/edflib/edflib.c edfreader.cpp)
-
-add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
-target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
 #
-set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
+######################################## TRTEST2 #######################################
+#
+#project(trtest2)
+#list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
+#find_package(Torch REQUIRED)
+##find_package(TorchExtension REQUIRED)
+#find_package(OpenCV REQUIRED)
+#find_package(LibLZMA REQUIRED)
+#find_package(LibArchive REQUIRED)
+#
+#set(CMAKE_CXX_STANDARD 17)
+#set(CMAKE_CXX_STANDARD_REQUIRED True)
+#
+#set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} ${MODEL_FILES} ${TRANSFORM_FILES} ../src/datasets/base/base.cpp ../src/datasets/image_classification/mnist.cpp trtest2.cpp)
+#
+#add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
+#target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
+##
+#set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
+#
+#include_directories(/usr/include)
+#
+#target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
+#target_link_libraries(${PROJECT_NAME}
+#        ${CURL_LIBRARIES}
+#        ${TORCH_LIBRARIES}
+#        ${OpenCV_LIBS}
+#        ${ZLIB_LIBS}
+#        ${ZIP_LIBRARIES}
+#        zip
+#        ${ZLIB_LIBRARIES}
+#        ${LIBTAR_LIBRARY}
+#        OpenSSL::SSL
+#        OpenSSL::Crypto
+#        LibLZMA::LibLZMA
+#        ${LibArchive_LIBRARIES}
+#)
+#
+#
+######################################## MNTCOMP #######################################
+#
+#project(mntcomp)
+#list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
+#find_package(Torch REQUIRED)
+##find_package(TorchExtension REQUIRED)
+#find_package(OpenCV REQUIRED)
+#find_package(LibLZMA REQUIRED)
+#find_package(LibArchive REQUIRED)
+#
+#set(CMAKE_CXX_STANDARD 17)
+#set(CMAKE_CXX_STANDARD_REQUIRED True)
+#
+#set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} ${MODEL_FILES} ${TRANSFORM_FILES}  ../src/datasets/base/base.cpp ../src/datasets/image_classification/mnist.cpp mntcomp.cpp)
+#
+#add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
+#target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
+##
+#set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
+#
+#include_directories(/usr/include)
+#
+#target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
+#target_link_libraries(${PROJECT_NAME}
+#        ${CURL_LIBRARIES}
+#        ${TORCH_LIBRARIES}
+#        ${OpenCV_LIBS}
+#        ${ZLIB_LIBS}
+#        ${ZIP_LIBRARIES}
+#        zip
+#        ${ZLIB_LIBRARIES}
+#        ${LIBTAR_LIBRARY}
+#        OpenSSL::SSL
+#        OpenSSL::Crypto
+#        LibLZMA::LibLZMA
+#        ${LibArchive_LIBRARIES}
+#)
+#
+#
+######################################## MNTCOMP2 #######################################
+#
+#project(mntcomp2)
+#list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
+#find_package(Torch REQUIRED)
+##find_package(TorchExtension REQUIRED)
+#find_package(OpenCV REQUIRED)
+#find_package(LibLZMA REQUIRED)
+#find_package(LibArchive REQUIRED)
+#
+#set(CMAKE_CXX_STANDARD 17)
+#set(CMAKE_CXX_STANDARD_REQUIRED True)
+#
+#set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} ${MODEL_FILES} ${TRAINER_FILES} ${DATA_LOADER_FILES} ${TRANSFORM_FILES}
+#        ../src/trainers/trainer.cpp
+#        ../src/datasets/base/base.cpp ../src/datasets/image_classification/mnist.cpp
+#        ../src/datasets/image_classification/cifar_10.cpp ../src/datasets/image_classification/imagenette.cpp
+#        ../src/datasets/base/base.cpp mntcomp2.cpp)
+#
+#add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
+#target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
+##
+#set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
+#
+#include_directories(/usr/include)
+#
+#target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
+#target_link_libraries(${PROJECT_NAME}
+#        ${CURL_LIBRARIES}
+#        ${TORCH_LIBRARIES}
+#        ${OpenCV_LIBS}
+#        ${ZLIB_LIBS}
+#        ${ZIP_LIBRARIES}
+#        zip
+#        ${ZLIB_LIBRARIES}
+#        ${LIBTAR_LIBRARY}
+#        OpenSSL::SSL
+#        OpenSSL::Crypto
+#        LibLZMA::LibLZMA
+#        ${LibArchive_LIBRARIES}
+#)
+#
+#
+######################################## CNPYTEST #######################################
+#
+#project(cnpytest)
+#list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
+#find_package(Torch REQUIRED)
+##find_package(TorchExtension REQUIRED)
+#find_package(OpenCV REQUIRED)
+#find_package(LibLZMA REQUIRED)
+#find_package(LibArchive REQUIRED)
+#
+#set(CMAKE_CXX_STANDARD 17)
+#set(CMAKE_CXX_STANDARD_REQUIRED True)
+#
+#set(TEST_SOURCE_FILES  ../third_party/cnpy/cnpy.cpp cnpytest.cpp)
+#
+#add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
+#target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
+##
+#set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
+#
+#include_directories(/usr/include)
+#
+#target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
+#target_link_libraries(${PROJECT_NAME}
+#        ${CURL_LIBRARIES}
+#        ${TORCH_LIBRARIES}
+#        ${OpenCV_LIBS}
+#        ${ZLIB_LIBS}
+#        ${ZIP_LIBRARIES}
+#        zip
+#        ${ZLIB_LIBRARIES}
+#        ${LIBTAR_LIBRARY}
+#        OpenSSL::SSL
+#        OpenSSL::Crypto
+#        LibLZMA::LibLZMA
+#        ${LibArchive_LIBRARIES}
+#)
+#
+#
+#
+#
+######################################## CSVTEST #######################################
+#
+#project(csvtest)
+#list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
+#find_package(Torch REQUIRED)
+##find_package(TorchExtension REQUIRED)
+#find_package(OpenCV REQUIRED)
+#find_package(LibLZMA REQUIRED)
+#find_package(LibArchive REQUIRED)
+#
+#set(CMAKE_CXX_STANDARD 17)
+#set(CMAKE_CXX_STANDARD_REQUIRED True)
+#
+#set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} ${MODEL_FILES} ${TRAINER_FILES} ${DATA_LOADER_FILES} ${TRANSFORM_FILES} csvtest.cpp)
+#
+#add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
+#target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
+##
+#set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
+#
+#include_directories(/usr/include)
+#
+#target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
+#target_link_libraries(${PROJECT_NAME}
+#        ${CURL_LIBRARIES}
+#        ${TORCH_LIBRARIES}
+#        ${OpenCV_LIBS}
+#        ${ZLIB_LIBS}
+#        ${ZIP_LIBRARIES}
+#        zip
+#        ${ZLIB_LIBRARIES}
+#        ${LIBTAR_LIBRARY}
+#        OpenSSL::SSL
+#        OpenSSL::Crypto
+#        LibLZMA::LibLZMA
+#        ${LibArchive_LIBRARIES}
+#)
+#
+#
+#
+#
+######################################## EDFWRITER #######################################
+#
+#project(edfwriter)
+#list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
+#find_package(Torch REQUIRED)
+##find_package(TorchExtension REQUIRED)
+#find_package(OpenCV REQUIRED)
+#find_package(LibLZMA REQUIRED)
+#find_package(LibArchive REQUIRED)
+#
+#set(CMAKE_CXX_STANDARD 17)
+#set(CMAKE_CXX_STANDARD_REQUIRED True)
+#
+#set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} ${MODEL_FILES} ${TRAINER_FILES} ${DATA_LOADER_FILES} ${TRANSFORM_FILES} ../third_party/edflib/edflib.c edfwriter.cpp)
+#
+#add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
+#target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
+##
+#set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
+#
+#include_directories(/usr/include)
+#
+#target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
+#target_link_libraries(${PROJECT_NAME}
+#        ${CURL_LIBRARIES}
+#        ${TORCH_LIBRARIES}
+#        ${OpenCV_LIBS}
+#        ${ZLIB_LIBS}
+#        ${ZIP_LIBRARIES}
+#        zip
+#        ${ZLIB_LIBRARIES}
+#        ${LIBTAR_LIBRARY}
+#        OpenSSL::SSL
+#        OpenSSL::Crypto
+#        LibLZMA::LibLZMA
+#        ${LibArchive_LIBRARIES}
+#)
+#
+#
+#
+######################################## EDFREADER #######################################
+#
+#project(edfreader)
+#list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
+#find_package(Torch REQUIRED)
+##find_package(TorchExtension REQUIRED)
+#find_package(OpenCV REQUIRED)
+#find_package(LibLZMA REQUIRED)
+#find_package(LibArchive REQUIRED)
+#
+#set(CMAKE_CXX_STANDARD 17)
+#set(CMAKE_CXX_STANDARD_REQUIRED True)
+#
+#set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} ${MODEL_FILES} ${TRAINER_FILES} ${DATA_LOADER_FILES} ${TRANSFORM_FILES} ../third_party/edflib/edflib.c edfreader.cpp)
+#
+#add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
+#target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
+##
+#set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
+#
+#include_directories(/usr/include)
+#
+#target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
+#target_link_libraries(${PROJECT_NAME}
+#        ${CURL_LIBRARIES}
+#        ${TORCH_LIBRARIES}
+#        ${OpenCV_LIBS}
+#        ${ZLIB_LIBS}
+#        ${ZIP_LIBRARIES}
+#        zip
+#        ${ZLIB_LIBRARIES}
+#        ${LIBTAR_LIBRARY}
+#        OpenSSL::SSL
+#        OpenSSL::Crypto
+#        LibLZMA::LibLZMA
+#        ${LibArchive_LIBRARIES}
+#)
+#
+#
+######################################## EEGREADER #######################################
+#
+#project(eegreader)
+#list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
+#find_package(Torch REQUIRED)
+##find_package(xTorch REQUIRED)
+#find_package(OpenCV REQUIRED)
+#find_package(LibLZMA REQUIRED)
+#find_package(LibArchive REQUIRED)
+#
+#set(CMAKE_CXX_STANDARD 17)
+#set(CMAKE_CXX_STANDARD_REQUIRED True)
+#
+#set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} ${MODEL_FILES} ${TRAINER_FILES} ${DATA_LOADER_FILES} ${TRANSFORM_FILES} ../third_party/edflib/edflib.c eegreader.cpp)
+#
+#add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
+#target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
+##
+#set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
+#
+#include_directories(/usr/include)
+#
+#target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
+#target_link_libraries(${PROJECT_NAME}
+#        ${CURL_LIBRARIES}
+#        ${TORCH_LIBRARIES}
+#        ${OpenCV_LIBS}
+#        ${ZLIB_LIBS}
+#        ${ZIP_LIBRARIES}
+#        zip
+#        ${ZLIB_LIBRARIES}
+#        ${LIBTAR_LIBRARY}
+#        OpenSSL::SSL
+#        OpenSSL::Crypto
+#        LibLZMA::LibLZMA
+#        ${LibArchive_LIBRARIES}
+#)
+#
+#
+#
+######################################## CURLPRG #######################################
+#
+#project(curlprg)
+#list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
+#find_package(Torch REQUIRED)
+##find_package(xTorch REQUIRED)
+#find_package(OpenCV REQUIRED)
+#find_package(LibLZMA REQUIRED)
+#find_package(LibArchive REQUIRED)
+#
+#set(CMAKE_CXX_STANDARD 17)
+#set(CMAKE_CXX_STANDARD_REQUIRED True)
+#
+#set(TEST_SOURCE_FILES curlprg.cpp)
+#
+#add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
+#target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
+##
+#set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
+#
+#include_directories(/usr/include)
+#
+#target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
+#target_link_libraries(${PROJECT_NAME}
+#        ${CURL_LIBRARIES}
+#        ${TORCH_LIBRARIES}
+#        ${OpenCV_LIBS}
+#        ${ZLIB_LIBS}
+#        ${ZIP_LIBRARIES}
+#        zip
+#        ${ZLIB_LIBRARIES}
+#        ${LIBTAR_LIBRARY}
+#        OpenSSL::SSL
+#        OpenSSL::Crypto
+#        LibLZMA::LibLZMA
+#        ${LibArchive_LIBRARIES}
+#)
+#
+#
+#
+######################################## CURLPRG2 #######################################
+#
+#project(curlprg2)
+#list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
+#find_package(Torch REQUIRED)
+##find_package(xTorch REQUIRED)
+#find_package(OpenCV REQUIRED)
+#find_package(LibLZMA REQUIRED)
+#find_package(LibArchive REQUIRED)
+#
+#set(CMAKE_CXX_STANDARD 17)
+#set(CMAKE_CXX_STANDARD_REQUIRED True)
+#
+#set(TEST_SOURCE_FILES curlprg2.cpp)
+#
+#add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
+#target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
+##
+#set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
+#
+#include_directories(/usr/include)
+#
+#target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
+#target_link_libraries(${PROJECT_NAME}
+#        ${CURL_LIBRARIES}
+#        ${TORCH_LIBRARIES}
+#        ${OpenCV_LIBS}
+#        ${ZLIB_LIBS}
+#        ${ZIP_LIBRARIES}
+#        zip
+#        ${ZLIB_LIBRARIES}
+#        ${LIBTAR_LIBRARY}
+#        OpenSSL::SSL
+#        OpenSSL::Crypto
+#        LibLZMA::LibLZMA
+#        ${LibArchive_LIBRARIES}
+#)
+#
+#
+######################################## CURLPRG3 #######################################
+#
+#project(curlprg3)
+#list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
+#find_package(Torch REQUIRED)
+##find_package(xTorch REQUIRED)
+#find_package(OpenCV REQUIRED)
+#find_package(LibLZMA REQUIRED)
+#find_package(LibArchive REQUIRED)
+#
+#set(CMAKE_CXX_STANDARD 17)
+#set(CMAKE_CXX_STANDARD_REQUIRED True)
+#
+#set(TEST_SOURCE_FILES curlprg3.cpp)
+#
+#add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
+#target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
+##
+#set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
+#
+#include_directories(/usr/include)
+#
+#target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
+#target_link_libraries(${PROJECT_NAME}
+#        ${CURL_LIBRARIES}
+#        ${TORCH_LIBRARIES}
+#        ${OpenCV_LIBS}
+#        ${ZLIB_LIBS}
+#        ${ZIP_LIBRARIES}
+#        zip
+#        ${ZLIB_LIBRARIES}
+#        ${LIBTAR_LIBRARY}
+#        OpenSSL::SSL
+#        OpenSSL::Crypto
+#        LibLZMA::LibLZMA
+#        ${LibArchive_LIBRARIES}
+#)
+#
+######################################## CURLPRG4 #######################################
+#
+#project(curlprg4)
+#list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
+#find_package(Torch REQUIRED)
+##find_package(xTorch REQUIRED)
+#find_package(OpenCV REQUIRED)
+#find_package(LibLZMA REQUIRED)
+#find_package(LibArchive REQUIRED)
+#
+#set(CMAKE_CXX_STANDARD 17)
+#set(CMAKE_CXX_STANDARD_REQUIRED True)
+#
+#set(TEST_SOURCE_FILES curlprg4.cpp)
+#
+#add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
+#target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
+##
+#set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
+#
+#include_directories(/usr/include)
+#
+#target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
+#target_link_libraries(${PROJECT_NAME}
+#        ${CURL_LIBRARIES}
+#        ${TORCH_LIBRARIES}
+#        ${OpenCV_LIBS}
+#        ${ZLIB_LIBS}
+#        ${ZIP_LIBRARIES}
+#        zip
+#        ${ZLIB_LIBRARIES}
+#        ${LIBTAR_LIBRARY}
+#        OpenSSL::SSL
+#        OpenSSL::Crypto
+#        LibLZMA::LibLZMA
+#        ${LibArchive_LIBRARIES}
+#)
+#
+#
+######################################## CURLPRG5 #######################################
+#
+#project(curlprg5)
+#list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
+#find_package(Torch REQUIRED)
+##find_package(xTorch REQUIRED)
+#find_package(OpenCV REQUIRED)
+#find_package(LibLZMA REQUIRED)
+#find_package(LibArchive REQUIRED)
+#
+#set(CMAKE_CXX_STANDARD 17)
+#set(CMAKE_CXX_STANDARD_REQUIRED True)
+#
+#set(TEST_SOURCE_FILES curlprg5.cpp)
+#
+#add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
+#target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
+##
+#set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
+#
+#include_directories(/usr/include)
+#
+#target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
+#target_link_libraries(${PROJECT_NAME}
+#        ${CURL_LIBRARIES}
+#        ${TORCH_LIBRARIES}
+#        ${OpenCV_LIBS}
+#        ${ZLIB_LIBS}
+#        ${ZIP_LIBRARIES}
+#        zip
+#        ${ZLIB_LIBRARIES}
+#        ${LIBTAR_LIBRARY}
+#        OpenSSL::SSL
+#        OpenSSL::Crypto
+#        LibLZMA::LibLZMA
+#        ${LibArchive_LIBRARIES}
+#)
+#
+######################################## CURLPRG6 #######################################
+#
+#project(curlprg6)
+#list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
+#find_package(Torch REQUIRED)
+##find_package(xTorch REQUIRED)
+#find_package(OpenCV REQUIRED)
+#find_package(LibLZMA REQUIRED)
+#find_package(LibArchive REQUIRED)
+#
+#set(CMAKE_CXX_STANDARD 17)
+#set(CMAKE_CXX_STANDARD_REQUIRED True)
+#
+#set(TEST_SOURCE_FILES curlprg6.cpp)
+#
+#add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
+#target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
+##
+#set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
+#
+#include_directories(/usr/include)
+#
+#target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
+#target_link_libraries(${PROJECT_NAME}
+#        ${CURL_LIBRARIES}
+#        ${TORCH_LIBRARIES}
+#        ${OpenCV_LIBS}
+#        ${ZLIB_LIBS}
+#        ${ZIP_LIBRARIES}
+#        zip
+#        ${ZLIB_LIBRARIES}
+#        ${LIBTAR_LIBRARY}
+#        OpenSSL::SSL
+#        OpenSSL::Crypto
+#        LibLZMA::LibLZMA
+#        ${LibArchive_LIBRARIES}
+#)
+#
+#
+#
+######################################## CURLPRG7 #######################################
+#
+#project(curlprg7)
+#list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
+#find_package(Torch REQUIRED)
+##find_package(xTorch REQUIRED)
+#find_package(OpenCV REQUIRED)
+#find_package(LibLZMA REQUIRED)
+#find_package(LibArchive REQUIRED)
+#
+#set(CMAKE_CXX_STANDARD 17)
+#set(CMAKE_CXX_STANDARD_REQUIRED True)
+#
+#set(TEST_SOURCE_FILES curlprg7.cpp)
+#
+#add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
+#target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
+##
+#set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
+#
+#include_directories(/usr/include)
+#
+#target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
+#target_link_libraries(${PROJECT_NAME}
+#        ${CURL_LIBRARIES}
+#        ${TORCH_LIBRARIES}
+#        ${OpenCV_LIBS}
+#        ${ZLIB_LIBS}
+#        ${ZIP_LIBRARIES}
+#        zip
+#        ${ZLIB_LIBRARIES}
+#        ${LIBTAR_LIBRARY}
+#        OpenSSL::SSL
+#        OpenSSL::Crypto
+#        LibLZMA::LibLZMA
+#        ${LibArchive_LIBRARIES}
+#)
+#
+#
+######################################## CURLPRG8 #######################################
+#
+#project(curlprg8)
+#list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
+#find_package(Torch REQUIRED)
+##find_package(xTorch REQUIRED)
+#find_package(OpenCV REQUIRED)
+#find_package(LibLZMA REQUIRED)
+#find_package(LibArchive REQUIRED)
+#
+#set(CMAKE_CXX_STANDARD 17)
+#set(CMAKE_CXX_STANDARD_REQUIRED True)
+#
+#set(TEST_SOURCE_FILES curlprg8.cpp)
+#
+#add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
+#target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
+##
+#set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
+#
+#include_directories(/usr/include)
+#
+#target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
+#target_link_libraries(${PROJECT_NAME}
+#        ${CURL_LIBRARIES}
+#        ${TORCH_LIBRARIES}
+#        ${OpenCV_LIBS}
+#        ${ZLIB_LIBS}
+#        ${ZIP_LIBRARIES}
+#        zip
+#        ${ZLIB_LIBRARIES}
+#        ${LIBTAR_LIBRARY}
+#        OpenSSL::SSL
+#        OpenSSL::Crypto
+#        LibLZMA::LibLZMA
+#        ${LibArchive_LIBRARIES}
+#)
+#
+######################################## CURLPRG9 #######################################
+#
+#project(curlprg9)
+#list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
+#find_package(Torch REQUIRED)
+##find_package(xTorch REQUIRED)
+#find_package(OpenCV REQUIRED)
+#find_package(LibLZMA REQUIRED)
+#find_package(LibArchive REQUIRED)
+#
+#set(CMAKE_CXX_STANDARD 17)
+#set(CMAKE_CXX_STANDARD_REQUIRED True)
+#
+#set(TEST_SOURCE_FILES curlprg9.cpp)
+#
+#add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
+#target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
+##
+#set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
+#
+#include_directories(/usr/include)
+#
+#target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
+#target_link_libraries(${PROJECT_NAME}
+#        ${CURL_LIBRARIES}
+#        ${TORCH_LIBRARIES}
+#        ${OpenCV_LIBS}
+#        ${ZLIB_LIBS}
+#        ${ZIP_LIBRARIES}
+#        zip
+#        ${ZLIB_LIBRARIES}
+#        ${LIBTAR_LIBRARY}
+#        OpenSSL::SSL
+#        OpenSSL::Crypto
+#        LibLZMA::LibLZMA
+#        ${LibArchive_LIBRARIES}
+#)
+#
+#
+######################################## CURLPRG10 #######################################
+#
+#project(curlprg10)
+#list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
+#find_package(Torch REQUIRED)
+##find_package(xTorch REQUIRED)
+#find_package(OpenCV REQUIRED)
+#find_package(LibLZMA REQUIRED)
+#find_package(LibArchive REQUIRED)
+#
+#set(CMAKE_CXX_STANDARD 17)
+#set(CMAKE_CXX_STANDARD_REQUIRED True)
+#
+#set(TEST_SOURCE_FILES curlprg10.cpp)
+#
+#add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
+#target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
+##
+#set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
+#
+#include_directories(/usr/include)
+#
+#target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
+#target_link_libraries(${PROJECT_NAME}
+#        ${CURL_LIBRARIES}
+#        ${TORCH_LIBRARIES}
+#        ${OpenCV_LIBS}
+#        ${ZLIB_LIBS}
+#        ${ZIP_LIBRARIES}
+#        zip
+#        ${ZLIB_LIBRARIES}
+#        ${LIBTAR_LIBRARY}
+#        OpenSSL::SSL
+#        OpenSSL::Crypto
+#        LibLZMA::LibLZMA
+#        ${LibArchive_LIBRARIES}
+#)
+#
+#
+#
+######################################## LENET5PARAMETRIC #######################################
+#
+#project(lenet5parametric)
+#list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
+#find_package(Torch REQUIRED)
+##find_package(xTorch REQUIRED)
+#find_package(OpenCV REQUIRED)
+#find_package(LibLZMA REQUIRED)
+#find_package(LibArchive REQUIRED)
+#
+#set(CMAKE_CXX_STANDARD 17)
+#set(CMAKE_CXX_STANDARD_REQUIRED True)
+#
+#set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} ${DATASET_FILES} ${MODEL_FILES}  ${BASE_SOURCE_FILES}   lenet5parametric.cpp)
+#
+#add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
+#target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
+##
+#set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
+#
+#include_directories(/usr/include)
+#
+#target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
+#target_link_libraries(${PROJECT_NAME}
+#        ${CURL_LIBRARIES}
+#        ${TORCH_LIBRARIES}
+#        ${OpenCV_LIBS}
+#        ${ZLIB_LIBS}
+#        ${ZIP_LIBRARIES}
+#        zip
+#        ${ZLIB_LIBRARIES}
+#        ${LIBTAR_LIBRARY}
+#        OpenSSL::SSL
+#        OpenSSL::Crypto
+#        LibLZMA::LibLZMA
+#        ${LibArchive_LIBRARIES}
+#)
+#
 
-include_directories(/usr/include)
-
-target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
-target_link_libraries(${PROJECT_NAME}
-        ${CURL_LIBRARIES}
-        ${TORCH_LIBRARIES}
-        ${OpenCV_LIBS}
-        ${ZLIB_LIBS}
-        ${ZIP_LIBRARIES}
-        zip
-        ${ZLIB_LIBRARIES}
-        ${LIBTAR_LIBRARY}
-        OpenSSL::SSL
-        OpenSSL::Crypto
-        LibLZMA::LibLZMA
-        ${LibArchive_LIBRARIES}
-)
 
 
-####################################### EEGREADER #######################################
+######################################## VGGNETPARAMETRIC #######################################
+#
+#project(vggnetparametric)
+#list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
+#find_package(Torch REQUIRED)
+##find_package(xTorch REQUIRED)
+#find_package(OpenCV REQUIRED)
+#find_package(LibLZMA REQUIRED)
+#find_package(LibArchive REQUIRED)
+#
+#set(CMAKE_CXX_STANDARD 17)
+#set(CMAKE_CXX_STANDARD_REQUIRED True)
+#
+#set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} ${DATASET_FILES} ${MODEL_FILES}  ${BASE_SOURCE_FILES}   vggnetparametric.cpp)
+#
+#add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
+#target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
+##
+#set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
+#
+#include_directories(/usr/include)
+#
+#target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
+#target_link_libraries(${PROJECT_NAME}
+#        ${CURL_LIBRARIES}
+#        ${TORCH_LIBRARIES}
+#        ${OpenCV_LIBS}
+#        ${ZLIB_LIBS}
+#        ${ZIP_LIBRARIES}
+#        zip
+#        ${ZLIB_LIBRARIES}
+#        ${LIBTAR_LIBRARY}
+#        OpenSSL::SSL
+#        OpenSSL::Crypto
+#        LibLZMA::LibLZMA
+#        ${LibArchive_LIBRARIES}
+#)
+#
+#
+######################################## ALEXNETPARAMETRIC #######################################
+#
+#project(alexnetparametric)
+#list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
+#find_package(Torch REQUIRED)
+##find_package(xTorch REQUIRED)
+#find_package(OpenCV REQUIRED)
+#find_package(LibLZMA REQUIRED)
+#find_package(LibArchive REQUIRED)
+#
+#set(CMAKE_CXX_STANDARD 17)
+#set(CMAKE_CXX_STANDARD_REQUIRED True)
+#
+#set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} ${DATASET_FILES} ${MODEL_FILES}  ${BASE_SOURCE_FILES}   alexnetparametric.cpp)
+#
+#add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
+#target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
+##
+#set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
+#
+#include_directories(/usr/include)
+#
+#target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
+#target_link_libraries(${PROJECT_NAME}
+#        ${CURL_LIBRARIES}
+#        ${TORCH_LIBRARIES}
+#        ${OpenCV_LIBS}
+#        ${ZLIB_LIBS}
+#        ${ZIP_LIBRARIES}
+#        zip
+#        ${ZLIB_LIBRARIES}
+#        ${LIBTAR_LIBRARY}
+#        OpenSSL::SSL
+#        OpenSSL::Crypto
+#        LibLZMA::LibLZMA
+#        ${LibArchive_LIBRARIES}
+#)
+#
+#
+######################################## RESNETPARAMETRIC #######################################
+#
+#project(resnetparametric)
+#list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
+#find_package(Torch REQUIRED)
+##find_package(xTorch REQUIRED)
+#find_package(OpenCV REQUIRED)
+#find_package(LibLZMA REQUIRED)
+#find_package(LibArchive REQUIRED)
+#
+#set(CMAKE_CXX_STANDARD 17)
+#set(CMAKE_CXX_STANDARD_REQUIRED True)
+#
+#set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} ${DATASET_FILES} ${MODEL_FILES}  ${BASE_SOURCE_FILES}   resnetparametric.cpp)
+#
+#add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
+#target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
+##
+#set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
+#
+#include_directories(/usr/include)
+#
+#target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
+#target_link_libraries(${PROJECT_NAME}
+#        ${CURL_LIBRARIES}
+#        ${TORCH_LIBRARIES}
+#        ${OpenCV_LIBS}
+#        ${ZLIB_LIBS}
+#        ${ZIP_LIBRARIES}
+#        zip
+#        ${ZLIB_LIBRARIES}
+#        ${LIBTAR_LIBRARY}
+#        OpenSSL::SSL
+#        OpenSSL::Crypto
+#        LibLZMA::LibLZMA
+#        ${LibArchive_LIBRARIES}
+#)
 
-project(eegreader)
+
+
+####################################### CUSTOMDATALOADER #######################################
+
+project(cdl01)
 list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
 find_package(Torch REQUIRED)
 #find_package(xTorch REQUIRED)
@@ -874,556 +1463,7 @@ find_package(LibArchive REQUIRED)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} ${MODEL_FILES} ${TRAINER_FILES} ${DATA_LOADER_FILES} ${TRANSFORM_FILES} ../third_party/edflib/edflib.c eegreader.cpp)
-
-add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
-target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
-#
-set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
-
-include_directories(/usr/include)
-
-target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
-target_link_libraries(${PROJECT_NAME}
-        ${CURL_LIBRARIES}
-        ${TORCH_LIBRARIES}
-        ${OpenCV_LIBS}
-        ${ZLIB_LIBS}
-        ${ZIP_LIBRARIES}
-        zip
-        ${ZLIB_LIBRARIES}
-        ${LIBTAR_LIBRARY}
-        OpenSSL::SSL
-        OpenSSL::Crypto
-        LibLZMA::LibLZMA
-        ${LibArchive_LIBRARIES}
-)
-
-
-
-####################################### CURLPRG #######################################
-
-project(curlprg)
-list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
-find_package(Torch REQUIRED)
-#find_package(xTorch REQUIRED)
-find_package(OpenCV REQUIRED)
-find_package(LibLZMA REQUIRED)
-find_package(LibArchive REQUIRED)
-
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
-
-set(TEST_SOURCE_FILES curlprg.cpp)
-
-add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
-target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
-#
-set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
-
-include_directories(/usr/include)
-
-target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
-target_link_libraries(${PROJECT_NAME}
-        ${CURL_LIBRARIES}
-        ${TORCH_LIBRARIES}
-        ${OpenCV_LIBS}
-        ${ZLIB_LIBS}
-        ${ZIP_LIBRARIES}
-        zip
-        ${ZLIB_LIBRARIES}
-        ${LIBTAR_LIBRARY}
-        OpenSSL::SSL
-        OpenSSL::Crypto
-        LibLZMA::LibLZMA
-        ${LibArchive_LIBRARIES}
-)
-
-
-
-####################################### CURLPRG2 #######################################
-
-project(curlprg2)
-list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
-find_package(Torch REQUIRED)
-#find_package(xTorch REQUIRED)
-find_package(OpenCV REQUIRED)
-find_package(LibLZMA REQUIRED)
-find_package(LibArchive REQUIRED)
-
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
-
-set(TEST_SOURCE_FILES curlprg2.cpp)
-
-add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
-target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
-#
-set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
-
-include_directories(/usr/include)
-
-target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
-target_link_libraries(${PROJECT_NAME}
-        ${CURL_LIBRARIES}
-        ${TORCH_LIBRARIES}
-        ${OpenCV_LIBS}
-        ${ZLIB_LIBS}
-        ${ZIP_LIBRARIES}
-        zip
-        ${ZLIB_LIBRARIES}
-        ${LIBTAR_LIBRARY}
-        OpenSSL::SSL
-        OpenSSL::Crypto
-        LibLZMA::LibLZMA
-        ${LibArchive_LIBRARIES}
-)
-
-
-####################################### CURLPRG3 #######################################
-
-project(curlprg3)
-list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
-find_package(Torch REQUIRED)
-#find_package(xTorch REQUIRED)
-find_package(OpenCV REQUIRED)
-find_package(LibLZMA REQUIRED)
-find_package(LibArchive REQUIRED)
-
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
-
-set(TEST_SOURCE_FILES curlprg3.cpp)
-
-add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
-target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
-#
-set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
-
-include_directories(/usr/include)
-
-target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
-target_link_libraries(${PROJECT_NAME}
-        ${CURL_LIBRARIES}
-        ${TORCH_LIBRARIES}
-        ${OpenCV_LIBS}
-        ${ZLIB_LIBS}
-        ${ZIP_LIBRARIES}
-        zip
-        ${ZLIB_LIBRARIES}
-        ${LIBTAR_LIBRARY}
-        OpenSSL::SSL
-        OpenSSL::Crypto
-        LibLZMA::LibLZMA
-        ${LibArchive_LIBRARIES}
-)
-
-####################################### CURLPRG4 #######################################
-
-project(curlprg4)
-list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
-find_package(Torch REQUIRED)
-#find_package(xTorch REQUIRED)
-find_package(OpenCV REQUIRED)
-find_package(LibLZMA REQUIRED)
-find_package(LibArchive REQUIRED)
-
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
-
-set(TEST_SOURCE_FILES curlprg4.cpp)
-
-add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
-target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
-#
-set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
-
-include_directories(/usr/include)
-
-target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
-target_link_libraries(${PROJECT_NAME}
-        ${CURL_LIBRARIES}
-        ${TORCH_LIBRARIES}
-        ${OpenCV_LIBS}
-        ${ZLIB_LIBS}
-        ${ZIP_LIBRARIES}
-        zip
-        ${ZLIB_LIBRARIES}
-        ${LIBTAR_LIBRARY}
-        OpenSSL::SSL
-        OpenSSL::Crypto
-        LibLZMA::LibLZMA
-        ${LibArchive_LIBRARIES}
-)
-
-
-####################################### CURLPRG5 #######################################
-
-project(curlprg5)
-list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
-find_package(Torch REQUIRED)
-#find_package(xTorch REQUIRED)
-find_package(OpenCV REQUIRED)
-find_package(LibLZMA REQUIRED)
-find_package(LibArchive REQUIRED)
-
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
-
-set(TEST_SOURCE_FILES curlprg5.cpp)
-
-add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
-target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
-#
-set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
-
-include_directories(/usr/include)
-
-target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
-target_link_libraries(${PROJECT_NAME}
-        ${CURL_LIBRARIES}
-        ${TORCH_LIBRARIES}
-        ${OpenCV_LIBS}
-        ${ZLIB_LIBS}
-        ${ZIP_LIBRARIES}
-        zip
-        ${ZLIB_LIBRARIES}
-        ${LIBTAR_LIBRARY}
-        OpenSSL::SSL
-        OpenSSL::Crypto
-        LibLZMA::LibLZMA
-        ${LibArchive_LIBRARIES}
-)
-
-####################################### CURLPRG6 #######################################
-
-project(curlprg6)
-list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
-find_package(Torch REQUIRED)
-#find_package(xTorch REQUIRED)
-find_package(OpenCV REQUIRED)
-find_package(LibLZMA REQUIRED)
-find_package(LibArchive REQUIRED)
-
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
-
-set(TEST_SOURCE_FILES curlprg6.cpp)
-
-add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
-target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
-#
-set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
-
-include_directories(/usr/include)
-
-target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
-target_link_libraries(${PROJECT_NAME}
-        ${CURL_LIBRARIES}
-        ${TORCH_LIBRARIES}
-        ${OpenCV_LIBS}
-        ${ZLIB_LIBS}
-        ${ZIP_LIBRARIES}
-        zip
-        ${ZLIB_LIBRARIES}
-        ${LIBTAR_LIBRARY}
-        OpenSSL::SSL
-        OpenSSL::Crypto
-        LibLZMA::LibLZMA
-        ${LibArchive_LIBRARIES}
-)
-
-
-
-####################################### CURLPRG7 #######################################
-
-project(curlprg7)
-list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
-find_package(Torch REQUIRED)
-#find_package(xTorch REQUIRED)
-find_package(OpenCV REQUIRED)
-find_package(LibLZMA REQUIRED)
-find_package(LibArchive REQUIRED)
-
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
-
-set(TEST_SOURCE_FILES curlprg7.cpp)
-
-add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
-target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
-#
-set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
-
-include_directories(/usr/include)
-
-target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
-target_link_libraries(${PROJECT_NAME}
-        ${CURL_LIBRARIES}
-        ${TORCH_LIBRARIES}
-        ${OpenCV_LIBS}
-        ${ZLIB_LIBS}
-        ${ZIP_LIBRARIES}
-        zip
-        ${ZLIB_LIBRARIES}
-        ${LIBTAR_LIBRARY}
-        OpenSSL::SSL
-        OpenSSL::Crypto
-        LibLZMA::LibLZMA
-        ${LibArchive_LIBRARIES}
-)
-
-
-####################################### CURLPRG8 #######################################
-
-project(curlprg8)
-list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
-find_package(Torch REQUIRED)
-#find_package(xTorch REQUIRED)
-find_package(OpenCV REQUIRED)
-find_package(LibLZMA REQUIRED)
-find_package(LibArchive REQUIRED)
-
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
-
-set(TEST_SOURCE_FILES curlprg8.cpp)
-
-add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
-target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
-#
-set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
-
-include_directories(/usr/include)
-
-target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
-target_link_libraries(${PROJECT_NAME}
-        ${CURL_LIBRARIES}
-        ${TORCH_LIBRARIES}
-        ${OpenCV_LIBS}
-        ${ZLIB_LIBS}
-        ${ZIP_LIBRARIES}
-        zip
-        ${ZLIB_LIBRARIES}
-        ${LIBTAR_LIBRARY}
-        OpenSSL::SSL
-        OpenSSL::Crypto
-        LibLZMA::LibLZMA
-        ${LibArchive_LIBRARIES}
-)
-
-####################################### CURLPRG9 #######################################
-
-project(curlprg9)
-list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
-find_package(Torch REQUIRED)
-#find_package(xTorch REQUIRED)
-find_package(OpenCV REQUIRED)
-find_package(LibLZMA REQUIRED)
-find_package(LibArchive REQUIRED)
-
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
-
-set(TEST_SOURCE_FILES curlprg9.cpp)
-
-add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
-target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
-#
-set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
-
-include_directories(/usr/include)
-
-target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
-target_link_libraries(${PROJECT_NAME}
-        ${CURL_LIBRARIES}
-        ${TORCH_LIBRARIES}
-        ${OpenCV_LIBS}
-        ${ZLIB_LIBS}
-        ${ZIP_LIBRARIES}
-        zip
-        ${ZLIB_LIBRARIES}
-        ${LIBTAR_LIBRARY}
-        OpenSSL::SSL
-        OpenSSL::Crypto
-        LibLZMA::LibLZMA
-        ${LibArchive_LIBRARIES}
-)
-
-
-####################################### CURLPRG10 #######################################
-
-project(curlprg10)
-list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
-find_package(Torch REQUIRED)
-#find_package(xTorch REQUIRED)
-find_package(OpenCV REQUIRED)
-find_package(LibLZMA REQUIRED)
-find_package(LibArchive REQUIRED)
-
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
-
-set(TEST_SOURCE_FILES curlprg10.cpp)
-
-add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
-target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
-#
-set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
-
-include_directories(/usr/include)
-
-target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
-target_link_libraries(${PROJECT_NAME}
-        ${CURL_LIBRARIES}
-        ${TORCH_LIBRARIES}
-        ${OpenCV_LIBS}
-        ${ZLIB_LIBS}
-        ${ZIP_LIBRARIES}
-        zip
-        ${ZLIB_LIBRARIES}
-        ${LIBTAR_LIBRARY}
-        OpenSSL::SSL
-        OpenSSL::Crypto
-        LibLZMA::LibLZMA
-        ${LibArchive_LIBRARIES}
-)
-
-
-
-####################################### LENET5PARAMETRIC #######################################
-
-project(lenet5parametric)
-list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
-find_package(Torch REQUIRED)
-#find_package(xTorch REQUIRED)
-find_package(OpenCV REQUIRED)
-find_package(LibLZMA REQUIRED)
-find_package(LibArchive REQUIRED)
-
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
-
-set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} ${DATASET_FILES} ${MODEL_FILES}  ${BASE_SOURCE_FILES}   lenet5parametric.cpp)
-
-add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
-target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
-#
-set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
-
-include_directories(/usr/include)
-
-target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
-target_link_libraries(${PROJECT_NAME}
-        ${CURL_LIBRARIES}
-        ${TORCH_LIBRARIES}
-        ${OpenCV_LIBS}
-        ${ZLIB_LIBS}
-        ${ZIP_LIBRARIES}
-        zip
-        ${ZLIB_LIBRARIES}
-        ${LIBTAR_LIBRARY}
-        OpenSSL::SSL
-        OpenSSL::Crypto
-        LibLZMA::LibLZMA
-        ${LibArchive_LIBRARIES}
-)
-
-
-
-
-####################################### VGGNETPARAMETRIC #######################################
-
-project(vggnetparametric)
-list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
-find_package(Torch REQUIRED)
-#find_package(xTorch REQUIRED)
-find_package(OpenCV REQUIRED)
-find_package(LibLZMA REQUIRED)
-find_package(LibArchive REQUIRED)
-
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
-
-set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} ${DATASET_FILES} ${MODEL_FILES}  ${BASE_SOURCE_FILES}   vggnetparametric.cpp)
-
-add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
-target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
-#
-set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
-
-include_directories(/usr/include)
-
-target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
-target_link_libraries(${PROJECT_NAME}
-        ${CURL_LIBRARIES}
-        ${TORCH_LIBRARIES}
-        ${OpenCV_LIBS}
-        ${ZLIB_LIBS}
-        ${ZIP_LIBRARIES}
-        zip
-        ${ZLIB_LIBRARIES}
-        ${LIBTAR_LIBRARY}
-        OpenSSL::SSL
-        OpenSSL::Crypto
-        LibLZMA::LibLZMA
-        ${LibArchive_LIBRARIES}
-)
-
-
-####################################### ALEXNETPARAMETRIC #######################################
-
-project(alexnetparametric)
-list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
-find_package(Torch REQUIRED)
-#find_package(xTorch REQUIRED)
-find_package(OpenCV REQUIRED)
-find_package(LibLZMA REQUIRED)
-find_package(LibArchive REQUIRED)
-
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
-
-set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} ${DATASET_FILES} ${MODEL_FILES}  ${BASE_SOURCE_FILES}   alexnetparametric.cpp)
-
-add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
-target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
-#
-set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
-
-include_directories(/usr/include)
-
-target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
-target_link_libraries(${PROJECT_NAME}
-        ${CURL_LIBRARIES}
-        ${TORCH_LIBRARIES}
-        ${OpenCV_LIBS}
-        ${ZLIB_LIBS}
-        ${ZIP_LIBRARIES}
-        zip
-        ${ZLIB_LIBRARIES}
-        ${LIBTAR_LIBRARY}
-        OpenSSL::SSL
-        OpenSSL::Crypto
-        LibLZMA::LibLZMA
-        ${LibArchive_LIBRARIES}
-)
-
-
-####################################### RESNETPARAMETRIC #######################################
-
-project(resnetparametric)
-list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
-find_package(Torch REQUIRED)
-#find_package(xTorch REQUIRED)
-find_package(OpenCV REQUIRED)
-find_package(LibLZMA REQUIRED)
-find_package(LibArchive REQUIRED)
-
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
-
-set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} ${DATASET_FILES} ${MODEL_FILES}  ${BASE_SOURCE_FILES}   resnetparametric.cpp)
+set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} ${DATASET_FILES} ${MODEL_FILES}  ${BASE_SOURCE_FILES}   01/cdl-01.cpp)
 
 add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
 target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
