@@ -109,7 +109,7 @@ DataLoaderIterator DataLoader::end() {
 // Main function demonstrating usage with MNIST dataset
 int main() {
     // Load the MNIST training dataset
-    auto mnist_dataset = torch::data::datasets::MNIST("/home/kami/Documents/datasets/");
+    auto mnist_dataset = torch::data::datasets::MNIST("/home/kami/Documents/datasets/MNIST/raw/");
 
     // Collect data into a vector of pairs (image tensor, label tensor)
     std::vector<std::pair<torch::Tensor, torch::Tensor>> data;
