@@ -115,11 +115,11 @@ int main() {
     DataLoader loader(dataset, 4, true);
 
     // Iterate over batches
-    for (auto& batch : loader) {
+    for (const auto& batch : loader) {
         torch::Tensor inputs = batch.inputs;
         torch::Tensor targets = batch.targets;
-        std::cout << "Inputs:\n" << inputs << "\n";
-        std::cout << "Targets:\n" << targets << "\n\n";
+        std::cout << "Inputs:\n" << inputs.sizes() << "\n";
+        std::cout << "Targets:\n" << targets.sizes() << "\n\n";
     }
 
     return 0;
