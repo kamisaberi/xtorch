@@ -30,7 +30,7 @@ struct CustomNet : torch::nn::Cloneable<CustomNet> {
     torch::nn::Linear fc1{nullptr}, fc2{nullptr};
 };
 
-// DataParallel class for multi-device training (supports CPU and GPUs)
+// DataParallel class for multi-device training
 class DataParallel {
 public:
     // Constructor
@@ -40,12 +40,6 @@ public:
         : base_model_(model),
           devices_(devices),
           batch_size_(batch_size) {
-        if (devices_.empty()) {
-            throw std::runtime_error("No devices specified for DataParallel");
-        }
-        if (batch_size_ % devices_.size() != 0) {
-            throw std::runtime_error("Batch size must be divisible by number of devices");
-        }
         initialize();
     }
 
@@ -60,7 +54,6 @@ public:
             // Distribute data across devices
             auto data_thread = std::thread([&]() {
                 for (auto& batch : dataloader) {
-                    // Move data to the first device (e.g., cuda:0)
                     auto data = batch.data.to(devices_[0]);
                     auto target = batch.target.to(devices_[0]);
                     {
@@ -123,12 +116,8 @@ public:
                 thread.join();
             }
 
-            // Synchronize CUDA devices if any are used
-            for (const auto& device : devices_) {
-                if (device.is_cuda()) {
-                    torch::cuda::synchronize();
-                    break; // Synchronize once if any CUDA device is used
-                }
+            if (devices_[0].is_cuda()) {
+                torch::cuda::synchronize();
             }
             std::cout << "Epoch " << epoch + 1 << " completed\n";
         }
@@ -199,21 +188,21 @@ int main() {
     // Define custom model
     auto model = std::make_shared<CustomNet>();
 
-    // Define devices (2 GPUs + 1 CPU)
+    // Define devices (e.g., 2 GPUs)
     std::vector<torch::Device> devices = {
-        torch::Device(torch::kCUDA, 0), // GPU 0
-        torch::Device(torch::kCUDA, 1), // GPU 1
-        torch::Device(torch::kCPU)      // CPU
+        torch::Device(torch::kCUDA, 0),
+        torch::Device(torch::kCUDA, 1),
+        torch::Device(torch::kCPU)
     };
 
-    // Create DataParallel (batch size must be divisible by 3)
-    DataParallel dp(model, devices, 60); // Use 60 to ensure divisibility (60 / 3 = 20)
+    // Create DataParallel
+    DataParallel dp(model, devices, 64);
 
     // Create dataset and dataloader
     auto dataset = torch::data::datasets::MNIST("/home/kami/Documents/datasets/MNIST/raw/")
         .map(torch::data::transforms::Normalize<>(0.5, 0.5))
         .map(torch::data::transforms::Stack<>());
-    auto dataloader = torch::data::make_data_loader(dataset, torch::data::DataLoaderOptions().batch_size(60));
+    auto dataloader = torch::data::make_data_loader(dataset, torch::data::DataLoaderOptions().batch_size(64));
 
     // Create optimizer
     torch::optim::SGD optimizer(model->parameters(), torch::optim::SGDOptions(0.01));
