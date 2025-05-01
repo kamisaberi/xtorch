@@ -5,6 +5,7 @@
 #include <queue>
 #include <memory>
 #include <iostream>
+#include <chrono>
 
 // Custom neural network module inheriting from torch::nn::Cloneable
 struct CustomNet : torch::nn::Cloneable<CustomNet> {
@@ -191,8 +192,7 @@ int main() {
     // Define devices (e.g., 2 GPUs)
     std::vector<torch::Device> devices = {
         torch::Device(torch::kCUDA, 0),
-        torch::Device(torch::kCUDA, 1),
-        torch::Device(torch::kCPU)
+        torch::Device(torch::kCUDA, 1)
     };
 
     // Create DataParallel
@@ -206,9 +206,12 @@ int main() {
 
     // Create optimizer
     torch::optim::SGD optimizer(model->parameters(), torch::optim::SGDOptions(0.01));
-
+    auto start = std::chrono::high_resolution_clock::now();
     // Train
     dp.train(*dataloader, optimizer, 50);
+    auto end = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
+    std::cout << duration << " s\n";
 
     return 0;
 }
