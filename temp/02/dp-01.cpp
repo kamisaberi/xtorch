@@ -1,15 +1,35 @@
-#pragma once
-
 #include <torch/torch.h>
 #include <vector>
 #include <thread>
 #include <mutex>
 #include <queue>
+#include <memory>
+#include <iostream>
 
+// Custom neural network module inheriting from torch::nn::Module
+struct CustomNet : torch::nn::Module {
+    CustomNet() {
+        // Register submodules
+        fc1 = register_module("fc1", torch::nn::Linear(torch::nn::LinearOptions(784, 256).bias(true)));
+        fc2 = register_module("fc2", torch::nn::Linear(torch::nn::LinearOptions(256, 10).bias(true)));
+    }
+
+    // Forward pass
+    torch::Tensor forward(torch::Tensor x) {
+        x = torch::relu(fc1->forward(x));
+        x = fc2->forward(x);
+        return x;
+    }
+
+    // Submodules
+    torch::nn::Linear fc1{nullptr}, fc2{nullptr};
+};
+
+// DataParallel class for multi-device training
 class DataParallel {
 public:
     // Constructor
-    DataParallel(torch::nn::Module& model,
+    DataParallel(std::shared_ptr<torch::nn::Module> model,
                  const std::vector<torch::Device>& devices,
                  size_t batch_size)
         : base_model_(model),
@@ -65,8 +85,8 @@ public:
                         auto mini_data = data.narrow(0, start_idx, mini_batch_size).to(devices_[i]);
                         auto mini_target = target.narrow(0, start_idx, mini_batch_size).to(devices_[i]);
 
-                        // Forward pass
-                        auto output = model->forward(mini_data);
+                        // Forward pass using CustomNet
+                        auto output = model->as<CustomNet>()->forward(mini_data);
                         auto loss = torch::nn::functional::cross_entropy(output, mini_target);
 
                         // Backward pass
@@ -91,6 +111,9 @@ public:
                 thread.join();
             }
 
+            if (devices_[0].is_cuda()) {
+                torch::cuda::synchronize();
+            }
             std::cout << "Epoch " << epoch + 1 << " completed\n";
         }
     }
@@ -99,7 +122,8 @@ private:
     void initialize() {
         // Replicate model to all devices
         for (const auto& device : devices_) {
-            auto model = std::make_shared<torch::nn::Module>(base_model_.clone());
+            // Clone the model (requires Cloneable implementation)
+            auto model = base_model_->clone();
             model->to(device);
             models_.push_back(model);
         }
@@ -110,13 +134,19 @@ private:
         if (device_idx == 0) {
             // Aggregate gradients from all devices
             for (size_t i = 1; i < models_.size(); ++i) {
-                for (auto& param : models_[i]->parameters()) {
-                    if (param.grad().defined()) {
-                        auto main_param = models_[0]->parameters()[param.name()];
-                        if (main_param.grad().defined()) {
-                            main_param.grad() += param.grad().to(devices_[0]);
+                auto params_i = models_[i]->parameters();
+                auto params_0 = models_[0]->parameters();
+                for (size_t j = 0; j < params_i.size(); ++j) {
+                    if (params_i[j].grad().defined()) {
+                        auto grad = params_i[j].grad().to(devices_[0]).contiguous();
+                        if (params_0[j].grad().defined()) {
+                            // Create a new gradient tensor and assign it
+                            auto new_grad = params_0[j].grad().clone().to(devices_[0]).contiguous();
+                            new_grad += grad; // Out-of-place addition
+                            params_0[j].mutable_grad() = new_grad; // Safe assignment
                         } else {
-                            main_param.grad() = param.grad().to(devices_[0]);
+                            // Initialize gradient
+                            params_0[j].mutable_grad() = grad.clone();
                         }
                     }
                 }
@@ -126,36 +156,37 @@ private:
 
     void broadcast_parameters() {
         // Copy parameters from main model to all other models
+        auto params_0 = models_[0]->parameters();
         for (size_t i = 1; i < models_.size(); ++i) {
-            for (auto& param : models_[i]->parameters()) {
-                auto main_param = models_[0]->parameters()[param.name()];
-                param.copy_(main_param.to(devices_[i]));
+            auto params_i = models_[i]->parameters();
+            for (size_t j = 0; j < params_i.size(); ++j) {
+                params_i[j].copy_(params_0[j].to(devices_[i]));
             }
         }
     }
 
-    torch::nn::Module& base_model_;
+    std::shared_ptr<torch::nn::Module> base_model_;
     std::vector<torch::Device> devices_;
     std::vector<std::shared_ptr<torch::nn::Module>> models_;
     size_t batch_size_;
     std::mutex grad_mutex_;
 };
 
-// Example usage:
-/*
+// Main program
 int main() {
-    // Define model
-    auto model = torch::nn::Sequential(
-        torch::nn::Linear(784, 256),
-        torch::nn::ReLU(),
-        torch::nn::Linear(256, 10)
-    );
+    // Ensure CUDA is available
+    if (!torch::cuda::is_available()) {
+        std::cerr << "CUDA is not available. Exiting." << std::endl;
+        return 1;
+    }
 
-    // Define devices (2 GPUs + 2 CPUs)
+    // Define custom model
+    auto model = std::make_shared<CustomNet>();
+
+    // Define devices (e.g., 2 GPUs)
     std::vector<torch::Device> devices = {
         torch::Device(torch::kCUDA, 0),
         torch::Device(torch::kCUDA, 1),
-        torch::Device(torch::kCPU),
         torch::Device(torch::kCPU)
     };
 
@@ -166,14 +197,13 @@ int main() {
     auto dataset = torch::data::datasets::MNIST("./data")
         .map(torch::data::transforms::Normalize<>(0.5, 0.5))
         .map(torch::data::transforms::Stack<>());
-    auto dataloader = torch::data::make_data_loader(dataset, 64);
+    auto dataloader = torch::data::make_data_loader(dataset, torch::data::DataLoaderOptions().batch_size(64));
 
     // Create optimizer
     torch::optim::SGD optimizer(model->parameters(), torch::optim::SGDOptions(0.01));
 
     // Train
-    dp.train(*dataloader, optimizer, 10);
+    dp.train(*dataloader, optimizer, 5);
 
     return 0;
 }
-*/
