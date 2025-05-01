@@ -210,7 +210,7 @@ int main() {
     DataParallel dp(model, devices, 60); // Use 60 to ensure divisibility (60 / 3 = 20)
 
     // Create dataset and dataloader
-    auto dataset = torch::data::datasets::MNIST("./data")
+    auto dataset = torch::data::datasets::MNIST("/home/kami/Documents/datasets/MNIST/raw/")
         .map(torch::data::transforms::Normalize<>(0.5, 0.5))
         .map(torch::data::transforms::Stack<>());
     auto dataloader = torch::data::make_data_loader(dataset, torch::data::DataLoaderOptions().batch_size(60));
