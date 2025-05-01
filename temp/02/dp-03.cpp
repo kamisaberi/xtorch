@@ -50,47 +50,49 @@ public:
         auto start_time = std::chrono::high_resolution_clock::now();
 
         for (size_t epoch = 0; epoch < epochs; ++epoch) {
-            std::vector<std::thread> training_threads;
             std::vector<std::queue<std::tuple<torch::Tensor, torch::Tensor>>> batch_queues(devices_.size());
             std::vector<std::mutex> queue_mutexes(devices_.size());
             std::vector<size_t> batch_counts(devices_.size(), 0);
+            std::atomic<bool> data_loading_done{false};
 
-            // Data distribution thread for each device
-            std::vector<std::thread> data_threads;
-            for (size_t i = 0; i < devices_.size(); ++i) {
-                data_threads.emplace_back([&, i]() {
-                    size_t batch_idx = 0;
-                    for (auto& batch : dataloader) {
-                        if (batch_idx % devices_.size() == i) { // Distribute batches round-robin
-                            auto data = batch.data.to(devices_[i], /*non_blocking=*/true);
-                            auto target = batch.target.to(devices_[i], /*non_blocking=*/true);
-                            {
-                                std::lock_guard<std::mutex> lock(queue_mutexes[i]);
-                                batch_queues[i].push(std::make_tuple(data, target));
-                                batch_counts[i]++;
-                            }
-                        }
-                        batch_idx++;
+            // Single data distribution thread
+            std::thread data_thread([&]() {
+                size_t device_idx = 0;
+                for (auto& batch : dataloader) {
+                    // Move data to the target device asynchronously
+                    auto data = batch.data.to(devices_[device_idx], /*non_blocking=*/true);
+                    auto target = batch.target.to(devices_[device_idx], /*non_blocking=*/true);
+                    {
+                        std::lock_guard<std::mutex> lock(queue_mutexes[device_idx]);
+                        batch_queues[device_idx].push(std::make_tuple(data, target));
+                        batch_counts[device_idx]++;
                     }
-                });
-            }
+                    device_idx = (device_idx + 1) % devices_.size(); // Round-robin
+                }
+                data_loading_done = true;
+            });
 
             // Training threads for each device
+            std::vector<std::thread> training_threads;
             for (size_t i = 0; i < devices_.size(); ++i) {
                 training_threads.emplace_back([&, i]() {
                     auto model = models_[i];
                     model->train();
                     while (true) {
                         torch::Tensor data, target;
+                        bool has_data = false;
                         {
                             std::lock_guard<std::mutex> lock(queue_mutexes[i]);
-                            if (batch_queues[i].empty()) {
-                                if (batch_counts[i] == 0) break;
-                                continue;
+                            if (!batch_queues[i].empty()) {
+                                std::tie(data, target) = batch_queues[i].front();
+                                batch_queues[i].pop();
+                                batch_counts[i]--;
+                                has_data = true;
                             }
-                            std::tie(data, target) = batch_queues[i].front();
-                            batch_queues[i].pop();
-                            batch_counts[i]--;
+                        }
+                        if (!has_data) {
+                            if (data_loading_done && batch_counts[i] == 0) break;
+                            continue;
                         }
 
                         // Forward pass
@@ -107,11 +109,9 @@ public:
                 });
             }
 
-            // Update parameters in main thread after all threads complete
+            // Join threads
+            data_thread.join();
             for (auto& thread : training_threads) {
-                thread.join();
-            }
-            for (auto& thread : data_threads) {
                 thread.join();
             }
 
@@ -197,23 +197,19 @@ int main() {
     };
 
     // Create DataParallel (batch size divisible by 2)
-    DataParallel dp(model, devices, 128); // Larger batch size for better GPU utilization
+    DataParallel dp(model, devices, 128);
 
     // Create dataset and dataloader
-    auto dataset = torch::data::datasets::MNIST("/home/kami/Documents/datasets/MNIST/raw/")
+    auto dataset = torch::data::datasets::MNIST("./data")
         .map(torch::data::transforms::Normalize<>(0.5, 0.5))
         .map(torch::data::transforms::Stack<>());
     auto dataloader = torch::data::make_data_loader(dataset, torch::data::DataLoaderOptions().batch_size(128).workers(4));
 
     // Create optimizer
     torch::optim::SGD optimizer(model->parameters(), torch::optim::SGDOptions(0.01));
-    auto start = std::chrono::high_resolution_clock::now();
-    // Train
-    dp.train(*dataloader, optimizer, 50);
-    auto end = std::chrono::high_resolution_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
-    std::cout << duration << " s\n";
 
+    // Train
+    dp.train(*dataloader, optimizer, 5);
 
     return 0;
 }
