@@ -174,25 +174,27 @@ private:
 
 // Main program
 int main() {
+    std::cout << "1\n";
     // Ensure CUDA is available
     if (!torch::cuda::is_available()) {
         std::cerr << "CUDA is not available. Exiting." << std::endl;
         return 1;
     }
-
+    std::cout << "2\n";
     // Define custom model
     auto model = std::make_shared<CustomNet>();
-
+    std::cout << "3\n";
     // Define devices (e.g., 2 GPUs)
     std::vector<torch::Device> devices = {
         torch::Device(torch::kCUDA, 0),
         torch::Device(torch::kCUDA, 1),
         torch::Device(torch::kCPU)
     };
+    std::cout << "4\n";
 
     // Create DataParallel
     DataParallel dp(model, devices, 64);
-
+    std::cout << "5\n";
     // Create dataset and dataloader
     auto dataset = torch::data::datasets::MNIST("/home/kami/Documents/datasets/MNIST/raw/")
         .map(torch::data::transforms::Normalize<>(0.5, 0.5))
