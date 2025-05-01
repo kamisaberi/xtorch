@@ -200,16 +200,20 @@ int main() {
     DataParallel dp(model, devices, 128);
 
     // Create dataset and dataloader
-    auto dataset = torch::data::datasets::MNIST("./data")
+    auto dataset = torch::data::datasets::MNIST("/home/kami/Documents/datasets/MNIST/raw/")
         .map(torch::data::transforms::Normalize<>(0.5, 0.5))
         .map(torch::data::transforms::Stack<>());
     auto dataloader = torch::data::make_data_loader(dataset, torch::data::DataLoaderOptions().batch_size(128).workers(4));
 
     // Create optimizer
     torch::optim::SGD optimizer(model->parameters(), torch::optim::SGDOptions(0.01));
-
+    auto start = std::chrono::high_resolution_clock::now();
     // Train
-    dp.train(*dataloader, optimizer, 5);
+    dp.train(*dataloader, optimizer, 50);
+    auto end = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
+    std::cout << duration << " s\n";
+
 
     return 0;
 }
