@@ -191,8 +191,6 @@ int main() {
     // Define devices (e.g., 2 GPUs)
     std::vector<torch::Device> devices = {
         torch::Device(torch::kCUDA, 0),
-        torch::Device(torch::kCUDA, 1),
-        torch::Device(torch::kCPU)
     };
 
     // Create DataParallel
