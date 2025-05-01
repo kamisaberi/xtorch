@@ -4,7 +4,7 @@
 class DataLoaderIterator;
 
 // Main DataLoader class
-DataLoader::DataLoader(const std::vector<std::pair<torch::Tensor, torch::Tensor>>& dataset,
+CustomDataLoader::CustomDataLoader(const std::vector<std::pair<torch::Tensor, torch::Tensor>>& dataset,
                        int batch_size,
                        bool shuffle = false,
                        int num_workers = 0)
@@ -36,13 +36,13 @@ DataLoader::DataLoader(const std::vector<std::pair<torch::Tensor, torch::Tensor>
     {
         for (int i = 0; i < num_workers_; ++i)
         {
-            workers_.emplace_back(&DataLoader::worker_thread, this);
+            workers_.emplace_back(&CustomDataLoader::worker_thread, this);
         }
     }
 }
 
 // Destructor: stop workers and join threads
-DataLoader::~DataLoader()
+CustomDataLoader::~CustomDataLoader()
 {
     {
         std::lock_guard<std::mutex> lock(queue_mutex_);
@@ -64,7 +64,7 @@ DataLoaderIterator end();
 
 
 // Worker thread function to pre-fetch batches
-void DataLoader::worker_thread()
+void CustomDataLoader::worker_thread()
 {
     while (true)
     {
@@ -106,7 +106,7 @@ void DataLoader::worker_thread()
 }
 
 // Get the next batch (used by iterator)
-Batch DataLoader::get_next_batch()
+Batch CustomDataLoader::get_next_batch()
 {
     if (num_workers_ == 0)
     {
@@ -147,7 +147,7 @@ Batch DataLoader::get_next_batch()
 }
 
 
-DataLoaderIterator::DataLoaderIterator(DataLoader* loader, size_t batch_idx)
+DataLoaderIterator::DataLoaderIterator(CustomDataLoader* loader, size_t batch_idx)
     : loader_(loader), batch_idx_(batch_idx)
 {
     // Pre-fetch the first batch
@@ -182,12 +182,12 @@ bool DataLoaderIterator::operator!=(const DataLoaderIterator& other) const
 
 
 // Implementation of begin() and end() methods
-DataLoaderIterator DataLoader::begin()
+DataLoaderIterator CustomDataLoader::begin()
 {
     return DataLoaderIterator(this, 0);
 }
 
-DataLoaderIterator DataLoader::end()
+DataLoaderIterator CustomDataLoader::end()
 {
     return DataLoaderIterator(this, num_batches_);
 }
