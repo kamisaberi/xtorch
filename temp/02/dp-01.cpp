@@ -191,7 +191,8 @@ int main() {
     // Define devices (e.g., 2 GPUs)
     std::vector<torch::Device> devices = {
         torch::Device(torch::kCUDA, 0),
-        torch::Device(torch::kCUDA, 1)
+        torch::Device(torch::kCUDA, 1),
+        torch::Device(torch::kCPU)
     };
 
     // Create DataParallel
@@ -207,7 +208,7 @@ int main() {
     torch::optim::SGD optimizer(model->parameters(), torch::optim::SGDOptions(0.01));
 
     // Train
-    dp.train(*dataloader, optimizer, 5);
+    dp.train(*dataloader, optimizer, 50);
 
     return 0;
 }
