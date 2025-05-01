@@ -22,17 +22,17 @@ struct Batch
 class DataLoaderIterator;
 
 // Main DataLoader class
-class DataLoader
+class CustomDataLoader
 {
 public:
     // Constructor: takes a dataset, batch size, shuffle flag, and number of workers
-    DataLoader(const std::vector<std::pair<torch::Tensor, torch::Tensor>>& dataset,
+    CustomDataLoader(const std::vector<std::pair<torch::Tensor, torch::Tensor>>& dataset,
                int batch_size,
                bool shuffle = false,
                int num_workers = 0);
 
     // Destructor: stop workers and join threads
-    ~DataLoader();
+    ~CustomDataLoader();
 
     DataLoaderIterator begin();
     DataLoaderIterator end();
@@ -61,7 +61,7 @@ private:
 class DataLoaderIterator
 {
 public:
-    DataLoaderIterator(DataLoader* loader, size_t batch_idx);
+    DataLoaderIterator(CustomDataLoader* loader, size_t batch_idx);
 
     Batch operator*() const;
 
@@ -70,7 +70,7 @@ public:
     bool operator!=(const DataLoaderIterator& other) const;
 
 private:
-    DataLoader* loader_;
+    CustomDataLoader* loader_;
     size_t batch_idx_;
     Batch current_batch_;
 };
