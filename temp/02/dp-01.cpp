@@ -6,10 +6,15 @@
 #include <memory>
 #include <iostream>
 
-// Custom neural network module inheriting from torch::nn::Module
-struct CustomNet : torch::nn::Module {
+// Custom neural network module inheriting from torch::nn::Cloneable
+struct CustomNet : torch::nn::Cloneable<CustomNet> {
     CustomNet() {
-        // Register submodules
+        // Initialize submodules in reset()
+        reset();
+    }
+
+    // Implement reset() to initialize submodules
+    void reset() override {
         fc1 = register_module("fc1", torch::nn::Linear(torch::nn::LinearOptions(784, 256).bias(true)));
         fc2 = register_module("fc2", torch::nn::Linear(torch::nn::LinearOptions(256, 10).bias(true)));
     }
@@ -122,7 +127,7 @@ private:
     void initialize() {
         // Replicate model to all devices
         for (const auto& device : devices_) {
-            // Clone the model (requires Cloneable implementation)
+            // Clone the model
             auto model = base_model_->clone();
             model->to(device);
             models_.push_back(model);
@@ -174,27 +179,24 @@ private:
 
 // Main program
 int main() {
-    std::cout << "1\n";
     // Ensure CUDA is available
     if (!torch::cuda::is_available()) {
         std::cerr << "CUDA is not available. Exiting." << std::endl;
         return 1;
     }
-    std::cout << "2\n";
+
     // Define custom model
     auto model = std::make_shared<CustomNet>();
-    std::cout << "3\n";
+
     // Define devices (e.g., 2 GPUs)
     std::vector<torch::Device> devices = {
         torch::Device(torch::kCUDA, 0),
-        torch::Device(torch::kCUDA, 1),
-        torch::Device(torch::kCPU)
+        torch::Device(torch::kCUDA, 1)
     };
-    std::cout << "4\n";
 
     // Create DataParallel
     DataParallel dp(model, devices, 64);
-    std::cout << "5\n";
+
     // Create dataset and dataloader
     auto dataset = torch::data::datasets::MNIST("/home/kami/Documents/datasets/MNIST/raw/")
         .map(torch::data::transforms::Normalize<>(0.5, 0.5))
