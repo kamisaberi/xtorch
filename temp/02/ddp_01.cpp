@@ -32,6 +32,10 @@ public:
         : rank_(rank), world_size_(world_size), master_ip_(master_ip), master_port_(master_port) {
         model_ = std::make_shared<SimpleNet>();
         optimizer_ = std::make_unique<torch::optim::SGD>(model_->parameters(), torch::optim::SGDOptions(0.01));
+        // Store parameters for non-const access
+        for (auto& param : model_->parameters()) {
+            parameters_.push_back(param);
+        }
         setup_communication();
     }
 
@@ -132,8 +136,8 @@ private:
 
     void aggregate_gradients() {
         std::vector<torch::Tensor> all_grads;
-        for (auto& param : model_->parameters()) {
-            all_grads.push_back(param.grad().clone());
+        for (auto& param : parameters_) {
+            all_grads.push_back(param.grad().defined() ? param.grad().clone() : torch::zeros_like(param));
         }
 
         if (rank_ == 0) {
@@ -175,20 +179,23 @@ private:
 
         // Update gradients in model
         size_t idx = 0;
-        for (auto& param : model_->parameters()) {
-            param.grad() = all_grads[idx++].clone();
+        for (auto& param : parameters_) {
+            if (!param.grad().defined()) {
+                param.grad() = torch::zeros_like(param);
+            }
+            param.mutable_grad().copy_(all_grads[idx++]);
         }
     }
 
     void synchronize_model() {
         if (rank_ == 0) {
             // Master: Send model parameters
-            for (const auto& param : model_->parameters()) {
+            for (const auto& param : parameters_) {
                 send_data(client_fd_, param);
             }
         } else {
             // Worker: Receive and update model parameters
-            for (auto& param : model_->parameters()) {
+            for (auto& param : parameters_) {
                 auto new_param = receive_data(sock_fd_);
                 param.copy_(new_param.reshape(param.sizes()));
             }
@@ -200,6 +207,7 @@ private:
     int master_port_;
     std::shared_ptr<SimpleNet> model_;
     std::unique_ptr<torch::optim::Optimizer> optimizer_;
+    std::vector<torch::Tensor> parameters_; // Store parameters for non-const access
     int server_fd_ = -1, client_fd_ = -1, sock_fd_ = -1;
 };
 
