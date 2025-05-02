@@ -181,7 +181,8 @@ private:
         size_t idx = 0;
         for (auto& param : parameters_) {
             if (!param.grad().defined()) {
-                param.grad() = torch::zeros_like(param);
+                // Initialize undefined gradient
+                param.mutable_grad() = torch::zeros_like(param);
             }
             param.mutable_grad().copy_(all_grads[idx++]);
         }
