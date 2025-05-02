@@ -1,8 +1,3 @@
-//
-// Created by kami on 5/2/25.
-//
+#include "../../include/data_parallels/distributed_data_parallel.h"
 
-#ifndef DISTRIBUTED_DATA_PARALLEL_H
-#define DISTRIBUTED_DATA_PARALLEL_H
 
-#endif //DISTRIBUTED_DATA_PARALLEL_H
