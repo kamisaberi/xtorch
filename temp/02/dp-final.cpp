@@ -9,6 +9,21 @@
 #include <stdexcept>
 #include "../../include/data_parallels/data_parallel.h"
 
+// Custom transform to flatten MNIST images
+struct Flatten : public torch::data::transforms::TensorTransform<torch::Tensor>
+{
+    torch::Tensor operator()(torch::Tensor input)
+    {
+        // Log input shape for debugging
+        // std::cout << "Flatten input shape: " << input.sizes() << std::endl;
+        // Input: [1, 28, 28] (single sample) -> Output: [784]
+        if (input.dim() >= 3)
+        {
+            return input.view({-1});
+        }
+        return input;
+    }
+};
 
 
 // Main program
@@ -36,7 +51,7 @@ int main() {
         // Create dataset with reordered transforms
         auto dataset = torch::data::datasets::MNIST("/home/kami/Documents/datasets/MNIST/raw/")
             .map(torch::data::transforms::Normalize<>(0.5, 0.5))
-            .map(xt::parallelism::Flatten())
+            .map(Flatten())
             .map(torch::data::transforms::Stack<>());
 
         // Log raw dataset shape for debugging

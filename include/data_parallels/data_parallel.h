@@ -11,21 +11,6 @@
 
 namespace xt::parallelism
 {
-    // Custom transform to flatten MNIST images
-    struct Flatten : public torch::data::transforms::TensorTransform<torch::Tensor>
-    {
-        torch::Tensor operator()(torch::Tensor input)
-        {
-            // Log input shape for debugging
-            // std::cout << "Flatten input shape: " << input.sizes() << std::endl;
-            // Input: [1, 28, 28] (single sample) -> Output: [784]
-            if (input.dim() >= 3)
-            {
-                return input.view({-1});
-            }
-            return input;
-        }
-    };
 
 
     // Custom neural network module inheriting from torch::nn::Cloneable
