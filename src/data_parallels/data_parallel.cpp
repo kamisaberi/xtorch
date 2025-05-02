@@ -3,12 +3,10 @@
 namespace xt::parallelism
 {
     // Optimized DataParallel class for multi-GPU training
-    DataParallel::DataParallel(std::shared_ptr<torch::nn::Module> model,
-                               const std::vector<torch::Device>& devices,
-                               size_t batch_size)
-        : base_model_(model),
-          devices_(devices),
-          batch_size_(batch_size)
+    DataParallel::DataParallel(std::shared_ptr<torch::nn::Module> model, const std::vector<torch::Device>& devices,
+                               size_t batch_size) : base_model_(model),
+                                                    devices_(devices),
+                                                    batch_size_(batch_size)
     {
         if (devices_.empty())
         {
