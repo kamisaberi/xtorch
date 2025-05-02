@@ -9,6 +9,7 @@ file(GLOB_RECURSE DEFINITION_FILES CONFIGURE_DEPENDS ../src/definitions/*.cpp)
 file(GLOB_RECURSE MODEL_FILES CONFIGURE_DEPENDS ../src/models/*.cpp)
 file(GLOB_RECURSE MODEL_CNN_FILES CONFIGURE_DEPENDS ../src/models/cnn/*.cpp)
 file(GLOB_RECURSE DATA_LOADER_FILES CONFIGURE_DEPENDS ../src/data_loaders/*.cpp)
+file(GLOB_RECURSE DATA_PARALLEL_FILES CONFIGURE_DEPENDS ../src/data_parallels/*.cpp)
 file(GLOB_RECURSE TRAINER_FILES CONFIGURE_DEPENDS ../src/trainers/*.cpp)
 file(GLOB_RECURSE TRANSFORM_FILES CONFIGURE_DEPENDS ../src/transforms/*.cpp)
 
@@ -1331,7 +1332,6 @@ target_link_libraries(${PROJECT_NAME}
 #
 
 
-
 ######################################## VGGNETPARAMETRIC #######################################
 #
 #project(vggnetparametric)
@@ -1449,7 +1449,6 @@ target_link_libraries(${PROJECT_NAME}
 #)
 
 
-
 ####################################### CUSTOMDATALOADER #######################################
 
 project(cdl01)
@@ -1463,7 +1462,7 @@ find_package(LibArchive REQUIRED)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} ${DATASET_FILES} ${MODEL_FILES}  ${BASE_SOURCE_FILES}   01/cdl-01.cpp)
+set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} ${DATASET_FILES} ${MODEL_FILES} ${BASE_SOURCE_FILES} 01/cdl-01.cpp)
 
 add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
 target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
@@ -1502,7 +1501,7 @@ find_package(LibArchive REQUIRED)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} ${DATASET_FILES} ${MODEL_FILES}  ${BASE_SOURCE_FILES}   01/cdl_mnist.cpp)
+set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} ${DATASET_FILES} ${MODEL_FILES} ${BASE_SOURCE_FILES} 01/cdl_mnist.cpp)
 
 add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
 target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
@@ -1526,7 +1525,6 @@ target_link_libraries(${PROJECT_NAME}
         LibLZMA::LibLZMA
         ${LibArchive_LIBRARIES}
 )
-
 
 
 ####################################### CUSTOMDATALOADERNUMWORKERS #######################################
@@ -1566,7 +1564,6 @@ target_link_libraries(${PROJECT_NAME}
         LibLZMA::LibLZMA
         ${LibArchive_LIBRARIES}
 )
-
 
 
 ####################################### DATA-PARALLEL-00 #######################################
@@ -1724,7 +1721,6 @@ target_link_libraries(${PROJECT_NAME}
 )
 
 
-
 ####################################### DATA-PARALLEL-FINAL #######################################
 
 project(dp_final)
@@ -1738,7 +1734,8 @@ find_package(LibArchive REQUIRED)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} ../src/data_parallels/data_parallel.cpp 02/dp-final.cpp)
+
+set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} ${DATASET_FILES} ${MODEL_FILES} ${DATA_LOADER_FILES} ${DATA_PARALLEL_FILES} ${TRAINER_FILES} ${TRANSFORM_FILES} ../src/data_parallels/data_parallel.cpp 02/dp-final.cpp)
 
 add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
 target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
@@ -1762,7 +1759,6 @@ target_link_libraries(${PROJECT_NAME}
         LibLZMA::LibLZMA
         ${LibArchive_LIBRARIES}
 )
-
 
 
 ####################################### DISTRIBUTED-DATA-PARALLEL-03 #######################################
