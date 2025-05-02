@@ -24,7 +24,6 @@ set(BASE_SOURCE_FILES
         ../src/transforms/resize.cpp
         ../src/transforms/lambda.cpp
         ../src/datasets/base/base.cpp
-        ../src/datasets/definitions/functions.cpp
         ../src/models/base.cpp
 )
 
