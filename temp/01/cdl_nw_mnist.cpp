@@ -10,6 +10,8 @@
 #include <condition_variable>
 #include <atomic>
 #include <chrono>
+// #include <torch/nn/parallel/distributed.h>
+// #include <torch/nn/parallel/distributed.h>
 
 // Struct to hold a batch of data: input tensors and target tensors
 struct Batch
@@ -273,5 +275,6 @@ int main()
     auto end = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
     std::cout << duration << " s\n";
+
     return 0;
 }
