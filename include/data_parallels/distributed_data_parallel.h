@@ -11,13 +11,16 @@
 #include <memory>
 
 // Simple neural network model
-struct SimpleNet : torch::nn::Module {
-    SimpleNet() {
+struct SimpleNet : torch::nn::Module
+{
+    SimpleNet()
+    {
         fc1 = register_module("fc1", torch::nn::Linear(10, 50));
         fc2 = register_module("fc2", torch::nn::Linear(50, 2));
     }
 
-    torch::Tensor forward(torch::Tensor x) {
+    torch::Tensor forward(torch::Tensor x)
+    {
         x = torch::relu(fc1->forward(x));
         x = fc2->forward(x);
         return x;
@@ -27,13 +30,14 @@ struct SimpleNet : torch::nn::Module {
 };
 
 // DistributedDataParallel class
-class DistributedDataParallel {
+class DistributedDataParallel
+{
 public:
     DistributedDataParallel(int rank, int world_size, const std::string& master_ip, int master_port);
 
     ~DistributedDataParallel();
 
-    void train(const std::vector<std::pair<torch::Tensor, torch::Tensor>>& dataset, int epochs) ;
+    void train(const std::vector<std::pair<torch::Tensor, torch::Tensor>>& dataset, int epochs);
 
 private:
     void setup_communication();
@@ -42,21 +46,7 @@ private:
     torch::Tensor receive_data(int fd);
 
     void aggregate_gradients();
-    void synchronize_model() {
-        if (rank_ == 0) {
-            // Master: Send model parameters
-            for (const auto& param : parameters_) {
-                send_data(client_fd_, param);
-            }
-        } else {
-            // Worker: Receive and update model parameters
-            for (auto& param : parameters_) {
-                auto new_param = receive_data(sock_fd_);
-                param.copy_(new_param.reshape(param.sizes()));
-            }
-        }
-    }
-
+    void synchronize_model();
     int rank_, world_size_;
     std::string master_ip_;
     int master_port_;
