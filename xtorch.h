@@ -34,6 +34,7 @@
 #pragma once
 
 #include "include/data_loaders/data_loaders.h"
+#include "include/data_parallels/data_parallels.h"
 #include "include/datasets/datasets.h"
 #include "include/media/media.h"
 #include "include/models/models.h"
