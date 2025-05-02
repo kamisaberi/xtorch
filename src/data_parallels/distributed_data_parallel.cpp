@@ -91,7 +91,7 @@
         }
     }
 
-    void send_data(int fd, const torch::Tensor& tensor) {
+    void DistributedDataParallel::send_data(int fd, const torch::Tensor& tensor) {
         auto data = tensor.data_ptr<float>();
         size_t size = tensor.numel() * sizeof(float);
         uint32_t length = static_cast<uint32_t>(size);
@@ -99,7 +99,7 @@
         send(fd, data, size, 0);
     }
 
-    torch::Tensor receive_data(int fd) {
+    torch::Tensor DistributedDataParallel::receive_data(int fd) {
         uint32_t length;
         recv(fd, &length, sizeof(length), MSG_WAITALL);
         std::vector<float> buffer(length / sizeof(float));
@@ -107,7 +107,7 @@
         return torch::from_blob(buffer.data(), {static_cast<long>(buffer.size())});
     }
 
-    void aggregate_gradients() {
+    void DistributedDataParallel::aggregate_gradients() {
         std::vector<torch::Tensor> all_grads;
         for (auto& param : parameters_) {
             all_grads.push_back(param.grad().defined() ? param.grad().clone() : torch::zeros_like(param));
@@ -161,7 +161,7 @@
         }
     }
 
-    void synchronize_model() {
+    void DistributedDataParallel::synchronize_model() {
         if (rank_ == 0) {
             // Master: Send model parameters
             for (const auto& param : parameters_) {
