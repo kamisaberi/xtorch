@@ -1,0 +1,8 @@
+//
+// Created by kami on 5/2/25.
+//
+
+#ifndef DISTRIBUTED_DATA_PARALLEL_H
+#define DISTRIBUTED_DATA_PARALLEL_H
+
+#endif //DISTRIBUTED_DATA_PARALLEL_H
