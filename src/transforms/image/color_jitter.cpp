@@ -1,6 +1,6 @@
-#include "../../include/transforms/image/color_jitter.h"
+#include "../../../include/transforms/image/color_jitter.h"
 
-namespace xt::data::transforms {
+namespace xt::transforms::image {
 
 
 
