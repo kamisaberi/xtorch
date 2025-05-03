@@ -1,4 +1,4 @@
-#include "../../include/transforms/normalize.h"
+#include "../../include/transforms/image/normalize.h"
 
 namespace xt::data::transforms {
 
