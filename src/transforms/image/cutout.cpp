@@ -1,6 +1,6 @@
 #include "../../../include/transforms/image/cutout.h"
 
-namespace xt::data::transforms {
+namespace xt::transforms::image {
 
     Cutout::Cutout(int num_holes_, int hole_size_)
         : num_holes(num_holes_), hole_size(hole_size_) {}

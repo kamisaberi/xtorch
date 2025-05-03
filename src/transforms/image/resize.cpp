@@ -1,6 +1,6 @@
 #include "../../../include/transforms/image/resize.h"
 
-namespace xt::data::transforms {
+namespace xt::transforms::image {
 
     /**
      * @brief Constructs a Resize object with the target size.

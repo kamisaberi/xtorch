@@ -2,7 +2,7 @@
 
 #include "../../headers/transforms.h"
 
-namespace xt::data::transforms {
+namespace xt::transforms::image {
 
 
     struct Cutout {

@@ -1,6 +1,6 @@
 #include "../../../include/transforms/image/gaussian_noise.h"
 
-namespace xt::data::transforms {
+namespace xt::transforms::image {
 
 
 

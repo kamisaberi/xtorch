@@ -1,6 +1,6 @@
 #include "../../../include/transforms/image/grayscale.h"
 
-namespace xt::data::transforms {
+namespace xt::transforms::image {
 
     Grayscale::Grayscale() {
     }

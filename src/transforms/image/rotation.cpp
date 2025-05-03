@@ -1,6 +1,6 @@
 #include "../../../include/transforms/image/rotation.h"
 
-namespace xt::data::transforms {
+namespace xt::transforms::image {
 
     Rotation::Rotation(double angle_deg) : angle(angle_deg) {
     }
