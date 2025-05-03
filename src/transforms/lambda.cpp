@@ -1,6 +1,6 @@
 #include "../../include/transforms/lambda.h"
 
-namespace xt::data::transforms {
+namespace xt::transforms {
 
 
     Lambda::Lambda(std::function<torch::Tensor(torch::Tensor)> transform)
