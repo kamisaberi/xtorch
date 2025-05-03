@@ -1,4 +1,4 @@
-#include "../../include/transforms/jitter.h"
+#include "../../include/transforms/image/color_jitter.h"
 
 namespace xt::data::transforms {
 

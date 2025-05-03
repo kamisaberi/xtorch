@@ -7,7 +7,7 @@
 #include "image/random_flip.h"
 #include "gaussian.h"
 #include "grayscale.h"
-#include "jitter.h"
+#include "image/color_jitter.h"
 #include "lambda.h"
 #include "normalize.h"
 #include "pad.h"
