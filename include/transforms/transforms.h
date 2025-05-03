@@ -10,7 +10,7 @@
 #include "image/color_jitter.h"
 #include "lambda.h"
 #include "normalize.h"
-#include "pad.h"
+#include "image/pad.h"
 #include "resize.h"
 #include "rotation.h"
 

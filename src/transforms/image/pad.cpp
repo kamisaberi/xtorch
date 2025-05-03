@@ -1,7 +1,7 @@
 
-#include "../../include/transforms/pad.h"
+#include "../../../include/transforms/image/pad.h"
 
-namespace xt::data::transforms {
+namespace xt::transforms::image {
 
 
     /**
