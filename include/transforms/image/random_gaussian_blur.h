@@ -4,31 +4,6 @@
 namespace xt::data::transforms {
 
 
-    struct GaussianBlur {
-    public:
-        GaussianBlur(std::vector<int64_t> kernel_size, float sigma);
-
-        torch::Tensor operator()(torch::Tensor input);
-
-    private:
-        std::vector<int64_t> kernel_size;
-        float sigma;
-
-        torch::Tensor generate_gaussian_kernel(int64_t k_h, int64_t k_w, float sigma, torch::Device device);
-    };
-
-
-    struct GaussianBlurOpenCV {
-    public:
-        GaussianBlurOpenCV(int ksize, double sigma_val);
-
-        torch::Tensor operator()(const torch::Tensor &input_tensor);
-
-    private:
-        cv::Size kernel_size;
-        double sigma;
-    };
-
 
     struct RandomGaussianBlur {
     private:
@@ -42,17 +17,6 @@ namespace xt::data::transforms {
         torch::Tensor operator()(const torch::Tensor &input_tensor);
     };
 
-
-    struct GaussianNoise {
-    public:
-        GaussianNoise(float mean, float std);
-
-        torch::Tensor operator()(torch::Tensor input);
-
-    private:
-        float mean;
-        float std;
-    };
 
 
 }
