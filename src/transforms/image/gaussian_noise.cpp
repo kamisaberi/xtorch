@@ -1,4 +1,4 @@
-#include "../../include/transforms/gaussian.h"
+#include "../../../include/transforms/image/gaussian_noise.h"
 
 namespace xt::data::transforms {
 
