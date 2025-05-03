@@ -3,7 +3,7 @@
 #include "compose.h"
 #include "convert.h"
 #include "crop.h"
-#include "cutout.h"
+#include "image/cutout.h"
 #include "flip.h"
 #include "gaussian.h"
 #include "grayscale.h"
