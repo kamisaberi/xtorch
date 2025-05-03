@@ -4,7 +4,7 @@
 #include "convert.h"
 #include "crop.h"
 #include "image/cutout.h"
-#include "flip.h"
+#include "image/random_flip.h"
 #include "gaussian.h"
 #include "grayscale.h"
 #include "jitter.h"
