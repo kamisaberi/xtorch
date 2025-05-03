@@ -1,6 +1,6 @@
 #include "../../../include/transforms/general/normalize.h"
 
-namespace xt::data::transforms {
+namespace xt::transforms {
 
     Normalize::Normalize(std::vector<float> mean_, std::vector<float> std_)
             : mean(std::move(mean_)), std(std::move(std_)) {

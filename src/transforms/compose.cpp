@@ -1,6 +1,6 @@
 #include "../../include/transforms/compose.h"
 
-namespace xt::data::transforms {
+namespace xt::transforms {
 
     /**
      * @brief Alias for a transformation function that takes a tensor and returns a tensor.
