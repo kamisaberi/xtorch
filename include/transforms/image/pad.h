@@ -1,9 +1,9 @@
 #pragma once
 
 
-#include "../headers/transforms.h"
+#include "../../headers/transforms.h"
 
-namespace xt::data::transforms {
+namespace xt::transforms::image {
 
     /**
      * @struct Pad
