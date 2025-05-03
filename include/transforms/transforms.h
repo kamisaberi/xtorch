@@ -11,7 +11,7 @@
 #include "lambda.h"
 #include "general/normalize.h"
 #include "image/pad.h"
-#include "resize.h"
+#include "image/resize.h"
 #include "rotation.h"
 
 

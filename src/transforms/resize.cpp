@@ -1,4 +1,4 @@
-#include "../../include/transforms/resize.h"
+#include "../../include/transforms/image/resize.h"
 
 namespace xt::data::transforms {
 
