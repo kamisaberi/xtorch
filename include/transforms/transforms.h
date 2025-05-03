@@ -12,7 +12,7 @@
 #include "general/normalize.h"
 #include "image/pad.h"
 #include "image/resize.h"
-#include "rotation.h"
+#include "image/rotation.h"
 
 
 
