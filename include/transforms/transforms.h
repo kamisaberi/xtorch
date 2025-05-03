@@ -9,7 +9,7 @@
 #include "grayscale.h"
 #include "image/color_jitter.h"
 #include "lambda.h"
-#include "image/normalize.h"
+#include "general/normalize.h"
 #include "image/pad.h"
 #include "resize.h"
 #include "rotation.h"
