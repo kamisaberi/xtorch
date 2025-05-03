@@ -1,4 +1,4 @@
-#include "../../include/transforms/cutout.h"
+#include "../../include/transforms/image/cutout.h"
 
 namespace xt::data::transforms {
 
