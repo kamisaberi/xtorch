@@ -6,10 +6,10 @@ namespace xt::data::transforms {
 
 
 
-    struct ToTensor {
-    public:
-        torch::Tensor operator()(const cv::Mat& image) const;
-    };
+    // struct ToTensor {
+    // public:
+    //     torch::Tensor operator()(const cv::Mat& image) const;
+    // };
 
 
 }
