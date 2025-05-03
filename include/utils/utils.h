@@ -50,3 +50,4 @@
  *
  * The xt::utils namespace contains all utility functions organized into
  * logical components. This header provides
+ */
