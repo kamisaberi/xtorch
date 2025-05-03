@@ -166,6 +166,6 @@ endif()
 # Subdirectories
 # =============================================================================
 # Add examples subdirectory (contains demonstration code)
-add_subdirectory(examples)
+#add_subdirectory(examples)
 # Temporary code directory (currently commented out)
-add_subdirectory(temp)
+#add_subdirectory(temp)
