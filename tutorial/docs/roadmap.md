@@ -143,6 +143,33 @@
 
 ---
 
+## Section: Transforms : Text
+| Section    | Component           | Status | Notes |
+|------------|---------------------|-------|-------|
+| **Basic** |                     | | |
+|            | Resample              | ![Finished](https://img.shields.io/badge/-Finished-brightgreen) | Stable in v1.0. |
+|            | Vol          | ![In Progress](https://img.shields.io/badge/-In_Progress-orange) | Adding NoSQL support. |
+|            | SlidingWindowCmn          | ![Under Review](https://img.shields.io/badge/-Under_Review-blue) | PR #56 open. |
+| **Tokenization** |                     | | |
+|            | Spectrogram         | ![Finished](https://img.shields.io/badge/-Finished-brightgreen) | Stable in v1.0. |
+|            | MelSpectrogram           | ![In Progress](https://img.shields.io/badge/-In_Progress-orange) | Adding NoSQL support. |
+|            | MFCC     | ![Under Review](https://img.shields.io/badge/-Under_Review-blue) | PR #56 open. |
+|            | GriffinLim        | ![Not Started](https://img.shields.io/badge/-Not_Started-lightgrey) | Planned for v2. |
+| **Sequencing**  |                     | | |
+|            | TimeStretch         | ![Finished](https://img.shields.io/badge/-Finished-brightgreen) | Stable in v1.0. |
+|            | FrequencyMasking           | ![In Progress](https://img.shields.io/badge/-In_Progress-orange) | Adding NoSQL support. |
+|            | TimeMasking     | ![Under Review](https://img.shields.io/badge/-Under_Review-blue) | PR #56 open. |
+|            | InverseMelScale           | ![In Progress](https://img.shields.io/badge/-In_Progress-orange) | Adding NoSQL support. |
+|            | MelScale      | ![Under Review](https://img.shields.io/badge/-Under_Review-blue) | PR #56 open. |
+| **Advanced** |                     | | |
+|            | SpeedPerturbation          | ![Finished](https://img.shields.io/badge/-Finished-brightgreen) | Stable in v1.0. |
+|            | AddNoise            | ![In Progress](https://img.shields.io/badge/-In_Progress-orange) | Adding NoSQL support. |
+|            | PitchShift      | ![Under Review](https://img.shields.io/badge/-Under_Review-blue) | PR #56 open. |
+|            | BackgroundNoiseAddition          | ![Not Started](https://img.shields.io/badge/-Not_Started-lightgrey) | Planned for v2. |
+|            | TimeWarping           | ![Not Started](https://img.shields.io/badge/-Not_Started-lightgrey) | Planned for v2. |
+
+---
+
 
 ### How to Use
 1. Replace `Section: Core Module` with your actual module name.
