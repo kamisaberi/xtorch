@@ -170,8 +170,3 @@
 
 ---
 
-
-### How to Use
-1. Replace `Section: Core Module` with your actual module name.
-2. Update badges dynamically by changing the status in the URL (e.g., `In_Progress` → `Finished`).
-3. Optional: Add direct links to PRs/issues in the **Notes** column.
