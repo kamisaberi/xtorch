@@ -58,12 +58,19 @@
 |           | RandomPerspective       | ![Under Review](https://img.shields.io/badge/-Under_Review-blue) | PR #56 open. |
 | **Tensor Operations** |                       | | |
 |           | ToTensor           | ![Finished](https://img.shields.io/badge/-Finished-brightgreen) | Stable in v1.0. |
-|           | Grayscale             | ![In Progress](https://img.shields.io/badge/-In_Progress-orange) | Adding NoSQL support. |
-|           | RandomGrayscale       | ![Under Review](https://img.shields.io/badge/-Under_Review-blue) | PR #56 open. |
-|           | RandomInvert          | ![Not Started](https://img.shields.io/badge/-Not_Started-lightgrey) | Planned for v2. |
-|           | RandomAdjustSharpness | ![Finished](https://img.shields.io/badge/-Finished-brightgreen) | Stable in v1.0. |
-|           | RandomAutoContrast    | ![Finished](https://img.shields.io/badge/-Finished-brightgreen) | Stable in v1.0. |
-|           | RandomEqualize        | ![Finished](https://img.shields.io/badge/-Finished-brightgreen) | Stable in v1.0. |
+|           | Normalize             | ![In Progress](https://img.shields.io/badge/-In_Progress-orange) | Adding NoSQL support. |
+|           | ConvertImageDtype       | ![Under Review](https://img.shields.io/badge/-Under_Review-blue) | PR #56 open. |
+|           | Lambda          | ![Not Started](https://img.shields.io/badge/-Not_Started-lightgrey) | Planned for v2. |
+| **Augmentation** | | | |
+|           | RandomApply | ![Finished](https://img.shields.io/badge/-Finished-brightgreen) | Stable in v1.0. |
+|           | RandomChoice | ![In Progress](https://img.shields.io/badge/-In_Progress-orange) | Adding NoSQL support. |
+|           | RandomOrder | ![Under Review](https://img.shields.io/badge/-Under_Review-blue) | PR #56 open. |
+|           | AutoAugment | ![Not Started](https://img.shields.io/badge/-Not_Started-lightgrey) | Planned for v2. |
+|           | RandAugment | ![Finished](https://img.shields.io/badge/-Finished-brightgreen) | Stable in v1.0. |
+| **Advanced** | | | |
+|           | GaussianBlur | ![Finished](https://img.shields.io/badge/-Finished-brightgreen) | Stable in v1.0. |
+|           | RandomSolarize | ![In Progress](https://img.shields.io/badge/-In_Progress-orange) | Adding NoSQL support. |
+|           | RandomPosterize | ![Under Review](https://img.shields.io/badge/-Under_Review-blue) | PR #56 open. |
 
 
 
