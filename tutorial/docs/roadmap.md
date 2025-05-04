@@ -32,18 +32,26 @@
 ---
 
 ## 📂 Section: Transforms : Image
-| Section   | Component  | Status | Notes |
-|-----------|-------------|-------|-------|
-| **BASIC** | | | |
-|           | Resize | ![Finished](https://img.shields.io/badge/-Finished-brightgreen) | Stable in v1.0. |
-|           | CenterCrop | ![In Progress](https://img.shields.io/badge/-In_Progress-orange) | Adding NoSQL support. |
-|           | RandomCrop | ![Under Review](https://img.shields.io/badge/-Under_Review-blue) | PR #56 open. |
-|           | Pad | ![Not Started](https://img.shields.io/badge/-Not_Started-lightgrey) | Planned for v2. |
-|           | RandomHorizontalFlip | ![Finished](https://img.shields.io/badge/-Finished-brightgreen) | Stable in v1.0. |
-|           | RandomVerticalFlip | ![Finished](https://img.shields.io/badge/-Finished-brightgreen) | Stable in v1.0. |
-|           | RandomFlip | ![Finished](https://img.shields.io/badge/-Finished-brightgreen) | Stable in v1.0. |
-|           | RandomRotation | ![Finished](https://img.shields.io/badge/-Finished-brightgreen) | Stable in v1.0. |
-|           | RandomResizedCrop | ![Finished](https://img.shields.io/badge/-Finished-brightgreen) | Stable in v1.0. |
+| Section   | Component             | Status | Notes |
+|-----------|-----------------------|-------|-------|
+| **BASIC** |                       | | |
+|           | Resize                | ![Finished](https://img.shields.io/badge/-Finished-brightgreen) | Stable in v1.0. |
+|           | CenterCrop            | ![In Progress](https://img.shields.io/badge/-In_Progress-orange) | Adding NoSQL support. |
+|           | RandomCrop            | ![Under Review](https://img.shields.io/badge/-Under_Review-blue) | PR #56 open. |
+|           | Pad                   | ![Not Started](https://img.shields.io/badge/-Not_Started-lightgrey) | Planned for v2. |
+|           | RandomHorizontalFlip  | ![Finished](https://img.shields.io/badge/-Finished-brightgreen) | Stable in v1.0. |
+|           | RandomVerticalFlip    | ![Finished](https://img.shields.io/badge/-Finished-brightgreen) | Stable in v1.0. |
+|           | RandomFlip            | ![Finished](https://img.shields.io/badge/-Finished-brightgreen) | Stable in v1.0. |
+|           | RandomRotation        | ![Finished](https://img.shields.io/badge/-Finished-brightgreen) | Stable in v1.0. |
+|           | RandomResizedCrop     | ![Finished](https://img.shields.io/badge/-Finished-brightgreen) | Stable in v1.0. |
+| **Color/Contrast** |                       | | |
+|           | ColorJitter           | ![Finished](https://img.shields.io/badge/-Finished-brightgreen) | Stable in v1.0. |
+|           | Grayscale             | ![In Progress](https://img.shields.io/badge/-In_Progress-orange) | Adding NoSQL support. |
+|           | RandomGrayscale       | ![Under Review](https://img.shields.io/badge/-Under_Review-blue) | PR #56 open. |
+|           | RandomInvert          | ![Not Started](https://img.shields.io/badge/-Not_Started-lightgrey) | Planned for v2. |
+|           | RandomAdjustSharpness | ![Finished](https://img.shields.io/badge/-Finished-brightgreen) | Stable in v1.0. |
+|           | RandomAutoContrast    | ![Finished](https://img.shields.io/badge/-Finished-brightgreen) | Stable in v1.0. |
+|           | RandomEqualize        | ![Finished](https://img.shields.io/badge/-Finished-brightgreen) | Stable in v1.0. |
 
 
 
