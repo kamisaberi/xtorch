@@ -1,27 +1,31 @@
-name: C/C++ CI
+name: Build xtorch
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ main ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ main ]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
-    - name: configure
-      run: |
-        mkdir build
-        cd build
-        cmake ..
-        make
-    - name: make
-      run: make
-    - name: make check
-      run: make check
-    - name: make distcheck
-      run: make distcheck
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: sudo apt-get update && sudo apt-get install -y cmake build-essential wget unzip
+
+      - name: Download LibTorch
+        run: |
+          wget https://download.pytorch.org/libtorch/cpu/libtorch-shared-with-deps-2.2.0%2Bcpu.zip
+          unzip libtorch-shared-with-deps-2.2.0+cpu.zip
+          mv libtorch /tmp/libtorch
+
+      - name: Build xtorch
+        run: |
+          mkdir build
+          cd build
+          cmake -DCMAKE_PREFIX_PATH=/tmp/libtorch ..
+          make
