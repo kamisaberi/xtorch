@@ -16,6 +16,10 @@ jobs:
 
       - name: Install dependencies
         run: sudo apt-get update && sudo apt-get install -y cmake build-essential wget unzip
+      - name: Run install.sh
+        run: |
+          chmod +x install.sh
+          ./install.sh
 
       - name: Download LibTorch
         run: |
