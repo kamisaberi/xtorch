@@ -32,12 +32,17 @@
 ---
 
 ## 📂 Section: Transforms : Image
-| Component       | Status Badge | Notes |
-|----------------|-------------|-------|
-| Authentication | ![Finished](https://img.shields.io/badge/-Finished-brightgreen) | Stable in v1.0. |
-| Database Layer | ![In Progress](https://img.shields.io/badge/-In_Progress-orange) | Adding NoSQL support. |
-| API Docs | ![Under Review](https://img.shields.io/badge/-Under_Review-blue) | PR #56 open. |
-| Caching | ![Not Started](https://img.shields.io/badge/-Not_Started-lightgrey) | Planned for v2. |
+| Component  | Status Badge | Notes |
+|------------|-------------|-------|
+| Resize | ![Finished](https://img.shields.io/badge/-Finished-brightgreen) | Stable in v1.0. |
+| CenterCrop | ![In Progress](https://img.shields.io/badge/-In_Progress-orange) | Adding NoSQL support. |
+| RandomCrop | ![Under Review](https://img.shields.io/badge/-Under_Review-blue) | PR #56 open. |
+| Pad | ![Not Started](https://img.shields.io/badge/-Not_Started-lightgrey) | Planned for v2. |
+| RandomHorizontalFlip | ![Finished](https://img.shields.io/badge/-Finished-brightgreen) | Stable in v1.0. |
+| RandomVerticalFlip | ![Finished](https://img.shields.io/badge/-Finished-brightgreen) | Stable in v1.0. |
+| RandomFlip | ![Finished](https://img.shields.io/badge/-Finished-brightgreen) | Stable in v1.0. |
+| RandomRotation | ![Finished](https://img.shields.io/badge/-Finished-brightgreen) | Stable in v1.0. |
+| RandomResizedCrop | ![Finished](https://img.shields.io/badge/-Finished-brightgreen) | Stable in v1.0. |
 
 ---
 
