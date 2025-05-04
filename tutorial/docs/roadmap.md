@@ -11,7 +11,7 @@
 
 ---
 
-## 📂 Section: Datasets
+## Section: Datasets
 | Component       | Status Badge | Notes |
 |----------------|-------------|-------|
 | Authentication | ![Finished](https://img.shields.io/badge/-Finished-brightgreen) | Stable in v1.0. |
@@ -21,7 +21,7 @@
 
 ---
 
-## 📂 Section: Models
+## Section: Models
 | Component       | Status Badge | Notes |
 |----------------|-------------|-------|
 | Authentication | ![Finished](https://img.shields.io/badge/-Finished-brightgreen) | Stable in v1.0. |
@@ -31,7 +31,7 @@
 
 ---
 
-## 📂 Section: Transforms : Image
+## Section: Transforms : Image
 | Section   | Component             | Status | Notes |
 |-----------|-----------------------|-------|-------|
 | **BASIC** |                       | | |
@@ -76,7 +76,7 @@
 
 ---
 
-## 📂 Section: Transforms : Signal
+## Section: Transforms : Signal
 | Component       | Status Badge | Notes |
 |----------------|-------------|-------|
 | Authentication | ![Finished](https://img.shields.io/badge/-Finished-brightgreen) | Stable in v1.0. |
