@@ -66,9 +66,9 @@ def define_env(env):
                 {"Diffusion Models": "examples/generative_models/8_3_diffusion_models.markdown"},
             ]},
             {"Deployment and Production": [
-                {"Model Serialization": "examples/natural_language_processing/2_1_image_classification.markdown"},
-                {"Inference": "examples/natural_language_processing/2_2_object_detection.markdown"},
-                {"Web Services": "examples/natural_language_processing/2_2_object_detection.markdown"},
+                {"Model Serialization": "examples/deployment_and_production/9_1_model_serialization.markdown"},
+                {"Inference": "examples/deployment_and_production/9_2_inference.markdown"},
+                {"Web Services": "examples/deployment_and_production/9_3_web_services.markdown"},
             ]},
             {"Data Handling and Preprocessing": [
                 {"Datasets": "examples/natural_language_processing/2_1_image_classification.markdown"},
