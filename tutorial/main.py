@@ -71,14 +71,14 @@ def define_env(env):
                 {"Web Services": "examples/deployment_and_production/9_3_web_services.markdown"},
             ]},
             {"Data Handling and Preprocessing": [
-                {"Datasets": "examples/natural_language_processing/2_1_image_classification.markdown"},
-                {"Data Loaders": "examples/natural_language_processing/2_2_object_detection.markdown"},
-                {"Transforms": "examples/natural_language_processing/2_2_object_detection.markdown"},
+                {"Datasets": "examples/data_handling_and_preprocessing/10_1_datasets.markdown"},
+                {"Data Loaders": "examples/data_handling_and_preprocessing/10_2_data_loaders.markdown"},
+                {"Transforms": "examples/data_handling_and_preprocessing/10_3_transforms.markdown"},
             ]},
             {"Optimization and Training Techniques": [
-                {"Optimizers": "examples/natural_language_processing/2_1_image_classification.markdown"},
-                {"Learning Rate Schedulers": "examples/natural_language_processing/2_2_object_detection.markdown"},
-                {"Regularization": "examples/natural_language_processing/2_2_object_detection.markdown"},
+                {"Optimizers": "examples/optimization_and_training_techniques/11_1_optimizers.markdown"},
+                {"Learning Rate Schedulers": "examples/optimization_and_training_techniques/11_2_learning_rate_schedulers.markdown"},
+                {"Regularization": "examples/optimization_and_training_techniques/11_3_regularization.markdown"},
             ]},
             {"Performance and Benchmarking": [
                 {"Speed Optimization": "examples/natural_language_processing/2_1_image_classification.markdown"},
