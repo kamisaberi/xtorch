@@ -27,5 +27,5 @@ jobs:
         run: |
           mkdir build
           cd build
-          cmake -DCMAKE_PREFIX_PATH=/tmp/libtorch ..
+          cmake -DCMAKE_PREFIX_PATH=/tmp/libtorch  -DSndFile_DIR=/usr/lib/x86_64-linux-gnu/cmake ..
           make
