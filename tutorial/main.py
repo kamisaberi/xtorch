@@ -61,9 +61,9 @@ def define_env(env):
                 {"Graph-Level Tasks": "examples/graph_neural_networks/7_2_graph_level_tasks.markdown"},
             ]},
             {"Generative Models": [
-                {"Autoencoders": "examples/natural_language_processing/2_1_image_classification.markdown"},
-                {"GANs": "examples/natural_language_processing/2_2_object_detection.markdown"},
-                {"Diffusion Models": "examples/natural_language_processing/2_2_object_detection.markdown"},
+                {"Autoencoders": "examples/generative_models/8_1_autoencoders.markdown"},
+                {"GANs": "examples/generative_models/8_2_gans.markdown"},
+                {"Diffusion Models": "examples/generative_models/8_3_diffusion_models.markdown"},
             ]},
             {"Deployment and Production": [
                 {"Model Serialization": "examples/natural_language_processing/2_1_image_classification.markdown"},
