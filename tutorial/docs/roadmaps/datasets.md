@@ -1,11 +1,20 @@
-# Datasets Roadmap
+# Transforms Roadmap
 
 
-## Datasets : CNN
+## Datasets
 | Section               | Component           | Status | Notes |
 |-----------------------|---------------------|-------|-------|
-| **LeNet**             |                     | | |
-|                       | LeNet5              | ![Finished](https://img.shields.io/badge/-Finished-black) | Stable in v1.0. |
+| **Image Classification**             |                     | | |
+|                       | CalTech              | ![Finished](https://img.shields.io/badge/-Finished-black) | Stable in v1.0. |
+|                       | CalTech              | ![Finished](https://img.shields.io/badge/-Finished-black) | Stable in v1.0. |
+|                       | CalTech              | ![Finished](https://img.shields.io/badge/-Finished-black) | Stable in v1.0. |
+|                       | CalTech              | ![Finished](https://img.shields.io/badge/-Finished-black) | Stable in v1.0. |
+|                       | CalTech              | ![Finished](https://img.shields.io/badge/-Finished-black) | Stable in v1.0. |
+|                       | CalTech              | ![Finished](https://img.shields.io/badge/-Finished-black) | Stable in v1.0. |
+|                       | CalTech              | ![Finished](https://img.shields.io/badge/-Finished-black) | Stable in v1.0. |
+|                       | CalTech              | ![Finished](https://img.shields.io/badge/-Finished-black) | Stable in v1.0. |
+|                       | CalTech              | ![Finished](https://img.shields.io/badge/-Finished-black) | Stable in v1.0. |
+|                       | CalTech              | ![Finished](https://img.shields.io/badge/-Finished-black) | Stable in v1.0. |
 | **AlexNet**    |                     | | |
 |                       | AlexNet         | ![Finished](https://img.shields.io/badge/-Finished-black) | Stable in v1.0. |
 | **VGGNet**          |                     | | |
@@ -22,7 +31,7 @@
 
 ---
 
-## Datasets : RNN
+## Section: Transforms : Signal
 | Section         | Component           | Status | Notes |
 |-----------------|---------------------|-------|-------|
 | **Preprocessing**      |                     | | |
@@ -52,7 +61,7 @@
 
 ---
 
-## Datasets : GAN
+## Section: Transforms : Video
 | Section    | Component           | Status | Notes |
 |------------|---------------------|-------|-------|
 | **Frame-Based** |                     | | |
@@ -79,7 +88,7 @@
 
 ---
 
-## Datasets : DIFFUSION
+## Section: Transforms : Text
 | Section    | Component           | Status | Notes |
 |------------|---------------------|-------|-------|
 | **Basic** |                     | | |
