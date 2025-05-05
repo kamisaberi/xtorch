@@ -60,6 +60,35 @@ def define_env(env):
                 {"Node-Level Tasks": "examples/natural_language_processing/2_1_image_classification.markdown"},
                 {"Graph-Level Tasks": "examples/natural_language_processing/2_2_object_detection.markdown"},
             ]},
+            {"Generative Models": [
+                {"Autoencoders": "examples/natural_language_processing/2_1_image_classification.markdown"},
+                {"GANs": "examples/natural_language_processing/2_2_object_detection.markdown"},
+                {"Diffusion Models": "examples/natural_language_processing/2_2_object_detection.markdown"},
+            ]},
+            {"Deployment and Production": [
+                {"Model Serialization": "examples/natural_language_processing/2_1_image_classification.markdown"},
+                {"Inference": "examples/natural_language_processing/2_2_object_detection.markdown"},
+                {"Web Services": "examples/natural_language_processing/2_2_object_detection.markdown"},
+            ]},
+            {"Data Handling and Preprocessing": [
+                {"Datasets": "examples/natural_language_processing/2_1_image_classification.markdown"},
+                {"Data Loaders": "examples/natural_language_processing/2_2_object_detection.markdown"},
+                {"Transforms": "examples/natural_language_processing/2_2_object_detection.markdown"},
+            ]},
+            {"Optimization and Training Techniques": [
+                {"Optimizers": "examples/natural_language_processing/2_1_image_classification.markdown"},
+                {"Learning Rate Schedulers": "examples/natural_language_processing/2_2_object_detection.markdown"},
+                {"Regularization": "examples/natural_language_processing/2_2_object_detection.markdown"},
+            ]},
+            {"Performance and Benchmarking": [
+                {"Speed Optimization": "examples/natural_language_processing/2_1_image_classification.markdown"},
+                {"Memory Management": "examples/natural_language_processing/2_2_object_detection.markdown"},
+            ]},
+            {"Distributed and Parallel Training": [
+                {"Data Parallelism": "examples/natural_language_processing/2_1_image_classification.markdown"},
+                {"Model Parallelism": "examples/natural_language_processing/2_2_object_detection.markdown"},
+                {"Distributed Training": "examples/natural_language_processing/2_2_object_detection.markdown"},
+            ]},
             {"Examples": "examples/0_examples.markdown"},
         ]},
         {"Roadmap": [
