@@ -82,12 +82,12 @@ find_package(ZLIB REQUIRED)           # Compression library
 find_package(OpenSSL REQUIRED)        # Cryptography and SSL/TLS
 find_package(LibLZMA REQUIRED)        # LZMA compression
 find_package(LibArchive REQUIRED)     # Multi-format archive library
-#find_package(SndFile REQUIRED)        # Audio file handling
-find_package(SndFile REQUIRED
-        PATHS /usr/lib/x86_64-linux-gnu/cmake
-        /usr/local/lib/cmake
-        /usr/share/cmake
-        )
+find_package(SndFile REQUIRED)        # Audio file handling
+#find_package(SndFile REQUIRED
+#        PATHS /usr/lib/x86_64-linux-gnu/cmake
+#        /usr/local/lib/cmake
+#        /usr/share/cmake
+#        )
 
 
 # Find libtar (for tar archive handling)
