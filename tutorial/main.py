@@ -40,17 +40,17 @@ def define_env(env):
                 {"Image Generation": "examples/computer_vision/2_4_image_generation.markdown"},
             ]},
             {"Natural Language Processing": [
-                {"Text Classification": "examples/natural_language_processing/2_1_image_classification.markdown"},
-                {"Sequence to Sequence": "examples/natural_language_processing/2_2_object_detection.markdown"},
-                {"Language Modeling": "examples/natural_language_processing/2_3_segmentation.markdown"},
+                {"Text Classification": "examples/natural_language_processing/3_1_text_classification.markdown"},
+                {"Sequence to Sequence": "examples/natural_language_processing/3_2_sequence_to_sequence.markdown"},
+                {"Language Modeling": "examples/natural_language_processing/3_3_language_modeling.markdown"},
             ]},
             {"Audio and Speech": [
-                {"Speech Recognition": "examples/natural_language_processing/2_1_image_classification.markdown"},
-                {"Audio Classification": "examples/natural_language_processing/2_2_object_detection.markdown"},
+                {"Speech Recognition": "examples/audio_and_speech/4_1_speech_recognition.markdown"},
+                {"Audio Classification": "examples/audio_and_speech/4_2_audio_classification.markdown"},
             ]},
             {"Time Series and Sequential Data": [
-                {"Forecasting": "examples/natural_language_processing/2_1_image_classification.markdown"},
-                {"Anomaly Detection": "examples/natural_language_processing/2_2_object_detection.markdown"},
+                {"Forecasting": "examples/time_series_and_sequential_data/5_1_forecasting.markdown"},
+                {"Anomaly Detection": "examples/time_series_and_sequential_data/5_2_anomaly_detection.markdown"},
             ]},
             {"Reinforcement Learning": [
                 {"Value-Based Methods": "examples/natural_language_processing/2_1_image_classification.markdown"},
