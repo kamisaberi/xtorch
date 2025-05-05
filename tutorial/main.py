@@ -32,13 +32,35 @@ def define_env(env):
             ]}
         ]},
         {"Examples": [
-            {"Getting Started": "examples/1_getting_started.markdown"},
+            {"Getting Started": "examples/getting_started/1_getting_started.markdown"},
             {"Computer Vision": [
-                {"Image Classification":"examples/2_1_image_classification_examples_for_xtorch.markdown"},
-                {"Object Detection":"examples/"},
-                {"Segmentation":"examples/"},
-                {"Image Generation":"examples/"},
-            ]}
+                {"Image Classification": "examples/computer_vision/2_1_image_classification.markdown"},
+                {"Object Detection": "examples/computer_vision/2_2_object_detection.markdown"},
+                {"Segmentation": "examples/computer_vision/2_3_segmentation.markdown"},
+                {"Image Generation": "examples/computer_vision/2_4_image_generation.markdown"},
+            ]},
+            {"Natural Language Processing": [
+                {"Text Classification": "examples/natural_language_processing/2_1_image_classification.markdown"},
+                {"Sequence to Sequence": "examples/natural_language_processing/2_2_object_detection.markdown"},
+                {"Language Modeling": "examples/natural_language_processing/2_3_segmentation.markdown"},
+            ]},
+            {"Audio and Speech": [
+                {"Speech Recognition": "examples/natural_language_processing/2_1_image_classification.markdown"},
+                {"Audio Classification": "examples/natural_language_processing/2_2_object_detection.markdown"},
+            ]},
+            {"Time Series and Sequential Data": [
+                {"Forecasting": "examples/natural_language_processing/2_1_image_classification.markdown"},
+                {"Anomaly Detection": "examples/natural_language_processing/2_2_object_detection.markdown"},
+            ]},
+            {"Reinforcement Learning": [
+                {"Value-Based Methods": "examples/natural_language_processing/2_1_image_classification.markdown"},
+                {"Policy-Based Methods": "examples/natural_language_processing/2_2_object_detection.markdown"},
+            ]},
+            {"Graph Neural Networks": [
+                {"Node-Level Tasks": "examples/natural_language_processing/2_1_image_classification.markdown"},
+                {"Graph-Level Tasks": "examples/natural_language_processing/2_2_object_detection.markdown"},
+            ]},
+            {"Examples": "examples/0_examples.markdown"},
         ]},
         {"Roadmap": [
             {"Datasets": "roadmaps/datasets.md"},
