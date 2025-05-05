@@ -31,12 +31,14 @@ def define_env(env):
                 {"C++ Extensions": "tutorials/advanced/cpp_extensions.md"},
             ]}
         ]},
+        {"Examples": [
+            {"Getting Started": []}
+        ]},
         {"Roadmap": [
             {"Datasets": "roadmaps/datasets.md"},
             {"Models": "roadmaps/models.md"},
             {"Transforms": "roadmaps/transforms.md"},
         ]},
-
         {"Ecosystem": [
             {"XTorch Vision": "ecosystem/vision.md"},
             {"XTorch NLP": "ecosystem/nlp.md"},
