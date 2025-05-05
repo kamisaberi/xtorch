@@ -5,17 +5,15 @@ repo_url: https://github.com/kamisaberi/xtorch
 theme:
   name: material  # looks clean and modern
 
-plugins:
-  - search
-  - macros
-  - mkdoxy:
-      projects:
-        xtorch:
-          src-dirs: ../include
-          full-doc: true
-          doxy-cfg:
-            FILE_PATTERNS: "*.cpp *.h*"
-            RECURSIVE: true
+#plugins:
+#  - search
+#  - macros
+#  - mkdoxy:
+#      projects:
+#        xtorch:
+#          src-dirs: ../include
+#          full-doc: true
+#          doxy-cfg:
+#            FILE_PATTERNS: "*.cpp *.h*"
+#            RECURSIVE: true
 
-# Move nav to a separate file for conditional logic
-#nav: !macro xtorch_nav()
