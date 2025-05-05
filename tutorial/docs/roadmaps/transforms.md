@@ -1,35 +1,5 @@
-# 📊 Development Progress Tracker
+# Transforms Roadmap
 
-## Status Key
-| Badge | Status         | Description                          |
-|-------|----------------|--------------------------------------|
-| ![Finished](https://img.shields.io/badge/-Finished-black) | **Finished** | Completed and merged. |
-| ![In Progress](https://img.shields.io/badge/-In_Progress-darkgrey) | **In Progress** | Actively being developed. |
-| ![Under Review](https://img.shields.io/badge/-Under_Review-grey) | **Under Review** | Pending review/testing. |
-| ![Not Started](https://img.shields.io/badge/-Not_Started-lightgrey) | **Not Started** | Not yet implemented. |
-| ![On Hold](https://img.shields.io/badge/-On_Hold-silver) | **On Hold** | Paused (optional). |
-
----
-
-## Section: Datasets
-| Component       | Status Badge | Notes |
-|----------------|-------------|-------|
-| Authentication | ![Finished](https://img.shields.io/badge/-Finished-black) | Stable in v1.0. |
-| Database Layer | ![In Progress](https://img.shields.io/badge/-In_Progress-darkgrey) | Adding NoSQL support. |
-| API Docs | ![Under Review](https://img.shields.io/badge/-Under_Review-grey) | PR #56 open. |
-| Caching | ![Not Started](https://img.shields.io/badge/-Not_Started-lightgrey) | Planned for v2. |
-
----
-
-## Section: Models
-| Component       | Status Badge | Notes |
-|----------------|-------------|-------|
-| Authentication | ![Finished](https://img.shields.io/badge/-Finished-black) | Stable in v1.0. |
-| Database Layer | ![In Progress](https://img.shields.io/badge/-In_Progress-darkgrey) | Adding NoSQL support. |
-| API Docs | ![Under Review](https://img.shields.io/badge/-Under_Review-grey) | PR #56 open. |
-| Caching | ![Not Started](https://img.shields.io/badge/-Not_Started-lightgrey) | Planned for v2. |
-
----
 
 ## Section: Transforms : Image
 | Section               | Component           | Status | Notes |
