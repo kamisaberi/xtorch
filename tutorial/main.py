@@ -53,12 +53,12 @@ def define_env(env):
                 {"Anomaly Detection": "examples/time_series_and_sequential_data/5_2_anomaly_detection.markdown"},
             ]},
             {"Reinforcement Learning": [
-                {"Value-Based Methods": "examples/natural_language_processing/2_1_image_classification.markdown"},
-                {"Policy-Based Methods": "examples/natural_language_processing/2_2_object_detection.markdown"},
+                {"Value-Based Methods": "examples/reinforcement_learning/6_1_value_based_methods.markdown"},
+                {"Policy-Based Methods": "examples/reinforcement_learning/6_2_policy_based_methods.markdown"},
             ]},
             {"Graph Neural Networks": [
-                {"Node-Level Tasks": "examples/natural_language_processing/2_1_image_classification.markdown"},
-                {"Graph-Level Tasks": "examples/natural_language_processing/2_2_object_detection.markdown"},
+                {"Node-Level Tasks": "examples/graph_neural_networks/7_1_node_level_tasks.markdown"},
+                {"Graph-Level Tasks": "examples/graph_neural_networks/7_2_graph_level_tasks.markdown"},
             ]},
             {"Generative Models": [
                 {"Autoencoders": "examples/natural_language_processing/2_1_image_classification.markdown"},
