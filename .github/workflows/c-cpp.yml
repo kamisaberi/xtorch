@@ -15,7 +15,17 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install dependencies
-        run: sudo apt-get update && sudo apt-get install -y cmake build-essential wget unzip libcurl4-openssl-dev libopencv-dev zlib1g-dev libssl-dev liblzma-dev libarchive-dev libtar-dev libzip-dev libsndfile1-dev libhdf5-dev
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake build-essential wget unzip \
+            libcurl4-openssl-dev libopencv-dev zlib1g-dev libssl-dev \
+            liblzma-dev libarchive-dev libtar-dev libzip-dev \
+            libsndfile1-dev libhdf5-dev pkg-config
+
+      - name: Verify sndfile installation
+        run: |
+          pkg-config --exists sndfile && echo "sndfile found via pkg-config"
+          sudo find /usr -name "*sndfile*config.cmake" 2>/dev/null || echo "No CMake config found"
 
       - name: Download LibTorch
         run: |
@@ -27,5 +37,5 @@ jobs:
         run: |
           mkdir build
           cd build
-          cmake -DCMAKE_PREFIX_PATH=/tmp/libtorch  -DSndFile_DIR=/usr/lib/x86_64-linux-gnu/cmake ..
+          cmake -DCMAKE_PREFIX_PATH=/tmp/libtorch ..
           make
