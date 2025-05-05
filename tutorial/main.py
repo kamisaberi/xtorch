@@ -81,13 +81,13 @@ def define_env(env):
                 {"Regularization": "examples/optimization_and_training_techniques/11_3_regularization.markdown"},
             ]},
             {"Performance and Benchmarking": [
-                {"Speed Optimization": "examples/natural_language_processing/2_1_image_classification.markdown"},
-                {"Memory Management": "examples/natural_language_processing/2_2_object_detection.markdown"},
+                {"Speed Optimization": "examples/performance_and_benchmarking/12_1_speed_optimization.markdown"},
+                {"Memory Management": "examples/performance_and_benchmarking/12_2_memory_management.markdown"},
             ]},
             {"Distributed and Parallel Training": [
-                {"Data Parallelism": "examples/natural_language_processing/2_1_image_classification.markdown"},
-                {"Model Parallelism": "examples/natural_language_processing/2_2_object_detection.markdown"},
-                {"Distributed Training": "examples/natural_language_processing/2_2_object_detection.markdown"},
+                {"Data Parallelism": "examples/distributed_and_parallel_training/13_1_data_parallelism.markdown"},
+                {"Model Parallelism": "examples/distributed_and_parallel_training/13_2_model_parallelism.markdown"},
+                {"Distributed Training": "examples/distributed_and_parallel_training/13_3_distributed_training.markdown"},
             ]},
             {"Examples": "examples/0_examples.markdown"},
         ]},
