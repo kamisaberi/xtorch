@@ -32,7 +32,7 @@ def define_env(env):
             ]}
         ]},
         {"Examples": [
-            {"Getting Started": "examples/1_getting_started_examples_for_xtorch.markdown"},
+            {"Getting Started": "examples/1_getting_started.markdown"},
             {"Computer Vision": [
                 {"Image Classification":"examples/2_1_image_classification_examples_for_xtorch.markdown"},
                 {"Object Detection":"examples/"},
