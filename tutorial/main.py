@@ -1,5 +1,8 @@
 import os
 
+BUILD_REF = False
+
+
 def define_env(env):
     """
     Define the MkDocs navigation dynamically based on environment variables.
@@ -49,28 +52,30 @@ def define_env(env):
             {"Code of Conduct": "community/code_of_conduct.md"},
         ]},
     ]
-    if not is_rtd:
-        api_ref = {"API Reference": []}
-        # Add API Reference entries
-        # api_ref = nav[2]["API Reference"]
-        api_ref.append({"Index": "api/index.md"})
+    if BUILD_REF:
+        if not is_rtd:
+            api_ref = {"API Reference": []}
+            # Add API Reference entries
+            # api_ref = nav[2]["API Reference"]
+            api_ref["API Reference"].append({"Index": "api/index.md"})
 
-        api_ref.extend([
-            {"Python API": [
-                {"Core": "api/python/core.md"},
-                {"NN Modules": "api/python/nn.md"},
-                {"Optimizers": "api/python/optim.md"},
-                {"Utilities": "api/python/utils.md"},
-            ]},
-            {"C++ API": [
-                {"Tensor Operations": "api/cpp/tensor.md"},
-                {"Core Classes": "api/cpp/core_classes.md"},
-                {"Native Extensions": "api/cpp/native.md"},
-            ]}
-        ])
-        # nav.append(api_ref)
-    else :
-        api_ref = {"API Reference": "api/ref.md"}
-    nav.append(api_ref)
+            api_ref["API Reference"].extend([
+                {"Python API": [
+                    {"Core": "api/python/core.md"},
+                    {"NN Modules": "api/python/nn.md"},
+                    {"Optimizers": "api/python/optim.md"},
+                    {"Utilities": "api/python/utils.md"},
+                ]},
+                {"C++ API": [
+                    {"Tensor Operations": "api/cpp/tensor.md"},
+                    {"Core Classes": "api/cpp/core_classes.md"},
+                    {"Native Extensions": "api/cpp/native.md"},
+                ]}
+            ])
+            # nav.append(api_ref)
+        else:
+            api_ref = {"API Reference": "api/ref.md"}
+
+        nav.append(api_ref)
     # Set the navigation
     env.conf["nav"] = nav
