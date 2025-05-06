@@ -2,8 +2,8 @@
 
 #include "../headers/transforms.h"
 
-namespace xt::transforms {
-
+namespace xt::transforms
+{
     /**
      * @class Compose
      * @brief A class to compose multiple tensor transformations into a single callable pipeline.
@@ -14,7 +14,8 @@ namespace xt::transforms {
      * they are provided. The transformations are stored as a vector of function objects and applied
      * via the call operator.
      */
-    class Compose : xt::Module{
+    class Compose : xt::Module
+    {
     public:
         /**
          * @brief Alias for a transformation function that takes a tensor and returns a tensor.
