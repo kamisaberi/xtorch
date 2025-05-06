@@ -1,6 +1,6 @@
 #include <utility>
 
-#include "../../include/transforms/compose.h"
+#include "../../include/transforms/one_of.h"
 
 namespace xt::transforms
 {
