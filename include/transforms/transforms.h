@@ -8,7 +8,7 @@
 #include "gaussian.h"
 #include "grayscale.h"
 #include "image/color_jitter.h"
-#include "lambda.h"
+#include "general/lambda.h"
 #include "general/normalize.h"
 #include "image/pad.h"
 #include "image/resize.h"
