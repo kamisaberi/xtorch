@@ -1,7 +1,9 @@
+#include <utility>
+
 #include "../../include/transforms/compose.h"
 
-namespace xt::transforms {
-
+namespace xt::transforms
+{
     /**
      * @brief Alias for a transformation function that takes a tensor and returns a tensor.
      *
@@ -16,8 +18,7 @@ namespace xt::transforms {
      * Creates a Compose object with no transformations, allowing subsequent addition of transforms
      * if needed. The internal vector of transformations is default-initialized to empty.
      */
-    Compose::Compose() {
-    }
+    Compose::Compose() = default;
 
     /**
      * @brief Constructs a Compose object with a vector of transformation functions.
@@ -26,8 +27,8 @@ namespace xt::transforms {
      * Initializes the Compose object by storing the provided vector of transformation functions,
      * which will be applied in sequence when the object is called.
      */
-    Compose::Compose(std::vector<TransformFunc> transforms)
-        : transforms(transforms) {
+    Compose::Compose(std::vector<TransformFunc> transforms): xt::Module(), transforms(std::move(transforms))
+    {
     }
 
     /**
@@ -40,11 +41,12 @@ namespace xt::transforms {
      * with the final result returned. The input tensor is moved into each transformation to optimize
      * performance by avoiding unnecessary copies where possible.
      */
-    torch::Tensor Compose::operator()(torch::Tensor input) const {
-        for (const auto &transform: this->transforms) {
+    torch::Tensor Compose::operator()(torch::Tensor input) const
+    {
+        for (const auto& transform : this->transforms)
+        {
             input = transform(std::move(input));
         }
         return input;
     }
-
 }

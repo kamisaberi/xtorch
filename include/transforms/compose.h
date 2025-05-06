@@ -14,7 +14,7 @@ namespace xt::transforms {
      * they are provided. The transformations are stored as a vector of function objects and applied
      * via the call operator.
      */
-    class Compose {
+    class Compose : xt::Module{
     public:
         /**
          * @brief Alias for a transformation function that takes a tensor and returns a tensor.
@@ -38,7 +38,7 @@ namespace xt::transforms {
          *
          * Initializes the Compose object with a predefined set of transformations to be applied in order.
          */
-        Compose(std::vector<TransformFunc> transforms);
+        explicit Compose(std::vector<TransformFunc> transforms);
 
         /**
          * @brief Applies the sequence of transformations to the input tensor.
