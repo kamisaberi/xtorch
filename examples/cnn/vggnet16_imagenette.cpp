@@ -1,6 +1,6 @@
 #include "includes/base.h"
 #include "../../include/datasets/image_classification/imagenette.h"
-#include "../../include/models/cnn/vggnet/vggnet16.h"
+#include "../../include/models/computer_vision/image_classification/vggnet16.h"
 #include "../../include/definitions/transforms.h"
 
 using namespace std;

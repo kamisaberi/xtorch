@@ -1,4 +1,4 @@
-#include "../../../../include/models/cnn/vggnet/vggnet16.h"
+#include "../../../../include/models/computer_vision/image_classification/vggnet16.h"
 
 namespace xt::models {
     VggNet16::VggNet16(int num_classes,int in_channels) : BaseModel() {
