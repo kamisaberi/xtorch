@@ -1,4 +1,4 @@
-#include "../../../../include/models/cnn/mobilenet/mobilenet-v1.h"
+#include "../../../../include/models/computer_vision/image_classification/mobilenet-v1.h"
 
 namespace xt::models {
 //     HSigmoid::HSigmoid() {
