@@ -1,4 +1,4 @@
-#include "../../../../include/models/cnn/vggnet/vggnet19.h"
+#include "../../../../include/models/computer_vision/image_classification/vggnet19.h"
 
 namespace xt::models {
     VggNet19::VggNet19(int num_classes,int in_channels) : BaseModel() {
