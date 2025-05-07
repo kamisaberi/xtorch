@@ -1,4 +1,4 @@
-#include "../../../../include/models/cnn/lenet/lenet5.h"
+#include "../../../../include/models/computer_vision/image_classification/lenet5.h"
 
 
 using namespace std;
