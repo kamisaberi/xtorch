@@ -1,4 +1,4 @@
-#include "../../../../include/models/cnn/vggnet/vggnet11.h"
+#include "../../../../include/models/computer_vision/image_classification/vggnet11.h"
 
 namespace xt::models {
     VggNet11::VggNet11(int num_classes,int in_channels) : BaseModel() {
