@@ -1,4 +1,4 @@
-#include "../../../../include/models/cnn/resnet/resnet34.h"
+#include "../../../../include/models/computer_vision/image_classification/resnet34.h"
 
 namespace xt::models {
     namespace {
