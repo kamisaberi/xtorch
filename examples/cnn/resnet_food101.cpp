@@ -1,6 +1,6 @@
 #include "includes/base.h"
 #include "../../include/datasets/image_classification/food.h"
-#include "../../include/models/cnn/resnet/resnet18.h"
+#include "../../include/models/computer_vision/image_classification/resnet18.h"
 #include "../../include/definitions/transforms.h"
 
 using namespace std;
