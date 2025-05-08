@@ -1,4 +1,4 @@
-#include "../../../../include/models/cnn/unet/unet.h"
+#include "../../../../include/models/computer_vision/object_detection/unet.h"
 
 
 namespace xt::models {
