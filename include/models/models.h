@@ -1,4 +1,4 @@
 #pragma once
 
 #include "base.h"
-#include "cnn/cnn.h"
+#include "computer_vision/computer_vision.h"
