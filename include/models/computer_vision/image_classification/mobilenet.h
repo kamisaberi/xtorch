@@ -7,7 +7,8 @@
 #include "../../base.h"
 
 
-namespace xt::models {
+namespace xt::models
+{
     //class HSigmoid(nn.Module):
     //    def __init__(self):
     //        """Hard Sigmoid activation function."""
@@ -17,7 +18,8 @@ namespace xt::models {
     //    def forward(self, x):
     //        x = self.relu6(x + 3) / 6
     //        return x
-    struct HSigmoid : torch::nn::Module {
+    struct HSigmoid : torch::nn::Module
+    {
     public:
         HSigmoid();
 
@@ -40,7 +42,8 @@ namespace xt::models {
     //        return x
     //
     //
-    struct HSwish : torch::nn::Module {
+    struct HSwish : torch::nn::Module
+    {
     public:
         HSwish();
 
@@ -77,7 +80,8 @@ namespace xt::models {
     //        x = x * self.SE(x)
     //        return x
 
-    struct SqueezeExcite : torch::nn::Module {
+    struct SqueezeExcite : torch::nn::Module
+    {
     public:
         SqueezeExcite(int input_channels, int squeeze = 4);
 
@@ -144,7 +148,8 @@ namespace xt::models {
     //
     //        return output
 
-    struct Bottleneck : torch::nn::Module {
+    struct Bottleneck : torch::nn::Module
+    {
     public:
         Bottleneck(int input_channels, int kernel, int stride, int expansion, int output_channels,
                    torch::nn::Module activation, bool se = false);
@@ -194,7 +199,6 @@ namespace xt::models {
     //                Bottleneck(input_channels=80, kernel=3, stride=1, expansion=184, output_channels=80, activation=HSwish()),
 
 
-
     //                Bottleneck(input_channels=80, kernel=3, stride=1, expansion=480, output_channels=112, activation=HSwish(), se=True),
     //                Bottleneck(input_channels=112, kernel=3, stride=1, expansion=672, output_channels=112, activation=HSwish(), se=True),
     //                Bottleneck(input_channels=112, kernel=5, stride=2, expansion=672, output_channels=160, activation=HSwish(), se=True),
@@ -226,9 +230,40 @@ namespace xt::models {
     //        x = self.classifier(x)
     //        return x
 
-    struct MobileNetV1 : BaseModel {
+    struct MobileNetV1 : BaseModel
+    {
     public:
         MobileNetV1(int input_channels, int num_classes, float dropout_prob = 0.5);
+        torch::Tensor forward(torch::Tensor x);
+
+    private:
+        torch::nn::Sequential initial_conv;
+        torch::nn::Sequential bottlenecks;
+        torch::nn::Sequential final_conv;
+        torch::nn::AdaptiveAvgPool2d pool;
+        torch::nn::Sequential classifier;
+    };
+
+
+    struct MobileNetV2 : BaseModel
+    {
+    public:
+        MobileNetV2(int input_channels, int num_classes, float dropout_prob = 0.5);
+        torch::Tensor forward(torch::Tensor x);
+
+    private:
+        torch::nn::Sequential initial_conv;
+        torch::nn::Sequential bottlenecks;
+        torch::nn::Sequential final_conv;
+        torch::nn::AdaptiveAvgPool2d pool;
+        torch::nn::Sequential classifier;
+    };
+
+
+    struct MobileNetV3 : BaseModel
+    {
+    public:
+        MobileNetV3(int input_channels, int num_classes, float dropout_prob = 0.5);
         torch::Tensor forward(torch::Tensor x);
 
     private:
