@@ -1,6 +1,6 @@
 #pragma once
 
-#include "cityscapes.h"
+#include "../computer_vision/semantic_segmentation/cityscapes.h"
 #include "coco.h"
-#include "oxfordIII_t_pet.h"
+#include "../computer_vision/semantic_segmentation/oxfordIII_t_pet.h"
 #include "sb_dataset.h"
