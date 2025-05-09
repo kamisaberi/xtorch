@@ -1,6 +1,6 @@
 #pragma once
 
-#include "hmdb.h"
-#include "kinetics.h"
+#include "../computer_vision/video_classification/hmdb.h"
+#include "../computer_vision/video_classification/kinetics.h"
 #include "moving_mnist.h"
-#include "ucf.h"
+#include "../computer_vision/video_classification/ucf.h"
