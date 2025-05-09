@@ -1,4 +1,4 @@
-#include "../../../include/datasets/specific/kitti.h"
+#include "../../../include/datasets/computer_vision/stereo_matching/kitti_2012_stereo.h"
 
 namespace xt::data::datasets {
 
