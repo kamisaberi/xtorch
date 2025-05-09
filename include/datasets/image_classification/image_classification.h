@@ -28,7 +28,7 @@
 #include "../computer_vision/image_classification/rendered_sst2.h"
 #include "../computer_vision/image_classification/semeion.h"
 #include "../computer_vision/image_classification/stanford_cars.h"
-#include "stl.h"
+#include "../computer_vision/image_classification/stl.h"
 #include "sun.h"
 #include "svhn.h"
 #include "usps.h"
