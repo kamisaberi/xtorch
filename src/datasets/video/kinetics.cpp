@@ -1,4 +1,4 @@
-#include "../../../include/datasets/video/kinetics.h"
+#include "../../../include/datasets/computer_vision/video_classification/kinetics.h"
 
 namespace xt::data::datasets {
 
