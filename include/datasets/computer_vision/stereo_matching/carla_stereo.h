@@ -21,17 +21,5 @@ namespace xt::data::datasets {
     };
 
 
-    class CREStereo : public BaseDataset {
-    public :
-        explicit  CREStereo(const std::string &root);
-        CREStereo(const std::string &root, DataMode mode);
-        CREStereo(const std::string &root, DataMode mode , bool download);
-        CREStereo(const std::string &root, DataMode mode , bool download, TransformType transforms);
 
-
-    private :
-        void load_data();
-
-        void check_resources();
-    };
 }
