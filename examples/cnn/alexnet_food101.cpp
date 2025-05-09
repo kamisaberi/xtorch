@@ -1,5 +1,5 @@
 #include "includes/base.h"
-#include "../../include/datasets/image_classification/food.h"
+#include "../../include/datasets/computer_vision/image_classification/food.h"
 #include "../../include/models/computer_vision/image_classification/alexnet.h"
 #include "../../include/definitions/transforms.h"
 
