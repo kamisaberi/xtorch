@@ -27,7 +27,7 @@
 #include "../computer_vision/image_classification/qmnist.h"
 #include "../computer_vision/image_classification/rendered_sst2.h"
 #include "../computer_vision/image_classification/semeion.h"
-#include "stanford_cars.h"
+#include "../computer_vision/image_classification/stanford_cars.h"
 #include "stl.h"
 #include "sun.h"
 #include "svhn.h"
