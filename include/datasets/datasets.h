@@ -16,6 +16,6 @@
 #include "sentiment_analysis/sentiment_analysis.h"
 #include "sequence_tagging/sequence_tagging.h"
 #include "specific/specific.h"
-#include "stereo_matching_depth_estimation/stereo_matching_depth_estimation.h"
+#include "computer_vision/stereo_matching/stereo_matching.h"
 #include "text_classification/text_classification.h"
 #include "video/video.h"
