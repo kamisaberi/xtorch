@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../computer_vision/image_classification/caltech.h"
+#include "../computer_vision/image_classification/caltech256.h"
 #include "../computer_vision/image_classification/celeba.h"
 #include "../computer_vision/image_classification/cifar_10.h"
 #include "cifar_100.h"
