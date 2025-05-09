@@ -1,4 +1,4 @@
-#include "../../../include/datasets/specific/sintel.h"
+#include "../../../../include/datasets/computer_vision/stereo_matching/sintel_stereo.h"
 
 namespace xt::data::datasets {
 
