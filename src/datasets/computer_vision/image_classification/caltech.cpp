@@ -1,4 +1,4 @@
-#include "../../../include/datasets/image_classification/caltech.h"
+#include "../../../../include/datasets/computer_vision/image_classification/caltech.h"
 
 namespace xt::data::datasets {
 
