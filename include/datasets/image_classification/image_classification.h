@@ -24,7 +24,7 @@
 #include "omniglot.h"
 #include "../computer_vision/image_classification/pcam.h"
 #include "../computer_vision/image_classification/places.h"
-#include "qmnist.h"
+#include "../computer_vision/image_classification/qmnist.h"
 #include "rendered_sst2.h"
 #include "semeion.h"
 #include "stanford_cars.h"
