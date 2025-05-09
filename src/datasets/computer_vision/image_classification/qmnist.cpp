@@ -1,4 +1,4 @@
-#include "../../../include/datasets/image_classification/qmnist.h"
+#include "../../../../include/datasets/computer_vision/image_classification/qmnist.h"
 
 namespace xt::data::datasets
 {
