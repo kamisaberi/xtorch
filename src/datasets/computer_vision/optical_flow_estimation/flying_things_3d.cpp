@@ -1,4 +1,4 @@
-#include "../../../include/datasets/scene_flow/flying_things_3d.h"
+#include "../../../../include/datasets/computer_vision/optical_flow_estimation/flying_things_3d.h"
 
 namespace xt::data::datasets {
 
