@@ -1,6 +1,6 @@
 #pragma once
 
-#include "cre_stereo.h"
+#include "../computer_vision/stereo_matching/cre_stereo.h"
 #include "eth_3d_stereo.h"
 #include "falling_things_stereo.h"
 #include "in_stereo.h"
