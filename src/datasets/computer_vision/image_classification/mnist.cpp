@@ -1,4 +1,4 @@
-#include "../../../include/datasets/image_classification/mnist.h"
+#include "../../../../include/datasets/computer_vision/image_classification/mnist.h"
 
 namespace xt::data::datasets {
 
