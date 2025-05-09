@@ -5,7 +5,7 @@
 #include "definitions/definitions.h"
 #include "face_recognition/face_recognition.h"
 #include "general/general.h"
-#include "image_classification/image_classification.h"
+#include "computer_vision/image_classification/image_classification.h"
 #include "language_modeling/language_modeling.h"
 #include "machine_translation/machine_translation.h"
 #include "natural_language_inference/natural_language_inference.h"
