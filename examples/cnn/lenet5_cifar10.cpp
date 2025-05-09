@@ -1,5 +1,5 @@
 #include "includes/base.h"
-#include "../../include/datasets/image_classification/cifar_10.h"
+#include "../../include/datasets/computer_vision/image_classification/cifar_10.h"
 #include "../../include/models/computer_vision/image_classification/lenet5.h"
 #include "../../include/definitions/transforms.h"
 

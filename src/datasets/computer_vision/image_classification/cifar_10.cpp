@@ -1,4 +1,4 @@
-#include "../../../include/datasets/image_classification/cifar_100.h"
+#include "../../../../include/datasets/computer_vision/image_classification/cifar_10.h"
 
 using namespace std;
 namespace fs = std::filesystem;
@@ -12,7 +12,7 @@ namespace fs = std::filesystem;
  */
 namespace xt::data::datasets
 {
-    /* ------------------ CIFAR100 Implementation ------------------ */
+    /* ------------------ CIFAR10 Implementation ------------------ */
 
     /**
      * @brief Default constructor with root directory only
@@ -23,9 +23,9 @@ namespace xt::data::datasets
      * - Mode: TRAIN
      * - Download: false
      */
-    CIFAR100::CIFAR100(const std::string& root): CIFAR100::CIFAR100(root, DataMode::TRAIN, false)
+    CIFAR10::CIFAR10(const std::string& root): CIFAR10::CIFAR10(root, DataMode::TRAIN, false)
     {
-        /* Constructor chaining to initialize with default parameters */
+        // Simple delegation to main constructor with default params
     }
 
     /**
@@ -36,9 +36,9 @@ namespace xt::data::datasets
      *
      * @note Delegates to main constructor with download=false
      */
-    CIFAR100::CIFAR100(const std::string& root, DataMode mode): CIFAR100::CIFAR100(root, mode, false)
+    CIFAR10::CIFAR10(const std::string& root, DataMode mode): CIFAR10::CIFAR10(root, mode, false)
     {
-        /* Constructor chaining to initialize with specified mode */
+        // Delegation to handle mode while keeping download disabled
     }
 
     /**
@@ -53,16 +53,14 @@ namespace xt::data::datasets
      * - Optional downloading with checksum verification
      * - Archive extraction
      * - Data loading
-     *
-     * @throws std::runtime_error If download fails or verification fails
      */
-    CIFAR100::CIFAR100(const std::string& root, DataMode mode, bool download) : BaseDataset(root, mode, download)
+    CIFAR10::CIFAR10(const std::string& root, DataMode mode, bool download) : BaseDataset(root, mode, download)
     {
         // Initialize filesystem paths for dataset access
         this->root = fs::path(root);
         this->dataset_path = this->root / this->dataset_folder_name;
 
-        bool res = true;  // Track download/extraction success
+        bool res = true;  // Track success of download/extraction operations
 
         // Handle automatic download if requested
         if (download)
@@ -114,8 +112,8 @@ namespace xt::data::datasets
      * @note Maintains same functionality as main constructor while
      * adding transform support through base class initialization
      */
-    CIFAR100::CIFAR100(const std::string& root, DataMode mode, bool download,
-                       TransformType transforms) : BaseDataset(root, mode, download, transforms)
+    CIFAR10::CIFAR10(const std::string& root, DataMode mode, bool download,
+                     TransformType transforms) : BaseDataset(root, mode, download, transforms)
     {
         // Same initialization as main constructor
         this->root = fs::path(root);
@@ -156,14 +154,14 @@ namespace xt::data::datasets
 
     /**
      * @brief Retrieve a single sample from the dataset
-     * @param index Position of sample to retrieve (0 <= index < size())
+     * @param index Position of sample to retrieve
      * @return torch::data::Example<> containing image tensor and label
      * @author Kamran Saberifard
      *
      * @note Returns cloned tensor to ensure memory safety and proper
      * ownership management in the PyTorch ecosystem
      */
-    torch::data::Example<> CIFAR100::get(size_t index)
+    torch::data::Example<> CIFAR10::get(size_t index)
     {
         // Clone both data and label tensors to prevent memory issues
         return {data[index].clone(), torch::tensor(labels[index])};
@@ -171,68 +169,71 @@ namespace xt::data::datasets
 
     /**
      * @brief Get the total number of samples in dataset
-     * @return torch::optional<size_t> Dataset size (50,000 train or 10,000 test)
+     * @return torch::optional<size_t> Dataset size
      * @author Kamran Saberifard
+     *
+     * @note Returns actual size of loaded data (typically 50,000 for train)
      */
-    torch::optional<size_t> CIFAR100::size() const
+    torch::optional<size_t> CIFAR10::size() const
     {
-        // Return count of loaded samples
-        return data.size();
+        return data.size();  // Return count of loaded samples
     }
 
     /**
-     * @brief Internal method to load CIFAR-100 binary data
+     * @brief Internal method to load CIFAR-10 binary data
      * @param mode Whether to load training or test data
      * @author Kamran Saberifard
      *
      * @details Handles:
-     * - Binary file parsing (2 label bytes + 3072 image bytes per sample)
-     * - Fine label extraction (skips coarse label)
+     * - Binary file parsing (1 label byte + 3072 image bytes per sample)
+     * - Label extraction and type conversion
      * - Image tensor conversion and reshaping
      * - Channel permutation to PyTorch standard (C, H, W)
      * - Data storage in member vectors
      */
-    void CIFAR100::load_data(DataMode mode)
+    void CIFAR10::load_data(DataMode mode)
     {
-        // CIFAR-100 has single training file (50000 samples)
-        std::string file_path = (dataset_path / train_file_name).string();
-        cout << "train file path : " << file_path << endl;
+        const int num_files = 5;  // CIFAR-10 has 5 training batch files
 
-        // Open binary file
-        std::ifstream file(file_path, std::ios::binary);
-        if (!file.is_open())
+        // Process each training file in sequence
+        for (auto path : this->train_file_names)
         {
-            std::cerr << "Failed to open file: " << file_path << std::endl;
-            return;
+            // Construct full path to binary file
+            std::string file_path = this->dataset_path / path;
+
+            // Open file in binary mode
+            std::ifstream file(file_path, std::ios::binary);
+            if (!file.is_open())
+            {
+                std::cerr << "Failed to open file: " << file_path << std::endl;
+                continue;  // Skip to next file if open fails
+            }
+
+            // Each file contains exactly 10,000 samples
+            for (int j = 0; j < 10000; ++j)
+            {
+                // Read single byte label (0-9)
+                uint8_t label;
+                file.read(reinterpret_cast<char*>(&label), sizeof(label));
+                labels.push_back(static_cast<int64_t>(label));  // Store as int64
+
+                // Read image data (32x32x3 = 3072 bytes)
+                std::vector<uint8_t> image(3072);
+                file.read(reinterpret_cast<char*>(image.data()), image.size());
+
+                // Convert to tensor and reshape to 3x32x32
+                auto tensor_image = torch::from_blob(image.data(), {3, 32, 32},
+                                                   torch::kByte).clone();  // Clone for ownership
+
+                // Permute dimensions from (C, H, W) to (C, W, H) and back to (C, H, W)
+                // (Note: Original CIFAR-10 binary format has unusual dimension ordering)
+                tensor_image = tensor_image.permute({0, 2, 1});
+
+                // Store final tensor in data vector
+                data.push_back(tensor_image);
+            }
+
+            file.close();  // Explicit close (RAII would handle this but clear intent)
         }
-
-        // Process all 50000 samples in file
-        for (int j = 0; j < 50000; ++j)
-        {
-            // Read labels (CIFAR-100 specific format)
-            uint8_t label;
-            file.read(reinterpret_cast<char*>(&label), sizeof(label));  // Skip coarse label (not used)
-            file.read(reinterpret_cast<char*>(&label), sizeof(label));  // Read fine label (0-99)
-
-            // Store fine-grained label (100 classes)
-            labels.push_back(static_cast<int64_t>(label));
-
-            // Read image data (32x32x3 = 3072 bytes)
-            std::vector<uint8_t> image(3072);
-            file.read(reinterpret_cast<char*>(image.data()), image.size());
-
-            // Convert to tensor and reshape to 3x32x32
-            auto tensor_image = torch::from_blob(image.data(), {3, 32, 32},
-                                             torch::kByte).clone();  // Clone for memory ownership
-
-            // Permute dimensions from (C, H, W) to (C, W, H) and back to (C, H, W)
-            // (Original CIFAR-100 binary format has unusual dimension ordering)
-            tensor_image = tensor_image.permute({0, 2, 1});
-
-            // Store final tensor in data vector
-            data.push_back(tensor_image);
-        }
-
-        file.close();  // Explicit close (RAII would handle this but clear intent)
     }
 }
