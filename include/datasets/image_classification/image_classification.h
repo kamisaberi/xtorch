@@ -19,7 +19,7 @@
 #include "../computer_vision/image_classification/imagenet.h"
 #include "imagenette.h"
 #include "../computer_vision/image_classification/inaturalist.h"
-#include "kmnist.h"
+#include "../computer_vision/image_classification/kmnist.h"
 #include "mnist.h"
 #include "omniglot.h"
 #include "pcam.h"
