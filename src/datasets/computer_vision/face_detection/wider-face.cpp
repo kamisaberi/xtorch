@@ -1,4 +1,4 @@
-#include "../../../include/datasets/face_recognition/wider_face.h"
+#include "../../../../include/datasets/computer_vision/face_detection/wider_face.h"
 
 namespace xt::data::datasets {
 

@@ -3,4 +3,4 @@
 
 
 #include "lfw.h"
-#include "wider_face.h"
+#include "../computer_vision/face_detection/wider_face.h"
