@@ -14,7 +14,7 @@
 #include "fgvc_aircraft.h"
 #include "flickr.h"
 #include "../computer_vision/image_classification/flowers.h"
-#include "food.h"
+#include "../computer_vision/image_classification/food.h"
 #include "gtsrb.h"
 #include "imagenet.h"
 #include "imagenette.h"
