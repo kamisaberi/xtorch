@@ -1,4 +1,4 @@
-#include "../../../include/datasets/natural_language_inference/qnli.h"
+#include "../../../../include/datasets/natural_language_processing/text_classification/qnli.h"
 
 namespace xt::data::datasets {
 
