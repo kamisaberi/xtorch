@@ -1,6 +1,6 @@
 #pragma once
 
-#include "cola.h"
+#include "../natural_language_processing/text_classification/cola.h"
 #include "mnli.h"
 #include "mrpc.h"
 #include "qnli.h"
