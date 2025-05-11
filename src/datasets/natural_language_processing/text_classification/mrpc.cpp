@@ -1,4 +1,4 @@
-#include "../../../include/datasets/natural_language_inference/mrpc.h"
+#include "../../../../include/datasets/natural_language_processing/text_classification/mrpc.h"
 
 namespace xt::data::datasets {
 
