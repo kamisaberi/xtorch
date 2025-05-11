@@ -1,4 +1,4 @@
-#include "../../../include/datasets/audio_speech/urban_sound.h"
+#include "../../../../include/datasets/audio_processing/environmental_sound_classification/urban_sound.h"
 
 namespace xt::data::datasets {
 
