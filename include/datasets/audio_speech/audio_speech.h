@@ -3,7 +3,7 @@
 #include "../audio_processing/speech_recognition/common_voice.h"
 #include "crema_d.h"
 #include "esc.h"
-#include "gtzan.h"
+#include "../audio_processing/music_genre_classification/gtzan.h"
 #include "../audio_processing/speech_recognition/librispeech.h"
 #include "../audio_processing/speech_synthesis/lj_speech.h"
 #include "speech_commands.h"
