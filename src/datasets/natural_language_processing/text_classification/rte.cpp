@@ -1,4 +1,4 @@
-#include "../../../include/datasets/natural_language_inference/rte.h"
+#include "../../../../include/datasets/natural_language_processing/text_classification/rte.h"
 
 namespace xt::data::datasets {
 
