@@ -11,5 +11,5 @@
 #include "../audio_processing/speech_recognition/timit.h"
 #include "urban_sound.h"
 #include "../audio_processing/speech_synthesis/dr_vctk.h"
-#include "vox_celeb.h"
+#include "../audio_processing/speaker_identification_and_verification/vox_celeb.h"
 #include "yes_no.h"
