@@ -12,4 +12,4 @@
 #include "urban_sound.h"
 #include "../audio_processing/speech_synthesis/dr_vctk.h"
 #include "../audio_processing/speaker_identification_and_verification/vox_celeb.h"
-#include "yes_no.h"
+#include "../audio_processing/binary_speech_classification/yes_no.h"
