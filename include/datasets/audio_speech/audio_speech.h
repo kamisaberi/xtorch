@@ -1,5 +1,5 @@
 #pragma once
-#include "cmu_arctic.h"
+#include "../audio_processing/speech_synthesis/cmu_arctic.h"
 #include "common_voice.h"
 #include "crema_d.h"
 #include "esc.h"
