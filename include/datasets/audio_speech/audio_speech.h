@@ -5,7 +5,7 @@
 #include "esc.h"
 #include "gtzan.h"
 #include "librispeech.h"
-#include "lj_speech.h"
+#include "../audio_processing/speech_synthesis/lj_speech.h"
 #include "speech_commands.h"
 #include "tedlium.h"
 #include "timit.h"
