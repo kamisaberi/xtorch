@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ag_news.h"
+#include "../natural_language_processing/text_classification/ag_news.h"
 #include "amazon_review.h"
 #include "db_pedia.h"
 #include "sogou_news.h"
