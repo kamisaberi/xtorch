@@ -10,6 +10,6 @@
 #include "tedlium.h"
 #include "timit.h"
 #include "urban_sound.h"
-#include "vctk.h"
+#include "../audio_processing/speech_synthesis/dr_vctk.h"
 #include "vox_celeb.h"
 #include "yes_no.h"
