@@ -1,4 +1,4 @@
-#include "../../../include/datasets/audio_speech/librispeech.h"
+#include "../../../../include/datasets/audio_processing/speech_recognition/librispeech.h"
 
 namespace xt::data::datasets {
 
