@@ -1,10 +1,10 @@
 #pragma once
 #include "../audio_processing/speech_synthesis/cmu_arctic.h"
-#include "common_voice.h"
+#include "../audio_processing/speech_recognition/common_voice.h"
 #include "crema_d.h"
 #include "esc.h"
 #include "gtzan.h"
-#include "librispeech.h"
+#include "../audio_processing/speech_recognition/librispeech.h"
 #include "../audio_processing/speech_synthesis/lj_speech.h"
 #include "speech_commands.h"
 #include "tedlium.h"
