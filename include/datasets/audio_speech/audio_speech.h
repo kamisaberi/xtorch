@@ -6,7 +6,7 @@
 #include "../audio_processing/music_genre_classification/gtzan.h"
 #include "../audio_processing/speech_recognition/librispeech.h"
 #include "../audio_processing/speech_synthesis/lj_speech.h"
-#include "speech_commands.h"
+#include "../audio_processing/speech_command_recognition/speech_commands.h"
 #include "../audio_processing/speech_recognition/tedlium.h"
 #include "../audio_processing/speech_recognition/timit.h"
 #include "../audio_processing/environmental_sound_classification/urban_sound.h"

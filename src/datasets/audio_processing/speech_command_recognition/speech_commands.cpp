@@ -1,4 +1,22 @@
-//
-// Created by pc on 5/11/2025.
-//
+#include "../../../../include/datasets/audio_processing/speech_command_recognition/speech_commands.h"
 
+namespace xt::data::datasets {
+
+    SpeechCommands::SpeechCommands(const std::string &root): SpeechCommands::SpeechCommands(root, DataMode::TRAIN, false) {
+    }
+
+    SpeechCommands::SpeechCommands(const std::string &root, DataMode mode): SpeechCommands::SpeechCommands(root, mode, false) {
+    }
+
+    SpeechCommands::SpeechCommands(const std::string &root, DataMode mode, bool download) : BaseDataset(root, mode, download) {
+        throw std::runtime_error("SpeechCommands: SpeechCommands not implemented");
+    }
+
+
+    SpeechCommands::SpeechCommands(const std::string &root, DataMode mode, bool download,
+                         TransformType transforms) : BaseDataset(root, mode, download, transforms) {
+        throw std::runtime_error("SpeechCommands: SpeechCommands not implemented");
+    }
+
+
+}
