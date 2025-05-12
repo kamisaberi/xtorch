@@ -1,9 +1,7 @@
 #pragma once
 
 
-#include "image_classification/alexnet.h"
-#include "image_classification/lenet5.h"
-#include "image_classification/mobilenet-v3.h"
-#include "image_classification/resnet18.h"
-#include "image_segmentation/unet.h"
-#include "image_classification/vggnet16.h"
+#include "image_classification/image_classification.h"
+#include "image_segmentation/image_segmentation.h"
+#include "object_detection/object_detection.h"
+#include "vision_transformers/vision_transformers.h"
