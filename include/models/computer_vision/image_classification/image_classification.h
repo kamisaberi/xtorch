@@ -15,4 +15,11 @@
 #include "network_in_network.h"
 #include "pyramidal_net.h"
 #include "resnet.h"
+#include "se_net.h"
+#include "vggnet.h"
+#include "wide-resnet.h"
+#include "xception.h"
+#include "zefnet.h"
+
+
 
