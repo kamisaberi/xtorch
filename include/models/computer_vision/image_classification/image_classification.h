@@ -6,4 +6,13 @@
 #include "cbam.h"
 #include "dense_net.h"
 #include "efficient_net.h"
+#include "google_net.h"
+#include "highway_network.h"
+#include "inception.h"
+#include "inception_resnet.h"
+#include "lenet5.h"
+#include "mobilenet.h"
+#include "network_in_network.h"
+#include "pyramidal_net.h"
+#include "resnet.h"
 
