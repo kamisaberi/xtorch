@@ -1,6 +1,6 @@
 #include <utility>
 
-#include "../../../include/transforms/some_of.h"
+#include "../../../include/transforms/appliers/some_of.h"
 
 namespace xt::transforms
 {

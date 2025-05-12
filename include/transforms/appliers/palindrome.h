@@ -1,15 +1,15 @@
 #pragma once
 
-#include "../headers/transforms.h"
+#include "../../headers/transforms.h"
 
 namespace xt::transforms
 {
-    class SomeOf : xt::Module
+    class Palindrome : xt::Module
     {
     public:
         using TransformFunc = std::function<torch::Tensor(torch::Tensor)>;
-        SomeOf();
-        explicit SomeOf(std::vector<TransformFunc> transforms);
+        Palindrome();
+        explicit Palindrome(std::vector<TransformFunc> transforms);
         torch::Tensor operator()(torch::Tensor input) const override;
 
     private:

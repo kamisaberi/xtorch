@@ -1,15 +1,15 @@
 #pragma once
 
-#include "../headers/transforms.h"
+#include "../../headers/transforms.h"
 
 namespace xt::transforms
 {
-    class ReplayCompose : xt::Module
+    class RandomApply : xt::Module
     {
     public:
         using TransformFunc = std::function<torch::Tensor(torch::Tensor)>;
-        ReplayCompose();
-        explicit ReplayCompose(std::vector<TransformFunc> transforms);
+        RandomApply();
+        explicit RandomApply(std::vector<TransformFunc> transforms);
         torch::Tensor operator()(torch::Tensor input) const override;
 
     private:
