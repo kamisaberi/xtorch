@@ -1,1 +1,15 @@
 #pragma once
+
+#include "a3c.h"
+#include "alpha_go.h"
+#include "alpha_zero.h"
+#include "ddpg.h"
+#include "double_dqn.h"
+#include "dqn.h"
+#include "dueling_dqn.h"
+#include "impala.h"
+#include "mu_zero.h"
+#include "pro.h"
+#include "rainbow.h"
+#include "sac.h"
+#include "td3.h"
