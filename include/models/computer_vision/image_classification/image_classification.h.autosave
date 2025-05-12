@@ -1,0 +1,14 @@
+#pragma once
+
+
+#include "alexnet.h"
+#include "amoeba_net.h"
+#include "cbam.h"
+#include "dense_net.h"
+#include "efficient_net.h"
+#include "google_net.h"
+#include "highway_network.h"
+#include "inception.h"
+#include "inception_resnet.h"
+#include "inception_resnet.h"
+
