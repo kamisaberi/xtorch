@@ -1,4 +1,6 @@
 #pragma once
 
-#include "autoencoders/autoencoder.h"
-#include "diffusion/"
+#include "autoencoders/autoencoders.h"
+#include "diffusion/diffusion.h"
+#include "gans//gans.h"
+#include "others/others.h"
