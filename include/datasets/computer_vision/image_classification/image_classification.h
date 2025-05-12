@@ -1,5 +1,6 @@
 #pragma once
 
+#include "caltech101.h"
 #include "caltech256.h"
 #include "celeba.h"
 #include "cifar_10.h"
@@ -8,8 +9,8 @@
 #include "dtd.h"
 #include "emnist.h"
 #include "euro_sat.h"
-#include "fashion_mnist.h"
 #include "fake_data.h"
+#include "fashion_mnist.h"
 #include "fer.h"
 #include "fgvc_aircraft.h"
 #include "flickr.h"
@@ -20,6 +21,7 @@
 #include "imagenette.h"
 #include "inaturalist.h"
 #include "kmnist.h"
+#include "lfw_people.h"
 #include "mnist.h"
 #include "omniglot.h"
 #include "pcam.h"
