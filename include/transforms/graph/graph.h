@@ -1,1 +1,18 @@
 #pragma once
+
+#include "drop_edge_and_feature.h"
+#include "edge_add.h"
+#include "edge_drop.h"
+#include "edge_feature_masking.h"
+#include "edge_perturbation.h"
+#include "feature_augmentation.h"
+#include "feature_dropout.h"
+#include "graph_coarsening.h"
+#include "graph_diffusion.h"
+#include "graph_mix_up.h"
+#include "node_drop.h"
+#include "node_feature_masking.h"
+#include "node_feature_shuffling.h"
+#include "node_mix_up.h"
+#include "random_walk_subgraph.h"
+#include "subgraph.h"
