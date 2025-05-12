@@ -4,22 +4,22 @@
 #include <vector>
 #include <fstream>
 #include <string>
-#include "../../base.h"
+#include "../../../../include/models/base.h"
 
 
 using namespace std;
 
 
 namespace xt::models {
-    struct NasNetB : BaseModel {
+    struct RegNetY : BaseModel {
         mutable torch::nn::Sequential layer1 = nullptr, layer2 = nullptr, layer3 = nullptr, layer4 = nullptr, layer5 =
                 nullptr;
         mutable torch::nn::Sequential fc = nullptr, fc1 = nullptr, fc2 = nullptr;
 
     public:
-        NasNetB(int num_classes /* classes */, int in_channels = 3/* input channels */);
+        RegNetY(int num_classes /* classes */, int in_channels = 3/* input channels */);
 
-        NasNetB(int num_classes, int in_channels, std::vector<int64_t> input_shape);
+        RegNetY(int num_classes, int in_channels, std::vector<int64_t> input_shape);
 
         torch::Tensor forward(torch::Tensor x) const override;
     };
