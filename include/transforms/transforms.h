@@ -1,6 +1,6 @@
 #pragma once
 
-#include "compose.h"
+#include "appliers/compose.h"
 #include "convert.h"
 #include "crop.h"
 #include "image/cutout.h"

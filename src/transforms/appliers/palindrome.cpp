@@ -1,6 +1,6 @@
 #include <utility>
 
-#include "../../../include/transforms/palindrome.h"
+#include "../../../include/transforms/appliers/palindrome.h"
 
 namespace xt::transforms
 {
