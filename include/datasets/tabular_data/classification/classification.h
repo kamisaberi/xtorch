@@ -1,0 +1,13 @@
+#pragma once
+#include "balance_scale.h"
+#include "car_evaluation.h"
+#include "ecoli.h"
+#include "glass_identification.h"
+#include "iris_dataset.h"
+#include "palmer_penguin_dataset.h"
+#include "thyroid_disease.h"
+#include "vertebral_column.h"
+#include "wheat_seeds.h"
+#include "wine_dataset.h"
+#include "yeast.h"
+#include "zoo_dataset.h"
