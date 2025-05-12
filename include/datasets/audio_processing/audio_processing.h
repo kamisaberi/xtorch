@@ -1,2 +1,18 @@
 #pragma once
 
+#include "audio_event_detection/audio_event_detection.h"
+#include "binary_speech_classification/binary_speech_classification.h"
+#include "emotion_recognition/emotion_recognition.h"
+#include "environmental_sound_classification/environmental_sound_classification.h"
+#include "intent_classification/intent_classification.h"
+#include "music_genre_classification/music_genre_classification.h"
+#include "music_information_retrieval/music_information_retrieval.h"
+#include "music_source_separation/music_source_separation.h"
+#include "music_tagging/music_tagging.h"
+#include "pronunciation_dictionary/pronunciation_dictionary.h"
+#include "sound_event_detection/sound_event_detection.h"
+#include "speaker_identification_and_verification/speaker_identification_and_verification.h"
+#include "speech_command_recognition/speech_command_recognition.h"
+#include "speech_recognition/speech_recognition.h"
+#include "speech_separation/speech_separation.h"
+#include "speech_synthesis/speech_synthesis.h"
