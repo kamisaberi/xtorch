@@ -4,7 +4,7 @@
 
 namespace xt::transforms
 {
-    class OneOf : xt::Module
+    class OneOf final : public xt::Module
     {
     public:
         using TransformFunc = std::function<torch::Tensor(torch::Tensor)>;
