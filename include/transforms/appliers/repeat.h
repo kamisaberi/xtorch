@@ -10,8 +10,7 @@ namespace xt::transforms
         using TransformFunc = std::function<torch::Tensor(torch::Tensor)>;
         Repeat();
         explicit Repeat(TransformFunc transform, int n_times);
-        torch::Tensor operator()(torch::Tensor input)  const override;
-
+        torch::Tensor forward(torch::Tensor input) const override;
     private:
         TransformFunc transform;
         int n_times_;
