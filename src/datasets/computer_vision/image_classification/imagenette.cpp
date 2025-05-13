@@ -87,7 +87,7 @@ namespace xt::data::datasets {
         // Initialize transforms if provided
         if (!transforms.empty()) {
             this->transforms = transforms;
-            this->compose = xt::data::transforms::Compose(transforms);
+            this->compose = xt::transforms::Compose(transforms);
         }
         // Verify dataset resources
         check_resources(root, download);
