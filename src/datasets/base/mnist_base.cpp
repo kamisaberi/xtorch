@@ -17,7 +17,7 @@ namespace xt::data::datasets {
         root, mode, download) {
         this->transforms = transforms;
         if (!transforms.empty()) {
-            this->compose = xt::data::transforms::Compose(this->transforms);
+            this->compose = xt::transforms::Compose(this->transforms);
         }
     }
 
