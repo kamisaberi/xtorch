@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../headers/datasets.h"
+#include "datasets/common.h"
 
 using namespace std;
 namespace fs = std::filesystem;
@@ -103,7 +103,7 @@ namespace xt::data::datasets {
         fs::path dataset_path;
 
         /// Transform composition pipeline
-        xt::data::transforms::Compose compose;
+        xt::transforms::Compose compose;
 
         /// Sequence of tensor transforms to apply
         vector<std::function<torch::Tensor(torch::Tensor)>> transforms = {};
