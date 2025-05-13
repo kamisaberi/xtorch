@@ -11,7 +11,7 @@ namespace xt::transforms
     {
     }
 
-    torch::Tensor Repeat::operator()(torch::Tensor input) const
+    torch::Tensor Repeat::forward(torch::Tensor input) const
     {
         for (int i = 1; i < this->n_times_; i++)
         {
