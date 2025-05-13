@@ -12,5 +12,6 @@ namespace xt
     public:
         Module();
         virtual  torch::Tensor forward(torch::Tensor input) const = 0;
+        torch::Tensor operator()(torch::Tensor input) const ;
     };
 }

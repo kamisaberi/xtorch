@@ -41,10 +41,10 @@ namespace xt::transforms
      * with the final result returned. The input tensor is moved into each transformation to optimize
      * performance by avoiding unnecessary copies where possible.
      */
-    torch::Tensor Compose::operator()(torch::Tensor input) const
-    {
-        return this->forward(std::move(input));
-    }
+    // torch::Tensor Compose::operator()(torch::Tensor input) const
+    // {
+    //     return this->forward(std::move(input));
+    // }
 
     torch::Tensor Compose::forward(torch::Tensor input) const
     {
