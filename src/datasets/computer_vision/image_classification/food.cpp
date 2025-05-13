@@ -57,7 +57,7 @@ namespace xt::data::datasets {
         root, mode, download, transforms) {
         this->transforms = transforms;
         if (!transforms.empty()) {
-            this->compose = xt::data::transforms::Compose(transforms);
+            this->compose = xt::transforms::Compose(transforms);
         }
         check_resources();
         load_classes();
