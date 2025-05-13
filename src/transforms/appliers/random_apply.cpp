@@ -12,10 +12,6 @@ namespace xt::transforms
     {
     }
 
-    torch::Tensor RandomApply::operator()(torch::Tensor input) const
-    {
-        return this->forward(input);
-    }
 
     torch::Tensor RandomApply::forward(torch::Tensor input) const
     {

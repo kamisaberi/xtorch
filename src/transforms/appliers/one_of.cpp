@@ -12,10 +12,6 @@ namespace xt::transforms
     {
     }
 
-    torch::Tensor OneOf::operator()(torch::Tensor input) const
-    {
-        return  this->forward(std::move(input));
-    }
 
     torch::Tensor OneOf::forward(torch::Tensor input) const
     {
