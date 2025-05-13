@@ -12,7 +12,7 @@ namespace xt::transforms
     {
     }
 
-    torch::Tensor SomeOf::operator()(torch::Tensor input) const
+    torch::Tensor SomeOf::forward(torch::Tensor input) const
     {
         int index = torch::randint(0, transforms.size() - 1, {}, torch::kInt32).item<int>();
         input = transforms[index](std::move(input));
