@@ -10,7 +10,6 @@ namespace xt::transforms
         using TransformFunc = std::function<torch::Tensor(torch::Tensor)>;
         RandomApply();
         explicit RandomApply(std::vector<TransformFunc> transforms);
-        torch::Tensor operator()(torch::Tensor input) const ;
         torch::Tensor forward(torch::Tensor input) const override;
 
     private:
