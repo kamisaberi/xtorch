@@ -14,7 +14,7 @@ namespace xt::transforms
      * they are provided. The transformations are stored as a vector of function objects and applied
      * via the call operator.
      */
-    class Compose final : xt::Module
+    class Compose final : public xt::Module
     {
     public:
         /**
