@@ -43,6 +43,11 @@ namespace xt::transforms
      */
     torch::Tensor Compose::operator()(torch::Tensor input) const
     {
+        return this->forward(std::move(input));
+    }
+
+    torch::Tensor Compose::forward(torch::Tensor input) const
+    {
         for (const auto& transform : this->transforms)
         {
             input = transform(std::move(input));

@@ -1,4 +1,4 @@
-#include "../../../include/datasets/base/base.h"
+#include "datasets/base/base.h"
 
 namespace xt::data::datasets {
     BaseDataset::BaseDataset(const std::string &root): BaseDataset::BaseDataset(root, DataMode::TRAIN, false) {
@@ -15,7 +15,7 @@ namespace xt::data::datasets {
                              TransformType transforms) : BaseDataset::BaseDataset(root, mode, download) {
         this->transforms = transforms;
         if (!transforms.empty()) {
-            this->compose = xt::data::transforms::Compose(this->transforms);
+            this->compose = xt::transforms::Compose(this->transforms);
         }
     }
 

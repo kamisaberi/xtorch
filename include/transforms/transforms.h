@@ -10,6 +10,3 @@
 #include "text/text.h"
 #include "video/video.h"
 #include "weather/weather.h"
-
-
-
