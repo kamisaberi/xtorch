@@ -4,13 +4,14 @@
 
 namespace xt::transforms
 {
-    class Palindrome : xt::Module
+    class Palindrome final :public xt::Module
     {
     public:
         using TransformFunc = std::function<torch::Tensor(torch::Tensor)>;
         Palindrome();
         explicit Palindrome(std::vector<TransformFunc> transforms);
-        torch::Tensor operator()(torch::Tensor input) const override;
+        torch::Tensor operator()(torch::Tensor input) const;
+        torch::Tensor forward(torch::Tensor input) const override;
 
     private:
         std::vector<TransformFunc> transforms;
