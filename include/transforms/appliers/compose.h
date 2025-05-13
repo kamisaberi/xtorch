@@ -49,7 +49,6 @@ namespace xt::transforms
          * This operator applies each transformation in the `transforms` vector to the input tensor,
          * passing the output of one transformation as the input to the next, and returns the final result.
          */
-        // torch::Tensor operator()(torch::Tensor input) const;
         torch::Tensor forward(torch::Tensor input) const override;
 
     private:
