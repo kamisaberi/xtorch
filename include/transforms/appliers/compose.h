@@ -14,7 +14,7 @@ namespace xt::transforms
      * they are provided. The transformations are stored as a vector of function objects and applied
      * via the call operator.
      */
-    class Compose : xt::Module
+    class Compose final : xt::Module
     {
     public:
         /**
@@ -50,6 +50,7 @@ namespace xt::transforms
          * passing the output of one transformation as the input to the next, and returns the final result.
          */
         torch::Tensor operator()(torch::Tensor input) const;
+        torch::Tensor forward(torch::Tensor input) const override;
 
     private:
         /**
@@ -58,6 +59,6 @@ namespace xt::transforms
          * This member holds the list of transformations to be applied when the object is called.
          */
         std::vector<TransformFunc> transforms;
-        torch::Tensor forward(torch::Tensor input) const override;
+
     };
 }
