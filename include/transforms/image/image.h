@@ -91,7 +91,6 @@
 #include "spatter.h"
 #include "style_mixing.h"
 #include "temporal_jitter.h"
-#include "to_grayscale.h"
 #include "to_sepia.h"
 #include "truncation_trick.h"
 #include "upscale.h"
