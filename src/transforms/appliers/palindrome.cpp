@@ -14,7 +14,7 @@ namespace xt::transforms
 
     torch::Tensor Palindrome::operator()(torch::Tensor input) const
     {
-        return  this->forward(input);
+        return  this->forward(std::move(input));
     }
 
     torch::Tensor Palindrome::forward(torch::Tensor input) const
