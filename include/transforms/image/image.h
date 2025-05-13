@@ -94,5 +94,6 @@
 #include "to_grayscale.h"
 #include "to_sepia.h"
 #include "truncation_trick.h"
-#include ""
-#include ""
+#include "upscale.h"
+#include "vertical_flip.h"
+#include "zoom_blur.h"
