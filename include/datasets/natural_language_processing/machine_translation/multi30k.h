@@ -4,12 +4,12 @@
 
 
 namespace xt::data::datasets {
-    class MULTI : BaseDataset {
+    class MULTI30k : BaseDataset {
         public :
-            explicit MULTI(const std::string &root);
-        MULTI(const std::string &root, DataMode mode);
-        MULTI(const std::string &root, DataMode mode , bool download);
-        MULTI(const std::string &root, DataMode mode , bool download, TransformType transforms);
+            explicit MULTI30k(const std::string &root);
+        MULTI30k(const std::string &root, DataMode mode);
+        MULTI30k(const std::string &root, DataMode mode , bool download);
+        MULTI30k(const std::string &root, DataMode mode , bool download, TransformType transforms);
 
         private :
             void load_data();
