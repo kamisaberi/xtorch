@@ -1,11 +1,6 @@
 #pragma once
-#include <torch/torch.h>
-#include <iostream>
-#include <vector>
-#include <fstream>
-#include <string>
-#include "../../base.h"
 
+#include "models/common.h"
 
 namespace xt::models
 {
@@ -230,7 +225,7 @@ namespace xt::models
     //        x = self.classifier(x)
     //        return x
 
-    struct MobileNetV1 : BaseModel
+    struct MobileNetV1 : xt::Module
     {
     public:
         MobileNetV1(int input_channels, int num_classes, float dropout_prob = 0.5);
@@ -245,7 +240,7 @@ namespace xt::models
     };
 
 
-    struct MobileNetV2 : BaseModel
+    struct MobileNetV2 : xt::Module
     {
     public:
         MobileNetV2(int input_channels, int num_classes, float dropout_prob = 0.5);
@@ -260,7 +255,7 @@ namespace xt::models
     };
 
 
-    struct MobileNetV3 : BaseModel
+    struct MobileNetV3 : xt::Module
     {
     public:
         MobileNetV3(int input_channels, int num_classes, float dropout_prob = 0.5);
