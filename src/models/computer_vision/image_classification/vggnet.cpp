@@ -1,7 +1,7 @@
 #include "../../../../include/models/computer_vision/image_classification/vggnet.h"
 
 namespace xt::models {
-    VggNet11::VggNet11(int num_classes,int in_channels) : BaseModel() {
+    VggNet11::VggNet11(int num_classes,int in_channels) : xt::Module() {
         //TODO layer1 DONE
         layer1 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(in_channels, 64, 3).stride(1).padding(1)),
@@ -147,7 +147,7 @@ namespace xt::models {
 
 
     VggNet11::VggNet11(int num_classes, int in_channels, std::vector<int64_t> input_shape)
-        : BaseModel() {
+        : xt::Module() {
 
         //TODO layer1 DONE
         layer1 = torch::nn::Sequential(
@@ -337,7 +337,7 @@ namespace xt::models {
     }
 
 
-    VggNet13::VggNet13(int num_classes,int in_channels) : BaseModel() {
+    VggNet13::VggNet13(int num_classes,int in_channels) : xt::Module() {
         //TODO layer1 DONE
         layer1 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(in_channels, 64, 3).stride(1).padding(1)),
@@ -483,7 +483,7 @@ namespace xt::models {
 
 
     VggNet13::VggNet13(int num_classes, int in_channels, std::vector<int64_t> input_shape)
-        : BaseModel() {
+        : xt::Module() {
 
         //TODO layer1 DONE
         layer1 = torch::nn::Sequential(
@@ -675,7 +675,7 @@ namespace xt::models {
 
 
 
-        VggNet16::VggNet16(int num_classes,int in_channels) : BaseModel() {
+        VggNet16::VggNet16(int num_classes,int in_channels) : xt::Module() {
         //TODO layer1 DONE
         layer1 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(in_channels, 64, 3).stride(1).padding(1)),
@@ -821,7 +821,7 @@ namespace xt::models {
 
 
     VggNet16::VggNet16(int num_classes, int in_channels, std::vector<int64_t> input_shape)
-        : BaseModel() {
+        : xt::Module() {
 
         //TODO layer1 DONE
         layer1 = torch::nn::Sequential(
@@ -1012,7 +1012,7 @@ namespace xt::models {
 
 
 
-        VggNet19::VggNet19(int num_classes,int in_channels) : BaseModel() {
+        VggNet19::VggNet19(int num_classes,int in_channels) : xt::Module() {
         //TODO layer1 DONE
         layer1 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(in_channels, 64, 3).stride(1).padding(1)),
@@ -1158,7 +1158,7 @@ namespace xt::models {
 
 
     VggNet19::VggNet19(int num_classes, int in_channels, std::vector<int64_t> input_shape)
-        : BaseModel() {
+        : xt::Module() {
 
         //TODO layer1 DONE
         layer1 = torch::nn::Sequential(
