@@ -1,4 +1,4 @@
-#include "../../../../include/datasets/computer_vision/image_classification/imagenet.h"
+#include "datasets/computer_vision/image_classification/imagenet.h"
 
 namespace xt::data::datasets {
 

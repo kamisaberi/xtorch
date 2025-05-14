@@ -12,7 +12,7 @@
  * different image resolutions and data augmentation transforms.
  */
 
-#include "../../../../include/datasets/computer_vision/image_classification/imagenette.h"
+#include "datasets/computer_vision/image_classification/imagenette.h"
 
 namespace xt::data::datasets {
 

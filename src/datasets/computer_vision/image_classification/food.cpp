@@ -1,4 +1,4 @@
-#include "../../../../include/datasets/computer_vision/image_classification/food.h"
+#include "datasets/computer_vision/image_classification/food.h"
 
 namespace xt::data::datasets {
     /**
