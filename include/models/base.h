@@ -16,16 +16,4 @@ class BaseModel: public torch::nn::Module {
 };
 
 
-class Model : public BaseModel {
-
-
-  public:
-    Model(int a);
-    torch::Tensor forward(torch::Tensor input) const override;
-
-private :
-    int a;
-};
-
-
 }

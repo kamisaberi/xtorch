@@ -7,8 +7,4 @@ namespace xt::models {
       this->a = a;
     }
 
-    torch::Tensor Model::forward(torch::Tensor input) const {
-//      std::cout << input << std::endl;
-      return input * a;
-    }
 }
