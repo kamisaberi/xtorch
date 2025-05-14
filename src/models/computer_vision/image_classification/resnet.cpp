@@ -38,7 +38,7 @@ namespace xt::models {
     }
 
 
-    ResNet18::ResNet18(vector<int> layers, int num_classes, int in_channels) : BaseModel() {
+    ResNet18::ResNet18(vector<int> layers, int num_classes, int in_channels): xt::Module() {
         inplanes = 64;
 
 
@@ -69,7 +69,7 @@ namespace xt::models {
 
 
     ResNet18::ResNet18(std::vector<int> layers, int num_classes, int in_channels, std::vector<int64_t> input_shape)
-        : BaseModel() {
+        : xt::Module() {
         inplanes = 64;
 
         conv1 = torch::nn::Sequential(
@@ -174,7 +174,7 @@ namespace xt::models {
 
 
 
-        ResNet34::ResNet34(vector<int> layers, int num_classes, int in_channels) : BaseModel() {
+        ResNet34::ResNet34(vector<int> layers, int num_classes, int in_channels) : xt::Module(){
         inplanes = 64;
 
 
@@ -205,7 +205,7 @@ namespace xt::models {
 
 
     ResNet34::ResNet34(std::vector<int> layers, int num_classes, int in_channels, std::vector<int64_t> input_shape)
-        : BaseModel() {
+        : xt::Module() {
         inplanes = 64;
 
         conv1 = torch::nn::Sequential(
@@ -303,7 +303,7 @@ namespace xt::models {
         return x;
     }
 
-        ResNet50::ResNet50(vector<int> layers, int num_classes, int in_channels) : BaseModel() {
+        ResNet50::ResNet50(vector<int> layers, int num_classes, int in_channels) : xt::Module() {
         inplanes = 64;
 
 
@@ -334,7 +334,7 @@ namespace xt::models {
 
 
     ResNet50::ResNet50(std::vector<int> layers, int num_classes, int in_channels, std::vector<int64_t> input_shape)
-        : BaseModel() {
+        : xt::Module() {
         inplanes = 64;
 
         conv1 = torch::nn::Sequential(
@@ -434,7 +434,7 @@ namespace xt::models {
 
 
 
-        ResNet101::ResNet101(vector<int> layers, int num_classes, int in_channels) : BaseModel() {
+        ResNet101::ResNet101(vector<int> layers, int num_classes, int in_channels) : xt::Module() {
         inplanes = 64;
 
 
@@ -465,7 +465,7 @@ namespace xt::models {
 
 
     ResNet101::ResNet101(std::vector<int> layers, int num_classes, int in_channels, std::vector<int64_t> input_shape)
-        : BaseModel() {
+        : xt::Module() {
         inplanes = 64;
 
         conv1 = torch::nn::Sequential(
@@ -565,7 +565,7 @@ namespace xt::models {
 
 
 
-        ResNet152::ResNet152(vector<int> layers, int num_classes, int in_channels) : BaseModel() {
+        ResNet152::ResNet152(vector<int> layers, int num_classes, int in_channels) : xt::Module() {
         inplanes = 64;
 
 
@@ -596,7 +596,7 @@ namespace xt::models {
 
 
     ResNet152::ResNet152(std::vector<int> layers, int num_classes, int in_channels, std::vector<int64_t> input_shape)
-        : BaseModel() {
+        : xt::Module() {
         inplanes = 64;
 
         conv1 = torch::nn::Sequential(
@@ -695,7 +695,7 @@ namespace xt::models {
     }
 
 
-        ResNet200::ResNet200(vector<int> layers, int num_classes, int in_channels) : BaseModel() {
+        ResNet200::ResNet200(vector<int> layers, int num_classes, int in_channels) : xt::Module() {
         inplanes = 64;
 
 
@@ -726,7 +726,7 @@ namespace xt::models {
 
 
     ResNet200::ResNet200(std::vector<int> layers, int num_classes, int in_channels, std::vector<int64_t> input_shape)
-        : BaseModel() {
+        : xt::Module() {
         inplanes = 64;
 
         conv1 = torch::nn::Sequential(
@@ -825,7 +825,7 @@ namespace xt::models {
     }
 
 
-        ResNet1202::ResNet1202(vector<int> layers, int num_classes, int in_channels) : BaseModel() {
+        ResNet1202::ResNet1202(vector<int> layers, int num_classes, int in_channels) : xt::Module() {
         inplanes = 64;
 
 
@@ -856,7 +856,7 @@ namespace xt::models {
 
 
     ResNet1202::ResNet1202(std::vector<int> layers, int num_classes, int in_channels, std::vector<int64_t> input_shape)
-        : BaseModel() {
+        : xt::Module() {
         inplanes = 64;
 
         conv1 = torch::nn::Sequential(

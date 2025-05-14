@@ -3,12 +3,11 @@
 
 using namespace std;
 
-namespace xt::models {
-
-
+namespace xt::models
+{
     LeNet5::LeNet5(int num_classes, int in_channels, std::vector<int64_t> input_shape)
-    : BaseModel() {
-
+        : xt::Module()
+    {
         // Define convolutional layers
         layer1 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(in_channels, 6, 5).stride(1).padding(0)),
@@ -31,7 +30,7 @@ namespace xt::models {
         auto out = layer1->forward(dummy_input);
         out = layer2->forward(out);
 
-        int flattened_size = out.numel() / out.size(0);  // total features per sample
+        int flattened_size = out.numel() / out.size(0); // total features per sample
 
         // Define fully connected layers
         fc1 = torch::nn::Linear(flattened_size, 120);
@@ -47,7 +46,8 @@ namespace xt::models {
     }
 
 
-    LeNet5::LeNet5(int num_classes, int in_channels) : BaseModel() {
+    LeNet5::LeNet5(int num_classes, int in_channels) : xt::Module()
+    {
         layer1 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(in_channels, 6, 5).stride(1).padding(0)),
             torch::nn::BatchNorm2d(6),
@@ -85,7 +85,8 @@ namespace xt::models {
     //     // cout << x << endl;
     //     return x;
     // }
-    torch::Tensor LeNet5::forward(torch::Tensor x) const {
+    torch::Tensor LeNet5::forward(torch::Tensor x) const
+    {
         x = layer1->forward(x);
         x = layer2->forward(x);
         x = x.view({x.size(0), -1}); // flatten
@@ -94,7 +95,6 @@ namespace xt::models {
         x = torch::log_softmax(fc3->forward(x), 1);
         return x;
     }
-
 }
 
 /*
