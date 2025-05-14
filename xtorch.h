@@ -33,6 +33,7 @@
  */
 #pragma once
 
+#include "include/base/base.h"
 #include "include/data_loaders/data_loaders.h"
 #include "include/data_parallels/data_parallels.h"
 #include "include/datasets/datasets.h"
