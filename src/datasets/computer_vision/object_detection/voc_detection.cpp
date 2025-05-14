@@ -1,4 +1,4 @@
-#include "../../../include/datasets/specific/voc.h"
+#include "datasets/computer_vision/object_detection/voc_detection.h"
 
 namespace xt::data::datasets {
 
