@@ -8,11 +8,34 @@ namespace fs = std::filesystem;
 
 namespace xt::data::datasets {
     class LFW : public BaseDataset {
+        /*
+"""`LFW <http://vis-www.cs.umass.edu/lfw/>`_ Dataset.
+
+Args:
+root (str or ``pathlib.Path``): Root directory of dataset where directory
+    ``lfw-py`` exists or will be saved to if download is set to True.
+split (string, optional): The image split to use. Can be one of ``train``, ``test``,
+    ``10fold``. Defaults to ``10fold``.
+image_set (str, optional): Type of image funneling to use, ``original``, ``funneled`` or
+    ``deepfunneled``. Defaults to ``funneled``.
+transform (callable, optional): A function/transform that takes in a PIL image
+    and returns a transformed version. E.g, ``transforms.RandomRotation``
+target_transform (callable, optional): A function/transform that takes in the
+    target and transforms it.
+download (bool, optional): If true, downloads the dataset from the internet and
+    puts it in root directory. If dataset is already downloaded, it is not
+    downloaded again.
+
+"""
+
+
+ */
+
     public :
-        explicit LFW(const std::string &root);
-        LFW(const std::string &root, DataMode mode);
-        LFW(const std::string &root, DataMode mode , bool download);
-        LFW(const std::string &root, DataMode mode , bool download, TransformType transforms);
+        explicit LFWPairs(const std::string &root);
+        LFWPairs(const std::string &root, DataMode mode);
+        LFWPairs(const std::string &root, DataMode mode , bool download);
+        LFWPairs(const std::string &root, DataMode mode , bool download, TransformType transforms);
 
 
     private :
@@ -49,39 +72,5 @@ namespace xt::data::datasets {
         void check_resources();
     };
 
-    class LFWPairs : public LFW {
-        /*
-        """`LFW <http://vis-www.cs.umass.edu/lfw/>`_ Dataset.
 
-    Args:
-        root (str or ``pathlib.Path``): Root directory of dataset where directory
-            ``lfw-py`` exists or will be saved to if download is set to True.
-        split (string, optional): The image split to use. Can be one of ``train``, ``test``,
-            ``10fold``. Defaults to ``10fold``.
-        image_set (str, optional): Type of image funneling to use, ``original``, ``funneled`` or
-            ``deepfunneled``. Defaults to ``funneled``.
-        transform (callable, optional): A function/transform that takes in a PIL image
-            and returns a transformed version. E.g, ``transforms.RandomRotation``
-        target_transform (callable, optional): A function/transform that takes in the
-            target and transforms it.
-        download (bool, optional): If true, downloads the dataset from the internet and
-            puts it in root directory. If dataset is already downloaded, it is not
-            downloaded again.
-
-    """
-
-
-         */
-    public :
-        explicit  LFWPairs(const std::string &root);
-        LFWPairs(const std::string &root, DataMode mode);
-        LFWPairs(const std::string &root, DataMode mode , bool download);
-        LFWPairs(const std::string &root, DataMode mode , bool download, TransformType transforms);
-
-
-    private :
-        void load_data();
-
-        void check_resources();
-    };
 }
