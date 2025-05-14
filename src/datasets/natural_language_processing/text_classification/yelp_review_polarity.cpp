@@ -2,18 +2,18 @@
 
 namespace xt::data::datasets {
 
-    YelpReview::YelpReview(const std::string &root): YelpReview::YelpReview(root, DataMode::TRAIN, false) {
+    YelpReviewPolarity::YelpReviewPolarity(const std::string &root): YelpReviewPolarity::YelpReviewPolarity(root, DataMode::TRAIN, false) {
     }
 
-    YelpReview::YelpReview(const std::string &root, DataMode mode): YelpReview::YelpReview(root, mode, false) {
+    YelpReviewPolarity::YelpReviewPolarity(const std::string &root, DataMode mode): YelpReviewPolarity::YelpReviewPolarity(root, mode, false) {
     }
 
-    YelpReview::YelpReview(const std::string &root, DataMode mode, bool download) : BaseDataset(root, mode, download) {
+    YelpReviewPolarity::YelpReviewPolarity(const std::string &root, DataMode mode, bool download) : BaseDataset(root, mode, download) {
         throw std::runtime_error("YelpReview: YelpReview not implemented");
     }
 
 
-    YelpReview::YelpReview(const std::string &root, DataMode mode, bool download,
+    YelpReviewPolarity::YelpReviewPolarity(const std::string &root, DataMode mode, bool download,
                            TransformType transforms) : BaseDataset(root, mode, download, transforms) {
         throw std::runtime_error("YelpReview: YelpReview not implemented");
     }
