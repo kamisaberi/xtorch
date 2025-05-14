@@ -1,4 +1,4 @@
-#include "../../../include/datasets/natural_language_processing/text_classification/amazon_review_polarity.h"
+#include "datasets/natural_language_processing/text_classification/amazon_review_full.h"
 
 namespace xt::data::datasets {
 
