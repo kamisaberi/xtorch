@@ -1,13 +1,12 @@
 #pragma once
-#include "../base/base.h"
-#include "../../headers/datasets.h"
+#include "../../base/base.h"
 
 
 using namespace std;
 namespace fs = std::filesystem;
 
 namespace xt::data::datasets {
-    class LFW : public BaseDataset {
+    class LFWPairs : public BaseDataset {
         /*
 """`LFW <http://vis-www.cs.umass.edu/lfw/>`_ Dataset.
 
