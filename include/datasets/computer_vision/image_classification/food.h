@@ -1,10 +1,6 @@
 #pragma once
-#include "../../base/base.h"
-#include "../../../headers/datasets.h"
-#include "../../../utils/filesystem.h"
-#include "../../../utils/string.h"
-#include <fstream>
-#include <map>
+
+#include "datasets/base/base.h"
 
 using namespace std;
 namespace fs = std::filesystem;

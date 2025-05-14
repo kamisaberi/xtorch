@@ -1,8 +1,6 @@
 #pragma once
 
-#include "../../base/base.h"
-#include "../../../headers/datasets.h"
-
+#include "datasets/base/base.h"
 
 namespace xt::data::datasets {
     [[deprecated("Flickr8k Dataset some files removed and Links are broken")]]
