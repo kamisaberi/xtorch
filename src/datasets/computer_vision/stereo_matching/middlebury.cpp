@@ -1,4 +1,4 @@
-#include "../../../../include/datasets/computer_vision/stereo_matching/middlebury.h"
+#include "datasets/computer_vision/stereo_matching/middlebury.h"
 
 namespace xt::data::datasets {
 

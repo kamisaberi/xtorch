@@ -1,4 +1,4 @@
-#include "../../../../include/datasets/computer_vision/stereo_matching/scene_flow_stereo.h"
+#include "datasets/computer_vision/stereo_matching/scene_flow_stereo.h"
 
 namespace xt::data::datasets {
 
