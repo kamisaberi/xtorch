@@ -3,16 +3,18 @@
 #include "../../../headers/datasets.h"
 
 
-namespace xt::data::datasets {
-    class WikiText : BaseDataset {
-        public :
-            explicit WikiText(const std::string &root);
-        WikiText(const std::string &root, DataMode mode);
-        WikiText(const std::string &root, DataMode mode , bool download);
-        WikiText(const std::string &root, DataMode mode , bool download, TransformType transforms);
+namespace xt::data::datasets
+{
+    class WikiText103 : BaseDataset
+    {
+    public :
+        explicit WikiText103(const std::string& root);
+        WikiText103(const std::string& root, DataMode mode);
+        WikiText103(const std::string& root, DataMode mode, bool download);
+        WikiText103(const std::string& root, DataMode mode, bool download, TransformType transforms);
 
-        private :
-            void load_data();
+    private :
+        void load_data();
 
         void check_resources();
     };
