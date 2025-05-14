@@ -1,4 +1,4 @@
-#include "../../../../include/datasets/natural_language_processing/text_classification/yelp_review_polarity.h"
+#include "datasets/natural_language_processing/text_classification/yelp_review_polarity.h"
 
 namespace xt::data::datasets {
 
