@@ -4,12 +4,12 @@
 
 
 namespace xt::data::datasets {
-    class SST : BaseDataset {
+    class SST2 : BaseDataset {
         public :
-            explicit SST(const std::string &root);
-        SST(const std::string &root, DataMode mode);
-        SST(const std::string &root, DataMode mode , bool download);
-        SST(const std::string &root, DataMode mode , bool download, TransformType transforms);
+            explicit SST2(const std::string &root);
+        SST2(const std::string &root, DataMode mode);
+        SST2(const std::string &root, DataMode mode , bool download);
+        SST2(const std::string &root, DataMode mode , bool download, TransformType transforms);
 
         private :
             void load_data();
