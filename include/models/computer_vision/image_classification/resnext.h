@@ -1,10 +1,5 @@
 #pragma once
-#include <torch/torch.h>
-#include <iostream>
-#include <vector>
-#include <fstream>
-#include <string>
-#include "../../base.h"
+#include "models/common.h"
 
 
 using namespace std;
@@ -24,7 +19,7 @@ namespace xt::models {
         };
     }
 
-    struct ResNext : BaseModel {
+    struct ResNext : xt::Module {
         mutable int inplanes = 64;
         mutable torch::nn::Sequential conv1 = nullptr;
         mutable torch::nn::MaxPool2d maxpool = nullptr;
