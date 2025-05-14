@@ -1,4 +1,4 @@
-#include "../../../../include/datasets/computer_vision/image_classification/omniglot.h"
+#include "datasets/computer_vision/image_classification/omniglot.h"
 
 namespace xt::data::datasets {
 
