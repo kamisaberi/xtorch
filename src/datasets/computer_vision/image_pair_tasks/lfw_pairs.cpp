@@ -2,7 +2,7 @@
 
 namespace xt::data::datasets {
 
-    // ---------------------- LFW ---------------------- //
+    // ---------------------- LFWPairs ---------------------- //
     LFWPairs::LFWPairs(const std::string &root): LFWPairs::LFWPairs(root, DataMode::TRAIN, false) {
     }
 
