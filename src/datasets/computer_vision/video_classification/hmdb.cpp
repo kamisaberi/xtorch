@@ -1,4 +1,4 @@
-#include "../../../../include/datasets/computer_vision/video_classification/hmdb.h"
+#include "datasets/computer_vision/video_classification/hmdb.h"
 
 namespace xt::data::datasets {
 
