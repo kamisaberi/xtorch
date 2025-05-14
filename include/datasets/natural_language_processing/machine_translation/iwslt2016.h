@@ -4,12 +4,12 @@
 
 
 namespace xt::data::datasets {
-    class IWSLT : BaseDataset {
+    class IWSLT20169 : BaseDataset {
         public :
-            explicit IWSLT(const std::string &root);
-        IWSLT(const std::string &root, DataMode mode);
-        IWSLT(const std::string &root, DataMode mode , bool download);
-        IWSLT(const std::string &root, DataMode mode , bool download, TransformType transforms);
+            explicit IWSLT20169(const std::string &root);
+        IWSLT20169(const std::string &root, DataMode mode);
+        IWSLT20169(const std::string &root, DataMode mode , bool download);
+        IWSLT20169(const std::string &root, DataMode mode , bool download, TransformType transforms);
 
         private :
             void load_data();
