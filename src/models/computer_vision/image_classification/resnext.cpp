@@ -38,7 +38,7 @@ namespace xt::models {
     }
 
 
-    ResNext::ResNext(vector<int> layers, int num_classes, int in_channels) : BaseModel() {
+    ResNext::ResNext(vector<int> layers, int num_classes, int in_channels) : xt::Module(){
         inplanes = 64;
 
 
@@ -69,7 +69,7 @@ namespace xt::models {
 
 
     ResNext::ResNext(std::vector<int> layers, int num_classes, int in_channels, std::vector<int64_t> input_shape)
-        : BaseModel() {
+        : xt::Module() {
         inplanes = 64;
 
         conv1 = torch::nn::Sequential(
