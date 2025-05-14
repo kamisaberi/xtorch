@@ -1,14 +1,10 @@
 #pragma once
-#include <torch/torch.h>
-#include <iostream>
-#include <vector>
-#include <fstream>
-#include <string>
-#include "../../base.h"
+#include "models/common.h"
 
 #include "../../../exceptions/implementation.h"
 
-namespace xt::models {
+namespace xt::models
+{
     //class DoubleConv(nn.Module):
     //    def __init__(self, in_channels, out_channels):
     //        super().__init__()
@@ -23,7 +19,8 @@ namespace xt::models {
     //        return self.conv_op(x)
 
 
-    struct DoubleConv : torch::nn::Module {
+    struct DoubleConv : torch::nn::Module
+    {
     public:
         DoubleConv(int in_channels, int out_channels);
 
@@ -45,7 +42,8 @@ namespace xt::models {
     //        p = self.pool(down)
     //        return down, p
 
-    struct DownSample : torch::nn::Module {
+    struct DownSample : torch::nn::Module
+    {
     public:
         DownSample(int in_channels, int out_channels);
 
@@ -68,7 +66,8 @@ namespace xt::models {
     //     x = torch.cat([x1, x2], 1)
     //     return self.conv(x)
 
-    struct UpSample : torch::nn::Module {
+    struct UpSample : torch::nn::Module
+    {
     public:
         UpSample(int in_channels, int out_channels);
 
@@ -115,23 +114,24 @@ namespace xt::models {
     //
 
 
-    struct UNet : BaseModel {
+    struct UNet : xt::Module
+    {
     public:
         UNet(int num_classes/* classes */, int in_channels = 1/*  input channels */);
         torch::Tensor forward(torch::Tensor input) const override;
 
     private:
-        DownSample down_convolution_1{0,0};
-        DownSample down_convolution_2{0,0};
-        DownSample down_convolution_3{0,0};
-        DownSample down_convolution_4{0,0};
+        DownSample down_convolution_1{0, 0};
+        DownSample down_convolution_2{0, 0};
+        DownSample down_convolution_3{0, 0};
+        DownSample down_convolution_4{0, 0};
 
-        DoubleConv bottle_neck{0,0};
+        DoubleConv bottle_neck{0, 0};
 
-        UpSample up_convolution_1{0,0};
-        UpSample up_convolution_2{0,0};
-        UpSample up_convolution_3{0,0};
-        UpSample up_convolution_4{0,0};
+        UpSample up_convolution_1{0, 0};
+        UpSample up_convolution_2{0, 0};
+        UpSample up_convolution_3{0, 0};
+        UpSample up_convolution_4{0, 0};
 
         torch::nn::Conv2d out = nullptr;
     };
