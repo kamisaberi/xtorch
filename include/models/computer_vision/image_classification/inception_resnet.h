@@ -1,19 +1,16 @@
 #pragma once
-#include <torch/torch.h>
-#include <iostream>
-#include <vector>
-#include <fstream>
-#include <string>
-#include "../../base.h"
 
+#include "models/common.h"
 
 using namespace std;
 
 
-namespace xt::models {
-    struct InceptionResNetV1 : BaseModel {
+namespace xt::models
+{
+    struct InceptionResNetV1 : xt::Module
+    {
         mutable torch::nn::Sequential layer1 = nullptr, layer2 = nullptr, layer3 = nullptr, layer4 = nullptr, layer5 =
-                nullptr;
+                                          nullptr;
         mutable torch::nn::Sequential fc = nullptr, fc1 = nullptr, fc2 = nullptr;
 
     public:
@@ -24,9 +21,10 @@ namespace xt::models {
         torch::Tensor forward(torch::Tensor x) const override;
     };
 
-    struct InceptionResNetV2 : BaseModel {
+    struct InceptionResNetV2 : BaseModel
+    {
         mutable torch::nn::Sequential layer1 = nullptr, layer2 = nullptr, layer3 = nullptr, layer4 = nullptr, layer5 =
-                nullptr;
+                                          nullptr;
         mutable torch::nn::Sequential fc = nullptr, fc1 = nullptr, fc2 = nullptr;
 
     public:
@@ -36,5 +34,4 @@ namespace xt::models {
 
         torch::Tensor forward(torch::Tensor x) const override;
     };
-
 }
