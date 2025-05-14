@@ -1,15 +1,14 @@
 #pragma once
-#include "../../base/base.h"
-#include "../../../headers/datasets.h"
+#include "datasets/base/base.h"
 
 
 namespace xt::data::datasets {
-    class YelpReview : BaseDataset {
+    class YelpReviewPolarity : BaseDataset {
         public :
-            explicit YelpReview(const std::string &root);
-        YelpReview(const std::string &root, DataMode mode);
-        YelpReview(const std::string &root, DataMode mode , bool download);
-        YelpReview(const std::string &root, DataMode mode , bool download, TransformType transforms);
+            explicit YelpReviewPolarity(const std::string &root);
+        YelpReviewPolarity(const std::string &root, DataMode mode);
+        YelpReviewPolarity(const std::string &root, DataMode mode , bool download);
+        YelpReviewPolarity(const std::string &root, DataMode mode , bool download, TransformType transforms);
 
         private :
             void load_data();
