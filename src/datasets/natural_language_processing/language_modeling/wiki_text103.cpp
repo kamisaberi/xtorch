@@ -1,4 +1,4 @@
-#include "../../../include/datasets/language_modeling/wiki_text.h"
+#include "datasets/natural_language_processing/language_modeling/wiki_text103.h"
 
 namespace xt::data::datasets {
 
