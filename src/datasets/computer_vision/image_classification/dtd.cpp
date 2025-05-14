@@ -1,4 +1,4 @@
-#include "../../../../include/datasets/computer_vision/image_classification/dtd.h"
+#include "datasets/computer_vision/image_classification/dtd.h"
 
 namespace xt::data::datasets {
 
