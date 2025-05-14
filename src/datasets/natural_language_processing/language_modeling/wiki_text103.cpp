@@ -2,18 +2,18 @@
 
 namespace xt::data::datasets {
 
-    WikiText::WikiText(const std::string &root): WikiText::WikiText(root, DataMode::TRAIN, false) {
+    WikiText103::WikiText103(const std::string &root): WikiText103::WikiText103(root, DataMode::TRAIN, false) {
     }
 
-    WikiText::WikiText(const std::string &root, DataMode mode): WikiText::WikiText(root, mode, false) {
+    WikiText103::WikiText103(const std::string &root, DataMode mode): WikiText103::WikiText103(root, mode, false) {
     }
 
-    WikiText::WikiText(const std::string &root, DataMode mode, bool download) : BaseDataset(root, mode, download) {
+    WikiText103::WikiText103(const std::string &root, DataMode mode, bool download) : BaseDataset(root, mode, download) {
         throw std::runtime_error("WikiText: WikiText not implemented");
     }
 
 
-    WikiText::WikiText(const std::string &root, DataMode mode, bool download,
+    WikiText103::WikiText103(const std::string &root, DataMode mode, bool download,
                            TransformType transforms) : BaseDataset(root, mode, download, transforms) {
         throw std::runtime_error("WikiText: WikiText not implemented");
     }
