@@ -1,17 +1,15 @@
 #pragma once
-#include <torch/torch.h>
-#include <iostream>
-#include <vector>
-#include <fstream>
-#include <string>
-#include "../../base.h"
+#include "models/common.h"
 
 
 using namespace std;
 
-namespace xt::models {
-    namespace {
-        struct ResidualBlock : torch::nn::Module {
+namespace xt::models
+{
+    namespace
+    {
+        struct ResidualBlock : torch::nn::Module
+        {
             torch::nn::Sequential conv1 = nullptr, conv2 = nullptr, downsample = nullptr;
             int out_channels;
             torch::nn::ReLU relu = nullptr;
@@ -24,7 +22,8 @@ namespace xt::models {
         };
     }
 
-    struct ResNet18 : BaseModel {
+    struct ResNet18 : xt::Module
+    {
         mutable int inplanes = 64;
         mutable torch::nn::Sequential conv1 = nullptr;
         mutable torch::nn::MaxPool2d maxpool = nullptr;
@@ -43,7 +42,8 @@ namespace xt::models {
     };
 
 
-    struct ResNet34 : BaseModel {
+    struct ResNet34 : xt::Module
+    {
         mutable int inplanes = 64;
         mutable torch::nn::Sequential conv1 = nullptr;
         mutable torch::nn::MaxPool2d maxpool = nullptr;
@@ -62,8 +62,8 @@ namespace xt::models {
     };
 
 
-
-    struct ResNet50 : BaseModel {
+    struct ResNet50 : xt::Module
+    {
         mutable int inplanes = 64;
         mutable torch::nn::Sequential conv1 = nullptr;
         mutable torch::nn::MaxPool2d maxpool = nullptr;
@@ -82,7 +82,8 @@ namespace xt::models {
     };
 
 
-    struct ResNet101 : BaseModel {
+    struct ResNet101 : xt::Module
+    {
         mutable int inplanes = 64;
         mutable torch::nn::Sequential conv1 = nullptr;
         mutable torch::nn::MaxPool2d maxpool = nullptr;
@@ -101,7 +102,8 @@ namespace xt::models {
     };
 
 
-    struct ResNet152 : BaseModel {
+    struct ResNet152 : xt::Module
+    {
         mutable int inplanes = 64;
         mutable torch::nn::Sequential conv1 = nullptr;
         mutable torch::nn::MaxPool2d maxpool = nullptr;
@@ -120,7 +122,8 @@ namespace xt::models {
     };
 
 
-    struct ResNet200 : BaseModel {
+    struct ResNet200 : xt::Module
+    {
         mutable int inplanes = 64;
         mutable torch::nn::Sequential conv1 = nullptr;
         mutable torch::nn::MaxPool2d maxpool = nullptr;
@@ -139,7 +142,8 @@ namespace xt::models {
     };
 
 
-    struct ResNet1202 : BaseModel {
+    struct ResNet1202 : xt::Module
+    {
         mutable int inplanes = 64;
         mutable torch::nn::Sequential conv1 = nullptr;
         mutable torch::nn::MaxPool2d maxpool = nullptr;
@@ -156,7 +160,4 @@ namespace xt::models {
 
         torch::Tensor forward(torch::Tensor x) const override;
     };
-
-
-
 }
