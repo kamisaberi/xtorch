@@ -1,4 +1,4 @@
-#include "../../../../include/datasets/computer_vision/image_captioning/coco_captions.h"
+#include "datasets/computer_vision/image_captioning/coco_captions.h"
 
 namespace xt::data::datasets {
 
