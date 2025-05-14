@@ -1,4 +1,4 @@
-#include "../../../include/datasets/specific/sintel.h"
+#include "datasets/computer_vision/optical_flow_estimation/sintel.h"
 
 namespace xt::data::datasets {
 
