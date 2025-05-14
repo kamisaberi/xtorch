@@ -3,13 +3,13 @@
 
 namespace xt::data::datasets
 {
-    class AmazonReview : BaseDataset
+    class AmazonReviewFull : BaseDataset
     {
     public :
-        explicit AmazonReview(const std::string& root);
-        AmazonReview(const std::string& root, DataMode mode);
-        AmazonReview(const std::string& root, DataMode mode, bool download);
-        AmazonReview(const std::string& root, DataMode mode, bool download, TransformType transforms);
+        explicit AmazonReviewFull(const std::string& root);
+        AmazonReviewFull(const std::string& root, DataMode mode);
+        AmazonReviewFull(const std::string& root, DataMode mode, bool download);
+        AmazonReviewFull(const std::string& root, DataMode mode, bool download, TransformType transforms);
 
     private :
         void load_data();
