@@ -17,7 +17,7 @@
 #include "resnet.h"
 #include "se_net.h"
 #include "vggnet.h"
-#include "wide-resnet.h"
+#include "wide_resnet.h"
 #include "xception.h"
 #include "zefnet.h"
 
