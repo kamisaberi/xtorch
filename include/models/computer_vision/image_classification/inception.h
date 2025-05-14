@@ -1,10 +1,6 @@
 #pragma once
-#include <torch/torch.h>
-#include <iostream>
-#include <vector>
-#include <fstream>
-#include <string>
-#include "../../base.h"
+
+#include "models/common.h"
 
 
 using namespace std;
@@ -12,7 +8,7 @@ using namespace std;
 
 namespace xt::models
 {
-    struct InceptionV1 : BaseModel
+    struct InceptionV1 : xt::Module
     {
         mutable torch::nn::Sequential layer1 = nullptr, layer2 = nullptr, layer3 = nullptr, layer4 = nullptr, layer5 =
                                           nullptr;

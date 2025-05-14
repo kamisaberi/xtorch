@@ -1,14 +1,12 @@
 #pragma once
-#include <torch/torch.h>
-#include "../../base.h"
-#include <iostream>
-#include <vector>
+
+#include "models/common.h"
 
 
 using namespace std;
 
 namespace xt::models {
-    struct LeNet5 : BaseModel {
+    struct LeNet5 : xt::Module {
     protected:
         mutable  torch::nn::Sequential layer1 = nullptr, layer2 = nullptr;
         mutable  torch::nn::Linear fc1 = nullptr, fc2 = nullptr, fc3 = nullptr;
