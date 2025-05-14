@@ -4,12 +4,12 @@
 
 
 namespace xt::data::datasets {
-    class AmazonReview : BaseDataset {
+    class AmazonReviewPolarity : BaseDataset {
         public :
-            explicit AmazonReview(const std::string &root);
-        AmazonReview(const std::string &root, DataMode mode);
-        AmazonReview(const std::string &root, DataMode mode , bool download);
-        AmazonReview(const std::string &root, DataMode mode , bool download, TransformType transforms);
+            explicit AmazonReviewPolarity(const std::string &root);
+        AmazonReviewPolarity(const std::string &root, DataMode mode);
+        AmazonReviewPolarity(const std::string &root, DataMode mode , bool download);
+        AmazonReviewPolarity(const std::string &root, DataMode mode , bool download, TransformType transforms);
 
         private :
             void load_data();
