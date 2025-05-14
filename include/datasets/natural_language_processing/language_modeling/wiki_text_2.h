@@ -4,12 +4,12 @@
 
 
 namespace xt::data::datasets {
-    class WikiText : BaseDataset {
+    class WikiTextV2 : BaseDataset {
         public :
-            explicit WikiText(const std::string &root);
-        WikiText(const std::string &root, DataMode mode);
-        WikiText(const std::string &root, DataMode mode , bool download);
-        WikiText(const std::string &root, DataMode mode , bool download, TransformType transforms);
+            explicit WikiTextV2(const std::string &root);
+        WikiTextV2(const std::string &root, DataMode mode);
+        WikiTextV2(const std::string &root, DataMode mode , bool download);
+        WikiTextV2(const std::string &root, DataMode mode , bool download, TransformType transforms);
 
         private :
             void load_data();
