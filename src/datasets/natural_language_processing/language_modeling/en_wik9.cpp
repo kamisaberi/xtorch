@@ -1,22 +1,7 @@
-#include "../../../include/datasets/language_modeling/en_wik.h"
+#include "datasets/natural_language_processing/language_modeling/en_wik9.h"
 
 namespace xt::data::datasets {
 
-    EnWik::EnWik(const std::string &root): EnWik::EnWik(root, DataMode::TRAIN, false) {
-    }
-
-    EnWik::EnWik(const std::string &root, DataMode mode): EnWik::EnWik(root, mode, false) {
-    }
-
-    EnWik::EnWik(const std::string &root, DataMode mode, bool download) : BaseDataset(root, mode, download) {
-        throw std::runtime_error("EnWik: EnWik not implemented");
-    }
-
-
-    EnWik::EnWik(const std::string &root, DataMode mode, bool download,
-                           TransformType transforms) : BaseDataset(root, mode, download, transforms) {
-        throw std::runtime_error("EnWik: EnWik not implemented");
-    }
 
 
 }
