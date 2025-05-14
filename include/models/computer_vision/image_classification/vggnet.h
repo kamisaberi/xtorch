@@ -1,16 +1,11 @@
 #pragma once
-#include <torch/torch.h>
-#include <iostream>
-#include <vector>
-#include <fstream>
-#include <string>
-#include "../../base.h"
+#include "models/common.h"
 
 
 using namespace std;
 
 namespace xt::models {
-    struct VggNet11 : BaseModel {
+    struct VggNet11 : xt::Module {
         mutable torch::nn::Sequential layer1 = nullptr, layer2 = nullptr, layer3 = nullptr, layer4 = nullptr;
         mutable torch::nn::Sequential layer5 = nullptr;
         mutable torch::nn::Sequential layer6 = nullptr, layer7 = nullptr, layer8 = nullptr, layer9 = nullptr;
@@ -24,7 +19,7 @@ namespace xt::models {
         torch::Tensor forward(torch::Tensor x) const override;
     };
 
-    struct VggNet13 : BaseModel {
+    struct VggNet13 : xt::Module {
         mutable torch::nn::Sequential layer1 = nullptr, layer2 = nullptr, layer3 = nullptr, layer4 = nullptr;
         mutable torch::nn::Sequential layer5 = nullptr;
         mutable torch::nn::Sequential layer6 = nullptr, layer7 = nullptr, layer8 = nullptr, layer9 = nullptr;
@@ -39,7 +34,7 @@ namespace xt::models {
     };
 
 
-    struct VggNet16 : BaseModel {
+    struct VggNet16 : xt::Module {
         mutable torch::nn::Sequential layer1 = nullptr, layer2 = nullptr, layer3 = nullptr, layer4 = nullptr;
         mutable torch::nn::Sequential layer5 = nullptr;
         mutable torch::nn::Sequential layer6 = nullptr, layer7 = nullptr, layer8 = nullptr, layer9 = nullptr;
@@ -56,7 +51,7 @@ namespace xt::models {
 
 
 
-    struct VggNet19 : BaseModel {
+    struct VggNet19 : xt::Module {
         mutable torch::nn::Sequential layer1 = nullptr, layer2 = nullptr, layer3 = nullptr, layer4 = nullptr;
         mutable torch::nn::Sequential layer5 = nullptr;
         mutable torch::nn::Sequential layer6 = nullptr, layer7 = nullptr, layer8 = nullptr, layer9 = nullptr;
