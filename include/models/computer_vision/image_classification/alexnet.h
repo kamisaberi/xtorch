@@ -4,14 +4,15 @@
 #include <vector>
 #include <fstream>
 #include <string>
-#include "../../base.h"
+// #include "../../base.h"
+#include "base/module.h"
 
 
 using namespace std;
 
 
 namespace xt::models {
-    struct AlexNet : BaseModel {
+    struct AlexNet : xt::Module {
         mutable torch::nn::Sequential layer1 = nullptr, layer2 = nullptr, layer3 = nullptr, layer4 = nullptr, layer5 =
                         nullptr;
         mutable torch::nn::Sequential fc = nullptr, fc1 = nullptr, fc2 = nullptr;
