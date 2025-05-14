@@ -4,12 +4,12 @@
 
 
 namespace xt::data::datasets {
-    class WMT : BaseDataset {
+    class WMT14 : BaseDataset {
         public :
-            explicit WMT(const std::string &root);
-        WMT(const std::string &root, DataMode mode);
-        WMT(const std::string &root, DataMode mode , bool download);
-        WMT(const std::string &root, DataMode mode , bool download, TransformType transforms);
+            explicit WMT14(const std::string &root);
+        WMT14(const std::string &root, DataMode mode);
+        WMT14(const std::string &root, DataMode mode , bool download);
+        WMT14(const std::string &root, DataMode mode , bool download, TransformType transforms);
 
         private :
             void load_data();
