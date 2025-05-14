@@ -7,9 +7,8 @@
 #include <memory>             // For std::shared_ptr
 #include <string>             // For std::string
 #include "../data_loaders/data_loader.h"  // Custom data loader for datasets
-#include "../models/base.h"               // Base model class for neural networks
 #include "../datasets/base/base.h"        // Base dataset class for data handling
-
+#include "base/base.h"
 namespace xt {
 // Namespace for the xTorch project, encapsulating training-related functionality
 
@@ -49,7 +48,7 @@ namespace xt {
         // @param train_loader DataLoader providing batches of training data
         // @note Assumes CPU device; moves model and data to CPU
         template <typename Dataset>
-        void fit(xt::models::BaseModel *model, xt::DataLoader<Dataset>& train_loader) {
+        void fit(xt::Module *model, xt::DataLoader<Dataset>& train_loader) {
             // Set device to CPU
             torch::Device device(torch::kCPU);
             // Move model to CPU and set to training mode
@@ -91,7 +90,7 @@ namespace xt {
         // @param device Target device (e.g., torch::kCUDA, torch::kCPU)
         // @note Moves model and data to the specified device
         template <typename Dataset>
-        void fit(xt::models::BaseModel *model, xt::DataLoader<Dataset>& train_loader, torch::Device device) {
+        void fit(xt::Module *model, xt::DataLoader<Dataset>& train_loader, torch::Device device) {
             // Move model to the specified device and set to training mode
             model->to(device);
             model->train();
