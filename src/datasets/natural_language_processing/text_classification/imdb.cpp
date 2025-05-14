@@ -1,4 +1,4 @@
-#include "../../../../include/datasets/natural_language_processing/text_classification/imdb.h"
+#include "datasets/natural_language_processing/text_classification/imdb.h"
 
 namespace xt::data::datasets {
 
