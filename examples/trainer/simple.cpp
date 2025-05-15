@@ -34,7 +34,7 @@ int main() {
     auto dataset = xt::data::datasets::MNIST(
             "/home/kami/Documents/datasets/", DataMode::TRAIN, true,
             {
-                    xt::data::transforms::Resize({32, 32}),
+                    xt::transforms::Resize({32, 32}),
                     torch::data::transforms::Normalize<>(0.5, 0.5)
             }).map(torch::data::transforms::Stack<>());
 
