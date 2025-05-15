@@ -8,6 +8,7 @@
 #include "../../include/data_loaders/data_loader.h"
 // #include "../../include/data_loaders/data_loader.tpp"
 #include "../../include/trainers/trainer.h"
+#include "../../include/transforms/transforms.h"
 
 using namespace std;
 

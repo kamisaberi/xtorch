@@ -19,7 +19,7 @@ namespace xt::transforms::image {
          * @brief Constructs a Resize object with the target size.
          * @param size A vector of 64-bit integers specifying the target dimensions (e.g., {height, width}).
          */
-        Resize(std::vector<int64_t> size);
+        explicit Resize(std::vector<int64_t> size);
 
         /**
          * @brief Resizes the input tensor image to the target size.
