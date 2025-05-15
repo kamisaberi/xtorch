@@ -1,9 +1,8 @@
 #pragma once
 #include "transforms/common.h"
 
-namespace xt::transforms::image {
-
-
+namespace xt::transforms::image
+{
     /**
      * @struct Resize
      * @brief A functor to resize a tensor image to a specified size.
@@ -13,7 +12,8 @@ namespace xt::transforms::image {
      * perform the resizing operation, making it suitable for use in functional pipelines or
      * transformations.
      */
-    struct Resize {
+    struct Resize
+    {
     public:
         /**
          * @brief Constructs a Resize object with the target size.
@@ -31,8 +31,4 @@ namespace xt::transforms::image {
     private:
         std::vector<int64_t> size; ///< The target size for resizing (e.g., {height, width}).
     };
-
-
-
-
 }
