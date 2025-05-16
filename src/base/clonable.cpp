@@ -12,6 +12,6 @@ namespace xt
         return this->forward(std::move(input));
     }
     void CloneableModule::reset() {
-        // Linear layer is already initialized in the constructor
+
     }
 }
