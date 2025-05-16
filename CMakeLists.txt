@@ -74,15 +74,16 @@ set_target_properties(xTorch PROPERTIES
 # =============================================================================
 # Add custom library paths (LibTorch)
 
-if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
-    list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/cpp/libtorch/)
-elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
-    list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/cpp/libtorch/)
-elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
-    list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/cpp/libtorch/)
-else()
-    message(WARNING "Unsupported OS: ${CMAKE_SYSTEM_NAME}")
-endif()
+list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/cpp/libtorch/)
+#if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
+#    list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/cpp/libtorch/)
+#elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+#    list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/cpp/libtorch/)
+#elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
+#    list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/cpp/libtorch/)
+#else()
+#    message(WARNING "Unsupported OS: ${CMAKE_SYSTEM_NAME}")
+#endif()
 
 #list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/cpp/libtorch/)
 
