@@ -8,10 +8,13 @@
 
 namespace xt
 {
-    class Module: public torch::nn::Module {
+    class CloneableModule: public torch::nn::Cloneable<CloneableModule> {
     public:
-        Module();
+        CloneableModule();
         virtual  torch::Tensor forward(torch::Tensor input) const = 0;
         torch::Tensor operator()(torch::Tensor input) const ;
+        void reset() override;
+
+
     };
 }
