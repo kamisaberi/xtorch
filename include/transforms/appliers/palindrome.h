@@ -9,7 +9,6 @@ namespace xt::transforms
     public:
         Palindrome();
         explicit Palindrome(std::vector<xt::Module> transforms);
-        torch::Tensor operator()(torch::Tensor input) const;
         torch::Tensor forward(torch::Tensor input) const override;
 
     private:
