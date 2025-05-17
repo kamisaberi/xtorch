@@ -12,11 +12,8 @@ namespace xt::datasets {
     }
 
     Dataset::Dataset(const std::string &root, DataMode mode, bool download,
-                             TransformType transforms) : Dataset::Dataset(root, mode, download) {
-        this->transforms = transforms;
-        if (!transforms.empty()) {
-            this->compose = xt::transforms::Compose(this->transforms);
-        }
+                             xt::Module transformer) : Dataset::Dataset(root, mode, download) {
+        this->transformer = transformer;
     }
 
 
