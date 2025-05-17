@@ -3,11 +3,11 @@
 
 namespace xt::transforms {
 
-    struct Lambda {
+    struct Lambda final : xt::Module {
     public:
+        Lambda();
         Lambda(std::function<torch::Tensor(torch::Tensor)> transform);
-
-        torch::Tensor operator()(torch::Tensor input);
+        torch::Tensor forward(torch::Tensor input) const override;
 
     private:
         std::function<torch::Tensor(torch::Tensor)> transform;
