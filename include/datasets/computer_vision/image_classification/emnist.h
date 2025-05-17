@@ -16,7 +16,7 @@ namespace xt::data::datasets {
     public :
         EMNIST(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
 
-        EMNIST(const fs::path &root, DatasetArguments args);
+        EMNIST(const fs::path &root);
 
     private:
         std::string url = "https://biometrics.nist.gov/cs_links/EMNIST/";
