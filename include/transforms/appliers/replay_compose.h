@@ -7,12 +7,11 @@ namespace xt::transforms
     class ReplayCompose : xt::Module
     {
     public:
-        using TransformFunc = std::function<torch::Tensor(torch::Tensor)>;
         ReplayCompose();
-        explicit ReplayCompose(std::vector<TransformFunc> transforms);
+        explicit ReplayCompose(std::vector<xt::Module> transforms);
         torch::Tensor forward(torch::Tensor input) const override;
 
     private:
-        std::vector<TransformFunc> transforms;
+        std::vector<xt::Module> transforms;
     };
 }

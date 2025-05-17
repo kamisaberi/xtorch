@@ -1,14 +1,13 @@
 #include <utility>
 
-#include "../../../include/transforms/appliers/replay_compose.h"
+#include "transforms/appliers/replay_compose.h"
 
 namespace xt::transforms
 {
-    using TransformFunc = std::function<torch::Tensor(torch::Tensor)>;
 
     ReplayCompose::ReplayCompose() = default;
 
-    ReplayCompose::ReplayCompose(std::vector<TransformFunc> transforms): xt::Module(), transforms(std::move(transforms))
+    ReplayCompose::ReplayCompose(std::vector<xt::Module> transforms): xt::Module(), transforms(std::move(transforms))
     {
     }
 
