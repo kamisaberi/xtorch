@@ -8,7 +8,7 @@ namespace xt::data::datasets {
     public :
         Flickr8k(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
 
-        Flickr8k(const fs::path &root, DatasetArguments args);
+        Flickr8k(const fs::path &root);
 
     private :
         void load_data(DataMode mode = DataMode::TRAIN);
@@ -21,7 +21,7 @@ namespace xt::data::datasets {
     public :
         Flickr30k(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
 
-        Flickr30k(const fs::path &root, DatasetArguments args);
+        Flickr30k(const fs::path &root);
 
     private :
         void load_data(DataMode mode = DataMode::TRAIN);

@@ -12,7 +12,7 @@ namespace xt::data::datasets {
     class QMNIST : public MNISTBase {
     public :
         QMNIST(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
-        QMNIST(const fs::path &root, DatasetArguments args);
+        QMNIST(const fs::path &root);
 
     private:
         std::string url = "https://raw.githubusercontent.com/facebookresearch/qmnist/master/";

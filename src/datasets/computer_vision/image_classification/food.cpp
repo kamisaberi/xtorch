@@ -57,7 +57,7 @@ namespace xt::data::datasets {
         root, mode, download, transforms) {
         this->transforms = transforms;
         if (!transforms.empty()) {
-            this->compose = xt::transforms::Compose(transforms);
+            // this->compose = xt::transforms::Compose(transforms);
         }
         check_resources();
         load_classes();
@@ -174,7 +174,7 @@ namespace xt::data::datasets {
 
                 // Apply transforms if specified
                 if (!transforms.empty()) {
-                    tensor = this->compose(tensor);
+                    // tensor = this->compose(tensor);
                 }
 
                 // Store results
@@ -204,7 +204,7 @@ namespace xt::data::datasets {
 
                 // Apply transforms if specified
                 if (!transforms.empty()) {
-                    tensor = this->compose(tensor);
+                    // tensor = this->compose(tensor);
                 }
 
                 // Store results
