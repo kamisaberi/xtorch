@@ -5,7 +5,7 @@
 namespace xt::transforms::general {
     class ConvertDType final : public xt::Module {
     public:
-        Compose();
+        ConvertDType();
 
         explicit ConvertDType(torch::ScalarType target_dtype);
 

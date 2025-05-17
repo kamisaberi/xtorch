@@ -1,6 +1,8 @@
 #pragma once
 
 #include "datasets/common.h"
+#include "base/base.h"
+
 
 using namespace std;
 namespace fs = std::filesystem;

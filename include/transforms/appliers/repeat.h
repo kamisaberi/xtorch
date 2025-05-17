@@ -8,10 +8,10 @@ namespace xt::transforms
     {
     public:
         Repeat();
-        explicit Repeat(xt::Module transform, int n_times);
+        explicit Repeat(std::unique_ptr<xt::Module> transform, int n_times);
         torch::Tensor forward(torch::Tensor input) const override;
     private:
-        xt::Module transform;
+        std::unique_ptr<xt::Module> transform;
         int n_times_;
     };
 }
