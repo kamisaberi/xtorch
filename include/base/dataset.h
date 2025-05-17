@@ -28,32 +28,27 @@ namespace xt::datasets {
 
     public:
 
-        explicit Dataset(const std::string &root);
+        explicit Dataset();
 
-        Dataset(const std::string &root, DataMode mode);
+        explicit Dataset(DataMode mode);
 
-        Dataset(const std::string &root, DataMode mode , bool download);
+        explicit Dataset(DataMode mode, xt::Module transformer);
 
-        Dataset(const std::string &root, DataMode mode , bool download ,xt::Module transforms);
+        explicit Dataset(DataMode mode, xt::Module transformer, xt::Module target_transformer);
 
         torch::data::Example<> get(size_t index) override;
 
-        torch::optional<size_t> size() const override;
+        torch::optional <size_t> size() const override;
 
     public:
-        std::vector<torch::Tensor> data;
+        std::vector <torch::Tensor> data;
 
-        std::vector<uint8_t> labels;
+        std::vector <uint8_t> targets;
 
         DataMode mode = DataMode::TRAIN;
 
-        bool download = false;
-
-        fs::path root;
-        fs::path dataset_path;
-        xt::Module compose;
-
-
+        xt::Module transformer;
+        xt::Module target_transformer;
 
     };
 }
