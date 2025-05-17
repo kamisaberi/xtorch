@@ -5,13 +5,13 @@
 namespace xt::transforms::general {
 
 
-    struct Normalize::xt::Module {
+    struct Normalize final : xt::Module {
     public:
         Normalize();
 
 //        Normalize(float mean, float std);
 
-        Normalize(std::vector<float>  mean, std::vector<float> std);
+        Normalize(std::vector<float> mean, std::vector<float> std);
 
         torch::Tensor forward(torch::Tensor input) const override;
 
