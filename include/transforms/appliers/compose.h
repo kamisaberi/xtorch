@@ -57,7 +57,7 @@ namespace xt::transforms
          *
          * This member holds the list of transformations to be applied when the object is called.
          */
-        std::vector<TransformFunc> transforms;
+        std::vector<xt::Module> transforms;
 
     };
 }
