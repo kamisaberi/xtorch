@@ -24,6 +24,13 @@ namespace fs = std::filesystem;
  */
 namespace xt::datasets {
 
+    enum class DataMode {
+        TRAIN = 1,
+        VALIDATION = 2,
+        TEST = 3,
+    };
+
+
     /**
      * @class BaseDataset
      * @brief Abstract base class for all custom datasets in the xt framework
