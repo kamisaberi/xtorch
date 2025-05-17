@@ -7,12 +7,11 @@ namespace xt::transforms
     class Sometimes : xt::Module
     {
     public:
-        using TransformFunc = std::function<torch::Tensor(torch::Tensor)>;
         Sometimes();
-        explicit Sometimes(std::vector<TransformFunc> transforms);
+        explicit Sometimes(std::vector<xt::Module> transforms);
         torch::Tensor forward(torch::Tensor input) const override;
 
     private:
-        std::vector<TransformFunc> transforms;
+        std::vector<xt::Module> transforms;
     };
 }
