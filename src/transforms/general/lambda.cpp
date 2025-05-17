@@ -1,16 +1,15 @@
-#include "../../../include/transforms/general/lambda.h"
+#include "transforms/general/lambda.h"
 
 namespace xt::transforms {
 
+    Lambda::Lambda() = default;
 
-    Lambda::Lambda(std::function<torch::Tensor(torch::Tensor)> transform)
-        : transform(transform) {
+
+    Lambda::Lambda(std::function<torch::Tensor(torch::Tensor)> transform) : xt::Module(), transform(transform) {
     }
 
-    torch::Tensor Lambda::operator()(torch::Tensor input) {
+    torch::Tensor Lambda::forward(torch::Tensor input) {
         return transform(input);
     }
-
-
 
 }
