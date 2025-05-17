@@ -7,7 +7,7 @@ namespace xt::transforms::general {
     ConvertDType::ConvertDType(torch::ScalarType target_dtype) : xt::Module(), target_dtype(target_dtype) {
     }
 
-    torch::Tensor Compose::forward(torch::Tensor input) const {
+    torch::Tensor ConvertDType::forward(torch::Tensor input) const {
 
         if (!input.defined()) {
             throw std::invalid_argument("Input tensor is not defined");
