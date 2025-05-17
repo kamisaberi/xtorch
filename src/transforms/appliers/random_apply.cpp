@@ -4,11 +4,10 @@
 
 namespace xt::transforms
 {
-    using TransformFunc = std::function<torch::Tensor(torch::Tensor)>;
 
     RandomApply::RandomApply() = default;
 
-    RandomApply::RandomApply(std::vector<TransformFunc> transforms): xt::Module(), transforms(std::move(transforms))
+    RandomApply::RandomApply(std::vector<xt::Module> transforms): xt::Module(), transforms(std::move(transforms))
     {
     }
 

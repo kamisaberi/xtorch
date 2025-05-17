@@ -7,12 +7,11 @@ namespace xt::transforms
     class RandomApply final : public xt::Module
     {
     public:
-        using TransformFunc = std::function<torch::Tensor(torch::Tensor)>;
         RandomApply();
-        explicit RandomApply(std::vector<TransformFunc> transforms);
+        explicit RandomApply(std::vector<xt::Module> transforms);
         torch::Tensor forward(torch::Tensor input) const override;
 
     private:
-        std::vector<TransformFunc> transforms;
+        std::vector<xt::Module> transforms;
     };
 }
