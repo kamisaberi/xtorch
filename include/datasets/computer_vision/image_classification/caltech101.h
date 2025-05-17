@@ -14,10 +14,10 @@ namespace xt::data::datasets
     {
     public :
         explicit Caltech101(const std::string& root);
-        Caltech101(const std::string& root, DataMode mode);
-        Caltech101(const std::string& root, DataMode mode, bool download);
-        Caltech101(const std::string& root, DataMode mode, bool download, std::unique_ptr<xt::Module> transformer);
-        Caltech101(const std::string& root, DataMode mode, bool download, std::unique_ptr<xt::Module> transformer,
+        Caltech101(const std::string& root, xt::datasets::DataMode mode);
+        Caltech101(const std::string& root, xt::datasets::DataMode mode, bool download);
+        Caltech101(const std::string& root, xt::datasets::DataMode mode, bool download, std::unique_ptr<xt::Module> transformer);
+        Caltech101(const std::string& root, xt::datasets::DataMode mode, bool download, std::unique_ptr<xt::Module> transformer,
                    std::unique_ptr<xt::Module> target_transformer);
 
     private:
