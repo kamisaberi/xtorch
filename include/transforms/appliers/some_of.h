@@ -7,12 +7,11 @@ namespace xt::transforms
     class SomeOf : xt::Module
     {
     public:
-        using TransformFunc = std::function<torch::Tensor(torch::Tensor)>;
         SomeOf();
-        explicit SomeOf(std::vector<TransformFunc> transforms);
+        explicit SomeOf(std::vector<xt::Module> transforms);
         torch::Tensor forward(torch::Tensor input) const override;
 
     private:
-        std::vector<TransformFunc> transforms;
+        std::vector<xt::Module> transforms;
     };
 }
