@@ -9,7 +9,7 @@ namespace xt::transforms::general {
         }
     }
 
-    torch::Tensor Normalize::forward(const torch::Tensor &tensor) const {
+    torch::Tensor Normalize::forward(torch::Tensor tensor) const{
         if (tensor.dim() != 3 || tensor.size(0) != static_cast<long>(mean.size())) {
             throw std::invalid_argument("Input tensor must be CHW with matching number of channels");
         }
