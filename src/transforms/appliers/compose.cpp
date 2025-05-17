@@ -6,7 +6,7 @@ namespace xt::transforms
 {
     Compose::Compose() = default;
 
-    Compose::Compose(std::vector<TransformFunc> transforms): xt::Module(), transforms(std::move(transforms))
+    Compose::Compose(std::vector<xt::Module> transforms): xt::Module(), transforms(std::move(transforms))
     {
     }
 
