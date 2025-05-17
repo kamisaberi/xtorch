@@ -1,14 +1,12 @@
 #include <utility>
 
-#include "../../../include/transforms/appliers/some_of.h"
+#include "transforms/appliers/some_of.h"
 
 namespace xt::transforms
 {
-    using TransformFunc = std::function<torch::Tensor(torch::Tensor)>;
-
     SomeOf::SomeOf() = default;
 
-    SomeOf::SomeOf(std::vector<TransformFunc> transforms): xt::Module(), transforms(std::move(transforms))
+    SomeOf::SomeOf(std::vector<xt::Module> transforms): xt::Module(), transforms(std::move(transforms))
     {
     }
 
