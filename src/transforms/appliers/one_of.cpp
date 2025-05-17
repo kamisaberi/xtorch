@@ -1,14 +1,13 @@
 #include <utility>
 
-#include "../../../include/transforms/appliers/one_of.h"
+#include "transforms/appliers/one_of.h"
 
 namespace xt::transforms
 {
-    using TransformFunc = std::function<torch::Tensor(torch::Tensor)>;
 
     OneOf::OneOf() = default;
 
-    OneOf::OneOf(std::vector<TransformFunc> transforms): xt::Module(), transforms(std::move(transforms))
+    OneOf::OneOf(std::vector<xt::Module> transforms): xt::Module(), transforms(std::move(transforms))
     {
     }
 
