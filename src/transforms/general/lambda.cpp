@@ -1,6 +1,6 @@
 #include "transforms/general/lambda.h"
 
-namespace xt::transforms {
+namespace xt::transforms::general {
 
     Lambda::Lambda() = default;
 
