@@ -1,14 +1,12 @@
 #include <utility>
 
-#include "../../../include/transforms/appliers/sometimes.h"
+#include "transforms/appliers/sometimes.h"
 
 namespace xt::transforms
 {
-    using TransformFunc = std::function<torch::Tensor(torch::Tensor)>;
-
     Sometimes::Sometimes() = default;
 
-    Sometimes::Sometimes(std::vector<TransformFunc> transforms): xt::Module(), transforms(std::move(transforms))
+    Sometimes::Sometimes(std::vector<xt::Module> transforms): xt::Module(), transforms(std::move(transforms))
     {
     }
 
