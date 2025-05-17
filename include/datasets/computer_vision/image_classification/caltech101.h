@@ -9,12 +9,12 @@ namespace fs = std::filesystem;
 
 
 namespace xt::data::datasets {
-    class Caltech101 : public BaseDataset {
+    class Caltech101 : public xt::datasets::Dataset {
     public :
         explicit Caltech101(const std::string &root);
         Caltech101(const std::string &root, DataMode mode);
         Caltech101(const std::string &root, DataMode mode , bool download);
-        Caltech101(const std::string &root, DataMode mode , bool download, TransformType transforms);
+        Caltech101(const std::string &root, DataMode mode , bool download, std::unique_ptr<xt::Module> transformer ,   std::unique_ptr<xt::Module> target_transformer);
 
     private:
         vector<std::tuple<string, string, string> > resources = {
@@ -27,7 +27,16 @@ namespace xt::data::datasets {
                 "6f83eeb1f24d99cab4eb377263132c91"
             }
         };
+
+
         fs::path dataset_folder_name = "caltech101";
+
+        bool download = false;
+        fs::path root;
+        fs::path dataset_path;
+
+
+
         void load_data();
 
         void check_resources();
