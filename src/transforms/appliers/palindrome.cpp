@@ -4,11 +4,10 @@
 
 namespace xt::transforms
 {
-    using TransformFunc = std::function<torch::Tensor(torch::Tensor)>;
 
     Palindrome::Palindrome() = default;
 
-    Palindrome::Palindrome(std::vector<TransformFunc> transforms): xt::Module(), transforms(std::move(transforms))
+    Palindrome::Palindrome(std::vector<xt::Module> transforms): xt::Module(), transforms(std::move(transforms))
     {
     }
 
