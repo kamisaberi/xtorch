@@ -28,7 +28,7 @@ namespace xt::data::datasets {
         this->load_sub_folders = load_sub_folders;
         if (!transforms.empty()) {
             this->transforms = transforms;
-            this->compose = xt::transforms::Compose(transforms);
+            // this->compose = xt::transforms::Compose(transforms);
         }
         // check_resources(root, download);
         load_data();
