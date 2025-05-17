@@ -6,7 +6,6 @@ namespace xt::datasets {
         return {data[index], torch::tensor(labels[index])};
     }
 
-    // Override `size` method to return the number of samples
     torch::optional <size_t> Dataset::size() const {
         return data.size();
     }

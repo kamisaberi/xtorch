@@ -1,6 +1,7 @@
 #pragma once
 
-#include "datasets/base/base.h"
+#include "base/base.h"
+#include "datasets/common.h"
 
 
 using namespace std;
