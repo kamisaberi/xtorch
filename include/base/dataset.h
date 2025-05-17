@@ -1,6 +1,16 @@
 #pragma once
 
-#include "datasets/common.h"
+#include <fstream>
+#include <filesystem>
+#include <vector>
+#include <tuple>
+#include <map>
+#include <torch/torch.h>
+#include "types/enums.h"
+#include <opencv2/opencv.hpp>
+#include "media/opencv/images.h"
+#include "transforms/transforms.h"
+#include "utils/utils.h"
 
 using namespace std;
 namespace fs = std::filesystem;
