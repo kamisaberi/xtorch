@@ -6,7 +6,7 @@
 #include <tuple>
 #include <map>
 #include <torch/torch.h>
-#include "types/enums.h"
+#include "base/types/enums.h"
 #include <opencv2/opencv.hpp>
 #include "media/opencv/images.h"
 #include "transforms/transforms.h"
