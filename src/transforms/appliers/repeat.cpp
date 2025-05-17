@@ -4,7 +4,7 @@ namespace xt::transforms
 {
     Repeat::Repeat() = default;
 
-    Repeat::Repeat(xt::Module transform, int n_times): xt::Module(), transform(std::move(transform)),
+    Repeat::Repeat(std::unique_ptr<xt::Module> transform, int n_times): xt::Module(), transform(std::move(transform)),
                                                           n_times_(n_times)
     {
     }
@@ -13,7 +13,7 @@ namespace xt::transforms
     {
         for (int i = 1; i < this->n_times_; i++)
         {
-            input = transform(std::move(input));
+            // input = transform(std::move(input));
         }
         return input;
     }
