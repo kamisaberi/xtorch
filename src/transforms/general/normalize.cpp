@@ -1,6 +1,6 @@
 #include "../../../include/transforms/general/normalize.h"
 
-namespace xt::transforms {
+namespace xt::transforms::general {
 
     Normalize::Normalize(std::vector<float> mean_, std::vector<float> std_)
             : mean(std::move(mean_)), std(std::move(std_)) {
@@ -9,7 +9,7 @@ namespace xt::transforms {
         }
     }
 
-    torch::Tensor Normalize::operator()(const torch::Tensor &tensor) const {
+    torch::Tensor Normalize::forward(const torch::Tensor &tensor) const {
         if (tensor.dim() != 3 || tensor.size(0) != static_cast<long>(mean.size())) {
             throw std::invalid_argument("Input tensor must be CHW with matching number of channels");
         }
