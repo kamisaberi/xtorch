@@ -1,7 +1,7 @@
 #pragma once
 #include "transforms/common.h"
 
-namespace xt::transforms {
+namespace xt::transforms::general {
 
     struct Lambda final : xt::Module {
     public:
