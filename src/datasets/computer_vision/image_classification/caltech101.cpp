@@ -30,6 +30,9 @@ namespace xt::data::datasets
                            std::unique_ptr<xt::Module> transformer, std::unique_ptr<xt::Module> target_transformer):
         xt::datasets::Dataset(mode, std::move(transformer), std::move(target_transformer))
     {
+        check_resources();
+        load_data();
+
     }
 
 

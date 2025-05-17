@@ -16,13 +16,15 @@ namespace xt::data::datasets
         explicit Caltech101(const std::string& root);
         Caltech101(const std::string& root, xt::datasets::DataMode mode);
         Caltech101(const std::string& root, xt::datasets::DataMode mode, bool download);
-        Caltech101(const std::string& root, xt::datasets::DataMode mode, bool download, std::unique_ptr<xt::Module> transformer);
-        Caltech101(const std::string& root, xt::datasets::DataMode mode, bool download, std::unique_ptr<xt::Module> transformer,
+        Caltech101(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer);
+        Caltech101(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer,
                    std::unique_ptr<xt::Module> target_transformer);
 
     private:
-        tuple<string, string> resources = {
-            "https://data.caltech.edu/records/mzrjq-6wc02/files/caltech-101.zip?download=1",
+        tuple<string, string, string> resources = {
+            "https://data.caltech.edu/records/mzrjq-6wc02/files/caltech-101.zip?download=1", "caltech-101.zip",
             "3138e1922a9193bfa496528edbbc45d0"
         };
         // vector<std::tuple<string, string, string> > resources = {
