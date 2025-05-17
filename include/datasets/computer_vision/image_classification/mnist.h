@@ -23,7 +23,7 @@ namespace xt::data::datasets
         // MNIST(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false , std::shared_ptr<xt::data::transforms::Compose> compose= nullptr);
         // MNIST(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false, vector<std::function<torch::Tensor(torch::Tensor)>> transforms= {});
 
-        MNIST(const fs::path& root, DatasetArguments args);
+        MNIST(const fs::path& root);
 
     private :
         std::string url = "https://ossci-datasets.s3.amazonaws.com/mnist/";

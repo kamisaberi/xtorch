@@ -9,7 +9,7 @@ namespace xt::data::datasets {
     public :
         LSUN(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
 
-        LSUN(const fs::path &root, DatasetArguments args);
+        LSUN(const fs::path &root);
 
     private :
         void load_data(DataMode mode = DataMode::TRAIN);

@@ -13,7 +13,7 @@ namespace xt::data::datasets {
     public :
         KMNIST(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
 
-        KMNIST(const fs::path &root, DatasetArguments args);
+        KMNIST(const fs::path &root);
 
     private:
         std::string url = "http://codh.rois.ac.jp/kmnist/dataset/kmnist/";
