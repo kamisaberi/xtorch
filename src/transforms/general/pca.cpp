@@ -7,7 +7,7 @@ namespace xt::transforms::general {
     PCA::PCA(std::function<torch::Tensor(torch::Tensor)> transform) : xt::Module(), transform(transform) {
     }
 
-    torch::Tensor Lambda::forward(torch::Tensor input) {
+    torch::Tensor PCA::forward(torch::Tensor input) const {
         return transform(input);
     }
 

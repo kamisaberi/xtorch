@@ -8,7 +8,7 @@ namespace xt::transforms::general {
     RandomOverSampling::RandomOverSampling(std::function<torch::Tensor(torch::Tensor)> transform) : xt::Module(), transform(transform) {
     }
 
-    torch::Tensor Lambda::forward(torch::Tensor input) {
+    torch::Tensor RandomOverSampling::forward(torch::Tensor input) const{
         return transform(input);
     }
 
