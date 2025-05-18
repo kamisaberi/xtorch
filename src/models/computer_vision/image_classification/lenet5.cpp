@@ -6,7 +6,6 @@ using namespace std;
 namespace xt::models
 {
     LeNet5::LeNet5(int num_classes, int in_channels, std::vector<int64_t> input_shape)
-        : xt::Module()
     {
         // Define convolutional layers
         layer1 = torch::nn::Sequential(
@@ -47,7 +46,7 @@ namespace xt::models
     }
 
 
-    LeNet5::LeNet5(int num_classes, int in_channels) : xt::Module()
+    LeNet5::LeNet5(int num_classes, int in_channels)
     {
         layer1 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(in_channels, 6, 5).stride(1).padding(0)),
