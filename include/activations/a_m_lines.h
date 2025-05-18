@@ -6,7 +6,6 @@ namespace xt::activations
 {
     class AMLines : xt::Module
     {
-
     };
 }
 
