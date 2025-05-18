@@ -8,24 +8,32 @@ using namespace std;
 namespace fs = std::filesystem;
 
 
-namespace xt::data::datasets {
-
-    class Caltech256 : public BaseDataset {
+namespace xt::data::datasets
+{
+    class Caltech256 : public xt::datasets::Dataset
+    {
     public :
-        explicit  Caltech256(const std::string &root);
-        Caltech256(const std::string &root, DataMode mode);
-        Caltech256(const std::string &root, DataMode mode , bool download);
-        Caltech256(const std::string &root, DataMode mode , bool download, TransformType transforms);
-
+        explicit Caltech256(const std::string& root);
+        Caltech256(const std::string& root, xt::datasets::DataMode mode);
+        Caltech256(const std::string& root, xt::datasets::DataMode mode, bool download);
+        Caltech256(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer);
+        Caltech256(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer,
+                   std::unique_ptr<xt::Module> target_transformer);
 
     private:
-        vector<std::tuple<string, string, string> > resources = {
-            {
-                "https://drive.google.com/file/d/1r6o0pSROcV1_VwT4oSjA2FBUSCWGuxLK", "256_ObjectCategories.tar",
-                "67b4f42ca05d46448c6bb8ecd2220f6d"
-            },
+        std::tuple<string, string, string> resources = {
+            "https://data.caltech.edu/records/nyy15-4j048/files/256_ObjectCategories.tar?download=1",
+            "256_ObjectCategories.tar",
+            "67b4f42ca05d46448c6bb8ecd2220f6d"
         };
-        fs::path dataset_folder_name = "caltech256";
+
+        fs::path dataset_folder_name = "256_ObjectCategories";
+
+        bool download = false;
+        fs::path root;
+        fs::path dataset_path;
 
         void load_data();
 
