@@ -3,25 +3,47 @@
 namespace xt::data::datasets {
 
 
-    // ---------------------- Caltech101 ---------------------- //
-
-    Caltech256::Caltech256(const std::string &root): Caltech256::Caltech256(root, DataMode::TRAIN, false) {
+    Caltech256::Caltech256(const std::string& root): Caltech256::Caltech256(
+        root, xt::datasets::DataMode::TRAIN, false, nullptr, nullptr)
+    {
     }
 
-    Caltech256::Caltech256(const std::string &root, DataMode mode): Caltech256::Caltech256(root, mode, false) {
+    Caltech256::Caltech256(const std::string& root, xt::datasets::DataMode mode): Caltech256::Caltech256(
+        root, mode, false, nullptr, nullptr)
+    {
     }
 
-    Caltech256::Caltech256(const std::string &root, DataMode mode, bool download) : BaseDataset(root, mode, download) {
-        throw std::runtime_error("Caltech101: Caltech101 not implemented");
+    Caltech256::Caltech256(const std::string& root, xt::datasets::DataMode mode, bool download) :
+        Caltech256::Caltech256(
+            root, mode, download, nullptr, nullptr)
+    {
+    }
+
+    Caltech256::Caltech256(const std::string& root, xt::datasets::DataMode mode, bool download,
+                           std::unique_ptr<xt::Module> transformer) : Caltech256::Caltech256(
+        root, mode, download, std::move(transformer), nullptr)
+    {
+    }
+
+    Caltech256::Caltech256(const std::string& root, xt::datasets::DataMode mode, bool download,
+                           std::unique_ptr<xt::Module> transformer, std::unique_ptr<xt::Module> target_transformer):
+        xt::datasets::Dataset(mode, std::move(transformer), std::move(target_transformer))
+    {
+        check_resources();
+        load_data();
+
     }
 
 
-    Caltech256::Caltech256(const std::string &root, DataMode mode, bool download,
-                           TransformType transforms) : BaseDataset(root, mode, download, transforms) {
-        throw std::runtime_error("Caltech101: Caltech101 not implemented");
+    void Caltech256::load_data()
+    {
+
     }
 
+    void Caltech256::check_resources()
+    {
 
+    }
 
 
 
