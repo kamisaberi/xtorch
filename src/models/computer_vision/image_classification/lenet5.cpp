@@ -43,6 +43,7 @@ namespace xt::models
         register_module("fc1", fc1);
         register_module("fc2", fc2);
         register_module("fc3", fc3);
+        reset();
     }
 
 
@@ -67,11 +68,13 @@ namespace xt::models
         fc3 = torch::nn::Linear(84, num_classes);
 
 
-        register_module("layer1", layer1);
-        register_module("layer2", layer2);
-        register_module("fc1", fc1);
-        register_module("fc2", fc2);
-        register_module("fc3", fc3);
+        layer1 = register_module("layer1", layer1);
+        layer2 = register_module("layer2", layer2);
+        fc1 = register_module("fc1", fc1);
+        fc2 = register_module("fc2", fc2);
+        fc3 = register_module("fc3", fc3);
+
+        reset();
     }
 
     // torch::Tensor LeNet5::forward(torch::Tensor x) const {
@@ -94,6 +97,10 @@ namespace xt::models
         x = torch::relu(fc2->forward(x));
         x = torch::log_softmax(fc3->forward(x), 1);
         return x;
+    }
+
+    void LeNet5::reset()
+    {
     }
 }
 
