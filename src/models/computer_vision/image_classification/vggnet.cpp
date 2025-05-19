@@ -1,7 +1,9 @@
 #include "models/computer_vision/image_classification/vggnet.h"
 
-namespace xt::models {
-    VggNet11::VggNet11(int num_classes,int in_channels) : xt::Module() {
+namespace xt::models
+{
+    VggNet11::VggNet11(int num_classes, int in_channels)
+    {
         layer1 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(in_channels, 64, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(64),
@@ -131,8 +133,7 @@ namespace xt::models {
 
 
     VggNet11::VggNet11(int num_classes, int in_channels, std::vector<int64_t> input_shape)
-        : xt::Module() {
-
+    {
         layer1 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(in_channels, 64, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(64),
@@ -293,9 +294,8 @@ namespace xt::models {
     }
 
 
-
-
-    torch::Tensor VggNet11::forward(torch::Tensor x) const {
+    torch::Tensor VggNet11::forward(torch::Tensor x) const
+    {
         x = layer1->forward(x);
         x = layer2->forward(x);
         x = layer3->forward(x);
@@ -317,7 +317,8 @@ namespace xt::models {
     }
 
 
-    VggNet13::VggNet13(int num_classes,int in_channels) : xt::Module() {
+    VggNet13::VggNet13(int num_classes, int in_channels) : xt::Module()
+    {
         //TODO layer1 DONE
         layer1 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(in_channels, 64, 3).stride(1).padding(1)),
@@ -463,8 +464,8 @@ namespace xt::models {
 
 
     VggNet13::VggNet13(int num_classes, int in_channels, std::vector<int64_t> input_shape)
-        : xt::Module() {
-
+        : xt::Module()
+    {
         //TODO layer1 DONE
         layer1 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(in_channels, 64, 3).stride(1).padding(1)),
@@ -629,9 +630,8 @@ namespace xt::models {
     }
 
 
-
-
-    torch::Tensor VggNet13::forward(torch::Tensor x) const {
+    torch::Tensor VggNet13::forward(torch::Tensor x) const
+    {
         x = layer1->forward(x);
         x = layer2->forward(x);
         x = layer3->forward(x);
@@ -653,9 +653,8 @@ namespace xt::models {
     }
 
 
-
-
-        VggNet16::VggNet16(int num_classes,int in_channels) : xt::Module() {
+    VggNet16::VggNet16(int num_classes, int in_channels) : xt::Module()
+    {
         //TODO layer1 DONE
         layer1 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(in_channels, 64, 3).stride(1).padding(1)),
@@ -801,8 +800,8 @@ namespace xt::models {
 
 
     VggNet16::VggNet16(int num_classes, int in_channels, std::vector<int64_t> input_shape)
-        : xt::Module() {
-
+        : xt::Module()
+    {
         //TODO layer1 DONE
         layer1 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(in_channels, 64, 3).stride(1).padding(1)),
@@ -967,9 +966,8 @@ namespace xt::models {
     }
 
 
-
-
-    torch::Tensor VggNet16::forward(torch::Tensor x) const {
+    torch::Tensor VggNet16::forward(torch::Tensor x) const
+    {
         x = layer1->forward(x);
         x = layer2->forward(x);
         x = layer3->forward(x);
@@ -991,8 +989,8 @@ namespace xt::models {
     }
 
 
-
-        VggNet19::VggNet19(int num_classes,int in_channels) : xt::Module() {
+    VggNet19::VggNet19(int num_classes, int in_channels) : xt::Module()
+    {
         //TODO layer1 DONE
         layer1 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(in_channels, 64, 3).stride(1).padding(1)),
@@ -1138,8 +1136,8 @@ namespace xt::models {
 
 
     VggNet19::VggNet19(int num_classes, int in_channels, std::vector<int64_t> input_shape)
-        : xt::Module() {
-
+        : xt::Module()
+    {
         //TODO layer1 DONE
         layer1 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(in_channels, 64, 3).stride(1).padding(1)),
@@ -1304,9 +1302,8 @@ namespace xt::models {
     }
 
 
-
-
-    torch::Tensor VggNet19::forward(torch::Tensor x) const {
+    torch::Tensor VggNet19::forward(torch::Tensor x) const
+    {
         x = layer1->forward(x);
         x = layer2->forward(x);
         x = layer3->forward(x);
@@ -1326,18 +1323,4 @@ namespace xt::models {
         x = fc2->forward(x);
         return x;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
