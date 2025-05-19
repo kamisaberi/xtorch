@@ -1,8 +1,11 @@
-#include "../../../../include/models/computer_vision/image_classification/resnet.h"
+#include "models/computer_vision/image_classification/resnet.h"
 
-namespace xt::models {
-    namespace {
-        ResidualBlock::ResidualBlock(int in_channels, int out_channels, int stride, torch::nn::Sequential downsample) {
+namespace xt::models
+{
+    namespace
+    {
+        ResidualBlock::ResidualBlock(int in_channels, int out_channels, int stride, torch::nn::Sequential downsample)
+        {
             conv1 = torch::nn::Sequential(
                 torch::nn::Conv2d(torch::nn::Conv2dOptions(in_channels, out_channels, 3).stride(stride).padding(1)),
                 torch::nn::BatchNorm2d(out_channels),
@@ -23,13 +26,17 @@ namespace xt::models {
             this->out_channels = out_channels;
         }
 
-        torch::Tensor ResidualBlock::forward(torch::Tensor x) {
+        torch::Tensor ResidualBlock::forward(torch::Tensor x) const
+        {
             residual = x;
             torch::Tensor out = conv1->forward(x);
             out = conv2->forward(out);
-            if (downsample) {
+            if (downsample)
+            {
                 residual = downsample->forward(x);
-            } else {
+            }
+            else
+            {
             }
             out += residual;
             out = relu(out);
@@ -38,7 +45,8 @@ namespace xt::models {
     }
 
 
-    ResNet18::ResNet18(vector<int> layers, int num_classes, int in_channels): xt::Module() {
+    ResNet18::ResNet18(vector<int> layers, int num_classes, int in_channels)
+    {
         inplanes = 64;
 
 
@@ -65,11 +73,12 @@ namespace xt::models {
 
         avgpool = torch::nn::AvgPool2d(torch::nn::AvgPool2dOptions(7).stride(1));
         fc = torch::nn::Linear(512, num_classes);
+        reset();
     }
 
 
     ResNet18::ResNet18(std::vector<int> layers, int num_classes, int in_channels, std::vector<int64_t> input_shape)
-        : xt::Module() {
+    {
         inplanes = 64;
 
         conv1 = torch::nn::Sequential(
@@ -111,6 +120,7 @@ namespace xt::models {
 
         register_module("avgpool", avgpool);
         register_module("fc", fc);
+        reset();
     }
 
     // torch::nn::Sequential ResNet::makeLayerFromResidualBlock(int planes, int blocks, int stride) {
@@ -131,9 +141,11 @@ namespace xt::models {
     // }
 
 
-    torch::nn::Sequential ResNet18::makeLayerFromResidualBlock(int planes, int blocks, int stride) {
+    torch::nn::Sequential ResNet18::makeLayerFromResidualBlock(int planes, int blocks, int stride)
+    {
         torch::nn::Sequential downsample = nullptr;
-        if (stride != 1 || inplanes != planes) {
+        if (stride != 1 || inplanes != planes)
+        {
             downsample = torch::nn::Sequential();
             //                    nn.Conv2d(self.inplanes, planes, kernel_size=1, stride=stride),
             torch::nn::Conv2d convd = torch::nn::Conv2d(
@@ -147,14 +159,16 @@ namespace xt::models {
         ResidualBlock rb = ResidualBlock(inplanes, planes, stride, downsample);
         layers->push_back(rb);
         inplanes = planes;
-        for (int i = 1; i < blocks; i++) {
+        for (int i = 1; i < blocks; i++)
+        {
             ResidualBlock rbt = ResidualBlock(inplanes, planes);
             layers->push_back(rbt);
         }
         return layers;
     }
 
-    torch::Tensor ResNet18::forward(torch::Tensor x) const {
+    torch::Tensor ResNet18::forward(torch::Tensor x) const
+    {
         x = conv1->forward(x);
         x = maxpool->forward(x);
         x = layer0->forward(x);
@@ -168,13 +182,8 @@ namespace xt::models {
     }
 
 
-
-
-
-
-
-
-        ResNet34::ResNet34(vector<int> layers, int num_classes, int in_channels) : xt::Module(){
+    ResNet34::ResNet34(vector<int> layers, int num_classes, int in_channels) : xt::Module()
+    {
         inplanes = 64;
 
 
@@ -205,7 +214,8 @@ namespace xt::models {
 
 
     ResNet34::ResNet34(std::vector<int> layers, int num_classes, int in_channels, std::vector<int64_t> input_shape)
-        : xt::Module() {
+        : xt::Module()
+    {
         inplanes = 64;
 
         conv1 = torch::nn::Sequential(
@@ -267,9 +277,11 @@ namespace xt::models {
     // }
 
 
-    torch::nn::Sequential ResNet34::makeLayerFromResidualBlock(int planes, int blocks, int stride) {
+    torch::nn::Sequential ResNet34::makeLayerFromResidualBlock(int planes, int blocks, int stride)
+    {
         torch::nn::Sequential downsample = nullptr;
-        if (stride != 1 || inplanes != planes) {
+        if (stride != 1 || inplanes != planes)
+        {
             downsample = torch::nn::Sequential();
             //                    nn.Conv2d(self.inplanes, planes, kernel_size=1, stride=stride),
             torch::nn::Conv2d convd = torch::nn::Conv2d(
@@ -283,14 +295,16 @@ namespace xt::models {
         ResidualBlock rb = ResidualBlock(inplanes, planes, stride, downsample);
         layers->push_back(rb);
         inplanes = planes;
-        for (int i = 1; i < blocks; i++) {
+        for (int i = 1; i < blocks; i++)
+        {
             ResidualBlock rbt = ResidualBlock(inplanes, planes);
             layers->push_back(rbt);
         }
         return layers;
     }
 
-    torch::Tensor ResNet34::forward(torch::Tensor x) const {
+    torch::Tensor ResNet34::forward(torch::Tensor x) const
+    {
         x = conv1->forward(x);
         x = maxpool->forward(x);
         x = layer0->forward(x);
@@ -303,7 +317,8 @@ namespace xt::models {
         return x;
     }
 
-        ResNet50::ResNet50(vector<int> layers, int num_classes, int in_channels) : xt::Module() {
+    ResNet50::ResNet50(vector<int> layers, int num_classes, int in_channels) : xt::Module()
+    {
         inplanes = 64;
 
 
@@ -334,7 +349,8 @@ namespace xt::models {
 
 
     ResNet50::ResNet50(std::vector<int> layers, int num_classes, int in_channels, std::vector<int64_t> input_shape)
-        : xt::Module() {
+        : xt::Module()
+    {
         inplanes = 64;
 
         conv1 = torch::nn::Sequential(
@@ -396,9 +412,11 @@ namespace xt::models {
     // }
 
 
-    torch::nn::Sequential ResNet50::makeLayerFromResidualBlock(int planes, int blocks, int stride) {
+    torch::nn::Sequential ResNet50::makeLayerFromResidualBlock(int planes, int blocks, int stride)
+    {
         torch::nn::Sequential downsample = nullptr;
-        if (stride != 1 || inplanes != planes) {
+        if (stride != 1 || inplanes != planes)
+        {
             downsample = torch::nn::Sequential();
             //                    nn.Conv2d(self.inplanes, planes, kernel_size=1, stride=stride),
             torch::nn::Conv2d convd = torch::nn::Conv2d(
@@ -412,14 +430,16 @@ namespace xt::models {
         ResidualBlock rb = ResidualBlock(inplanes, planes, stride, downsample);
         layers->push_back(rb);
         inplanes = planes;
-        for (int i = 1; i < blocks; i++) {
+        for (int i = 1; i < blocks; i++)
+        {
             ResidualBlock rbt = ResidualBlock(inplanes, planes);
             layers->push_back(rbt);
         }
         return layers;
     }
 
-    torch::Tensor ResNet50::forward(torch::Tensor x) const {
+    torch::Tensor ResNet50::forward(torch::Tensor x) const
+    {
         x = conv1->forward(x);
         x = maxpool->forward(x);
         x = layer0->forward(x);
@@ -433,8 +453,8 @@ namespace xt::models {
     }
 
 
-
-        ResNet101::ResNet101(vector<int> layers, int num_classes, int in_channels) : xt::Module() {
+    ResNet101::ResNet101(vector<int> layers, int num_classes, int in_channels) : xt::Module()
+    {
         inplanes = 64;
 
 
@@ -465,7 +485,8 @@ namespace xt::models {
 
 
     ResNet101::ResNet101(std::vector<int> layers, int num_classes, int in_channels, std::vector<int64_t> input_shape)
-        : xt::Module() {
+        : xt::Module()
+    {
         inplanes = 64;
 
         conv1 = torch::nn::Sequential(
@@ -527,9 +548,11 @@ namespace xt::models {
     // }
 
 
-    torch::nn::Sequential ResNet101::makeLayerFromResidualBlock(int planes, int blocks, int stride) {
+    torch::nn::Sequential ResNet101::makeLayerFromResidualBlock(int planes, int blocks, int stride)
+    {
         torch::nn::Sequential downsample = nullptr;
-        if (stride != 1 || inplanes != planes) {
+        if (stride != 1 || inplanes != planes)
+        {
             downsample = torch::nn::Sequential();
             //                    nn.Conv2d(self.inplanes, planes, kernel_size=1, stride=stride),
             torch::nn::Conv2d convd = torch::nn::Conv2d(
@@ -543,14 +566,16 @@ namespace xt::models {
         ResidualBlock rb = ResidualBlock(inplanes, planes, stride, downsample);
         layers->push_back(rb);
         inplanes = planes;
-        for (int i = 1; i < blocks; i++) {
+        for (int i = 1; i < blocks; i++)
+        {
             ResidualBlock rbt = ResidualBlock(inplanes, planes);
             layers->push_back(rbt);
         }
         return layers;
     }
 
-    torch::Tensor ResNet101::forward(torch::Tensor x) const {
+    torch::Tensor ResNet101::forward(torch::Tensor x) const
+    {
         x = conv1->forward(x);
         x = maxpool->forward(x);
         x = layer0->forward(x);
@@ -564,8 +589,8 @@ namespace xt::models {
     }
 
 
-
-        ResNet152::ResNet152(vector<int> layers, int num_classes, int in_channels) : xt::Module() {
+    ResNet152::ResNet152(vector<int> layers, int num_classes, int in_channels) : xt::Module()
+    {
         inplanes = 64;
 
 
@@ -596,7 +621,8 @@ namespace xt::models {
 
 
     ResNet152::ResNet152(std::vector<int> layers, int num_classes, int in_channels, std::vector<int64_t> input_shape)
-        : xt::Module() {
+        : xt::Module()
+    {
         inplanes = 64;
 
         conv1 = torch::nn::Sequential(
@@ -658,9 +684,11 @@ namespace xt::models {
     // }
 
 
-    torch::nn::Sequential ResNet152::makeLayerFromResidualBlock(int planes, int blocks, int stride) {
+    torch::nn::Sequential ResNet152::makeLayerFromResidualBlock(int planes, int blocks, int stride)
+    {
         torch::nn::Sequential downsample = nullptr;
-        if (stride != 1 || inplanes != planes) {
+        if (stride != 1 || inplanes != planes)
+        {
             downsample = torch::nn::Sequential();
             //                    nn.Conv2d(self.inplanes, planes, kernel_size=1, stride=stride),
             torch::nn::Conv2d convd = torch::nn::Conv2d(
@@ -674,14 +702,16 @@ namespace xt::models {
         ResidualBlock rb = ResidualBlock(inplanes, planes, stride, downsample);
         layers->push_back(rb);
         inplanes = planes;
-        for (int i = 1; i < blocks; i++) {
+        for (int i = 1; i < blocks; i++)
+        {
             ResidualBlock rbt = ResidualBlock(inplanes, planes);
             layers->push_back(rbt);
         }
         return layers;
     }
 
-    torch::Tensor ResNet152::forward(torch::Tensor x) const {
+    torch::Tensor ResNet152::forward(torch::Tensor x) const
+    {
         x = conv1->forward(x);
         x = maxpool->forward(x);
         x = layer0->forward(x);
@@ -695,7 +725,8 @@ namespace xt::models {
     }
 
 
-        ResNet200::ResNet200(vector<int> layers, int num_classes, int in_channels) : xt::Module() {
+    ResNet200::ResNet200(vector<int> layers, int num_classes, int in_channels) : xt::Module()
+    {
         inplanes = 64;
 
 
@@ -726,7 +757,8 @@ namespace xt::models {
 
 
     ResNet200::ResNet200(std::vector<int> layers, int num_classes, int in_channels, std::vector<int64_t> input_shape)
-        : xt::Module() {
+        : xt::Module()
+    {
         inplanes = 64;
 
         conv1 = torch::nn::Sequential(
@@ -788,9 +820,11 @@ namespace xt::models {
     // }
 
 
-    torch::nn::Sequential ResNet200::makeLayerFromResidualBlock(int planes, int blocks, int stride) {
+    torch::nn::Sequential ResNet200::makeLayerFromResidualBlock(int planes, int blocks, int stride)
+    {
         torch::nn::Sequential downsample = nullptr;
-        if (stride != 1 || inplanes != planes) {
+        if (stride != 1 || inplanes != planes)
+        {
             downsample = torch::nn::Sequential();
             //                    nn.Conv2d(self.inplanes, planes, kernel_size=1, stride=stride),
             torch::nn::Conv2d convd = torch::nn::Conv2d(
@@ -804,14 +838,16 @@ namespace xt::models {
         ResidualBlock rb = ResidualBlock(inplanes, planes, stride, downsample);
         layers->push_back(rb);
         inplanes = planes;
-        for (int i = 1; i < blocks; i++) {
+        for (int i = 1; i < blocks; i++)
+        {
             ResidualBlock rbt = ResidualBlock(inplanes, planes);
             layers->push_back(rbt);
         }
         return layers;
     }
 
-    torch::Tensor ResNet200::forward(torch::Tensor x) const {
+    torch::Tensor ResNet200::forward(torch::Tensor x) const
+    {
         x = conv1->forward(x);
         x = maxpool->forward(x);
         x = layer0->forward(x);
@@ -825,7 +861,8 @@ namespace xt::models {
     }
 
 
-        ResNet1202::ResNet1202(vector<int> layers, int num_classes, int in_channels) : xt::Module() {
+    ResNet1202::ResNet1202(vector<int> layers, int num_classes, int in_channels) : xt::Module()
+    {
         inplanes = 64;
 
 
@@ -856,7 +893,8 @@ namespace xt::models {
 
 
     ResNet1202::ResNet1202(std::vector<int> layers, int num_classes, int in_channels, std::vector<int64_t> input_shape)
-        : xt::Module() {
+        : xt::Module()
+    {
         inplanes = 64;
 
         conv1 = torch::nn::Sequential(
@@ -918,9 +956,11 @@ namespace xt::models {
     // }
 
 
-    torch::nn::Sequential ResNet1202::makeLayerFromResidualBlock(int planes, int blocks, int stride) {
+    torch::nn::Sequential ResNet1202::makeLayerFromResidualBlock(int planes, int blocks, int stride)
+    {
         torch::nn::Sequential downsample = nullptr;
-        if (stride != 1 || inplanes != planes) {
+        if (stride != 1 || inplanes != planes)
+        {
             downsample = torch::nn::Sequential();
             //                    nn.Conv2d(self.inplanes, planes, kernel_size=1, stride=stride),
             torch::nn::Conv2d convd = torch::nn::Conv2d(
@@ -934,14 +974,16 @@ namespace xt::models {
         ResidualBlock rb = ResidualBlock(inplanes, planes, stride, downsample);
         layers->push_back(rb);
         inplanes = planes;
-        for (int i = 1; i < blocks; i++) {
+        for (int i = 1; i < blocks; i++)
+        {
             ResidualBlock rbt = ResidualBlock(inplanes, planes);
             layers->push_back(rbt);
         }
         return layers;
     }
 
-    torch::Tensor ResNet1202::forward(torch::Tensor x) const {
+    torch::Tensor ResNet1202::forward(torch::Tensor x) const
+    {
         x = conv1->forward(x);
         x = maxpool->forward(x);
         x = layer0->forward(x);
@@ -953,13 +995,4 @@ namespace xt::models {
         x = fc->forward(x);
         return x;
     }
-
-
-
-
-
-
-
-
-
 }
