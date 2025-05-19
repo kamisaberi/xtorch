@@ -1,4 +1,4 @@
-#include "../../../../include/models/computer_vision/image_classification/vggnet.h"
+#include "models/computer_vision/image_classification/vggnet.h"
 
 namespace xt::models {
     VggNet11::VggNet11(int num_classes,int in_channels) : xt::Module() {
@@ -133,7 +133,6 @@ namespace xt::models {
     VggNet11::VggNet11(int num_classes, int in_channels, std::vector<int64_t> input_shape)
         : xt::Module() {
 
-        //TODO layer1 DONE
         layer1 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(in_channels, 64, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(64),
@@ -141,7 +140,6 @@ namespace xt::models {
         );
 
 
-        //TODO layer2 DONE
         layer2 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(64, 64, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(64),
@@ -149,14 +147,12 @@ namespace xt::models {
             torch::nn::MaxPool2d(torch::nn::MaxPool2dOptions(2).stride(2))
         );
 
-        //TODO layer3 DONE
         layer3 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(64, 128, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(128),
             torch::nn::ReLU()
         );
 
-        //TODO layer4 DONE
         layer4 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(128, 128, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(128),
