@@ -127,7 +127,7 @@ namespace xt::models
     };
 
 
-    struct ResNet200 : xt::Module
+    struct ResNet200 : xt::Cloneable<ResNet200>
     {
         mutable int inplanes = 64;
         mutable torch::nn::Sequential conv1 = nullptr;
@@ -144,6 +144,7 @@ namespace xt::models
         torch::nn::Sequential makeLayerFromResidualBlock(int planes, int blocks, int stride = 1);
 
         torch::Tensor forward(torch::Tensor x) const override;
+        void reset() override;
     };
 
 
