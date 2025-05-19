@@ -5,10 +5,12 @@
 using namespace std;
 
 
-namespace xt::models {
-    struct AlexNet final : xt::Module {
+namespace xt::models
+{
+    struct AlexNet final : xt::Cloneable<AlexNet>
+    {
         mutable torch::nn::Sequential layer1 = nullptr, layer2 = nullptr, layer3 = nullptr, layer4 = nullptr, layer5 =
-                        nullptr;
+                                          nullptr;
         mutable torch::nn::Sequential fc = nullptr, fc1 = nullptr, fc2 = nullptr;
 
     public:
@@ -17,5 +19,6 @@ namespace xt::models {
         AlexNet(int num_classes, int in_channels, std::vector<int64_t> input_shape);
 
         torch::Tensor forward(torch::Tensor x) const override;
+        void reset() override;
     };
 }
