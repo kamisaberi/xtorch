@@ -170,4 +170,9 @@ namespace xt::models
         x = fc2->forward(x);
         return x;
     }
+
+    void AlexNet::reset()
+    {
+    }
+
 }

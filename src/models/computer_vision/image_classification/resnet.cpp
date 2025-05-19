@@ -181,6 +181,9 @@ namespace xt::models
         return x;
     }
 
+    void ResNet18::reset()
+    {
+    }
 
 
 
@@ -188,7 +191,8 @@ namespace xt::models
 
 
 
-    ResNet34::ResNet34(vector<int> layers, int num_classes, int in_channels) : xt::Module()
+
+    ResNet34::ResNet34(vector<int> layers, int num_classes, int in_channels)
     {
         inplanes = 64;
 
@@ -216,11 +220,12 @@ namespace xt::models
 
         avgpool = torch::nn::AvgPool2d(torch::nn::AvgPool2dOptions(7).stride(1));
         fc = torch::nn::Linear(512, num_classes);
+        reset();
     }
 
 
     ResNet34::ResNet34(std::vector<int> layers, int num_classes, int in_channels, std::vector<int64_t> input_shape)
-        : xt::Module()
+
     {
         inplanes = 64;
 
@@ -263,6 +268,7 @@ namespace xt::models
 
         register_module("avgpool", avgpool);
         register_module("fc", fc);
+        reset();
     }
 
     // torch::nn::Sequential ResNet::makeLayerFromResidualBlock(int planes, int blocks, int stride) {
@@ -322,6 +328,10 @@ namespace xt::models
         x = fc->forward(x);
         return x;
     }
+    void ResNet34::reset()
+    {
+    }
+
 
     ResNet50::ResNet50(vector<int> layers, int num_classes, int in_channels) : xt::Module()
     {
