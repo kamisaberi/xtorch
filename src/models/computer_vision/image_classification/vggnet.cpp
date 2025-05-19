@@ -129,6 +129,7 @@ namespace xt::models
         register_module("fc", fc);
         register_module("fc1", fc1);
         register_module("fc2", fc2);
+        reset();
     }
 
 
@@ -291,6 +292,7 @@ namespace xt::models
         register_module("fc", fc);
         register_module("fc1", fc1);
         register_module("fc2", fc2);
+        reset();
     }
 
 
@@ -317,7 +319,7 @@ namespace xt::models
     }
 
 
-    VggNet13::VggNet13(int num_classes, int in_channels) : xt::Module()
+    VggNet13::VggNet13(int num_classes, int in_channels)
     {
         //TODO layer1 DONE
         layer1 = torch::nn::Sequential(
@@ -460,11 +462,11 @@ namespace xt::models
         register_module("fc", fc);
         register_module("fc1", fc1);
         register_module("fc2", fc2);
+        reset();
     }
 
 
     VggNet13::VggNet13(int num_classes, int in_channels, std::vector<int64_t> input_shape)
-        : xt::Module()
     {
         //TODO layer1 DONE
         layer1 = torch::nn::Sequential(
@@ -627,6 +629,7 @@ namespace xt::models
         register_module("fc", fc);
         register_module("fc1", fc1);
         register_module("fc2", fc2);
+        reset();
     }
 
 
@@ -653,7 +656,7 @@ namespace xt::models
     }
 
 
-    VggNet16::VggNet16(int num_classes, int in_channels) : xt::Module()
+    VggNet16::VggNet16(int num_classes, int in_channels)
     {
         //TODO layer1 DONE
         layer1 = torch::nn::Sequential(
@@ -800,7 +803,6 @@ namespace xt::models
 
 
     VggNet16::VggNet16(int num_classes, int in_channels, std::vector<int64_t> input_shape)
-        : xt::Module()
     {
         //TODO layer1 DONE
         layer1 = torch::nn::Sequential(
@@ -989,7 +991,7 @@ namespace xt::models
     }
 
 
-    VggNet19::VggNet19(int num_classes, int in_channels) : xt::Module()
+    VggNet19::VggNet19(int num_classes, int in_channels)
     {
         //TODO layer1 DONE
         layer1 = torch::nn::Sequential(
@@ -1136,7 +1138,6 @@ namespace xt::models
 
 
     VggNet19::VggNet19(int num_classes, int in_channels, std::vector<int64_t> input_shape)
-        : xt::Module()
     {
         //TODO layer1 DONE
         layer1 = torch::nn::Sequential(
