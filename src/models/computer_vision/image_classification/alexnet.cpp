@@ -3,9 +3,10 @@
 
 using namespace std;
 
-namespace xt::models {
-    AlexNet::AlexNet(int num_classes , int in_channels) : xt::Module(){
-
+namespace xt::models
+{
+    AlexNet::AlexNet(int num_classes, int in_channels)
+    {
         //TODO layer1
         layer1 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(in_channels, 96, 11).stride(4).padding(0)),
@@ -16,10 +17,10 @@ namespace xt::models {
 
         //TODO layer2
         layer2 = torch::nn::Sequential(
-        torch::nn::Conv2d(torch::nn::Conv2dOptions(96, 256, 5).stride(1).padding(2)),
-        torch::nn::BatchNorm2d(256),
-        torch::nn::ReLU(),
-        torch::nn::MaxPool2d(torch::nn::MaxPool2dOptions(3).stride(2))
+            torch::nn::Conv2d(torch::nn::Conv2dOptions(96, 256, 5).stride(1).padding(2)),
+            torch::nn::BatchNorm2d(256),
+            torch::nn::ReLU(),
+            torch::nn::MaxPool2d(torch::nn::MaxPool2dOptions(3).stride(2))
         );
 
 
@@ -75,11 +76,11 @@ namespace xt::models {
         register_module("fc2", fc2);
 
         //TODO DONE
+        reset();
     }
 
     AlexNet::AlexNet(int num_classes, int in_channels, std::vector<int64_t> input_shape)
-        : xt::Module() {
-
+    {
         // Layer definitions
         layer1 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(in_channels, 96, 11).stride(4).padding(0)),
@@ -151,10 +152,13 @@ namespace xt::models {
         register_module("fc", fc);
         register_module("fc1", fc1);
         register_module("fc2", fc2);
+
+        reset();
     }
 
 
-    torch::Tensor AlexNet::forward(torch::Tensor x) const{
+    torch::Tensor AlexNet::forward(torch::Tensor x) const
+    {
         x = layer1->forward(x);
         x = layer2->forward(x);
         x = layer3->forward(x);
