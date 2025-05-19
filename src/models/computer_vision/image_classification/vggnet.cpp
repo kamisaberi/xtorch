@@ -799,6 +799,7 @@ namespace xt::models
         register_module("fc", fc);
         register_module("fc1", fc1);
         register_module("fc2", fc2);
+        reset();
     }
 
 
@@ -965,6 +966,8 @@ namespace xt::models
         register_module("fc", fc);
         register_module("fc1", fc1);
         register_module("fc2", fc2);
+
+        reset();
     }
 
 
@@ -1134,6 +1137,7 @@ namespace xt::models
         register_module("fc", fc);
         register_module("fc1", fc1);
         register_module("fc2", fc2);
+        reset();
     }
 
 
@@ -1300,6 +1304,7 @@ namespace xt::models
         register_module("fc", fc);
         register_module("fc1", fc1);
         register_module("fc2", fc2);
+        reset();
     }
 
 
