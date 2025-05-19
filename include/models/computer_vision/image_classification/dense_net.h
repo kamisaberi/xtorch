@@ -49,11 +49,9 @@ namespace xt::models
     };
 
 
-    struct DenseNet264 : BaseModel
+    struct DenseNet264 : xt::Cloneable<DenseNet264>
     {
-        mutable torch::nn::Sequential layer1 = nullptr, layer2 = nullptr, layer3 = nullptr, layer4 = nullptr, layer5 =
-                                          nullptr;
-        mutable torch::nn::Sequential fc = nullptr, fc1 = nullptr, fc2 = nullptr;
+    private:
 
     public:
         DenseNet264(int num_classes /* classes */, int in_channels = 3/* input channels */);
@@ -61,5 +59,6 @@ namespace xt::models
         DenseNet264(int num_classes, int in_channels, std::vector<int64_t> input_shape);
 
         torch::Tensor forward(torch::Tensor x) const override;
+        void reset() override;
     };
 }
