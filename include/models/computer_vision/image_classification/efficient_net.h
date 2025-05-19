@@ -3,14 +3,15 @@
 #include "models/common.h"
 
 
-
 using namespace std;
 
 
-namespace xt::models {
-    struct EfficientNetB0 : xt::Module {
+namespace xt::models
+{
+    struct EfficientNetB0 : xt::Cloneable<EfficientNetB0>
+    {
         mutable torch::nn::Sequential layer1 = nullptr, layer2 = nullptr, layer3 = nullptr, layer4 = nullptr, layer5 =
-                nullptr;
+                                          nullptr;
         mutable torch::nn::Sequential fc = nullptr, fc1 = nullptr, fc2 = nullptr;
 
     public:
@@ -21,9 +22,10 @@ namespace xt::models {
         torch::Tensor forward(torch::Tensor x) const override;
     };
 
-    struct EfficientNetB1 : BaseModel {
+    struct EfficientNetB1 : BaseModel
+    {
         mutable torch::nn::Sequential layer1 = nullptr, layer2 = nullptr, layer3 = nullptr, layer4 = nullptr, layer5 =
-                nullptr;
+                                          nullptr;
         mutable torch::nn::Sequential fc = nullptr, fc1 = nullptr, fc2 = nullptr;
 
     public:
@@ -34,9 +36,10 @@ namespace xt::models {
         torch::Tensor forward(torch::Tensor x) const override;
     };
 
-    struct EfficientNetB2 : BaseModel {
+    struct EfficientNetB2 : BaseModel
+    {
         mutable torch::nn::Sequential layer1 = nullptr, layer2 = nullptr, layer3 = nullptr, layer4 = nullptr, layer5 =
-                nullptr;
+                                          nullptr;
         mutable torch::nn::Sequential fc = nullptr, fc1 = nullptr, fc2 = nullptr;
 
     public:
@@ -46,9 +49,11 @@ namespace xt::models {
 
         torch::Tensor forward(torch::Tensor x) const override;
     };
-    struct EfficientNetB3 : BaseModel {
+
+    struct EfficientNetB3 : BaseModel
+    {
         mutable torch::nn::Sequential layer1 = nullptr, layer2 = nullptr, layer3 = nullptr, layer4 = nullptr, layer5 =
-                nullptr;
+                                          nullptr;
         mutable torch::nn::Sequential fc = nullptr, fc1 = nullptr, fc2 = nullptr;
 
     public:
@@ -59,9 +64,10 @@ namespace xt::models {
         torch::Tensor forward(torch::Tensor x) const override;
     };
 
-    struct EfficientNetB4 : BaseModel {
+    struct EfficientNetB4 : BaseModel
+    {
         mutable torch::nn::Sequential layer1 = nullptr, layer2 = nullptr, layer3 = nullptr, layer4 = nullptr, layer5 =
-                nullptr;
+                                          nullptr;
         mutable torch::nn::Sequential fc = nullptr, fc1 = nullptr, fc2 = nullptr;
 
     public:
@@ -71,9 +77,11 @@ namespace xt::models {
 
         torch::Tensor forward(torch::Tensor x) const override;
     };
-    struct EfficientNetB5 : BaseModel {
+
+    struct EfficientNetB5 : BaseModel
+    {
         mutable torch::nn::Sequential layer1 = nullptr, layer2 = nullptr, layer3 = nullptr, layer4 = nullptr, layer5 =
-                nullptr;
+                                          nullptr;
         mutable torch::nn::Sequential fc = nullptr, fc1 = nullptr, fc2 = nullptr;
 
     public:
@@ -84,9 +92,10 @@ namespace xt::models {
         torch::Tensor forward(torch::Tensor x) const override;
     };
 
-    struct EfficientNetB6 : BaseModel {
+    struct EfficientNetB6 : BaseModel
+    {
         mutable torch::nn::Sequential layer1 = nullptr, layer2 = nullptr, layer3 = nullptr, layer4 = nullptr, layer5 =
-                nullptr;
+                                          nullptr;
         mutable torch::nn::Sequential fc = nullptr, fc1 = nullptr, fc2 = nullptr;
 
     public:
@@ -98,9 +107,10 @@ namespace xt::models {
     };
 
 
-    struct EfficientNetB7 : BaseModel {
+    struct EfficientNetB7 : BaseModel
+    {
         mutable torch::nn::Sequential layer1 = nullptr, layer2 = nullptr, layer3 = nullptr, layer4 = nullptr, layer5 =
-                nullptr;
+                                          nullptr;
         mutable torch::nn::Sequential fc = nullptr, fc1 = nullptr, fc2 = nullptr;
 
     public:
@@ -110,6 +120,4 @@ namespace xt::models {
 
         torch::Tensor forward(torch::Tensor x) const override;
     };
-
-
 }
