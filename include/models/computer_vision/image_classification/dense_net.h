@@ -5,10 +5,12 @@
 using namespace std;
 
 
-namespace xt::models {
-    struct DenseNet121 : xt::Module {
+namespace xt::models
+{
+    struct DenseNet121 : xt::Cloneable<DenseNet121>
+    {
         mutable torch::nn::Sequential layer1 = nullptr, layer2 = nullptr, layer3 = nullptr, layer4 = nullptr, layer5 =
-                nullptr;
+                                          nullptr;
         mutable torch::nn::Sequential fc = nullptr, fc1 = nullptr, fc2 = nullptr;
 
     public:
@@ -20,10 +22,10 @@ namespace xt::models {
     };
 
 
-
-    struct DenseNet169 : BaseModel {
+    struct DenseNet169 : BaseModel
+    {
         mutable torch::nn::Sequential layer1 = nullptr, layer2 = nullptr, layer3 = nullptr, layer4 = nullptr, layer5 =
-                nullptr;
+                                          nullptr;
         mutable torch::nn::Sequential fc = nullptr, fc1 = nullptr, fc2 = nullptr;
 
     public:
@@ -35,11 +37,10 @@ namespace xt::models {
     };
 
 
-
-
-    struct DenseNet201 : BaseModel {
+    struct DenseNet201 : BaseModel
+    {
         mutable torch::nn::Sequential layer1 = nullptr, layer2 = nullptr, layer3 = nullptr, layer4 = nullptr, layer5 =
-                nullptr;
+                                          nullptr;
         mutable torch::nn::Sequential fc = nullptr, fc1 = nullptr, fc2 = nullptr;
 
     public:
@@ -51,10 +52,10 @@ namespace xt::models {
     };
 
 
-
-    struct DenseNet264 : BaseModel {
+    struct DenseNet264 : BaseModel
+    {
         mutable torch::nn::Sequential layer1 = nullptr, layer2 = nullptr, layer3 = nullptr, layer4 = nullptr, layer5 =
-                nullptr;
+                                          nullptr;
         mutable torch::nn::Sequential fc = nullptr, fc1 = nullptr, fc2 = nullptr;
 
     public:
@@ -64,8 +65,4 @@ namespace xt::models {
 
         torch::Tensor forward(torch::Tensor x) const override;
     };
-
-
-
-
 }
