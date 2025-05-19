@@ -182,6 +182,12 @@ namespace xt::models
     }
 
 
+
+
+
+
+
+
     ResNet34::ResNet34(vector<int> layers, int num_classes, int in_channels) : xt::Module()
     {
         inplanes = 64;
