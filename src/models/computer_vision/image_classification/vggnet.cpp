@@ -317,6 +317,10 @@ namespace xt::models
         x = fc2->forward(x);
         return x;
     }
+    void VggNet11::reset()
+    {
+    }
+
 
 
     VggNet13::VggNet13(int num_classes, int in_channels)
@@ -654,6 +658,10 @@ namespace xt::models
         x = fc2->forward(x);
         return x;
     }
+    void VggNet13::reset()
+    {
+    }
+
 
 
     VggNet16::VggNet16(int num_classes, int in_channels)
@@ -992,6 +1000,10 @@ namespace xt::models
         x = fc2->forward(x);
         return x;
     }
+    void VggNet16::reset()
+    {
+    }
+
 
 
     VggNet19::VggNet19(int num_classes, int in_channels)
@@ -1328,5 +1340,9 @@ namespace xt::models
         x = fc1->forward(x);
         x = fc2->forward(x);
         return x;
+    }
+
+    void VggNet19::reset()
+    {
     }
 }
