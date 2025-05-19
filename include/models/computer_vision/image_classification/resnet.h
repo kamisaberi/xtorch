@@ -13,7 +13,7 @@ namespace xt::models
             mutable torch::nn::Sequential conv1 = nullptr, conv2 = nullptr, downsample = nullptr;
             int out_channels;
             mutable torch::nn::ReLU relu = nullptr;
-            mutable  torch::Tensor residual;
+            mutable torch::Tensor residual;
 
             ResidualBlock(int in_channels, int out_channels, int stride = 1,
                           torch::nn::Sequential downsample = nullptr);
@@ -106,7 +106,7 @@ namespace xt::models
     };
 
 
-    struct ResNet152 : xt::Module
+    struct ResNet152 : xt::Cloneable<ResNet152>
     {
         mutable int inplanes = 64;
         mutable torch::nn::Sequential conv1 = nullptr;
@@ -123,6 +123,7 @@ namespace xt::models
         torch::nn::Sequential makeLayerFromResidualBlock(int planes, int blocks, int stride = 1);
 
         torch::Tensor forward(torch::Tensor x) const override;
+        void reset() override;
     };
 
 
