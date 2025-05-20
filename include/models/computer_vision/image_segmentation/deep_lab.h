@@ -43,5 +43,19 @@ namespace xt::models
         void reset() override;
     };
 
+    struct DeepLabV3Plus : xt::Cloneable<DeepLabV3Plus>
+    {
+    private:
+
+    public:
+        DeepLabV3Plus(int num_classes /* classes */, int in_channels = 3/* input channels */);
+
+        DeepLabV3Plus(int num_classes, int in_channels, std::vector<int64_t> input_shape);
+
+        torch::Tensor forward(torch::Tensor x) const override;
+        void reset() override;
+    };
+
+
 
 }
