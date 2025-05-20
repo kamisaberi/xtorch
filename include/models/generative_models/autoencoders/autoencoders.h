@@ -1,8 +1,8 @@
 #pragma once
 
 
-#include "autoencoder.h"
-#include "contractive_autoencoder.h"
-#include "denoising_autoencoder.h"
+#include "ae.h"
+#include "cae.h"
+#include "dae.h"
 #include "sparse_autoencoder.h"
-#include "variational_autoencoder.h"
+#include "vae.h"
