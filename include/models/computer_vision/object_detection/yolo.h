@@ -44,6 +44,45 @@ namespace xt::models
     };
 
 
+    struct YoloV4 : xt::Cloneable<YoloV4>
+    {
+    private:
+
+    public:
+        YoloV4(int num_classes /* classes */, int in_channels = 3/* input channels */);
+
+        YoloV4(int num_classes, int in_channels, std::vector<int64_t> input_shape);
+
+        torch::Tensor forward(torch::Tensor x) const override;
+        void reset() override;
+    };
+
+    struct YoloV5 : xt::Cloneable<YoloV5>
+    {
+    private:
+
+    public:
+        YoloV5(int num_classes /* classes */, int in_channels = 3/* input channels */);
+
+        YoloV5(int num_classes, int in_channels, std::vector<int64_t> input_shape);
+
+        torch::Tensor forward(torch::Tensor x) const override;
+        void reset() override;
+    };
+
+    struct YoloV6 : xt::Cloneable<YoloV6>
+    {
+    private:
+
+    public:
+        YoloV6(int num_classes /* classes */, int in_channels = 3/* input channels */);
+
+        YoloV6(int num_classes, int in_channels, std::vector<int64_t> input_shape);
+
+        torch::Tensor forward(torch::Tensor x) const override;
+        void reset() override;
+    };
+
 
 
 }
