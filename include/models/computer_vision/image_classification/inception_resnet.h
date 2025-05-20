@@ -21,12 +21,9 @@ namespace xt::models
         void reset() override;
     };
 
-
-    struct InceptionResNetV2 : BaseModel
+    struct InceptionResNetV2 : xt::Cloneable<InceptionResNetV2>
     {
-        mutable torch::nn::Sequential layer1 = nullptr, layer2 = nullptr, layer3 = nullptr, layer4 = nullptr, layer5 =
-                                          nullptr;
-        mutable torch::nn::Sequential fc = nullptr, fc1 = nullptr, fc2 = nullptr;
+    private:
 
     public:
         InceptionResNetV2(int num_classes /* classes */, int in_channels = 3/* input channels */);
@@ -34,5 +31,8 @@ namespace xt::models
         InceptionResNetV2(int num_classes, int in_channels, std::vector<int64_t> input_shape);
 
         torch::Tensor forward(torch::Tensor x) const override;
+        void reset() override;
     };
+
+
 }
