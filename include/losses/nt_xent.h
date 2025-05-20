@@ -4,7 +4,7 @@
 
 namespace xt::losses
 {
-    class AdaptiveLoss : xt::Module
+    class NTXent : xt::Module
     {
     public:
 
