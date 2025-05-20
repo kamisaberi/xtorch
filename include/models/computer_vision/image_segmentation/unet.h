@@ -19,15 +19,15 @@ namespace xt::models
     //        return self.conv_op(x)
 
 
-    struct DoubleConv : torch::nn::Module
+    struct DoubleConv : xt::Module
     {
     public:
         DoubleConv(int in_channels, int out_channels);
 
-        torch::Tensor forward(torch::Tensor input);
+        torch::Tensor forward(torch::Tensor input) const override;
 
     private:
-        torch::nn::Sequential conv_op = nullptr;
+        mutable  torch::nn::Sequential conv_op = nullptr;
     };
 
 
@@ -42,16 +42,16 @@ namespace xt::models
     //        p = self.pool(down)
     //        return down, p
 
-    struct DownSample : torch::nn::Module
+    struct DownSample : xt::Module
     {
     public:
         DownSample(int in_channels, int out_channels);
 
-        torch::Tensor forward(torch::Tensor input);
+        torch::Tensor forward(torch::Tensor input) const override;
 
     private:
         DoubleConv conv{0, 0};
-        torch::nn::MaxPool2d pool = nullptr;
+        mutable  torch::nn::MaxPool2d pool = nullptr;
     };
 
 

@@ -16,7 +16,7 @@ namespace xt::models
         register_module("conv_op", this->conv_op);
     }
 
-    torch::Tensor DoubleConv::forward(torch::Tensor input)
+    torch::Tensor DoubleConv::forward(torch::Tensor input) const
     {
         return this->conv_op->forward(input);
     }
@@ -31,7 +31,7 @@ namespace xt::models
         register_module("pool", pool);
     }
 
-    torch::Tensor DownSample::forward(torch::Tensor input)
+    torch::Tensor DownSample::forward(torch::Tensor input) const
     {
         torch::Tensor x = this->conv.forward(input);
         x = this->pool->forward(x);
