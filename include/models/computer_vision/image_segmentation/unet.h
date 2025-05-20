@@ -114,11 +114,12 @@ namespace xt::models
     //
 
 
-    struct UNet : xt::Module
+    struct UNet : xt::Cloneable<UNet>
     {
     public:
         UNet(int num_classes/* classes */, int in_channels = 1/*  input channels */);
         torch::Tensor forward(torch::Tensor input) const override;
+        void reset() override;
 
     private:
         DownSample down_convolution_1{0, 0};

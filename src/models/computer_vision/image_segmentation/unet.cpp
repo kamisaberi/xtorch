@@ -1,8 +1,10 @@
-#include "../../../../include/models/computer_vision/image_segmentation/unet.h"
+#include "models/computer_vision/image_segmentation/unet.h"
 
 
-namespace xt::models {
-    DoubleConv::DoubleConv(int in_channels, int out_channels) {
+namespace xt::models
+{
+    DoubleConv::DoubleConv(int in_channels, int out_channels)
+    {
         this->conv_op = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(in_channels, out_channels, 3).padding(1)),
             torch::nn::ReLU(),
@@ -14,12 +16,14 @@ namespace xt::models {
         register_module("conv_op", this->conv_op);
     }
 
-    torch::Tensor DoubleConv::forward(torch::Tensor input) {
+    torch::Tensor DoubleConv::forward(torch::Tensor input)
+    {
         return this->conv_op->forward(input);
     }
 
 
-    DownSample::DownSample(int in_channels, int out_channels) {
+    DownSample::DownSample(int in_channels, int out_channels)
+    {
         this->conv = DoubleConv(in_channels, out_channels);
         this->pool = torch::nn::MaxPool2d(torch::nn::MaxPool2dOptions(2).stride(2));
         // register_module("conv", conv);
@@ -27,7 +31,8 @@ namespace xt::models {
         register_module("pool", pool);
     }
 
-    torch::Tensor DownSample::forward(torch::Tensor input) {
+    torch::Tensor DownSample::forward(torch::Tensor input)
+    {
         torch::Tensor x = this->conv.forward(input);
         x = this->pool->forward(x);
         return x;
@@ -36,7 +41,8 @@ namespace xt::models {
     //        self.up = nn.ConvTranspose2d(in_channels, in_channels//2, kernel_size=2, stride=2)
     //        self.conv = DoubleConv(in_channels, out_channels)
 
-    UpSample::UpSample(int in_channels, int out_channels) {
+    UpSample::UpSample(int in_channels, int out_channels)
+    {
         this->conv = DoubleConv(in_channels, out_channels);
         this->up = torch::nn::ConvTranspose2d(
             torch::nn::ConvTranspose2dOptions(in_channels, in_channels / 2, 2).stride(2));
@@ -45,7 +51,8 @@ namespace xt::models {
         register_module("up", up);
     }
 
-    torch::Tensor UpSample::forward(torch::Tensor x1, torch::Tensor x2) {
+    torch::Tensor UpSample::forward(torch::Tensor x1, torch::Tensor x2)
+    {
         x1 = this->up(x1);
         torch::Tensor x = torch::cat({x1, x2});
         return this->conv.forward(x);
@@ -56,8 +63,8 @@ namespace xt::models {
     }
 
 
-    UNet::UNet(int num_classes, int in_channels) {
-
+    UNet::UNet(int num_classes, int in_channels)
+    {
         this->down_convolution_1 = DownSample(in_channels, 64);
         this->down_convolution_2 = DownSample(64, 128);
         this->down_convolution_3 = DownSample(128, 256);
@@ -73,11 +80,16 @@ namespace xt::models {
         this->out = torch::nn::Conv2d(torch::nn::Conv2dOptions(in_channels, num_classes, 1));
         //
         //        self.out = nn.Conv2d(in_channels=64, out_channels=num_classes, kernel_size=1)
-
+        reset();
     }
 
 
-    torch::Tensor UNet::forward(torch::Tensor input) const {
+    torch::Tensor UNet::forward(torch::Tensor input) const
+    {
         return input;
+    }
+
+    void UNet::reset()
+    {
     }
 }
