@@ -4,7 +4,7 @@
 
 namespace xt::activations
 {
-    class AMLines : xt::Module
+    struct AMLines : xt::Module
     {
     };
 }
