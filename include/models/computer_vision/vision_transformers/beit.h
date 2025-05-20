@@ -4,14 +4,14 @@
 
 namespace xt::models
 {
-    struct BEIT : xt::Cloneable<BEIT>
+    struct BEiT : xt::Cloneable<BEiT>
     {
     private:
 
     public:
-        BEIT(int num_classes /* classes */, int in_channels = 3/* input channels */);
+        BEiT(int num_classes /* classes */, int in_channels = 3/* input channels */);
 
-        BEIT(int num_classes, int in_channels, std::vector<int64_t> input_shape);
+        BEiT(int num_classes, int in_channels, std::vector<int64_t> input_shape);
 
         torch::Tensor forward(torch::Tensor x) const override;
         void reset() override;
