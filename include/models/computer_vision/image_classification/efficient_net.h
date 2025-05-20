@@ -36,6 +36,18 @@ namespace xt::models
     };
 
 
+    struct EfficientNetB2 : xt::Cloneable<EfficientNetB2>
+    {
+    private:
+
+    public:
+        EfficientNetB2(int num_classes /* classes */, int in_channels = 3/* input channels */);
+
+        EfficientNetB2(int num_classes, int in_channels, std::vector<int64_t> input_shape);
+
+        torch::Tensor forward(torch::Tensor x) const override;
+        void reset() override;
+    };
 
 
 }
