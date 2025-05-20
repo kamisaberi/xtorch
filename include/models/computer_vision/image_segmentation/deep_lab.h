@@ -1,8 +1,8 @@
 #pragma once
 #include "models/common.h"
+
 namespace xt::models
 {
-
     struct DeepLabV1 : xt::Cloneable<DeepLabV1>
     {
     private:
@@ -55,7 +55,4 @@ namespace xt::models
         torch::Tensor forward(torch::Tensor x) const override;
         void reset() override;
     };
-
-
-
 }
