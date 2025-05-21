@@ -2,7 +2,7 @@
 #include "normalizations/common.h"
 
 
-namespace xt::dropouts
+namespace xt::norm
 {
     class AdaptiveDropout : xt::Module
     {
