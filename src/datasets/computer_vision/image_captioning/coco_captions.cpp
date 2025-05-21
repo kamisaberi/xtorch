@@ -2,21 +2,48 @@
 
 namespace xt::data::datasets {
 
-    // ---------------------- CocoCaptions ---------------------- //
-    CocoCaptions::CocoCaptions(const std::string &root): CocoCaptions::CocoCaptions(root, DataMode::TRAIN, false) {
+    // ---------------------- Caltech101 ---------------------- //
+
+    CocoCaptions::CocoCaptions(const std::string& root): CocoCaptions::CocoCaptions(
+            root, xt::datasets::DataMode::TRAIN, false, nullptr, nullptr)
+    {
     }
 
-    CocoCaptions::CocoCaptions(const std::string &root, DataMode mode): CocoCaptions::CocoCaptions(root, mode, false) {
+    CocoCaptions::CocoCaptions(const std::string& root, xt::datasets::DataMode mode): CocoCaptions::CocoCaptions(
+            root, mode, false, nullptr, nullptr)
+    {
     }
 
-    CocoCaptions::CocoCaptions(const std::string &root, DataMode mode, bool download) : BaseDataset(root, mode, download) {
-        throw std::runtime_error("CocoCaptions: CocoCaptions not implemented");
+    CocoCaptions::CocoCaptions(const std::string& root, xt::datasets::DataMode mode, bool download) :
+            CocoCaptions::CocoCaptions(
+                    root, mode, download, nullptr, nullptr)
+    {
+    }
+
+    CocoCaptions::CocoCaptions(const std::string& root, xt::datasets::DataMode mode, bool download,
+                           std::unique_ptr<xt::Module> transformer) : CocoCaptions::CocoCaptions(
+            root, mode, download, std::move(transformer), nullptr)
+    {
+    }
+
+    CocoCaptions::CocoCaptions(const std::string& root, xt::datasets::DataMode mode, bool download,
+                           std::unique_ptr<xt::Module> transformer, std::unique_ptr<xt::Module> target_transformer):
+            xt::datasets::Dataset(mode, std::move(transformer), std::move(target_transformer))
+    {
+        check_resources();
+        load_data();
+
     }
 
 
-    CocoCaptions::CocoCaptions(const std::string &root, DataMode mode, bool download,
-                           TransformType transforms) : BaseDataset(root, mode, download, transforms) {
-        throw std::runtime_error("CocoCaptions: CocoCaptions not implemented");
+    void Caltech101::load_data()
+    {
+
+    }
+
+    void Caltech101::check_resources()
+    {
+
     }
 
 
