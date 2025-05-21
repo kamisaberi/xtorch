@@ -5,7 +5,6 @@
 using namespace std;
 namespace fs = std::filesystem;
 
-
 namespace xt::data::datasets
 {
     class ModelNet40 : public xt::datasets::Dataset
