@@ -1,5 +1,4 @@
 #pragma once
-#include "datasets/base/base.h"
 #include "datasets/common.h"
 
 
@@ -7,8 +6,9 @@ using namespace std;
 namespace fs = std::filesystem;
 
 
+
 namespace xt::data::datasets {
-    class WIDERFace : BaseDataset {
+    class WIDERFace : public xt::datasets::Dataset {
         /*
         """`WIDERFace <http://shuoyang1213.me/WIDERFACE/>`_ Dataset.
 
@@ -42,13 +42,16 @@ namespace xt::data::datasets {
 
          */
     public :
-        explicit WIDERFace(const std::string &root);
-        WIDERFace(const std::string &root, DataMode mode);
-        WIDERFace(const std::string &root, DataMode mode , bool download);
-        WIDERFace(const std::string &root, DataMode mode , bool download, TransformType transforms);
+        explicit WIDERFace(const std::string& root);
+        WIDERFace(const std::string& root, xt::datasets::DataMode mode);
+        WIDERFace(const std::string& root, xt::datasets::DataMode mode, bool download);
+        WIDERFace(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer);
+        WIDERFace(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer,
+                   std::unique_ptr<xt::Module> target_transformer);
 
     private:
-        fs::path dataset_folder_name = fs::path("widerface");
         std::vector<std::tuple<std::string, std::string, fs::path> > resources = {
                 {"15hGDLhsx8bLgLcIRD5DhYt5iBxnjNF1M", "3fedf70df600953d25982bcd13d91ba2", fs::path("WIDER_train.zip")},
                 {"1GUCogbp16PMGa39thoMMeWxp7Rp5oM8Q", "dfa7d7e790efa35df3788964cf0bbaea", fs::path("WIDER_val.zip")},
@@ -59,10 +62,17 @@ namespace xt::data::datasets {
                 "0e3767bcf0e326556d407bf5bff5d27c",
                 fs::path("wider_face_split.zip")
         };
+
+        // TODO fs::path dataset_folder_name
+        fs::path dataset_folder_name = fs::path("widerface");
+
+        bool download = false;
+        fs::path root;
+        fs::path dataset_path;
+
         void load_data();
 
         void check_resources();
-
 
     };
 }
