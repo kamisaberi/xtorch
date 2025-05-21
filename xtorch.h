@@ -41,6 +41,13 @@
 #include "include/models/models.h"
 #include "include/trainers/trainers.h"
 #include "include/transforms/transforms.h"
+#include "include/activations/activations.h"
+#include "include/losses/losses.h"
+#include "include/dropouts/dropouts.h"
+#include "include/optimizations/optimizations.h"
+#include "include/regulariztions/regulariztions.h"
+#include "include/normalizations/normalizations.h"
+
 #include "include/types/types.h"
 #include "include/utils/utils.h"
 #include "include/temp/temp.h"
