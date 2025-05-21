@@ -12,6 +12,8 @@
 #include "media/opencv/images.h"
 #include "transforms/transforms.h"
 #include "utils/utils.h"
-#include "base/base.h"
+#include "base/dataset.h"
+#include "base/tensor.h"
+#include "base/cloneable.h"
 
 
