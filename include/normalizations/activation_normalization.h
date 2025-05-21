@@ -1,5 +1,5 @@
 #pragma once
-#include "dropouts/common.h"
+#include "normalizations/common.h"
 
 
 namespace xt::dropouts
