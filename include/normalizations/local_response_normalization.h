@@ -4,7 +4,7 @@
 
 namespace xt::norm
 {
-    class AdaptiveDropout : xt::Module
+    class LocalResponseNorm : xt::Module
     {
     public:
 
