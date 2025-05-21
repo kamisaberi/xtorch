@@ -12,4 +12,6 @@
 #include "media/opencv/images.h"
 #include "transforms/transforms.h"
 #include "utils/utils.h"
+#include "base/base.h"
+
 
