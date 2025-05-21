@@ -4,7 +4,7 @@
 
 namespace xt::dropouts
 {
-    class AdaptiveDropout : xt::Module
+    class AdaptiveInstanceNorm : xt::Module
     {
     public:
 
