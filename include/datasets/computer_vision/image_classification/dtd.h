@@ -1,14 +1,23 @@
 #pragma once
-#include "datasets/base/base.h"
+
+#include "datasets/common.h"
+
+
+using namespace std;
+namespace fs = std::filesystem;
 
 
 namespace xt::data::datasets {
-    class DTD : public BaseDataset {
+    class DTD : public xt::datasets::Dataset {
     public :
-        explicit  DTD(const std::string &root);
-        DTD(const std::string &root, DataMode mode);
-        DTD(const std::string &root, DataMode mode , bool download);
-        DTD(const std::string &root, DataMode mode , bool download, TransformType transforms);
+        explicit DTD(const std::string& root);
+        DTD(const std::string& root, xt::datasets::DataMode mode);
+        DTD(const std::string& root, xt::datasets::DataMode mode, bool download);
+        DTD(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer);
+        DTD(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer,
+                   std::unique_ptr<xt::Module> target_transformer);
 
     private :
         void load_data();
