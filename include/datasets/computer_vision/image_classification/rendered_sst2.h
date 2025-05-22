@@ -1,11 +1,13 @@
 #pragma once
-#include "datasets/base/base.h"
+
+#include "datasets/common.h"
+
 using namespace std;
 namespace fs = std::filesystem;
 
 
 namespace xt::data::datasets {
-    class RenderedSST2 : BaseDataset {
+    class RenderedSST2 : xt::datasets::Dataset {
         /*
         """`The Rendered SST2 Dataset <https://github.com/openai/CLIP/blob/main/data/rendered-sst2.md>`_.
 
@@ -30,10 +32,15 @@ namespace xt::data::datasets {
 
          */
     public :
-        explicit RenderedSST2(const std::string &root);
-        RenderedSST2(const std::string &root, DataMode mode);
-        RenderedSST2(const std::string &root, DataMode mode , bool download);
-        RenderedSST2(const std::string &root, DataMode mode , bool download, TransformType transforms);
+
+        explicit RenderedSST2(const std::string& root);
+        RenderedSST2(const std::string& root, xt::datasets::DataMode mode);
+        RenderedSST2(const std::string& root, xt::datasets::DataMode mode, bool download);
+        RenderedSST2(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer);
+        RenderedSST2(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer,
+                   std::unique_ptr<xt::Module> target_transformer);
 
 
     private:
@@ -41,9 +48,15 @@ namespace xt::data::datasets {
         fs::path dataset_file_name = "rendered-sst2.tgz";
         std::string dataset_file_md5 = "2384d08e9dcfa4bd55b324e610496ee5";
         fs::path dataset_folder_name = "rendered-sst2";
+
+        bool download = false;
+        fs::path root;
+        fs::path dataset_path;
+
         void load_data();
 
         void check_resources();
+
 
     };
 }
