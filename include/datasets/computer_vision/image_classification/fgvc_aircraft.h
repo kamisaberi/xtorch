@@ -26,8 +26,14 @@ namespace xt::data::datasets {
         std::string dataset_file_name = "fgvc-aircraft-2013b.tar.gz";
         fs::path dataset_folder_name = "fgvc-aircraft-2013b";
 
-        void load_data(DataMode mode = DataMode::TRAIN);
+        bool download = false;
+        fs::path root;
+        fs::path dataset_path;
 
-        void check_resources(const std::string &root, bool download = false);
+
+        void load_data();
+
+        void check_resources();
+
     };
 }
