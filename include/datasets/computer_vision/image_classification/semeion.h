@@ -1,13 +1,13 @@
 #pragma once
 
-#include "datasets/base/base.h"
+#include "datasets/common.h"
 
 using namespace std;
 namespace fs = std::filesystem;
 
 
 namespace xt::data::datasets {
-   class SEMEION : BaseDataset {
+   class SEMEION : xt::datasets::Dataset {
        /*
        r"""`SEMEION <http://archive.ics.uci.edu/ml/datasets/semeion+handwritten+digit>`_ Dataset.
 
@@ -26,10 +26,15 @@ namespace xt::data::datasets {
 
         */
    public :
-       explicit SEMEION(const std::string &root);
-       SEMEION(const std::string &root, DataMode mode);
-       SEMEION(const std::string &root, DataMode mode , bool download);
-       SEMEION(const std::string &root, DataMode mode , bool download, TransformType transforms);
+
+       explicit SEMEION(const std::string& root);
+       SEMEION(const std::string& root, xt::datasets::DataMode mode);
+       SEMEION(const std::string& root, xt::datasets::DataMode mode, bool download);
+       SEMEION(const std::string& root, xt::datasets::DataMode mode, bool download,
+                  std::unique_ptr<xt::Module> transformer);
+       SEMEION(const std::string& root, xt::datasets::DataMode mode, bool download,
+                  std::unique_ptr<xt::Module> transformer,
+                  std::unique_ptr<xt::Module> target_transformer);
 
 
    private:
@@ -38,9 +43,14 @@ namespace xt::data::datasets {
        std::string dataset_file_md5 = "cb545d371d2ce14ec121470795a77432";
        fs::path dataset_folder_name = "semeion";
 
+       bool download = false;
+       fs::path root;
+       fs::path dataset_path;
+
        void load_data();
 
        void check_resources();
+
 
     };
 }
