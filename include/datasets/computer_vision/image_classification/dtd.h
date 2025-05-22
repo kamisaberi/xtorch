@@ -20,8 +20,20 @@ namespace xt::data::datasets {
                    std::unique_ptr<xt::Module> target_transformer);
 
     private :
+
+        //TODO fs::path dataset_folder_name
+        fs::path dataset_folder_name = "?";
+
+        bool download = false;
+        fs::path root;
+        fs::path dataset_path;
+
+
+
         void load_data();
 
         void check_resources();
+
+
     };
 }
