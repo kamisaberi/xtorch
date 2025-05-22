@@ -1,13 +1,13 @@
 #pragma once
 
-#include "datasets/base/base.h"
+#include "datasets/common.h"
 
 using namespace std;
 namespace fs = std::filesystem;
 
 
 namespace xt::data::datasets {
-    class USPS : BaseDataset {
+    class USPS : xt::datasets::Dataset {
         /*
         """`USPS <https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/multiclass.html#usps>`_ Dataset.
     The data-format is : [label [index:value ]*256 \\n] * num_lines, where ``label`` lies in ``[1, 10]``.
@@ -30,10 +30,16 @@ namespace xt::data::datasets {
 
          */
     public :
-        explicit USPS(const std::string &root);
-        USPS(const std::string &root, DataMode mode);
-        USPS(const std::string &root, DataMode mode , bool download);
-        USPS(const std::string &root, DataMode mode , bool download, TransformType transforms);
+
+        explicit USPS(const std::string& root);
+        USPS(const std::string& root, xt::datasets::DataMode mode);
+        USPS(const std::string& root, xt::datasets::DataMode mode, bool download);
+        USPS(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer);
+        USPS(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer,
+                   std::unique_ptr<xt::Module> target_transformer);
+
 
     private :
         std::map<std::string, std::tuple<fs::path, fs::path, std::string>> resources = {
@@ -53,9 +59,19 @@ namespace xt::data::datasets {
                           }
                 }
         };
+
+
+        // TODO fs::path dataset_folder_name
+        fs::path dataset_folder_name = "?";
+
+        bool download = false;
+        fs::path root;
+        fs::path dataset_path;
+
         void load_data();
 
         void check_resources();
+
 
     };
 }

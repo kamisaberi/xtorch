@@ -1,21 +1,48 @@
-#include "datasets/computer_vision/image_classification/usps.h"
+#include "datasets/computer_vision"
 
-namespace xt::data::datasets {
-    USPS::USPS(const std::string &root): USPS::USPS(root, DataMode::TRAIN, false) {
+namespace xt::data::datasets
+{
+    // ---------------------- ModelNet40 ---------------------- //
+
+    ModelNet40::ModelNet40(const std::string& root): ModelNet40::ModelNet40(
+        root, xt::datasets::DataMode::TRAIN, false, nullptr, nullptr)
+    {
     }
 
-    USPS::USPS(const std::string &root, DataMode mode): USPS::USPS(root, mode, false) {
+    ModelNet40::ModelNet40(const std::string& root, xt::datasets::DataMode mode): ModelNet40::ModelNet40(
+        root, mode, false, nullptr, nullptr)
+    {
     }
 
-    USPS::USPS(const std::string &root, DataMode mode, bool download) : BaseDataset(root, mode, download) {
-        throw std::runtime_error("USPS: USPS not implemented");
+    ModelNet40::ModelNet40(const std::string& root, xt::datasets::DataMode mode, bool download) :
+        ModelNet40::ModelNet40(
+            root, mode, download, nullptr, nullptr)
+    {
+    }
+
+    ModelNet40::ModelNet40(const std::string& root, xt::datasets::DataMode mode, bool download,
+                           std::unique_ptr<xt::Module> transformer) : ModelNet40::ModelNet40(
+        root, mode, download, std::move(transformer), nullptr)
+    {
+    }
+
+    ModelNet40::ModelNet40(const std::string& root, xt::datasets::DataMode mode, bool download,
+                           std::unique_ptr<xt::Module> transformer, std::unique_ptr<xt::Module> target_transformer):
+        xt::datasets::Dataset(mode, std::move(transformer), std::move(target_transformer))
+    {
+        check_resources();
+        load_data();
+
     }
 
 
-    USPS::USPS(const std::string &root, DataMode mode, bool download,
-                           TransformType transforms) : BaseDataset(root, mode, download, transforms) {
-        throw std::runtime_error("USPS: USPS not implemented");
+    void ModelNet40::load_data()
+    {
+
     }
 
+    void ModelNet40::check_resources()
+    {
 
+    }
 }
