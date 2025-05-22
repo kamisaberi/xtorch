@@ -1,14 +1,23 @@
 #pragma once
 
-#include "datasets/base/base.h"
+#include "datasets/common.h"
+
+
+using namespace std;
+namespace fs = std::filesystem;
 
 namespace xt::data::datasets {
-    class FGVCAircraft :public BaseDataset {
+    class FGVCAircraft :public xt::datasets::Dataset {
     public :
-        explicit FGVCAircraft(const std::string &root);
-        FGVCAircraft(const std::string &root, DataMode mode);
-        FGVCAircraft(const std::string &root, DataMode mode , bool download);
-        FGVCAircraft(const std::string &root, DataMode mode , bool download, TransformType transforms);
+        explicit FGVCAircraft(const std::string& root);
+        FGVCAircraft(const std::string& root, xt::datasets::DataMode mode);
+        FGVCAircraft(const std::string& root, xt::datasets::DataMode mode, bool download);
+        FGVCAircraft(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer);
+        FGVCAircraft(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer,
+                   std::unique_ptr<xt::Module> target_transformer);
+
 
 
     private :
