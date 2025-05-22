@@ -1,21 +1,48 @@
 #include "datasets/computer_vision/stereo_matching/falling_things_stereo.h"
 
-namespace xt::data::datasets {
+namespace xt::data::datasets
+{
+    // ---------------------- FallingThingsStereo ---------------------- //
 
-    FallingThingsStereo::FallingThingsStereo(const std::string &root): FallingThingsStereo::FallingThingsStereo(root, DataMode::TRAIN, false) {
+    FallingThingsStereo::FallingThingsStereo(const std::string& root): FallingThingsStereo::FallingThingsStereo(
+        root, xt::datasets::DataMode::TRAIN, false, nullptr, nullptr)
+    {
     }
 
-    FallingThingsStereo::FallingThingsStereo(const std::string &root, DataMode mode): FallingThingsStereo::FallingThingsStereo(root, mode, false) {
+    FallingThingsStereo::FallingThingsStereo(const std::string& root, xt::datasets::DataMode mode): FallingThingsStereo::FallingThingsStereo(
+        root, mode, false, nullptr, nullptr)
+    {
     }
 
-    FallingThingsStereo::FallingThingsStereo(const std::string &root, DataMode mode, bool download) : BaseDataset(root, mode, download) {
-        throw std::runtime_error("FallingThingsStereo: FallingThingsStereo not implemented");
+    FallingThingsStereo::FallingThingsStereo(const std::string& root, xt::datasets::DataMode mode, bool download) :
+        FallingThingsStereo::FallingThingsStereo(
+            root, mode, download, nullptr, nullptr)
+    {
+    }
+
+    FallingThingsStereo::FallingThingsStereo(const std::string& root, xt::datasets::DataMode mode, bool download,
+                           std::unique_ptr<xt::Module> transformer) : FallingThingsStereo::FallingThingsStereo(
+        root, mode, download, std::move(transformer), nullptr)
+    {
+    }
+
+    FallingThingsStereo::FallingThingsStereo(const std::string& root, xt::datasets::DataMode mode, bool download,
+                           std::unique_ptr<xt::Module> transformer, std::unique_ptr<xt::Module> target_transformer):
+        xt::datasets::Dataset(mode, std::move(transformer), std::move(target_transformer))
+    {
+        check_resources();
+        load_data();
+
     }
 
 
-    FallingThingsStereo::FallingThingsStereo(const std::string &root, DataMode mode, bool download,
-                           TransformType transforms) : BaseDataset(root, mode, download, transforms) {
-        throw std::runtime_error("FallingThingsStereo: FallingThingsStereo not implemented");
+    void FallingThingsStereo::load_data()
+    {
+
     }
 
+    void FallingThingsStereo::check_resources()
+    {
+
+    }
 }
