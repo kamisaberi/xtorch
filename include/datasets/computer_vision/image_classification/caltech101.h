@@ -38,7 +38,6 @@ namespace xt::data::datasets
         // };
 
         fs::path dataset_folder_name = "caltech-101";
-
         bool download = false;
         fs::path root;
         fs::path dataset_path;
