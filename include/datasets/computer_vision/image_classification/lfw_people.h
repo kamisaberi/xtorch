@@ -1,12 +1,13 @@
 #pragma once
-#include "datasets/base/base.h"
+
+#include "datasets/common.h"
 
 using namespace std;
 namespace fs = std::filesystem;
 
 namespace xt::data::datasets
 {
-    class LFWPeople : public BaseDataset
+    class LFWPeople : public xt::datasets::Dataset
     {
         /*
         """`LFW <http://vis-www.cs.umass.edu/lfw/>`_ Dataset.
@@ -30,10 +31,17 @@ namespace xt::data::datasets
         */
 
     public :
+
         explicit LFWPeople(const std::string& root);
-        LFWPeople(const std::string& root, DataMode mode);
-        LFWPeople(const std::string& root, DataMode mode, bool download);
-        LFWPeople(const std::string& root, DataMode mode, bool download, TransformType transforms);
+        LFWPeople(const std::string& root, xt::datasets::DataMode mode);
+        LFWPeople(const std::string& root, xt::datasets::DataMode mode, bool download);
+        LFWPeople(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer);
+        LFWPeople(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer,
+                   std::unique_ptr<xt::Module> target_transformer);
+
+
 
     private :
         fs::path dataset_folder_name = fs::path("lfw-py");
