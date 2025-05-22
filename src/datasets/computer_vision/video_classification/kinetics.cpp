@@ -2,31 +2,31 @@
 
 namespace xt::data::datasets
 {
-    // ---------------------- ModelNet40 ---------------------- //
+    // ---------------------- Kinetics ---------------------- //
 
-    ModelNet40::ModelNet40(const std::string& root): ModelNet40::ModelNet40(
+    Kinetics::Kinetics(const std::string& root): Kinetics::Kinetics(
         root, xt::datasets::DataMode::TRAIN, false, nullptr, nullptr)
     {
     }
 
-    ModelNet40::ModelNet40(const std::string& root, xt::datasets::DataMode mode): ModelNet40::ModelNet40(
+    Kinetics::Kinetics(const std::string& root, xt::datasets::DataMode mode): Kinetics::Kinetics(
         root, mode, false, nullptr, nullptr)
     {
     }
 
-    ModelNet40::ModelNet40(const std::string& root, xt::datasets::DataMode mode, bool download) :
-        ModelNet40::ModelNet40(
+    Kinetics::Kinetics(const std::string& root, xt::datasets::DataMode mode, bool download) :
+        Kinetics::Kinetics(
             root, mode, download, nullptr, nullptr)
     {
     }
 
-    ModelNet40::ModelNet40(const std::string& root, xt::datasets::DataMode mode, bool download,
-                           std::unique_ptr<xt::Module> transformer) : ModelNet40::ModelNet40(
+    Kinetics::Kinetics(const std::string& root, xt::datasets::DataMode mode, bool download,
+                           std::unique_ptr<xt::Module> transformer) : Kinetics::Kinetics(
         root, mode, download, std::move(transformer), nullptr)
     {
     }
 
-    ModelNet40::ModelNet40(const std::string& root, xt::datasets::DataMode mode, bool download,
+    Kinetics::Kinetics(const std::string& root, xt::datasets::DataMode mode, bool download,
                            std::unique_ptr<xt::Module> transformer, std::unique_ptr<xt::Module> target_transformer):
         xt::datasets::Dataset(mode, std::move(transformer), std::move(target_transformer))
     {
@@ -36,12 +36,12 @@ namespace xt::data::datasets
     }
 
 
-    void ModelNet40::load_data()
+    void Kinetics::load_data()
     {
 
     }
 
-    void ModelNet40::check_resources()
+    void Kinetics::check_resources()
     {
 
     }
