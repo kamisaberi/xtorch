@@ -1,22 +1,48 @@
 #include "datasets/audio_processing/binary_speech_classification/yes_no.h"
 
-namespace xt::data::datasets {
+namespace xt::data::datasets
+{
+    // ---------------------- YesNo ---------------------- //
 
-    YesNo::YesNo(const std::string &root): YesNo::YesNo(root, DataMode::TRAIN, false) {
+    YesNo::YesNo(const std::string& root): YesNo::YesNo(
+        root, xt::datasets::DataMode::TRAIN, false, nullptr, nullptr)
+    {
     }
 
-    YesNo::YesNo(const std::string &root, DataMode mode): YesNo::YesNo(root, mode, false) {
+    YesNo::YesNo(const std::string& root, xt::datasets::DataMode mode): YesNo::YesNo(
+        root, mode, false, nullptr, nullptr)
+    {
     }
 
-    YesNo::YesNo(const std::string &root, DataMode mode, bool download) : BaseDataset(root, mode, download) {
-        throw std::runtime_error("YesNo: YesNo not implemented");
+    YesNo::YesNo(const std::string& root, xt::datasets::DataMode mode, bool download) :
+        YesNo::YesNo(
+            root, mode, download, nullptr, nullptr)
+    {
+    }
+
+    YesNo::YesNo(const std::string& root, xt::datasets::DataMode mode, bool download,
+                           std::unique_ptr<xt::Module> transformer) : YesNo::YesNo(
+        root, mode, download, std::move(transformer), nullptr)
+    {
+    }
+
+    YesNo::YesNo(const std::string& root, xt::datasets::DataMode mode, bool download,
+                           std::unique_ptr<xt::Module> transformer, std::unique_ptr<xt::Module> target_transformer):
+        xt::datasets::Dataset(mode, std::move(transformer), std::move(target_transformer))
+    {
+        check_resources();
+        load_data();
+
     }
 
 
-    YesNo::YesNo(const std::string &root, DataMode mode, bool download,
-                           TransformType transforms) : BaseDataset(root, mode, download, transforms) {
-        throw std::runtime_error("YesNo: YesNo not implemented");
+    void YesNo::load_data()
+    {
+
     }
 
+    void YesNo::check_resources()
+    {
 
+    }
 }
