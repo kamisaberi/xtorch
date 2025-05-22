@@ -1,9 +1,12 @@
 #pragma once
 
-#include "datasets/base/base.h"
+#include "datasets/common.h"
+
+using namespace std;
+namespace fs = std::filesystem;
 
 namespace xt::data::datasets {
-    class GTSRB : BaseDataset {
+    class GTSRB : xt::datasets::Dataset {
         /*
         """`German Traffic Sign Recognition Benchmark (GTSRB) <https://benchmark.ini.rub.de/>`_ Dataset.
 
@@ -19,10 +22,14 @@ namespace xt::data::datasets {
         """
          */
     public :
-        explicit GTSRB(const std::string &root);
-        GTSRB(const std::string &root, DataMode mode);
-        GTSRB(const std::string &root, DataMode mode , bool download);
-        GTSRB(const std::string &root, DataMode mode , bool download, TransformType transforms);
+        explicit GTSRB(const std::string& root);
+        GTSRB(const std::string& root, xt::datasets::DataMode mode);
+        GTSRB(const std::string& root, xt::datasets::DataMode mode, bool download);
+        GTSRB(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer);
+        GTSRB(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer,
+                   std::unique_ptr<xt::Module> target_transformer);
 
     private :
         // base_url = "https://sid.erda.dk/public/archives/daaeac0d7ce1152aea9b61d9f1e19370/"
@@ -44,6 +51,13 @@ namespace xt::data::datasets {
         //         download_root=str(self._base_folder),
         //         md5="fe31e9c9270bbcd7b84b7f21a9d9d9e5",
         //     )
+
+        // TODO fs::path dataset_folder_name
+        fs::path dataset_folder_name = "?";
+
+        bool download = false;
+        fs::path root;
+        fs::path dataset_path;
 
         void load_data();
 
