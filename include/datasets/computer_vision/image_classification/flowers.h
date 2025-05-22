@@ -1,13 +1,23 @@
 #pragma once
-#include "datasets/base/base.h"
 
-namespace xt::data::datasets {
-    class Flowers102 : public BaseDataset {
+#include "datasets/common.h"
+
+using namespace std;
+namespace fs = std::filesystem;
+
+namespace xt::data::datasets
+{
+    class Flowers102 : public xt::datasets::Dataset
+    {
     public :
-        explicit Flowers102(const std::string &root);
-        Flowers102(const std::string &root, DataMode mode);
-        Flowers102(const std::string &root, DataMode mode , bool download);
-        Flowers102(const std::string &root, DataMode mode , bool download, TransformType transforms);
+        explicit Flowers102(const std::string& root);
+        Flowers102(const std::string& root, xt::datasets::DataMode mode);
+        Flowers102(const std::string& root, xt::datasets::DataMode mode, bool download);
+        Flowers102(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer);
+        Flowers102(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer,
+                   std::unique_ptr<xt::Module> target_transformer);
 
     private :
 
@@ -18,6 +28,13 @@ namespace xt::data::datasets {
         // "setid": ("setid.mat", "a5357ecc9cb78c4bef273ce3793fc85c"),
         // }
         // _splits_map = {"train": "trnid", "val": "valid", "test": "tstid"}
+
+        // TODO fs::path dataset_folder_name
+        fs::path dataset_folder_name = "?";
+
+        bool download = false;
+        fs::path root;
+        fs::path dataset_path;
 
         void load_data();
 
