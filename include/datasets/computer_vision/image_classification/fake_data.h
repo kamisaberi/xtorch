@@ -1,17 +1,25 @@
 #pragma once
 
-#include "datasets/base/base.h"
+#include "datasets/common.h"
 
-namespace xt::data::datasets {
-    class FakeData : public BaseDataset {
+
+using namespace std;
+namespace fs = std::filesystem;
+
+namespace xt::data::datasets
+{
+    class FakeData : public xt::datasets::Dataset
+    {
     public :
-        FakeData();
-
         FakeData(size_t size);
+        FakeData(size_t size, xt::datasets::DataMode mode );
+        FakeData(size_t size, xt::datasets::DataMode mode ,vector<int64_t> shape);
+        FakeData(size_t size, xt::datasets::DataMode mode ,vector<int64_t> shape,
+                   std::unique_ptr<xt::Module> transformer);
+        FakeData(size_t size, xt::datasets::DataMode mode ,vector<int64_t> shape,
+                   std::unique_ptr<xt::Module> transformer,
+                   std::unique_ptr<xt::Module> target_transformer);
 
-        FakeData( size_t size, vector<int64_t> shape);
-
-        FakeData( size_t size, vector<int64_t> shape, TransformType transforms);
 
     private :
         size_t size_;
