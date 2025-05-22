@@ -1,15 +1,21 @@
 #pragma once
 
+#include "datasets/common.h"
 
-#include "datasets/base/base.h"
+using namespace std;
+namespace fs = std::filesystem;
 
 namespace xt::data::datasets {
-    class CarlaStereo : public  BaseDataset {
+    class CarlaStereo : public  xt::datasets::Dataset {
     public :
-        explicit  CarlaStereo(const std::string &root);
-        CarlaStereo(const std::string &root, DataMode mode);
-        CarlaStereo(const std::string &root, DataMode mode , bool download);
-        CarlaStereo(const std::string &root, DataMode mode , bool download, TransformType transforms);
+        explicit CarlaStereo(const std::string& root);
+        CarlaStereo(const std::string& root, xt::datasets::DataMode mode);
+        CarlaStereo(const std::string& root, xt::datasets::DataMode mode, bool download);
+        CarlaStereo(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer);
+        CarlaStereo(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer,
+                   std::unique_ptr<xt::Module> target_transformer);
 
 
     private :
