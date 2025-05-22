@@ -1,11 +1,12 @@
 #pragma once
-#include "datasets/base/base.h"
+
+#include "datasets/common.h"
 
 using namespace std;
 namespace fs = std::filesystem;
 
 namespace xt::data::datasets {
-    class INaturalist : BaseDataset {
+    class INaturalist : xt::datasets::Dataset {
         /*
         """`iNaturalist <https://github.com/visipedia/inat_comp>`_ Dataset.
         Args:
@@ -41,10 +42,14 @@ namespace xt::data::datasets {
         """
          */
     public :
-        explicit  INaturalist(const std::string &root);
-        INaturalist(const std::string &root, DataMode mode);
-        INaturalist(const std::string &root, DataMode mode , bool download);
-        INaturalist(const std::string &root, DataMode mode , bool download, TransformType transforms);
+        explicit INaturalist(const std::string& root);
+        INaturalist(const std::string& root, xt::datasets::DataMode mode);
+        INaturalist(const std::string& root, xt::datasets::DataMode mode, bool download);
+        INaturalist(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer);
+        INaturalist(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer,
+                   std::unique_ptr<xt::Module> target_transformer);
 
     private:
         std::map<string, std::tuple<fs::path, std::string> > resources = {
@@ -94,8 +99,14 @@ namespace xt::data::datasets {
 
         fs::path dataset_folder_name = "inaturalist";
 
+        bool download = false;
+        fs::path root;
+        fs::path dataset_path;
+
         void load_data();
 
         void check_resources();
+
+
     };
 }
