@@ -1,9 +1,13 @@
 #pragma once
 
-#include "datasets/base/base.h"
+#include "datasets/common.h"
+
+
+using namespace std;
+namespace fs = std::filesystem;
 
 namespace xt::data::datasets {
-    class FER2013 : public BaseDataset {
+    class FER2013 : public xt::datasets::Dataset {
         /*
             `FER2013
             <https://www.kaggle.com/c/challenges-in-representation-learning-facial-expression-recognition-challenge>`_ Dataset.
@@ -29,15 +33,20 @@ namespace xt::data::datasets {
                 target_transform (callable, optional): A function/transform that takes in the target and transforms it.
         */
     public :
-        explicit  FER2013(const std::string &root);
-        FER2013(const std::string &root, DataMode mode);
-        FER2013(const std::string &root, DataMode mode , bool download);
-        FER2013(const std::string &root, DataMode mode , bool download, TransformType transforms);
+
+        explicit FER2013(const std::string& root);
+        FER2013(const std::string& root, xt::datasets::DataMode mode);
+        FER2013(const std::string& root, xt::datasets::DataMode mode, bool download);
+        FER2013(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer);
+        FER2013(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer,
+                   std::unique_ptr<xt::Module> target_transformer);
+
+
+
 
     private :
-        void load_data();
-
-        void check_resources();
 
         // resources = {
         //     "train": ("train.csv", "3f0dfb3d3fd99c811a1299cb947e3131"),
@@ -45,6 +54,18 @@ namespace xt::data::datasets {
         //     "fer": ("fer2013.csv", "f8428a1edbd21e88f42c73edd2a14f95"),
         //     "icml": ("icml_face_data.csv", "b114b9e04e6949e5fe8b6a98b3892b1d"),
         // }
+
+        //TODO fs::path dataset_folder_name = "?";
+        fs::path dataset_folder_name = "?";
+        bool download = false;
+        fs::path root;
+        fs::path dataset_path;
+
+
+        void load_data();
+
+        void check_resources();
+
 
     };
 }
