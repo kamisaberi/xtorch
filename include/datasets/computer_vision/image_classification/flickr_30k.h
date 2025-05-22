@@ -1,30 +1,35 @@
 #pragma once
 
-#include "datasets/base/base.h"
+#include "datasets/common.h"
 
-namespace xt::data::datasets {
-    class Flickr8k :public BaseDataset {
+using namespace std;
+namespace fs = std::filesystem;
+
+namespace xt::data::datasets
+{
+    class Flickr30k : public xt::datasets::Dataset
+    {
     public :
-        Flickr8k(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+        explicit Flickr30k(const std::string& root);
+        Flickr30k(const std::string& root, xt::datasets::DataMode mode);
+        Flickr30k(const std::string& root, xt::datasets::DataMode mode, bool download);
+        Flickr30k(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer);
+        Flickr30k(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer,
+                   std::unique_ptr<xt::Module> target_transformer);
 
-        Flickr8k(const fs::path &root);
+    private:
 
-    private :
-        void load_data(DataMode mode = DataMode::TRAIN);
+        // TODO fs::path dataset_folder_name
+        fs::path dataset_folder_name = "?";
 
-        void check_resources(const std::string &root, bool download = false);
-    };
+        bool download = false;
+        fs::path root;
+        fs::path dataset_path;
 
-    [[deprecated("Flickr30k Dataset some files removed and Links are broken")]]
-    class Flickr30k :public BaseDataset {
-    public :
-        Flickr30k(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
+        void load_data();
 
-        Flickr30k(const fs::path &root);
-
-    private :
-        void load_data(DataMode mode = DataMode::TRAIN);
-
-        void check_resources(const std::string &root, bool download = false);
+        void check_resources();
     };
 }
