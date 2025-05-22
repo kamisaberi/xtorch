@@ -1,22 +1,48 @@
-#include "../../../../include/datasets/audio_processing/music_genre_classification/gtzan.h"
+#include "datasets/audio_processing/music_genre_classification/gtzan.h"
 
-namespace xt::data::datasets {
+namespace xt::data::datasets
+{
+    // ---------------------- GTZAN ---------------------- //
 
-    GTZAN::GTZAN(const std::string &root): GTZAN::GTZAN(root, DataMode::TRAIN, false) {
+    GTZAN::GTZAN(const std::string& root): GTZAN::GTZAN(
+        root, xt::datasets::DataMode::TRAIN, false, nullptr, nullptr)
+    {
     }
 
-    GTZAN::GTZAN(const std::string &root, DataMode mode): GTZAN::GTZAN(root, mode, false) {
+    GTZAN::GTZAN(const std::string& root, xt::datasets::DataMode mode): GTZAN::GTZAN(
+        root, mode, false, nullptr, nullptr)
+    {
     }
 
-    GTZAN::GTZAN(const std::string &root, DataMode mode, bool download) : BaseDataset(root, mode, download) {
-        throw std::runtime_error("GTZAN: GTZAN not implemented");
+    GTZAN::GTZAN(const std::string& root, xt::datasets::DataMode mode, bool download) :
+        GTZAN::GTZAN(
+            root, mode, download, nullptr, nullptr)
+    {
+    }
+
+    GTZAN::GTZAN(const std::string& root, xt::datasets::DataMode mode, bool download,
+                           std::unique_ptr<xt::Module> transformer) : GTZAN::GTZAN(
+        root, mode, download, std::move(transformer), nullptr)
+    {
+    }
+
+    GTZAN::GTZAN(const std::string& root, xt::datasets::DataMode mode, bool download,
+                           std::unique_ptr<xt::Module> transformer, std::unique_ptr<xt::Module> target_transformer):
+        xt::datasets::Dataset(mode, std::move(transformer), std::move(target_transformer))
+    {
+        check_resources();
+        load_data();
+
     }
 
 
-    GTZAN::GTZAN(const std::string &root, DataMode mode, bool download,
-                         TransformType transforms) : BaseDataset(root, mode, download, transforms) {
-        throw std::runtime_error("GTZAN: GTZAN not implemented");
+    void GTZAN::load_data()
+    {
+
     }
 
+    void GTZAN::check_resources()
+    {
 
+    }
 }
