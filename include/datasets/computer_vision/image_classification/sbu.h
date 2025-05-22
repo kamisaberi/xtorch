@@ -1,12 +1,13 @@
 #pragma once
-#include "datasets/base/base.h"
+
+#include "datasets/common.h"
 
 using namespace std;
 namespace fs = std::filesystem;
 
 
 namespace xt::data::datasets {
-    class SBU : BaseDataset {
+    class SBU : xt::datasets::Dataset {
         /*
         """`SBU Captioned Photo <http://www.cs.virginia.edu/~vicente/sbucaptions/>`_ Dataset.
 
@@ -24,10 +25,14 @@ namespace xt::data::datasets {
 
          */
     public :
-        explicit SBU(const std::string &root);
-        SBU(const std::string &root, DataMode mode);
-        SBU(const std::string &root, DataMode mode , bool download);
-        SBU(const std::string &root, DataMode mode , bool download, TransformType transforms);
+        explicit SBU(const std::string& root);
+        SBU(const std::string& root, xt::datasets::DataMode mode);
+        SBU(const std::string& root, xt::datasets::DataMode mode, bool download);
+        SBU(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer);
+        SBU(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer,
+                   std::unique_ptr<xt::Module> target_transformer);
 
 
     private :
@@ -35,9 +40,15 @@ namespace xt::data::datasets {
         fs::path dataset_file_name = fs::path("SBUCaptionedPhotoDataset.tar.gz");
         std::string dataset_file_md5 = "9aec147b3488753cf758b4d493422285";
         fs::path dataset_folder_name = "sbu";
+
+        bool download = false;
+        fs::path root;
+        fs::path dataset_path;
+
         void load_data();
 
         void check_resources();
+
 
 
     };
