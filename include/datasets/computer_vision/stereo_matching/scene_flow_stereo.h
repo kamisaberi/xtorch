@@ -1,8 +1,12 @@
 #pragma once
-#include "datasets/base/base.h"
+
+#include "datasets/common.h"
+
+using namespace std;
+namespace fs = std::filesystem;
 
 namespace xt::data::datasets {
-   class SceneFlowStereo : BaseDataset {
+   class SceneFlowStereo : xt::datasets::Dataset {
        /*
             """Dataset interface for `Scene Flow <https://lmb.informatik.uni-freiburg.de/resources/datasets/SceneFlowDatasets.en.html>`_ datasets.
     This interface provides access to the `FlyingThings3D, `Monkaa` and `Driving` datasets.
@@ -60,13 +64,25 @@ namespace xt::data::datasets {
         */
 
    public :
-       explicit SceneFlowStereo(const std::string &root);
-       SceneFlowStereo(const std::string &root, DataMode mode);
-       SceneFlowStereo(const std::string &root, DataMode mode , bool download);
-       SceneFlowStereo(const std::string &root, DataMode mode , bool download, TransformType transforms);
+
+       explicit SceneFlowStereo(const std::string& root);
+       SceneFlowStereo(const std::string& root, xt::datasets::DataMode mode);
+       SceneFlowStereo(const std::string& root, xt::datasets::DataMode mode, bool download);
+       SceneFlowStereo(const std::string& root, xt::datasets::DataMode mode, bool download,
+                  std::unique_ptr<xt::Module> transformer);
+       SceneFlowStereo(const std::string& root, xt::datasets::DataMode mode, bool download,
+                  std::unique_ptr<xt::Module> transformer,
+                  std::unique_ptr<xt::Module> target_transformer);
 
    private :
        fs::path dataset_folder_name = fs::path("SceneFlow") ;
+
+
+       bool download = false;
+       fs::path root;
+       fs::path dataset_path;
+
+
        void load_data();
 
        void check_resources();
