@@ -1,23 +1,34 @@
 #pragma once
 
-#include "datasets/base/base.h"
 #include "datasets/common.h"
+
+using namespace std;
+namespace fs = std::filesystem;
 
 
 namespace xt::data::datasets {
-    class UrbanSound : BaseDataset {
+    class UrbanSound : xt::datasets::Dataset {
     public :
-        explicit UrbanSound(const std::string &root);
-
-        UrbanSound(const std::string &root, DataMode mode);
-
-        UrbanSound(const std::string &root, DataMode mode, bool download);
-
-        UrbanSound(const std::string &root, DataMode mode, bool download, TransformType transforms);
+        explicit UrbanSound(const std::string& root);
+        UrbanSound(const std::string& root, xt::datasets::DataMode mode);
+        UrbanSound(const std::string& root, xt::datasets::DataMode mode, bool download);
+        UrbanSound(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer);
+        UrbanSound(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer,
+                   std::unique_ptr<xt::Module> target_transformer);
 
     private :
+        // TODO fs::path dataset_folder_name
+        fs::path dataset_folder_name = "?";
+
+        bool download = false;
+        fs::path root;
+        fs::path dataset_path;
+
         void load_data();
 
         void check_resources();
+
     };
 }
