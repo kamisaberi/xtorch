@@ -6,8 +6,10 @@ using namespace std;
 namespace fs = std::filesystem;
 
 
-namespace xt::data::datasets {
-    class RenderedSST2 : xt::datasets::Dataset {
+namespace xt::data::datasets
+{
+    class RenderedSST2 : xt::datasets::Dataset
+    {
         /*
         """`The Rendered SST2 Dataset <https://github.com/openai/CLIP/blob/main/data/rendered-sst2.md>`_.
 
@@ -32,16 +34,14 @@ namespace xt::data::datasets {
 
          */
     public :
-
         explicit RenderedSST2(const std::string& root);
         RenderedSST2(const std::string& root, xt::datasets::DataMode mode);
         RenderedSST2(const std::string& root, xt::datasets::DataMode mode, bool download);
         RenderedSST2(const std::string& root, xt::datasets::DataMode mode, bool download,
-                   std::unique_ptr<xt::Module> transformer);
+                     std::unique_ptr<xt::Module> transformer);
         RenderedSST2(const std::string& root, xt::datasets::DataMode mode, bool download,
-                   std::unique_ptr<xt::Module> transformer,
-                   std::unique_ptr<xt::Module> target_transformer);
-
+                     std::unique_ptr<xt::Module> transformer,
+                     std::unique_ptr<xt::Module> target_transformer);
 
     private:
         fs::path url = fs::path("https://openaipublic.azureedge.net/clip/data/rendered-sst2.tgz");
@@ -56,7 +56,5 @@ namespace xt::data::datasets {
         void load_data();
 
         void check_resources();
-
-
     };
 }
