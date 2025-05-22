@@ -1,9 +1,14 @@
 #pragma once
 
-#include "datasets/base/base.h"
+#include "datasets/common.h"
 
-namespace xt::data::datasets {
-    class Omniglot : BaseDataset {
+using namespace std;
+namespace fs = std::filesystem;
+
+namespace xt::data::datasets
+{
+    class Omniglot : xt::datasets::Dataset
+    {
         /*
         https://github.com/brendenlake/omniglot
         """`Omniglot <https://github.com/brendenlake/omniglot>`_ Dataset.
@@ -22,11 +27,14 @@ namespace xt::data::datasets {
         """
          */
     public :
-        explicit Omniglot(const std::string &root);
-        Omniglot(const std::string &root, DataMode mode);
-        Omniglot(const std::string &root, DataMode mode , bool download);
-        Omniglot(const std::string &root, DataMode mode , bool download, TransformType transforms);
-
+        explicit Omniglot(const std::string& root);
+        Omniglot(const std::string& root, xt::datasets::DataMode mode);
+        Omniglot(const std::string& root, xt::datasets::DataMode mode, bool download);
+        Omniglot(const std::string& root, xt::datasets::DataMode mode, bool download,
+                 std::unique_ptr<xt::Module> transformer);
+        Omniglot(const std::string& root, xt::datasets::DataMode mode, bool download,
+                 std::unique_ptr<xt::Module> transformer,
+                 std::unique_ptr<xt::Module> target_transformer);
 
     private :
         // folder = "omniglot-py"
@@ -36,8 +44,21 @@ namespace xt::data::datasets {
         // "images_evaluation": "6b91aef0f799c5bb55b94e3f2daec811",
         // }
 
+
+        // TODO fs::path dataset_folder_name
+        fs::path dataset_folder_name = "?";
+
+        bool download = false;
+        fs::path root;
+        fs::path dataset_path;
+
+        void load_data();
+
+        void check_resources();
+
+
         void load_data(DataMode mode = DataMode::TRAIN);
 
-        void check_resources(const std::string &root, bool download = false);
+        void check_resources(const std::string& root, bool download = false);
     };
 }
