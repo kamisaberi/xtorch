@@ -1,19 +1,24 @@
 #pragma once
 
-#include "datasets/base/base.h"
 #include "datasets/common.h"
 
 
 using namespace std;
 namespace fs = std::filesystem;
 
+
+
 namespace xt::data::datasets {
-    class CelebA : public BaseDataset {
+    class CelebA : public xt::datasets::Dataset {
     public :
-        explicit  CelebA(const std::string &root);
-        CelebA(const std::string &root, DataMode mode);
-        CelebA(const std::string &root, DataMode mode , bool download);
-        CelebA(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
+        explicit CelebA(const std::string& root);
+        CelebA(const std::string& root, xt::datasets::DataMode mode);
+        CelebA(const std::string& root, xt::datasets::DataMode mode, bool download);
+        CelebA(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer);
+        CelebA(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer,
+                   std::unique_ptr<xt::Module> target_transformer);
 
     private:
         vector<std::tuple<string, string, fs::path> > resources = {
@@ -25,7 +30,14 @@ namespace xt::data::datasets {
             {"0B7EVK8r0v71pY0NSMzRuSXJEVkk", "d32c9cbf5e040fd4025c592c306e6668", "list_eval_partition.txt"}
         };
 
+
+
         fs::path dataset_folder_name = "celeba";
+        bool download = false;
+        fs::path root;
+        fs::path dataset_path;
+
+
         void load_data();
 
         void check_resources();
