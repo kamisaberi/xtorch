@@ -1,9 +1,13 @@
 #pragma once
-#include "datasets/base/base.h"
+
+#include "datasets/common.h"
+
+using namespace std;
+namespace fs = std::filesystem;
 
 
 namespace xt::data::datasets {
-    class PCAM : BaseDataset {
+    class PCAM : xt::datasets::Dataset {
         /*
         """`PCAM Dataset   <https://github.com/basveeling/pcam>`_.
 
@@ -30,10 +34,16 @@ namespace xt::data::datasets {
 
          */
     public :
-        explicit PCAM(const std::string &root);
-        PCAM(const std::string &root, DataMode mode);
-        PCAM(const std::string &root, DataMode mode , bool download);
-        PCAM(const std::string &root, DataMode mode , bool download, TransformType transforms);
+
+        explicit PCAM(const std::string& root);
+        PCAM(const std::string& root, xt::datasets::DataMode mode);
+        PCAM(const std::string& root, xt::datasets::DataMode mode, bool download);
+        PCAM(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer);
+        PCAM(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer,
+                   std::unique_ptr<xt::Module> target_transformer);
+
 
 
     private :
