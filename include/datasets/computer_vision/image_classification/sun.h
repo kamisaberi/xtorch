@@ -1,12 +1,13 @@
 #pragma once
-#include "datasets/base/base.h"
+
+#include "datasets/common.h"
 
 using namespace std;
 namespace fs = std::filesystem;
 
 
 namespace xt::data::datasets {
-    class SUN397 : BaseDataset {
+    class SUN397 : xt::datasets::Dataset {
         /*
         """`The SUN397 Data Set <https://vision.princeton.edu/projects/2010/SUN/>`_.
 
@@ -25,10 +26,14 @@ namespace xt::data::datasets {
 
          */
     public :
-        explicit SUN397(const std::string &root);
-        SUN397(const std::string &root, DataMode mode);
-        SUN397(const std::string &root, DataMode mode , bool download);
-        SUN397(const std::string &root, DataMode mode , bool download, TransformType transforms);
+        explicit SUN397(const std::string& root);
+        SUN397(const std::string& root, xt::datasets::DataMode mode);
+        SUN397(const std::string& root, xt::datasets::DataMode mode, bool download);
+        SUN397(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer);
+        SUN397(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer,
+                   std::unique_ptr<xt::Module> target_transformer);
 
 
     private :
@@ -37,10 +42,14 @@ namespace xt::data::datasets {
         std::string dataset_file_md5 = "8ca2778205c41d23104230ba66911c7a";
         fs::path dataset_folder_name = "sun397";
 
+        bool download = false;
+        fs::path root;
+        fs::path dataset_path;
+
         void load_data();
 
-
         void check_resources();
+
 
     };
 }
