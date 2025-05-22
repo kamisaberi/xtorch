@@ -1,22 +1,48 @@
 #include "datasets/computer_vision/stereo_matching/scene_flow_stereo.h"
 
-namespace xt::data::datasets {
+namespace xt::data::datasets
+{
+    // ---------------------- SceneFlowStereo ---------------------- //
 
-    SceneFlowStereo::SceneFlowStereo(const std::string &root): SceneFlowStereo::SceneFlowStereo(root, DataMode::TRAIN, false) {
+    SceneFlowStereo::SceneFlowStereo(const std::string& root): SceneFlowStereo::SceneFlowStereo(
+        root, xt::datasets::DataMode::TRAIN, false, nullptr, nullptr)
+    {
     }
 
-    SceneFlowStereo::SceneFlowStereo(const std::string &root, DataMode mode): SceneFlowStereo::SceneFlowStereo(root, mode, false) {
+    SceneFlowStereo::SceneFlowStereo(const std::string& root, xt::datasets::DataMode mode): SceneFlowStereo::SceneFlowStereo(
+        root, mode, false, nullptr, nullptr)
+    {
     }
 
-    SceneFlowStereo::SceneFlowStereo(const std::string &root, DataMode mode, bool download) : BaseDataset(root, mode, download) {
-        throw std::runtime_error("SceneFlowStereo: SceneFlowStereo not implemented");
+    SceneFlowStereo::SceneFlowStereo(const std::string& root, xt::datasets::DataMode mode, bool download) :
+        SceneFlowStereo::SceneFlowStereo(
+            root, mode, download, nullptr, nullptr)
+    {
+    }
+
+    SceneFlowStereo::SceneFlowStereo(const std::string& root, xt::datasets::DataMode mode, bool download,
+                           std::unique_ptr<xt::Module> transformer) : SceneFlowStereo::SceneFlowStereo(
+        root, mode, download, std::move(transformer), nullptr)
+    {
+    }
+
+    SceneFlowStereo::SceneFlowStereo(const std::string& root, xt::datasets::DataMode mode, bool download,
+                           std::unique_ptr<xt::Module> transformer, std::unique_ptr<xt::Module> target_transformer):
+        xt::datasets::Dataset(mode, std::move(transformer), std::move(target_transformer))
+    {
+        check_resources();
+        load_data();
+
     }
 
 
-    SceneFlowStereo::SceneFlowStereo(const std::string &root, DataMode mode, bool download,
-                           TransformType transforms) : BaseDataset(root, mode, download, transforms) {
-        throw std::runtime_error("SceneFlowStereo: SceneFlowStereo not implemented");
+    void SceneFlowStereo::load_data()
+    {
+
     }
 
+    void SceneFlowStereo::check_resources()
+    {
 
+    }
 }
