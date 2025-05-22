@@ -1,10 +1,14 @@
 #pragma once
 
-#include "datasets/base/base.h"
+#include "datasets/common.h"
 
-namespace xt::data::datasets {
+using namespace std;
+namespace fs = std::filesystem;
 
-    class Kitti2012Stereo : BaseDataset {
+namespace xt::data::datasets
+{
+    class Kitti2012Stereo : xt::datasets::Dataset
+    {
         /*
         """
     KITTI dataset from the `2012 stereo evaluation benchmark <http://www.cvlibs.net/datasets/kitti/eval_stereo_flow.php>`_.
@@ -46,17 +50,25 @@ namespace xt::data::datasets {
 
          */
     public :
-        explicit  Kitti2012Stereo(const std::string &root);
-        Kitti2012Stereo(const std::string &root, DataMode mode);
-        Kitti2012Stereo(const std::string &root, DataMode mode , bool download);
-        Kitti2012Stereo(const std::string &root, DataMode mode , bool download, TransformType transforms);
-
+        explicit Kitti2012Stereo(const std::string& root);
+        Kitti2012Stereo(const std::string& root, xt::datasets::DataMode mode);
+        Kitti2012Stereo(const std::string& root, xt::datasets::DataMode mode, bool download);
+        Kitti2012Stereo(const std::string& root, xt::datasets::DataMode mode, bool download,
+                        std::unique_ptr<xt::Module> transformer);
+        Kitti2012Stereo(const std::string& root, xt::datasets::DataMode mode, bool download,
+                        std::unique_ptr<xt::Module> transformer,
+                        std::unique_ptr<xt::Module> target_transformer);
 
     private :
+        // TODO fs::path dataset_folder_name
+        fs::path dataset_folder_name = "?";
+
+        bool download = false;
+        fs::path root;
+        fs::path dataset_path;
+
         void load_data();
 
         void check_resources();
     };
-
-
 }
