@@ -1,4 +1,4 @@
-#include "datasets/computer_vision/ste"
+#include "datasets/computer_vision/"
 
 namespace xt::data::datasets
 {
