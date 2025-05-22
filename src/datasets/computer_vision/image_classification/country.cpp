@@ -2,20 +2,48 @@
 
 namespace xt::data::datasets {
 
-    Country211::Country211(const std::string &root): Country211::Country211(root, DataMode::TRAIN, false) {
+    // ---------------------- Country211 ---------------------- //
+
+    Country211::Country211(const std::string& root): Country211::Country211(
+        root, xt::datasets::DataMode::TRAIN, false, nullptr, nullptr)
+    {
     }
 
-    Country211::Country211(const std::string &root, DataMode mode): Country211::Country211(root, mode, false) {
+    Country211::Country211(const std::string& root, xt::datasets::DataMode mode): Country211::Country211(
+        root, mode, false, nullptr, nullptr)
+    {
     }
 
-    Country211::Country211(const std::string &root, DataMode mode, bool download) : BaseDataset(root, mode, download) {
-        throw std::runtime_error("Country211: Country211 not implemented");
+    Country211::Country211(const std::string& root, xt::datasets::DataMode mode, bool download) :
+        Country211::Country211(
+            root, mode, download, nullptr, nullptr)
+    {
+    }
+
+    Country211::Country211(const std::string& root, xt::datasets::DataMode mode, bool download,
+                           std::unique_ptr<xt::Module> transformer) : Country211::Country211(
+        root, mode, download, std::move(transformer), nullptr)
+    {
+    }
+
+    Country211::Country211(const std::string& root, xt::datasets::DataMode mode, bool download,
+                           std::unique_ptr<xt::Module> transformer, std::unique_ptr<xt::Module> target_transformer):
+        xt::datasets::Dataset(mode, std::move(transformer), std::move(target_transformer))
+    {
+        check_resources();
+        load_data();
+
     }
 
 
-    Country211::Country211(const std::string &root, DataMode mode, bool download,
-                           TransformType transforms) : BaseDataset(root, mode, download, transforms) {
-        throw std::runtime_error("Country211: Country211 not implemented");
+    void Country211::load_data()
+    {
+
+    }
+
+    void Country211::check_resources()
+    {
+
     }
 
 }

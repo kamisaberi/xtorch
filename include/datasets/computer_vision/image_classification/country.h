@@ -8,7 +8,7 @@ namespace fs = std::filesystem;
 
 
 namespace xt::data::datasets {
-    class Country211 : public BaseDataset {
+    class Country211 : public xt::datasets::Dataset {
     public:
         explicit Country211(const std::string& root);
         Country211(const std::string& root, xt::datasets::DataMode mode);
