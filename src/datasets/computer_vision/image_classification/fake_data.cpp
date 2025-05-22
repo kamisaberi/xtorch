@@ -1,20 +1,48 @@
 #include "datasets/computer_vision/image_classification/fake_data.h"
 
 namespace xt::data::datasets {
-    FakeData::FakeData(): FakeData::FakeData(1000, {3, 24, 24}) {
+    // ---------------------- FakeData ---------------------- //
+
+    FakeData::FakeData(const std::string& root): FakeData::FakeData(
+        root, xt::datasets::DataMode::TRAIN, false, nullptr, nullptr)
+    {
     }
 
-    FakeData::FakeData(size_t size): FakeData::FakeData(size, {3, 24, 24}) {
+    FakeData::FakeData(const std::string& root, xt::datasets::DataMode mode): FakeData::FakeData(
+        root, mode, false, nullptr, nullptr)
+    {
     }
 
-    FakeData::FakeData(size_t size, vector<int64_t> shape) : BaseDataset(
-        "", DataMode::TRAIN, false) {
-        throw std::runtime_error("FakeData: FakeData not implemented");
+    FakeData::FakeData(const std::string& root, xt::datasets::DataMode mode, bool download) :
+        FakeData::FakeData(
+            root, mode, download, nullptr, nullptr)
+    {
+    }
+
+    FakeData::FakeData(const std::string& root, xt::datasets::DataMode mode, bool download,
+                           std::unique_ptr<xt::Module> transformer) : FakeData::FakeData(
+        root, mode, download, std::move(transformer), nullptr)
+    {
+    }
+
+    FakeData::FakeData(const std::string& root, xt::datasets::DataMode mode, bool download,
+                           std::unique_ptr<xt::Module> transformer, std::unique_ptr<xt::Module> target_transformer):
+        xt::datasets::Dataset(mode, std::move(transformer), std::move(target_transformer))
+    {
+        check_resources();
+        load_data();
+
     }
 
 
-    FakeData::FakeData(size_t size, vector<int64_t> shape, TransformType transforms) : BaseDataset(
-        "", DataMode::TRAIN, false, transforms) {
-        throw std::runtime_error("FakeData: FakeData not implemented");
+    void FakeData::load_data()
+    {
+
     }
+
+    void FakeData::check_resources()
+    {
+
+    }
+
 }
