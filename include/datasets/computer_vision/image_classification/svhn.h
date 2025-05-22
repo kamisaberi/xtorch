@@ -1,12 +1,13 @@
 #pragma once
-#include "datasets/base/base.h"
+
+#include "datasets/common.h"
 
 using namespace std;
 namespace fs = std::filesystem;
 
 
 namespace xt::data::datasets {
-    class SVHN : BaseDataset {
+    class SVHN : xt::datasets::Dataset {
         /*
         """`SVHN <http://ufldl.stanford.edu/housenumbers/>`_ Dataset.
     Note: The SVHN dataset assigns the label `10` to the digit `0`. However, in this Dataset,
@@ -33,10 +34,15 @@ namespace xt::data::datasets {
 
          */
     public :
-        explicit SVHN(const std::string &root);
-        SVHN(const std::string &root, DataMode mode);
-        SVHN(const std::string &root, DataMode mode , bool download);
-        SVHN(const std::string &root, DataMode mode , bool download, TransformType transforms);
+
+        explicit SVHN(const std::string& root);
+        SVHN(const std::string& root, xt::datasets::DataMode mode);
+        SVHN(const std::string& root, xt::datasets::DataMode mode, bool download);
+        SVHN(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer);
+        SVHN(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer,
+                   std::unique_ptr<xt::Module> target_transformer);
 
 
     private:
@@ -58,9 +64,19 @@ namespace xt::data::datasets {
                           }
                 }
         };
+
+
+        // TODO fs::path dataset_folder_name
+        fs::path dataset_folder_name = "?";
+
+        bool download = false;
+        fs::path root;
+        fs::path dataset_path;
+
         void load_data();
 
         void check_resources();
+
 
     };
 }
