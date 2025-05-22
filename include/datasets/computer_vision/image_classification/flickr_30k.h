@@ -3,7 +3,6 @@
 #include "datasets/base/base.h"
 
 namespace xt::data::datasets {
-    [[deprecated("Flickr8k Dataset some files removed and Links are broken")]]
     class Flickr8k :public BaseDataset {
     public :
         Flickr8k(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
