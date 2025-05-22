@@ -1,21 +1,45 @@
 #include "datasets/computer_vision/image_classification/euro_sat.h"
 
-namespace xt::data::datasets {
+namespace xt::data::datasets
+{
+    // ---------------------- EuroSAT ---------------------- //
 
-    EuroSAT::EuroSAT(const std::string &root): EuroSAT::EuroSAT(root, DataMode::TRAIN, false) {
+    EuroSAT::EuroSAT(const std::string& root): EuroSAT::EuroSAT(
+        root, xt::datasets::DataMode::TRAIN, false, nullptr, nullptr)
+    {
     }
 
-    EuroSAT::EuroSAT(const std::string &root, DataMode mode): EuroSAT::EuroSAT(root, mode, false) {
+    EuroSAT::EuroSAT(const std::string& root, xt::datasets::DataMode mode): EuroSAT::EuroSAT(
+        root, mode, false, nullptr, nullptr)
+    {
     }
 
-    EuroSAT::EuroSAT(const std::string &root, DataMode mode, bool download) : BaseDataset(root, mode, download) {
-        throw std::runtime_error("EuroSAT: EuroSAT not implemented");
+    EuroSAT::EuroSAT(const std::string& root, xt::datasets::DataMode mode, bool download) :
+        EuroSAT::EuroSAT(
+            root, mode, download, nullptr, nullptr)
+    {
+    }
+
+    EuroSAT::EuroSAT(const std::string& root, xt::datasets::DataMode mode, bool download,
+                     std::unique_ptr<xt::Module> transformer) : EuroSAT::EuroSAT(
+        root, mode, download, std::move(transformer), nullptr)
+    {
+    }
+
+    EuroSAT::EuroSAT(const std::string& root, xt::datasets::DataMode mode, bool download,
+                     std::unique_ptr<xt::Module> transformer, std::unique_ptr<xt::Module> target_transformer):
+        xt::datasets::Dataset(mode, std::move(transformer), std::move(target_transformer))
+    {
+        check_resources();
+        load_data();
     }
 
 
-    EuroSAT::EuroSAT(const std::string &root, DataMode mode, bool download,
-                           TransformType transforms) : BaseDataset(root, mode, download, transforms) {
-        throw std::runtime_error("EuroSAT: EuroSAT not implemented");
+    void EuroSAT::load_data()
+    {
     }
 
+    void EuroSAT::check_resources()
+    {
+    }
 }
