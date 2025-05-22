@@ -11,7 +11,7 @@ namespace xt::data::datasets
     class FakeData : public xt::datasets::Dataset
     {
     public :
-        FakeData(size_t size);
+        explicit FakeData(size_t size);
         FakeData(size_t size, xt::datasets::DataMode mode );
         FakeData(size_t size, xt::datasets::DataMode mode ,vector<int64_t> shape);
         FakeData(size_t size, xt::datasets::DataMode mode ,vector<int64_t> shape,
