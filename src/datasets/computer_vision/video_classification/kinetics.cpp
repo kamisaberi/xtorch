@@ -1,22 +1,48 @@
 #include "datasets/computer_vision/video_classification/kinetics.h"
 
-namespace xt::data::datasets {
+namespace xt::data::datasets
+{
+    // ---------------------- ModelNet40 ---------------------- //
 
-    Kinetics::Kinetics(const std::string &root): Kinetics::Kinetics(root, DataMode::TRAIN, false) {
+    ModelNet40::ModelNet40(const std::string& root): ModelNet40::ModelNet40(
+        root, xt::datasets::DataMode::TRAIN, false, nullptr, nullptr)
+    {
     }
 
-    Kinetics::Kinetics(const std::string &root, DataMode mode): Kinetics::Kinetics(root, mode, false) {
+    ModelNet40::ModelNet40(const std::string& root, xt::datasets::DataMode mode): ModelNet40::ModelNet40(
+        root, mode, false, nullptr, nullptr)
+    {
     }
 
-    Kinetics::Kinetics(const std::string &root, DataMode mode, bool download) : BaseDataset(root, mode, download) {
-        throw std::runtime_error("Kinetics: Kinetics not implemented");
+    ModelNet40::ModelNet40(const std::string& root, xt::datasets::DataMode mode, bool download) :
+        ModelNet40::ModelNet40(
+            root, mode, download, nullptr, nullptr)
+    {
+    }
+
+    ModelNet40::ModelNet40(const std::string& root, xt::datasets::DataMode mode, bool download,
+                           std::unique_ptr<xt::Module> transformer) : ModelNet40::ModelNet40(
+        root, mode, download, std::move(transformer), nullptr)
+    {
+    }
+
+    ModelNet40::ModelNet40(const std::string& root, xt::datasets::DataMode mode, bool download,
+                           std::unique_ptr<xt::Module> transformer, std::unique_ptr<xt::Module> target_transformer):
+        xt::datasets::Dataset(mode, std::move(transformer), std::move(target_transformer))
+    {
+        check_resources();
+        load_data();
+
     }
 
 
-    Kinetics::Kinetics(const std::string &root, DataMode mode, bool download,
-                           TransformType transforms) : BaseDataset(root, mode, download, transforms) {
-        throw std::runtime_error("Kinetics: Kinetics not implemented");
+    void ModelNet40::load_data()
+    {
+
     }
 
+    void ModelNet40::check_resources()
+    {
 
+    }
 }

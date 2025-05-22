@@ -1,8 +1,14 @@
 #pragma once
-#include "datasets/base/base.h"
 
-namespace xt::data::datasets {
-    class Kinetics : BaseDataset {
+#include "datasets/common.h"
+
+using namespace std;
+namespace fs = std::filesystem;
+
+namespace xt::data::datasets
+{
+    class Kinetics : xt::datasets::Dataset
+    {
         /*
         https://s3.amazonaws.com/kinetics
             """`Generic Kinetics <https://www.deepmind.com/open-source/kinetics>`_
@@ -65,23 +71,33 @@ namespace xt::data::datasets {
 
          */
     public :
-        explicit Kinetics(const std::string &root);
-        Kinetics(const std::string &root, DataMode mode);
-        Kinetics(const std::string &root, DataMode mode , bool download);
-        Kinetics(const std::string &root, DataMode mode , bool download, TransformType transforms);
-
+        explicit Kinetics(const std::string& root);
+        Kinetics(const std::string& root, xt::datasets::DataMode mode);
+        Kinetics(const std::string& root, xt::datasets::DataMode mode, bool download);
+        Kinetics(const std::string& root, xt::datasets::DataMode mode, bool download,
+                 std::unique_ptr<xt::Module> transformer);
+        Kinetics(const std::string& root, xt::datasets::DataMode mode, bool download,
+                 std::unique_ptr<xt::Module> transformer,
+                 std::unique_ptr<xt::Module> target_transformer);
 
     private :
-    //     _TAR_URLS = {
-    //     "400": "https://s3.amazonaws.com/kinetics/400/{split}/k400_{split}_path.txt",
-    //     "600": "https://s3.amazonaws.com/kinetics/600/{split}/k600_{split}_path.txt",
-    //     "700": "https://s3.amazonaws.com/kinetics/700_2020/{split}/k700_2020_{split}_path.txt",
-    // }
-    //     _ANNOTATION_URLS = {
-    //     "400": "https://s3.amazonaws.com/kinetics/400/annotations/{split}.csv",
-    //     "600": "https://s3.amazonaws.com/kinetics/600/annotations/{split}.csv",
-    //     "700": "https://s3.amazonaws.com/kinetics/700_2020/annotations/{split}.csv",
-    // }
+        //     _TAR_URLS = {
+        //     "400": "https://s3.amazonaws.com/kinetics/400/{split}/k400_{split}_path.txt",
+        //     "600": "https://s3.amazonaws.com/kinetics/600/{split}/k600_{split}_path.txt",
+        //     "700": "https://s3.amazonaws.com/kinetics/700_2020/{split}/k700_2020_{split}_path.txt",
+        // }
+        //     _ANNOTATION_URLS = {
+        //     "400": "https://s3.amazonaws.com/kinetics/400/annotations/{split}.csv",
+        //     "600": "https://s3.amazonaws.com/kinetics/600/annotations/{split}.csv",
+        //     "700": "https://s3.amazonaws.com/kinetics/700_2020/annotations/{split}.csv",
+        // }
+
+        // TODO fs::path dataset_folder_name
+        fs::path dataset_folder_name = "?";
+
+        bool download = false;
+        fs::path root;
+        fs::path dataset_path;
 
         void load_data();
 
