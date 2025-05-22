@@ -1,9 +1,14 @@
 #pragma once
 
-#include "datasets/base/base.h"
+#include "datasets/common.h"
 
-namespace xt::data::datasets {
-    class HMDB51 : BaseDataset {
+using namespace std;
+namespace fs = std::filesystem;
+
+namespace xt::data::datasets
+{
+    class HMDB51 : xt::datasets::Dataset
+    {
         /*
         """
             `HMDB51 <https://serre-lab.clps.brown.edu/resource/hmdb-a-large-human-motion-database/>`_
@@ -45,10 +50,14 @@ namespace xt::data::datasets {
             """
          */
     public :
-        explicit  HMDB51(const std::string &root);
-        HMDB51(const std::string &root, DataMode mode);
-        HMDB51(const std::string &root, DataMode mode , bool download);
-        HMDB51(const std::string &root, DataMode mode , bool download, TransformType transforms);
+        explicit HMDB51(const std::string& root);
+        HMDB51(const std::string& root, xt::datasets::DataMode mode);
+        HMDB51(const std::string& root, xt::datasets::DataMode mode, bool download);
+        HMDB51(const std::string& root, xt::datasets::DataMode mode, bool download,
+               std::unique_ptr<xt::Module> transformer);
+        HMDB51(const std::string& root, xt::datasets::DataMode mode, bool download,
+               std::unique_ptr<xt::Module> transformer,
+               std::unique_ptr<xt::Module> target_transformer);
 
     private :
         // data_url = "https://serre-lab.clps.brown.edu/wp-content/uploads/2013/10/hmdb51_org.rar"
@@ -57,8 +66,15 @@ namespace xt::data::datasets {
         //         "md5": "15e67781e70dcfbdce2d7dbb9b3344b5",
         // }
 
-        void load_data(DataMode mode = DataMode::TRAIN);
+        // TODO fs::path dataset_folder_name
+        fs::path dataset_folder_name = "?";
 
-        void check_resources(const std::string &root, bool download = false);
+        bool download = false;
+        fs::path root;
+        fs::path dataset_path;
+
+        void load_data();
+
+        void check_resources();
     };
 }
