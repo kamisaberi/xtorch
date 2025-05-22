@@ -1,9 +1,13 @@
 #pragma once
-#include "datasets/base/base.h"
+
+#include "datasets/common.h"
+
+using namespace std;
+namespace fs = std::filesystem;
 
 
 namespace xt::data::datasets {
-   class Places365 : BaseDataset {
+   class Places365 : xt::datasets::Dataset {
        /*
        """`Places365 <http://places2.csail.mit.edu/index.html>`_ classification dataset.
 
@@ -34,10 +38,16 @@ namespace xt::data::datasets {
 
         */
    public :
-       explicit Places365(const std::string &root);
-       Places365(const std::string &root, DataMode mode);
-       Places365(const std::string &root, DataMode mode , bool download);
-       Places365(const std::string &root, DataMode mode , bool download, TransformType transforms);
+
+       explicit Places365(const std::string& root);
+       Places365(const std::string& root, xt::datasets::DataMode mode);
+       Places365(const std::string& root, xt::datasets::DataMode mode, bool download);
+       Places365(const std::string& root, xt::datasets::DataMode mode, bool download,
+                  std::unique_ptr<xt::Module> transformer);
+       Places365(const std::string& root, xt::datasets::DataMode mode, bool download,
+                  std::unique_ptr<xt::Module> transformer,
+                  std::unique_ptr<xt::Module> target_transformer);
+
 
    private :
 
@@ -67,10 +77,17 @@ namespace xt::data::datasets {
 //    }
 
 
+       // TODO fs::path dataset_folder_name
+       fs::path dataset_folder_name = "?";
+
+       bool download = false;
+       fs::path root;
+       fs::path dataset_path;
 
        void load_data();
 
        void check_resources();
+
 
    };
 
