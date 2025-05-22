@@ -1,7 +1,14 @@
 #pragma once
-#include "datasets/base/base.h"
+
+#include "datasets/common.h"
+
+using namespace std;
+namespace fs = std::filesystem;
+
+
+
 namespace xt::data::datasets {
-   class StanfordCars : BaseDataset {
+   class StanfordCars : xt::datasets::Dataset {
 /*
        """Stanford Cars  Dataset
 
@@ -35,10 +42,16 @@ namespace xt::data::datasets {
 
  */
    public :
-       explicit StanfordCars(const std::string &root);
-       StanfordCars(const std::string &root, DataMode mode);
-       StanfordCars(const std::string &root, DataMode mode , bool download);
-       StanfordCars(const std::string &root, DataMode mode , bool download, TransformType transforms);
+
+       explicit StanfordCars(const std::string& root);
+       StanfordCars(const std::string& root, xt::datasets::DataMode mode);
+       StanfordCars(const std::string& root, xt::datasets::DataMode mode, bool download);
+       StanfordCars(const std::string& root, xt::datasets::DataMode mode, bool download,
+                  std::unique_ptr<xt::Module> transformer);
+       StanfordCars(const std::string& root, xt::datasets::DataMode mode, bool download,
+                  std::unique_ptr<xt::Module> transformer,
+                  std::unique_ptr<xt::Module> target_transformer);
+
 
    private :
        void load_data();
