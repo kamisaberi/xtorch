@@ -1,22 +1,48 @@
-#include "../../../../include/datasets/audio_processing/environmental_sound_classification/esc.h"
+#include "datasets/audio_processing/environmental_sound_classification/esc.h"
 
-namespace xt::data::datasets {
+namespace xt::data::datasets
+{
+    // ---------------------- ModelNet40 ---------------------- //
 
-    ESC::ESC(const std::string &root): ESC::ESC(root, DataMode::TRAIN, false) {
+    ModelNet40::ModelNet40(const std::string& root): ModelNet40::ModelNet40(
+        root, xt::datasets::DataMode::TRAIN, false, nullptr, nullptr)
+    {
     }
 
-    ESC::ESC(const std::string &root, DataMode mode): ESC::ESC(root, mode, false) {
+    ModelNet40::ModelNet40(const std::string& root, xt::datasets::DataMode mode): ModelNet40::ModelNet40(
+        root, mode, false, nullptr, nullptr)
+    {
     }
 
-    ESC::ESC(const std::string &root, DataMode mode, bool download) : BaseDataset(root, mode, download) {
-        throw std::runtime_error("ESC: ESC not implemented");
+    ModelNet40::ModelNet40(const std::string& root, xt::datasets::DataMode mode, bool download) :
+        ModelNet40::ModelNet40(
+            root, mode, download, nullptr, nullptr)
+    {
+    }
+
+    ModelNet40::ModelNet40(const std::string& root, xt::datasets::DataMode mode, bool download,
+                           std::unique_ptr<xt::Module> transformer) : ModelNet40::ModelNet40(
+        root, mode, download, std::move(transformer), nullptr)
+    {
+    }
+
+    ModelNet40::ModelNet40(const std::string& root, xt::datasets::DataMode mode, bool download,
+                           std::unique_ptr<xt::Module> transformer, std::unique_ptr<xt::Module> target_transformer):
+        xt::datasets::Dataset(mode, std::move(transformer), std::move(target_transformer))
+    {
+        check_resources();
+        load_data();
+
     }
 
 
-    ESC::ESC(const std::string &root, DataMode mode, bool download,
-                         TransformType transforms) : BaseDataset(root, mode, download, transforms) {
-        throw std::runtime_error("ESC: ESC not implemented");
+    void ModelNet40::load_data()
+    {
+
     }
 
+    void ModelNet40::check_resources()
+    {
 
+    }
 }
