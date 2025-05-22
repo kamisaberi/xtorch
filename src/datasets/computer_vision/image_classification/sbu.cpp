@@ -1,22 +1,48 @@
 #include "datasets/computer_vision/image_classification/sbu.h"
 
-namespace xt::data::datasets {
+namespace xt::data::datasets
+{
+    // ---------------------- SBU ---------------------- //
 
-    SBU::SBU(const std::string &root): SBU::SBU(root, DataMode::TRAIN, false) {
+    SBU::SBU(const std::string& root): SBU::SBU(
+        root, xt::datasets::DataMode::TRAIN, false, nullptr, nullptr)
+    {
     }
 
-    SBU::SBU(const std::string &root, DataMode mode): SBU::SBU(root, mode, false) {
+    SBU::SBU(const std::string& root, xt::datasets::DataMode mode): SBU::SBU(
+        root, mode, false, nullptr, nullptr)
+    {
     }
 
-    SBU::SBU(const std::string &root, DataMode mode, bool download) : BaseDataset(root, mode, download) {
-        throw std::runtime_error("SBU: SBU not implemented");
+    SBU::SBU(const std::string& root, xt::datasets::DataMode mode, bool download) :
+        SBU::SBU(
+            root, mode, download, nullptr, nullptr)
+    {
+    }
+
+    SBU::SBU(const std::string& root, xt::datasets::DataMode mode, bool download,
+                           std::unique_ptr<xt::Module> transformer) : SBU::SBU(
+        root, mode, download, std::move(transformer), nullptr)
+    {
+    }
+
+    SBU::SBU(const std::string& root, xt::datasets::DataMode mode, bool download,
+                           std::unique_ptr<xt::Module> transformer, std::unique_ptr<xt::Module> target_transformer):
+        xt::datasets::Dataset(mode, std::move(transformer), std::move(target_transformer))
+    {
+        check_resources();
+        load_data();
+
     }
 
 
-    SBU::SBU(const std::string &root, DataMode mode, bool download,
-                           TransformType transforms) : BaseDataset(root, mode, download, transforms) {
-        throw std::runtime_error("SBU: SBU not implemented");
+    void SBU::load_data()
+    {
+
     }
 
+    void SBU::check_resources()
+    {
 
+    }
 }
