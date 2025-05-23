@@ -1,68 +1,19 @@
-/**
- * @file imagenette.cpp
- * @brief Implementation of the Imagenette dataset loader
- * @author Kamran Saberifard
- * @email kamisaberi@gmail.com
- * @github https://github.com/kamisaberi
- * @date Created: [Current Date]
- * @version 1.0
- *
- * This file implements the Imagenette dataset loader which provides access to a subset of
- * the ImageNet dataset containing 10 easily classified classes. The implementation supports
- * different image resolutions and data augmentation transforms.
- */
-
 #include "datasets/computer_vision/image_classification/imagenette.h"
 
 namespace xt::data::datasets {
 
-    /**
-     * @brief Default constructor initializes dataset with default parameters
-     * @param root Path to the root directory containing or to contain the dataset
-     *
-     * Initializes with:
-     * - Training mode (DataMode::TRAIN)
-     * - Download disabled (false)
-     * - Default image size (PX160)
-     */
     Imagenette::Imagenette(const std::string &root): Imagenette::Imagenette(
         root, DataMode::TRAIN, false, ImageType::PX160) {
     }
 
-    /**
-     * @brief Constructor with specified data mode
-     * @param root Path to the root directory
-     * @param mode Dataset mode (TRAIN or VALIDATION)
-     *
-     * Initializes with:
-     * - Download disabled (false)
-     * - Default image size (PX160)
-     */
     Imagenette::Imagenette(const std::string &root, DataMode mode): Imagenette::Imagenette(
         root, mode, false, ImageType::PX160) {
     }
 
-    /**
-     * @brief Constructor with download option
-     * @param root Path to the root directory
-     * @param mode Dataset mode (TRAIN or VALIDATION)
-     * @param download Whether to download dataset if not present
-     *
-     * Initializes with default image size (PX160)
-     */
     Imagenette::Imagenette(const std::string &root, DataMode mode, bool download): Imagenette::Imagenette(
         root, mode, download, ImageType::PX160) {
     }
 
-    /**
-     * @brief Primary constructor with all basic parameters
-     * @param root Path to the root directory
-     * @param mode Dataset mode (TRAIN or VALIDATION)
-     * @param download Whether to download dataset if not present
-     * @param type Image resolution type (PX160, PX320, etc.)
-     *
-     * Initializes the dataset and loads data according to specified parameters
-     */
     Imagenette::Imagenette(const std::string &root, DataMode mode, bool download, ImageType type)
         : BaseDataset(root, mode, download) , type(type) {
         // Verify dataset resources and download if needed
@@ -71,16 +22,6 @@ namespace xt::data::datasets {
         load_data(mode);
     }
 
-    /**
-     * @brief Constructor with transforms for data augmentation
-     * @param root Path to the root directory
-     * @param mode Dataset mode (TRAIN or VALIDATION)
-     * @param download Whether to download dataset if not present
-     * @param type Image resolution type (PX160, PX320, etc.)
-     * @param transforms List of transforms to apply to images
-     *
-     * Initializes the dataset with specified transforms for data augmentation
-     */
     Imagenette::Imagenette(const std::string &root, DataMode mode, bool download, ImageType type,
                            TransformType transforms): BaseDataset(
         root, mode, download) , type(type) {
@@ -95,15 +36,6 @@ namespace xt::data::datasets {
         load_data(mode);
     }
 
-    /**
-     * @brief Verifies dataset resources and optionally downloads them
-     * @param root Path to verify dataset resources
-     * @param download Flag to enable automatic download if resources missing
-     * @throws std::runtime_error if resources are missing and download is disabled
-     *
-     * Checks for dataset existence and integrity using MD5 checksums.
-     * Downloads and extracts dataset if requested and needed.
-     */
     void Imagenette::check_resources(const std::string &root, bool download) {
         // Convert root path to filesystem path
         this->root = fs::path(root);
@@ -140,13 +72,6 @@ namespace xt::data::datasets {
         xt::utils::extractTgz(fpth, this->dataset_path.string());
     }
 
-    /**
-     * @brief Loads image data and labels based on specified mode
-     * @param mode Dataset mode (TRAIN or VALIDATION)
-     *
-     * Loads images from appropriate subdirectories, converts them to tensors,
-     * applies transforms if specified, and stores them with corresponding labels.
-     */
     void Imagenette::load_data(DataMode mode) {
         // Get resource information based on image type
         auto [url, dataset_filename, folder_name, md] = this->resources[getImageTypeValue(this->type)];
@@ -209,13 +134,3 @@ namespace xt::data::datasets {
     }
 } // namespace xt::data::datasets
 
-/*
- * Author: Kamran Saberifard
- * Email: kamisaberi@gmail.com
- * GitHub: https://github.com/kamisaberi
- *
- * This implementation is part of the XT Machine Learning Library.
- * Copyright (c) 2023 Kamran Saberifard. All rights reserved.
- *
- * Licensed under the MIT License. See LICENSE file in the project root for full license information.
- */
