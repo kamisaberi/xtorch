@@ -8,11 +8,18 @@ namespace fs = std::filesystem;
 
 namespace xt::data::datasets {
 
-    class KMNIST : public MNISTBase {
+    class KMNIST : public xt::datasets::Dataset {
     public :
-        KMNIST(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
 
-        KMNIST(const fs::path &root);
+        explicit KMNIST(const std::string& root);
+        KMNIST(const std::string& root, xt::datasets::DataMode mode);
+        KMNIST(const std::string& root, xt::datasets::DataMode mode, bool download);
+        KMNIST(const std::string& root, xt::datasets::DataMode mode, bool download,
+              std::unique_ptr<xt::Module> transformer);
+        KMNIST(const std::string& root, xt::datasets::DataMode mode, bool download,
+              std::unique_ptr<xt::Module> transformer,
+              std::unique_ptr<xt::Module> target_transformer);
+
 
     private:
         std::string url = "http://codh.rois.ac.jp/kmnist/dataset/kmnist/";
