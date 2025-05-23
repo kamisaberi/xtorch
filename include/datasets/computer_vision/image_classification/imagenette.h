@@ -28,7 +28,7 @@ namespace xt::data::datasets
         return "unknown"; // Default value if enum not found
     }
 
-    class Imagenette : public BaseDataset
+    class Imagenette : public xt::datasets::Dataset
     {
     public:
         explicit Imagenette(const std::string& root);
