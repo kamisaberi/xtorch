@@ -1,9 +1,12 @@
 #pragma once
 
-#include "datasets/base/base.h"
+#include "datasets/common.h"
+
+using namespace std;
+namespace fs = std::filesystem;
 
 namespace xt::data::datasets {
-    class KittiFlow : BaseDataset {
+    class KittiFlow : public xt::datasets::Dataset{
         /*
         """`KITTI <http://www.cvlibs.net/datasets/kitti/eval_scene_flow.php?benchmark=flow>`__ dataset for optical flow (2015).
 
@@ -26,13 +29,24 @@ namespace xt::data::datasets {
 
          */
     public :
-        explicit  KittiFlow(const std::string &root);
-        KittiFlow(const std::string &root, DataMode mode);
-        KittiFlow(const std::string &root, DataMode mode , bool download);
-        KittiFlow(const std::string &root, DataMode mode , bool download, TransformType transforms);
+        explicit KittiFlow(const std::string& root);
+        KittiFlow(const std::string& root, xt::datasets::DataMode mode);
+        KittiFlow(const std::string& root, xt::datasets::DataMode mode, bool download);
+        KittiFlow(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer);
+        KittiFlow(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer,
+                   std::unique_ptr<xt::Module> target_transformer);
 
 
     private :
+        // TODO fs::path dataset_folder_name
+        fs::path dataset_folder_name = "?";
+
+        bool download = false;
+        fs::path root;
+        fs::path dataset_path;
+
         void load_data();
 
         void check_resources();
