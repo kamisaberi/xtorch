@@ -5,14 +5,27 @@ namespace fs = std::filesystem;
 
 namespace xt::data::datasets
 {
-    CIFAR10::CIFAR10(const std::string& root): CIFAR10::CIFAR10(root, DataMode::TRAIN, false)
+
+    CIFAR10::CIFAR10(const std::string& root): CIFAR10::CIFAR10(
+    root, xt::datasets::DataMode::TRAIN, false, nullptr, nullptr)
     {
-        // Simple delegation to main constructor with default params
     }
 
-    CIFAR10::CIFAR10(const std::string& root, DataMode mode): CIFAR10::CIFAR10(root, mode, false)
+    CIFAR10::CIFAR10(const std::string& root, xt::datasets::DataMode mode): CIFAR10::CIFAR10(
+        root, mode, false, nullptr, nullptr)
     {
-        // Delegation to handle mode while keeping download disabled
+    }
+
+    CIFAR10::CIFAR10(const std::string& root, xt::datasets::DataMode mode, bool download) :
+        CIFAR10::CIFAR10(
+            root, mode, download, nullptr, nullptr)
+    {
+    }
+
+    CIFAR10::CIFAR10(const std::string& root, xt::datasets::DataMode mode, bool download,
+                           std::unique_ptr<xt::Module> transformer) : CIFAR10::CIFAR10(
+        root, mode, download, std::move(transformer), nullptr)
+    {
     }
 
     CIFAR10::CIFAR10(const std::string& root, DataMode mode, bool download) : BaseDataset(root, mode, download)
