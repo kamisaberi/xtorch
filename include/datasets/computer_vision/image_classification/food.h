@@ -6,16 +6,19 @@ using namespace std;
 namespace fs = std::filesystem;
 
 namespace xt::data::datasets {
-    class Food101 : public BaseDataset {
+    class Food101 : public xt::datasets::Dataset {
     public:
-        explicit Food101(const std::string &root);
 
-        Food101(const std::string &root, DataMode mode);
 
-        Food101(const std::string &root, DataMode mode, bool download);
+        explicit Food101(const std::string& root);
+        Food101(const std::string& root, xt::datasets::DataMode mode);
+        Food101(const std::string& root, xt::datasets::DataMode mode, bool download);
+        Food101(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer);
+        Food101(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer,
+                   std::unique_ptr<xt::Module> target_transformer);
 
-        Food101(const std::string &root, DataMode mode, bool download,
-               vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
 
     private:
         std::string url = "http://data.vision.ee.ethz.ch/cvl/food-101.tar.gz";
@@ -31,6 +34,11 @@ namespace xt::data::datasets {
         std::vector<string> classes_name;
 
         std::map<string, int> classes_map;
+
+        bool download = false;
+        fs::path root;
+        fs::path dataset_path;
+
 
         void load_data();
 
