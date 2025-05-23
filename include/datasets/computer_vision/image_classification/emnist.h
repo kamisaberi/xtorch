@@ -1,7 +1,5 @@
 #pragma once
-// #include "../../../headers/datasets.h"
-#include "../../base/mnist_base.h"
-#include "datasets/base/base.h"
+#include "datasets/common.h"
 
 
 
@@ -10,9 +8,7 @@ namespace fs = std::filesystem;
 
 
 namespace xt::data::datasets {
-
-
-    class EMNIST : public MNISTBase {
+    class EMNIST : public xt::datasets::Dataset {
     public :
         EMNIST(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
 
@@ -24,9 +20,18 @@ namespace xt::data::datasets {
         fs::path archive_file_name = "gzip.zip";
         std::string archive_file_md5 = "58c8d27c78d21e728a6bc7b3cc06412e";
 
-        void load_data(DataMode mode = DataMode::TRAIN);
+        void load_data();
 
-        void check_resources(const std::string &root, bool download = false);
+        void check_resources();
+
+        bool download = false;
+        fs::path root;
+        fs::path dataset_path;
+
+        void read_images(const std::string& file_path, int num_images);
+        void read_labels(const std::string& file_path, int num_labels);
+
+
     };
 
 }
