@@ -1,9 +1,14 @@
 #pragma once
 
-#include "datasets/base/base.h"
+#include "datasets/common.h"
 
-namespace xt::data::datasets {
-    class FlyingChairs : public BaseDataset {
+using namespace std;
+namespace fs = std::filesystem;
+
+namespace xt::data::datasets
+{
+    class FlyingChairs : public xt::datasets::Dataset
+    {
         /*
         """`FlyingChairs <https://lmb.informatik.uni-freiburg.de/resources/datasets/FlyingChairs.en.html#flyingchairs>`_ Dataset for optical flow.
         You will also need to download the FlyingChairs_train_val.txt file from the dataset page.
@@ -27,15 +32,25 @@ namespace xt::data::datasets {
         """
         */
     public :
-        explicit FlyingChairs(const std::string &root);
-        FlyingChairs(const std::string &root, DataMode mode);
-        FlyingChairs(const std::string &root, DataMode mode , bool download);
-        FlyingChairs(const std::string &root, DataMode mode , bool download, TransformType transforms);
+        explicit FlyingChairs(const std::string& root);
+        FlyingChairs(const std::string& root, xt::datasets::DataMode mode);
+        FlyingChairs(const std::string& root, xt::datasets::DataMode mode, bool download);
+        FlyingChairs(const std::string& root, xt::datasets::DataMode mode, bool download,
+                     std::unique_ptr<xt::Module> transformer);
+        FlyingChairs(const std::string& root, xt::datasets::DataMode mode, bool download,
+                     std::unique_ptr<xt::Module> transformer,
+                     std::unique_ptr<xt::Module> target_transformer);
 
     private :
+        // TODO fs::path dataset_folder_name
+        fs::path dataset_folder_name = "?";
+
+        bool download = false;
+        fs::path root;
+        fs::path dataset_path;
+
         void load_data();
 
         void check_resources();
     };
-
 }

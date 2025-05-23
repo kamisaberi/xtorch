@@ -1,23 +1,48 @@
 #include "datasets/computer_vision/optical_flow_estimation/flying_chairs.h"
 
-namespace xt::data::datasets {
-
+namespace xt::data::datasets
+{
     // ---------------------- FlyingChairs ---------------------- //
 
-    FlyingChairs::FlyingChairs(const std::string &root): FlyingChairs::FlyingChairs(root, DataMode::TRAIN, false) {
+    FlyingChairs::FlyingChairs(const std::string& root): FlyingChairs::FlyingChairs(
+        root, xt::datasets::DataMode::TRAIN, false, nullptr, nullptr)
+    {
     }
 
-    FlyingChairs::FlyingChairs(const std::string &root, DataMode mode): FlyingChairs::FlyingChairs(root, mode, false) {
+    FlyingChairs::FlyingChairs(const std::string& root, xt::datasets::DataMode mode): FlyingChairs::FlyingChairs(
+        root, mode, false, nullptr, nullptr)
+    {
     }
 
-    FlyingChairs::FlyingChairs(const std::string &root, DataMode mode, bool download) : BaseDataset(root, mode, download) {
-        throw std::runtime_error("FlyingChairs: FlyingChairs not implemented");
+    FlyingChairs::FlyingChairs(const std::string& root, xt::datasets::DataMode mode, bool download) :
+        FlyingChairs::FlyingChairs(
+            root, mode, download, nullptr, nullptr)
+    {
+    }
+
+    FlyingChairs::FlyingChairs(const std::string& root, xt::datasets::DataMode mode, bool download,
+                           std::unique_ptr<xt::Module> transformer) : FlyingChairs::FlyingChairs(
+        root, mode, download, std::move(transformer), nullptr)
+    {
+    }
+
+    FlyingChairs::FlyingChairs(const std::string& root, xt::datasets::DataMode mode, bool download,
+                           std::unique_ptr<xt::Module> transformer, std::unique_ptr<xt::Module> target_transformer):
+        xt::datasets::Dataset(mode, std::move(transformer), std::move(target_transformer))
+    {
+        check_resources();
+        load_data();
+
     }
 
 
-    FlyingChairs::FlyingChairs(const std::string &root, DataMode mode, bool download,
-                           TransformType transforms) : BaseDataset(root, mode, download, transforms) {
-        throw std::runtime_error("FlyingChairs: FlyingChairs not implemented");
+    void FlyingChairs::load_data()
+    {
+
     }
 
+    void FlyingChairs::check_resources()
+    {
+
+    }
 }
