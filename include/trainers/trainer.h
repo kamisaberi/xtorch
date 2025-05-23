@@ -43,7 +43,7 @@ namespace xt {
         Trainer& enable_checkpoint(const std::string& path, int interval);
 
         // Trains a model on a dataset using the specified data loader (CPU version)
-        // @tparam Dataset Type of the dataset (e.g., xt::data::datasets::BaseDataset)
+        // @tparam Dataset Type of the dataset (e.g., xt::datasets::Dataset)
         // @param model Pointer to a model derived from xt::models::BaseModel
         // @param train_loader DataLoader providing batches of training data
         // @note Assumes CPU device; moves model and data to CPU
@@ -84,7 +84,7 @@ namespace xt {
         }
 
         // Trains a model on a dataset using the specified data loader and device (e.g., CPU or CUDA)
-        // @tparam Dataset Type of the dataset (e.g., xt::data::datasets::BaseDataset)
+        // @tparam Dataset Type of the dataset (e.g., xt::datasets::Dataset)
         // @param model Pointer to a model derived from xt::models::BaseModel
         // @param train_loader DataLoader providing batches of training data
         // @param device Target device (e.g., torch::kCUDA, torch::kCPU)
