@@ -36,12 +36,12 @@ namespace xt::data::datasets
     }
 
 
-    void Caltech101::load_data()
+    void AudioSet::load_data()
     {
 
     }
 
-    void Caltech101::check_resources()
+    void AudioSet::check_resources()
     {
 
     }
