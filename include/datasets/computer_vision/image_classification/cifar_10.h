@@ -8,13 +8,20 @@ namespace fs = std::filesystem;
 namespace xt::data::datasets {
     class CIFAR10 : public xt::datasets::Dataset {
     public:
+
+
         explicit CIFAR10(const std::string &root);
 
-        CIFAR10(const std::string &root, DataMode mode);
+        CIFAR10(const std::string& root, xt::datasets::DataMode mode);
+        CIFAR10(const std::string& root, xt::datasets::DataMode mode, bool download);
 
-        CIFAR10(const std::string &root, DataMode mode, bool download);
+        CIFAR10(const std::string &root, DataMode mode, bool download,std::unique_ptr<xt::Module> transformer);
 
-        CIFAR10(const std::string &root, DataMode mode, bool download, TransformType transforms);
+        CIFAR10(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer,
+                   std::unique_ptr<xt::Module> target_transformer);
+
+
 
         torch::data::Example<> get(size_t index) override;
 
@@ -38,6 +45,12 @@ namespace xt::data::datasets {
         };
 
         fs::path test_file_name = "test_batch.bin";
+
+
+        bool download = false;
+        fs::path root;
+        fs::path dataset_path;
+
 
         void load_data(DataMode mode = DataMode::TRAIN);
     };
