@@ -1,17 +1,33 @@
 #pragma once
-#include "datasets/base/base.h"
+
+#include "datasets/common.h"
+
+using namespace std;
+namespace fs = std::filesystem;
 
 namespace xt::data::datasets {
-    class RTE : BaseDataset {
+    class RTE : public xt::datasets::Dataset{
         public :
-            explicit RTE(const std::string &root);
-        RTE(const std::string &root, DataMode mode);
-        RTE(const std::string &root, DataMode mode , bool download);
-        RTE(const std::string &root, DataMode mode , bool download, TransformType transforms);
+        explicit RTE(const std::string& root);
+        RTE(const std::string& root, xt::datasets::DataMode mode);
+        RTE(const std::string& root, xt::datasets::DataMode mode, bool download);
+        RTE(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer);
+        RTE(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer,
+                   std::unique_ptr<xt::Module> target_transformer);
 
         private :
-            void load_data();
+        // TODO fs::path dataset_folder_name
+fs::path dataset_folder_name = "?";
+
+        bool download = false;
+        fs::path root;
+        fs::path dataset_path;
+
+        void load_data();
 
         void check_resources();
+
     };
 }
