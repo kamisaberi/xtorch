@@ -1,25 +1,49 @@
 #include "datasets/computer_vision/optical_flow_estimation/sintel.h"
 
-namespace xt::data::datasets {
 
+namespace xt::data::datasets
+{
     // ---------------------- Sintel ---------------------- //
 
-    Sintel::Sintel(const std::string &root): Sintel::Sintel(root, DataMode::TRAIN, false) {
+    Sintel::Sintel(const std::string& root): Sintel::Sintel(
+        root, xt::datasets::DataMode::TRAIN, false, nullptr, nullptr)
+    {
     }
 
-    Sintel::Sintel(const std::string &root, DataMode mode): Sintel::Sintel(root, mode, false) {
+    Sintel::Sintel(const std::string& root, xt::datasets::DataMode mode): Sintel::Sintel(
+        root, mode, false, nullptr, nullptr)
+    {
     }
 
-    Sintel::Sintel(const std::string &root, DataMode mode, bool download) : BaseDataset(root, mode, download) {
-        throw std::runtime_error("Sintel: Sintel not implemented");
+    Sintel::Sintel(const std::string& root, xt::datasets::DataMode mode, bool download) :
+        Sintel::Sintel(
+            root, mode, download, nullptr, nullptr)
+    {
+    }
+
+    Sintel::Sintel(const std::string& root, xt::datasets::DataMode mode, bool download,
+                           std::unique_ptr<xt::Module> transformer) : Sintel::Sintel(
+        root, mode, download, std::move(transformer), nullptr)
+    {
+    }
+
+    Sintel::Sintel(const std::string& root, xt::datasets::DataMode mode, bool download,
+                           std::unique_ptr<xt::Module> transformer, std::unique_ptr<xt::Module> target_transformer):
+        xt::datasets::Dataset(mode, std::move(transformer), std::move(target_transformer))
+    {
+        check_resources();
+        load_data();
+
     }
 
 
-    Sintel::Sintel(const std::string &root, DataMode mode, bool download,
-                           TransformType transforms) : BaseDataset(root, mode, download, transforms) {
-        throw std::runtime_error("Sintel: Sintel not implemented");
+    void Sintel::load_data()
+    {
+
     }
 
+    void Sintel::check_resources()
+    {
 
-
+    }
 }
