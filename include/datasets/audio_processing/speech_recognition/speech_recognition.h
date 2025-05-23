@@ -1,4 +1,4 @@
-#pragma once
+#pragma onceModelNet40
 
 #include "common_voice.h"
 #include "libri_light_limited.h"
