@@ -1,17 +1,18 @@
 #pragma once
 
 
-#include "datasets/base/base.h"
+#include "datasets/common.h"
+
 
 namespace xt::data::datasets {
 
 
 
-    class EDFDataset : public BaseDataset {
+    class EDFDataset : public xt::datasets::Dataset {
     public :
         EDFDataset(const std::string &file_path);
         EDFDataset(const std::string &file_path,DataMode mode);
-        EDFDataset(const std::string &file_path,DataMode mode , vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
+        EDFDataset(const std::string &file_path,DataMode mode , std::unique_ptr<xt::Module> target_transformer);
 
     private:
         vector<string> labels_name;
@@ -20,12 +21,12 @@ namespace xt::data::datasets {
     };
 
 
-    class StackedEDFDataset : public BaseDataset {
+    class StackedEDFDataset : public xt::datasets::Dataset {
     public :
         StackedEDFDataset(const std::string &folder_path);
         StackedEDFDataset(const std::string &folder_path,DataMode mode);
         StackedEDFDataset(const std::string &folder_path,DataMode mode, bool load_sub_folders);
-        StackedEDFDataset(const std::string &folder_path,DataMode mode, bool load_sub_folders , vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
+        StackedEDFDataset(const std::string &folder_path,DataMode mode, bool load_sub_folders , std::unique_ptr<xt::Module> target_transformer);
 
     private:
         vector<string> labels_name;
