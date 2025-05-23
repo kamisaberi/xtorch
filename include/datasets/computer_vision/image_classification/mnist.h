@@ -12,16 +12,14 @@ namespace xt::data::datasets
     class MNIST : public xt::datasets::Dataset
     {
     public :
-
-
         explicit MNIST(const std::string& root);
         MNIST(const std::string& root, xt::datasets::DataMode mode);
         MNIST(const std::string& root, xt::datasets::DataMode mode, bool download);
         MNIST(const std::string& root, xt::datasets::DataMode mode, bool download,
-                   std::unique_ptr<xt::Module> transformer);
+              std::unique_ptr<xt::Module> transformer);
         MNIST(const std::string& root, xt::datasets::DataMode mode, bool download,
-                   std::unique_ptr<xt::Module> transformer,
-                   std::unique_ptr<xt::Module> target_transformer);
+              std::unique_ptr<xt::Module> transformer,
+              std::unique_ptr<xt::Module> target_transformer);
 
     private :
         std::string url = "https://ossci-datasets.s3.amazonaws.com/mnist/";
@@ -51,7 +49,5 @@ namespace xt::data::datasets
         bool download = false;
         fs::path root;
         fs::path dataset_path;
-
-
     };
 }
