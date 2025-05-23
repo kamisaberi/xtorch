@@ -7,7 +7,7 @@ namespace xt::data::datasets {
 
 
 
-    class TextDataset : public BaseDataset {
+    class TextDataset : public xt::datasets::Dataset {
     public :
         TextDataset(const std::string &file_path);
         TextDataset(const std::string &file_path,DataMode mode);
@@ -20,12 +20,12 @@ namespace xt::data::datasets {
     };
 
 
-    class StackedTextDataset : public BaseDataset {
+    class StackedTextDataset : public xt::datasets::Dataset {
     public :
         StackedTextDataset(const std::string &folder_path);
         StackedTextDataset(const std::string &folder_path,DataMode mode);
         StackedTextDataset(const std::string &folder_path,DataMode mode, bool load_sub_folders);
-        StackedTextDataset(const std::string &folder_path,DataMode mode, bool load_sub_folders , vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
+        StackedTextDataset(const std::string &folder_path,DataMode mode, bool load_sub_folders , std::unique_ptr<xt::Module> transformer);
 
     private:
         vector<string> labels_name;

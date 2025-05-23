@@ -47,7 +47,7 @@ namespace xt::data::datasets
         std::vector<int> labels;
     };
 
-    class StackedAudioDataset : public BaseDataset
+    class StackedAudioDataset : public xt::datasets::Dataset
     {
     public :
         StackedAudioDataset(const std::string& folder_path);

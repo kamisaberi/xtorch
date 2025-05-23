@@ -20,12 +20,12 @@ namespace xt::data::datasets {
     };
 
 
-    class StackedTimeSeriesDataset : public BaseDataset {
+    class StackedTimeSeriesDataset : public xt::datasets::Dataset {
     public :
         StackedTimeSeriesDataset(const std::string &folder_path);
         StackedTimeSeriesDataset(const std::string &folder_path,DataMode mode);
         StackedTimeSeriesDataset(const std::string &folder_path,DataMode mode, bool load_sub_folders);
-        StackedTimeSeriesDataset(const std::string &folder_path,DataMode mode, bool load_sub_folders , vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
+        StackedTimeSeriesDataset(const std::string &folder_path,DataMode mode, bool load_sub_folders , std::unique_ptr<xt::Module> transformer);
 
     private:
         vector<string> labels_name;
