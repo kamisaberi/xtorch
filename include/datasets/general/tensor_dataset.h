@@ -1,17 +1,16 @@
 #pragma once
 
 
-#include "datasets/base/base.h"
+#include "datasets/common.h"
 
 namespace xt::data::datasets
 {
-    class TensorDataset : public BaseDataset
+    class TensorDataset : public xt::datasets::Dataset
     {
     public :
         TensorDataset(const std::string& file_path);
         TensorDataset(const std::string& file_path, DataMode mode);
-        TensorDataset(const std::string& file_path, DataMode mode,
-                      vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
+        TensorDataset(const std::string& file_path, DataMode mode, std::unique_ptr<xt::Module> target_transformer);
 
     private:
         vector<string> labels_name;
