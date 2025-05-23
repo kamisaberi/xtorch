@@ -8,7 +8,7 @@ namespace xt::data::datasets
     // }
 
 
-    void EMNIST::load_data(DataMode mode)
+    void EMNIST::load_data()
     {
         // if (mode == DataMode::TRAIN) {
         //     fs::path imgs = this->dataset_path / std::get<0>(files["train"]);
@@ -31,7 +31,7 @@ namespace xt::data::datasets
         // }
     }
 
-    void EMNIST::check_resources(const std::string& root, bool download)
+    void EMNIST::check_resources()
     {
         // this->root = fs::path(root);
         // if (!fs::exists(this->root)) {
