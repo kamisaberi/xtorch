@@ -2,36 +2,43 @@
 
 namespace xt::data::datasets {
 
-    // FashionMNIST::FashionMNIST(const std::string &root, DataMode mode,
-    //                            bool download) : MNISTBase(root, mode, download) {
-    //     check_resources(root, download);
-    //     load_data(mode);
-    // }
 
 
-    FashionMNIST::FashionMNIST(const std::string &root): FashionMNIST::FashionMNIST(root, DataMode::TRAIN, false) {
+    FashionMNIST::FashionMNIST(const std::string& root): FashionMNIST(
+    root, xt::datasets::DataMode::TRAIN, false, nullptr, nullptr)
+    {
     }
 
-    FashionMNIST::FashionMNIST(const std::string &root, DataMode mode): FashionMNIST::FashionMNIST(root, mode, false) {
+    FashionMNIST::FashionMNIST(const std::string& root, xt::datasets::DataMode mode): FashionMNIST(
+        root, mode, false, nullptr, nullptr)
+    {
     }
 
-    FashionMNIST::FashionMNIST(const std::string &root, DataMode mode,
-                               bool download) : MNISTBase(root, mode, download) {
-        check_resources(root, download);
-        load_data(mode);
+    FashionMNIST::FashionMNIST(const std::string& root, xt::datasets::DataMode mode, bool download) :
+        FashionMNIST(
+            root, mode, download, nullptr, nullptr)
+    {
+    }
+
+    FashionMNIST::FashionMNIST(const std::string& root, xt::datasets::DataMode mode, bool download,
+                 std::unique_ptr<xt::Module> transformer) : FashionMNIST(
+        root, mode, download, std::move(transformer), nullptr)
+    {
+    }
+
+    FashionMNIST::FashionMNIST(const std::string& root, xt::datasets::DataMode mode, bool download,
+                 std::unique_ptr<xt::Module> transformer, std::unique_ptr<xt::Module> target_transformer):
+        xt::datasets::Dataset(mode, std::move(transformer), std::move(target_transformer))
+    {
+        check_resources();
+        load_data();
     }
 
 
-    FashionMNIST::FashionMNIST(const std::string &root, DataMode mode, bool download,
-                               vector<std::function<torch::Tensor(torch::Tensor)> > transforms) : MNISTBase::MNISTBase(
-        root, mode, download, transforms) {
-        check_resources(root, download);
-        load_data(mode);
-    }
 
 
-    void FashionMNIST::load_data(DataMode mode) {
-        if (mode == DataMode::TRAIN) {
+    void FashionMNIST::load_data() {
+        if (mode == xt::datasets::DataMode::TRAIN) {
             fs::path imgs = this->dataset_path / std::get<0>(files["train"]);
             fs::path lbls = this->dataset_path / std::get<1>(files["train"]);
             cout << imgs.string() << "  " << lbls.string() << endl;
@@ -58,7 +65,7 @@ namespace xt::data::datasets {
     }
 
 
-    void FashionMNIST::check_resources(const std::string &root, bool download) {
+    void FashionMNIST::check_resources() {
         this->root = fs::path(root);
         if (!fs::exists(this->root)) {
             throw runtime_error("path is not exists");
