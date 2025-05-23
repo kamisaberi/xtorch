@@ -1,11 +1,13 @@
 #pragma once
-#include "datasets/base/base.h"
+
+#include "datasets/common.h"
+
 using namespace std;
 namespace fs = std::filesystem;
 
 
 namespace xt::data::datasets {
-    class SBDataset : BaseDataset {
+    class SBDataset : public xt::datasets::Dataset{
         /*
         """`Semantic Boundaries Dataset <http://home.bharathh.info/pubs/codes/SBD/download.html>`_
 
@@ -40,10 +42,14 @@ namespace xt::data::datasets {
 
          */
     public :
-        explicit SBDataset(const std::string &root);
-        SBDataset(const std::string &root, DataMode mode);
-        SBDataset(const std::string &root, DataMode mode , bool download);
-        SBDataset(const std::string &root, DataMode mode , bool download, TransformType transforms);
+        explicit SBDataset(const std::string& root);
+        SBDataset(const std::string& root, xt::datasets::DataMode mode);
+        SBDataset(const std::string& root, xt::datasets::DataMode mode, bool download);
+        SBDataset(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer);
+        SBDataset(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer,
+                   std::unique_ptr<xt::Module> target_transformer);
 
 
     private:
@@ -54,9 +60,19 @@ namespace xt::data::datasets {
         fs::path voc_train_url = fs::path("https://www.cs.cornell.edu/~bharathh/train_noval.txt");
         fs::path voc_split_filename = fs::path("train_noval.txt");
         std::string voc_split_md5 = "79bff800c5f0b1ec6b21080a3c066722";
+
+        // TODO fs::path dataset_folder_name
+        fs::path dataset_folder_name = "?";
+
+        bool download = false;
+        fs::path root;
+        fs::path dataset_path;
+
         void load_data();
 
         void check_resources();
+
+
 
 
     };
