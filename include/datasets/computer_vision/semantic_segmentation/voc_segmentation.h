@@ -1,9 +1,14 @@
 #pragma once
 
-#include "datasets/base/base.h"
+#include "datasets/common.h"
 
-namespace xt::data::datasets {
-    class VOCSegmentation : BaseDataset {
+using namespace std;
+namespace fs = std::filesystem;
+
+namespace xt::data::datasets
+{
+    class VOCSegmentation : public xt::datasets::Dataset
+    {
         /*
         """`Pascal VOC <http://host.robots.ox.ac.uk/pascal/VOC/>`_ Segmentation Dataset.
 
@@ -26,13 +31,23 @@ namespace xt::data::datasets {
          */
 
     public :
-        explicit VOCSegmentation(const std::string &root);
-        VOCSegmentation(const std::string &root, DataMode mode);
-        VOCSegmentation(const std::string &root, DataMode mode , bool download);
-        VOCSegmentation(const std::string &root, DataMode mode , bool download, TransformType transforms);
-
+        explicit VOCSegmentation(const std::string& root);
+        VOCSegmentation(const std::string& root, xt::datasets::DataMode mode);
+        VOCSegmentation(const std::string& root, xt::datasets::DataMode mode, bool download);
+        VOCSegmentation(const std::string& root, xt::datasets::DataMode mode, bool download,
+                        std::unique_ptr<xt::Module> transformer);
+        VOCSegmentation(const std::string& root, xt::datasets::DataMode mode, bool download,
+                        std::unique_ptr<xt::Module> transformer,
+                        std::unique_ptr<xt::Module> target_transformer);
 
     private :
+        // TODO fs::path dataset_folder_name
+        fs::path dataset_folder_name = "?";
+
+        bool download = false;
+        fs::path root;
+        fs::path dataset_path;
+
         void load_data();
 
         void check_resources();
