@@ -23,5 +23,11 @@ namespace xt::data::datasets {
         LabelsType label_type = LabelsType::BY_FOLDER;
         bool load_sub_folders = false;
         void load_data();
+
+        bool download = false;
+        fs::path root;
+        fs::path dataset_path;
+
+
     };
 }
