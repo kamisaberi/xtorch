@@ -2,8 +2,6 @@
 
 namespace xt::data::datasets
 {
-
-
     KMNIST::KMNIST(const std::string& root): KMNIST(
         root, xt::datasets::DataMode::TRAIN, false, nullptr, nullptr)
     {
@@ -21,19 +19,18 @@ namespace xt::data::datasets
     }
 
     KMNIST::KMNIST(const std::string& root, xt::datasets::DataMode mode, bool download,
-                 std::unique_ptr<xt::Module> transformer) : KMNIST(
+                   std::unique_ptr<xt::Module> transformer) : KMNIST(
         root, mode, download, std::move(transformer), nullptr)
     {
     }
 
     KMNIST::KMNIST(const std::string& root, xt::datasets::DataMode mode, bool download,
-                 std::unique_ptr<xt::Module> transformer, std::unique_ptr<xt::Module> target_transformer):
+                   std::unique_ptr<xt::Module> transformer, std::unique_ptr<xt::Module> target_transformer):
         xt::datasets::Dataset(mode, std::move(transformer), std::move(target_transformer))
     {
         check_resources();
         load_data();
     }
-
 
 
     void KMNIST::load_data()
@@ -99,5 +96,69 @@ namespace xt::data::datasets
             }
             xt::utils::extractGzip(fpth);
         }
+    }
+
+    void KMNIST::read_images(const std::string& file_path, int num_images)
+    {
+        std::ifstream file(file_path, std::ios::binary);
+        if (!file.is_open())
+        {
+            throw std::runtime_error("Failed to open file: " + file_path);
+        }
+
+        // Read metadata
+        int32_t magic_number, num_items, rows, cols;
+        file.read(reinterpret_cast<char*>(&magic_number), 4);
+        file.read(reinterpret_cast<char*>(&num_items), 4);
+        file.read(reinterpret_cast<char*>(&rows), 4);
+        file.read(reinterpret_cast<char*>(&cols), 4);
+
+        // Convert endianess
+        magic_number = __builtin_bswap32(magic_number);
+        num_items = __builtin_bswap32(num_items);
+        rows = __builtin_bswap32(rows);
+        cols = __builtin_bswap32(cols);
+
+        std::vector<torch::Tensor> fimages;
+        std::vector<std::vector<uint8_t>> images(num_images, std::vector<uint8_t>(rows * cols));
+        for (int i = 0; i < num_images; i++)
+        {
+            file.read(reinterpret_cast<char*>(images[i].data()), rows * cols);
+            torch::Tensor tensor_image = torch::from_blob(images[i].data(), {1, 28, 28},
+                                                          torch::kByte).clone();
+            if (transformer != nullptr)
+            {
+                tensor_image = (*transformer)(tensor_image);
+            }
+            fimages.push_back(tensor_image);
+        }
+        file.close();
+        this->data = fimages;
+    }
+
+    void KMNIST::read_labels(const std::string& file_path, int num_labels)
+    {
+        std::ifstream file(file_path, std::ios::binary);
+        if (!file.is_open())
+        {
+            throw std::runtime_error("Failed to open file: " + file_path);
+        }
+
+        // Read metadata
+        int32_t magic_number, num_items;
+        file.read(reinterpret_cast<char*>(&magic_number), 4);
+        file.read(reinterpret_cast<char*>(&num_items), 4);
+
+        // Convert endianess
+        // cout << magic_number << "\t";
+        magic_number = __builtin_bswap32(magic_number);
+        num_items = __builtin_bswap32(num_items);
+
+        std::vector<uint8_t> labels(num_labels);
+        file.read(reinterpret_cast<char*>(labels.data()), num_labels);
+
+        // cout << labels.data() << endl;
+        file.close();
+        this->targets = labels;
     }
 }
