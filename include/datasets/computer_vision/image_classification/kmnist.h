@@ -1,6 +1,5 @@
 #pragma once
-// #include "../../../headers/datasets.h"
-#include "../../base/mnist_base.h"
+#include "datasets/common.h"
 
 
 using namespace std;
