@@ -44,7 +44,7 @@ namespace xt::data::datasets {
     };
 
 
-    class StackedCSVDataset : public BaseDataset {
+    class StackedCSVDataset : public xt::datasets::Dataset {
     public :
         StackedCSVDataset(const std::string &folder_path);
 
@@ -53,7 +53,7 @@ namespace xt::data::datasets {
         StackedCSVDataset(const std::string &folder_path, DataMode mode, bool load_sub_folders);
 
         StackedCSVDataset(const std::string &folder_path, DataMode mode, bool load_sub_folders,
-                          vector<std::function<torch::Tensor(torch::Tensor)> > transforms);
+                          std::unique_ptr<xt::Module> transformer);
 
     private:
         vector<string> labels_name;
