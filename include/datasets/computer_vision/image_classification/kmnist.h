@@ -37,9 +37,17 @@ namespace xt::data::datasets {
             {"test", {fs::path("t10k-images-idx3-ubyte"), fs::path("t10k-labels-idx1-ubyte")}}
         };
 
-        void load_data(DataMode mode = DataMode::TRAIN);
+        void load_data();
 
-        void check_resources(const std::string &root, bool download = false);
+        void check_resources();
+
+        void read_images(const std::string& file_path, int num_images);
+        void read_labels(const std::string& file_path, int num_labels);
+
+        bool download = false;
+        fs::path root;
+        fs::path dataset_path;
+
     };
 
 }
