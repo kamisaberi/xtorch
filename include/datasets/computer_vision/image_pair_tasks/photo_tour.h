@@ -1,9 +1,14 @@
 #pragma once
 
-#include "datasets/base/base.h"
+#include "datasets/common.h"
 
-namespace xt::data::datasets {
-    class PhotoTour : BaseDataset {
+using namespace std;
+namespace fs = std::filesystem;
+
+namespace xt::data::datasets
+{
+    class PhotoTour : public xt::datasets::Dataset
+    {
         /*
         """`Multi-view Stereo Correspondence <http://matthewalunbrown.com/patchdata/patchdata.html>`_ Dataset.
 
@@ -31,14 +36,17 @@ namespace xt::data::datasets {
 
          */
     public :
-        explicit PhotoTour(const std::string &root);
-        PhotoTour(const std::string &root, DataMode mode);
-        PhotoTour(const std::string &root, DataMode mode , bool download);
-        PhotoTour(const std::string &root, DataMode mode , bool download, TransformType transforms);
-
+        explicit PhotoTour(const std::string& root);
+        PhotoTour(const std::string& root, xt::datasets::DataMode mode);
+        PhotoTour(const std::string& root, xt::datasets::DataMode mode, bool download);
+        PhotoTour(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer);
+        PhotoTour(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer,
+                   std::unique_ptr<xt::Module> target_transformer);
 
     private :
-        std::map<std::string, std::tuple<fs::path, fs::path, std::string> > resources = {
+        std::map<std::string, std::tuple<fs::path, fs::path, std::string>> resources = {
             {
                 "notredame_harris", {
                     fs::path("http://matthewalunbrown.com/patchdata/notredame_harris.zip"), fs::path(
@@ -86,8 +94,15 @@ namespace xt::data::datasets {
         };
 
         fs::path dataset_folder_name = "photo-tour";
+
+
+        bool download = false;
+        fs::path root;
+        fs::path dataset_path;
+
         void load_data();
 
         void check_resources();
+
     };
 }
