@@ -1,57 +1,18 @@
 #include "datasets/computer_vision/image_classification/food.h"
 
 namespace xt::data::datasets {
-    /**
-     * @brief Default constructor with root directory only
-     * @author Kamran Saberifard
-     * @email kamisaberi@gmail.com
-     * @github https://github.com/kamisaberi
-     *
-     * @note Delegates to main constructor with:
-     * - Mode: TRAIN
-     * - Download: false
-     */
     Food101::Food101(const std::string &root): Food101::Food101(root, DataMode::TRAIN, false) {
     }
 
-    /**
-     * @brief Constructor with root directory and mode
-     * @author Kamran Saberifard
-     * @email kamisaberi@gmail.com
-     * @github https://github.com/kamisaberi
-     *
-     * @note Delegates to main constructor with download=false
-     */
     Food101::Food101(const std::string &root, DataMode mode): Food101::Food101(root, mode, false) {
     }
 
-    /**
-     * @brief Main constructor with download capability
-     * @author Kamran Saberifard
-     * @email kamisaberi@gmail.com
-     * @github https://github.com/kamisaberi
-     *
-     * @details Initializes dataset by:
-     * 1. Checking/Downloading resources
-     * 2. Loading class names
-     * 3. Loading image data
-     */
     Food101::Food101(const std::string &root, DataMode mode, bool download) : BaseDataset(root, mode, download) {
         check_resources();  // Verify dataset files exist
         load_classes();     // Load class names and mapping
         load_data();        // Load image data and labels
     }
 
-    /**
-     * @brief Constructor with transforms support
-     * @author Kamran Saberifard
-     * @email kamisaberi@gmail.com
-     * @github https://github.com/kamisaberi
-     *
-     * @details Additional functionality:
-     * - Initializes transform composition
-     * - Applies transforms during data loading
-     */
     Food101::Food101(const std::string &root, DataMode mode, bool download,
                      vector<std::function<torch::Tensor(torch::Tensor)> > transforms) : BaseDataset(
         root, mode, download, transforms) {
@@ -64,18 +25,6 @@ namespace xt::data::datasets {
         load_data();
     }
 
-    /**
-     * @brief Verifies and downloads dataset resources if needed
-     * @author Kamran Saberifard
-     * @email kamisaberi@gmail.com
-     * @github https://github.com/kamisaberi
-     *
-     * @details Handles:
-     * - Checking for existing extracted dataset
-     * - Verifying image count
-     * - Downloading archive if missing
-     * - Extracting archive
-     */
     void Food101::check_resources() {
         fs::path archive_file_abs_path = this->root / this->dataset_file_name;
         this->dataset_path = this->root / this->dataset_folder_name;
@@ -106,16 +55,6 @@ namespace xt::data::datasets {
         }
     }
 
-    /**
-     * @brief Loads class names and creates mapping
-     * @author Kamran Saberifard
-     * @email kamisaberi@gmail.com
-     * @github https://github.com/kamisaberi
-     *
-     * @details Reads from meta/classes.txt and populates:
-     * - classes_name vector
-     * - classes_map dictionary
-     */
     void Food101::load_classes() {
         cout << "Loading classes..." << endl;
         fs::path meta_path = this->dataset_path / fs::path("meta");
@@ -136,18 +75,6 @@ namespace xt::data::datasets {
         }
     }
 
-    /**
-     * @brief Loads image data and labels
-     * @author Kamran Saberifard
-     * @email kamisaberi@gmail.com
-     * @github https://github.com/kamisaberi
-     *
-     * @details Handles:
-     * - Reading train/test split files
-     * - Loading images with OpenCV
-     * - Applying transforms
-     * - Storing tensors and labels
-     */
     void Food101::load_data() {
         fs::path images_path = this->dataset_path / fs::path("images");
         fs::path meta_path = this->dataset_path / fs::path("meta");
@@ -214,9 +141,4 @@ namespace xt::data::datasets {
         }
     }
 
-    /* Commented out default constructor - kept for reference
-    // Food101::Food101() {
-    //     throw NotImplementedException();
-    // }
-    */
 }
