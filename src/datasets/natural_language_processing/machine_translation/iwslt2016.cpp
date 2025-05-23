@@ -1,22 +1,48 @@
 #include "datasets/natural_language_processing/machine_translation/iwslt2016.h"
 
-namespace xt::data::datasets {
+namespace xt::data::datasets
+{
+    // ---------------------- IWSLT2016 ---------------------- //
 
-    IWSLT20169::IWSLT20169(const std::string &root): IWSLT20169::IWSLT20169(root, DataMode::TRAIN, false) {
+    IWSLT2016::IWSLT2016(const std::string& root): IWSLT2016::IWSLT2016(
+        root, xt::datasets::DataMode::TRAIN, false, nullptr, nullptr)
+    {
     }
 
-    IWSLT20169::IWSLT20169(const std::string &root, DataMode mode): IWSLT20169::IWSLT20169(root, mode, false) {
+    IWSLT2016::IWSLT2016(const std::string& root, xt::datasets::DataMode mode): IWSLT2016::IWSLT2016(
+        root, mode, false, nullptr, nullptr)
+    {
     }
 
-    IWSLT20169::IWSLT20169(const std::string &root, DataMode mode, bool download) : BaseDataset(root, mode, download) {
-        throw std::runtime_error("IWSLT: IWSLT not implemented");
+    IWSLT2016::IWSLT2016(const std::string& root, xt::datasets::DataMode mode, bool download) :
+        IWSLT2016::IWSLT2016(
+            root, mode, download, nullptr, nullptr)
+    {
+    }
+
+    IWSLT2016::IWSLT2016(const std::string& root, xt::datasets::DataMode mode, bool download,
+                           std::unique_ptr<xt::Module> transformer) : IWSLT2016::IWSLT2016(
+        root, mode, download, std::move(transformer), nullptr)
+    {
+    }
+
+    IWSLT2016::IWSLT2016(const std::string& root, xt::datasets::DataMode mode, bool download,
+                           std::unique_ptr<xt::Module> transformer, std::unique_ptr<xt::Module> target_transformer):
+        xt::datasets::Dataset(mode, std::move(transformer), std::move(target_transformer))
+    {
+        check_resources();
+        load_data();
+
     }
 
 
-    IWSLT20169::IWSLT20169(const std::string &root, DataMode mode, bool download,
-                           TransformType transforms) : BaseDataset(root, mode, download, transforms) {
-        throw std::runtime_error("IWSLT: IWSLT not implemented");
+    void IWSLT2016::load_data()
+    {
+
     }
 
+    void IWSLT2016::check_resources()
+    {
 
+    }
 }
