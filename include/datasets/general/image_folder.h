@@ -1,6 +1,6 @@
 #pragma once
 
-#include "datasets/base/base.h"
+#include "datasets/common.h"
 
 namespace xt::data::datasets {
     enum class LabelsType {
@@ -9,14 +9,14 @@ namespace xt::data::datasets {
     };
 
 
-    class ImageFolder : public BaseDataset {
+    class ImageFolder : public xt::datasets::Dataset {
     public :
 
         ImageFolder(const std::string &root);
         ImageFolder(const std::string &root,bool load_sub_folders);
         ImageFolder(const std::string &root,bool load_sub_folders, DataMode mode);
         ImageFolder(const std::string &root,bool load_sub_folders, DataMode mode , LabelsType label_type);
-        ImageFolder(const std::string &root,bool load_sub_folders, DataMode mode , LabelsType label_type, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
+        ImageFolder(const std::string &root,bool load_sub_folders, DataMode mode , LabelsType label_type, std::unique_ptr<xt::Module> transformer);
 
     private:
         vector<string> labels_name;
