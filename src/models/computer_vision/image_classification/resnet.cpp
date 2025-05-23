@@ -157,13 +157,13 @@ namespace xt::models
         }
         torch::nn::Sequential layers = torch::nn::Sequential();
         ResidualBlock rb = ResidualBlock(inplanes, planes, stride, downsample);
-        layers->push_back(rb);
-        inplanes = planes;
-        for (int i = 1; i < blocks; i++)
-        {
-            ResidualBlock rbt = ResidualBlock(inplanes, planes);
-            layers->push_back(rbt);
-        }
+        // layers->push_back(rb);
+        // inplanes = planes;
+        // for (int i = 1; i < blocks; i++)
+        // {
+        //     ResidualBlock rbt = ResidualBlock(inplanes, planes);
+        //     layers->push_back(rbt);
+        // }
         return layers;
     }
 
@@ -299,13 +299,13 @@ namespace xt::models
         }
         torch::nn::Sequential layers = torch::nn::Sequential();
         ResidualBlock rb = ResidualBlock(inplanes, planes, stride, downsample);
-        layers->push_back(rb);
-        inplanes = planes;
-        for (int i = 1; i < blocks; i++)
-        {
-            ResidualBlock rbt = ResidualBlock(inplanes, planes);
-            layers->push_back(rbt);
-        }
+        // layers->push_back(rb);
+        // inplanes = planes;
+        // for (int i = 1; i < blocks; i++)
+        // {
+        //     ResidualBlock rbt = ResidualBlock(inplanes, planes);
+        //     layers->push_back(rbt);
+        // }
         return layers;
     }
 
@@ -441,13 +441,13 @@ namespace xt::models
         }
         torch::nn::Sequential layers = torch::nn::Sequential();
         ResidualBlock rb = ResidualBlock(inplanes, planes, stride, downsample);
-        layers->push_back(rb);
-        inplanes = planes;
-        for (int i = 1; i < blocks; i++)
-        {
-            ResidualBlock rbt = ResidualBlock(inplanes, planes);
-            layers->push_back(rbt);
-        }
+        // layers->push_back(rb);
+        // inplanes = planes;
+        // for (int i = 1; i < blocks; i++)
+        // {
+        //     ResidualBlock rbt = ResidualBlock(inplanes, planes);
+        //     layers->push_back(rbt);
+        // }
         return layers;
     }
 
@@ -583,13 +583,13 @@ namespace xt::models
         }
         torch::nn::Sequential layers = torch::nn::Sequential();
         ResidualBlock rb = ResidualBlock(inplanes, planes, stride, downsample);
-        layers->push_back(rb);
-        inplanes = planes;
-        for (int i = 1; i < blocks; i++)
-        {
-            ResidualBlock rbt = ResidualBlock(inplanes, planes);
-            layers->push_back(rbt);
-        }
+        // layers->push_back(rb);
+        // inplanes = planes;
+        // for (int i = 1; i < blocks; i++)
+        // {
+        //     ResidualBlock rbt = ResidualBlock(inplanes, planes);
+        //     layers->push_back(rbt);
+        // }
         return layers;
     }
 
@@ -725,13 +725,13 @@ namespace xt::models
         }
         torch::nn::Sequential layers = torch::nn::Sequential();
         ResidualBlock rb = ResidualBlock(inplanes, planes, stride, downsample);
-        layers->push_back(rb);
-        inplanes = planes;
-        for (int i = 1; i < blocks; i++)
-        {
-            ResidualBlock rbt = ResidualBlock(inplanes, planes);
-            layers->push_back(rbt);
-        }
+        // layers->push_back(rb);
+        // inplanes = planes;
+        // for (int i = 1; i < blocks; i++)
+        // {
+        //     ResidualBlock rbt = ResidualBlock(inplanes, planes);
+        //     layers->push_back(rbt);
+        // }
         return layers;
     }
 
@@ -865,13 +865,13 @@ namespace xt::models
         }
         torch::nn::Sequential layers = torch::nn::Sequential();
         ResidualBlock rb = ResidualBlock(inplanes, planes, stride, downsample);
-        layers->push_back(rb);
-        inplanes = planes;
-        for (int i = 1; i < blocks; i++)
-        {
-            ResidualBlock rbt = ResidualBlock(inplanes, planes);
-            layers->push_back(rbt);
-        }
+        // layers->push_back(rb);
+        // inplanes = planes;
+        // for (int i = 1; i < blocks; i++)
+        // {
+        //     ResidualBlock rbt = ResidualBlock(inplanes, planes);
+        //     layers->push_back(rbt);
+        // }
         return layers;
     }
 
@@ -1005,13 +1005,13 @@ namespace xt::models
         }
         torch::nn::Sequential layers = torch::nn::Sequential();
         ResidualBlock rb = ResidualBlock(inplanes, planes, stride, downsample);
-        layers->push_back(rb);
-        inplanes = planes;
-        for (int i = 1; i < blocks; i++)
-        {
-            ResidualBlock rbt = ResidualBlock(inplanes, planes);
-            layers->push_back(rbt);
-        }
+        // layers->push_back(rb);
+        // inplanes = planes;
+        // for (int i = 1; i < blocks; i++)
+        // {
+        //     ResidualBlock rbt = ResidualBlock(inplanes, planes);
+        //     layers->push_back(rbt);
+        // }
         return layers;
     }
 
