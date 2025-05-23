@@ -1,22 +1,49 @@
 #include "datasets/natural_language_processing/text_classification/qnli.h"
 
-namespace xt::data::datasets {
 
-    QNLI::QNLI(const std::string &root): QNLI::QNLI(root, DataMode::TRAIN, false) {
+namespace xt::data::datasets
+{
+    // ---------------------- QNLI ---------------------- //
+
+    QNLI::QNLI(const std::string& root): QNLI::QNLI(
+        root, xt::datasets::DataMode::TRAIN, false, nullptr, nullptr)
+    {
     }
 
-    QNLI::QNLI(const std::string &root, DataMode mode): QNLI::QNLI(root, mode, false) {
+    QNLI::QNLI(const std::string& root, xt::datasets::DataMode mode): QNLI::QNLI(
+        root, mode, false, nullptr, nullptr)
+    {
     }
 
-    QNLI::QNLI(const std::string &root, DataMode mode, bool download) : BaseDataset(root, mode, download) {
-        throw std::runtime_error("QNLI: QNLI not implemented");
+    QNLI::QNLI(const std::string& root, xt::datasets::DataMode mode, bool download) :
+        QNLI::QNLI(
+            root, mode, download, nullptr, nullptr)
+    {
+    }
+
+    QNLI::QNLI(const std::string& root, xt::datasets::DataMode mode, bool download,
+                           std::unique_ptr<xt::Module> transformer) : QNLI::QNLI(
+        root, mode, download, std::move(transformer), nullptr)
+    {
+    }
+
+    QNLI::QNLI(const std::string& root, xt::datasets::DataMode mode, bool download,
+                           std::unique_ptr<xt::Module> transformer, std::unique_ptr<xt::Module> target_transformer):
+        xt::datasets::Dataset(mode, std::move(transformer), std::move(target_transformer))
+    {
+        check_resources();
+        load_data();
+
     }
 
 
-    QNLI::QNLI(const std::string &root, DataMode mode, bool download,
-                           TransformType transforms) : BaseDataset(root, mode, download, transforms) {
-        throw std::runtime_error("QNLI: QNLI not implemented");
+    void QNLI::load_data()
+    {
+
     }
 
+    void QNLI::check_resources()
+    {
 
+    }
 }
