@@ -1,12 +1,12 @@
 #pragma once
-#include "datasets/base/base.h"
 
+#include "datasets/common.h"
 
 using namespace std;
 namespace fs = std::filesystem;
 
 namespace xt::data::datasets {
-    class LFWPairs : public BaseDataset {
+    class LFWPairs : public xt::datasets::Dataset {
         /*
 """`LFW <http://vis-www.cs.umass.edu/lfw/>`_ Dataset.
 
@@ -31,10 +31,14 @@ download (bool, optional): If true, downloads the dataset from the internet and
  */
 
     public :
-        explicit LFWPairs(const std::string &root);
-        LFWPairs(const std::string &root, DataMode mode);
-        LFWPairs(const std::string &root, DataMode mode , bool download);
-        LFWPairs(const std::string &root, DataMode mode , bool download, TransformType transforms);
+        explicit LFWPairs(const std::string& root);
+        LFWPairs(const std::string& root, xt::datasets::DataMode mode);
+        LFWPairs(const std::string& root, xt::datasets::DataMode mode, bool download);
+        LFWPairs(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer);
+        LFWPairs(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer,
+                   std::unique_ptr<xt::Module> target_transformer);
 
 
     private :
@@ -66,9 +70,15 @@ download (bool, optional): If true, downloads the dataset from the internet and
         };
         fs::path names = fs::path("lfw-names.txt");
 
+
+        bool download = false;
+        fs::path root;
+        fs::path dataset_path;
+
         void load_data();
 
         void check_resources();
+
     };
 
 
