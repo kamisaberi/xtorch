@@ -1,22 +1,49 @@
-#include "../../../../include/datasets/audio_processing/speech_recognition/tedlium.h"
+#include "datasets/audio_processing/speech_recognition/tedlium.h"
 
-namespace xt::data::datasets {
 
-    Tedlium::Tedlium(const std::string &root): Tedlium::Tedlium(root, DataMode::TRAIN, false) {
+namespace xt::data::datasets
+{
+    // ---------------------- Tedlium ---------------------- //
+
+    Tedlium::Tedlium(const std::string& root): Tedlium::Tedlium(
+        root, xt::datasets::DataMode::TRAIN, false, nullptr, nullptr)
+    {
     }
 
-    Tedlium::Tedlium(const std::string &root, DataMode mode): Tedlium::Tedlium(root, mode, false) {
+    Tedlium::Tedlium(const std::string& root, xt::datasets::DataMode mode): Tedlium::Tedlium(
+        root, mode, false, nullptr, nullptr)
+    {
     }
 
-    Tedlium::Tedlium(const std::string &root, DataMode mode, bool download) : BaseDataset(root, mode, download) {
-        throw std::runtime_error("Tedlium: Tedlium not implemented");
+    Tedlium::Tedlium(const std::string& root, xt::datasets::DataMode mode, bool download) :
+        Tedlium::Tedlium(
+            root, mode, download, nullptr, nullptr)
+    {
+    }
+
+    Tedlium::Tedlium(const std::string& root, xt::datasets::DataMode mode, bool download,
+                           std::unique_ptr<xt::Module> transformer) : Tedlium::Tedlium(
+        root, mode, download, std::move(transformer), nullptr)
+    {
+    }
+
+    Tedlium::Tedlium(const std::string& root, xt::datasets::DataMode mode, bool download,
+                           std::unique_ptr<xt::Module> transformer, std::unique_ptr<xt::Module> target_transformer):
+        xt::datasets::Dataset(mode, std::move(transformer), std::move(target_transformer))
+    {
+        check_resources();
+        load_data();
+
     }
 
 
-    Tedlium::Tedlium(const std::string &root, DataMode mode, bool download,
-                         TransformType transforms) : BaseDataset(root, mode, download, transforms) {
-        throw std::runtime_error("Tedlium: Tedlium not implemented");
+    void Tedlium::load_data()
+    {
+
     }
 
+    void Tedlium::check_resources()
+    {
 
+    }
 }
