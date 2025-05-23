@@ -1,5 +1,9 @@
 #pragma once
-#include "datasets/base/base.h"
+
+#include "datasets/common.h"
+
+using namespace std;
+namespace fs = std::filesystem;
 
 namespace xt::data::datasets {
     class OxfordIIITPet : BaseDataset {
@@ -27,10 +31,14 @@ namespace xt::data::datasets {
 
          */
     public :
-        explicit OxfordIIITPet(const std::string &root);
-        OxfordIIITPet(const std::string &root, DataMode mode);
-        OxfordIIITPet(const std::string &root, DataMode mode , bool download);
-        OxfordIIITPet(const std::string &root, DataMode mode , bool download, TransformType transforms);
+        explicit OxfordIIITPet(const std::string& root);
+        OxfordIIITPet(const std::string& root, xt::datasets::DataMode mode);
+        OxfordIIITPet(const std::string& root, xt::datasets::DataMode mode, bool download);
+        OxfordIIITPet(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer);
+        OxfordIIITPet(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer,
+                   std::unique_ptr<xt::Module> target_transformer);
 
 
     private :
@@ -46,8 +54,16 @@ namespace xt::data::datasets {
         };
         vector<std::string> _VALID_TARGET_TYPES = {"category", "binary-category", "segmentation"};
         fs::path dataset_folder_name = "oxford-iii-pets";
+
+        bool download = false;
+        fs::path root;
+        fs::path dataset_path;
+
         void load_data();
 
         void check_resources();
+
+
+
     };
 }
