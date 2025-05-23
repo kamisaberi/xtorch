@@ -1,22 +1,49 @@
-#include "../../../../include/datasets/audio_processing/speech_recognition/librispeech.h"
+#include "datasets/audio_processing/speech_recognition/librispeech.h"
 
-namespace xt::data::datasets {
 
-    LibriSpeech::LibriSpeech(const std::string &root): LibriSpeech::LibriSpeech(root, DataMode::TRAIN, false) {
+namespace xt::data::datasets
+{
+    // ---------------------- LibriSpeech ---------------------- //
+
+    LibriSpeech::LibriSpeech(const std::string& root): LibriSpeech::LibriSpeech(
+        root, xt::datasets::DataMode::TRAIN, false, nullptr, nullptr)
+    {
     }
 
-    LibriSpeech::LibriSpeech(const std::string &root, DataMode mode): LibriSpeech::LibriSpeech(root, mode, false) {
+    LibriSpeech::LibriSpeech(const std::string& root, xt::datasets::DataMode mode): LibriSpeech::LibriSpeech(
+        root, mode, false, nullptr, nullptr)
+    {
     }
 
-    LibriSpeech::LibriSpeech(const std::string &root, DataMode mode, bool download) : BaseDataset(root, mode, download) {
-        throw std::runtime_error("LibriSpeech: LibriSpeech not implemented");
+    LibriSpeech::LibriSpeech(const std::string& root, xt::datasets::DataMode mode, bool download) :
+        LibriSpeech::LibriSpeech(
+            root, mode, download, nullptr, nullptr)
+    {
+    }
+
+    LibriSpeech::LibriSpeech(const std::string& root, xt::datasets::DataMode mode, bool download,
+                           std::unique_ptr<xt::Module> transformer) : LibriSpeech::LibriSpeech(
+        root, mode, download, std::move(transformer), nullptr)
+    {
+    }
+
+    LibriSpeech::LibriSpeech(const std::string& root, xt::datasets::DataMode mode, bool download,
+                           std::unique_ptr<xt::Module> transformer, std::unique_ptr<xt::Module> target_transformer):
+        xt::datasets::Dataset(mode, std::move(transformer), std::move(target_transformer))
+    {
+        check_resources();
+        load_data();
+
     }
 
 
-    LibriSpeech::LibriSpeech(const std::string &root, DataMode mode, bool download,
-                         TransformType transforms) : BaseDataset(root, mode, download, transforms) {
-        throw std::runtime_error("LibriSpeech: GTSRB not implemented");
+    void LibriSpeech::load_data()
+    {
+
     }
 
+    void LibriSpeech::check_resources()
+    {
 
+    }
 }
