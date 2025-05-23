@@ -1,6 +1,6 @@
 #pragma once
 // #include "../../../headers/datasets.h"
-#include "../../base/mnist_base.h"
+#include "datasets/common.h"
 
 using namespace std;
 namespace fs = std::filesystem;
@@ -9,10 +9,18 @@ namespace fs = std::filesystem;
 namespace xt::data::datasets {
 
 
-    class QMNIST : public MNISTBase {
+    class QMNIST : public xt::datasets::Dataset {
     public :
-        QMNIST(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
-        QMNIST(const fs::path &root);
+
+        explicit QMNIST(const std::string& root);
+        QMNIST(const std::string& root, xt::datasets::DataMode mode);
+        QMNIST(const std::string& root, xt::datasets::DataMode mode, bool download);
+        QMNIST(const std::string& root, xt::datasets::DataMode mode, bool download,
+              std::unique_ptr<xt::Module> transformer);
+        QMNIST(const std::string& root, xt::datasets::DataMode mode, bool download,
+              std::unique_ptr<xt::Module> transformer,
+              std::unique_ptr<xt::Module> target_transformer);
+
 
     private:
         std::string url = "https://raw.githubusercontent.com/facebookresearch/qmnist/master/";
@@ -39,9 +47,15 @@ namespace xt::data::datasets {
                 }
             }
         };
-        void load_data(DataMode mode = DataMode::TRAIN);
+        void load_data();
 
-        void check_resources(const std::string &root, bool download = false);
+        void check_resources();
+        void read_images(const std::string& file_path, int num_images);
+        void read_labels(const std::string& file_path, int num_labels);
+
+        bool download = false;
+        fs::path root;
+
 
     };
 }
