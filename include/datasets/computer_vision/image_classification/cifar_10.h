@@ -51,6 +51,6 @@ namespace xt::data::datasets
         fs::path dataset_path;
 
 
-        void load_data(DataMode mode = DataMode::TRAIN);
+        void load_data();
     };
 }
