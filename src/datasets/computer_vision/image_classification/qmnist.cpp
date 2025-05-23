@@ -2,29 +2,42 @@
 
 namespace xt::data::datasets
 {
-    // QMNIST::QMNIST(const std::string &root, DataMode mode, bool download) : MNISTBase(root, mode, download) {
-    //     check_resources(root, download);
-    //     load_data(mode);
-    // }
-    //
-    //
-    // QMNIST::QMNIST(const fs::path &root, DatasetArguments args) : MNISTBase(root, args) {
-    //     auto [mode , download , transforms] = args;
-    //     // cout << "MNIST SIZE: " << this->data.size() << endl;
-    //     check_resources(root, download);
-    //     load_data(mode);
-    //     // cout << "MNIST SIZE: " << this->data.size() << endl;
-    //     if (!transforms.empty()) {
-    //         // cout << "Transforms 11111111111111111111" << endl;
-    //         // this->transform_data(transforms);
-    //     }
-    //     // cout << "MNIST SIZE: " << this->data.size() << endl;
-    // }
 
-
-    void QMNIST::load_data(DataMode mode)
+    QMNIST::QMNIST(const std::string& root): QMNIST(
+    root, xt::datasets::DataMode::TRAIN, false, nullptr, nullptr)
     {
-        if (mode == DataMode::TRAIN)
+    }
+
+    QMNIST::QMNIST(const std::string& root, xt::datasets::DataMode mode): QMNIST(
+        root, mode, false, nullptr, nullptr)
+    {
+    }
+
+    QMNIST::QMNIST(const std::string& root, xt::datasets::DataMode mode, bool download) :
+        QMNIST(
+            root, mode, download, nullptr, nullptr)
+    {
+    }
+
+    QMNIST::QMNIST(const std::string& root, xt::datasets::DataMode mode, bool download,
+                 std::unique_ptr<xt::Module> transformer) : QMNIST(
+        root, mode, download, std::move(transformer), nullptr)
+    {
+    }
+
+    QMNIST::QMNIST(const std::string& root, xt::datasets::DataMode mode, bool download,
+                 std::unique_ptr<xt::Module> transformer, std::unique_ptr<xt::Module> target_transformer):
+        xt::datasets::Dataset(mode, std::move(transformer), std::move(target_transformer))
+    {
+        check_resources();
+        load_data();
+    }
+
+
+
+    void QMNIST::load_data()
+    {
+        if (mode == xt::datasets::DataMode::TRAIN)
         {
             fs::path imgs = this->dataset_path / std::get<0>(resources["train"][0]);
             fs::path lbls = this->dataset_path / std::get<0>(resources["train"][1]);
@@ -56,7 +69,7 @@ namespace xt::data::datasets
         }
     }
 
-    void QMNIST::check_resources(const std::string& root, bool download)
+    void QMNIST::check_resources()
     {
         // this->root = fs::path(root);
         // if (!fs::exists(this->root)) {
@@ -83,4 +96,72 @@ namespace xt::data::datasets
         //     torch::ext::utils::extractGzip(fpth);
         // }
     }
+
+
+    void QMNIST::read_images(const std::string& file_path, int num_images)
+    {
+        std::ifstream file(file_path, std::ios::binary);
+        if (!file.is_open())
+        {
+            throw std::runtime_error("Failed to open file: " + file_path);
+        }
+
+        // Read metadata
+        int32_t magic_number, num_items, rows, cols;
+        file.read(reinterpret_cast<char*>(&magic_number), 4);
+        file.read(reinterpret_cast<char*>(&num_items), 4);
+        file.read(reinterpret_cast<char*>(&rows), 4);
+        file.read(reinterpret_cast<char*>(&cols), 4);
+
+        // Convert endianess
+        magic_number = __builtin_bswap32(magic_number);
+        num_items = __builtin_bswap32(num_items);
+        rows = __builtin_bswap32(rows);
+        cols = __builtin_bswap32(cols);
+
+        std::vector<torch::Tensor> fimages;
+        std::vector<std::vector<uint8_t>> images(num_images, std::vector<uint8_t>(rows * cols));
+        for (int i = 0; i < num_images; i++)
+        {
+            file.read(reinterpret_cast<char*>(images[i].data()), rows * cols);
+            torch::Tensor tensor_image = torch::from_blob(images[i].data(), {1, 28, 28},
+                                                          torch::kByte).clone();
+            if (transformer != nullptr)
+            {
+                tensor_image = (*transformer)(tensor_image);
+            }
+            fimages.push_back(tensor_image);
+        }
+        file.close();
+        this->data = fimages;
+    }
+
+    void QMNIST::read_labels(const std::string& file_path, int num_labels)
+    {
+        std::ifstream file(file_path, std::ios::binary);
+        if (!file.is_open())
+        {
+            throw std::runtime_error("Failed to open file: " + file_path);
+        }
+
+        // Read metadata
+        int32_t magic_number, num_items;
+        file.read(reinterpret_cast<char*>(&magic_number), 4);
+        file.read(reinterpret_cast<char*>(&num_items), 4);
+
+        // Convert endianess
+        // cout << magic_number << "\t";
+        magic_number = __builtin_bswap32(magic_number);
+        num_items = __builtin_bswap32(num_items);
+
+        std::vector<uint8_t> labels(num_labels);
+        file.read(reinterpret_cast<char*>(labels.data()), num_labels);
+
+        // cout << labels.data() << endl;
+        file.close();
+        this->targets = labels;
+    }
+
+
+
 }
