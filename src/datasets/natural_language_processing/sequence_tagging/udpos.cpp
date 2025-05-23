@@ -1,22 +1,49 @@
 #include "datasets/natural_language_processing/sequence_tagging/udpos.h"
 
-namespace xt::data::datasets {
 
-    UDPOS::UDPOS(const std::string &root): UDPOS::UDPOS(root, DataMode::TRAIN, false) {
+namespace xt::data::datasets
+{
+    // ---------------------- UDPOS ---------------------- //
+
+    UDPOS::UDPOS(const std::string& root): UDPOS::UDPOS(
+        root, xt::datasets::DataMode::TRAIN, false, nullptr, nullptr)
+    {
     }
 
-    UDPOS::UDPOS(const std::string &root, DataMode mode): UDPOS::UDPOS(root, mode, false) {
+    UDPOS::UDPOS(const std::string& root, xt::datasets::DataMode mode): UDPOS::UDPOS(
+        root, mode, false, nullptr, nullptr)
+    {
     }
 
-    UDPOS::UDPOS(const std::string &root, DataMode mode, bool download) : BaseDataset(root, mode, download) {
-        throw std::runtime_error("UDPOS: UDPOS not implemented");
+    UDPOS::UDPOS(const std::string& root, xt::datasets::DataMode mode, bool download) :
+        UDPOS::UDPOS(
+            root, mode, download, nullptr, nullptr)
+    {
+    }
+
+    UDPOS::UDPOS(const std::string& root, xt::datasets::DataMode mode, bool download,
+                           std::unique_ptr<xt::Module> transformer) : UDPOS::UDPOS(
+        root, mode, download, std::move(transformer), nullptr)
+    {
+    }
+
+    UDPOS::UDPOS(const std::string& root, xt::datasets::DataMode mode, bool download,
+                           std::unique_ptr<xt::Module> transformer, std::unique_ptr<xt::Module> target_transformer):
+        xt::datasets::Dataset(mode, std::move(transformer), std::move(target_transformer))
+    {
+        check_resources();
+        load_data();
+
     }
 
 
-    UDPOS::UDPOS(const std::string &root, DataMode mode, bool download,
-                           TransformType transforms) : BaseDataset(root, mode, download, transforms) {
-        throw std::runtime_error("UDPOS: UDPOS not implemented");
+    void UDPOS::load_data()
+    {
+
     }
 
+    void UDPOS::check_resources()
+    {
 
+    }
 }
