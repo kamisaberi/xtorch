@@ -2,15 +2,43 @@
 
 namespace xt::data::datasets
 {
-    // KMNIST::KMNIST(const std::string &root, DataMode mode, bool download) : MNISTBase(root, mode, download) {
-    //     check_resources(root, download);
-    //     load_data(mode);
-    // }
 
 
-    void KMNIST::load_data(DataMode mode)
+    KMNIST::KMNIST(const std::string& root): KMNIST(
+        root, xt::datasets::DataMode::TRAIN, false, nullptr, nullptr)
     {
-        if (mode == DataMode::TRAIN)
+    }
+
+    KMNIST::KMNIST(const std::string& root, xt::datasets::DataMode mode): KMNIST(
+        root, mode, false, nullptr, nullptr)
+    {
+    }
+
+    KMNIST::KMNIST(const std::string& root, xt::datasets::DataMode mode, bool download) :
+        KMNIST(
+            root, mode, download, nullptr, nullptr)
+    {
+    }
+
+    KMNIST::KMNIST(const std::string& root, xt::datasets::DataMode mode, bool download,
+                 std::unique_ptr<xt::Module> transformer) : KMNIST(
+        root, mode, download, std::move(transformer), nullptr)
+    {
+    }
+
+    KMNIST::KMNIST(const std::string& root, xt::datasets::DataMode mode, bool download,
+                 std::unique_ptr<xt::Module> transformer, std::unique_ptr<xt::Module> target_transformer):
+        xt::datasets::Dataset(mode, std::move(transformer), std::move(target_transformer))
+    {
+        check_resources();
+        load_data();
+    }
+
+
+
+    void KMNIST::load_data()
+    {
+        if (mode == xt::datasets::DataMode::TRAIN)
         {
             fs::path imgs = this->dataset_path / std::get<0>(files["train"]);
             fs::path lbls = this->dataset_path / std::get<1>(files["train"]);
@@ -38,7 +66,7 @@ namespace xt::data::datasets
         }
     }
 
-    void KMNIST::check_resources(const std::string& root, bool download)
+    void KMNIST::check_resources()
     {
         this->root = fs::path(root);
         if (!fs::exists(this->root))
