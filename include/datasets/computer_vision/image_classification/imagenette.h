@@ -75,6 +75,11 @@ namespace xt::data::datasets
         fs::path dataset_folder_name = "imagenette"; ///< Base folder name for dataset
         vector<string> labels_name; ///< List of class label names
 
+        bool download = false;
+        fs::path root;
+        fs::path dataset_path;
+
+
         void load_data(DataMode mode = DataMode::TRAIN);
 
         void check_resources(const std::string& root, bool download = false);

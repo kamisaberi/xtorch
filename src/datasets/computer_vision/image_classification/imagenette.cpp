@@ -107,14 +107,14 @@ namespace xt::data::datasets
                         torch::Tensor tensor = torch::ext::media::opencv::convertImageToTensor(img.path());
 
                         // Apply transforms if specified
-                        if (!transforms.empty())
+                        if (transformer != nullptr)
                         {
-                            // tensor = this->compose(tensor);
+                            tensor = (*transformer)(tensor);
                         }
 
                         // Store tensor and corresponding label
                         data.push_back(tensor);
-                        labels.push_back(labels_name.size() - 1); // Use label index
+                        targets.push_back(labels_name.size() - 1); // Use label index
                     }
                 }
             }
@@ -140,14 +140,14 @@ namespace xt::data::datasets
                         torch::Tensor tensor = torch::ext::media::opencv::convertImageToTensor(img.path());
 
                         // Apply transforms if specified
-                        if (!transforms.empty())
+                        if (transformer != nullptr)
                         {
-                            // tensor = this->compose(tensor);
+                            tensor = (*transformer)(tensor);
                         }
 
                         // Store tensor and corresponding label
                         data.push_back(tensor);
-                        labels.push_back(labels_name.size() - 1); // Use label index
+                        targets.push_back(labels_name.size() - 1); // Use label index
                     }
                 }
             }
