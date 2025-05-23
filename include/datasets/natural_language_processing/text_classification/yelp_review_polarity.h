@@ -1,17 +1,34 @@
 #pragma once
-#include "datasets/base/base.h"
+
+#include "datasets/common.h"
+
+using namespace std;
+namespace fs = std::filesystem;
 
 
-namespace xt::data::datasets {
-    class YelpReviewPolarity : BaseDataset {
-        public :
-            explicit YelpReviewPolarity(const std::string &root);
-        YelpReviewPolarity(const std::string &root, DataMode mode);
-        YelpReviewPolarity(const std::string &root, DataMode mode , bool download);
-        YelpReviewPolarity(const std::string &root, DataMode mode , bool download, TransformType transforms);
+namespace xt::data::datasets
+{
+    class YelpReviewPolarity : public xt::datasets::Dataset
+    {
+    public :
+        explicit YelpReviewPolarity(const std::string& root);
+        YelpReviewPolarity(const std::string& root, xt::datasets::DataMode mode);
+        YelpReviewPolarity(const std::string& root, xt::datasets::DataMode mode, bool download);
+        YelpReviewPolarity(const std::string& root, xt::datasets::DataMode mode, bool download,
+                           std::unique_ptr<xt::Module> transformer);
+        YelpReviewPolarity(const std::string& root, xt::datasets::DataMode mode, bool download,
+                           std::unique_ptr<xt::Module> transformer,
+                           std::unique_ptr<xt::Module> target_transformer);
 
-        private :
-            void load_data();
+    private :
+        // TODO fs::path dataset_folder_name
+        fs::path dataset_folder_name = "?";
+
+        bool download = false;
+        fs::path root;
+        fs::path dataset_path;
+
+        void load_data();
 
         void check_resources();
     };
