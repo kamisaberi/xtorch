@@ -1,18 +1,33 @@
 #pragma once
 
+#include "datasets/common.h"
 
-#include "datasets/base/base.h"
+using namespace std;
+namespace fs = std::filesystem;
 
-namespace xt::data::datasets {
-    class PennTreebank : BaseDataset {
-        public :
-            explicit PennTreebank(const std::string &root);
-        PennTreebank(const std::string &root, DataMode mode);
-        PennTreebank(const std::string &root, DataMode mode , bool download);
-        PennTreebank(const std::string &root, DataMode mode , bool download, TransformType transforms);
+namespace xt::data::datasets
+{
+    class PennTreebank : public xt::datasets::Dataset
+    {
+    public :
+        explicit PennTreebank(const std::string& root);
+        PennTreebank(const std::string& root, xt::datasets::DataMode mode);
+        PennTreebank(const std::string& root, xt::datasets::DataMode mode, bool download);
+        PennTreebank(const std::string& root, xt::datasets::DataMode mode, bool download,
+                     std::unique_ptr<xt::Module> transformer);
+        PennTreebank(const std::string& root, xt::datasets::DataMode mode, bool download,
+                     std::unique_ptr<xt::Module> transformer,
+                     std::unique_ptr<xt::Module> target_transformer);
 
-        private :
-            void load_data();
+    private :
+        // TODO fs::path dataset_folder_name
+        fs::path dataset_folder_name = "?";
+
+        bool download = false;
+        fs::path root;
+        fs::path dataset_path;
+
+        void load_data();
 
         void check_resources();
     };
