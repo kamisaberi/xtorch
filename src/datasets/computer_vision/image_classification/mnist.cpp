@@ -69,9 +69,9 @@ namespace xt::data::datasets
     }
 
 
-    void MNIST::load_data(DataMode mode)
+    void MNIST::load_data()
     {
-        if (mode == DataMode::TRAIN)
+        if (mode == xt::datasets::DataMode::TRAIN)
         {
             fs::path imgs = this->dataset_path / std::get<0>(files["train"]);
             fs::path lbls = this->dataset_path / std::get<1>(files["train"]);
