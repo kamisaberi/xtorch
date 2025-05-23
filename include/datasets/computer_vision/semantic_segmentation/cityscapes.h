@@ -1,15 +1,32 @@
 #pragma once
-#include "datasets/base/base.h"
 
-namespace xt::data::datasets {
-    class Cityscapes : public BaseDataset {
+#include "datasets/common.h"
+
+using namespace std;
+namespace fs = std::filesystem;
+
+namespace xt::data::datasets
+{
+    class Cityscapes : public xt::datasets::Dataset
+    {
     public :
-        explicit  Cityscapes(const std::string &root);
-        Cityscapes(const std::string &root, DataMode mode);
-        Cityscapes(const std::string &root, DataMode mode , bool download);
-        Cityscapes(const std::string &root, DataMode mode , bool download, vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
+        explicit Cityscapes(const std::string& root);
+        Cityscapes(const std::string& root, xt::datasets::DataMode mode);
+        Cityscapes(const std::string& root, xt::datasets::DataMode mode, bool download);
+        Cityscapes(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer);
+        Cityscapes(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer,
+                   std::unique_ptr<xt::Module> target_transformer);
 
     private :
+        // TODO fs::path dataset_folder_name
+        fs::path dataset_folder_name = "?";
+
+        bool download = false;
+        fs::path root;
+        fs::path dataset_path;
+
         void load_data();
 
         void check_resources();
