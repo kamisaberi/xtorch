@@ -1,21 +1,49 @@
 #include "datasets/computer_vision/semantic_segmentation/oxfordIII_t_pet.h"
 
-namespace xt::data::datasets {
 
-    OxfordIIITPet::OxfordIIITPet(const std::string &root): OxfordIIITPet::OxfordIIITPet(root, DataMode::TRAIN, false) {
+namespace xt::data::datasets
+{
+    // ---------------------- OxfordIIITPet ---------------------- //
+
+    OxfordIIITPet::OxfordIIITPet(const std::string& root): OxfordIIITPet::OxfordIIITPet(
+        root, xt::datasets::DataMode::TRAIN, false, nullptr, nullptr)
+    {
     }
 
-    OxfordIIITPet::OxfordIIITPet(const std::string &root, DataMode mode): OxfordIIITPet::OxfordIIITPet(root, mode, false) {
+    OxfordIIITPet::OxfordIIITPet(const std::string& root, xt::datasets::DataMode mode): OxfordIIITPet::OxfordIIITPet(
+        root, mode, false, nullptr, nullptr)
+    {
     }
 
-    OxfordIIITPet::OxfordIIITPet(const std::string &root, DataMode mode, bool download) : BaseDataset(root, mode, download) {
-        throw std::runtime_error("OxfordIIITPet: OxfordIIITPet not implemented");
+    OxfordIIITPet::OxfordIIITPet(const std::string& root, xt::datasets::DataMode mode, bool download) :
+        OxfordIIITPet::OxfordIIITPet(
+            root, mode, download, nullptr, nullptr)
+    {
+    }
+
+    OxfordIIITPet::OxfordIIITPet(const std::string& root, xt::datasets::DataMode mode, bool download,
+                           std::unique_ptr<xt::Module> transformer) : OxfordIIITPet::OxfordIIITPet(
+        root, mode, download, std::move(transformer), nullptr)
+    {
+    }
+
+    OxfordIIITPet::OxfordIIITPet(const std::string& root, xt::datasets::DataMode mode, bool download,
+                           std::unique_ptr<xt::Module> transformer, std::unique_ptr<xt::Module> target_transformer):
+        xt::datasets::Dataset(mode, std::move(transformer), std::move(target_transformer))
+    {
+        check_resources();
+        load_data();
+
     }
 
 
-    OxfordIIITPet::OxfordIIITPet(const std::string &root, DataMode mode, bool download,
-                           TransformType transforms) : BaseDataset(root, mode, download, transforms) {
-        throw std::runtime_error("OxfordIIITPet: OxfordIIITPet not implemented");
+    void OxfordIIITPet::load_data()
+    {
+
     }
 
+    void OxfordIIITPet::check_resources()
+    {
+
+    }
 }
