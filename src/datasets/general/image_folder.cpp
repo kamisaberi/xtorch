@@ -14,7 +14,7 @@ namespace xt::data::datasets {
     }
 
     ImageFolder::ImageFolder(const std::string &root, bool load_sub_folders, DataMode mode, LabelsType label_type)
-        : BaseDataset(root, mode, false) {
+        : xt::datasets::Dataset() {
         this->label_type = label_type;
         this->load_sub_folders = load_sub_folders;
         // check_resources(root, download);
@@ -22,14 +22,13 @@ namespace xt::data::datasets {
     }
 
     ImageFolder::ImageFolder(const std::string &root, bool load_sub_folders, DataMode mode, LabelsType label_type,
-                             vector<std::function<torch::Tensor(torch::Tensor)> > transforms): BaseDataset(
-        root, mode, false) {
+                             , std::unique_ptr<xt::Module> transformer): xt::datasets::Dataset() {
         this->label_type = label_type;
         this->load_sub_folders = load_sub_folders;
-        if (!transforms.empty()) {
-            this->transforms = transforms;
+        // if (!transforms.empty()) {
+            this->transformer = std::move(transformer);
             // this->compose = xt::transforms::Compose(transforms);
-        }
+        // }
         // check_resources(root, download);
         load_data();
     }
