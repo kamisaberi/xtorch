@@ -1,22 +1,49 @@
 #include "datasets/natural_language_processing/text_classification/yelp_review_full.h"
 
-namespace xt::data::datasets {
 
-    YelpReviewFull::YelpReviewFull(const std::string &root): YelpReviewFull::YelpReviewFull(root, DataMode::TRAIN, false) {
+namespace xt::data::datasets
+{
+    // ---------------------- YelpReviewFull ---------------------- //
+
+    YelpReviewFull::YelpReviewFull(const std::string& root): YelpReviewFull::YelpReviewFull(
+        root, xt::datasets::DataMode::TRAIN, false, nullptr, nullptr)
+    {
     }
 
-    YelpReviewFull::YelpReviewFull(const std::string &root, DataMode mode): YelpReviewFull::YelpReviewFull(root, mode, false) {
+    YelpReviewFull::YelpReviewFull(const std::string& root, xt::datasets::DataMode mode): YelpReviewFull::YelpReviewFull(
+        root, mode, false, nullptr, nullptr)
+    {
     }
 
-    YelpReviewFull::YelpReviewFull(const std::string &root, DataMode mode, bool download) : BaseDataset(root, mode, download) {
-        throw std::runtime_error("YelpReview: YelpReview not implemented");
+    YelpReviewFull::YelpReviewFull(const std::string& root, xt::datasets::DataMode mode, bool download) :
+        YelpReviewFull::YelpReviewFull(
+            root, mode, download, nullptr, nullptr)
+    {
+    }
+
+    YelpReviewFull::YelpReviewFull(const std::string& root, xt::datasets::DataMode mode, bool download,
+                           std::unique_ptr<xt::Module> transformer) : YelpReviewFull::YelpReviewFull(
+        root, mode, download, std::move(transformer), nullptr)
+    {
+    }
+
+    YelpReviewFull::YelpReviewFull(const std::string& root, xt::datasets::DataMode mode, bool download,
+                           std::unique_ptr<xt::Module> transformer, std::unique_ptr<xt::Module> target_transformer):
+        xt::datasets::Dataset(mode, std::move(transformer), std::move(target_transformer))
+    {
+        check_resources();
+        load_data();
+
     }
 
 
-    YelpReviewFull::YelpReviewFull(const std::string &root, DataMode mode, bool download,
-                           TransformType transforms) : BaseDataset(root, mode, download, transforms) {
-        throw std::runtime_error("YelpReview: YelpReview not implemented");
+    void YelpReviewFull::load_data()
+    {
+
     }
 
+    void YelpReviewFull::check_resources()
+    {
 
+    }
 }
