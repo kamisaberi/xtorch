@@ -23,9 +23,9 @@ using Example = torch::data::Example<torch::Tensor, torch::Tensor>;
 
 template <typename Dataset>
 void check_dataset_type(const Dataset& dataset) {
-    if constexpr (std::is_same_v<Dataset, xt::data::datasets::BaseDataset>) {
+    if constexpr (std::is_same_v<Dataset, xt::datasets::Dataset>) {
         std::cout << "The object is a MNIST dataset" << std::endl;
-    } else if constexpr (std::is_same_v<Dataset, torch::data::datasets::MapDataset<xt::data::datasets::BaseDataset, torch::data::transforms::Stack<>>>) {
+    } else if constexpr (std::is_same_v<Dataset, torch::data::datasets::MapDataset<xt::datasets::Dataset, torch::data::transforms::Stack<>>>) {
         std::cout << "The object is a transformed MNIST dataset" << std::endl;
     } else {
         std::cout << "The object is of an unknown type" << std::endl;

@@ -25,7 +25,7 @@ namespace xt {
      * @brief Compile-time check for transformed MapDataset with Stack transform
      * @tparam Dataset Type of dataset to check
      * @param dataset Dataset instance (unused in evaluation)
-     * @return constexpr bool True if Dataset is MapDataset<BaseDataset, Stack<>>, false otherwise
+     * @return constexpr bool True if Dataset is MapDataset<xt::datasets::Dataset, Stack<>>, false otherwise
      *
      * This type trait is particularly useful for:
      * - Validating dataset transformations in template code
