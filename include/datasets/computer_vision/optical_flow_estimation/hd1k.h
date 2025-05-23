@@ -1,8 +1,12 @@
 #pragma once
-#include "datasets/base/base.h"
+
+#include "datasets/common.h"
+
+using namespace std;
+namespace fs = std::filesystem;
 
 namespace xt::data::datasets {
-    class HD1K : BaseDataset {
+    class HD1K : public xt::datasets::Dataset{
         /*
         Hello,
 
@@ -55,13 +59,24 @@ namespace xt::data::datasets {
 
         */
     public :
-        explicit HD1K(const std::string &root);
-        HD1K(const std::string &root, DataMode mode);
-        HD1K(const std::string &root, DataMode mode , bool download);
-        HD1K(const std::string &root, DataMode mode , bool download, TransformType transforms);
+        explicit HD1K(const std::string& root);
+        HD1K(const std::string& root, xt::datasets::DataMode mode);
+        HD1K(const std::string& root, xt::datasets::DataMode mode, bool download);
+        HD1K(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer);
+        HD1K(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer,
+                   std::unique_ptr<xt::Module> target_transformer);
 
 
     private :
+        // TODO fs::path dataset_folder_name
+        fs::path dataset_folder_name = "?";
+
+        bool download = false;
+        fs::path root;
+        fs::path dataset_path;
+
         void load_data();
 
         void check_resources();
