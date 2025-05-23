@@ -1,9 +1,12 @@
 #pragma once
 
-#include "datasets/base/base.h"
+#include "datasets/common.h"
+
+using namespace std;
+namespace fs = std::filesystem;
 
 namespace xt::data::datasets {
-    class MovingMNIST : BaseDataset {
+    class MovingMNIST : xt::datasets::Dataset {
         /*
         """`MovingMNIST <http://www.cs.toronto.edu/~nitish/unsupervised_video/>`_ Dataset.
 
@@ -23,18 +26,31 @@ namespace xt::data::datasets {
 
          */
     public :
-        explicit MovingMNIST(const std::string &root);
-        MovingMNIST(const std::string &root, DataMode mode);
-        MovingMNIST(const std::string &root, DataMode mode , bool download);
-        MovingMNIST(const std::string &root, DataMode mode , bool download, TransformType transforms);
+        explicit MovingMNIST(const std::string& root);
+        MovingMNIST(const std::string& root, xt::datasets::DataMode mode);
+        MovingMNIST(const std::string& root, xt::datasets::DataMode mode, bool download);
+        MovingMNIST(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer);
+        MovingMNIST(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer,
+                   std::unique_ptr<xt::Module> target_transformer);
 
 
     private :
         fs::path url = fs::path("http://www.cs.toronto.edu/~nitish/unsupervised_video/mnist_test_seq.npy");
         fs::path dataset_file_name = fs::path("mnist_test_seq.npy");
         string dataset_file_md5 = "be083ec986bfe91a449d63653c411eb2";
+
+        // TODO fs::path dataset_folder_name
+        fs::path dataset_folder_name = "?";
+
+        bool download = false;
+        fs::path root;
+        fs::path dataset_path;
+
         void load_data();
 
         void check_resources();
+
     };
 }
