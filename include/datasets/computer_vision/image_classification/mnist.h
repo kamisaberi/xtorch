@@ -1,7 +1,6 @@
 #pragma once
-#include "../../base/base.h"
-// #include "../../../headers/datasets.h"
-#include "../../base/mnist_base.h"
+
+#include "datasets/common.h"
 
 
 using namespace std;
@@ -10,20 +9,19 @@ namespace fs = std::filesystem;
 
 namespace xt::data::datasets
 {
-    class MNIST : public MNISTBase
+    class MNIST : public xt::datasets::Dataset
     {
     public :
+
+
         explicit MNIST(const std::string& root);
-        MNIST(const std::string& root, DataMode mode);
-        MNIST(const std::string& root, DataMode mode, bool download);
-        MNIST(const std::string& root, DataMode mode, bool download,
-              vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
-
-        // // MNIST(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
-        // MNIST(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false , std::shared_ptr<xt::data::transforms::Compose> compose= nullptr);
-        // MNIST(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false, vector<std::function<torch::Tensor(torch::Tensor)>> transforms= {});
-
-        MNIST(const fs::path& root);
+        MNIST(const std::string& root, xt::datasets::DataMode mode);
+        MNIST(const std::string& root, xt::datasets::DataMode mode, bool download);
+        MNIST(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer);
+        MNIST(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer,
+                   std::unique_ptr<xt::Module> target_transformer);
 
     private :
         std::string url = "https://ossci-datasets.s3.amazonaws.com/mnist/";
@@ -43,7 +41,17 @@ namespace xt::data::datasets
 
         void load_data(DataMode mode = DataMode::TRAIN);
 
-        void check_resources(const std::string& root, bool download = false);
+        void check_resources();
         void transform_data();
+
+
+        void read_images(const std::string& file_path, int num_images);
+        void read_labels(const std::string& file_path, int num_labels);
+
+        bool download = false;
+        fs::path root;
+        fs::path dataset_path;
+
+
     };
 }
