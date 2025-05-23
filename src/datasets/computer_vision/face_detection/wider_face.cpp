@@ -36,12 +36,12 @@ namespace xt::data::datasets {
     }
 
 
-    void Caltech101::load_data()
+    void WIDERFace::load_data()
     {
 
     }
 
-    void Caltech101::check_resources()
+    void WIDERFace::check_resources()
     {
 
     }
