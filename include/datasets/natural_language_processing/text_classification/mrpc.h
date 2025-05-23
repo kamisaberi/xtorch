@@ -1,17 +1,34 @@
 #pragma once
-#include "datasets/base/base.h"
+
+#include "datasets/common.h"
+
+using namespace std;
+namespace fs = std::filesystem;
 
 namespace xt::data::datasets {
-    class MRPC : BaseDataset {
+    class MRPC : public  xt::datasets::Dataset{
         public :
-            explicit MRPC(const std::string &root);
-        MRPC(const std::string &root, DataMode mode);
-        MRPC(const std::string &root, DataMode mode , bool download);
-        MRPC(const std::string &root, DataMode mode , bool download, TransformType transforms);
+        explicit MRPC(const std::string& root);
+        MRPC(const std::string& root, xt::datasets::DataMode mode);
+        MRPC(const std::string& root, xt::datasets::DataMode mode, bool download);
+        MRPC(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer);
+        MRPC(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer,
+                   std::unique_ptr<xt::Module> target_transformer);
 
         private :
-            void load_data();
+        // TODO fs::path dataset_folder_name
+fs::path dataset_folder_name = "?";
+
+        bool download = false;
+        fs::path root;
+        fs::path dataset_path;
+
+        void load_data();
 
         void check_resources();
+
+
     };
 }
