@@ -1,22 +1,49 @@
 #include "datasets/natural_language_processing/language_modeling/penn_treebank.h"
 
-namespace xt::data::datasets {
 
-    PennTreebank::PennTreebank(const std::string &root): PennTreebank::PennTreebank(root, DataMode::TRAIN, false) {
+namespace xt::data::datasets
+{
+    // ---------------------- PennTreebank ---------------------- //
+
+    PennTreebank::PennTreebank(const std::string& root): PennTreebank::PennTreebank(
+        root, xt::datasets::DataMode::TRAIN, false, nullptr, nullptr)
+    {
     }
 
-    PennTreebank::PennTreebank(const std::string &root, DataMode mode): PennTreebank::PennTreebank(root, mode, false) {
+    PennTreebank::PennTreebank(const std::string& root, xt::datasets::DataMode mode): PennTreebank::PennTreebank(
+        root, mode, false, nullptr, nullptr)
+    {
     }
 
-    PennTreebank::PennTreebank(const std::string &root, DataMode mode, bool download) : BaseDataset(root, mode, download) {
-        throw std::runtime_error("PennTreebank: PennTreebank not implemented");
+    PennTreebank::PennTreebank(const std::string& root, xt::datasets::DataMode mode, bool download) :
+        PennTreebank::PennTreebank(
+            root, mode, download, nullptr, nullptr)
+    {
+    }
+
+    PennTreebank::PennTreebank(const std::string& root, xt::datasets::DataMode mode, bool download,
+                           std::unique_ptr<xt::Module> transformer) : PennTreebank::PennTreebank(
+        root, mode, download, std::move(transformer), nullptr)
+    {
+    }
+
+    PennTreebank::PennTreebank(const std::string& root, xt::datasets::DataMode mode, bool download,
+                           std::unique_ptr<xt::Module> transformer, std::unique_ptr<xt::Module> target_transformer):
+        xt::datasets::Dataset(mode, std::move(transformer), std::move(target_transformer))
+    {
+        check_resources();
+        load_data();
+
     }
 
 
-    PennTreebank::PennTreebank(const std::string &root, DataMode mode, bool download,
-                           TransformType transforms) : BaseDataset(root, mode, download, transforms) {
-        throw std::runtime_error("PennTreebank: PennTreebank not implemented");
+    void PennTreebank::load_data()
+    {
+
     }
 
+    void PennTreebank::check_resources()
+    {
 
+    }
 }
