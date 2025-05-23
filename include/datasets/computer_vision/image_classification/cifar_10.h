@@ -1,5 +1,6 @@
 #pragma once
-#include "datasets/base/base.h"
+
+#include "datasets/common.h"
 
 using namespace std;
 namespace fs = std::filesystem;
@@ -11,8 +12,7 @@ namespace fs = std::filesystem;
  * @email kamisaberi@gmail.com
  * @github https://github.com/kamisaberi
  */
-namespace xt::data::datasets
-{
+namespace xt::data::datasets {
     /**
      * @class CIFAR10
      * @brief Implementation of the CIFAR-10 dataset loader
@@ -25,15 +25,14 @@ namespace xt::data::datasets
      * - Train/test split handling
      * - Inherits all transform capabilities from BaseDataset
      */
-    class CIFAR10 : public BaseDataset
-    {
+    class CIFAR10 : public xt::datasets::Dataset {
     public:
         /**
          * @brief Construct CIFAR10 dataset with root directory only
          * @param root Root directory where dataset will be stored/located
          * @author Kamran Saberifard
          */
-        explicit CIFAR10(const std::string& root);
+        explicit CIFAR10(const std::string &root);
 
         /**
          * @brief Construct CIFAR10 dataset with specified mode
@@ -41,7 +40,7 @@ namespace xt::data::datasets
          * @param mode Dataset mode (TRAIN or TEST)
          * @author Kamran Saberifard
          */
-        CIFAR10(const std::string& root, DataMode mode);
+        CIFAR10(const std::string &root, DataMode mode);
 
         /**
          * @brief Construct CIFAR10 dataset with download capability
@@ -50,7 +49,7 @@ namespace xt::data::datasets
          * @param download Whether to automatically download if missing
          * @author Kamran Saberifard
          */
-        CIFAR10(const std::string& root, DataMode mode, bool download);
+        CIFAR10(const std::string &root, DataMode mode, bool download);
 
         /**
          * @brief Construct CIFAR10 dataset with transforms
@@ -60,7 +59,7 @@ namespace xt::data::datasets
          * @param transforms Sequence of tensor transformations to apply
          * @author Kamran Saberifard
          */
-        CIFAR10(const std::string& root, DataMode mode, bool download, TransformType transforms);
+        CIFAR10(const std::string &root, DataMode mode, bool download, TransformType transforms);
 
         /**
          * @brief Get a single sample from the dataset
@@ -75,7 +74,7 @@ namespace xt::data::datasets
          * @return torch::optional<size_t> Dataset size (50,000 train or 10,000 test)
          * @author Kamran Saberifard
          */
-        torch::optional<size_t> size() const override;
+        torch::optional <size_t> size() const override;
 
     private:
         /// @brief Official CIFAR-10 dataset download URL
@@ -96,12 +95,12 @@ namespace xt::data::datasets
 
         /// @brief List of training set binary files
         /// @author Kamran Saberifard
-        vector<fs::path> train_file_names = {
-            fs::path("data_batch_1.bin"),
-            fs::path("data_batch_2.bin"),
-            fs::path("data_batch_3.bin"),
-            fs::path("data_batch_4.bin"),
-            fs::path("data_batch_5.bin")
+        vector <fs::path> train_file_names = {
+                fs::path("data_batch_1.bin"),
+                fs::path("data_batch_2.bin"),
+                fs::path("data_batch_3.bin"),
+                fs::path("data_batch_4.bin"),
+                fs::path("data_batch_5.bin")
         };
 
         /// @brief Test set binary filename
