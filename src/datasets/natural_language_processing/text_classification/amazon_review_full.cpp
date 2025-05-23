@@ -1,22 +1,48 @@
 #include "datasets/natural_language_processing/text_classification/amazon_review_full.h"
 
-namespace xt::data::datasets {
+namespace xt::data::datasets
+{
+    // ---------------------- AmazonReviewFull ---------------------- //
 
-    AmazonReviewFull::AmazonReviewFull(const std::string &root): AmazonReviewFull::AmazonReviewFull(root, DataMode::TRAIN, false) {
+    AmazonReviewFull::AmazonReviewFull(const std::string& root): AmazonReviewFull::AmazonReviewFull(
+        root, xt::datasets::DataMode::TRAIN, false, nullptr, nullptr)
+    {
     }
 
-    AmazonReviewFull::AmazonReviewFull(const std::string &root, DataMode mode): AmazonReviewFull::AmazonReviewFull(root, mode, false) {
+    AmazonReviewFull::AmazonReviewFull(const std::string& root, xt::datasets::DataMode mode): AmazonReviewFull::AmazonReviewFull(
+        root, mode, false, nullptr, nullptr)
+    {
     }
 
-    AmazonReviewFull::AmazonReviewFull(const std::string &root, DataMode mode, bool download) : BaseDataset(root, mode, download) {
-        throw std::runtime_error("AmazonReview: AmazonReview not implemented");
+    AmazonReviewFull::AmazonReviewFull(const std::string& root, xt::datasets::DataMode mode, bool download) :
+        AmazonReviewFull::AmazonReviewFull(
+            root, mode, download, nullptr, nullptr)
+    {
+    }
+
+    AmazonReviewFull::AmazonReviewFull(const std::string& root, xt::datasets::DataMode mode, bool download,
+                           std::unique_ptr<xt::Module> transformer) : AmazonReviewFull::AmazonReviewFull(
+        root, mode, download, std::move(transformer), nullptr)
+    {
+    }
+
+    AmazonReviewFull::AmazonReviewFull(const std::string& root, xt::datasets::DataMode mode, bool download,
+                           std::unique_ptr<xt::Module> transformer, std::unique_ptr<xt::Module> target_transformer):
+        xt::datasets::Dataset(mode, std::move(transformer), std::move(target_transformer))
+    {
+        check_resources();
+        load_data();
+
     }
 
 
-    AmazonReviewFull::AmazonReviewFull(const std::string &root, DataMode mode, bool download,
-                           TransformType transforms) : BaseDataset(root, mode, download, transforms) {
-        throw std::runtime_error("AmazonReview: AmazonReview not implemented");
+    void AmazonReviewFull::load_data()
+    {
+
     }
 
+    void AmazonReviewFull::check_resources()
+    {
 
+    }
 }
