@@ -1,16 +1,33 @@
 #pragma once
-#include "datasets/base/base.h"
 
-namespace xt::data::datasets {
-    class QQP : BaseDataset {
-        public :
-            explicit QQP(const std::string &root);
-        QQP(const std::string &root, DataMode mode);
-        QQP(const std::string &root, DataMode mode , bool download);
-        QQP(const std::string &root, DataMode mode , bool download, TransformType transforms);
+#include "datasets/common.h"
 
-        private :
-            void load_data();
+using namespace std;
+namespace fs = std::filesystem;
+
+namespace xt::data::datasets
+{
+    class QQP : public xt::datasets::Dataset
+    {
+    public :
+        explicit QQP(const std::string& root);
+        QQP(const std::string& root, xt::datasets::DataMode mode);
+        QQP(const std::string& root, xt::datasets::DataMode mode, bool download);
+        QQP(const std::string& root, xt::datasets::DataMode mode, bool download,
+            std::unique_ptr<xt::Module> transformer);
+        QQP(const std::string& root, xt::datasets::DataMode mode, bool download,
+            std::unique_ptr<xt::Module> transformer,
+            std::unique_ptr<xt::Module> target_transformer);
+
+    private :
+        // TODO fs::path dataset_folder_name
+        fs::path dataset_folder_name = "?";
+
+        bool download = false;
+        fs::path root;
+        fs::path dataset_path;
+
+        void load_data();
 
         void check_resources();
     };
