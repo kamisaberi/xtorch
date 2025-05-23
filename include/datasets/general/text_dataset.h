@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include "datasets/base/base.h"
+#include "datasets/common.h"
 
 namespace xt::data::datasets {
 
@@ -11,7 +11,7 @@ namespace xt::data::datasets {
     public :
         TextDataset(const std::string &file_path);
         TextDataset(const std::string &file_path,DataMode mode);
-        TextDataset(const std::string &file_path,DataMode mode , vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
+        TextDataset(const std::string &file_path,DataMode mode , std::unique_ptr<xt::Module> transformer);
 
     private:
         vector<string> labels_name;
