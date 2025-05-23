@@ -1,13 +1,15 @@
 #pragma once
-#include "datasets/base/base.h"
+#include "datasets/common.h"
 using namespace std;
 namespace fs = std::filesystem;
 
-namespace xt::data::datasets {
-    enum class ImageType {
-        FULL = 0,  ///< Full resolution images
+namespace xt::data::datasets
+{
+    enum class ImageType
+    {
+        FULL = 0, ///< Full resolution images
         PX320 = 1, ///< 320px resolution images
-        PX160 = 2  ///< 160px resolution images
+        PX160 = 2 ///< 160px resolution images
     };
 
     const std::unordered_map<ImageType, std::string> ImageTypeToString = {
@@ -16,24 +18,30 @@ namespace xt::data::datasets {
         {ImageType::PX160, "160px"}
     };
 
-    inline std::string getImageTypeValue(ImageType type) {
+    inline std::string getImageTypeValue(ImageType type)
+    {
         auto it = ImageTypeToString.find(type);
-        if (it != ImageTypeToString.end()) {
+        if (it != ImageTypeToString.end())
+        {
             return it->second;
         }
         return "unknown"; // Default value if enum not found
     }
 
-    class Imagenette : public BaseDataset {
+    class Imagenette : public BaseDataset
+    {
     public:
-        Imagenette(const std::string &root, DataMode mode);
+        explicit Imagenette(const std::string& root);
+        Imagenette(const std::string& root, xt::datasets::DataMode mode);
+        Imagenette(const std::string& root, xt::datasets::DataMode mode, bool download);
+        Imagenette(const std::string& root, xt::datasets::DataMode mode, bool download, ImageType type);
+        Imagenette(const std::string& root, xt::datasets::DataMode mode, bool download, ImageType type,
+                   std::unique_ptr<xt::Module> transformer);
+        Imagenette(const std::string& root, xt::datasets::DataMode mode, bool download, ImageType type,
+                   std::unique_ptr<xt::Module> transformer,
+                   std::unique_ptr<xt::Module> target_transformer);
 
-        Imagenette(const std::string &root, DataMode mode, bool download);
 
-        Imagenette(const std::string &root, DataMode mode, bool download, ImageType type);
-
-        Imagenette(const std::string &root, DataMode mode, bool download,
-                  ImageType type, TransformType transforms);
 
     private:
         std::map<string, std::tuple<fs::path, fs::path, fs::path, std::string>> resources = {
@@ -63,12 +71,12 @@ namespace xt::data::datasets {
             }
         };
 
-        ImageType type = ImageType::PX160;  ///< Default image resolution type
-        fs::path dataset_folder_name = "imagenette";  ///< Base folder name for dataset
-        vector<string> labels_name;  ///< List of class label names
+        ImageType type = ImageType::PX160; ///< Default image resolution type
+        fs::path dataset_folder_name = "imagenette"; ///< Base folder name for dataset
+        vector<string> labels_name; ///< List of class label names
 
         void load_data(DataMode mode = DataMode::TRAIN);
 
-        void check_resources(const std::string &root, bool download = false);
+        void check_resources(const std::string& root, bool download = false);
     };
 }
