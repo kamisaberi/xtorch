@@ -7,7 +7,7 @@ namespace xt::data::datasets {
 
 
 
-    class VideoDataset : public BaseDataset {
+    class VideoDataset : public xt::datasets::Dataset {
     public :
         VideoDataset(const std::string &file_path);
         VideoDataset(const std::string &file_path,DataMode mode);
@@ -20,12 +20,12 @@ namespace xt::data::datasets {
     };
 
 
-    class StackedVideoDataset : public BaseDataset {
+    class StackedVideoDataset : public xt::datasets::Dataset {
     public :
         StackedVideoDataset(const std::string &folder_path);
         StackedVideoDataset(const std::string &folder_path,DataMode mode);
         StackedVideoDataset(const std::string &folder_path,DataMode mode, bool load_sub_folders);
-        StackedVideoDataset(const std::string &folder_path,DataMode mode, bool load_sub_folders , vector<std::function<torch::Tensor(torch::Tensor)>> transforms);
+        StackedVideoDataset(const std::string &folder_path,DataMode mode, bool load_sub_folders , std::unique_ptr<xt::Module> transformer);
 
     private:
         vector<string> labels_name;
