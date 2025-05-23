@@ -124,12 +124,12 @@ namespace xt::data::datasets
                 // Apply transforms if specified
                 if (transformer != nullptr)
                 {
-                    tensor = transformer(tensor);
+                    tensor = (*transformer)(tensor);
                 }
 
                 // Store results
                 this->data.push_back(tensor);
-                this->labels.push_back(classes_map[label]);
+                this->targets.push_back(classes_map[label]);
             }
         }
         // Handle test set
@@ -155,14 +155,14 @@ namespace xt::data::datasets
                 torch::Tensor tensor = torch::ext::media::opencv::convertImageToTensor(img_path);
 
                 // Apply transforms if specified
-                if (!transforms.empty())
+                if (transformer != nullptr)
                 {
-                    // tensor = this->compose(tensor);
+                    tensor = (*transformer)(tensor);
                 }
 
                 // Store results
                 this->data.push_back(tensor);
-                this->labels.push_back(classes_map[label]);
+                this->targets.push_back(classes_map[label]);
             }
         }
     }
