@@ -1,9 +1,12 @@
 #pragma once
 
-#include "datasets/base/base.h"
+#include "datasets/common.h"
+
+using namespace std;
+namespace fs = std::filesystem;
 
 namespace xt::data::datasets {
-    class FlyingThings3D : public BaseDataset {
+    class FlyingThings3D : public xt::datasets::Dataset {
         /*
         """`FlyingThings3D <https://lmb.informatik.uni-freiburg.de/resources/datasets/SceneFlowDatasets.en.html>`_ dataset for optical flow.
        The dataset is expected to have the following structure: ::
@@ -32,13 +35,24 @@ namespace xt::data::datasets {
         """
     */
     public :
-        explicit FlyingThings3D(const std::string &root);
-        FlyingThings3D(const std::string &root, DataMode mode);
-        FlyingThings3D(const std::string &root, DataMode mode , bool download);
-        FlyingThings3D(const std::string &root, DataMode mode , bool download, TransformType transforms);
+        explicit FlyingThings3D(const std::string& root);
+        FlyingThings3D(const std::string& root, xt::datasets::DataMode mode);
+        FlyingThings3D(const std::string& root, xt::datasets::DataMode mode, bool download);
+        FlyingThings3D(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer);
+        FlyingThings3D(const std::string& root, xt::datasets::DataMode mode, bool download,
+                   std::unique_ptr<xt::Module> transformer,
+                   std::unique_ptr<xt::Module> target_transformer);
 
 
     private :
+        // TODO fs::path dataset_folder_name
+        fs::path dataset_folder_name = "?";
+
+        bool download = false;
+        fs::path root;
+        fs::path dataset_path;
+
         void load_data();
 
         void check_resources();
