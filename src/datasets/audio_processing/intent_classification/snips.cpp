@@ -20,8 +20,8 @@ namespace xt::data::datasets
     {
     }
 
-    Caltech101::Caltech101(const std::string& root, xt::datasets::DataMode mode, bool download,
-                           std::unique_ptr<xt::Module> transformer) : Caltech101::Caltech101(
+    Snips::Snips(const std::string& root, xt::datasets::DataMode mode, bool download,
+                           std::unique_ptr<xt::Module> transformer) : Snips::Snips(
         root, mode, download, std::move(transformer), nullptr)
     {
     }
