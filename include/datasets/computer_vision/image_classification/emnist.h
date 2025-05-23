@@ -10,9 +10,16 @@ namespace fs = std::filesystem;
 namespace xt::data::datasets {
     class EMNIST : public xt::datasets::Dataset {
     public :
-        EMNIST(const std::string &root, DataMode mode = DataMode::TRAIN, bool download = false);
 
-        EMNIST(const fs::path &root);
+        explicit EMNIST(const std::string& root);
+        EMNIST(const std::string& root, xt::datasets::DataMode mode);
+        EMNIST(const std::string& root, xt::datasets::DataMode mode, bool download);
+        EMNIST(const std::string& root, xt::datasets::DataMode mode, bool download,
+              std::unique_ptr<xt::Module> transformer);
+        EMNIST(const std::string& root, xt::datasets::DataMode mode, bool download,
+              std::unique_ptr<xt::Module> transformer,
+              std::unique_ptr<xt::Module> target_transformer);
+
 
     private:
         std::string url = "https://biometrics.nist.gov/cs_links/EMNIST/";
