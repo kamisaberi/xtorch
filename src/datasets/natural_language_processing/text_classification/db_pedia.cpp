@@ -1,22 +1,49 @@
 #include "datasets/natural_language_processing/text_classification/db_pedia.h"
 
-namespace xt::data::datasets {
 
-    DBPedia::DBPedia(const std::string &root): DBPedia::DBPedia(root, DataMode::TRAIN, false) {
+namespace xt::data::datasets
+{
+    // ---------------------- DBPedia ---------------------- //
+
+    DBPedia::DBPedia(const std::string& root): DBPedia::DBPedia(
+        root, xt::datasets::DataMode::TRAIN, false, nullptr, nullptr)
+    {
     }
 
-    DBPedia::DBPedia(const std::string &root, DataMode mode): DBPedia::DBPedia(root, mode, false) {
+    DBPedia::DBPedia(const std::string& root, xt::datasets::DataMode mode): DBPedia::DBPedia(
+        root, mode, false, nullptr, nullptr)
+    {
     }
 
-    DBPedia::DBPedia(const std::string &root, DataMode mode, bool download) : BaseDataset(root, mode, download) {
-        throw std::runtime_error("DBPedia: DBPedia not implemented");
+    DBPedia::DBPedia(const std::string& root, xt::datasets::DataMode mode, bool download) :
+        DBPedia::DBPedia(
+            root, mode, download, nullptr, nullptr)
+    {
+    }
+
+    DBPedia::DBPedia(const std::string& root, xt::datasets::DataMode mode, bool download,
+                           std::unique_ptr<xt::Module> transformer) : DBPedia::DBPedia(
+        root, mode, download, std::move(transformer), nullptr)
+    {
+    }
+
+    DBPedia::DBPedia(const std::string& root, xt::datasets::DataMode mode, bool download,
+                           std::unique_ptr<xt::Module> transformer, std::unique_ptr<xt::Module> target_transformer):
+        xt::datasets::Dataset(mode, std::move(transformer), std::move(target_transformer))
+    {
+        check_resources();
+        load_data();
+
     }
 
 
-    DBPedia::DBPedia(const std::string &root, DataMode mode, bool download,
-                           TransformType transforms) : BaseDataset(root, mode, download, transforms) {
-        throw std::runtime_error("DBPedia: DBPedia not implemented");
+    void DBPedia::load_data()
+    {
+
     }
 
+    void DBPedia::check_resources()
+    {
 
+    }
 }
