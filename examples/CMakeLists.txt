@@ -15,7 +15,7 @@ set(BASE_SOURCE_FILES
         ../src/utils/md5.cpp
         ../src/utils/string.cpp
         ../src/media/image/processing.cpp
-        ../src/media/opencv/images.cpp
+        ../src/utils/images.cpp
 #        ../src/datasets/mnist.cpp
 #        ../src/models/cnn/lenet5.cpp
         ../src/definitions/transforms.cpp
