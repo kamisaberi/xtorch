@@ -1,6 +1,6 @@
 #include "include/datasets/computer_vision/image_classification/food.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     Food101::Food101(const std::string& root): Food101(root, xt::datasets::DataMode::TRAIN, false, nullptr, nullptr)
     {

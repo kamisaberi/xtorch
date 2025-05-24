@@ -1,6 +1,6 @@
 #include "include/datasets/computer_vision/image_classification/fer.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- FER2013 ---------------------- //
 

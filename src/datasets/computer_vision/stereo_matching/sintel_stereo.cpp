@@ -1,6 +1,6 @@
 #include "include/datasets/computer_vision/stereo_matching/sintel_stereo.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- SintelStereo ---------------------- //
 

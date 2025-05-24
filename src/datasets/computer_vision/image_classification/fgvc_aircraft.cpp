@@ -1,6 +1,6 @@
 #include "include/datasets/computer_vision/image_classification/fgvc_aircraft.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- FGVCAircraft ---------------------- //
 

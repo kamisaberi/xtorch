@@ -1,6 +1,6 @@
 #include "include/datasets/computer_vision/video_prediction/moving_mnist.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- MovingMNIST ---------------------- //
 

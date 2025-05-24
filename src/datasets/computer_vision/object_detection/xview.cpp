@@ -1,6 +1,6 @@
 #include "include/datasets/computer_vision/object_detection/xview.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- XView ---------------------- //
 

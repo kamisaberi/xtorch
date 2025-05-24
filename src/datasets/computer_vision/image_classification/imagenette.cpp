@@ -1,6 +1,6 @@
 #include "include/datasets/computer_vision/image_classification/imagenette.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     Imagenette::Imagenette(const std::string& root): Imagenette::Imagenette(
         root, xt::datasets::DataMode::TRAIN, false, ImageType::PX160, nullptr, nullptr)
@@ -153,4 +153,4 @@ namespace xt::data::datasets
             }
         }
     }
-} // namespace xt::data::datasets
+} // namespace xt::datasets

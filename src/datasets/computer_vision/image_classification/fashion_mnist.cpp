@@ -1,6 +1,6 @@
 #include "include/datasets/computer_vision/image_classification/fashion_mnist.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     FashionMNIST::FashionMNIST(const std::string& root): FashionMNIST(
         root, xt::datasets::DataMode::TRAIN, false, nullptr, nullptr)

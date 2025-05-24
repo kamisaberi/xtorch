@@ -1,6 +1,6 @@
 #include "include/datasets/computer_vision/stereo_matching/kitti_2015_stereo.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- Kitti2015Stereo ---------------------- //
 

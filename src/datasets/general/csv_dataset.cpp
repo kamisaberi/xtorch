@@ -1,6 +1,6 @@
 #include "include/datasets/general/csv_dataset.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     CSVDataset::CSVDataset(const std::string& file_path): xt::datasets::Dataset()
     {

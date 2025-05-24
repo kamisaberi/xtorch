@@ -1,6 +1,6 @@
 #include "include/datasets/computer_vision/image_classification/rendered_sst2.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- RenderedSST2 ---------------------- //
 

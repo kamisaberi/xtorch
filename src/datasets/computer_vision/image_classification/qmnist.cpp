@@ -1,6 +1,6 @@
 #include "include/datasets/computer_vision/image_classification/qmnist.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
 
     QMNIST::QMNIST(const std::string& root): QMNIST(

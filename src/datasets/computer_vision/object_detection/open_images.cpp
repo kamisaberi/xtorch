@@ -1,6 +1,6 @@
 #include "include/datasets/computer_vision/object_detection/open_images.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- OpenImages ---------------------- //
 

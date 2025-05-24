@@ -1,6 +1,6 @@
 #include "include/datasets/computer_vision/image_classification/stl.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- STL10 ---------------------- //
 

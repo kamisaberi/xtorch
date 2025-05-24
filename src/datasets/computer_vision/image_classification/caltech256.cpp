@@ -1,6 +1,6 @@
 #include "include/datasets/computer_vision/image_classification/caltech256.h"
 
-namespace xt::data::datasets {
+namespace xt::datasets {
 
 
     Caltech256::Caltech256(const std::string& root): Caltech256::Caltech256(

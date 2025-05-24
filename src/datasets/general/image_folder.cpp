@@ -1,6 +1,6 @@
 #include "include/datasets/general/image_folder.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     ImageFolder::ImageFolder(const std::string& root): ImageFolder::ImageFolder(
         root, false, DataMode::TRAIN, LabelsType::BY_FOLDER)

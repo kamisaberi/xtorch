@@ -1,6 +1,6 @@
 #include "include/datasets/computer_vision/3d_shape_generation/shapenet.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- ShapeNet ---------------------- //
 
