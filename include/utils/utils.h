@@ -30,6 +30,12 @@
 // String manipulation
 #include "string.h"      // String utility functions
 
+// String manipulation
+#include "images.h"      // String utility functions
+
+// String manipulation
+#include "videos.h"      // String utility functions
+
 /*
  * Author: Kamran Saberifard
  * Email: kamisaberi@gmail.com
