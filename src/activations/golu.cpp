@@ -1,3 +1,11 @@
-//
-// Created by kami on 5/16/25.
-//
+#include "include/activations/golu.h"
+
+namespace xt::activations {
+    torch::Tensor golu(torch::Tensor x) {
+    }
+
+    torch::Tensor GoLU::forward(torch::Tensor x) const {
+        return xt::activations::golu(x);
+    }
+
+}
