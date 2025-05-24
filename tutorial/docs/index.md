@@ -49,7 +49,7 @@ xTorch is architected as a thin layer on top of LibTorch’s C++ API, carefully 
 
 int main() {
     std::cout.precision(10);
-    auto dataset = xt::data::datasets::MNIST(
+    auto dataset = xt::datasets::MNIST(
         "/home/kami/Documents/temp/", DataMode::TRAIN, true,
         {
             xt::data::transforms::Resize({32, 32}),
