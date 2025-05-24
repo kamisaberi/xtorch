@@ -1,6 +1,6 @@
 #include "include/datasets/audio_processing/emotion_recognition/iemocap.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
 
     IEMOCAP::IEMOCAP(const std::string& root): IEMOCAP::IEMOCAP(

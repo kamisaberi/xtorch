@@ -1,7 +1,7 @@
 #include "include/datasets/computer_vision/semantic_segmentation/cityscapes.h"
 
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- Cityscapes ---------------------- //
 

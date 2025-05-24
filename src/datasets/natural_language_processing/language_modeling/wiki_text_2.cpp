@@ -1,6 +1,6 @@
 #include "include/datasets/natural_language_processing/language_modeling/wiki_text_2.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- WikiTextV2 ---------------------- //
 

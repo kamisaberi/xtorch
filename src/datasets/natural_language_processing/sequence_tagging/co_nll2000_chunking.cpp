@@ -1,6 +1,6 @@
 #include "include/datasets/natural_language_processing/sequence_tagging/co_nll2000_chunking.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- CoNLL2000Chunking ---------------------- //
 

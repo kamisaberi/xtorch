@@ -1,6 +1,6 @@
 #include "include/datasets/computer_vision/image_classification/emnist.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // EMNIST::EMNIST(const std::string &root, DataMode mode, bool download) : MNISTBase(root, mode, download) {
     //     check_resources(root, download);

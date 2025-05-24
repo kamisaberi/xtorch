@@ -1,6 +1,6 @@
 #include "include/datasets/audio_processing/speech_recognition/libri_light_limited.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
 
     LibriLightLimited::LibriLightLimited(const std::string& root): LibriLightLimited::LibriLightLimited(

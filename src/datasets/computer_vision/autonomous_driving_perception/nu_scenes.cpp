@@ -1,6 +1,6 @@
 #include "include/datasets/computer_vision/autonomous_driving_perception/nu_scenes.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- NuScenes ---------------------- //
 

@@ -1,7 +1,7 @@
 #include "include/datasets/audio_processing/speech_synthesis/lj_speech.h"
 
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- LjSpeech ---------------------- //
 

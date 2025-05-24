@@ -1,6 +1,6 @@
 #include "include/datasets/audio_processing/music_source_separation/mus_db_hq.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- MUSDBHQ ---------------------- //
 

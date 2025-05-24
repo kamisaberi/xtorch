@@ -1,6 +1,6 @@
 #include "include/datasets/computer_vision/optical_flow_estimation/hd1k.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- HD1K ---------------------- //
 

@@ -1,6 +1,6 @@
 #include "include/datasets/audio_processing/pronunciation_dictionary/cmu_dict.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
 
     CMUDict::CMUDict(const std::string& root): CMUDict::CMUDict(

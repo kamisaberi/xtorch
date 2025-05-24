@@ -1,6 +1,6 @@
 #include "include/datasets/audio_processing/speech_separation/libri_mix.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     
     LibriMix::LibriMix(const std::string& root): LibriMix::LibriMix(

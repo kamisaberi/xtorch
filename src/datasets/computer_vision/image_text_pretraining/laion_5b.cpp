@@ -1,6 +1,6 @@
 #include "include/datasets/computer_vision/image_text_pretraining/laion_5b.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- LAION5B ---------------------- //
 

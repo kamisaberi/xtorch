@@ -1,6 +1,6 @@
 #include "include/datasets/audio_processing/environmental_sound_classification/urban_sound.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- UrbanSound ---------------------- //
 

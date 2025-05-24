@@ -1,7 +1,7 @@
 #include "include/datasets/audio_processing/speech_recognition/librispeech.h"
 
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- LibriSpeech ---------------------- //
 

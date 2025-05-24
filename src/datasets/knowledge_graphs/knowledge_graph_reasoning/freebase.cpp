@@ -1,6 +1,6 @@
 #include "include/datasets/knowledge_graphs/knowledge_graph_reasoning/freebase.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- FreeBase ---------------------- //
 

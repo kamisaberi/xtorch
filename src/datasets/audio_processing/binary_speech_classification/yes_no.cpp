@@ -1,6 +1,6 @@
 #include "include/datasets/audio_processing/binary_speech_classification/yes_no.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- YesNo ---------------------- //
 

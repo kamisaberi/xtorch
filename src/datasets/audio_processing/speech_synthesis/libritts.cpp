@@ -1,6 +1,6 @@
 #include "include/datasets/audio_processing/speech_synthesis/libritts.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
 
     LIBRITTS::LIBRITTS(const std::string& root): LIBRITTS::LIBRITTS(

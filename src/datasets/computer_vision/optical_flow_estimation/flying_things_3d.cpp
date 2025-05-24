@@ -1,6 +1,6 @@
 #include "include/datasets/computer_vision/optical_flow_estimation/flying_things_3d.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- FlyingThings3D ---------------------- //
 

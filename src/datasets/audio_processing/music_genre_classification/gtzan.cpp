@@ -1,6 +1,6 @@
 #include "include/datasets/audio_processing/music_genre_classification/gtzan.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- GTZAN ---------------------- //
 

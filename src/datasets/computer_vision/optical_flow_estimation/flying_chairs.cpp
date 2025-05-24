@@ -1,6 +1,6 @@
 #include "include/datasets/computer_vision/optical_flow_estimation/flying_chairs.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- FlyingChairs ---------------------- //
 

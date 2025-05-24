@@ -1,6 +1,6 @@
 #include "include/datasets/audio_processing/music_tagging/magna_tag_a_tune.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- MagnaTagATune ---------------------- //
 
