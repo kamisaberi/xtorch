@@ -1,4 +1,4 @@
-#include "transforms/general/lambda.h"
+#include "include/transforms/general/lambda.h"
 
 namespace xt::transforms::general {
 

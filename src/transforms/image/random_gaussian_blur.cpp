@@ -1,4 +1,4 @@
-#include "../../../include/transforms/image/random_gaussian_blur.h"
+#include "include/transforms/image/random_gaussian_blur.h"
 
 namespace xt::transforms::image {
 
