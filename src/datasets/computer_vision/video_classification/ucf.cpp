@@ -1,6 +1,6 @@
 #include "include/datasets/computer_vision/video_classification//ucf.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- UCF101 ---------------------- //
 

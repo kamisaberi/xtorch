@@ -1,6 +1,6 @@
 #include "include/datasets/audio_processing/audio_event_detection/audioset.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- Caltech101 ---------------------- //
 

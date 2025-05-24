@@ -1,6 +1,6 @@
 #include "include/datasets/computer_vision/medical_image_classification/chest_xray14.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- ChestXray14 ---------------------- //
 

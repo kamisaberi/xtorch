@@ -1,6 +1,6 @@
 #include "include/datasets/audio_processing/speech_command_recognition/speech_commands.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- SpeechCommands ---------------------- //
 

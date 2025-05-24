@@ -1,6 +1,6 @@
 #include "include/datasets/audio_processing/sound_event_detection/fsd50k.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
 
     FSD50K::FSD50K(const std::string& root): FSD50K::FSD50K(

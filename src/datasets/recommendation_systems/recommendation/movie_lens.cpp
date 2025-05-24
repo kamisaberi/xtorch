@@ -1,6 +1,6 @@
 #include "include/datasets/recommendation_systems/recommendation/movie_lens.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- MovieLens ---------------------- //
 

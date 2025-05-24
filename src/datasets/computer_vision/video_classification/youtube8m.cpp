@@ -1,6 +1,6 @@
 #include "include/datasets/computer_vision/video_classification/youtube8m.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- YouTube8M ---------------------- //
 

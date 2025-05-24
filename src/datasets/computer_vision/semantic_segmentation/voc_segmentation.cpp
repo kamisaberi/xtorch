@@ -1,7 +1,7 @@
 #include "include/datasets/computer_vision/semantic_segmentation/voc_segmentation.h"
 
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- VOCSegmentation ---------------------- //
 

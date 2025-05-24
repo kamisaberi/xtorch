@@ -1,6 +1,6 @@
 #include "include/datasets/graph_data/molecular_property_prediction/ogb_mo_ihiv.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- OGBMolHIV ---------------------- //
 

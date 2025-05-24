@@ -1,6 +1,6 @@
 #include "include/datasets/audio_processing/speech_synthesis/vctk_092.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- VCTK092 ---------------------- //
 

@@ -1,7 +1,7 @@
 
 #include "include/datasets/general/video_dataset.h"
 
-namespace xt::data::datasets {
+namespace xt::datasets {
 
 
 

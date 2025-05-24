@@ -1,7 +1,7 @@
 #include "include/datasets/computer_vision/semantic_segmentation/oxfordIII_t_pet.h"
 
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- OxfordIIITPet ---------------------- //
 
