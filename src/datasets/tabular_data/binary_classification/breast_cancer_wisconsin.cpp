@@ -1,4 +1,4 @@
-#include "datasets/tabular_data/binary_classification/breast_cancer_wisconsin.h"
+#include "include/datasets/tabular_data/binary_classification/breast_cancer_wisconsin.h"
 
 namespace xt::data::datasets
 {

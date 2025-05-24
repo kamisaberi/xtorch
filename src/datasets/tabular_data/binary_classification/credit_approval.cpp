@@ -1,4 +1,4 @@
-#include "datasets/tabular_data/binary_classification/credit_approval.h"
+#include "include/datasets/tabular_data/binary_classification/credit_approval.h"
 
 namespace xt::data::datasets
 {
