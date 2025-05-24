@@ -1,3 +1,11 @@
-//
-// Created by kami on 5/16/25.
-//
+#include "include/activations/gcu.h"
+
+namespace xt::activations {
+    torch::Tensor gcu(torch::Tensor x) {
+    }
+
+    torch::Tensor GCU::forward(torch::Tensor x) const {
+        return xt::activations::gcu(x);
+    }
+
+}
