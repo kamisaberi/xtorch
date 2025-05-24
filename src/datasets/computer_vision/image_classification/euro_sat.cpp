@@ -1,4 +1,4 @@
-#include "datasets/computer_vision/image_classification/euro_sat.h"
+#include "include/datasets/computer_vision/image_classification/euro_sat.h"
 
 namespace xt::data::datasets
 {

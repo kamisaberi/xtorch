@@ -1,4 +1,4 @@
-#include "datasets/computer_vision/image_classification/sun.h"
+#include "include/datasets/computer_vision/image_classification/sun.h"
 
 namespace xt::data::datasets
 {

@@ -1,4 +1,4 @@
-#include "datasets/computer_vision/image_classification/flickr_8k.h"
+#include "include/datasets/computer_vision/image_classification/flickr_8k.h"
 
 namespace xt::data::datasets
 {

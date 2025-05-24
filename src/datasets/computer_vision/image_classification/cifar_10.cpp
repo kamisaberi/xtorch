@@ -1,4 +1,4 @@
-#include "datasets/computer_vision/image_classification/cifar_10.h"
+#include "include/datasets/computer_vision/image_classification/cifar_10.h"
 
 using namespace std;
 namespace fs = std::filesystem;

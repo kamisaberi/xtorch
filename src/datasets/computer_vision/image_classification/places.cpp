@@ -1,4 +1,4 @@
-#include "datasets/computer_vision/image_classification/places.h"
+#include "include/datasets/computer_vision/image_classification/places.h"
 
 namespace xt::data::datasets
 {
