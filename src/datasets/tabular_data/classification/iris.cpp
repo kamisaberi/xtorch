@@ -1,4 +1,4 @@
-#include "datasets/tabular_data/classification/iris.h"
+#include "include/datasets/tabular_data/classification/iris.h"
 
 namespace xt::data::datasets
 {
