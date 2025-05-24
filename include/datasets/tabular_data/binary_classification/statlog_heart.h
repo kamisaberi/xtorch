@@ -7,15 +7,15 @@ namespace fs = std::filesystem;
 
 namespace xt::data::datasets
 {
-    class ModelNet40 : public xt::datasets::Dataset
+    class StatlogHeart : public xt::datasets::Dataset
     {
     public :
-        explicit ModelNet40(const std::string& root);
-        ModelNet40(const std::string& root, xt::datasets::DataMode mode);
-        ModelNet40(const std::string& root, xt::datasets::DataMode mode, bool download);
-        ModelNet40(const std::string& root, xt::datasets::DataMode mode, bool download,
+        explicit StatlogHeart(const std::string& root);
+        StatlogHeart(const std::string& root, xt::datasets::DataMode mode);
+        StatlogHeart(const std::string& root, xt::datasets::DataMode mode, bool download);
+        StatlogHeart(const std::string& root, xt::datasets::DataMode mode, bool download,
                    std::unique_ptr<xt::Module> transformer);
-        ModelNet40(const std::string& root, xt::datasets::DataMode mode, bool download,
+        StatlogHeart(const std::string& root, xt::datasets::DataMode mode, bool download,
                    std::unique_ptr<xt::Module> transformer,
                    std::unique_ptr<xt::Module> target_transformer);
 
