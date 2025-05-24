@@ -1,6 +1,6 @@
 #pragma once
 
-#include "activations/common.h"
+#include "common.h"
 
 namespace xt::activations
 {
