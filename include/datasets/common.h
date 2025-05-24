@@ -9,7 +9,6 @@
 #include <map>
 #include <torch/torch.h>
 #include <opencv2/opencv.hpp>
-#include "media/opencv/images.h"
 #include "transforms/transforms.h"
 #include "utils/utils.h"
 #include "base/dataset.h"

@@ -7,11 +7,9 @@
 #include <string>
 #include <vector>
 
-using namespace std;
 
-namespace fs = std::filesystem;
 
 namespace xt::utils::videos {
     std::vector<cv::Mat>  extractFrames(const std::string& videoFilePath);
-    std::vector<torch::Tensor> extractVideoFramesAsTensor(fs::path videoFilePath);
+    std::vector<torch::Tensor> extractVideoFramesAsTensor(const std::filesystem::path& videoFilePath);
 }

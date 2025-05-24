@@ -119,7 +119,7 @@ namespace xt::datasets
 
                 // Load and process image
                 fs::path img_path = images_path / fs::path(line + ".jpg");
-                torch::Tensor tensor = torch::ext::media::opencv::convertImageToTensor(img_path);
+                torch::Tensor tensor = xt::utils::image::convertImageToTensor(img_path);
 
                 // Apply transforms if specified
                 if (transformer != nullptr)
@@ -152,7 +152,7 @@ namespace xt::datasets
 
                 // Load and process image
                 fs::path img_path = images_path / fs::path(line + ".jpg");
-                torch::Tensor tensor = torch::ext::media::opencv::convertImageToTensor(img_path);
+                torch::Tensor tensor = xt::utils::image::convertImageToTensor(img_path);
 
                 // Apply transforms if specified
                 if (transformer != nullptr)

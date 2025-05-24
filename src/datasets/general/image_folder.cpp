@@ -64,7 +64,7 @@ namespace xt::datasets
                     {
                         if (!file.is_directory())
                         {
-                            torch::Tensor tensor = torch::ext::media::opencv::convertImageToTensor(file.path());
+                            torch::Tensor tensor = xt::utils::image::convertImageToTensor(file.path());
                             data.push_back(tensor);
                             targets.push_back(labels_name.size() - 1);
                         }
@@ -76,7 +76,7 @@ namespace xt::datasets
                     {
                         if (!file.is_directory())
                         {
-                            torch::Tensor tensor = torch::ext::media::opencv::convertImageToTensor(file.path());
+                            torch::Tensor tensor = xt::utils::image::convertImageToTensor(file.path());
                             data.push_back(tensor);
                             targets.push_back(labels_name.size() - 1);
                         }
