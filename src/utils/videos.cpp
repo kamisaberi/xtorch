@@ -1,4 +1,4 @@
-#include "../../include/utils/videos.h"
+#include "include/utils/videos.h"
 
 
 
@@ -26,7 +26,7 @@ namespace xt::utils::videos {
     }
 
 
-    std::vector<torch::Tensor> extractVideoFramesAsTensor(fs::path videoFilePath) {
+    std::vector<torch::Tensor> extractVideoFramesAsTensor(const std::filesystem::path& videoFilePath) {
         std::vector<torch::Tensor> frames;
         cv::VideoCapture cap(videoFilePath.string());
         if (!cap.isOpened()) {

@@ -9,7 +9,7 @@ int main() {
 
   fs::path pth = fs::path("/home/kami/Documents/temp/food-101/images/apple_pie/134.jpg");
 
-  torch::Tensor tensor = torch::ext::media::opencv::convertImageToTensor(pth , {320,240} );
+  torch::Tensor tensor = xt::utils::image::convertImageToTensor(pth , {320,240} );
   cout << tensor.sizes() << endl;
 
 //

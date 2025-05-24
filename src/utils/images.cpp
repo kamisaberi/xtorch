@@ -2,7 +2,7 @@
 
 
 namespace xt::utils::image {
-    torch::Tensor convertImageToTensor(fs::path img, vector<int> size) {
+    torch::Tensor convertImageToTensor(std::filesystem::path img, vector<int> size) {
         cv::Mat image = cv::imread(img.string(), cv::IMREAD_COLOR);
         if (image.empty()) {
             throw std::runtime_error("Could not load image at: " + img.string());

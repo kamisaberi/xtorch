@@ -104,7 +104,7 @@ namespace xt::datasets
                     for (auto& img : fs::directory_iterator(p.path()))
                     {
                         // Convert image to tensor using OpenCV
-                        torch::Tensor tensor = torch::ext::media::opencv::convertImageToTensor(img.path());
+                        torch::Tensor tensor = xt::utils::image::convertImageToTensor(img.path());
 
                         // Apply transforms if specified
                         if (transformer != nullptr)
@@ -137,7 +137,7 @@ namespace xt::datasets
                     for (auto& img : fs::directory_iterator(p.path()))
                     {
                         // Convert image to tensor using OpenCV
-                        torch::Tensor tensor = torch::ext::media::opencv::convertImageToTensor(img.path());
+                        torch::Tensor tensor = xt::utils::image::convertImageToTensor(img.path());
 
                         // Apply transforms if specified
                         if (transformer != nullptr)
