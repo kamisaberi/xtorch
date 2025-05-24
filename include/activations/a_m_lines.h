@@ -13,10 +13,6 @@ namespace xt::activations
         torch::Tensor forward(torch::Tensor x) const override;
     private:
     };
-
-
-
-
 }
 
 
