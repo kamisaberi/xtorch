@@ -1,4 +1,4 @@
-#include "datasets/tabular_data/classification/ecoli.h"
+#include "include/datasets/tabular_data/classification/ecoli.h"
 
 namespace xt::data::datasets
 {

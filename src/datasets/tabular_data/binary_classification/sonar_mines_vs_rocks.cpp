@@ -1,4 +1,4 @@
-#include "datasets/tabular_data/binary_classification/sonar_mines_vs_rocks.h"
+#include "include/datasets/tabular_data/binary_classification/sonar_mines_vs_rocks.h"
 
 namespace xt::data::datasets
 {
