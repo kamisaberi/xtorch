@@ -1,4 +1,4 @@
-#include "datasets/natural_language_processing/text_classification/yahoo_answers.h"
+#include "include/datasets/natural_language_processing/text_classification/yahoo_answers.h"
 
 
 namespace xt::data::datasets

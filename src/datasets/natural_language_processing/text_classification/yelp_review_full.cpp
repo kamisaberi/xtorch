@@ -1,4 +1,4 @@
-#include "datasets/natural_language_processing/text_classification/yelp_review_full.h"
+#include "include/datasets/natural_language_processing/text_classification/yelp_review_full.h"
 
 
 namespace xt::data::datasets
