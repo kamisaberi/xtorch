@@ -1,7 +1,7 @@
 #include "include/datasets/computer_vision/object_detection/voc_detection.h"
 
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- VOCDetection ---------------------- //
 

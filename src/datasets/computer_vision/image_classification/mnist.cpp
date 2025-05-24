@@ -1,6 +1,6 @@
 #include "include/datasets/computer_vision/image_classification/mnist.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     MNIST::MNIST(const std::string& root): MNIST(
         root, xt::datasets::DataMode::TRAIN, false, nullptr, nullptr)

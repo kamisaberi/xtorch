@@ -1,6 +1,6 @@
 #include "include/datasets/computer_vision/image_generation/ffhq.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- FFHQ ---------------------- //
 

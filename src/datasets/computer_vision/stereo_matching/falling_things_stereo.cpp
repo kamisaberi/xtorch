@@ -1,6 +1,6 @@
 #include "include/datasets/computer_vision/stereo_matching/falling_things_stereo.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- FallingThingsStereo ---------------------- //
 

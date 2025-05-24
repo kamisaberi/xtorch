@@ -1,6 +1,6 @@
 #include "include/datasets/computer_vision/stereo_matching/middlebury.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- Middlebury2014Stereo ---------------------- //
 

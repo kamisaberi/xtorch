@@ -1,6 +1,6 @@
 #include "include/datasets/computer_vision/image_pair_tasks/photo_tour.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- PhotoTour ---------------------- //
 

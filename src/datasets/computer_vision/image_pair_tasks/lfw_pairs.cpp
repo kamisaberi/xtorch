@@ -1,6 +1,6 @@
 #include "include/datasets/computer_vision/image_pair_tasks/lfw_pairs.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- LFWPairs ---------------------- //
 

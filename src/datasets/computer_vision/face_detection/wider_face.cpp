@@ -1,6 +1,6 @@
 #include "include/datasets/computer_vision/face_detection/wider_face.h"
 
-namespace xt::data::datasets {
+namespace xt::datasets {
 
     // ---------------------- Caltech101 ---------------------- //
 

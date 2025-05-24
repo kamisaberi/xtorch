@@ -1,6 +1,6 @@
 #include "include/datasets/computer_vision/stereo_matching/eth_3d_stereo.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- ETH3DStereo ---------------------- //
 

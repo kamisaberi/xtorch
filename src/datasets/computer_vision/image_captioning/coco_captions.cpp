@@ -1,6 +1,6 @@
 #include "include/datasets/computer_vision/image_captioning/coco_captions.h"
 
-namespace xt::data::datasets {
+namespace xt::datasets {
 
     // ---------------------- Caltech101 ---------------------- //
 

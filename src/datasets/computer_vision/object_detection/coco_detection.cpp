@@ -1,7 +1,7 @@
 #include "include/datasets/computer_vision/object_detection/coco_detection.h"
 
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- CocoDetection ---------------------- //
 

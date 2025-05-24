@@ -3,7 +3,7 @@
 using namespace std;
 namespace fs = std::filesystem;
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     CIFAR100::CIFAR100(const std::string& root): CIFAR100::CIFAR100(
         root, xt::datasets::DataMode::TRAIN, false, nullptr, nullptr)

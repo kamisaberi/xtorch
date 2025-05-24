@@ -1,6 +1,6 @@
 #include "include/datasets/biomedical_data/cancer_genomics_classification/tcga.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- TCGA ---------------------- //
 

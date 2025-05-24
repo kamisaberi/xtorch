@@ -1,6 +1,6 @@
 #include "include/datasets/computer_vision/image_classification/places.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- Places365 ---------------------- //
 

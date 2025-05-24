@@ -1,6 +1,6 @@
 #include "include/datasets/computer_vision/image_classification/kmnist.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     KMNIST::KMNIST(const std::string& root): KMNIST(
         root, xt::datasets::DataMode::TRAIN, false, nullptr, nullptr)
