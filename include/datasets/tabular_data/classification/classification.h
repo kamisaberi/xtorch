@@ -3,7 +3,7 @@
 #include "car_evaluation.h"
 #include "ecoli.h"
 #include "glass_identification.h"
-#include "iris_dataset.h"
+#include "iris.h"
 #include "palmer_penguin_dataset.h"
 #include "thyroid_disease.h"
 #include "vertebral_column.h"
