@@ -1,4 +1,4 @@
-#include "datasets/natural_language_processing/dialogue_generation/daily_dialog.h"
+#include "include/datasets/natural_language_processing/dialogue_generation/daily_dialog.h"
 
 namespace xt::data::datasets
 {
