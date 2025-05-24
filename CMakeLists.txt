@@ -56,7 +56,7 @@ set(LIBRARY_SOURCE_FILES
 # =============================================================================
 # Add standard system include paths
 message(${CMAKE_SOURCE_DIR}/include)
-include_directories(SYSTEM ${CMAKE_SOURCE_DIR}/include /usr/include /usr/local/include)
+include_directories(SYSTEM ${CMAKE_SOURCE_DIR} /usr/include /usr/local/include)
 
 # =============================================================================
 # Library Target Configuration
