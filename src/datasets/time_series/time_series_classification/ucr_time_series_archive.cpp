@@ -1,6 +1,6 @@
 #include "include/datasets/time_series/time_series_classification/ucr_time_series_archive.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- UCRTimeSeriesArchive ---------------------- //
 

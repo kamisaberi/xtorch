@@ -1,6 +1,6 @@
 #include "include/datasets/time_series/time_series_forecasting/m4_competition.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- M4Competition ---------------------- //
 

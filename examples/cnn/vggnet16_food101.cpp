@@ -32,7 +32,7 @@ int main() {
     auto dataset = xt::datasets::Food101("/home/kami/Documents/temp/", DataMode::TRAIN, false);
 
     // Commented-out alternative dataset (Imagenette, not used)
-    // auto dataset = torch::ext::data::datasets::Imagenette("/home/kami/Documents/temp/", DataMode::TRAIN, true, torch::ext::data::datasets::ImageType::PX160);
+    // auto dataset = torch::ext::datasets::Imagenette("/home/kami/Documents/temp/", DataMode::TRAIN, true, torch::ext::datasets::ImageType::PX160);
 
     // Apply transformations to the dataset:
     // 1. Resize images to 227x227

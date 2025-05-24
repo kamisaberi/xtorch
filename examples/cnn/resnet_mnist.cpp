@@ -29,7 +29,7 @@ int main() {
     // - Path: /home/kami/Documents/temp/
     // - Mode: Training
     // - Download: Enabled
-    auto dataset = xt::data::datasets::MNIST("/home/kami/Documents/temp/", DataMode::TRAIN, true);
+    auto dataset = xt::datasets::MNIST("/home/kami/Documents/temp/", DataMode::TRAIN, true);
 
     // Apply transformations to the dataset:
     // 1. Resize images to 224x224

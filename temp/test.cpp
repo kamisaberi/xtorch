@@ -13,12 +13,12 @@ int main() {
     std::cout << tensor << std::endl;
     std::cout << "Hello World" << std::endl;
     std::string r = "./test/test1/ali";
-//    torch::ext::data::datasets::UCF101 u1 = torch::ext::data::datasets::UCF101(5);
-//    torch::ext::data::datasets::UCF101 u1 = torch::ext::data::datasets::UCF101(r);
+//    torch::ext::datasets::UCF101 u1 = torch::ext::datasets::UCF101(5);
+//    torch::ext::datasets::UCF101 u1 = torch::ext::datasets::UCF101(r);
 
-    xt::data::datasets::MNIST train("/home/kami/Documents/temp/", DataMode::TRAIN , true);
+    xt::datasets::MNIST train("/home/kami/Documents/temp/", DataMode::TRAIN , true);
     cout << "ttttttttttttttttttt\n";
-    xt::data::datasets::MNIST test("/home/kami/Documents/temp/", DataMode::TEST , true);
+    xt::datasets::MNIST test("/home/kami/Documents/temp/", DataMode::TEST , true);
     cout << "ttttttttttttttttttt\n";
     cout << train.get(0).target << endl;
     cout << "ttttttttttttttttttt\n";

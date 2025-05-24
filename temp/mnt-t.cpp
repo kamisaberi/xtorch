@@ -79,9 +79,9 @@ int main() {
     //    transforms.push_back(torch::data::transforms::Normalize<>(0.5,0.5));
     //    transforms.push_back(resize_transform);
 
-    // auto dataset = torch::ext::data::datasets::MNIST("/home/kami/Documents/temp/",
+    // auto dataset = torch::ext::datasets::MNIST("/home/kami/Documents/temp/",
     //                                                  {.mode = DataMode::TRAIN, .download = true});
-    auto dataset = xt::data::datasets::MNIST("/home/kami/Documents/temp/", DataMode::TRAIN, true);
+    auto dataset = xt::datasets::MNIST("/home/kami/Documents/temp/", DataMode::TRAIN, true);
 
     // cout << typeid(dataset).name() << endl;
 
@@ -105,7 +105,7 @@ int main() {
         xt::data::transforms::resize({32, 32}),
         xt::data::transforms::normalize(0.5, 0.5)
     };
-    auto dataset2 = xt::data::datasets::MNIST("/home/kami/Documents/temp/",
+    auto dataset2 = xt::datasets::MNIST("/home/kami/Documents/temp/",
                                                  {.mode = DataMode::TRAIN, .download = true , .transforms = transforms});
     // for (const auto &transform: transforms) {
     //     auto t  = dataset.map(transform);
@@ -137,7 +137,7 @@ int main() {
 
 
     // auto rs = torch::ext::data::transforms::resize({32, 32});
-    // torch::data::datasets::MapDataset<torch::ext::data::datasets::MNIST, torch::data::transforms::Lambda<
+    // torch::data::datasets::MapDataset<torch::ext::datasets::MNIST, torch::data::transforms::Lambda<
     //     torch::data::Example<> > > dataset1 = dataset.map(transforms[0]);
     // for (int i = 1 ; i < transforms.size();i++) {
     //     dataset1 = dataset.map(transforms[i]);

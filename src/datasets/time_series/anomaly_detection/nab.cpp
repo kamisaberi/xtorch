@@ -1,6 +1,6 @@
 #include "include/datasets/time_series/anomaly_detection/nab.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- NAB ---------------------- //
 
