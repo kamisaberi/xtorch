@@ -2,10 +2,16 @@
 
 #include "common.h"
 
-namespace xt::activations
-{
-    struct ASU : xt::Module
-    {
+namespace xt::activations {
+    torch::Tensor asu(torch::Tensor x);
+
+    struct ASU : xt::Module {
+    public:
+        ASU() = default;
+
+        torch::Tensor forward(torch::Tensor x) const override;
+
+    private:
     };
 }
 
