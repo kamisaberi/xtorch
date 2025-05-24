@@ -1,4 +1,4 @@
-#include "datasets/computer_vision/video_classification/youtube8m.h"
+#include "include/datasets/computer_vision/video_classification/youtube8m.h"
 
 namespace xt::data::datasets
 {
