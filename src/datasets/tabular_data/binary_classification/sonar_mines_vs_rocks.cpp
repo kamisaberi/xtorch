@@ -1,32 +1,32 @@
-#include "datasets/computer_vision/3d_point_cloud_analysis/model_net40.h"
+#include "datasets/tabular_data/binary_classification/sonar_mines_vs_rocks.h"
 
 namespace xt::data::datasets
 {
-    // ---------------------- ModelNet40 ---------------------- //
+    // ---------------------- SonarMinesVsRocks ---------------------- //
 
-    ModelNet40::ModelNet40(const std::string& root): ModelNet40::ModelNet40(
+    SonarMinesVsRocks::SonarMinesVsRocks(const std::string& root): SonarMinesVsRocks::SonarMinesVsRocks(
         root, xt::datasets::DataMode::TRAIN, false, nullptr, nullptr)
     {
     }
 
-    ModelNet40::ModelNet40(const std::string& root, xt::datasets::DataMode mode): ModelNet40::ModelNet40(
+    SonarMinesVsRocks::SonarMinesVsRocks(const std::string& root, xt::datasets::DataMode mode): SonarMinesVsRocks::SonarMinesVsRocks(
         root, mode, false, nullptr, nullptr)
     {
     }
 
-    ModelNet40::ModelNet40(const std::string& root, xt::datasets::DataMode mode, bool download) :
-        ModelNet40::ModelNet40(
+    SonarMinesVsRocks::SonarMinesVsRocks(const std::string& root, xt::datasets::DataMode mode, bool download) :
+        SonarMinesVsRocks::SonarMinesVsRocks(
             root, mode, download, nullptr, nullptr)
     {
     }
 
-    ModelNet40::ModelNet40(const std::string& root, xt::datasets::DataMode mode, bool download,
-                           std::unique_ptr<xt::Module> transformer) : ModelNet40::ModelNet40(
+    SonarMinesVsRocks::SonarMinesVsRocks(const std::string& root, xt::datasets::DataMode mode, bool download,
+                           std::unique_ptr<xt::Module> transformer) : SonarMinesVsRocks::SonarMinesVsRocks(
         root, mode, download, std::move(transformer), nullptr)
     {
     }
 
-    ModelNet40::ModelNet40(const std::string& root, xt::datasets::DataMode mode, bool download,
+    SonarMinesVsRocks::SonarMinesVsRocks(const std::string& root, xt::datasets::DataMode mode, bool download,
                            std::unique_ptr<xt::Module> transformer, std::unique_ptr<xt::Module> target_transformer):
         xt::datasets::Dataset(mode, std::move(transformer), std::move(target_transformer))
     {
@@ -36,12 +36,12 @@ namespace xt::data::datasets
     }
 
 
-    void ModelNet40::load_data()
+    void SonarMinesVsRocks::load_data()
     {
 
     }
 
-    void ModelNet40::check_resources()
+    void SonarMinesVsRocks::check_resources()
     {
 
     }
