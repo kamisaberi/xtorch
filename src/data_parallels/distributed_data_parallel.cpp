@@ -1,4 +1,4 @@
-#include "../../include/data_parallels/distributed_data_parallel.h"
+#include "include/data_parallels/distributed_data_parallel.h"
 
 
 // DistributedDataParallel class
