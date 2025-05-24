@@ -1,7 +1,7 @@
 #include "../../../include/media/opencv/images.h"
 
 
-namespace torch::ext::media::opencv {
+namespace xt::utils::image {
     torch::Tensor convertImageToTensor(fs::path img, vector<int> size) {
         cv::Mat image = cv::imread(img.string(), cv::IMREAD_COLOR);
         if (image.empty()) {
@@ -34,4 +34,14 @@ namespace torch::ext::media::opencv {
         tensor = tensor.contiguous();
         return tensor;
     }
+
+
+    torch::Tensor resize(const torch::Tensor &tensor, const std::vector<int64_t> &size) {
+        return torch::nn::functional::interpolate(
+                tensor.unsqueeze(0),
+                torch::nn::functional::InterpolateFuncOptions().size(size).mode(
+                        torch::kBilinear).align_corners(false)
+        ).squeeze(0);
+    }
+
 }

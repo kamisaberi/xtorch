@@ -7,11 +7,11 @@ using namespace std;
 
 namespace fs = std::filesystem;
 
-namespace torch::ext::media::opencv {
+namespace xt::utils::image {
+
 
     torch::Tensor convertImageToTensor(fs::path image ,vector<int> size = {0,0});
-
-
+    torch::Tensor resize(const torch::Tensor &tensor, const std::vector<int64_t> &size);
 
 }
 
