@@ -1,5 +1,5 @@
 #pragma once
-#include "normalizations/common.h"
+#include "common.h"
 
 
 namespace xt::norm
