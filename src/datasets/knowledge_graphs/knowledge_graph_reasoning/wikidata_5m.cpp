@@ -1,4 +1,4 @@
-#include "datasets/knowledge_graphs/knowledge_graph_reasoning/wikidata_5m.h"
+#include "include/datasets/knowledge_graphs/knowledge_graph_reasoning/wikidata_5m.h"
 
 namespace xt::data::datasets
 {
