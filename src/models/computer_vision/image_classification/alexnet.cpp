@@ -1,4 +1,4 @@
-#include "models/computer_vision/image_classification/alexnet.h"
+#include "include/models/computer_vision/image_classification/alexnet.h"
 
 
 using namespace std;
