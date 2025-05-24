@@ -1,4 +1,4 @@
-#include "datasets/computer_vision/image_classification/lfw_people.h"
+#include "include/datasets/computer_vision/image_classification/lfw_people.h"
 
 namespace xt::data::datasets
 {
