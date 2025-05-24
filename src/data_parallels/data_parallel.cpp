@@ -1,4 +1,4 @@
-#include "../../include/data_parallels/data_parallel.h"
+#include "include/data_parallels/data_parallel.h"
 
 namespace xt::parallelism
 {
