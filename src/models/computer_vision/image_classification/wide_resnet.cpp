@@ -1,4 +1,4 @@
-#include "models/computer_vision/image_classification/wide_resnet.h"
+#include "include/models/computer_vision/image_classification/wide_resnet.h"
 
 namespace xt::models {
     // namespace {

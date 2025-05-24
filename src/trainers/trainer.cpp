@@ -13,7 +13,7 @@
  * - Training checkpoint functionality
  */
 
-#include "../../include/trainers/trainer.h"
+#include "include/trainers/trainer.h"
 
 namespace xt {
 
