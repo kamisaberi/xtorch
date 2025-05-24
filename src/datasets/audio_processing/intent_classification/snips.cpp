@@ -1,4 +1,4 @@
-#include "datasets/audio_processing/intent_classification/snips.h"
+#include "include/datasets/audio_processing/intent_classification/snips.h"
 
 namespace xt::data::datasets
 {
