@@ -1,3 +1,11 @@
-//
-// Created by kami on 5/16/25.
-//
+#include "include/activations/geglu.h"
+
+namespace xt::activations {
+    torch::Tensor geglu(torch::Tensor x) {
+    }
+
+    torch::Tensor GeGLU::forward(torch::Tensor x) const {
+        return xt::activations::geglu(x);
+    }
+
+}
