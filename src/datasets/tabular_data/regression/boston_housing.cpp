@@ -1,4 +1,4 @@
-#include "datasets/computer_vision/3d_point_cloud_analysis/model_net40.h"
+#include "datasets/tabular_data/regression/boston_housing.h"
 
 namespace xt::data::datasets
 {
