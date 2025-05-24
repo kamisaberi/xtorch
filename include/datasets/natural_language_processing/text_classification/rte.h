@@ -5,7 +5,7 @@
 using namespace std;
 namespace fs = std::filesystem;
 
-namespace xt::data::datasets {
+namespace xt::datasets {
     class RTE : public xt::datasets::Dataset{
         public :
         explicit RTE(const std::string& root);

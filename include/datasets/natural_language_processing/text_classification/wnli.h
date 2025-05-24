@@ -5,7 +5,7 @@
 using namespace std;
 namespace fs = std::filesystem;
 
-namespace xt::data::datasets {
+namespace xt::datasets {
     class WNLI : public xt::datasets::Dataset{
         public :
         explicit WNLI(const std::string& root);

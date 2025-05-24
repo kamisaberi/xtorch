@@ -6,7 +6,7 @@ using namespace std;
 namespace fs = std::filesystem;
 
 
-namespace xt::data::datasets {
+namespace xt::datasets {
     class CoNLL2000Chunking : public  xt::datasets::Dataset{
         public :
         explicit CoNLL2000Chunking(const std::string& root);
