@@ -4,6 +4,8 @@
 
 namespace xt::activations
 {
+    torch::Tensor am_lines(torch::Tensor x);
+
     struct AMLines : xt::Module
     {
     public:
@@ -13,7 +15,7 @@ namespace xt::activations
     };
 
 
-    torch::Tensor am_lines(torch::Tensor x);
+
 
 }
 
