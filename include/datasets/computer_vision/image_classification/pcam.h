@@ -6,7 +6,7 @@ using namespace std;
 namespace fs = std::filesystem;
 
 
-namespace xt::data::datasets {
+namespace xt::datasets {
     class PCAM : xt::datasets::Dataset {
         /*
         """`PCAM Dataset   <https://github.com/basveeling/pcam>`_.

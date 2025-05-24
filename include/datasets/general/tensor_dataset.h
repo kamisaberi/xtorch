@@ -3,7 +3,7 @@
 
 #include "include/datasets/common.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     class TensorDataset : public xt::datasets::Dataset
     {

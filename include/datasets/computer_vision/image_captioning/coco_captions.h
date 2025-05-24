@@ -3,7 +3,7 @@
 #include "include/datasets/common.h"
 
 
-namespace xt::data::datasets {
+namespace xt::datasets {
     class CocoCaptions : public xt::datasets::Dataset {
     public :
         explicit CocoCaptions(const std::string &root);
