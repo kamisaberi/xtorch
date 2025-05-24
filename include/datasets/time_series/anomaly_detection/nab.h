@@ -5,7 +5,7 @@
 using namespace std;
 namespace fs = std::filesystem;
 
-namespace xt::data::datasets {
+namespace xt::datasets {
     class NAB : public xt::datasets::Dataset {
     public :
         explicit NAB(const std::string &root);

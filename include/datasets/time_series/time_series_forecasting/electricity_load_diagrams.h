@@ -5,7 +5,7 @@
 using namespace std;
 namespace fs = std::filesystem;
 
-namespace xt::data::datasets {
+namespace xt::datasets {
     class ElectricityLoadDiagrams : public xt::datasets::Dataset {
     public :
         explicit ElectricityLoadDiagrams(const std::string &root);
