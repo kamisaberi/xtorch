@@ -4,7 +4,7 @@
 #include "ecoli.h"
 #include "glass_identification.h"
 #include "iris.h"
-#include "palmer_penguin_dataset.h"
+#include "palmer_penguin.h"
 #include "thyroid_disease.h"
 #include "vertebral_column.h"
 #include "wheat_seeds.h"
