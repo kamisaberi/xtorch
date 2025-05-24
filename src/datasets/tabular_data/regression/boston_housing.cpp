@@ -1,4 +1,4 @@
-#include "datasets/tabular_data/regression/boston_housing.h"
+#include "include/datasets/tabular_data/regression/boston_housing.h"
 
 namespace xt::data::datasets
 {
