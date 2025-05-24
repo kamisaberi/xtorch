@@ -2,7 +2,7 @@
 
 
 
-namespace torch::ext::media::opencv::videos {
+namespace xt::utils::videos {
 
 
     std::vector<cv::Mat> extractFrames(const std::string& videoFilePath ) {
