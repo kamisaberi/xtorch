@@ -5,7 +5,7 @@
 using namespace std;
 namespace fs = std::filesystem;
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     class TCGA : public xt::datasets::Dataset
     {

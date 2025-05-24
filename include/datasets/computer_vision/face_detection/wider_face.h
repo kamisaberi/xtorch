@@ -7,7 +7,7 @@ namespace fs = std::filesystem;
 
 
 
-namespace xt::data::datasets {
+namespace xt::datasets {
     class WIDERFace : public xt::datasets::Dataset {
         /*
         """`WIDERFace <http://shuoyang1213.me/WIDERFACE/>`_ Dataset.

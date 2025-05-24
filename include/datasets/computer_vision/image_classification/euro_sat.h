@@ -7,7 +7,7 @@ using namespace std;
 namespace fs = std::filesystem;
 
 
-namespace xt::data::datasets {
+namespace xt::datasets {
     class EuroSAT :public  xt::datasets::Dataset {
     public :
         explicit EuroSAT(const std::string& root);

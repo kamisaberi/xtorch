@@ -6,7 +6,7 @@ using namespace std;
 namespace fs = std::filesystem;
 
 
-namespace xt::data::datasets {
+namespace xt::datasets {
     class SBU : xt::datasets::Dataset {
         /*
         """`SBU Captioned Photo <http://www.cs.virginia.edu/~vicente/sbucaptions/>`_ Dataset.

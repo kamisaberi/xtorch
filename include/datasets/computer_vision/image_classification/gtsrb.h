@@ -5,7 +5,7 @@
 using namespace std;
 namespace fs = std::filesystem;
 
-namespace xt::data::datasets {
+namespace xt::datasets {
     class GTSRB : xt::datasets::Dataset {
         /*
         """`German Traffic Sign Recognition Benchmark (GTSRB) <https://benchmark.ini.rub.de/>`_ Dataset.

@@ -6,7 +6,7 @@ using namespace std;
 namespace fs = std::filesystem;
 
 
-namespace xt::data::datasets {
+namespace xt::datasets {
    class Places365 : xt::datasets::Dataset {
        /*
        """`Places365 <http://places2.csail.mit.edu/index.html>`_ classification dataset.

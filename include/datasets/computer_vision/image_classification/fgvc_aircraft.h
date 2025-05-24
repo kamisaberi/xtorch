@@ -6,7 +6,7 @@
 using namespace std;
 namespace fs = std::filesystem;
 
-namespace xt::data::datasets {
+namespace xt::datasets {
     class FGVCAircraft :public xt::datasets::Dataset {
     public :
         explicit FGVCAircraft(const std::string& root);

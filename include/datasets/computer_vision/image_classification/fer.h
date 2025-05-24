@@ -6,7 +6,7 @@
 using namespace std;
 namespace fs = std::filesystem;
 
-namespace xt::data::datasets {
+namespace xt::datasets {
     class FER2013 : public xt::datasets::Dataset {
         /*
             `FER2013
