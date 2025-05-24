@@ -1,4 +1,4 @@
-#include "datasets/reinforcement_learning/reinforcement_learning/atari_2600_ale.h"
+#include "include/datasets/reinforcement_learning/reinforcement_learning/atari_2600_ale.h"
 
 namespace xt::data::datasets
 {

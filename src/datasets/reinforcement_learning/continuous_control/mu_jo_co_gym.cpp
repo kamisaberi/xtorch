@@ -1,4 +1,4 @@
-#include "datasets/reinforcement_learning/continuous_control/mu_jo_co_gym.h"
+#include "include/datasets/reinforcement_learning/continuous_control/mu_jo_co_gym.h"
 
 namespace xt::data::datasets
 {

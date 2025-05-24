@@ -1,4 +1,4 @@
-#include "datasets/tabular_data/binary_classification/german_credit.h"
+#include "include/datasets/tabular_data/binary_classification/german_credit.h"
 
 namespace xt::data::datasets
 {
