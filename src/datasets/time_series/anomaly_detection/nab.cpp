@@ -1,4 +1,4 @@
-#include "datasets/time_series/anomaly_detection/nab.h"
+#include "include/datasets/time_series/anomaly_detection/nab.h"
 
 namespace xt::data::datasets
 {

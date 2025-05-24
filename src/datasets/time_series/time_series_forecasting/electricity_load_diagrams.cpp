@@ -1,4 +1,4 @@
-#include "datasets/time_series/time_series_forecasting/electricity_load_diagrams.h"
+#include "include/datasets/time_series/time_series_forecasting/electricity_load_diagrams.h"
 
 namespace xt::data::datasets
 {
