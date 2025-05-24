@@ -1,3 +1,7 @@
-//
-// Created by kami on 5/19/25.
-//
+#include "include/losses/adaptive_loss.h"
+
+namespace xt::losses
+{
+
+
+}
