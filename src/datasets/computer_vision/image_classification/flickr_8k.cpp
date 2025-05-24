@@ -1,6 +1,6 @@
 #include "include/datasets/computer_vision/image_classification/flickr_8k.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- Flickr8k ---------------------- //
 

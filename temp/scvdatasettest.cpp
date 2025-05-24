@@ -21,7 +21,7 @@
 
 
 int main() {
-    auto dataset = xt::data::datasets::CSVDataset("/home/kami/Documents/temp/iris.csv");
+    auto dataset = xt::datasets::CSVDataset("/home/kami/Documents/temp/iris.csv");
 
 
 

@@ -1,6 +1,6 @@
 #include "include/datasets/tabular_data/regression_classification/abalone.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- Abalone ---------------------- //
 

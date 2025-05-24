@@ -29,7 +29,7 @@ int main() {
     // - Path: /home/kami/Documents/temp/
     // - Mode: Training
     // - Download: Disabled
-    auto dataset = xt::data::datasets::Food101("/home/kami/Documents/temp/", DataMode::TRAIN, false);
+    auto dataset = xt::datasets::Food101("/home/kami/Documents/temp/", DataMode::TRAIN, false);
 
     // Apply transformations to the dataset:
     // 1. Resize images to 227x227

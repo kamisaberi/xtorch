@@ -57,7 +57,7 @@ int main() {
     std::cout.precision(10);
     torch::Device device(torch::kCPU);
 
-    auto dataset = xt::data::datasets::MNIST("/home/kami/Documents/temp/", DataMode::TRAIN, true,
+    auto dataset = xt::datasets::MNIST("/home/kami/Documents/temp/", DataMode::TRAIN, true,
                                              {
                                                  // xt::data::transforms::create_resize_transform(size),
                                                  Resize(size),
@@ -69,7 +69,7 @@ int main() {
     check_dataset_type(dataset);
     check_dataset_type(transformed_dataset);
 
-    auto dataseti = xt::data::datasets::Imagenette("/home/kami/Documents/temp/", DataMode::TRAIN, true , xt::data::datasets::ImageType::PX160);
+    auto dataseti = xt::datasets::Imagenette("/home/kami/Documents/temp/", DataMode::TRAIN, true , xt::datasets::ImageType::PX160);
 
     cout << "MNIST dataset size: " << endl;
     auto transformed_dataseti = dataseti.map(torch::data::transforms::Stack<>());

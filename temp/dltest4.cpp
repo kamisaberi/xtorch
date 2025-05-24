@@ -119,7 +119,7 @@ int main() {
     auto resize_fn  = xt::data::transforms::create_resize_transform({32,32});
 //    auto compose = xt::data::transforms::Compose({resize_fn, normalize_fn});
 
-    auto base_dataset = xt::data::datasets::MNIST("/home/kami/Documents/temp/", DataMode::TRAIN, true,{resize_fn, normalize_fn});
+    auto base_dataset = xt::datasets::MNIST("/home/kami/Documents/temp/", DataMode::TRAIN, true,{resize_fn, normalize_fn});
 
 //    auto stacked_dataset = base_dataset.map(torch::data::transforms::Stack<>());
 

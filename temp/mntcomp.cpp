@@ -37,7 +37,7 @@ int main() {
     auto normalize_fn = torch::data::transforms::Normalize<>(0.5, 0.5);
     auto resize_fn  = xt::data::transforms::create_resize_transform(size);
     auto compose = xt::data::transforms::Compose({resize_fn, normalize_fn});
-    auto dataset = xt::data::datasets::MNIST("/home/kami/Documents/temp/", DataMode::TRAIN, true,{resize_fn,normalize_fn} );
+    auto dataset = xt::datasets::MNIST("/home/kami/Documents/temp/", DataMode::TRAIN, true,{resize_fn,normalize_fn} );
     auto transformed_dataset = dataset.map(torch::data::transforms::Stack<>());
 
     auto options = torch::data::DataLoaderOptions().batch_size(64).drop_last(false);

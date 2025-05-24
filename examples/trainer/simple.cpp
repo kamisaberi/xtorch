@@ -32,7 +32,7 @@ int main() {
      * - Download: Enabled
      * - Transformations: Resize to 32x32, Normalize with mean 0.5 and std 0.5
      */
-    auto dataset = xt::data::datasets::MNIST(
+    auto dataset = xt::datasets::MNIST(
             "/home/kami/Documents/datasets/", DataMode::TRAIN, true,
             {
                     xt::transforms::Resize({32, 32}),
