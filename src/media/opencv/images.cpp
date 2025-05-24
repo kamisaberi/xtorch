@@ -1,4 +1,4 @@
-#include "../../../include/media/opencv/images.h"
+#include "../../../include/utils/images.h"
 
 
 namespace xt::utils::image {
