@@ -1,4 +1,4 @@
-#include "datasets/general/image_folder.h"
+#include "include/datasets/general/image_folder.h"
 
 namespace xt::data::datasets
 {
