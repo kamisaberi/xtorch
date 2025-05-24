@@ -30,7 +30,7 @@ int main() {
     // - Mode: Training
     // - Download: Enabled
     // - ImageType: PX160 (160px images)
-    auto dataset = xt::data::datasets::Imagenette("/home/kami/Documents/temp/", DataMode::TRAIN, true, xt::data::datasets::ImageType::PX160);
+    auto dataset = xt::datasets::Imagenette("/home/kami/Documents/temp/", DataMode::TRAIN, true, xt::datasets::ImageType::PX160);
 
     // Apply transformations to the dataset:
     // 1. Resize images to 32x32

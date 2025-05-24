@@ -1,7 +1,7 @@
 #include "include/datasets/natural_language_processing/text_classification/amazon_review_polarity.h"
 
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- AmazonReviewPolarity ---------------------- //
 

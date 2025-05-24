@@ -1,6 +1,6 @@
 #include "include/datasets/tabular_data/classification/yeast.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- Yeast ---------------------- //
 

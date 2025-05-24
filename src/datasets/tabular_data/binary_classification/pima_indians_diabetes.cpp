@@ -1,6 +1,6 @@
 #include "include/datasets/tabular_data/binary_classification/pima_indians_diabetes.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- PimaIndiansDiabetes ---------------------- //
 

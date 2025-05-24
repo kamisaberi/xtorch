@@ -1,6 +1,6 @@
 #include "include/datasets/tabular_data/classification/balance_scale.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- BalanceScale ---------------------- //
 

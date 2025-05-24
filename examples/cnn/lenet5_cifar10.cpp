@@ -30,7 +30,7 @@ int main() {
     // - Path: /home/kami/Documents/temp/
     // - Mode: Training
     // - Download: Enabled
-    auto dataset = xt::data::datasets::CIFAR10("/home/kami/Documents/temp/", DataMode::TRAIN, true);
+    auto dataset = xt::datasets::CIFAR10("/home/kami/Documents/temp/", DataMode::TRAIN, true);
 
     // Print the size of the dataset
     cout << dataset.size().value() << endl;

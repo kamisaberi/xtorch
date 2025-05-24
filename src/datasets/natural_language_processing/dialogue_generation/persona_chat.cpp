@@ -1,6 +1,6 @@
 #include "include/datasets/natural_language_processing/dialogue_generation/persona_chat.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- PersonaChat ---------------------- //
 

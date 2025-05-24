@@ -1,6 +1,6 @@
 #include "include/datasets/natural_language_processing/text_classification/stsb.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- STSB ---------------------- //
 

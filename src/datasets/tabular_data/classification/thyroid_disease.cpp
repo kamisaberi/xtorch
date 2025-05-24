@@ -1,6 +1,6 @@
 #include "include/datasets/tabular_data/classification/thyroid_disease.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- ThyroidDisease ---------------------- //
 
