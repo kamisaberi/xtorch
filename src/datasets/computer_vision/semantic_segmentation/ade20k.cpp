@@ -1,4 +1,4 @@
-#include "datasets/computer_vision/semantic_segmentation/ade20k.h"
+#include "include/datasets/computer_vision/semantic_segmentation/ade20k.h"
 
 namespace xt::data::datasets
 {
