@@ -1,7 +1,7 @@
 #include "include/datasets/natural_language_processing/machine_translation/wmt14.h"
 
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- WMT14 ---------------------- //
 

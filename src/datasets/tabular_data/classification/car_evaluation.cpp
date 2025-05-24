@@ -1,6 +1,6 @@
 #include "include/datasets/tabular_data/classification/car_evaluation.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- CarEvaluation ---------------------- //
 

@@ -1,6 +1,6 @@
 #include "include/datasets/tabular_data/binary_classification/statlog_heart.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- StatlogHeart ---------------------- //
 

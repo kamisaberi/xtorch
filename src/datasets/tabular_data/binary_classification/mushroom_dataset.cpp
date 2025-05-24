@@ -1,6 +1,6 @@
 #include "include/datasets/tabular_data/binary_classification/mushroom_dataset.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- MushroomDataset ---------------------- //
 

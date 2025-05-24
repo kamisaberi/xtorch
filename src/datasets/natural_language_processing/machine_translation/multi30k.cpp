@@ -1,7 +1,7 @@
 #include "include/datasets/natural_language_processing/machine_translation/multi30k.h"
 
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- MULTI30k ---------------------- //
 

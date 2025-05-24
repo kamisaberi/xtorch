@@ -1,6 +1,6 @@
 #include "include/datasets/natural_language_processing/question_answering/squad1_0.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- SQuAD10 ---------------------- //
 

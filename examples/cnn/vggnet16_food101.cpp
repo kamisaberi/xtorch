@@ -29,7 +29,7 @@ int main() {
     // - Path: /home/kami/Documents/temp/
     // - Mode: Training
     // - Download: Disabled
-    auto dataset = xt::data::datasets::Food101("/home/kami/Documents/temp/", DataMode::TRAIN, false);
+    auto dataset = xt::datasets::Food101("/home/kami/Documents/temp/", DataMode::TRAIN, false);
 
     // Commented-out alternative dataset (Imagenette, not used)
     // auto dataset = torch::ext::data::datasets::Imagenette("/home/kami/Documents/temp/", DataMode::TRAIN, true, torch::ext::data::datasets::ImageType::PX160);

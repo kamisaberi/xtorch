@@ -1,6 +1,6 @@
 #include "include/datasets/natural_language_processing/machine_translation/iwslt2016.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- IWSLT2016 ---------------------- //
 

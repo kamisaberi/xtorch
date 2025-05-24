@@ -1,6 +1,6 @@
 #include "include/datasets/natural_language_processing/question_answering/trivia_qa.h"
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     // ---------------------- TriviaQA ---------------------- //
 
