@@ -1,4 +1,4 @@
-#include "datasets/computer_vision/anomaly_detection/mvtec_ad.h"
+#include "include/datasets/computer_vision/anomaly_detection/mvtec_ad.h"
 
 namespace xt::data::datasets
 {
