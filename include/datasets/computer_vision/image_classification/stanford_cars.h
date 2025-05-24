@@ -7,7 +7,7 @@ namespace fs = std::filesystem;
 
 
 
-namespace xt::data::datasets {
+namespace xt::datasets {
    class StanfordCars : xt::datasets::Dataset {
 /*
        """Stanford Cars  Dataset

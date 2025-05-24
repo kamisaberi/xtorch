@@ -7,7 +7,7 @@ using namespace std;
 namespace fs = std::filesystem;
 
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     class DAVIS : public xt::datasets::Dataset
     {

@@ -2,7 +2,7 @@
 
 #include "include/datasets/common.h"
 
-namespace xt::data::datasets {
+namespace xt::datasets {
     enum class LabelsType {
         BY_FOLDER = 0,
         BY_NAME = 1,

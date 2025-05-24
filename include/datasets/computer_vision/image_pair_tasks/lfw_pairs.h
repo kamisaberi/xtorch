@@ -5,7 +5,7 @@
 using namespace std;
 namespace fs = std::filesystem;
 
-namespace xt::data::datasets {
+namespace xt::datasets {
     class LFWPairs : public xt::datasets::Dataset {
         /*
 """`LFW <http://vis-www.cs.umass.edu/lfw/>`_ Dataset.

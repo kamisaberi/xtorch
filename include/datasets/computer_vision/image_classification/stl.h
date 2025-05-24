@@ -6,7 +6,7 @@ using namespace std;
 namespace fs = std::filesystem;
 
 
-namespace xt::data::datasets {
+namespace xt::datasets {
     class STL10 : xt::datasets::Dataset {
         /*
         """`STL10 <https://cs.stanford.edu/~acoates/stl10/>`_ Dataset.

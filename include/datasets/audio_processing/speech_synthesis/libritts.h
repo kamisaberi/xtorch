@@ -5,7 +5,7 @@
 using namespace std;
 namespace fs = std::filesystem;
 
-namespace xt::data::datasets {
+namespace xt::datasets {
     class LIBRITTS : public xt::datasets::Dataset {
     public :
         explicit LIBRITTS(const std::string &root);

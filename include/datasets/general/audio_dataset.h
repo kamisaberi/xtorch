@@ -7,7 +7,7 @@ using namespace std;
 namespace fs = std::filesystem;
 
 
-namespace xt::data::datasets
+namespace xt::datasets
 {
     class AudioDataset : public xt::datasets::Dataset
     {

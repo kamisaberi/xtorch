@@ -4,7 +4,7 @@
 
 
 
-namespace xt::data::datasets {
+namespace xt::datasets {
     class CSVDataset : public xt::datasets::Dataset {
     public :
         CSVDataset(const std::string &file_path);

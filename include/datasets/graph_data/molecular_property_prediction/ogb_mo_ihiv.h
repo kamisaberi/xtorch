@@ -5,7 +5,7 @@
 using namespace std;
 namespace fs = std::filesystem;
 
-namespace xt::data::datasets {
+namespace xt::datasets {
     class OGBMolHIV : public xt::datasets::Dataset {
     public :
         explicit OGBMolHIV(const std::string &root);

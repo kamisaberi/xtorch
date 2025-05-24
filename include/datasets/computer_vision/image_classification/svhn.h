@@ -6,7 +6,7 @@ using namespace std;
 namespace fs = std::filesystem;
 
 
-namespace xt::data::datasets {
+namespace xt::datasets {
     class SVHN : xt::datasets::Dataset {
         /*
         """`SVHN <http://ufldl.stanford.edu/housenumbers/>`_ Dataset.
