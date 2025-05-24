@@ -5,7 +5,7 @@
 using namespace std;
 namespace fs = std::filesystem;
 
-namespace xt::data::datasets {
+namespace xt::datasets {
     class MovingMNIST : xt::datasets::Dataset {
         /*
         """`MovingMNIST <http://www.cs.toronto.edu/~nitish/unsupervised_video/>`_ Dataset.

@@ -6,7 +6,7 @@ using namespace std;
 namespace fs = std::filesystem;
 
 
-namespace xt::data::datasets {
+namespace xt::datasets {
     class SBDataset : public xt::datasets::Dataset{
         /*
         """`Semantic Boundaries Dataset <http://home.bharathh.info/pubs/codes/SBD/download.html>`_

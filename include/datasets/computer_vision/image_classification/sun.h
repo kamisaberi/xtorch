@@ -6,7 +6,7 @@ using namespace std;
 namespace fs = std::filesystem;
 
 
-namespace xt::data::datasets {
+namespace xt::datasets {
     class SUN397 : xt::datasets::Dataset {
         /*
         """`The SUN397 Data Set <https://vision.princeton.edu/projects/2010/SUN/>`_.

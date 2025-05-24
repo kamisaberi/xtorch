@@ -5,7 +5,7 @@
 using namespace std;
 namespace fs = std::filesystem;
 
-namespace xt::data::datasets {
+namespace xt::datasets {
     class Cora : public xt::datasets::Dataset {
     public :
         explicit Cora(const std::string &root);

@@ -5,7 +5,7 @@
 using namespace std;
 namespace fs = std::filesystem;
 
-namespace xt::data::datasets {
+namespace xt::datasets {
     class VCTK092 : public xt::datasets::Dataset {
     public :
         explicit VCTK092(const std::string &root);
