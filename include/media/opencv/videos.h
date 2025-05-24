@@ -11,7 +11,7 @@ using namespace std;
 
 namespace fs = std::filesystem;
 
-namespace torch::ext::media::opencv::videos {
+namespace xt::utils::videos {
     std::vector<cv::Mat>  extractFrames(const std::string& videoFilePath);
     std::vector<torch::Tensor> extractVideoFramesAsTensor(fs::path videoFilePath);
 }
