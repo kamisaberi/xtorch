@@ -1,32 +1,32 @@
-#include "datasets/computer_vision/3d_point_cloud_analysis/model_net40.h"
+#include "datasets/tabular_data/classification/palmer_penguin.h"
 
 namespace xt::data::datasets
 {
-    // ---------------------- ModelNet40 ---------------------- //
+    // ---------------------- PalmerPenguin ---------------------- //
 
-    ModelNet40::ModelNet40(const std::string& root): ModelNet40::ModelNet40(
+    PalmerPenguin::PalmerPenguin(const std::string& root): PalmerPenguin::PalmerPenguin(
         root, xt::datasets::DataMode::TRAIN, false, nullptr, nullptr)
     {
     }
 
-    ModelNet40::ModelNet40(const std::string& root, xt::datasets::DataMode mode): ModelNet40::ModelNet40(
+    PalmerPenguin::PalmerPenguin(const std::string& root, xt::datasets::DataMode mode): PalmerPenguin::PalmerPenguin(
         root, mode, false, nullptr, nullptr)
     {
     }
 
-    ModelNet40::ModelNet40(const std::string& root, xt::datasets::DataMode mode, bool download) :
-        ModelNet40::ModelNet40(
+    PalmerPenguin::PalmerPenguin(const std::string& root, xt::datasets::DataMode mode, bool download) :
+        PalmerPenguin::PalmerPenguin(
             root, mode, download, nullptr, nullptr)
     {
     }
 
-    ModelNet40::ModelNet40(const std::string& root, xt::datasets::DataMode mode, bool download,
-                           std::unique_ptr<xt::Module> transformer) : ModelNet40::ModelNet40(
+    PalmerPenguin::PalmerPenguin(const std::string& root, xt::datasets::DataMode mode, bool download,
+                           std::unique_ptr<xt::Module> transformer) : PalmerPenguin::PalmerPenguin(
         root, mode, download, std::move(transformer), nullptr)
     {
     }
 
-    ModelNet40::ModelNet40(const std::string& root, xt::datasets::DataMode mode, bool download,
+    PalmerPenguin::PalmerPenguin(const std::string& root, xt::datasets::DataMode mode, bool download,
                            std::unique_ptr<xt::Module> transformer, std::unique_ptr<xt::Module> target_transformer):
         xt::datasets::Dataset(mode, std::move(transformer), std::move(target_transformer))
     {
@@ -36,12 +36,12 @@ namespace xt::data::datasets
     }
 
 
-    void ModelNet40::load_data()
+    void PalmerPenguin::load_data()
     {
 
     }
 
-    void ModelNet40::check_resources()
+    void PalmerPenguin::check_resources()
     {
 
     }
