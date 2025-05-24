@@ -1,4 +1,4 @@
-#include "../../../include/transforms/image/grayscale_to_rgb.h"
+#include "include/transforms/image/grayscale_to_rgb.h"
 
 namespace xt::transforms::image {
 
