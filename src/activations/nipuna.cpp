@@ -1,4 +1,4 @@
-#include "include/activations/aglu.h"
+#include "include/activations/nipuna.h"
 
 namespace xt::activations {
     torch::Tensor nipuna(torch::Tensor x) {
