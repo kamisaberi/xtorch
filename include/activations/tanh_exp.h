@@ -2,10 +2,16 @@
 
 #include "common.h"
 
-namespace xt::activations
-{
-    struct TanhExp	 : xt::Module
-    {
+namespace xt::activations {
+    torch::Tensor tanh_exp(torch::Tensor x);
+
+    struct TanhExp : xt::Module {
+    public:
+        TanhExp() = default;
+
+        torch::Tensor forward(torch::Tensor x) const override;
+
+    private:
     };
 }
 
