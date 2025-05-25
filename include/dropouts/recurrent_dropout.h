@@ -1,13 +1,19 @@
 #pragma once
+
 #include "common.h"
 
+namespace xt::dropouts {
+    torch::Tensor recurrent_dropout(torch::Tensor x);
 
-namespace xt::dropouts
-{
-    class RecurrentDropout : xt::Module
-    {
+    struct RecurrentDropout : xt::Module {
     public:
+        RecurrentDropout() = default;
+
+        torch::Tensor forward(torch::Tensor x) const override;
 
     private:
     };
 }
+
+
+
