@@ -1,3 +1,11 @@
-//
-// Created by kami on 5/16/25.
-//
+#include "include/activations/aglu.h"
+
+namespace xt::activations {
+    torch::Tensor nipuna(torch::Tensor x) {
+    }
+
+    torch::Tensor Nipuna::forward(torch::Tensor x) const {
+        return xt::activations::nipuna(x);
+    }
+
+}
