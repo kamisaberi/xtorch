@@ -4,10 +4,15 @@
 
 namespace xt::activations
 {
-    struct Swish	 : xt::Module
+    torch::Tensor swish(torch::Tensor x);
+
+    struct Swish : xt::Module
     {
+    public:
+        Swish() = default;
+
+        torch::Tensor forward(torch::Tensor x) const override;
+
+    private:
     };
 }
-
-
-
