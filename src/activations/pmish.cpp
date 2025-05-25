@@ -1,3 +1,11 @@
-//
-// Created by kami on 5/16/25.
-//
+#include "include/activations/pmish.h"
+
+namespace xt::activations {
+    torch::Tensor pmish(torch::Tensor x) {
+    }
+
+    torch::Tensor PMish::forward(torch::Tensor x) const {
+        return xt::activations::pmish(x);
+    }
+
+}
