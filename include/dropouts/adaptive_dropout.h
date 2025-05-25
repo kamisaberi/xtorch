@@ -3,11 +3,11 @@
 #include "common.h"
 
 namespace xt::dropouts {
-    torch::Tensor adaptive_dropout(torch::Tensor x);
+    torch::Tensor temporal_dropout(torch::Tensor x);
 
-    struct AdaptiveDropout : xt::Module {
+    struct TemporalDropout : xt::Module {
     public:
-        AdaptiveDropout() = default;
+        TemporalDropout() = default;
 
         torch::Tensor forward(torch::Tensor x) const override;
 
