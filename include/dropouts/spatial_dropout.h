@@ -1,13 +1,19 @@
 #pragma once
+
 #include "common.h"
 
+namespace xt::dropouts {
+    torch::Tensor spatial_dropout(torch::Tensor x);
 
-namespace xt::dropouts
-{
-    class SpatialDropout : xt::Module
-    {
+    struct SpatialDropout : xt::Module {
     public:
+        SpatialDropout() = default;
+
+        torch::Tensor forward(torch::Tensor x) const override;
 
     private:
     };
 }
+
+
+
