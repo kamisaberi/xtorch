@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.28 FATAL_ERROR)
 
 
 # List Of All CPP Files By Category
+file(GLOB_RECURSE BASE_FILES CONFIGURE_DEPENDS ../src/base/*.cpp)
 file(GLOB_RECURSE UTILITY_FILES CONFIGURE_DEPENDS ../src/utils/*.cpp)
 file(GLOB_RECURSE MEDIA_FILES CONFIGURE_DEPENDS ../src/media/*.cpp)
 file(GLOB_RECURSE DATASET_FILES CONFIGURE_DEPENDS ../src/datasets/*.cpp)
@@ -31,6 +32,8 @@ set(BASE_SOURCE_FILES
         ../src/transforms/lambda.cpp
         ../src/datasets/base/base.cpp
         ../src/models/base.cpp
+        ../src/base/module1.cpp
+
 )
 
 
@@ -1448,9 +1451,360 @@ target_link_libraries(${PROJECT_NAME}
 #)
 
 
-####################################### CUSTOMDATALOADER #######################################
+######################################## CUSTOMDATALOADER #######################################
+#
+#project(cdl01)
+#list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
+#find_package(Torch REQUIRED)
+##find_package(xTorch REQUIRED)
+#find_package(OpenCV REQUIRED)
+#find_package(LibLZMA REQUIRED)
+#find_package(LibArchive REQUIRED)
+#
+#set(CMAKE_CXX_STANDARD 17)
+#set(CMAKE_CXX_STANDARD_REQUIRED True)
+#
+#set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} ${DATASET_FILES} ${MODEL_FILES} ${BASE_SOURCE_FILES} 01/cdl-01.cpp)
+#
+#add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
+#target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
+##
+#set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
+#
+#include_directories(/usr/include)
+#
+#target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
+#target_link_libraries(${PROJECT_NAME}
+#        ${CURL_LIBRARIES}
+#        ${TORCH_LIBRARIES}
+#        ${OpenCV_LIBS}
+#        ${ZLIB_LIBS}
+#        ${ZIP_LIBRARIES}
+#        zip
+#        ${ZLIB_LIBRARIES}
+#        ${LIBTAR_LIBRARY}
+#        OpenSSL::SSL
+#        OpenSSL::Crypto
+#        LibLZMA::LibLZMA
+#        ${LibArchive_LIBRARIES}
+#)
+#
+#
+######################################## CUSTOMDATALOADERMNIST #######################################
+#
+#project(cdl_mnist)
+#list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
+#find_package(Torch REQUIRED)
+##find_package(xTorch REQUIRED)
+#find_package(OpenCV REQUIRED)
+#find_package(LibLZMA REQUIRED)
+#find_package(LibArchive REQUIRED)
+#
+#set(CMAKE_CXX_STANDARD 17)
+#set(CMAKE_CXX_STANDARD_REQUIRED True)
+#
+#set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} ${DATASET_FILES} ${MODEL_FILES} ${BASE_SOURCE_FILES} 01/cdl_mnist.cpp)
+#
+#add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
+#target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
+##
+#set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
+#
+#include_directories(/usr/include)
+#
+#target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
+#target_link_libraries(${PROJECT_NAME}
+#        ${CURL_LIBRARIES}
+#        ${TORCH_LIBRARIES}
+#        ${OpenCV_LIBS}
+#        ${ZLIB_LIBS}
+#        ${ZIP_LIBRARIES}
+#        zip
+#        ${ZLIB_LIBRARIES}
+#        ${LIBTAR_LIBRARY}
+#        OpenSSL::SSL
+#        OpenSSL::Crypto
+#        LibLZMA::LibLZMA
+#        ${LibArchive_LIBRARIES}
+#)
+#
+#
+######################################## CUSTOMDATALOADERNUMWORKERS #######################################
+#
+#project(cdl_nw_mnist)
+#list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
+#find_package(Torch REQUIRED)
+##find_package(xTorch REQUIRED)
+#find_package(OpenCV REQUIRED)
+#find_package(LibLZMA REQUIRED)
+#find_package(LibArchive REQUIRED)
+#
+#set(CMAKE_CXX_STANDARD 17)
+#set(CMAKE_CXX_STANDARD_REQUIRED True)
+#
+#set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} 01/cdl_nw_mnist.cpp)
+#
+#add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
+#target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
+##
+#set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
+#
+#include_directories(/usr/include)
+#
+#target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
+#target_link_libraries(${PROJECT_NAME}
+#        ${CURL_LIBRARIES}
+#        ${TORCH_LIBRARIES}
+#        ${OpenCV_LIBS}
+#        ${ZLIB_LIBS}
+#        ${ZIP_LIBRARIES}
+#        zip
+#        ${ZLIB_LIBRARIES}
+#        ${LIBTAR_LIBRARY}
+#        OpenSSL::SSL
+#        OpenSSL::Crypto
+#        LibLZMA::LibLZMA
+#        ${LibArchive_LIBRARIES}
+#)
+#
+#
+######################################## DATA-PARALLEL-00 #######################################
+#
+#project(dp_00)
+#list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
+#find_package(Torch REQUIRED)
+##find_package(xTorch REQUIRED)
+#find_package(OpenCV REQUIRED)
+#find_package(LibLZMA REQUIRED)
+#find_package(LibArchive REQUIRED)
+#
+#set(CMAKE_CXX_STANDARD 17)
+#set(CMAKE_CXX_STANDARD_REQUIRED True)
+#
+#set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} 02/dp-00.cpp)
+#
+#add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
+#target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
+##
+#set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
+#
+#include_directories(/usr/include)
+#
+#target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
+#target_link_libraries(${PROJECT_NAME}
+#        ${CURL_LIBRARIES}
+#        ${TORCH_LIBRARIES}
+#        ${OpenCV_LIBS}
+#        ${ZLIB_LIBS}
+#        ${ZIP_LIBRARIES}
+#        zip
+#        ${ZLIB_LIBRARIES}
+#        ${LIBTAR_LIBRARY}
+#        OpenSSL::SSL
+#        OpenSSL::Crypto
+#        LibLZMA::LibLZMA
+#        ${LibArchive_LIBRARIES}
+#)
+#
+######################################## DATA-PARALLEL-01 #######################################
+#
+#project(dp_01)
+#list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
+#find_package(Torch REQUIRED)
+##find_package(xTorch REQUIRED)
+#find_package(OpenCV REQUIRED)
+#find_package(LibLZMA REQUIRED)
+#find_package(LibArchive REQUIRED)
+#
+#set(CMAKE_CXX_STANDARD 17)
+#set(CMAKE_CXX_STANDARD_REQUIRED True)
+#
+#set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} 02/dp-01.cpp)
+#
+#add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
+#target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
+##
+#set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
+#
+#include_directories(/usr/include)
+#
+#target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
+#target_link_libraries(${PROJECT_NAME}
+#        ${CURL_LIBRARIES}
+#        ${TORCH_LIBRARIES}
+#        ${OpenCV_LIBS}
+#        ${ZLIB_LIBS}
+#        ${ZIP_LIBRARIES}
+#        zip
+#        ${ZLIB_LIBRARIES}
+#        ${LIBTAR_LIBRARY}
+#        OpenSSL::SSL
+#        OpenSSL::Crypto
+#        LibLZMA::LibLZMA
+#        ${LibArchive_LIBRARIES}
+#)
+#
+#
+######################################## DATA-PARALLEL-02 #######################################
+#
+#project(dp_02)
+#list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
+#find_package(Torch REQUIRED)
+##find_package(xTorch REQUIRED)
+#find_package(OpenCV REQUIRED)
+#find_package(LibLZMA REQUIRED)
+#find_package(LibArchive REQUIRED)
+#
+#set(CMAKE_CXX_STANDARD 17)
+#set(CMAKE_CXX_STANDARD_REQUIRED True)
+#
+#set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} 02/dp-02.cpp)
+#
+#add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
+#target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
+##
+#set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
+#
+#include_directories(/usr/include)
+#
+#target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
+#target_link_libraries(${PROJECT_NAME}
+#        ${CURL_LIBRARIES}
+#        ${TORCH_LIBRARIES}
+#        ${OpenCV_LIBS}
+#        ${ZLIB_LIBS}
+#        ${ZIP_LIBRARIES}
+#        zip
+#        ${ZLIB_LIBRARIES}
+#        ${LIBTAR_LIBRARY}
+#        OpenSSL::SSL
+#        OpenSSL::Crypto
+#        LibLZMA::LibLZMA
+#        ${LibArchive_LIBRARIES}
+#)
+#
+#
+######################################## DATA-PARALLEL-03 #######################################
+#
+#project(dp_03)
+#list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
+#find_package(Torch REQUIRED)
+##find_package(xTorch REQUIRED)
+#find_package(OpenCV REQUIRED)
+#find_package(LibLZMA REQUIRED)
+#find_package(LibArchive REQUIRED)
+#
+#set(CMAKE_CXX_STANDARD 17)
+#set(CMAKE_CXX_STANDARD_REQUIRED True)
+#
+#set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} 02/dp-03.cpp)
+#
+#add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
+#target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
+##
+#set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
+#
+#include_directories(/usr/include)
+#
+#target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
+#target_link_libraries(${PROJECT_NAME}
+#        ${CURL_LIBRARIES}
+#        ${TORCH_LIBRARIES}
+#        ${OpenCV_LIBS}
+#        ${ZLIB_LIBS}
+#        ${ZIP_LIBRARIES}
+#        zip
+#        ${ZLIB_LIBRARIES}
+#        ${LIBTAR_LIBRARY}
+#        OpenSSL::SSL
+#        OpenSSL::Crypto
+#        LibLZMA::LibLZMA
+#        ${LibArchive_LIBRARIES}
+#)
+#
+#
+######################################## DATA-PARALLEL-FINAL #######################################
+#
+#project(dp_final)
+#list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
+#find_package(Torch REQUIRED)
+##find_package(xTorch REQUIRED)
+#find_package(OpenCV REQUIRED)
+#find_package(LibLZMA REQUIRED)
+#find_package(LibArchive REQUIRED)
+#
+#set(CMAKE_CXX_STANDARD 17)
+#set(CMAKE_CXX_STANDARD_REQUIRED True)
+#
+#
+#set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} ../src/data_parallels/data_parallel.cpp 02/dp-final.cpp)
+#
+#add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
+#target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
+##
+#set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
+#
+#include_directories(/usr/include)
+#
+#target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
+#target_link_libraries(${PROJECT_NAME}
+#        ${CURL_LIBRARIES}
+#        ${TORCH_LIBRARIES}
+#        ${OpenCV_LIBS}
+#        ${ZLIB_LIBS}
+#        ${ZIP_LIBRARIES}
+#        zip
+#        ${ZLIB_LIBRARIES}
+#        ${LIBTAR_LIBRARY}
+#        OpenSSL::SSL
+#        OpenSSL::Crypto
+#        LibLZMA::LibLZMA
+#        ${LibArchive_LIBRARIES}
+#)
+#
+#
+######################################## DISTRIBUTED-DATA-PARALLEL-03 #######################################
+#
+#project(ddp_01)
+#list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
+#find_package(Torch REQUIRED)
+##find_package(xTorch REQUIRED)
+#find_package(OpenCV REQUIRED)
+#find_package(LibLZMA REQUIRED)
+#find_package(LibArchive REQUIRED)
+#
+#set(CMAKE_CXX_STANDARD 17)
+#set(CMAKE_CXX_STANDARD_REQUIRED True)
+#
+#set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} 02/ddp_01.cpp)
+#
+#add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
+#target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
+##
+#set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
+#
+#include_directories(/usr/include)
+#
+#target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
+#target_link_libraries(${PROJECT_NAME}
+#        ${CURL_LIBRARIES}
+#        ${TORCH_LIBRARIES}
+#        ${OpenCV_LIBS}
+#        ${ZLIB_LIBS}
+#        ${ZIP_LIBRARIES}
+#        zip
+#        ${ZLIB_LIBRARIES}
+#        ${LIBTAR_LIBRARY}
+#        OpenSSL::SSL
+#        OpenSSL::Crypto
+#        LibLZMA::LibLZMA
+#        ${LibArchive_LIBRARIES}
+#)
 
-project(cdl01)
+
+####################################### XT_MODULE_TEST #######################################
+
+project(xt_module)
 list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
 find_package(Torch REQUIRED)
 #find_package(xTorch REQUIRED)
@@ -1461,7 +1815,12 @@ find_package(LibArchive REQUIRED)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} ${DATASET_FILES} ${MODEL_FILES} ${BASE_SOURCE_FILES} 01/cdl-01.cpp)
+set(BASE_SOURCE_FILES
+        ../src/base/module1.cpp
+)
+
+
+set(TEST_SOURCE_FILES ${BASE_FILES} xt_module/xt_module_test.cpp)
 
 add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
 target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
@@ -1485,317 +1844,4 @@ target_link_libraries(${PROJECT_NAME}
         LibLZMA::LibLZMA
         ${LibArchive_LIBRARIES}
 )
-
-
-####################################### CUSTOMDATALOADERMNIST #######################################
-
-project(cdl_mnist)
-list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
-find_package(Torch REQUIRED)
-#find_package(xTorch REQUIRED)
-find_package(OpenCV REQUIRED)
-find_package(LibLZMA REQUIRED)
-find_package(LibArchive REQUIRED)
-
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
-
-set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} ${DATASET_FILES} ${MODEL_FILES} ${BASE_SOURCE_FILES} 01/cdl_mnist.cpp)
-
-add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
-target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
-#
-set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
-
-include_directories(/usr/include)
-
-target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
-target_link_libraries(${PROJECT_NAME}
-        ${CURL_LIBRARIES}
-        ${TORCH_LIBRARIES}
-        ${OpenCV_LIBS}
-        ${ZLIB_LIBS}
-        ${ZIP_LIBRARIES}
-        zip
-        ${ZLIB_LIBRARIES}
-        ${LIBTAR_LIBRARY}
-        OpenSSL::SSL
-        OpenSSL::Crypto
-        LibLZMA::LibLZMA
-        ${LibArchive_LIBRARIES}
-)
-
-
-####################################### CUSTOMDATALOADERNUMWORKERS #######################################
-
-project(cdl_nw_mnist)
-list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
-find_package(Torch REQUIRED)
-#find_package(xTorch REQUIRED)
-find_package(OpenCV REQUIRED)
-find_package(LibLZMA REQUIRED)
-find_package(LibArchive REQUIRED)
-
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
-
-set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} 01/cdl_nw_mnist.cpp)
-
-add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
-target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
-#
-set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
-
-include_directories(/usr/include)
-
-target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
-target_link_libraries(${PROJECT_NAME}
-        ${CURL_LIBRARIES}
-        ${TORCH_LIBRARIES}
-        ${OpenCV_LIBS}
-        ${ZLIB_LIBS}
-        ${ZIP_LIBRARIES}
-        zip
-        ${ZLIB_LIBRARIES}
-        ${LIBTAR_LIBRARY}
-        OpenSSL::SSL
-        OpenSSL::Crypto
-        LibLZMA::LibLZMA
-        ${LibArchive_LIBRARIES}
-)
-
-
-####################################### DATA-PARALLEL-00 #######################################
-
-project(dp_00)
-list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
-find_package(Torch REQUIRED)
-#find_package(xTorch REQUIRED)
-find_package(OpenCV REQUIRED)
-find_package(LibLZMA REQUIRED)
-find_package(LibArchive REQUIRED)
-
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
-
-set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} 02/dp-00.cpp)
-
-add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
-target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
-#
-set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
-
-include_directories(/usr/include)
-
-target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
-target_link_libraries(${PROJECT_NAME}
-        ${CURL_LIBRARIES}
-        ${TORCH_LIBRARIES}
-        ${OpenCV_LIBS}
-        ${ZLIB_LIBS}
-        ${ZIP_LIBRARIES}
-        zip
-        ${ZLIB_LIBRARIES}
-        ${LIBTAR_LIBRARY}
-        OpenSSL::SSL
-        OpenSSL::Crypto
-        LibLZMA::LibLZMA
-        ${LibArchive_LIBRARIES}
-)
-
-####################################### DATA-PARALLEL-01 #######################################
-
-project(dp_01)
-list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
-find_package(Torch REQUIRED)
-#find_package(xTorch REQUIRED)
-find_package(OpenCV REQUIRED)
-find_package(LibLZMA REQUIRED)
-find_package(LibArchive REQUIRED)
-
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
-
-set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} 02/dp-01.cpp)
-
-add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
-target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
-#
-set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
-
-include_directories(/usr/include)
-
-target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
-target_link_libraries(${PROJECT_NAME}
-        ${CURL_LIBRARIES}
-        ${TORCH_LIBRARIES}
-        ${OpenCV_LIBS}
-        ${ZLIB_LIBS}
-        ${ZIP_LIBRARIES}
-        zip
-        ${ZLIB_LIBRARIES}
-        ${LIBTAR_LIBRARY}
-        OpenSSL::SSL
-        OpenSSL::Crypto
-        LibLZMA::LibLZMA
-        ${LibArchive_LIBRARIES}
-)
-
-
-####################################### DATA-PARALLEL-02 #######################################
-
-project(dp_02)
-list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
-find_package(Torch REQUIRED)
-#find_package(xTorch REQUIRED)
-find_package(OpenCV REQUIRED)
-find_package(LibLZMA REQUIRED)
-find_package(LibArchive REQUIRED)
-
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
-
-set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} 02/dp-02.cpp)
-
-add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
-target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
-#
-set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
-
-include_directories(/usr/include)
-
-target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
-target_link_libraries(${PROJECT_NAME}
-        ${CURL_LIBRARIES}
-        ${TORCH_LIBRARIES}
-        ${OpenCV_LIBS}
-        ${ZLIB_LIBS}
-        ${ZIP_LIBRARIES}
-        zip
-        ${ZLIB_LIBRARIES}
-        ${LIBTAR_LIBRARY}
-        OpenSSL::SSL
-        OpenSSL::Crypto
-        LibLZMA::LibLZMA
-        ${LibArchive_LIBRARIES}
-)
-
-
-####################################### DATA-PARALLEL-03 #######################################
-
-project(dp_03)
-list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
-find_package(Torch REQUIRED)
-#find_package(xTorch REQUIRED)
-find_package(OpenCV REQUIRED)
-find_package(LibLZMA REQUIRED)
-find_package(LibArchive REQUIRED)
-
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
-
-set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} 02/dp-03.cpp)
-
-add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
-target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
-#
-set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
-
-include_directories(/usr/include)
-
-target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
-target_link_libraries(${PROJECT_NAME}
-        ${CURL_LIBRARIES}
-        ${TORCH_LIBRARIES}
-        ${OpenCV_LIBS}
-        ${ZLIB_LIBS}
-        ${ZIP_LIBRARIES}
-        zip
-        ${ZLIB_LIBRARIES}
-        ${LIBTAR_LIBRARY}
-        OpenSSL::SSL
-        OpenSSL::Crypto
-        LibLZMA::LibLZMA
-        ${LibArchive_LIBRARIES}
-)
-
-
-####################################### DATA-PARALLEL-FINAL #######################################
-
-project(dp_final)
-list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
-find_package(Torch REQUIRED)
-#find_package(xTorch REQUIRED)
-find_package(OpenCV REQUIRED)
-find_package(LibLZMA REQUIRED)
-find_package(LibArchive REQUIRED)
-
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
-
-
-set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES}  ../src/data_parallels/data_parallel.cpp 02/dp-final.cpp)
-
-add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
-target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
-#
-set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
-
-include_directories(/usr/include)
-
-target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
-target_link_libraries(${PROJECT_NAME}
-        ${CURL_LIBRARIES}
-        ${TORCH_LIBRARIES}
-        ${OpenCV_LIBS}
-        ${ZLIB_LIBS}
-        ${ZIP_LIBRARIES}
-        zip
-        ${ZLIB_LIBRARIES}
-        ${LIBTAR_LIBRARY}
-        OpenSSL::SSL
-        OpenSSL::Crypto
-        LibLZMA::LibLZMA
-        ${LibArchive_LIBRARIES}
-)
-
-
-####################################### DISTRIBUTED-DATA-PARALLEL-03 #######################################
-
-project(ddp_01)
-list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
-find_package(Torch REQUIRED)
-#find_package(xTorch REQUIRED)
-find_package(OpenCV REQUIRED)
-find_package(LibLZMA REQUIRED)
-find_package(LibArchive REQUIRED)
-
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
-
-set(TEST_SOURCE_FILES ${UTILITY_FILES} ${MEDIA_FILES} ${DEFINITION_FILES} 02/ddp_01.cpp)
-
-add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
-target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
-#
-set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
-
-include_directories(/usr/include)
-
-target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
-target_link_libraries(${PROJECT_NAME}
-        ${CURL_LIBRARIES}
-        ${TORCH_LIBRARIES}
-        ${OpenCV_LIBS}
-        ${ZLIB_LIBS}
-        ${ZIP_LIBRARIES}
-        zip
-        ${ZLIB_LIBRARIES}
-        ${LIBTAR_LIBRARY}
-        OpenSSL::SSL
-        OpenSSL::Crypto
-        LibLZMA::LibLZMA
-        ${LibArchive_LIBRARIES}
-)
-
 
