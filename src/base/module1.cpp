@@ -2,7 +2,6 @@
 
 namespace xt
 {
-    // Implementation of variadic forward method
     template <typename... Args>
     torch::Tensor Module1::forward(Args... args)
     {
@@ -25,8 +24,23 @@ namespace xt
             throw std::invalid_argument("Maximum 10 tensors allowed");
         }
 
-        // Call the virtual forward method
-        return forward(tensors);
+        // Check that all tensors have the same shape
+        auto reference_sizes = tensors[0].sizes();
+        for (size_t i = 1; i < tensors.size(); ++i)
+        {
+            if (tensors[i].sizes() != reference_sizes)
+            {
+                throw std::invalid_argument("All tensors must have the same shape");
+            }
+        }
+
+        // Sum all tensors (default implementation)
+        torch::Tensor result = tensors[0];
+        for (size_t i = 1; i < tensors.size(); ++i)
+        {
+            result = result + tensors[i];
+        }
+        return result;
     }
 
     // Explicit template instantiations
