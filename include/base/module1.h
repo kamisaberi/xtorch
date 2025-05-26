@@ -16,7 +16,7 @@ namespace xt
         virtual torch::Tensor forward(std::vector<torch::Tensor> tensors) = 0;
 
         // Virtual destructor for proper cleanup
-        virtual ~Module() = default;
+        virtual ~Module1() = default;
     };
 
     // Explicit template instantiation declarations
