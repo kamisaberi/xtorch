@@ -9,10 +9,10 @@
 #include <map>
 #include <torch/torch.h>
 #include <opencv2/opencv.hpp>
-#include "transforms/transforms.h"
-#include "utils/utils.h"
-#include "base/dataset.h"
-#include "base/tensor.h"
-#include "base/cloneable.h"
+#include "include/transforms/transforms.h"
+#include "include/utils/utils.h"
+#include "include/base/dataset.h"
+#include "include/base/tensor.h"
+#include "include/base/cloneable.h"
 
 
