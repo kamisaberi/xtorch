@@ -12,8 +12,6 @@ namespace xt
     class Module: public torch::nn::Module {
     public:
         Module();
-    public:
-        Module();
         // Pure virtual forward with initializer_list
         virtual auto forward(std::initializer_list<torch::Tensor> tensors) -> std::any = 0;
 
