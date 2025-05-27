@@ -14,7 +14,7 @@ namespace xt::transforms
         torch::Tensor input = tensor_vec[0];
         for (auto& transform : this->transforms)
         {
-            input = transform({input});
+            input = std::any_cast<torch::Tensor>(transform({input}));
         }
         return input;
     }
