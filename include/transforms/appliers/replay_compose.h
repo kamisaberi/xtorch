@@ -9,7 +9,7 @@ namespace xt::transforms
     public:
         ReplayCompose();
         explicit ReplayCompose(std::vector<xt::Module> transforms);
-        auto forward(std::initializer_list<torch::Tensor> tensors) -> std::any override;
+        torch::Tensor forward(torch::Tensor input) const override;
 
     private:
         std::vector<xt::Module> transforms;
