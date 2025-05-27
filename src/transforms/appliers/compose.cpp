@@ -1,4 +1,3 @@
-
 #include "include/transforms/appliers/compose.h"
 
 namespace xt::transforms
@@ -9,11 +8,12 @@ namespace xt::transforms
     {
     }
 
-    auto forward(std::initializer_list<torch::Tensor> tensors) -> std::any override {
+    auto forward(std::initializer_list<torch::Tensor> tensors) -> std::any
     {
+        auto input = tensors;
         for (const auto& transform : this->transforms)
         {
-            input = transform(std::move(input));
+            input = transform(input);
         }
         return input;
     }
