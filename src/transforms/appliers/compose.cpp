@@ -12,9 +12,9 @@ namespace xt::transforms
     {
         std::vector<torch::Tensor> tensor_vec(tensors);
         torch::Tensor input = tensor_vec[0];
-        for (const auto& transform : this->transforms)
+        for (auto& transform : this->transforms)
         {
-            input = transform(input);
+            input = transform({input});
         }
         return input;
     }
