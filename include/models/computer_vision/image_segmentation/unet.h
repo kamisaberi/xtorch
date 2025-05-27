@@ -24,7 +24,7 @@ namespace xt::models
     public:
         DoubleConv(int in_channels, int out_channels);
 
-        auto forward(std::initializer_list<torch::Tensor> tensors) -> std::any override;
+        torch::Tensor forward(torch::Tensor input) const override;
 
     private:
         mutable  torch::nn::Sequential conv_op = nullptr;
@@ -47,7 +47,7 @@ namespace xt::models
     public:
         DownSample(int in_channels, int out_channels);
 
-        auto forward(std::initializer_list<torch::Tensor> tensors) -> std::any override;
+        torch::Tensor forward(torch::Tensor input) const override;
 
     private:
         DoubleConv conv{0, 0};
