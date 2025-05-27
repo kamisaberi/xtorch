@@ -1,11 +1,11 @@
-#include "include/base/module.h"
+#include "include/base/module1.h"
 #include <iostream>
 #include <vector>
 
 namespace xt {
 
 // Derived class overriding forward
-class MyModule : public Module {
+class MyModule : public Module1 {
 public:
     MyModule() = default; // No register_module
 

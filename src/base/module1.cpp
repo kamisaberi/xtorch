@@ -1,62 +1,13 @@
-#include  "include/base/module1.h"
+#include "include/base/module1.h"
+
 
 namespace xt
 {
-    template <typename... Args>
-    torch::Tensor Module1::forward(Args... args)
+    Module1::Module1() = default;
+
+    // Operator() implementation in Module
+    auto Module1::operator()(const std::initializer_list<torch::Tensor> tensors) -> std::any
     {
-        // Ensure all arguments are torch::Tensor
-        static_assert(
-            (std::is_same_v<std::decay_t<Args>, torch::Tensor> && ...),
-            "All arguments to forward must be torch::Tensor"
-        );
-
-        // Collect tensors into a vector
-        std::vector<torch::Tensor> tensors = {args...};
-
-        // Check for valid number of arguments (1 to 10)
-        if (tensors.empty())
-        {
-            throw std::invalid_argument("At least one tensor must be provided");
-        }
-        if (tensors.size() > 10)
-        {
-            throw std::invalid_argument("Maximum 10 tensors allowed");
-        }
-
-        // Check that all tensors have the same shape
-        auto reference_sizes = tensors[0].sizes();
-        for (size_t i = 1; i < tensors.size(); ++i)
-        {
-            if (tensors[i].sizes() != reference_sizes)
-            {
-                throw std::invalid_argument("All tensors must have the same shape");
-            }
-        }
-
-        // Sum all tensors (default implementation)
-        torch::Tensor result = tensors[0];
-        for (size_t i = 1; i < tensors.size(); ++i)
-        {
-            result = result + tensors[i];
-        }
-        return result;
+        return forward(tensors); // Calls subclass's forward
     }
-
-    // Explicit template instantiations
-    template torch::Tensor Module1::forward(torch::Tensor);
-    template torch::Tensor Module1::forward(torch::Tensor, torch::Tensor);
-    template torch::Tensor Module1::forward(torch::Tensor, torch::Tensor, torch::Tensor);
-    template torch::Tensor Module1::forward(torch::Tensor, torch::Tensor, torch::Tensor, torch::Tensor);
-    template torch::Tensor Module1::forward(torch::Tensor, torch::Tensor, torch::Tensor, torch::Tensor, torch::Tensor);
-    template torch::Tensor Module1::forward(torch::Tensor, torch::Tensor, torch::Tensor, torch::Tensor, torch::Tensor,
-                                            torch::Tensor);
-    template torch::Tensor Module1::forward(torch::Tensor, torch::Tensor, torch::Tensor, torch::Tensor, torch::Tensor,
-                                            torch::Tensor, torch::Tensor);
-    template torch::Tensor Module1::forward(torch::Tensor, torch::Tensor, torch::Tensor, torch::Tensor, torch::Tensor,
-                                            torch::Tensor, torch::Tensor, torch::Tensor);
-    template torch::Tensor Module1::forward(torch::Tensor, torch::Tensor, torch::Tensor, torch::Tensor, torch::Tensor,
-                                            torch::Tensor, torch::Tensor, torch::Tensor, torch::Tensor);
-    template torch::Tensor Module1::forward(torch::Tensor, torch::Tensor, torch::Tensor, torch::Tensor, torch::Tensor,
-                                            torch::Tensor, torch::Tensor, torch::Tensor, torch::Tensor, torch::Tensor);
-} // namespace xt
+}
