@@ -8,7 +8,7 @@ namespace xt::transforms
     {
     }
 
-    auto forward(std::initializer_list<torch::Tensor> tensors) -> std::any
+    auto Compose::forward(std::initializer_list<torch::Tensor> tensors) -> std::any
     {
         auto input = tensors;
         for (const auto& transform : this->transforms)
