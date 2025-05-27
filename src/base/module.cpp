@@ -7,7 +7,7 @@ namespace xt
 
 
     // Operator() implementation in Module
-    auto Module::operator()(const std::initializer_list<torch::Tensor> tensors) -> std::any
+    auto Module::operator()(std::initializer_list<torch::Tensor> tensors) -> std::any
     {
         return forward(tensors); // Calls subclass's forward
     }
