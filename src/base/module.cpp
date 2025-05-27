@@ -5,8 +5,10 @@ namespace xt
 {
     Module::Module() = default;
 
-    torch::Tensor Module::operator()(torch::Tensor input) const
+
+    // Operator() implementation in Module
+    auto Module::operator()(const std::initializer_list<torch::Tensor> tensors) -> std::any
     {
-        return this->forward(std::move(input));
+        return forward(tensors); // Calls subclass's forward
     }
 }
