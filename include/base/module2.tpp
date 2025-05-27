@@ -5,7 +5,7 @@
 namespace xt {
 
     template<typename... Args>
-    auto Module::forward(Args... args) -> torch::Tensor {
+    auto Module2::forward(Args... args) -> torch::Tensor {
         // Ensure all arguments are torch::Tensor
         static_assert(
             (std::is_same_v<std::decay_t<Args>, torch::Tensor> && ...),
