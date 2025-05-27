@@ -9,7 +9,7 @@ namespace xt::transforms
     {
     }
 
-    torch::Tensor Compose::forward(torch::Tensor input) const
+    auto forward(std::initializer_list<torch::Tensor> tensors) -> std::any override {
     {
         for (const auto& transform : this->transforms)
         {

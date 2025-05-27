@@ -9,7 +9,8 @@
 
 namespace xt
 {
-    class Module: public torch::nn::Module {
+    class Module : public torch::nn::Module
+    {
     public:
         Module();
         // Pure virtual forward with initializer_list
@@ -19,6 +20,8 @@ namespace xt
         auto operator()(std::initializer_list<torch::Tensor> tensors) -> std::any;
 
         // Pure virtual destructor
-        ~Module() override = default;    };
+        ~Module() override = default;
+    };
 };
+
 }
