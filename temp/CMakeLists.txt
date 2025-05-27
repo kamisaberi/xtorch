@@ -1804,7 +1804,7 @@ set(BASE_SOURCE_FILES
 
 ####################################### XT_MODULE_1_TEST #######################################
 
-project(xt_module_1)
+project(xt_module_0)
 list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/c++/libtorch/)
 find_package(Torch REQUIRED)
 #find_package(xTorch REQUIRED)

@@ -1,4 +1,5 @@
 #pragma once
+#include <any>
 #include <torch/torch.h>
 #include <iostream>
 #include <torch/script.h>
@@ -11,7 +12,15 @@ namespace xt
     class Module: public torch::nn::Module {
     public:
         Module();
-        virtual  torch::Tensor forward(torch::Tensor input) const = 0;
-        torch::Tensor operator()(torch::Tensor input) const ;
-    };
+    public:
+        Module();
+        // Pure virtual forward with initializer_list
+        virtual auto forward(std::initializer_list<torch::Tensor> tensors) -> std::any = 0;
+
+        // Operator() to call forward
+        auto operator()(std::initializer_list<torch::Tensor> tensors) -> std::any;
+
+        // Pure virtual destructor
+        ~Module() override = default;    };
+};
 }
