@@ -19,5 +19,5 @@ namespace xt
         auto operator()(std::initializer_list<torch::Tensor> tensors) -> std::any;
 
         // Pure virtual destructor
-        virtual ~Module() = default;    };
+        ~Module() override = default;    };
 }
