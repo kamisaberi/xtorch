@@ -1,41 +1,23 @@
 #pragma once
+#include <any>
 #include <torch/torch.h>
+#include <iostream>
+#include <torch/script.h>
+#include <string>
 #include <vector>
-#include <type_traits>
+
 
 namespace xt
 {
-    class Module1 : public torch::nn::Module
-    {
+    class Module1: public torch::nn::Module {
     public:
-        // Variadic template forward method (non-virtual, as templates cannot be virtual)
-        template <typename... Args>
-        torch::Tensor forward(Args... args);
+        Module1();
+        // Pure virtual forward with initializer_list
+        virtual auto forward(std::initializer_list<torch::Tensor> tensors) -> std::any = 0;
 
-        // Pure virtual destructor to make the class abstract
-        ~Module1() override = 0;
-    };
+        // Operator() to call forward
+        auto operator()(std::initializer_list<torch::Tensor> tensors) -> std::any;
 
-    // Pure virtual destructor definition
-    inline Module1::~Module1() = default;
-
-    // Explicit template instantiation declarations
-    extern template torch::Tensor Module1::forward(torch::Tensor);
-    extern template torch::Tensor Module1::forward(torch::Tensor, torch::Tensor);
-    extern template torch::Tensor Module1::forward(torch::Tensor, torch::Tensor, torch::Tensor);
-    extern template torch::Tensor Module1::forward(torch::Tensor, torch::Tensor, torch::Tensor, torch::Tensor);
-    extern template torch::Tensor Module1::forward(torch::Tensor, torch::Tensor, torch::Tensor, torch::Tensor,
-                                                   torch::Tensor);
-    extern template torch::Tensor Module1::forward(torch::Tensor, torch::Tensor, torch::Tensor, torch::Tensor,
-                                                   torch::Tensor, torch::Tensor);
-    extern template torch::Tensor Module1::forward(torch::Tensor, torch::Tensor, torch::Tensor, torch::Tensor,
-                                                   torch::Tensor, torch::Tensor, torch::Tensor);
-    extern template torch::Tensor Module1::forward(torch::Tensor, torch::Tensor, torch::Tensor, torch::Tensor,
-                                                   torch::Tensor, torch::Tensor, torch::Tensor, torch::Tensor);
-    extern template torch::Tensor Module1::forward(torch::Tensor, torch::Tensor, torch::Tensor, torch::Tensor,
-                                                   torch::Tensor, torch::Tensor, torch::Tensor, torch::Tensor,
-                                                   torch::Tensor);
-    extern template torch::Tensor Module1::forward(torch::Tensor, torch::Tensor, torch::Tensor, torch::Tensor,
-                                                   torch::Tensor, torch::Tensor, torch::Tensor, torch::Tensor,
-                                                   torch::Tensor, torch::Tensor);
-} // namespace xt
+        // Pure virtual destructor
+        ~Module1() override = default;    };
+}
