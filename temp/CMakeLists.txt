@@ -1820,7 +1820,7 @@ set(BASE_SOURCE_FILES
 )
 
 
-set(TEST_SOURCE_FILES ${BASE_FILES} xt_module/xt_module_test.cpp)
+set(TEST_SOURCE_FILES ${BASE_FILES} xt_module/xt_module1_test.cpp)
 
 add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
 target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
