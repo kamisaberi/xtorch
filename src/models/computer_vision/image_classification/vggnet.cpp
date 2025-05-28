@@ -296,8 +296,17 @@ namespace xt::models
     }
 
 
-    torch::Tensor VggNet11::forward(torch::Tensor x) const
+    auto VggNet11::forward(std::initializer_list<std::any> tensors) -> std::any
     {
+        std::vector<std::any> any_vec(tensors);
+
+        std::vector<torch::Tensor> tensor_vec;
+        for (const auto& item : any_vec)
+        {
+            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+        }
+
+        torch::Tensor x = tensor_vec[0];
         x = layer1->forward(x);
         x = layer2->forward(x);
         x = layer3->forward(x);
@@ -637,8 +646,18 @@ namespace xt::models
     }
 
 
-    torch::Tensor VggNet13::forward(torch::Tensor x) const
+
+    auto VggNet13::forward(std::initializer_list<std::any> tensors) -> std::any
     {
+        std::vector<std::any> any_vec(tensors);
+
+        std::vector<torch::Tensor> tensor_vec;
+        for (const auto& item : any_vec)
+        {
+            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+        }
+
+        torch::Tensor x = tensor_vec[0];
         x = layer1->forward(x);
         x = layer2->forward(x);
         x = layer3->forward(x);
@@ -706,7 +725,6 @@ namespace xt::models
         );
 
 
-        //TODO layer6 DONE
         layer6 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(256, 256, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(256),
@@ -715,7 +733,6 @@ namespace xt::models
         );
 
 
-        //TODO layer7 DONE
         layer7 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(256, 256, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(256),
@@ -724,7 +741,6 @@ namespace xt::models
         );
 
 
-        //TODO layer8 DONE
         layer8 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(256, 512, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(512),
