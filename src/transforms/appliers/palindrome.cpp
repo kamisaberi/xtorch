@@ -18,11 +18,11 @@ namespace xt::transforms
 
         for (const auto& transform : this->transforms)
         {
-            input = transform(std::move(input));
+            input = std::any_cast<torch::Tensor>(transform({input}));
         }
         for (int i = this->transforms.size() - 1; i >= 0; i--)
         {
-            input = transforms[i](std::move(input));
+            input = std::any_cast<torch::Tensor>(transforms[i]({input}));
         }
 
 
