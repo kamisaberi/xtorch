@@ -7,13 +7,13 @@ namespace xt::transforms {
                                                                           n_times_(n_times) {
     }
 
-    auto Repeat::forward(std::initializer_list <torch::Tensor> tensors) -> std::any {
-        std::vector <torch::Tensor> tensor_vec(tensors);
-        torch::Tensor input = tensor_vec[0];
-        for (int i = 1; i < this->n_times_; i++) {
-            // input = transform(std::move(input));
-        }
-        return input;
+    auto Repeat::forward(std::initializer_list <std::any> tensors) -> std::any {
+        // std::vector <torch::Tensor> tensor_vec(tensors);
+        // torch::Tensor input = tensor_vec[0];
+        // for (int i = 1; i < this->n_times_; i++) {
+        //     // input = transform(std::move(input));
+        // }
+        // return input;
 
 
     }
