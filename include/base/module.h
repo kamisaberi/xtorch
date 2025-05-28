@@ -23,5 +23,3 @@ namespace xt
         ~Module() override = default;
     };
 };
-
-}
