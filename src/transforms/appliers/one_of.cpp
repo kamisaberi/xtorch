@@ -9,7 +9,7 @@ namespace xt::transforms {
     }
 
 
-    auto Compose::forward(std::initializer_list <torch::Tensor> tensors) -> std::any {
+    auto OneOf::forward(std::initializer_list <torch::Tensor> tensors) -> std::any {
 
         std::vector <torch::Tensor> tensor_vec(tensors);
         input = tensor_vec[0];
