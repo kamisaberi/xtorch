@@ -7,37 +7,34 @@ namespace xt {
 // Derived class overriding forward
 class MyModule : public Module1 {
 public:
-    MyModule() = default; // No register_module
+    MyModule() = default;
 
-    // Override forward to take exactly 2 tensors and return std::vector<float>
-    auto forward(std::initializer_list<torch::Tensor> tensors) -> std::any override {
-        // Ensure exactly 2 tensors
-        if (tensors.size() != 2) {
+    auto forward(std::initializer_list<std::any> data) -> std::any override {
+        if (data.size() != 2) {
             throw std::invalid_argument("MyModule::forward requires exactly 2 tensors");
         }
-
-        // Convert initializer_list to vector for processing
-        std::vector<torch::Tensor> tensor_vec(tensors);
-
-        // Validate tensors
-        for (const auto& tensor : tensor_vec) {
+        std::vector<torch::Tensor> tensors;
+        try {
+            for (const auto& item : data) {
+                tensors.push_back(std::any_cast<torch::Tensor>(item));
+            }
+        } catch (const std::bad_any_cast&) {
+            throw std::invalid_argument("MyModule::forward expects torch::Tensor elements");
+        }
+        for (const auto& tensor : tensors) {
             if (tensor.numel() == 0) {
                 throw std::invalid_argument("Tensor is empty");
             }
         }
-
-        // Return first element of each tensor
         std::vector<float> result = {
-            tensor_vec[0].flatten()[0].item<float>(),
-            tensor_vec[1].flatten()[0].item<float>()
+                tensors[0].flatten()[0].item<float>(),
+                tensors[1].flatten()[0].item<float>()
         };
         return std::any(result);
     }
 
-    // Convenience method for two tensors
     auto forward(torch::Tensor t1, torch::Tensor t2) -> std::vector<float> {
-        // Call the virtual forward with initializer_list
-        auto any_result = forward({t1, t2});
+        auto any_result = forward({std::any(t1), std::any(t2)});
         return std::any_cast<std::vector<float>>(any_result);
     }
 };
