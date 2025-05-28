@@ -92,7 +92,7 @@ namespace xt::datasets
         for (int i = 0; i < this->data.size(); i++)
         {
             torch::Tensor tensor = this->data[i];
-            tensor = (*transformer)(tensor);
+            tensor =std::any_cast<torch::Tensor>((*transformer)({tensor}));
             this->data[i] = tensor;
         }
     }
@@ -128,7 +128,7 @@ namespace xt::datasets
                                                           torch::kByte).clone();
             if (transformer != nullptr)
             {
-                tensor_image = (*transformer)(tensor_image);
+                tensor_image =std::any_cast<torch::Tensor>((*transformer)({tensor_image}));
             }
             fimages.push_back(tensor_image);
         }
