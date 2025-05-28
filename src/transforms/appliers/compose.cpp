@@ -10,11 +10,14 @@ namespace xt::transforms
 
     auto Compose::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-
-
         std::vector<std::any> any_vec(tensors);
 
-        std::vector<torch::Tensor> tensors_vec =
+        std::vector<torch::Tensor> tensor_vec;
+        for (const auto& item : data)
+        {
+            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+        }
+
         torch::Tensor input = tensor_vec[0];
         for (auto& transform : this->transforms)
         {
