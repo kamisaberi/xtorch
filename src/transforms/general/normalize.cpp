@@ -9,20 +9,20 @@ namespace xt::transforms::general {
         }
     }
 
-    auto Normalize::forward(std::initializer_list<torch::Tensor> tensors) -> std::any
+    auto Normalize::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        std::vector<torch::Tensor> tensor_vec(tensors);
-        torch::Tensor input = tensor_vec[0];
-        if (tensor.dim() != 3 || tensor.size(0) != static_cast<long>(mean.size())) {
-            throw std::invalid_argument("Input tensor must be CHW with matching number of channels");
-        }
-
-        torch::Tensor out = tensor.clone();
-        for (size_t c = 0; c < mean.size(); ++c) {
-            out[c] = (out[c] - mean[c]) / std[c];
-        }
-
-        return out;
+        // std::vector<torch::Tensor> tensor_vec(tensors);
+        // torch::Tensor input = tensor_vec[0];
+        // if (tensor.dim() != 3 || tensor.size(0) != static_cast<long>(mean.size())) {
+        //     throw std::invalid_argument("Input tensor must be CHW with matching number of channels");
+        // }
+        //
+        // torch::Tensor out = tensor.clone();
+        // for (size_t c = 0; c < mean.size(); ++c) {
+        //     out[c] = (out[c] - mean[c]) / std[c];
+        // }
+        //
+        // return out;
     }
 
 

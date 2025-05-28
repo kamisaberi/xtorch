@@ -9,13 +9,13 @@ namespace xt::transforms::general {
     }
 
 
-    auto Lambda::forward(std::initializer_list <torch::Tensor> tensors) -> std::any {
-        std::vector <torch::Tensor> tensor_vec(tensors);
-        torch::Tensor input = tensor_vec[0];
-
-        torch::Tensor Lambda::forward(torch::Tensor input) const {
-            return transform(input);
-        }
+    auto Lambda::forward(std::initializer_list <std::any> tensors) -> std::any {
+        // std::vector <torch::Tensor> tensor_vec(tensors);
+        // torch::Tensor input = tensor_vec[0];
+        //
+        // torch::Tensor Lambda::forward(torch::Tensor input) const {
+        //     return transform(input);
+        // }
     }
 
 
