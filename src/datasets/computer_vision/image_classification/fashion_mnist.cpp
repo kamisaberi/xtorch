@@ -131,7 +131,7 @@ namespace xt::datasets
                                                           torch::kByte).clone();
             if (transformer != nullptr)
             {
-                tensor_image = (*transformer)(tensor_image);
+                tensor_image =std::any_cast<torch::Tensor>((*transformer)({tensor_image}));
             }
             fimages.push_back(tensor_image);
         }
