@@ -8,19 +8,19 @@ namespace xt::transforms::general {
     }
 
 
-    auto ConvertDTypeCompose::forward(std::initializer_list <torch::Tensor> tensors) -> std::any {
+    auto ConvertDType::forward(std::initializer_list <std::any> tensors) -> std::any {
 
-        std::vector <torch::Tensor> tensor_vec(tensors);
-        torch::Tensor input = tensor_vec[0];
-        if (!input.defined()) {
-            throw std::invalid_argument("Input tensor is not defined");
-        }
-
-        if (input.dtype() == target_dtype) {
-            return input;
-        }
-
-        return input.to(target_dtype);
+        // std::vector <torch::Tensor> tensor_vec(tensors);
+        // torch::Tensor input = tensor_vec[0];
+        // if (!input.defined()) {
+        //     throw std::invalid_argument("Input tensor is not defined");
+        // }
+        //
+        // if (input.dtype() == target_dtype) {
+        //     return input;
+        // }
+        //
+        // return input.to(target_dtype);
 
     }
 
