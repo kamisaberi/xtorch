@@ -6,7 +6,7 @@ namespace xt::transforms::general {
     public:
         PCA();
         PCA(std::function<torch::Tensor(torch::Tensor)> transform);
-        torch::Tensor forward(torch::Tensor input) const override;
+        auto forward(std::initializer_list<torch::Tensor> tensors) -> std::any  override;
 
     private:
         std::function<torch::Tensor(torch::Tensor)> transform;
