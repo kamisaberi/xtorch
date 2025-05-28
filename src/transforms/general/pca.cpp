@@ -9,6 +9,6 @@ namespace xt::transforms::general {
 
     // torch::Tensor PCA::forward(torch::Tensor input) const {
     //     return transform(input);
-    }
+    // }
 
 }
