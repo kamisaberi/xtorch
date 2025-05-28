@@ -101,7 +101,7 @@ namespace xt::models
 
         torch::nn::Sequential makeLayerFromResidualBlock(int planes, int blocks, int stride = 1);
 
-        torch::Tensor forward(torch::Tensor x) const override;
+        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
         void reset() override;
     };
 
@@ -122,7 +122,7 @@ namespace xt::models
 
         torch::nn::Sequential makeLayerFromResidualBlock(int planes, int blocks, int stride = 1);
 
-        torch::Tensor forward(torch::Tensor x) const override;
+        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
         void reset() override;
     };
 
@@ -143,7 +143,7 @@ namespace xt::models
 
         torch::nn::Sequential makeLayerFromResidualBlock(int planes, int blocks, int stride = 1);
 
-        torch::Tensor forward(torch::Tensor x) const override;
+        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
         void reset() override;
     };
 
@@ -164,7 +164,7 @@ namespace xt::models
 
         torch::nn::Sequential makeLayerFromResidualBlock(int planes, int blocks, int stride = 1);
 
-        torch::Tensor forward(torch::Tensor x) const override;
+        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
         void reset() override;
     };
 }
