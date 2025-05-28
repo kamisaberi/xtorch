@@ -92,7 +92,7 @@ namespace xt::models
         std::vector<std::any> any_vec(tensors);
 
         std::vector<torch::Tensor> tensor_vec;
-        for (const auto& item : data)
+        for (const auto& item : any_vec)
         {
             tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
         }
