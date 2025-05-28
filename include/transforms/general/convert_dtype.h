@@ -9,6 +9,8 @@ namespace xt::transforms::general {
 
         explicit ConvertDType(torch::ScalarType target_dtype);
 
+        auto forward(std::initializer_list<torch::Tensor> tensors) -> std::any  override;
+
         torch::Tensor forward(torch::Tensor input) const override;
 
     private:
