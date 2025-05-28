@@ -11,7 +11,14 @@ namespace xt::transforms
     }
 
 
-    torch::Tensor Palindrome::forward(torch::Tensor input) const
+    auto Compose::forward(std::initializer_list<torch::Tensor> tensors) -> std::any {
+
+
+
+
+    }
+
+        torch::Tensor Palindrome::forward(torch::Tensor input) const
     {
         for (const auto& transform : this->transforms)
         {
