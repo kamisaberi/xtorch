@@ -18,7 +18,7 @@ namespace xt::models
         VggNet11(int num_classes /* classes */, int in_channels /* input channels */);
         VggNet11(int num_classes, int in_channels, std::vector<int64_t> input_shape);
 
-        torch::Tensor forward(torch::Tensor x) const override;
+        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
         void reset() override;
     };
 
@@ -34,7 +34,7 @@ namespace xt::models
         VggNet13(int num_classes /* classes */, int in_channels /* input channels */);
         VggNet13(int num_classes, int in_channels, std::vector<int64_t> input_shape);
 
-        torch::Tensor forward(torch::Tensor x) const override;
+        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
         void reset() override;
     };
 
@@ -51,7 +51,7 @@ namespace xt::models
         VggNet16(int num_classes /* classes */, int in_channels /* input channels */);
         VggNet16(int num_classes, int in_channels, std::vector<int64_t> input_shape);
 
-        torch::Tensor forward(torch::Tensor x) const override;
+        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
         void reset() override;
     };
 
@@ -68,7 +68,7 @@ namespace xt::models
         VggNet19(int num_classes /* classes */, int in_channels /* input channels */);
         VggNet19(int num_classes, int in_channels, std::vector<int64_t> input_shape);
 
-        torch::Tensor forward(torch::Tensor x) const override;
+        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
         void reset() override;
     };
 }
