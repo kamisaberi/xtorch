@@ -9,7 +9,8 @@ namespace xt::transforms
     public:
         RandomApply();
         explicit RandomApply(std::vector<xt::Module> transforms);
-        torch::Tensor forward(torch::Tensor input) const override;
+//        torch::Tensor forward(torch::Tensor input) const override;
+        auto forward(std::initializer_list<torch::Tensor> tensors) -> std::any  override;
 
     private:
         std::vector<xt::Module> transforms;
