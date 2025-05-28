@@ -87,8 +87,18 @@ namespace xt::models
     //     // cout << x << endl;
     //     return x;
     // }
-    torch::Tensor LeNet5::forward(torch::Tensor x) const
+    auto LeNet5::forward(std::initializer_list<std::any> tensors) -> std::any
     {
+        std::vector<std::any> any_vec(tensors);
+
+        std::vector<torch::Tensor> tensor_vec;
+        for (const auto& item : data)
+        {
+            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+        }
+
+        torch::Tensor x = tensor_vec[0];
+
         x = layer1->forward(x);
         x = layer2->forward(x);
         x = x.view({x.size(0), -1}); // flatten
