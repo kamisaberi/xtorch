@@ -68,7 +68,8 @@ namespace xt {
                     this->optimizer_->zero_grad();
                     torch::Tensor output;
                     // Forward pass through the model
-                    output = model->forward(data);
+                    //TODO BUG
+                    output = std::any_cast<torch::Tensor>(model->forward({data}));
                     torch::Tensor loss;
                     // Compute loss using the specified loss function
                     loss = this->loss_fn_(output, targets);
@@ -111,7 +112,8 @@ namespace xt {
                     this->optimizer_->zero_grad();
                     torch::Tensor output;
                     // Forward pass through the model
-                    output = model->forward(data);
+                    //TODO BUG
+                    output = std::any_cast<torch::Tensor>(model->forward({data}));
                     torch::Tensor loss;
                     // Compute loss using the specified loss function
                     loss = this->loss_fn_(output, targets);
