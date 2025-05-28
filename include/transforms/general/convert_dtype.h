@@ -11,8 +11,6 @@ namespace xt::transforms::general {
 
         auto forward(std::initializer_list<torch::Tensor> tensors) -> std::any  override;
 
-        torch::Tensor forward(torch::Tensor input) const override;
-
     private:
         torch::ScalarType target_dtype;
     };
