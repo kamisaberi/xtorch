@@ -6,7 +6,6 @@ namespace xt::transforms::general {
     struct RandomOverSampling final : xt::Module {
     public:
         RandomOverSampling();
-        RandomOverSampling(std::function<torch::Tensor(torch::Tensor)> transform);
         auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
 
     private:
