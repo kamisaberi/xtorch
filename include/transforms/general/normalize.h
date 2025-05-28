@@ -13,7 +13,7 @@ namespace xt::transforms::general {
 
         Normalize(std::vector<float> mean, std::vector<float> std);
 
-        torch::Tensor forward(torch::Tensor input) const override;
+        auto forward(std::initializer_list<torch::Tensor> tensors) -> std::any  override;
 
     private:
         std::vector<float> mean;
