@@ -9,7 +9,7 @@ namespace xt::transforms
     public:
         OneOf();
         explicit OneOf(std::vector<xt::Module> transforms);
-        auto forward(std::initializer_list<torch::Tensor> tensors) -> std::any  override;
+        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
 
     private:
         std::vector<xt::Module> transforms;
