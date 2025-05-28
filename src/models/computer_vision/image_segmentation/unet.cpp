@@ -16,8 +16,18 @@ namespace xt::models
         register_module("conv_op", this->conv_op);
     }
 
-    torch::Tensor DoubleConv::forward(torch::Tensor input) const
+
+    auto DoubleConv::forward(std::initializer_list<std::any> tensors) -> std::any
     {
+        std::vector<std::any> any_vec(tensors);
+
+        std::vector<torch::Tensor> tensor_vec;
+        for (const auto& item : any_vec)
+        {
+            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+        }
+
+        torch::Tensor input = tensor_vec[0];
         return this->conv_op->forward(input);
     }
 
@@ -31,9 +41,19 @@ namespace xt::models
         register_module("pool", pool);
     }
 
-    torch::Tensor DownSample::forward(torch::Tensor input) const
+
+    auto DownSample::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        torch::Tensor x = this->conv.forward(input);
+        std::vector<std::any> any_vec(tensors);
+
+        std::vector<torch::Tensor> tensor_vec;
+        for (const auto& item : any_vec)
+        {
+            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+        }
+
+        torch::Tensor input = tensor_vec[0];
+        torch::Tensor x = std::any_cast<torch::Tensor>(this->conv.forward({input}));
         x = this->pool->forward(x);
         return x;
     }
@@ -55,7 +75,7 @@ namespace xt::models
     {
         x1 = this->up(x1);
         torch::Tensor x = torch::cat({x1, x2});
-        return this->conv.forward(x);
+        return std::any_cast<torch::Tensor>(this->conv.forward({x}));
         // def forward(self, x1, x2):
         //     x1 = self.up(x1)
         //     x = torch.cat([x1, x2], 1)
@@ -84,9 +104,18 @@ namespace xt::models
     }
 
 
-    torch::Tensor UNet::forward(torch::Tensor input) const
+    auto UNet::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return input;
+        std::vector<std::any> any_vec(tensors);
+
+        std::vector<torch::Tensor> tensor_vec;
+        for (const auto& item : any_vec)
+        {
+            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+        }
+
+        torch::Tensor x = tensor_vec[0];
+        return x;
     }
 
     void UNet::reset()
