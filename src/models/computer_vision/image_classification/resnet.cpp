@@ -630,8 +630,17 @@ namespace xt::models
         return layers;
     }
 
-    torch::Tensor ResNet101::forward(torch::Tensor x) const
+    auto ResNet101::forward(std::initializer_list<std::any> tensors) -> std::any
     {
+        std::vector<std::any> any_vec(tensors);
+
+        std::vector<torch::Tensor> tensor_vec;
+        for (const auto& item : any_vec)
+        {
+            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+        }
+
+        torch::Tensor x = tensor_vec[0];
         x = conv1->forward(x);
         x = maxpool->forward(x);
         x = layer0->forward(x);
@@ -772,8 +781,17 @@ namespace xt::models
         return layers;
     }
 
-    torch::Tensor ResNet152::forward(torch::Tensor x) const
+    auto ResNet152::forward(std::initializer_list<std::any> tensors) -> std::any
     {
+        std::vector<std::any> any_vec(tensors);
+
+        std::vector<torch::Tensor> tensor_vec;
+        for (const auto& item : any_vec)
+        {
+            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+        }
+
+        torch::Tensor x = tensor_vec[0];
         x = conv1->forward(x);
         x = maxpool->forward(x);
         x = layer0->forward(x);
