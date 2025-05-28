@@ -13,10 +13,10 @@ namespace xt
     public:
         Module1();
         // Pure virtual forward with initializer_list
-        virtual auto forward(std::initializer_list<torch::Tensor> tensors) -> std::any = 0;
+        virtual auto forward(std::initializer_list<std::any> tensors) -> std::any = 0;
 
         // Operator() to call forward
-        auto operator()(std::initializer_list<torch::Tensor> tensors) -> std::any;
+        auto operator()(std::initializer_list<std::any> tensors) -> std::any;
 
         // Pure virtual destructor
         ~Module1() override = default;    };
