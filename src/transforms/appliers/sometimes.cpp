@@ -1,18 +1,20 @@
 
 #include "include/transforms/appliers/sometimes.h"
 
-namespace xt::transforms
-{
+namespace xt::transforms {
     Sometimes::Sometimes() = default;
 
-    Sometimes::Sometimes(std::vector<xt::Module> transforms): xt::Module(), transforms(std::move(transforms))
-    {
+    Sometimes::Sometimes(std::vector <xt::Module> transforms) : xt::Module(), transforms(std::move(transforms)) {
     }
 
-    torch::Tensor Sometimes::forward(torch::Tensor input) const
-    {
+    auto Sometimes::forward(std::initializer_list <torch::Tensor> tensors) -> std::any {
+        std::vector <torch::Tensor> tensor_vec(tensors);
+        torch::Tensor input = tensor_vec[0];
         int index = torch::randint(0, transforms.size() - 1, {}, torch::kInt32).item<int>();
-        input = transforms[index](std::move(input));
+        input = std::any_cast<torch::Tensor>(transform[index]({input}));
         return input;
+
     }
+
+
 }
