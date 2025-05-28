@@ -26,8 +26,18 @@ namespace xt::models
             this->out_channels = out_channels;
         }
 
-        torch::Tensor ResidualBlock::forward(torch::Tensor x) const
+        auto ResidualBlock::forward(std::initializer_list<std::any> tensors) -> std::any
         {
+            std::vector<std::any> any_vec(tensors);
+
+            std::vector<torch::Tensor> tensor_vec;
+            for (const auto& item : any_vec)
+            {
+                tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+            }
+
+            torch::Tensor x = tensor_vec[0];
+
             residual = x;
             torch::Tensor out = conv1->forward(x);
             out = conv2->forward(out);
@@ -167,8 +177,17 @@ namespace xt::models
         return layers;
     }
 
-    torch::Tensor ResNet18::forward(torch::Tensor x) const
+    auto ResNet18::forward(std::initializer_list<std::any> tensors) -> std::any
     {
+        std::vector<std::any> any_vec(tensors);
+
+        std::vector<torch::Tensor> tensor_vec;
+        for (const auto& item : any_vec)
+        {
+            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+        }
+
+        torch::Tensor x = tensor_vec[0];
         x = conv1->forward(x);
         x = maxpool->forward(x);
         x = layer0->forward(x);
@@ -1031,5 +1050,6 @@ namespace xt::models
 
 
     void ResNet1202::reset()
-    {}
+    {
+    }
 }
