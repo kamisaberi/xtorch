@@ -12,6 +12,5 @@ namespace xt::transforms
         auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
 
     private:
-        std::vector<xt::Module> transforms;
     };
 }
