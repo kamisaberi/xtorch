@@ -1,3 +1,16 @@
 #pragma once
 
 #include "include/transforms/common.h"
+
+namespace xt::transforms
+{
+    class NodeMixUp final : public xt::Module
+    {
+    public:
+        NodeMixUp();
+        explicit NodeMixUp(std::vector<xt::Module> transforms);
+        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
+
+    private:
+    };
+}
