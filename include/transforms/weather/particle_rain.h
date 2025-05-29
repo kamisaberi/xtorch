@@ -1,1 +1,16 @@
 #pragma once
+
+#include "include/transforms/common.h"
+
+namespace xt::transforms
+{
+    class ParticleRain final : public xt::Module
+    {
+    public:
+        ParticleRain();
+        explicit ParticleRain(std::vector<xt::Module> transforms);
+        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
+
+    private:
+    };
+}
