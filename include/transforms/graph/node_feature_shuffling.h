@@ -1,2 +1,16 @@
 #pragma once
+
 #include "include/transforms/common.h"
+
+namespace xt::transforms
+{
+    class NodeFeatureShuffling final : public xt::Module
+    {
+    public:
+        NodeFeatureShuffling();
+        explicit NodeFeatureShuffling(std::vector<xt::Module> transforms);
+        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
+
+    private:
+    };
+}
