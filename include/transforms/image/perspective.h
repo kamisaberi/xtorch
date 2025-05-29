@@ -1,2 +1,16 @@
 #pragma once
+
 #include "include/transforms/common.h"
+
+namespace xt::transforms
+{
+    class Perspective final : public xt::Module
+    {
+    public:
+        Perspective();
+        explicit Perspective(std::vector<xt::Module> transforms);
+        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
+
+    private:
+    };
+}
