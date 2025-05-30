@@ -2,10 +2,13 @@
 
 namespace xt::activations {
     torch::Tensor asu(torch::Tensor x) {
+        return  torch::zeros(10);
     }
 
-    torch::Tensor ASU::forward(torch::Tensor x) const {
-        return xt::activations::asu(x);
+    auto ASU::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+
+        return xt::activations::asu(torch::zeros(10));
     }
 
 }
