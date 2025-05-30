@@ -3,13 +3,13 @@
 #include "common.h"
 
 namespace xt::dropouts {
-    torch::Tensor shake_dropout(torch::Tensor x);
+    torch::Tensor shake_drop(torch::Tensor x);
 
-    struct ShakeDropout : xt::Module {
+    struct ShakeDrop : xt::Module {
     public:
-        ShakeDropout() = default;
+        ShakeDrop() = default;
 
-        torch::Tensor forward(torch::Tensor x) const override;
+        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
 
     private:
     };
