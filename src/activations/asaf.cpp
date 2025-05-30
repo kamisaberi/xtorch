@@ -1,11 +1,14 @@
 #include "include/activations/asaf.h"
 
-namespace xt::activations {
-    torch::Tensor asaf(torch::Tensor x) {
+namespace xt::activations
+{
+    torch::Tensor asaf(torch::Tensor x)
+    {
+        return torch::zeros(10);
     }
 
-    torch::Tensor ASAF::forward(torch::Tensor x) const {
-        return xt::activations::aglu(x);
+    auto ASAF::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        return xt::activations::aglu(torch::zeros(10));
     }
-
 }

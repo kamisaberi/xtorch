@@ -1,11 +1,15 @@
+//TODO SHOULD IMPLEMENT
 #include "include/activations/andhra.h"
 
-namespace xt::activations {
-    torch::Tensor andhra(torch::Tensor x) {
+namespace xt::activations
+{
+    torch::Tensor andhra(torch::Tensor x)
+    {
+        return torch::zeros(10);
     }
 
-    torch::Tensor ANDHRA::forward(torch::Tensor x) const {
-        return xt::activations::andhra(x);
+    auto ANDHRA::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        return xt::activations::andhra(torch::zeros(10));
     }
-
 }

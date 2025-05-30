@@ -1,11 +1,14 @@
 #include "include/activations/aria.h"
 
-namespace xt::activations {
-    torch::Tensor aria(torch::Tensor x) {
+namespace xt::activations
+{
+    torch::Tensor aria(torch::Tensor x)
+    {
+         return  torch::zeros(10);
     }
 
-    torch::Tensor ARiA::forward(torch::Tensor x) const {
-        return xt::activations::aria(x);
+    auto ARiA::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        return xt::activations::aria(torch::zeros(10));
     }
-
 }
