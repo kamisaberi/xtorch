@@ -1,11 +1,14 @@
+//TODO SHOULD IMPLEMENT
 #include "include/activations/ahaf.h"
 
 namespace xt::activations {
     torch::Tensor ahaf(torch::Tensor x) {
+        return  torch::zeros(10);
     }
 
-    torch::Tensor AHAF::forward(torch::Tensor x) const {
-        return xt::activations::ahaf(x);
+    auto AHAF::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        return xt::activations::ahaf(torch::zeros(10));
     }
 
 }

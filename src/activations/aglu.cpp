@@ -1,3 +1,4 @@
+//TODO SHOULD IMPLEMENT
 #include "include/activations/aglu.h"
 
 namespace xt::activations
@@ -9,6 +10,6 @@ namespace xt::activations
 
     auto AGLU::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return xt::activations::aglu(x);
+        return xt::activations::aglu(torch::zeros(10));
     }
 }
