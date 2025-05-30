@@ -1,11 +1,14 @@
 #include "include/activations/coslu.h"
 
-namespace xt::activations {
-    torch::Tensor coslu(torch::Tensor x) {
+namespace xt::activations
+{
+    torch::Tensor coslu(torch::Tensor x)
+    {
+        return torch::zeros(10);
     }
 
-    torch::Tensor CosLU::forward(torch::Tensor x) const {
-        return xt::activations::coslu(x);
+    auto CosLU::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        return xt::activations::coslu(torch::zeros(10));
     }
-
 }

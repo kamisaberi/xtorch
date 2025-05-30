@@ -4,10 +4,12 @@ namespace xt::activations
 {
     torch::Tensor delu(torch::Tensor x)
     {
+        return torch::zeros(10);
     }
 
-    torch::Tensor DELU::forward(torch::Tensor x) const
+
+    auto DELU::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return xt::activations::delu(x);
+        return xt::activations::delu(torch::zeros(10));
     }
 }
