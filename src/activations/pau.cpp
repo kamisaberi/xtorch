@@ -1,11 +1,14 @@
 #include "include/activations/pau.h"
 
-namespace xt::activations {
-    torch::Tensor pau(torch::Tensor x) {
+namespace xt::activations
+{
+    torch::Tensor pau(torch::Tensor x)
+    {
+        return torch::zeros(10);
     }
 
-    torch::Tensor PAU::forward(torch::Tensor x) const {
-        return xt::activations::pau(x);
+    auto PAU::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        return xt::activations::pau(torch::zeros(10));
     }
-
 }

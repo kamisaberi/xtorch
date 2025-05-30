@@ -2,18 +2,16 @@
 
 #include "common.h"
 
-namespace xt::activations {
+namespace xt::activations
+{
     torch::Tensor pau(torch::Tensor x);
 
-    struct PAU : xt::Module {
+    struct PAU : xt::Module
+    {
     public:
         PAU() = default;
-
-        torch::Tensor forward(torch::Tensor x) const override;
+        auto forward(std::initializer_list<std::any> tensors) -> std::any override;
 
     private:
     };
 }
-
-
-

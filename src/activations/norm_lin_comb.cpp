@@ -1,11 +1,14 @@
 #include "include/activations/norm_lin_comb.h"
 
-namespace xt::activations {
-    torch::Tensor norm_lin_comb(torch::Tensor x) {
+namespace xt::activations
+{
+    torch::Tensor norm_lin_comb(torch::Tensor x)
+    {
+        return torch::zeros(10);
     }
 
-    torch::Tensor NormLinComb::forward(torch::Tensor x) const {
-        return xt::activations::norm_lin_comb(x);
+    auto NormLinComb::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        return xt::activations::norm_lin_comb(torch::zeros(10));
     }
-
 }
