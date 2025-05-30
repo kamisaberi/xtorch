@@ -9,6 +9,6 @@ namespace xt::activations
 
     auto ASAF::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return xt::activations::aglu(torch::zeros(10));
+        return xt::activations::asaf(torch::zeros(10));
     }
 }

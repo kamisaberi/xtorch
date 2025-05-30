@@ -7,7 +7,7 @@ namespace xt::activations {
 
     struct ModReLU : xt::Module {
     public:
-        AGLU() = default;
+        ModReLU() = default;
 
         auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
 
