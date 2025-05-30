@@ -1,11 +1,15 @@
 #include "include/activations/aglu.h"
 
-namespace xt::activations {
-    torch::Tensor dra(torch::Tensor x) {
+namespace xt::activations
+{
+    torch::Tensor dra(torch::Tensor x)
+    {
+        return torch::zeros(10);
     }
 
-    torch::Tensor DRA::forward(torch::Tensor x) const {
-        return xt::activations::dra(x);
-    }
 
+    auto DRA::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        return xt::activations::dra(torch::zeros(10));
+    }
 }

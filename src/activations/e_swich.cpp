@@ -4,10 +4,11 @@ namespace xt::activations
 {
     torch::Tensor e_swish(torch::Tensor x)
     {
+        return torch::zeros(10);
     }
 
-    torch::Tensor ESwish::forward(torch::Tensor x) const
+    auto ESwish::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return xt::activations::e_swish(x);
+        return xt::activations::e_swish(torch::zeros(10));
     }
 }
