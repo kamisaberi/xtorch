@@ -1,13 +1,15 @@
 #pragma once
+
 #include "common.h"
 
 namespace xt::optimizations
 {
     class OneBitAdam : public torch::optim::Optimizer {
     public:
-        OneBitAdam(std::vector<torch::Tensor>&& parameters, double lr = 0.01, double momentum = 0.9);
+        explicit OneBitAdam(std::vector<torch::Tensor>&& parameters, double lr = 0.01, double momentum = 0.9);
 
-        void step() override;
+        using LossClosure = std::function<torch::Tensor()>;
+        torch::Tensor step(LossClosure closure = nullptr) override;
 
         // Getter and setter for learning rate
         double lr() const { return lr_; }
