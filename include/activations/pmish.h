@@ -8,8 +8,7 @@ namespace xt::activations {
     struct PMish : xt::Module {
     public:
         PMish() = default;
-
-        torch::Tensor forward(torch::Tensor x) const override;
+        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
 
     private:
     };

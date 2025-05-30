@@ -1,11 +1,14 @@
 #include "include/activations/rational.h"
 
-namespace xt::activations {
-    torch::Tensor rational(torch::Tensor x) {
+namespace xt::activations
+{
+    torch::Tensor rational(torch::Tensor x)
+    {
+        return torch::zeros(10);
     }
 
-    torch::Tensor Rational::forward(torch::Tensor x) const {
-        return xt::activations::rational(x);
+    auto Rational::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        return xt::activations::rational(torch::zeros(10));
     }
-
 }
