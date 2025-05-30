@@ -1,11 +1,14 @@
 #include "include/activations/leaf.h"
 
-namespace xt::activations {
-    torch::Tensor leaf(torch::Tensor x) {
+namespace xt::activations
+{
+    torch::Tensor leaf(torch::Tensor x)
+    {
+        return torch::zeros(10);
     }
 
-    torch::Tensor LEAF::forward(torch::Tensor x) const {
-        return xt::activations::leaf(x);
+    auto LEAF::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        return xt::activations::leaf(torch::zeros(10));
     }
-
 }
