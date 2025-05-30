@@ -1,11 +1,14 @@
 #include "include/activations/smish.h"
 
-namespace xt::activations {
-    torch::Tensor smish(torch::Tensor x) {
+namespace xt::activations
+{
+    torch::Tensor smish(torch::Tensor x)
+    {
+        return torch::zeros(10);
     }
 
-    torch::Tensor Smish::forward(torch::Tensor x) const {
-        return xt::activations::smish(x);
+    auto Smish::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        return xt::activations::smish(torch::zeros(10));
     }
-
 }

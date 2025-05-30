@@ -1,11 +1,14 @@
 #include "include/activations/smooth_step.h"
 
-namespace xt::activations {
-    torch::Tensor smooth_step(torch::Tensor x) {
+namespace xt::activations
+{
+    torch::Tensor smooth_step(torch::Tensor x)
+    {
+        return torch::zeros(10);
     }
 
-    torch::Tensor SmoothStep::forward(torch::Tensor x) const {
-        return xt::activations::smooth_step(x);
+    auto SmoothStep::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        return xt::activations::smooth_step(torch::zeros(10));
     }
-
 }
