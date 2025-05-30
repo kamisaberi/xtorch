@@ -1,11 +1,14 @@
 #include "include/activations/mod_relu.h"
 
-namespace xt::activations {
-    torch::Tensor mod_relu(torch::Tensor x) {
+namespace xt::activations
+{
+    torch::Tensor mod_relu(torch::Tensor x)
+    {
+        return torch::zeros(10);
     }
 
-    torch::Tensor ModReLU::forward(torch::Tensor x) const {
-        return xt::activations::mod_relu(x);
+    auto ModReLU::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        return xt::activations::mod_relu(torch::zeros(10));
     }
-
 }
