@@ -1,11 +1,14 @@
 #include "include/activations/tanh_exp.h"
 
-namespace xt::activations {
-    torch::Tensor tanh_exp(torch::Tensor x) {
+namespace xt::activations
+{
+    torch::Tensor tanh_exp(torch::Tensor x)
+    {
+        return torch::zeros(10);
     }
 
-    torch::Tensor TanhExp::forward(torch::Tensor x) const {
-        return xt::activations::tanh_exp(x);
+    auto TanhExp::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        return xt::activations::tanh_exp(torch::zeros(10));
     }
-
 }

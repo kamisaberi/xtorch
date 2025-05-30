@@ -1,11 +1,14 @@
 #include "include/activations/swigelu.h"
 
-namespace xt::activations {
-    torch::Tensor swiglu(torch::Tensor x) {
+namespace xt::activations
+{
+    torch::Tensor swiglu(torch::Tensor x)
+    {
+        return torch::zeros(10);
     }
 
-    torch::Tensor SwiGLU::forward(torch::Tensor x) const {
-        return xt::activations::swiglu(x);
+    auto SwiGLU::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        return xt::activations::swiglu(torch::zeros(10));
     }
-
 }
