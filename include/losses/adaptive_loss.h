@@ -4,13 +4,16 @@
 
 
 namespace xt::losses {
+    torch::Tensor adaptive_loss(torch::Tensor x);
+
+
     class AdaptiveLoss : xt::Module {
     public:
         AdaptiveLoss() = default;
-        torch::Tensor forward(torch::Tensor x) const override;
+        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
 
     private:
     };
 
-    torch::Tensor adaptive_loss(torch::Tensor x);
+
 }
