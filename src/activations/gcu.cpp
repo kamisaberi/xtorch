@@ -1,11 +1,14 @@
 #include "include/activations/gcu.h"
 
-namespace xt::activations {
-    torch::Tensor gcu(torch::Tensor x) {
+namespace xt::activations
+{
+    torch::Tensor gcu(torch::Tensor x)
+    {
+        return torch::zeros(10);
     }
 
-    torch::Tensor GCU::forward(torch::Tensor x) const {
-        return xt::activations::gcu(x);
+    auto GCU::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        return xt::activations::gcu(torch::zeros(10));
     }
-
 }
