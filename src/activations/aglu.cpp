@@ -1,11 +1,14 @@
 #include "include/activations/aglu.h"
 
-namespace xt::activations {
-    torch::Tensor aglu(torch::Tensor x) {
+namespace xt::activations
+{
+    torch::Tensor aglu(torch::Tensor x)
+    {
+        return torch::zeros(10);
     }
 
-    torch::Tensor AGLU::forward(torch::Tensor x) const {
+    auto AGLU::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
         return xt::activations::aglu(x);
     }
-
 }
