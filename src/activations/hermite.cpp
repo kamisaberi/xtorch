@@ -1,11 +1,14 @@
 #include "include/activations/hermite.h"
 
-namespace xt::activations {
-    torch::Tensor hermite(torch::Tensor x) {
+namespace xt::activations
+{
+    torch::Tensor hermite(torch::Tensor x)
+    {
+        return torch::zeros(10);
     }
 
-    torch::Tensor Hermite::forward(torch::Tensor x) const {
-        return xt::activations::hermite(x);
+    auto Hermite::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        return xt::activations::hermite(torch::zeros(10));
     }
-
 }

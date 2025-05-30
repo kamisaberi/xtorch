@@ -1,11 +1,14 @@
 #include "include/activations/hard_swish.h"
 
-namespace xt::activations {
-    torch::Tensor hard_swich(torch::Tensor x) {
+namespace xt::activations
+{
+    torch::Tensor hard_swich(torch::Tensor x)
+    {
+        return torch::zeros(10);
     }
 
-    torch::Tensor HardSwish::forward(torch::Tensor x) const {
-        return xt::activations::hard_swich(x);
+    auto HardSwish::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        return xt::activations::hard_swich(torch::zeros(10));
     }
-
 }
