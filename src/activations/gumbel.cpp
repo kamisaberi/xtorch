@@ -1,11 +1,14 @@
 #include "include/activations/gumbel.h"
 
-namespace xt::activations {
-    torch::Tensor gumbel(torch::Tensor x) {
+namespace xt::activations
+{
+    torch::Tensor gumbel(torch::Tensor x)
+    {
+        return torch::zeros(10);
     }
 
-    torch::Tensor Gumbel::forward(torch::Tensor x) const {
-        return xt::activations::gumbel(x);
+    auto Gumbel::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        return xt::activations::gumbel(torch::zeros(10));
     }
-
 }

@@ -1,11 +1,14 @@
 #include "include/activations/golu.h"
 
-namespace xt::activations {
-    torch::Tensor golu(torch::Tensor x) {
+namespace xt::activations
+{
+    torch::Tensor golu(torch::Tensor x)
+    {
+        return torch::zeros(10);
     }
 
-    torch::Tensor GoLU::forward(torch::Tensor x) const {
-        return xt::activations::golu(x);
+    auto GoLU::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        return xt::activations::golu(torch::zeros(10));
     }
-
 }
