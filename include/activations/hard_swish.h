@@ -8,7 +8,7 @@ namespace xt::activations {
     struct HardSwish : xt::Module {
     public:
         HardSwish() = default;
-
+        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
         torch::Tensor forward(torch::Tensor x) const override;
 
     private:
