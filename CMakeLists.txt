@@ -29,26 +29,30 @@ endif ()
 # =============================================================================
 # Recursively collect all source files from project directories
 # CONFIGURE_DEPENDS enables automatic reconfiguration when files are added/removed
-file(GLOB_RECURSE UTILITY_FILES CONFIGURE_DEPENDS src/utils/*.cpp)
-file(GLOB_RECURSE MEDIA_FILES CONFIGURE_DEPENDS src/media/*.cpp)
-file(GLOB_RECURSE DATASET_FILES CONFIGURE_DEPENDS src/datasets/*.cpp)
-file(GLOB_RECURSE DEFINITION_FILES CONFIGURE_DEPENDS src/definitions/*.cpp)
-file(GLOB_RECURSE MODEL_FILES CONFIGURE_DEPENDS src/models/*.cpp)
-file(GLOB_RECURSE MODEL_CNN_FILES CONFIGURE_DEPENDS src/models/cnn/*.cpp)
+
+
 file(GLOB_RECURSE DATA_LOADER_FILES CONFIGURE_DEPENDS src/data_loaders/*.cpp)
 file(GLOB_RECURSE DATA_PARALLEL_FILES CONFIGURE_DEPENDS src/data_parallels/*.cpp)
-file(GLOB_RECURSE TRANSFORM_FILES CONFIGURE_DEPENDS src/transforms/*.cpp)
+file(GLOB_RECURSE DATASET_FILES CONFIGURE_DEPENDS src/datasets/*.cpp)
+
+file(GLOB_RECURSE MODEL_FILES CONFIGURE_DEPENDS src/models/*.cpp)
 file(GLOB_RECURSE TRAINER_FILES CONFIGURE_DEPENDS src/trainers/*.cpp)
-file(GLOB_RECURSE TEMP_FILES CONFIGURE_DEPENDS src/temp/*.cpp)
+file(GLOB_RECURSE TRANSFORM_FILES CONFIGURE_DEPENDS src/transforms/*.cpp)
+file(GLOB_RECURSE UTILITY_FILES CONFIGURE_DEPENDS src/utils/*.cpp)
+
 
 # Collect all header files from include directory
 file(GLOB_RECURSE HEADER_FILES CONFIGURE_DEPENDS ./include/*.h)
 
 # Combine all source files into single list for library target
 set(LIBRARY_SOURCE_FILES
-        ${UTILITY_FILES} ${MEDIA_FILES} ${DATASET_FILES} ${DEFINITION_FILES}
-        ${MODEL_FILES} ${MODEL_CNN_FILES} ${DATA_LOADER_FILES}
-        ${TRANSFORM_FILES} ${TEMP_FILES} ${HEADER_FILES} ${TRAINER_FILES} ${DATA_PARALLEL_FILES}
+        ${DATA_LOADER_FILES}
+        ${DATA_PARALLEL_FILES}
+        ${DATASET_FILES}
+        ${MODEL_FILES}
+        ${TRAINER_FILES}
+        ${TRANSFORM_FILES}
+        ${UTILITY_FILES}
 )
 
 # =============================================================================
