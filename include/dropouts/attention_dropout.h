@@ -8,8 +8,7 @@ namespace xt::dropouts {
     struct AttentionDropout : xt::Module {
     public:
         AttentionDropout() = default;
-
-        torch::Tensor forward(torch::Tensor x) const override;
+        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
 
     private:
     };

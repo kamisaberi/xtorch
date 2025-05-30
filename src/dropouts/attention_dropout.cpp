@@ -4,10 +4,11 @@ namespace xt::dropouts
 {
     torch::Tensor attention_dropout(torch::Tensor x)
     {
+        return torch::zeros(10);
     }
 
-    torch::Tensor AttentionDropout::forward(torch::Tensor x) const
+    auto AttentionDropout::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return xt::dropouts::attention_dropout(x);
+        return xt::dropouts::attention_dropout(torch::zeros(10));
     }
 }
