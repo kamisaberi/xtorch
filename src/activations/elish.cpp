@@ -4,10 +4,11 @@ namespace xt::activations
 {
     torch::Tensor elish(torch::Tensor x)
     {
+        return torch::zeros(10);
     }
 
-    torch::Tensor ELiSH::forward(torch::Tensor x) const
+    auto ELiSH::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return xt::activations::elish(x);
+        return xt::activations::elish(torch::zeros(10));
     }
 }
