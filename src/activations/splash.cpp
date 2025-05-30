@@ -1,11 +1,14 @@
 #include "include/activations/splash.h"
 
-namespace xt::activations {
-    torch::Tensor splash(torch::Tensor x) {
+namespace xt::activations
+{
+    torch::Tensor splash(torch::Tensor x)
+    {
+        return torch::zeros(10);
     }
 
-    torch::Tensor SPLASH::forward(torch::Tensor x) const {
-        return xt::activations::splash(x);
+    auto SPLASH::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        return xt::activations::splash(torch::zeros(10));
     }
-
 }
