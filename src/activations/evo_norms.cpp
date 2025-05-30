@@ -1,11 +1,14 @@
 #include "include/activations/evo_norms.h"
 
-namespace xt::activations {
-    torch::Tensor evo_norms(torch::Tensor x) {
+namespace xt::activations
+{
+    torch::Tensor evo_norms(torch::Tensor x)
+    {
+        return torch::zeros(10);
     }
 
-    torch::Tensor EvoNorms::forward(torch::Tensor x) const {
-        return xt::activations::evo_norms(x);
+    auto EvoNorms::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        return xt::activations::evo_norms(torch::zeros(10));
     }
-
 }
