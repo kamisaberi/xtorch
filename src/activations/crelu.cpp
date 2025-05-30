@@ -4,10 +4,12 @@ namespace xt::activations
 {
     torch::Tensor crelu(torch::Tensor x)
     {
+        return torch::zeros(10);
     }
 
-    torch::Tensor CReLU::forward(torch::Tensor x) const
+
+    auto CReLU::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return xt::activations::crelu(x);
+        return xt::activations::crelu(torch::zeros(10));
     }
 }

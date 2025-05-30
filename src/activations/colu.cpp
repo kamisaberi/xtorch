@@ -1,11 +1,14 @@
 #include "include/activations/colu.h"
 
-namespace xt::activations {
-    torch::Tensor colu(torch::Tensor x) {
+namespace xt::activations
+{
+    torch::Tensor colu(torch::Tensor x)
+    {
+        return torch::zeros(10);
     }
 
-    torch::Tensor CoLU::forward(torch::Tensor x) const {
-        return xt::activations::colu(x);
+    auto CoLU::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        return xt::activations::colu(torch::zeros(10));
     }
-
 }
