@@ -1,11 +1,14 @@
 #include "include/activations/phish.h"
 
-namespace xt::activations {
-    torch::Tensor phish(torch::Tensor x) {
+namespace xt::activations
+{
+    torch::Tensor phish(torch::Tensor x)
+    {
+        return torch::zeros(10);
     }
 
-    torch::Tensor Phish::forward(torch::Tensor x) const {
-        return xt::activations::phish(x);
+    auto Phish::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        return xt::activations::phish(torch::zeros(10));
     }
-
 }
