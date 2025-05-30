@@ -1,4 +1,4 @@
-#include "include/activations/aglu.h"
+#include "include/activations/dra.h"
 
 namespace xt::activations
 {
