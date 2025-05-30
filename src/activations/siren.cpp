@@ -1,11 +1,14 @@
 #include "include/activations/siren.h"
 
-namespace xt::activations {
-    torch::Tensor siren(torch::Tensor x) {
+namespace xt::activations
+{
+    torch::Tensor siren(torch::Tensor x)
+    {
+        return torch::zeros(10);
     }
 
-    torch::Tensor Siren::forward(torch::Tensor x) const {
-        return xt::activations::siren(x);
+    auto Siren::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        return xt::activations::siren(torch::zeros(10));
     }
-
 }

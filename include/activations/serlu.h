@@ -8,8 +8,8 @@ namespace xt::activations {
     struct SERLU : xt::Module {
     public:
         SERLU() = default;
+        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
 
-        torch::Tensor forward(torch::Tensor x) const override;
 
     private:
     };
