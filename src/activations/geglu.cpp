@@ -1,11 +1,14 @@
 #include "include/activations/geglu.h"
 
-namespace xt::activations {
-    torch::Tensor geglu(torch::Tensor x) {
+namespace xt::activations
+{
+    torch::Tensor geglu(torch::Tensor x)
+    {
+        return torch::zeros(10);
     }
 
-    torch::Tensor GeGLU::forward(torch::Tensor x) const {
-        return xt::activations::geglu(x);
+    auto GeGLU::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        return xt::activations::geglu(torch::zeros(10));
     }
-
 }
