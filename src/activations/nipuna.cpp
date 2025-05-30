@@ -1,11 +1,14 @@
 #include "include/activations/nipuna.h"
 
-namespace xt::activations {
-    torch::Tensor nipuna(torch::Tensor x) {
+namespace xt::activations
+{
+    torch::Tensor nipuna(torch::Tensor x)
+    {
+        return torch::zeros(10);
     }
 
-    torch::Tensor Nipuna::forward(torch::Tensor x) const {
-        return xt::activations::nipuna(x);
+    auto Nipuna::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        return xt::activations::nipuna(torch::zeros(10));
     }
-
 }
