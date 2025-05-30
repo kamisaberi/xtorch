@@ -1,11 +1,14 @@
 #include "include/activations/mish.h"
 
-namespace xt::activations {
-    torch::Tensor mish(torch::Tensor x) {
+namespace xt::activations
+{
+    torch::Tensor mish(torch::Tensor x)
+    {
+        return torch::zeros(10);
     }
 
-    torch::Tensor Mish::forward(torch::Tensor x) const {
-        return xt::activations::mish(x);
+    auto Mish::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        return xt::activations::mish(torch::zeros(10));
     }
-
 }

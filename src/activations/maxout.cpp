@@ -1,11 +1,15 @@
 #include "include/activations/maxout.h"
 
-namespace xt::activations {
-    torch::Tensor maxout(torch::Tensor x) {
+namespace xt::activations
+{
+    torch::Tensor maxout(torch::Tensor x)
+    {
+        return torch::zeros(10);
     }
 
-    torch::Tensor Maxout::forward(torch::Tensor x) const {
-        return xt::activations::maxout(x);
-    }
 
+    auto Maxout::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        return xt::activations::maxout(torch::zeros(10));
+    }
 }

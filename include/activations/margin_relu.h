@@ -8,8 +8,7 @@ namespace xt::activations {
     struct MarginReLU : xt::Module {
     public:
         MarginReLU() = default;
-
-        torch::Tensor forward(torch::Tensor x) const override;
+        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
 
     private:
     };
