@@ -9,7 +9,7 @@ namespace xt::transforms
     public:
         ChannelDropout();
         explicit ChannelDropout(std::vector<xt::Module> transforms);
-        auto ChannelDropout(std::initializer_list<std::any> tensors) -> std::any  override;
+        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
 
     private:
     };

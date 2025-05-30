@@ -8,7 +8,7 @@ namespace xt::transforms
     {
     public:
         DeReverberation();
-        explicit EdgeAdd(std::vector<xt::Module> transforms);
+        explicit DeReverberation(std::vector<xt::Module> transforms);
         auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
 
     private:
