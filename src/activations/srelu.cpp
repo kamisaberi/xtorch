@@ -1,11 +1,14 @@
 #include "include/activations/srelu.h"
 
-namespace xt::activations {
-    torch::Tensor srelu(torch::Tensor x) {
+namespace xt::activations
+{
+    torch::Tensor srelu(torch::Tensor x)
+    {
+        return torch::zeros(10);
     }
 
-    torch::Tensor SReLU::forward(torch::Tensor x) const {
-        return xt::activations::srelu(x);
+    auto SReLU::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        return xt::activations::srelu(torch::zeros(10));
     }
-
 }

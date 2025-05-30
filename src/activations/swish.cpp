@@ -1,11 +1,14 @@
 #include "include/activations/swish.h"
 
-namespace xt::activations {
-    torch::Tensor swish(torch::Tensor x) {
+namespace xt::activations
+{
+    torch::Tensor swish(torch::Tensor x)
+    {
+        return torch::zeros(10);
     }
 
-    torch::Tensor Swish::forward(torch::Tensor x) const {
-        return xt::activations::swish(x);
+    auto Swish::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        return xt::activations::swish(torch::zeros(10));
     }
-
 }
