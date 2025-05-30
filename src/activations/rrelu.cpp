@@ -2,10 +2,13 @@
 
 namespace xt::activations {
     torch::Tensor rrelu(torch::Tensor x) {
+        return  torch::zeros(10);
     }
+    auto RReLU::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
 
-    torch::Tensor RReLU::forward(torch::Tensor x) const {
-        return xt::activations::rrelu(x);
+
+        return xt::activations::rrelu(torch::zeros(10));
     }
 
 }

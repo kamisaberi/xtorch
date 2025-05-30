@@ -1,11 +1,14 @@
 #include "include/activations/serf.h"
 
-namespace xt::activations {
-    torch::Tensor serf(torch::Tensor x) {
+namespace xt::activations
+{
+    torch::Tensor serf(torch::Tensor x)
+    {
+        return torch::zeros(10);
     }
 
-    torch::Tensor Serf::forward(torch::Tensor x) const {
-        return xt::activations::serf(x);
+    auto Serf::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        return xt::activations::serf(torch::zeros(10));
     }
-
 }
