@@ -5,8 +5,9 @@ namespace xt::activations {
 
     }
 
-    torch::Tensor AMLines::forward(torch::Tensor x) const {
-        return xt::activations::am_lines(x);
+    auto AMLines::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        return xt::activations::am_lines(torch::zeros(10));
     }
 
 }
