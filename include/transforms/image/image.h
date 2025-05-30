@@ -50,7 +50,6 @@
 #include "posterize.h"
 #include "random_adjust_sharpness.h"
 #include "random_affine.h"
-#include "random_apply.h"
 #include "random_augment.h"
 #include "random_auto_contrast.h"
 #include "random_brightness.h"

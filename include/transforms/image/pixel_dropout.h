@@ -8,7 +8,7 @@ namespace xt::transforms
     {
     public:
         PixelDropout();
-        explicit EdgeAdd(std::vector<xt::Module> transforms);
+        explicit PixelDropout(std::vector<xt::Module> transforms);
         auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
 
     private:
