@@ -1,11 +1,14 @@
 #include "include/activations/pmish.h"
 
-namespace xt::activations {
-    torch::Tensor pmish(torch::Tensor x) {
+namespace xt::activations
+{
+    torch::Tensor pmish(torch::Tensor x)
+    {
+        return torch::zeros(10);
     }
 
-    torch::Tensor PMish::forward(torch::Tensor x) const {
-        return xt::activations::pmish(x);
+    auto PMish::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        return xt::activations::pmish(torch::zeros(10));
     }
-
 }

@@ -1,11 +1,14 @@
 #include "include/activations/poly.h"
 
-namespace xt::activations {
-    torch::Tensor poly(torch::Tensor x) {
+namespace xt::activations
+{
+    torch::Tensor poly(torch::Tensor x)
+    {
+        return torch::zeros(10);
     }
 
-    torch::Tensor Poly::forward(torch::Tensor x) const {
-        return xt::activations::poly(x);
+    auto Poly::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        return xt::activations::poly(torch::zeros(10));
     }
-
 }
