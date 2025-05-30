@@ -1,11 +1,15 @@
 #include "include/activations/m_arcsinh.h"
 
-namespace xt::activations {
-    torch::Tensor m_arcsinh(torch::Tensor x) {
+namespace xt::activations
+{
+    torch::Tensor m_arcsinh(torch::Tensor x)
+    {
+        return torch::zeros(10);
     }
 
-    torch::Tensor MArcsinh::forward(torch::Tensor x) const {
-        return xt::activations::m_arcsinh(x);
-    }
 
+    auto MArcsinh::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        return xt::activations::m_arcsinh(torch::zeros(10));
+    }
 }

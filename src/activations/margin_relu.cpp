@@ -1,11 +1,14 @@
 #include "include/activations/margin_relu.h"
 
-namespace xt::activations {
-    torch::Tensor margin_relu(torch::Tensor x) {
+namespace xt::activations
+{
+    torch::Tensor margin_relu(torch::Tensor x)
+    {
+        return torch::zeros(10);
     }
 
-    torch::Tensor MarginReLU::forward(torch::Tensor x) const {
-        return xt::activations::margin_relu(x);
+    auto MarginReLU::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        return xt::activations::margin_relu(torch::zeros(10));
     }
-
 }
