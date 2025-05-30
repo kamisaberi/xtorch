@@ -1,11 +1,14 @@
 #include "include/activations/kan.h"
 
-namespace xt::activations {
-    torch::Tensor kan(torch::Tensor x) {
+namespace xt::activations
+{
+    torch::Tensor kan(torch::Tensor x)
+    {
+        return torch::zeros(10);
     }
 
-    torch::Tensor KAN::forward(torch::Tensor x) const {
-        return xt::activations::kan(x);
+    auto KAN::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        return xt::activations::kan(torch::zeros(10));
     }
-
 }

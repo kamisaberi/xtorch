@@ -1,11 +1,14 @@
 #include "include/activations/kaf.h"
 
-namespace xt::activations {
-    torch::Tensor kaf(torch::Tensor x) {
+namespace xt::activations
+{
+    torch::Tensor kaf(torch::Tensor x)
+    {
+        return torch::zeros(10);
     }
 
-    torch::Tensor KAF::forward(torch::Tensor x) const {
-        return xt::activations::kaf(x);
+    auto KAF::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        return xt::activations::kaf(torch::zeros(10));
     }
-
 }
