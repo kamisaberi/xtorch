@@ -3,9 +3,10 @@
 
 #include "include/transforms/common.h"
 
-namespace xt::transforms::image {
-
-    struct GaussianNoise {
+namespace xt::transforms::image
+{
+    struct GaussianNoise
+    {
     public:
         GaussianNoise(float mean, float std);
 
@@ -15,6 +16,4 @@ namespace xt::transforms::image {
         float mean;
         float std;
     };
-
-
 }
