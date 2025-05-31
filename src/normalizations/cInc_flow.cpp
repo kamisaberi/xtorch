@@ -1,3 +1,9 @@
-//
-// Created by kami on 5/21/25.
-//
+#include "include/normalizations/clnc_flow.h"
+
+namespace xt::norm
+{
+    auto CLNCFlow::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        return torch::zeros(10);
+    }
+}
