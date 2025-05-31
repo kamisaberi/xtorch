@@ -2,7 +2,7 @@
 
 namespace xt::optimizations
 {
-    For::AdaBelief(std::vector<torch::Tensor>&& parameters, double lr, double momentum)
+    ForwardGradient::ForwardGradient(std::vector<torch::Tensor>&& parameters, double lr, double momentum)
         : Optimizer(std::move(parameters), nullptr), lr_(lr), momentum_(momentum)
     {
         velocities_.resize(param_groups()[0].params().size());
@@ -13,7 +13,7 @@ namespace xt::optimizations
     }
 
     using LossClosure = std::function<torch::Tensor()>;
-    torch::Tensor AdaBelief::step(LossClosure closure)
+    torch::Tensor ForwardGradient::step(LossClosure closure)
     {
         return torch::Tensor();
     }
