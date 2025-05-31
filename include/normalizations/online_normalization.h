@@ -1,12 +1,15 @@
 #pragma once
-#include "common.h"
 
+#include "common.h"
 
 namespace xt::norm
 {
-    class OnlineNorm : xt::Module
+    struct OnlineNorm : xt::Module
     {
     public:
+        OnlineNorm() = default;
+
+        auto forward(std::initializer_list<std::any> tensors) -> std::any override;
 
     private:
     };
