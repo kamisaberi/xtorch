@@ -5,6 +5,11 @@ namespace xt::transforms::general {
     RandomOverSampling::RandomOverSampling() = default;
 
 
+    auto RandomOverSampling::forward(std::initializer_list <std::any> tensors) -> std::any {
+        return torch::zeroes(10);
+    }
+
+
     // RandomOverSampling::RandomOverSampling(std::function<torch::Tensor(torch::Tensor)> transform) : xt::Module(), transform(transform) {
     // }
     //
