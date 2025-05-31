@@ -1,3 +1,15 @@
-//
-// Created by kami on 5/11/25.
-//
+#include "include/transforms/image/affine.h"
+
+namespace xt::transforms::image  {
+
+    Affine::Affine() = default;
+
+    Affine::Affine(std::function<torch::Tensor(torch::Tensor)> transform) : xt::Module(), transform(transform) {
+    }
+
+    auto Affine::forward(std::initializer_list <std::any> tensors) -> std::any {
+        return torch::zeroes(10);
+    }
+
+
+}
