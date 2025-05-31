@@ -4,11 +4,11 @@ namespace xt::transforms::image {
 
     Brightness::Brightness() = default;
 
-    Brightness::Brightness(std::function<torch::Tensor(torch::Tensor)> transform) : xt::Module(), transform(transform) {
+    Brightness::Brightness(std::vector<xt::Module> transforms) : xt::Module() {
     }
 
     auto Brightness::forward(std::initializer_list <std::any> tensors) -> std::any {
-        return torch::zeroes(10);
+        return torch::zeros(10);
     }
 
 
