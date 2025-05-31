@@ -2,13 +2,13 @@
 
 #include "include/transforms/common.h"
 
-namespace xt::transforms
+namespace xt::transforms::image
 {
-    class MotionNlur final : public xt::Module
+    class MotionBlur final : public xt::Module
     {
     public:
-        MotionNlur();
-        explicit MotionNlur(std::vector<xt::Module> transforms);
+        MotionBlur();
+        explicit MotionBlur(std::vector<xt::Module> transforms);
         auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
 
     private:
