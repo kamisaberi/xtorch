@@ -4,10 +4,10 @@
 
 namespace xt::norm
 {
-    struct EvoNorm : xt::Module
+    struct ActiveNorm : xt::Module
     {
     public:
-        EvoNorm() = default;
+        ActiveNorm() = default;
 
         auto forward(std::initializer_list<std::any> tensors) -> std::any override;
 
