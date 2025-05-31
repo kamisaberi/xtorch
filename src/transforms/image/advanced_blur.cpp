@@ -1,15 +1,15 @@
 #include "include/transforms/image/advanced_blur.h"
 
-namespace xt::transforms::image  {
-
+namespace xt::transforms::image
+{
     AdvancedBlur::AdvancedBlur() = default;
 
-    AdvancedBlur::AdvancedBlur(std::function<torch::Tensor(torch::Tensor)> transform) : xt::Module(), transform(transform) {
+    AdvancedBlur::AdvancedBlur(std::vector<xt::Module> transforms) : xt::Module()
+    {
     }
 
-    auto AdvancedBlur::forward(std::initializer_list <std::any> tensors) -> std::any {
-        return torch::zeroes(10);
+    auto AdvancedBlur::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        return torch::zeros(10);
     }
-
-
 }
