@@ -1,12 +1,15 @@
 #pragma once
-#include "common.h"
 
+#include "common.h"
 
 namespace xt::norm
 {
-    class Rezero : xt::Module
+    struct Rezero : xt::Module
     {
     public:
+        Rezero() = default;
+
+        auto forward(std::initializer_list<std::any> tensors) -> std::any override;
 
     private:
     };
