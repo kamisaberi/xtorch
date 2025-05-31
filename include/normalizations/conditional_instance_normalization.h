@@ -1,12 +1,15 @@
 #pragma once
-#include "common.h"
 
+#include "common.h"
 
 namespace xt::norm
 {
-    class ConditionalInstanceNorm : xt::Module
+    struct ConditionalInstanceNorm : xt::Module
     {
     public:
+        ConditionalInstanceNorm() = default;
+
+        auto forward(std::initializer_list<std::any> tensors) -> std::any override;
 
     private:
     };
