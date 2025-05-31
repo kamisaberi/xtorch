@@ -4,11 +4,11 @@ namespace xt::transforms::image {
 
     Crop::Crop() = default;
 
-    Crop::Crop(std::function<torch::Tensor(torch::Tensor)> transform) : xt::Module(), transform(transform) {
+    Crop::Crop(std::vector<xt::Module> transforms) : xt::Module() {
     }
 
     auto Crop::forward(std::initializer_list <std::any> tensors) -> std::any {
-        return torch::zeroes(10);
+        return torch::zeros(10);
     }
 
 
