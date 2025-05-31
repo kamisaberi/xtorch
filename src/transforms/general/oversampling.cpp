@@ -8,8 +8,9 @@ namespace xt::transforms::general {
     OverSampling::OverSampling(std::function<torch::Tensor(torch::Tensor)> transform) : xt::Module(), transform(transform) {
     }
 
-    // torch::Tensor OverSampling::forward(torch::Tensor input) const {
-    //     return transform(input);
-    // }
+    auto OverSampling::forward(std::initializer_list <std::any> tensors) -> std::any {
+        return torch::zeroes(10);
+    }
+
 
 }
