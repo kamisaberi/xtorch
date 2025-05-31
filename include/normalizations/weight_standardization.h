@@ -1,12 +1,15 @@
 #pragma once
-#include "common.h"
 
+#include "common.h"
 
 namespace xt::norm
 {
-    class WeightStandardization : xt::Module
+    struct WeightStandardization : xt::Module
     {
     public:
+        WeightStandardization() = default;
+
+        auto forward(std::initializer_list<std::any> tensors) -> std::any override;
 
     private:
     };
