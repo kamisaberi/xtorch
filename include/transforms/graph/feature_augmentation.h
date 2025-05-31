@@ -2,7 +2,7 @@
 
 #include "include/transforms/common.h"
 
-namespace xt::transforms
+namespace xt::transforms::graph
 {
     class FeatureAugmentation final : public xt::Module
     {

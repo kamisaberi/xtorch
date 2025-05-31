@@ -1,6 +1,6 @@
 #include "include/transforms/general/to_tensor.h"
 
-namespace xt::transforms
+namespace xt::transforms::general
 {
 
     torch::Tensor ToTensor::operator()(const cv::Mat &image) const {

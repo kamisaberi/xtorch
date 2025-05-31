@@ -2,7 +2,7 @@
 
 #include "include/transforms/common.h"
 
-namespace xt::transforms
+namespace xt::transforms::graph
 {
     class EdgeFeatureMasking final : public xt::Module
     {
