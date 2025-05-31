@@ -1,12 +1,15 @@
 #pragma once
-#include "common.h"
 
+#include "common.h"
 
 namespace xt::norm
 {
-    class BatchChannelNorm : xt::Module
+    struct BatchChannelNorm : xt::Module
     {
     public:
+        BatchChannelNorm() = default;
+
+        auto forward(std::initializer_list<std::any> tensors) -> std::any override;
 
     private:
     };
