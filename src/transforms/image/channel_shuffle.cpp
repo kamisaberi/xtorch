@@ -4,11 +4,11 @@ namespace xt::transforms::image {
 
     ChannelShuffle::ChannelShuffle() = default;
 
-    ChannelShuffle::ChannelShuffle(std::function<torch::Tensor(torch::Tensor)> transform) : xt::Module(), transform(transform) {
+    ChannelShuffle::ChannelShuffle(std::vector<xt::Module> transforms) : xt::Module() {
     }
 
     auto ChannelShuffle::forward(std::initializer_list <std::any> tensors) -> std::any {
-        return torch::zeroes(10);
+        return torch::zeros(10);
     }
 
 
