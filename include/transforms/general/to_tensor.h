@@ -1,7 +1,7 @@
 #pragma once
 #include "include/transforms/common.h"
 
-namespace xt::transforms
+namespace xt::transforms::general
 {
     struct ToTensor final : xt::Module {
     public:
