@@ -2,7 +2,7 @@
 
 #include "include/transforms/common.h"
 
-namespace xt::transforms
+namespace xt::transforms::image
 {
     class CropAndPad final : public xt::Module
     {
