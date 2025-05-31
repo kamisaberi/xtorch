@@ -1,12 +1,15 @@
 #pragma once
-#include "common.h"
 
+#include "common.h"
 
 namespace xt::norm
 {
-    class VirtualBatchNorm : xt::Module
+    struct VirtualBatchNorm : xt::Module
     {
     public:
+        VirtualBatchNorm() = default;
+
+        auto forward(std::initializer_list<std::any> tensors) -> std::any override;
 
     private:
     };
