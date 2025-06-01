@@ -163,7 +163,6 @@ namespace xt::models
         );
 
 
-        //TODO layer5 DONE
         layer5 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(128, 256, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(256),
@@ -171,7 +170,6 @@ namespace xt::models
         );
 
 
-        //TODO layer6 DONE
         layer6 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(256, 256, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(256),
@@ -180,7 +178,6 @@ namespace xt::models
         );
 
 
-        //TODO layer7 DONE
         layer7 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(256, 256, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(256),
@@ -189,7 +186,6 @@ namespace xt::models
         );
 
 
-        //TODO layer8 DONE
         layer8 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(256, 512, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(512),
@@ -197,7 +193,6 @@ namespace xt::models
         );
 
 
-        //TODO layer9 DONE
         layer9 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(512, 512, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(512),
@@ -205,7 +200,6 @@ namespace xt::models
         );
 
 
-        //TODO layer10 DONE
         layer10 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(512, 512, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(512),
@@ -214,7 +208,6 @@ namespace xt::models
         );
 
 
-        //TODO layer11 DONE
         layer11 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(512, 512, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(512),
@@ -222,7 +215,6 @@ namespace xt::models
         );
 
 
-        //TODO layer12 DONE
         layer12 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(512, 512, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(512),
@@ -230,7 +222,6 @@ namespace xt::models
         );
 
 
-        //TODO layer13
         layer13 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(512, 512, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(512),
@@ -334,7 +325,6 @@ namespace xt::models
 
     VggNet13::VggNet13(int num_classes, int in_channels)
     {
-        //TODO layer1 DONE
         layer1 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(in_channels, 64, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(64),
@@ -342,7 +332,6 @@ namespace xt::models
         );
 
 
-        //TODO layer2 DONE
         layer2 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(64, 64, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(64),
@@ -350,14 +339,12 @@ namespace xt::models
             torch::nn::MaxPool2d(torch::nn::MaxPool2dOptions(2).stride(2))
         );
 
-        //TODO layer3 DONE
         layer3 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(64, 128, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(128),
             torch::nn::ReLU()
         );
 
-        //TODO layer4 DONE
         layer4 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(128, 128, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(128),
@@ -366,7 +353,6 @@ namespace xt::models
         );
 
 
-        //TODO layer5 DONE
         layer5 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(128, 256, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(256),
@@ -374,7 +360,6 @@ namespace xt::models
         );
 
 
-        //TODO layer6 DONE
         layer6 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(256, 256, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(256),
@@ -383,7 +368,6 @@ namespace xt::models
         );
 
 
-        //TODO layer7 DONE
         layer7 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(256, 256, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(256),
@@ -392,7 +376,6 @@ namespace xt::models
         );
 
 
-        //TODO layer8 DONE
         layer8 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(256, 512, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(512),
@@ -400,7 +383,6 @@ namespace xt::models
         );
 
 
-        //TODO layer9 DONE
         layer9 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(512, 512, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(512),
@@ -408,7 +390,6 @@ namespace xt::models
         );
 
 
-        //TODO layer10 DONE
         layer10 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(512, 512, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(512),
@@ -417,7 +398,6 @@ namespace xt::models
         );
 
 
-        //TODO layer11 DONE
         layer11 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(512, 512, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(512),
@@ -425,7 +405,6 @@ namespace xt::models
         );
 
 
-        //TODO layer12 DONE
         layer12 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(512, 512, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(512),
@@ -433,7 +412,6 @@ namespace xt::models
         );
 
 
-        //TODO layer13
         layer13 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(512, 512, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(512),
@@ -442,21 +420,18 @@ namespace xt::models
         );
 
 
-        //TODO fc DONE
         fc = torch::nn::Sequential(
             torch::nn::Dropout(0.5),
             torch::nn::Linear(7 * 7 * 512, 4096),
             torch::nn::ReLU()
         );
 
-        //TODO fc1 DONE
         fc1 = torch::nn::Sequential(
             torch::nn::Dropout(0.5),
             torch::nn::Linear(4096, 4096),
             torch::nn::ReLU()
         );
 
-        //TODO fc2 DONE
         fc2 = torch::nn::Sequential(torch::nn::Linear(4096, num_classes));
 
         register_module("layer1", layer1);
@@ -481,7 +456,6 @@ namespace xt::models
 
     VggNet13::VggNet13(int num_classes, int in_channels, std::vector<int64_t> input_shape)
     {
-        //TODO layer1 DONE
         layer1 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(in_channels, 64, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(64),
@@ -489,7 +463,6 @@ namespace xt::models
         );
 
 
-        //TODO layer2 DONE
         layer2 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(64, 64, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(64),
@@ -497,14 +470,12 @@ namespace xt::models
             torch::nn::MaxPool2d(torch::nn::MaxPool2dOptions(2).stride(2))
         );
 
-        //TODO layer3 DONE
         layer3 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(64, 128, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(128),
             torch::nn::ReLU()
         );
 
-        //TODO layer4 DONE
         layer4 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(128, 128, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(128),
@@ -513,7 +484,6 @@ namespace xt::models
         );
 
 
-        //TODO layer5 DONE
         layer5 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(128, 256, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(256),
@@ -521,7 +491,6 @@ namespace xt::models
         );
 
 
-        //TODO layer6 DONE
         layer6 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(256, 256, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(256),
@@ -530,7 +499,6 @@ namespace xt::models
         );
 
 
-        //TODO layer7 DONE
         layer7 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(256, 256, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(256),
@@ -539,7 +507,6 @@ namespace xt::models
         );
 
 
-        //TODO layer8 DONE
         layer8 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(256, 512, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(512),
@@ -547,7 +514,6 @@ namespace xt::models
         );
 
 
-        //TODO layer9 DONE
         layer9 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(512, 512, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(512),
@@ -555,7 +521,6 @@ namespace xt::models
         );
 
 
-        //TODO layer10 DONE
         layer10 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(512, 512, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(512),
@@ -564,15 +529,12 @@ namespace xt::models
         );
 
 
-        //TODO layer11 DONE
         layer11 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(512, 512, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(512),
             torch::nn::ReLU()
         );
 
-
-        //TODO layer12 DONE
         layer12 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(512, 512, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(512),
@@ -580,7 +542,6 @@ namespace xt::models
         );
 
 
-        //TODO layer13
         layer13 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(512, 512, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(512),
@@ -685,7 +646,6 @@ namespace xt::models
 
     VggNet16::VggNet16(int num_classes, int in_channels)
     {
-        //TODO layer1 DONE
         layer1 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(in_channels, 64, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(64),
@@ -693,7 +653,6 @@ namespace xt::models
         );
 
 
-        //TODO layer2 DONE
         layer2 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(64, 64, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(64),
@@ -701,14 +660,12 @@ namespace xt::models
             torch::nn::MaxPool2d(torch::nn::MaxPool2dOptions(2).stride(2))
         );
 
-        //TODO layer3 DONE
         layer3 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(64, 128, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(128),
             torch::nn::ReLU()
         );
 
-        //TODO layer4 DONE
         layer4 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(128, 128, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(128),
@@ -717,7 +674,6 @@ namespace xt::models
         );
 
 
-        //TODO layer5 DONE
         layer5 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(128, 256, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(256),
@@ -748,7 +704,6 @@ namespace xt::models
         );
 
 
-        //TODO layer9 DONE
         layer9 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(512, 512, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(512),
@@ -756,7 +711,6 @@ namespace xt::models
         );
 
 
-        //TODO layer10 DONE
         layer10 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(512, 512, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(512),
@@ -765,7 +719,6 @@ namespace xt::models
         );
 
 
-        //TODO layer11 DONE
         layer11 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(512, 512, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(512),
@@ -773,7 +726,6 @@ namespace xt::models
         );
 
 
-        //TODO layer12 DONE
         layer12 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(512, 512, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(512),
@@ -781,7 +733,6 @@ namespace xt::models
         );
 
 
-        //TODO layer13
         layer13 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(512, 512, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(512),
@@ -790,21 +741,18 @@ namespace xt::models
         );
 
 
-        //TODO fc DONE
         fc = torch::nn::Sequential(
             torch::nn::Dropout(0.5),
             torch::nn::Linear(7 * 7 * 512, 4096),
             torch::nn::ReLU()
         );
 
-        //TODO fc1 DONE
         fc1 = torch::nn::Sequential(
             torch::nn::Dropout(0.5),
             torch::nn::Linear(4096, 4096),
             torch::nn::ReLU()
         );
 
-        //TODO fc2 DONE
         fc2 = torch::nn::Sequential(torch::nn::Linear(4096, num_classes));
 
         register_module("layer1", layer1);
@@ -829,7 +777,6 @@ namespace xt::models
 
     VggNet16::VggNet16(int num_classes, int in_channels, std::vector<int64_t> input_shape)
     {
-        //TODO layer1 DONE
         layer1 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(in_channels, 64, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(64),
@@ -837,7 +784,6 @@ namespace xt::models
         );
 
 
-        //TODO layer2 DONE
         layer2 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(64, 64, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(64),
@@ -845,14 +791,12 @@ namespace xt::models
             torch::nn::MaxPool2d(torch::nn::MaxPool2dOptions(2).stride(2))
         );
 
-        //TODO layer3 DONE
         layer3 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(64, 128, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(128),
             torch::nn::ReLU()
         );
 
-        //TODO layer4 DONE
         layer4 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(128, 128, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(128),
@@ -861,7 +805,6 @@ namespace xt::models
         );
 
 
-        //TODO layer5 DONE
         layer5 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(128, 256, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(256),
@@ -869,7 +812,6 @@ namespace xt::models
         );
 
 
-        //TODO layer6 DONE
         layer6 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(256, 256, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(256),
@@ -878,7 +820,6 @@ namespace xt::models
         );
 
 
-        //TODO layer7 DONE
         layer7 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(256, 256, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(256),
@@ -887,7 +828,6 @@ namespace xt::models
         );
 
 
-        //TODO layer8 DONE
         layer8 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(256, 512, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(512),
@@ -895,7 +835,6 @@ namespace xt::models
         );
 
 
-        //TODO layer9 DONE
         layer9 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(512, 512, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(512),
@@ -903,7 +842,6 @@ namespace xt::models
         );
 
 
-        //TODO layer10 DONE
         layer10 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(512, 512, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(512),
@@ -912,7 +850,6 @@ namespace xt::models
         );
 
 
-        //TODO layer11 DONE
         layer11 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(512, 512, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(512),
@@ -920,7 +857,6 @@ namespace xt::models
         );
 
 
-        //TODO layer12 DONE
         layer12 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(512, 512, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(512),
@@ -928,7 +864,6 @@ namespace xt::models
         );
 
 
-        //TODO layer13
         layer13 = torch::nn::Sequential(
             torch::nn::Conv2d(torch::nn::Conv2dOptions(512, 512, 3).stride(1).padding(1)),
             torch::nn::BatchNorm2d(512),
