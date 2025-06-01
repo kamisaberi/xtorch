@@ -2,7 +2,8 @@
 
 #include "include/transforms/common.h"
 
-namespace xt::transforms
+namespace xt::transforms::target
+
 {
     class ClassWeighter final : public xt::Module
     {
