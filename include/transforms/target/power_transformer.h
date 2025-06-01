@@ -2,7 +2,7 @@
 
 #include "include/transforms/common.h"
 
-namespace xt::transforms
+namespace xt::transforms::target
 {
     class PowerTransformer final : public xt::Module
     {
