@@ -4,11 +4,11 @@
 
 namespace xt::transforms::image
 {
-    class LatenProjection final : public xt::Module
+    class LatentProjection final : public xt::Module
     {
     public:
-        LatenProjection();
-        explicit LatenProjection(std::vector<xt::Module> transforms);
+        LatentProjection();
+        explicit LatentProjection(std::vector<xt::Module> transforms);
         auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
 
     private:
