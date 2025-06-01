@@ -2,7 +2,7 @@
 
 #include "include/transforms/common.h"
 
-namespace xt::transforms
+namespace xt::transforms::signal
 {
     class AddNoise final : public xt::Module
     {
