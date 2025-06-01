@@ -2,7 +2,7 @@
 
 #include "include/transforms/common.h"
 
-namespace xt::transforms
+namespace xt::transforms::weather
 {
     class FallingSnow final : public xt::Module
     {
