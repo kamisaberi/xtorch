@@ -2,7 +2,7 @@
 
 #include "include/transforms/common.h"
 
-namespace xt::transforms
+namespace xt::transforms::video
 {
     class OpticalFlowWarping final : public xt::Module
     {
