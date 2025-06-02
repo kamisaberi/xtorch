@@ -4,11 +4,11 @@ namespace xt::transforms::graph {
 
     NodeFeatureShuffling::NodeFeatureShuffling() = default;
 
-    NodeFeatureShuffling::NodeFeatureShuffling(std::function<torch::Tensor(torch::Tensor)> transform) : xt::Module(), transform(transform) {
+    NodeFeatureShuffling::NodeFeatureShuffling(std::vector<xt::Module> transforms) : xt::Module() {
     }
 
     auto NodeFeatureShuffling::forward(std::initializer_list <std::any> tensors) -> std::any {
-        return torch::zeroes(10);
+        return torch::zeros(10);
     }
 
 
