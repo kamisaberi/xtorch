@@ -4,7 +4,7 @@ namespace xt::transforms::graph {
 
     FeatureAugmentation::FeatureAugmentation() = default;
 
-    FeatureAugmentation::FeatureAugmentation(std::vector<xt::Module> transforms) : xt::Module(), transform(transform) {
+    FeatureAugmentation::FeatureAugmentation(std::vector<xt::Module> transforms) : xt::Module() {
     }
 
     auto FeatureAugmentation::forward(std::initializer_list <std::any> tensors) -> std::any {
