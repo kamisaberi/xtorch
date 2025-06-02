@@ -27,9 +27,9 @@ class CustomDataLoader
 public:
     // Constructor: takes a dataset, batch size, shuffle flag, and number of workers
     CustomDataLoader(const std::vector<std::pair<torch::Tensor, torch::Tensor>>& dataset,
-               int batch_size,
-               bool shuffle = false,
-               int num_workers = 0);
+                     int batch_size,
+                     bool shuffle = false,
+                     int num_workers = 0);
 
     // Destructor: stop workers and join threads
     ~CustomDataLoader();

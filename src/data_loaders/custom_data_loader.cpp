@@ -5,9 +5,9 @@ class DataLoaderIterator;
 
 // Main DataLoader class
 CustomDataLoader::CustomDataLoader(const std::vector<std::pair<torch::Tensor, torch::Tensor>>& dataset,
-                       int batch_size,
-                       bool shuffle ,
-                       int num_workers)
+                                   int batch_size,
+                                   bool shuffle,
+                                   int num_workers)
     : dataset_(dataset),
       batch_size_(batch_size),
       shuffle_(shuffle),
