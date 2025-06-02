@@ -5,7 +5,7 @@
 namespace xt::transforms::general {
 
 
-    struct Normalize final : xt::Module {
+    struct Normalize :public xt::Module {
     public:
         Normalize();
 

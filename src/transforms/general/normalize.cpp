@@ -35,5 +35,20 @@ namespace xt::transforms::general
         }
 
         return out;
+        // if (tensors.size() != 1) throw std::runtime_error("Normalize expects one input");
+        // torch::Tensor tensor = std::any_cast<torch::Tensor>(*tensors.begin());
+        // // Basic normalization, make sure types and shapes are compatible
+        // tensor = tensor.to(torch::kFloat32);
+        // auto mean = mean.to(tensor.device()).to(tensor.scalar_type());
+        // auto std = std.to(tensor.device()).to(tensor.scalar_type());
+        // // Ensure mean/std are broadcastable, e.g., reshape for image channels
+        // if (tensor.dim() == 3 && mean.numel() == tensor.size(0)) { // CHW
+        //     mean = mean.reshape({-1, 1, 1});
+        //     std = std.reshape({-1, 1, 1});
+        // } else if (tensor.dim() == 4 && mean.numel() == tensor.size(1)) { // NCHW
+        //     mean = mean.reshape({1, -1, 1, 1});
+        //     std = std.reshape({1, -1, 1, 1});
+        // }
+        // return (tensor - mean) / std;
     }
 }
