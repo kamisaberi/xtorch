@@ -3,12 +3,12 @@
 namespace xt::transforms::general {
     PCA::PCA() = default;
 
-    PCA::PCA(torch::ScalarType target_dtype) : xt::Module() {
+    PCA::PCA(std::vector<xt::Module> transforms) : xt::Module() {
     }
 
 
     auto PCA::forward(std::initializer_list <std::any> tensors) -> std::any {
-        return torch::zeroes(10);
+        return torch::zeros(10);
     }
 
 }
