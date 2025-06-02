@@ -4,7 +4,7 @@ namespace xt::dataloaders
 {
     using BatchData = std::pair<torch::Tensor, torch::Tensor>;
 
-    MyCustomDataLoaderV2::MyCustomDataLoaderV2(xt::datasets::Dataset& dataset, size_t batch_size, bool shuffle,
+    ExtendedDataLoader::ExtendedDataLoader(xt::datasets::Dataset& dataset, size_t batch_size, bool shuffle,
                                                size_t num_workers, size_t prefetch_factor)
     // How many batches per worker to aim for in queue
         : dataset_(dataset),
@@ -46,12 +46,12 @@ namespace xt::dataloaders
         // reset_epoch() will be called by begin() to shuffle (if needed) and start workers.
     }
 
-    MyCustomDataLoaderV2::~MyCustomDataLoaderV2()
+    ExtendedDataLoader::~ExtendedDataLoader()
     {
         shutdown();
     }
 
-    void MyCustomDataLoaderV2::shutdown()
+    void ExtendedDataLoader::shutdown()
     {
         {
             std::unique_lock<std::mutex> lock(queue_mutex_);
@@ -76,7 +76,7 @@ namespace xt::dataloaders
         prefetched_batch_queue_.clear(); // std::deque::clear calls destructors of elements
     }
 
-    void MyCustomDataLoaderV2::reset_epoch()
+    void ExtendedDataLoader::reset_epoch()
     {
         // 1. Stop and join existing workers if any (e.g., from a previous epoch)
         shutdown(); // This sets shutdown_workers_ and joins threads
@@ -129,12 +129,12 @@ namespace xt::dataloaders
         {
             for (size_t i = 0; i < num_workers_; ++i)
             {
-                worker_threads_.emplace_back(&MyCustomDataLoaderV2::worker_loop, this, i);
+                worker_threads_.emplace_back(&ExtendedDataLoader::worker_loop, this, i);
             }
         }
     }
 
-    std::optional<BatchData> MyCustomDataLoaderV2::next_batch()
+    std::optional<BatchData> ExtendedDataLoader::next_batch()
     {
         if (current_dataset_size_ == 0)
         {
@@ -181,7 +181,7 @@ namespace xt::dataloaders
         return batch;
     }
 
-    void MyCustomDataLoaderV2::worker_loop(size_t worker_id)
+    void ExtendedDataLoader::worker_loop(size_t worker_id)
     {
         // std::cout << "Worker " << worker_id << " started." << std::endl;
         try
@@ -284,7 +284,7 @@ namespace xt::dataloaders
     }
 
     // Helper to fetch samples for a given batch_overall_idx and collate them.
-    std::optional<BatchData> MyCustomDataLoaderV2::produce_batch(size_t batch_overall_idx)
+    std::optional<BatchData> ExtendedDataLoader::produce_batch(size_t batch_overall_idx)
     {
         size_t start_sample_idx_in_indices_vec = batch_overall_idx * batch_size_;
 
@@ -348,7 +348,7 @@ namespace xt::dataloaders
         return {{features_batch, labels_batch}};
     }
 
-    MyCustomDataLoaderV2::Iterator::Iterator(MyCustomDataLoaderV2* loader, bool end )
+    ExtendedDataLoader::Iterator::Iterator(ExtendedDataLoader* loader, bool end )
         : loader_(loader), is_end_(end)
     {
         if (loader_ && !is_end_)
@@ -363,7 +363,7 @@ namespace xt::dataloaders
         }
     }
 
-    const BatchData& MyCustomDataLoaderV2::Iterator::operator*() const
+    const BatchData& ExtendedDataLoader::Iterator::operator*() const
     {
         if (!current_batch_opt_)
         {
@@ -372,7 +372,7 @@ namespace xt::dataloaders
         return *current_batch_opt_;
     }
 
-    BatchData& MyCustomDataLoaderV2::Iterator::operator*()
+    BatchData& ExtendedDataLoader::Iterator::operator*()
     {
         // Non-const version
         if (!current_batch_opt_)
@@ -382,7 +382,7 @@ namespace xt::dataloaders
         return *current_batch_opt_;
     }
 
-    MyCustomDataLoaderV2::Iterator& MyCustomDataLoaderV2::Iterator::operator++()
+    ExtendedDataLoader::Iterator& ExtendedDataLoader::Iterator::operator++()
     {
         if (loader_ && !is_end_)
         {
@@ -401,7 +401,7 @@ namespace xt::dataloaders
         return *this;
     }
 
-    bool MyCustomDataLoaderV2::Iterator::operator!=(const Iterator& other) const
+    bool ExtendedDataLoader::Iterator::operator!=(const Iterator& other) const
     {
         // Common iterator comparison:
         // 1. If both are "end" iterators, they are equal (so not unequal).
@@ -415,11 +415,11 @@ namespace xt::dataloaders
         return loader_ != other.loader_ || current_batch_opt_.has_value() != other.current_batch_opt_.has_value();
     }
 
-    MyCustomDataLoaderV2* loader_;
+    ExtendedDataLoader* loader_;
     bool is_end_;
     std::optional<BatchData> current_batch_opt_; // Cache for current batch
 
-    MyCustomDataLoaderV2::Iterator MyCustomDataLoaderV2::begin()
+    ExtendedDataLoader::Iterator ExtendedDataLoader::begin()
     {
         reset_epoch(); // Prepare for a new iteration: (re)shuffle, (re)start workers
         if (current_dataset_size_ == 0 || total_batches_in_epoch_ == 0)
@@ -430,7 +430,7 @@ namespace xt::dataloaders
         return Iterator(this, false); // Creates an iterator that primes the first batch
     }
 
-    MyCustomDataLoaderV2::Iterator MyCustomDataLoaderV2::end()
+    ExtendedDataLoader::Iterator ExtendedDataLoader::end()
     {
         return Iterator(this, true); // Represents the end
     }
