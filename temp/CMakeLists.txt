@@ -21,19 +21,16 @@ set(BASE_SOURCE_FILES
         ../src/utils/filesystem.cpp
         ../src/utils/md5.cpp
         ../src/utils/string.cpp
-        ../src/media/image/processing.cpp
         ../src/utils/images.cpp
-        #        ../src/datasets/mnist.cpp
-        #        ../src/models/cnn/lenet5.cpp
-        ../src/definitions/transforms.cpp
-        ../src/transforms/compose.cpp
-        ../src/transforms/normalize.cpp
-        ../src/transforms/resize.cpp
+        ../src/transforms/appliers/compose.cpp
+        ../src/transforms/general/normalize.cpp
+        ../src/transforms/image/resize.cpp
         ../src/transforms/lambda.cpp
         ../src/datasets/base/base.cpp
         ../src/models/base.cpp
-        ../src/base/module1.cpp
-
+        ../src/base/module.cpp
+        ../src/base/tensor.cpp
+        ../src/base/dataset.cpp
 )
 
 
@@ -1817,6 +1814,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 set(BASE_SOURCE_FILES
         ../src/base/module1.cpp
+        ../src/datasets/computer_vision/image_classification/mnist.cpp
 )
 
 
@@ -1992,6 +1990,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 set(BASE_SOURCE_FILES
         ../src/base/module1.cpp
+        ../src/datasets/computer_vision/image_classification/mnist.cpp
 )
 
 
