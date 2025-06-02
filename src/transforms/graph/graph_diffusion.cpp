@@ -1,15 +1,15 @@
-#include "include/transforms/graph/graph_difussion.h"
+#include "include/transforms/graph/graph_diffusion.h"
 
-namespace xt::transforms::graph {
-
+namespace xt::transforms::graph
+{
     GraphDiffusion::GraphDiffusion() = default;
 
-    GraphDiffusion::GraphDiffusion(std::function<torch::Tensor(torch::Tensor)> transform) : xt::Module(), transform(transform) {
+    GraphDiffusion::GraphDiffusion(std::vector<xt::Module> transforms) : xt::Module()
+    {
     }
 
-    auto GraphDiffusion::forward(std::initializer_list <std::any> tensors) -> std::any {
-        return torch::zeroes(10);
+    auto GraphDiffusion::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        return torch::zeros(10);
     }
-
-
 }

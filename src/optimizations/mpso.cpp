@@ -1,8 +1,8 @@
-#include "include/optimizations/mspo.h"
+#include "include/optimizations/mpso.h"
 
 namespace xt::optimizations
 {
-    MSPO::MSPO(std::vector<torch::Tensor>&& parameters, double lr, double momentum)
+    MPSO::MPSO(std::vector<torch::Tensor>&& parameters, double lr, double momentum)
             : Optimizer(std::move(parameters), nullptr), lr_(lr), momentum_(momentum)
     {
         velocities_.resize(param_groups()[0].params().size());
@@ -13,7 +13,7 @@ namespace xt::optimizations
     }
 
     using LossClosure = std::function<torch::Tensor()>;
-    torch::Tensor MSPO::step(LossClosure closure)
+    torch::Tensor MPSO::step(LossClosure closure)
     {
         return torch::Tensor();
     }

@@ -5,11 +5,11 @@ namespace xt::transforms::graph {
     DropEdgeAndFeature::DropEdgeAndFeature() = default;
 
 
-    DropEdgeAndFeature::DropEdgeAndFeature(std::function<torch::Tensor(torch::Tensor)> transform) : xt::Module(), transform(transform) {
+    DropEdgeAndFeature::DropEdgeAndFeature(std::vector<xt::Module> transforms) : xt::Module() {
     }
 
     auto DropEdgeAndFeature::forward(std::initializer_list <std::any> tensors) -> std::any {
-        return torch::zeroes(10);
+        return torch::zeros(10);
     }
 
 
