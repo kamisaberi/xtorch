@@ -5,16 +5,8 @@
 #include <vector>
 #include <string>
 #include <algorithm> // For std::shuffle, std::iota, std::min, std::max
-#include <random>    // For std::default_random_engine, std::random_device
-#include <iostream>
-#include <thread>
 #include <future>    // Not directly used in V2, but good to keep in mind for other patterns
-#include <mutex>
-#include <condition_variable>
-#include <deque>      // For the batch queue
-#include <atomic>     // For atomic counters and flags
 #include <optional>   // For torch::optional and std::optional
-#include <stdexcept>  // For std::out_of_range, std::runtime_error, std::invalid_argument
 #include <chrono>     // For timing in main
 #include "include/data_loaders/extended_data_loader.h"
 
@@ -30,12 +22,6 @@ using namespace std;
 int main()
 {
     std::cout.precision(10);
-
-    // xt::transforms::Compose compose({
-    //     xt::transforms::image::Resize({32, 32}),
-    //     xt::transforms::general::Normalize({0.5}, {0.5})
-    // });
-
 
     std::vector<std::shared_ptr<xt::Module>> transform_list;
     transform_list.push_back(std::make_shared<xt::transforms::image::Resize>(std::vector<int64_t>{32, 32}));
