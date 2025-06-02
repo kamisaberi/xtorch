@@ -16,7 +16,7 @@
 #include <optional>   // For torch::optional and std::optional
 #include <stdexcept>  // For std::out_of_range, std::runtime_error, std::invalid_argument
 #include <chrono>     // For timing in main
-#include "include/data_loaders/prefetch_data_loader.h"
+#include "include/data_loaders/extended_data_loader.h"
 
 #include "../../include/datasets/computer_vision/image_classification/mnist.h"
 
