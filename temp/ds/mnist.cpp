@@ -18,7 +18,7 @@
 #include <chrono>     // For timing in main
 #include "include/data_loaders/extended_data_loader.h"
 
-#include "../../include/datasets/computer_vision/image_classification/mnist.h"
+#include "include/datasets/computer_vision/image_classification/mnist.h"
 
 using namespace std;
 
