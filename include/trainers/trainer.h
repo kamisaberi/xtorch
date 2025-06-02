@@ -8,7 +8,7 @@
 #include <string>             // For std::string
 #include "include/data_loaders/data_loaders.h"  // Custom data loader for datasets
 #include "include/datasets/common.h"        // Base dataset class for data handling
-#include "base/base.h"
+#include "include/base/base.h"
 namespace xt {
 // Namespace for the xTorch project, encapsulating training-related functionality
 
