@@ -8,7 +8,7 @@ int main()
     std::cout.precision(10);
 
     auto dataset = xt::datasets::MNIST(
-        "/home/kami/Documents/datasets/", xt::datasets::DataMode::TRAIN, false);
+        "/home/kami/Documents/datasets/", xt::datasets::DataMode::TRAIN, true );
 
     // xt::DataLoader<decltype(dataset)> loader(
     //     std::move(dataset),
