@@ -2,17 +2,37 @@ cmake_minimum_required(VERSION 3.28 FATAL_ERROR)
 
 
 # List Of All CPP Files By Category
+#file(GLOB_RECURSE BASE_FILES CONFIGURE_DEPENDS ../src/base/*.cpp)
+#file(GLOB_RECURSE UTILITY_FILES CONFIGURE_DEPENDS ../src/utils/*.cpp)
+#file(GLOB_RECURSE MEDIA_FILES CONFIGURE_DEPENDS ../src/media/*.cpp)
+#file(GLOB_RECURSE DATASET_FILES CONFIGURE_DEPENDS ../src/datasets/*.cpp)
+#file(GLOB_RECURSE DEFINITION_FILES CONFIGURE_DEPENDS ../src/definitions/*.cpp)
+#file(GLOB_RECURSE MODEL_FILES CONFIGURE_DEPENDS ../src/models/*.cpp)
+#file(GLOB_RECURSE MODEL_CNN_FILES CONFIGURE_DEPENDS ../src/models/cnn/*.cpp)
+#file(GLOB_RECURSE DATA_LOADER_FILES CONFIGURE_DEPENDS ../src/data_loaders/*.cpp)
+#file(GLOB_RECURSE DATA_PARALLEL_FILES CONFIGURE_DEPENDS ../src/data_parallels/*.cpp)
+#file(GLOB_RECURSE TRAINER_FILES CONFIGURE_DEPENDS ../src/trainers/*.cpp)
+#file(GLOB_RECURSE TRANSFORM_FILES CONFIGURE_DEPENDS ../src/transforms/*.cpp)
+
+
+file(GLOB_RECURSE ACTIVATION_FILES CONFIGURE_DEPENDS ../src/activations/*.cpp)
 file(GLOB_RECURSE BASE_FILES CONFIGURE_DEPENDS ../src/base/*.cpp)
-file(GLOB_RECURSE UTILITY_FILES CONFIGURE_DEPENDS ../src/utils/*.cpp)
-file(GLOB_RECURSE MEDIA_FILES CONFIGURE_DEPENDS ../src/media/*.cpp)
-file(GLOB_RECURSE DATASET_FILES CONFIGURE_DEPENDS ../src/datasets/*.cpp)
-file(GLOB_RECURSE DEFINITION_FILES CONFIGURE_DEPENDS ../src/definitions/*.cpp)
-file(GLOB_RECURSE MODEL_FILES CONFIGURE_DEPENDS ../src/models/*.cpp)
-file(GLOB_RECURSE MODEL_CNN_FILES CONFIGURE_DEPENDS ../src/models/cnn/*.cpp)
+file(GLOB_RECURSE DROPOUT_FILES CONFIGURE_DEPENDS ../src/dropouts/*.cpp)
+
 file(GLOB_RECURSE DATA_LOADER_FILES CONFIGURE_DEPENDS ../src/data_loaders/*.cpp)
 file(GLOB_RECURSE DATA_PARALLEL_FILES CONFIGURE_DEPENDS ../src/data_parallels/*.cpp)
+file(GLOB_RECURSE DATASET_FILES CONFIGURE_DEPENDS ../src/datasets/*.cpp)
+
+file(GLOB_RECURSE LOSS_FILES CONFIGURE_DEPENDS ../src/losses/*.cpp)
+
+file(GLOB_RECURSE MODEL_FILES CONFIGURE_DEPENDS ../src/models/*.cpp)
+
+file(GLOB_RECURSE NORMALIZATION_FILES CONFIGURE_DEPENDS ../src/normalizations/*.cpp)
+file(GLOB_RECURSE OPTIMIZATION_FILES CONFIGURE_DEPENDS ../src/optimizations/*.cpp)
+
 file(GLOB_RECURSE TRAINER_FILES CONFIGURE_DEPENDS ../src/trainers/*.cpp)
 file(GLOB_RECURSE TRANSFORM_FILES CONFIGURE_DEPENDS ../src/transforms/*.cpp)
+file(GLOB_RECURSE UTILITY_FILES CONFIGURE_DEPENDS ../src/utils/*.cpp)
 
 
 set(BASE_SOURCE_FILES
@@ -1991,10 +2011,42 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(BASE_SOURCE_FILES
         ../src/base/module1.cpp
         ../src/datasets/computer_vision/image_classification/mnist.cpp
+        ../src/base/dataset.cpp
+        ../src/base/module.cpp
 )
 
+#ACTIVATION_FILES
+#BASE_FILES
+#DROPOUT_FILES
+#DATA_LOADER_FILES
+#DATA_PARALLEL_FILES
+#DATASET_FILES
+#LOSS_FILES
+#MODEL_FILES
+#NORMALIZATION_FILES
+#OPTIMIZATION_FILES
+#TRAINER_FILES
+#TRANSFORM_FILES
+#UTILITY_FILES
+#
 
-set(TEST_SOURCE_FILES ${BASE_FILES} ds/mnist.cpp)
+
+set(TEST_SOURCE_FILES
+        ${ACTIVATION_FILES}
+        ${BASE_FILES}
+        ${DROPOUT_FILES}
+        ${DATA_LOADER_FILES}
+        ${DATA_PARALLEL_FILES}
+        ${DATASET_FILES}
+
+        ${LOSS_FILES}
+        ${MODEL_FILES}
+        ${NORMALIZATION_FILES}
+        ${OPTIMIZATION_FILES}
+        ${TRAINER_FILES}
+        ${TRANSFORM_FILES}
+        ${UTILITY_FILES}
+        ds/mnist.cpp)
 
 add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
 target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
