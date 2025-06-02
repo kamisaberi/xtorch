@@ -4,7 +4,7 @@ namespace xt::transforms::graph {
 
     FeatureDropout::FeatureDropout() = default;
 
-    FeatureDropout::FeatureDropout(std::vector<xt::Module> transforms) : xt::Module(), transform(transform) {
+    FeatureDropout::FeatureDropout(std::vector<xt::Module> transforms) : xt::Module() {
     }
 
     auto FeatureDropout::forward(std::initializer_list <std::any> tensors) -> std::any {
