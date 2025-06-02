@@ -4,11 +4,11 @@ namespace xt::transforms::graph {
 
     NodeMixUp::NodeMixUp() = default;
 
-    NodeMixUp::NodeMixUp(std::function<torch::Tensor(torch::Tensor)> transform) : xt::Module(), transform(transform) {
+    NodeMixUp::NodeMixUp(std::vector<xt::Module> transforms) : xt::Module() {
     }
 
     auto NodeMixUp::forward(std::initializer_list <std::any> tensors) -> std::any {
-        return torch::zeroes(10);
+        return torch::zeros(10);
     }
 
 
