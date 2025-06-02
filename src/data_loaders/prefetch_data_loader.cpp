@@ -1,29 +1,23 @@
 #include "include/data_loaders/prefetch_data_loader.h"
 
-namespace  xt::dataloaders
+namespace xt::dataloaders
 {
-
     using BatchData = std::pair<torch::Tensor, torch::Tensor>;
 
-class MyCustomDataLoaderV2
-{
-public:
-    MyCustomDataLoaderV2(xt::datasets::Dataset& dataset,
-                         size_t batch_size,
-                         bool shuffle,
-                         size_t num_workers,
-                         size_t prefetch_factor = 2) // How many batches per worker to aim for in queue
+    MyCustomDataLoaderV2::MyCustomDataLoaderV2(xt::datasets::Dataset& dataset, size_t batch_size, bool shuffle,
+                                               size_t num_workers, size_t prefetch_factor)
+    // How many batches per worker to aim for in queue
         : dataset_(dataset),
           batch_size_(batch_size),
           shuffle_(shuffle),
           num_workers_(num_workers),
           prefetch_queue_max_size_(std::max(size_t(1), num_workers * prefetch_factor)),
           // Ensure queue size is at least 1
-          shutdown_workers_(false),
-          epoch_ended_for_workers_(false), // True when workers have processed/claimed all batches for current epoch
-          current_dataset_size_(0), // Will be initialized in constructor
-          total_batches_in_epoch_(0),
-          next_batch_idx_to_produce_(0), // Atomic counter for workers to claim batch tasks
+          current_dataset_size_(0),
+          shutdown_workers_(false), // True when workers have processed/claimed all batches for current epoch
+          epoch_ended_for_workers_(false), // Will be initialized in constructor
+          next_batch_idx_to_produce_(0),
+          total_batches_in_epoch_(0), // Atomic counter for workers to claim batch tasks
           batches_consumed_in_epoch_(0)
     {
         if (batch_size_ == 0)
@@ -52,12 +46,12 @@ public:
         // reset_epoch() will be called by begin() to shuffle (if needed) and start workers.
     }
 
-    ~MyCustomDataLoaderV2()
+    MyCustomDataLoaderV2::~MyCustomDataLoaderV2()
     {
         shutdown();
     }
 
-    void shutdown()
+    void MyCustomDataLoaderV2::shutdown()
     {
         {
             std::unique_lock<std::mutex> lock(queue_mutex_);
@@ -82,7 +76,7 @@ public:
         prefetched_batch_queue_.clear(); // std::deque::clear calls destructors of elements
     }
 
-    void reset_epoch()
+    void MyCustomDataLoaderV2::reset_epoch()
     {
         // 1. Stop and join existing workers if any (e.g., from a previous epoch)
         shutdown(); // This sets shutdown_workers_ and joins threads
@@ -140,7 +134,7 @@ public:
         }
     }
 
-    std::optional<BatchData> next_batch()
+    std::optional<BatchData> MyCustomDataLoaderV2::next_batch()
     {
         if (current_dataset_size_ == 0)
         {
@@ -187,9 +181,7 @@ public:
         return batch;
     }
 
-private:
-    // This is the function executed by each worker thread
-    void worker_loop(size_t worker_id)
+    void MyCustomDataLoaderV2::worker_loop(size_t worker_id)
     {
         // std::cout << "Worker " << worker_id << " started." << std::endl;
         try
@@ -292,7 +284,7 @@ private:
     }
 
     // Helper to fetch samples for a given batch_overall_idx and collate them.
-    std::optional<BatchData> produce_batch(size_t batch_overall_idx)
+    std::optional<BatchData> MyCustomDataLoaderV2::produce_batch(size_t batch_overall_idx)
     {
         size_t start_sample_idx_in_indices_vec = batch_overall_idx * batch_size_;
 
@@ -356,84 +348,78 @@ private:
         return {{features_batch, labels_batch}};
     }
 
-public: // Iterator support
-    class Iterator
+    MyCustomDataLoaderV2::Iterator::Iterator(MyCustomDataLoaderV2* loader, bool end = false)
+        : loader_(loader), is_end_(end)
     {
-    public:
-        Iterator(MyCustomDataLoaderV2* loader, bool end = false)
-            : loader_(loader), is_end_(end)
+        if (loader_ && !is_end_)
         {
-            if (loader_ && !is_end_)
-            {
-                // Prime the first batch when the iterator is created (for begin())
-                current_batch_opt_ = loader_->next_batch();
-                if (!current_batch_opt_)
-                {
-                    // If next_batch() returns nullopt immediately, we are at the end
-                    is_end_ = true;
-                }
-            }
-        }
-
-        const BatchData& operator*() const
-        {
+            // Prime the first batch when the iterator is created (for begin())
+            current_batch_opt_ = loader_->next_batch();
             if (!current_batch_opt_)
             {
-                throw std::runtime_error("Attempting to dereference an end iterator or uninitialized iterator.");
-            }
-            return *current_batch_opt_;
-        }
-
-        BatchData& operator*()
-        {
-            // Non-const version
-            if (!current_batch_opt_)
-            {
-                throw std::runtime_error("Attempting to dereference an end iterator or uninitialized iterator.");
-            }
-            return *current_batch_opt_;
-        }
-
-        Iterator& operator++()
-        {
-            if (loader_ && !is_end_)
-            {
-                // Only advance if not already at the end
-                current_batch_opt_ = loader_->next_batch();
-                if (!current_batch_opt_)
-                {
-                    is_end_ = true; // Reached the end
-                }
-            }
-            else
-            {
-                // If loader is null or already at end, make sure is_end_ is true
+                // If next_batch() returns nullopt immediately, we are at the end
                 is_end_ = true;
             }
-            return *this;
         }
+    }
 
-        bool operator!=(const Iterator& other) const
+    const BatchData& MyCustomDataLoaderV2::Iterator::operator*() const
+    {
+        if (!current_batch_opt_)
         {
-            // Common iterator comparison:
-            // 1. If both are "end" iterators, they are equal (so not unequal).
-            if (is_end_ && other.is_end_) return false;
-            // 2. If one is "end" and the other is not, they are unequal.
-            if (is_end_ != other.is_end_) return true;
-            // 3. If neither are "end", compare based on loader and potentially current value.
-            //    For this simple iterator, if they point to the same loader and both are not end,
-            //    they are considered "at the same position" for the purpose of range-for.
-            //    A more robust iterator might compare actual batch indices if available.
-            return loader_ != other.loader_ || current_batch_opt_.has_value() != other.current_batch_opt_.has_value();
+            throw std::runtime_error("Attempting to dereference an end iterator or uninitialized iterator.");
         }
+        return *current_batch_opt_;
+    }
 
-    private:
-        MyCustomDataLoaderV2* loader_;
-        bool is_end_;
-        std::optional<BatchData> current_batch_opt_; // Cache for current batch
-    };
+    BatchData& MyCustomDataLoaderV2::Iterator::operator*()
+    {
+        // Non-const version
+        if (!current_batch_opt_)
+        {
+            throw std::runtime_error("Attempting to dereference an end iterator or uninitialized iterator.");
+        }
+        return *current_batch_opt_;
+    }
 
-    Iterator begin()
+    Iterator& MyCustomDataLoaderV2::Iterator::operator++()
+    {
+        if (loader_ && !is_end_)
+        {
+            // Only advance if not already at the end
+            current_batch_opt_ = loader_->next_batch();
+            if (!current_batch_opt_)
+            {
+                is_end_ = true; // Reached the end
+            }
+        }
+        else
+        {
+            // If loader is null or already at end, make sure is_end_ is true
+            is_end_ = true;
+        }
+        return *this;
+    }
+
+    bool MyCustomDataLoaderV2::Iterator::operator!=(const Iterator& other) const
+    {
+        // Common iterator comparison:
+        // 1. If both are "end" iterators, they are equal (so not unequal).
+        if (is_end_ && other.is_end_) return false;
+        // 2. If one is "end" and the other is not, they are unequal.
+        if (is_end_ != other.is_end_) return true;
+        // 3. If neither are "end", compare based on loader and potentially current value.
+        //    For this simple iterator, if they point to the same loader and both are not end,
+        //    they are considered "at the same position" for the purpose of range-for.
+        //    A more robust iterator might compare actual batch indices if available.
+        return loader_ != other.loader_ || current_batch_opt_.has_value() != other.current_batch_opt_.has_value();
+    }
+
+    MyCustomDataLoaderV2* loader_;
+    bool is_end_;
+    std::optional<BatchData> current_batch_opt_; // Cache for current batch
+
+    Iterator MyCustomDataLoaderV2::begin()
     {
         reset_epoch(); // Prepare for a new iteration: (re)shuffle, (re)start workers
         if (current_dataset_size_ == 0 || total_batches_in_epoch_ == 0)
@@ -444,41 +430,8 @@ public: // Iterator support
         return Iterator(this, false); // Creates an iterator that primes the first batch
     }
 
-    Iterator end()
+    Iterator MyCustomDataLoaderV2::end()
     {
         return Iterator(this, true); // Represents the end
     }
-
-private:
-    xt::datasets::Dataset& dataset_;
-    size_t batch_size_;
-    bool shuffle_;
-    size_t num_workers_;
-    size_t prefetch_queue_max_size_;
-    size_t current_dataset_size_; // Cache dataset size for the epoch
-
-    std::vector<size_t> indices_; // Shuffled indices for the current epoch
-
-    std::deque<BatchData> prefetched_batch_queue_;
-    std::mutex queue_mutex_;
-    std::condition_variable data_available_cv_; // Main thread waits on this
-    std::condition_variable space_available_cv_; // Workers wait on this
-
-    std::vector<std::thread> worker_threads_;
-    std::atomic<bool> shutdown_workers_;
-    std::atomic<bool> epoch_ended_for_workers_; // True when all batches are produced/claimed by workers
-
-    std::atomic<size_t> next_batch_idx_to_produce_;
-    size_t total_batches_in_epoch_;
-    size_t batches_consumed_in_epoch_; // For debugging/tracking
 };
-
-
-
-
-
-
-
-
-
-}
