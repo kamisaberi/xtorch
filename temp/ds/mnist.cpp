@@ -1,3 +1,4 @@
+#include <iostream>
 #include "../../include/datasets/computer_vision/image_classification/mnist.h"
 
 using namespace std;
