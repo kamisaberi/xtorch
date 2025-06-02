@@ -8,10 +8,11 @@ namespace xt::transforms
     {
     public:
         Compose();
-        explicit Compose(std::vector<xt::Module> transforms);
+        explicit Compose(std::vector<std::shared_ptr<xt::Module>> transforms);
         auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
 
     private:
-        std::vector<xt::Module> transforms;
+        std::vector<std::shared_ptr<xt::Module>> transforms; // Store shared_ptr
+        // std::vector<xt::Module> transforms;
     };
 }

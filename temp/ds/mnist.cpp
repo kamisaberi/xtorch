@@ -13,8 +13,14 @@ int main()
     // });
 
 
+    std::vector<std::shared_ptr<xt::Module>> transform_list;
+    transform_list.push_back(std::make_shared<xt::transforms::image::Resize>(std::vector<int64_t>{32, 32}));
+    transform_list.push_back(std::make_shared<xt::transforms::general::Normalize>(std::vector<float>{0.5}, std::vector<float>{0.5}));
+
+    auto compose= std::make_unique<xt::transforms::Compose>(transform_list);
+
     auto dataset = xt::datasets::MNIST(
-        "/home/kami/Documents/datasets/", xt::datasets::DataMode::TRAIN, false);
+        "/home/kami/Documents/datasets/", xt::datasets::DataMode::TRAIN, false, std::move(compose));
 
 
     auto datum = dataset.get(0);
