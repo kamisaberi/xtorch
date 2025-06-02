@@ -1,4 +1,4 @@
-#include "../../xtorch.h"
+#include "../../include/datasets/computer_vision/image_classification/mnist.h"
 
 using namespace std;
 
