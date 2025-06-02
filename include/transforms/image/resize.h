@@ -9,7 +9,7 @@ namespace xt::transforms::image
     public:
         explicit Resize(std::vector<int64_t> size);
 
-        torch::Tensor operator()(torch::Tensor img);
+        // torch::Tensor operator()(torch::Tensor img);
         auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
     private:
         std::vector<int64_t> size;
