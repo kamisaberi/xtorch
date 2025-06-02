@@ -7,11 +7,10 @@ int main()
 {
     std::cout.precision(10);
 
-    auto transforms = {
-        xt::transforms::image::Resize({32, 32}),
-        xt::transforms::general::Normalize({0.5}, {0.5})
-    };
-    xt::transforms::Compose compose(transforms);
+    // xt::transforms::Compose compose({
+    //     xt::transforms::image::Resize({32, 32}),
+    //     xt::transforms::general::Normalize({0.5}, {0.5})
+    // });
 
 
     auto dataset = xt::datasets::MNIST(
