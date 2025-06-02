@@ -1977,7 +1977,7 @@ target_link_libraries(${PROJECT_NAME} "${TORCH_LIBRARIES}")
 #
 set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
 
-include_directories(/usr/include)
+include_directories(../${CMAKE_SOURCE_DIR} /usr/include)
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
 target_link_libraries(${PROJECT_NAME}
