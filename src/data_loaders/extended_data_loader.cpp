@@ -1,4 +1,4 @@
-#include "include/data_loaders/prefetch_data_loader.h"
+#include "include/data_loaders/extended_data_loader.h"
 
 namespace xt::dataloaders
 {
