@@ -9,8 +9,8 @@ namespace xt::transforms
     }
 
 
-    // auto Palindrome::forward(std::initializer_list<std::any> tensors) -> std::any
-    // {
+    auto Palindrome::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
     //     std::vector<std::any> any_vec(tensors);
     //
     //     std::vector<torch::Tensor> tensor_vec;
@@ -30,6 +30,6 @@ namespace xt::transforms
     //     {
     //         input = std::any_cast<torch::Tensor>(transforms[i]({input}));
     //     }
-    // }
+    }
 
 }
