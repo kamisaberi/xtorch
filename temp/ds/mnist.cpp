@@ -55,7 +55,7 @@ int main()
     auto datum = dataset.get(0);
     cout << datum.data.sizes() << endl;
 
-    xt::dataloaders::MyCustomDataLoaderV2 data_loader(dataset, 64, true, 2, /*prefetch_factor=*/2);
+    xt::dataloaders::ExtendedDataLoader data_loader(dataset, 64, true, 2, /*prefetch_factor=*/2);
 
 
 
