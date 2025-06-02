@@ -25,13 +25,13 @@ namespace xt::dataloaders
 {
     using BatchData = std::pair<torch::Tensor, torch::Tensor>;
 
-    class MyCustomDataLoaderV2
+    class ExtendedDataLoader
     {
     public:
-        MyCustomDataLoaderV2(xt::datasets::Dataset& dataset, size_t batch_size, bool shuffle, size_t num_workers,
+        ExtendedDataLoader(xt::datasets::Dataset& dataset, size_t batch_size, bool shuffle, size_t num_workers,
                              size_t prefetch_factor = 2); // How many batches per worker to aim for in queue
 
-        ~MyCustomDataLoaderV2();
+        ~ExtendedDataLoader();
         void shutdown();
         void reset_epoch();
         std::optional<BatchData> next_batch();
@@ -47,14 +47,14 @@ namespace xt::dataloaders
         class Iterator
         {
         public:
-            Iterator(MyCustomDataLoaderV2* loader, bool end = false);
+            Iterator(ExtendedDataLoader* loader, bool end = false);
             const BatchData& operator*() const;
             BatchData& operator*();
             Iterator& operator++();
             bool operator!=(const Iterator& other) const;
 
         private:
-            MyCustomDataLoaderV2* loader_;
+            ExtendedDataLoader* loader_;
             bool is_end_;
             std::optional<BatchData> current_batch_opt_; // Cache for current batch
         };
