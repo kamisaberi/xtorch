@@ -7,7 +7,7 @@ namespace xt::transforms::graph {
     GraphCoarsening::GraphCoarsening(std::vector<xt::Module> transforms) : xt::Module() {
     }
 
-    auto EdgeDrop::forward(std::initializer_list <std::any> tensors) -> std::any {
+    auto GraphCoarsening::forward(std::initializer_list <std::any> tensors) -> std::any {
         return torch::zeros(10);
     }
 

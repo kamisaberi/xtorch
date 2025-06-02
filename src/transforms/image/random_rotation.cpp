@@ -8,7 +8,7 @@ namespace xt::transforms::image
     {
     }
 
-    auto RandomRotation::RandomRotation(std::initializer_list<std::any> tensors) -> std::any
+    auto RandomRotation::forward(std::initializer_list<std::any> tensors) -> std::any
     {
         return torch::zeros(10);
     }
