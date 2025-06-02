@@ -348,7 +348,7 @@ namespace xt::dataloaders
         return {{features_batch, labels_batch}};
     }
 
-    MyCustomDataLoaderV2::Iterator::Iterator(MyCustomDataLoaderV2* loader, bool end = false)
+    MyCustomDataLoaderV2::Iterator::Iterator(MyCustomDataLoaderV2* loader, bool end )
         : loader_(loader), is_end_(end)
     {
         if (loader_ && !is_end_)
@@ -382,7 +382,7 @@ namespace xt::dataloaders
         return *current_batch_opt_;
     }
 
-    Iterator& MyCustomDataLoaderV2::Iterator::operator++()
+    MyCustomDataLoaderV2::Iterator& MyCustomDataLoaderV2::Iterator::operator++()
     {
         if (loader_ && !is_end_)
         {
@@ -419,7 +419,7 @@ namespace xt::dataloaders
     bool is_end_;
     std::optional<BatchData> current_batch_opt_; // Cache for current batch
 
-    Iterator MyCustomDataLoaderV2::begin()
+    MyCustomDataLoaderV2::Iterator MyCustomDataLoaderV2::begin()
     {
         reset_epoch(); // Prepare for a new iteration: (re)shuffle, (re)start workers
         if (current_dataset_size_ == 0 || total_batches_in_epoch_ == 0)
@@ -430,7 +430,7 @@ namespace xt::dataloaders
         return Iterator(this, false); // Creates an iterator that primes the first batch
     }
 
-    Iterator MyCustomDataLoaderV2::end()
+    MyCustomDataLoaderV2::Iterator MyCustomDataLoaderV2::end()
     {
         return Iterator(this, true); // Represents the end
     }
