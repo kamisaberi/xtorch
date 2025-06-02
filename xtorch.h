@@ -37,7 +37,6 @@
 #include "include/data_loaders/data_loaders.h"
 #include "include/data_parallels/data_parallels.h"
 #include "include/datasets/datasets.h"
-#include "include/media/media.h"
 #include "include/models/models.h"
 #include "include/trainers/trainers.h"
 #include "include/transforms/transforms.h"
@@ -47,7 +46,4 @@
 #include "include/optimizations/optimizations.h"
 #include "include/regulariztions/regulariztions.h"
 #include "include/normalizations/normalizations.h"
-
-#include "include/types/types.h"
 #include "include/utils/utils.h"
-#include "include/temp/temp.h"
