@@ -22,7 +22,6 @@ int main()
     auto dataset = xt::datasets::MNIST(
         "/home/kami/Documents/datasets/", xt::datasets::DataMode::TRAIN, false, std::move(compose));
 
-
     auto datum = dataset.get(0);
     cout << datum.data.sizes() << endl;
     // xt::DataLoader<decltype(dataset)> loader(
