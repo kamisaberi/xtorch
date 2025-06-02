@@ -21,7 +21,7 @@ namespace xt::transforms::general
             tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
         }
 
-        torch::Tensor input = tensor_vec[0];
+        const torch::Tensor input = tensor_vec[0];
 
         if (input.dim() != 3 || input.size(0) != static_cast<long>(mean.size()))
         {
