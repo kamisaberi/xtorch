@@ -22,9 +22,9 @@ namespace xt::datasets
               std::unique_ptr<xt::Module> target_transformer);
 
 
-        torch::data::Example<> get(size_t index) override;
-
-        torch::optional<size_t> size() const override;
+        // torch::data::Example<> get(size_t index) override;
+        //
+        // torch::optional<size_t> size() const override;
 
 
     private :
