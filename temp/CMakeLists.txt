@@ -2032,17 +2032,17 @@ set(BASE_SOURCE_FILES
 
 
 set(TEST_SOURCE_FILES
-        ${ACTIVATION_FILES}
+#        ${ACTIVATION_FILES}
         ${BASE_FILES}
-        ${DROPOUT_FILES}
+#        ${DROPOUT_FILES}
         ${DATA_LOADER_FILES}
-        ${DATA_PARALLEL_FILES}
-        ${DATASET_FILES}
-
-        ${LOSS_FILES}
-        ${MODEL_FILES}
-        ${NORMALIZATION_FILES}
-        ${OPTIMIZATION_FILES}
+#        ${DATA_PARALLEL_FILES}
+#        ${DATASET_FILES}
+        ../src/datasets/computer_vision/image_classification/mnist.cpp
+#        ${LOSS_FILES}
+        ../src/models/computer_vision/image_classification/lenet5.cpp
+#        ${NORMALIZATION_FILES}
+#        ${OPTIMIZATION_FILES}
         ${TRAINER_FILES}
         ${TRANSFORM_FILES}
         ${UTILITY_FILES}
