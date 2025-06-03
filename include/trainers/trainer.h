@@ -7,6 +7,7 @@
 #include <string>
 #include <functional> // For std::function
 #include "include/base/base.h"     // Assuming xt::Module is defined here or via common.h
+#include "include/data_loaders/data_loaders.h"     // Assuming xt::Module is defined here or via common.h
 
 // Forward declaration for xt::Module if not fully included by base.h
 // namespace xt { class Module; }
@@ -27,11 +28,11 @@ namespace xt
 
         // Fit method for CPU training
         void fit(xt::Module& model, // Pass model by reference
-                 xt::datasets::Dataset& train_loader); // Use the new DataLoader
+                 xt::dataloaders::ExtendedDataLoader& train_loader); // Use the new DataLoader
 
         // Fit method for training on a specified device (CPU or GPU)
         void fit(xt::Module& model, // Pass model by reference
-                 xt::datasets::Dataset& train_loader, // Use the new DataLoader
+                 xt::dataloaders::ExtendedDataLoader& train_loader, // Use the new DataLoader
                  torch::Device device);
 
     private:
@@ -46,7 +47,7 @@ namespace xt
 
         // Helper for the training loop logic
         void training_loop(xt::Module& model,
-                           xt::datasets::Dataset& train_loader,
+                           xt::dataloaders::ExtendedDataLoader& train_loader,
                            torch::Device device);
     };
 } // namespace xt

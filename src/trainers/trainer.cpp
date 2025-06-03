@@ -1,6 +1,8 @@
 #include "include/trainers/trainer.h" // Assuming trainer.h is in the same include path or adjust
 #include <any> // For std::any_cast
 
+#include "data_loaders/extended_data_loader.h"
+
 namespace xt
 {
     Trainer::Trainer()
@@ -54,7 +56,7 @@ namespace xt
 
     // Private helper for the main training loop
     void Trainer::training_loop(xt::Module& model,
-                                xt::datasets::Dataset& train_loader,
+                                xt::dataloaders::ExtendedDataLoader& train_loader,
                                 torch::Device device)
     {
         if (!optimizer_ptr_)
@@ -108,8 +110,8 @@ namespace xt
                 if ((batch_idx + 1) % 10 == 0)
                 {
                     // Assuming DataLoader has total_batches_in_epoch_
-                    std::cout << "  Batch " << (batch_idx + 1) << " | Loss: " << (running_loss / num_samples_processed)
-                        << std::endl;
+                    std::cout << "  Batch " << (batch_idx + 1)
+                        << " | Loss: " << (running_loss / num_samples_processed) << std::endl;
                 }
                 batch_idx++;
             }
@@ -130,14 +132,14 @@ namespace xt
 
     // Fit method for CPU training (delegates to the device-specific one)
     void Trainer::fit(xt::Module& model,
-                      xt::datasets::Dataset& train_loader)
+                      xt::dataloaders::ExtendedDataLoader& train_loader)
     {
         training_loop(model, train_loader, torch::Device(torch::kCPU));
     }
 
     // Fit method for training on a specified device
     void Trainer::fit(xt::Module& model,
-                      xt::datasets::Dataset& train_loader,
+                      xt::dataloaders::ExtendedDataLoader& train_loader,
                       torch::Device device)
     {
         training_loop(model, train_loader, device);
