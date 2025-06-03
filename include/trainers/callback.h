@@ -25,9 +25,13 @@ namespace xt {
         torch::Tensor output;
         torch::Tensor target;
         size_t num_samples;
-        // Add other metrics here
-    };
 
+        // User-declared constructor
+        BatchEndState(int ep, int b_idx, torch::Tensor l,
+                      torch::Tensor o, torch::Tensor t, size_t n_samples)
+            : epoch(ep), batch_idx(b_idx), loss(std::move(l)),
+              output(std::move(o)), target(std::move(t)), num_samples(n_samples) {}
+    };
 
     class Callback {
     public:
