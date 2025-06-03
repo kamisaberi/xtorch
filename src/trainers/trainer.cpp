@@ -212,17 +212,24 @@ namespace xt
         {
             for (const auto& cb : callbacks_) cb->on_batch_begin(current_epoch_, static_cast<int>(batch_idx));
 
-            torch::Tensor data = batch_data.first.to(device);
-            torch::Tensor target = batch_data.second.to(device);
 
-            std::any output_any = model_ptr_->forward({data});
+            torch::Tensor data = batch_data.first.to(device);
+
+            // cout << "Trainer 1" << endl;
+            torch::Tensor target = batch_data.second.to(device);
+            // cout << "Trainer 2" << endl;
+            auto output_any = model_ptr_->forward({data});
+            // cout << "Trainer 3" << endl;
             torch::Tensor output = std::any_cast<torch::Tensor>(output_any);
+            // cout << "Trainer 4" << endl;
             torch::Tensor loss = loss_fn_(output, target);
+            // cout << "Trainer 5" << endl;
 
             if (grad_accumulation_steps_ > 1)
             {
                 loss = loss / grad_accumulation_steps_; // Normalize loss
             }
+            // cout << "Trainer 6" << endl;
             loss.backward();
 
             if ((batch_idx + 1) % grad_accumulation_steps_ == 0)
