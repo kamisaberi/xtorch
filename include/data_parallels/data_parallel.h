@@ -197,7 +197,6 @@ namespace xt::parallelism
 
     private:
         void initialize();
-torch::nn:DataParallel()
         void synchronize_gradients(size_t device_idx);
 
         void broadcast_parameters();
