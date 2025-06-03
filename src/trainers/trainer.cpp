@@ -314,8 +314,6 @@ namespace xt
             //TODO BUG
             // torch::save(*model_ptr_, filename); // Saves the entire module
 
-
-
             // For state_dict:
             // torch::serialize::OutputArchive output_archive;
             // model_ptr_->save(output_archive);
