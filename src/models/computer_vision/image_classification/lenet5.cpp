@@ -98,11 +98,13 @@ namespace xt::models
         }
 
         torch::Tensor x = tensor_vec[0];
-
+        x = x.to(torch::kFloat32);
         x = layer1->forward(x);
         x = layer2->forward(x);
         x = x.view({x.size(0), -1}); // flatten
+
         x = torch::relu(fc1->forward(x));
+
         x = torch::relu(fc2->forward(x));
         x = torch::log_softmax(fc3->forward(x), 1);
         return x;
