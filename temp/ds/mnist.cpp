@@ -11,6 +11,8 @@
 #include "include/data_loaders/extended_data_loader.h"
 
 #include "include/datasets/computer_vision/image_classification/mnist.h"
+
+#include "include/models/computer_vision/image_classification/lenet5.h"
 #include "include/trainers/logging_callback.h"
 #include "include/trainers/trainer.h"
 
@@ -19,24 +21,19 @@ using namespace std;
 #include <torch/nn/parallel/data_parallel.h>
 
 
-
-
-
 int main()
 {
     std::cout.precision(10);
 
     std::vector<std::shared_ptr<xt::Module>> transform_list;
     transform_list.push_back(std::make_shared<xt::transforms::image::Resize>(std::vector<int64_t>{32, 32}));
-    transform_list.push_back(std::make_shared<xt::transforms::general::Normalize>(std::vector<float>{0.5}, std::vector<float>{0.5}));
+    transform_list.push_back(
+        std::make_shared<xt::transforms::general::Normalize>(std::vector<float>{0.5}, std::vector<float>{0.5}));
 
-    auto compose= std::make_unique<xt::transforms::Compose>(transform_list);
+    auto compose = std::make_unique<xt::transforms::Compose>(transform_list);
 
     auto dataset = xt::datasets::MNIST(
         "/home/kami/Documents/datasets/", xt::datasets::DataMode::TRAIN, false, std::move(compose));
-
-
-
 
 
     int num_epochs = 2;
@@ -45,18 +42,26 @@ int main()
 
     xt::dataloaders::ExtendedDataLoader data_loader(dataset, 64, true, 2, /*prefetch_factor=*/2);
 
+    xt::models::LeNet5 model(10);
+    model.to(torch::Device(torch::kCPU));
+    model.train();
+
+    torch::optim::Adam optimizer(model.parameters(), torch::optim::AdamOptions(1e-3));
 
     auto logger = std::make_shared<xt::LoggingCallback>("[MyTrain]", /*log_every_N_batches=*/20, /*log_time=*/true);
-    // xt::Trainer trainer;
-    // trainer.set_max_epochs(10)
-    //        .set_optimizer(optimizer)
-    //        .set_loss_fn(loss_function_lambda)
-    //        // .set_lr_scheduler(scheduler) // Optional
-    //        .add_callback(logger) // Add the logger
-    //        // .enable_checkpointing(...) // Optional
-    //        ;
-    //
-    // trainer.fit(model, data_loader, &data_loader, device);
+    xt::Trainer trainer;
+    trainer.set_max_epochs(10)
+           .set_optimizer(optimizer)
+           .set_loss_fn([](auto output, auto target)
+           {
+               return torch::nll_loss(output, target);
+           })
+           // .set_lr_scheduler(scheduler) // Optional
+           .add_callback(logger) // Add the logger
+        // .enable_checkpointing(...) // Optional
+        ;
+
+    trainer.fit(model, data_loader, &data_loader, torch::Device(torch::kCPU));
 
 
     for (int epoch = 1; epoch <= num_epochs; ++epoch)
