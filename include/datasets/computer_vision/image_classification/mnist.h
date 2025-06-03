@@ -21,6 +21,12 @@ namespace xt::datasets
               std::unique_ptr<xt::Module> transformer,
               std::unique_ptr<xt::Module> target_transformer);
 
+
+        torch::data::Example<> get(size_t index) override;
+
+        torch::optional<size_t> size() const override;
+
+
     private :
         std::string url = "https://ossci-datasets.s3.amazonaws.com/mnist/";
         fs::path dataset_folder_name = "MNIST/raw";

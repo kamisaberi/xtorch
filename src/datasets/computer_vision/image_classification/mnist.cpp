@@ -2,6 +2,20 @@
 
 namespace xt::datasets
 {
+
+
+
+    torch::data::Example<> MNIST::get(size_t index) {
+        cout << "MNIST GET" << endl;
+        return {data[index], torch::tensor(targets[index])};
+    }
+
+    torch::optional <size_t> MNIST::size() const {
+        cout << "MNIST SIZE" << endl;
+        return data.size();
+    }
+
+
     MNIST::MNIST(const std::string& root): MNIST(
         root, xt::datasets::DataMode::TRAIN, false, nullptr, nullptr)
     {
