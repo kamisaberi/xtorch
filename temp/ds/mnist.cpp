@@ -11,6 +11,8 @@
 #include "include/data_loaders/extended_data_loader.h"
 
 #include "include/datasets/computer_vision/image_classification/mnist.h"
+#include "include/trainers/logging_callback.h"
+#include "include/trainers/trainer.h"
 
 using namespace std;
 
@@ -43,6 +45,18 @@ int main()
 
     xt::dataloaders::ExtendedDataLoader data_loader(dataset, 64, true, 2, /*prefetch_factor=*/2);
 
+
+    auto logger = std::make_shared<xt::LoggingCallback>("[MyTrain]", /*log_every_N_batches=*/20, /*log_time=*/true);
+    // xt::Trainer trainer;
+    // trainer.set_max_epochs(10)
+    //        .set_optimizer(optimizer)
+    //        .set_loss_fn(loss_function_lambda)
+    //        // .set_lr_scheduler(scheduler) // Optional
+    //        .add_callback(logger) // Add the logger
+    //        // .enable_checkpointing(...) // Optional
+    //        ;
+    //
+    // trainer.fit(model, data_loader, &data_loader, device);
 
 
     for (int epoch = 1; epoch <= num_epochs; ++epoch)
