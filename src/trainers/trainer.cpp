@@ -1,7 +1,7 @@
 #include "include/trainers/trainer.h" // Assuming trainer.h is in the same include path or adjust
 #include <any> // For std::any_cast
 
-#include "data_loaders/extended_data_loader.h"
+#include "include/data_loaders/extended_data_loader.h"
 
 namespace xt
 {
