@@ -240,8 +240,8 @@ namespace xt
                 current_epoch_,
                 static_cast<int>(batch_idx),
                 loss.detach() * grad_accumulation_steps_, // Assuming loss is a tensor
-                output.detach(),                          // Assuming output is a tensor
-                target.detach(),                          // Assuming target is a tensor
+                output.detach(), // Assuming output is a tensor
+                target.detach(), // Assuming target is a tensor
                 data.size(0)
             );
 
