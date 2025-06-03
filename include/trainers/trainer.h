@@ -2,52 +2,75 @@
 
 #include <torch/torch.h>
 #include <iostream>
-#include <filesystem> // If you use checkpointing features later
-#include <memory>
+#include <filesystem>
+#include <memory> // For std::shared_ptr, std::unique_ptr
 #include <string>
+#include <vector>
 #include <functional> // For std::function
-#include "include/base/base.h"     // Assuming xt::Module is defined here or via common.h
-#include "include/data_loaders/data_loaders.h"     // Assuming xt::Module is defined here or via common.h
+#include <limits>     // For std::numeric_limits
 
-// Forward declaration for xt::Module if not fully included by base.h
-// namespace xt { class Module; }
+#include "include/data_loaders/extended_data_loader.h" // Your DataLoader
+#include "include/base/base.h"     // For xt::Module
+#include "callback.h"              // For xt::Callback
 
+namespace xt {
 
-namespace xt
-{
-    class Trainer
-    {
+    class Trainer {
     public:
         Trainer();
 
-        // Setter methods (fluent interface)
+        // Configuration
         Trainer& set_max_epochs(int max_epochs);
-        Trainer& set_optimizer(torch::optim::Optimizer& optimizer); // Pass by reference
+        Trainer& set_optimizer(torch::optim::Optimizer& optimizer); // Non-owning
         Trainer& set_loss_fn(std::function<torch::Tensor(const torch::Tensor&, const torch::Tensor&)> loss_fn);
-        Trainer& enable_checkpoint(const std::string& path, int interval); // For future use
+        Trainer& set_lr_scheduler(std::shared_ptr<torch::optim::LRScheduler> scheduler); // Can be nullptr
+        Trainer& add_callback(std::shared_ptr<Callback> callback);
+        Trainer& set_gradient_accumulation_steps(int steps);
 
-        // Fit method for CPU training
-        void fit(xt::Module& model, // Pass model by reference
-                 xt::dataloaders::ExtendedDataLoader& train_loader); // Use the new DataLoader
+        // Checkpointing
+        Trainer& enable_checkpointing(const std::string& save_dir,
+                                      const std::string& metric_to_monitor = "val_loss",
+                                      const std::string& mode = "min"); // "min" or "max"
 
-        // Fit method for training on a specified device (CPU or GPU)
-        void fit(xt::Module& model, // Pass model by reference
-                 xt::dataloaders::ExtendedDataLoader& train_loader, // Use the new DataLoader
-                 torch::Device device);
+        // Main training method
+        void fit(xt::Module& model,
+                 xt::dataloaders::ExtendedDataLoader& train_loader,
+                 xt::dataloaders::ExtendedDataLoader* val_loader = nullptr, // Optional validation loader
+                 torch::Device device = torch::Device(torch::kCPU));
+
+        // Allow callbacks to access some trainer state (use with caution)
+        const xt::Module* get_model_ptr() const { return model_ptr_; }
+        const torch::optim::Optimizer* get_optimizer_ptr() const { return optimizer_ptr_; }
+        int get_current_epoch() const { return current_epoch_; }
+
 
     private:
-        int max_epochs_;
-        torch::optim::Optimizer* optimizer_ptr_; // Store as a pointer
+        void train_epoch(xt::dataloaders::ExtendedDataLoader& train_loader, torch::Device device);
+        EpochEndState validate_epoch(xt::dataloaders::ExtendedDataLoader& val_loader, torch::Device device);
+        void save_checkpoint(const std::string& reason = "best_model");
+
+
+        // Core components
+        xt::Module* model_ptr_; // Non-owning pointer to the model being trained
+        torch::optim::Optimizer* optimizer_ptr_; // Non-owning
         std::function<torch::Tensor(const torch::Tensor&, const torch::Tensor&)> loss_fn_;
+        std::shared_ptr<torch::optim::LRScheduler> lr_scheduler_;
 
-        // Checkpointing members (for future expansion)
-        bool checkpoint_enabled_;
-        std::string checkpoint_path_;
-        int checkpoint_interval_;
+        // Training parameters
+        int max_epochs_;
+        int current_epoch_; // To track current epoch
+        torch::Device current_device_; // Device used for current training
+        int grad_accumulation_steps_;
 
-        // Helper for the training loop logic
-        void training_loop(xt::Module& model,
-                           xt::dataloaders::ExtendedDataLoader& train_loader,
-                           torch::Device device);
+        // Callbacks
+        std::vector<std::shared_ptr<Callback>> callbacks_;
+
+        // Checkpointing
+        bool checkpointing_enabled_;
+        std::string checkpoint_save_dir_;
+        std::string checkpoint_metric_monitor_; // e.g., "val_loss"
+        std::string checkpoint_mode_;           // "min" or "max"
+        double best_metric_value_;
     };
+
 } // namespace xt
