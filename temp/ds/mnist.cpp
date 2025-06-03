@@ -50,53 +50,49 @@ int main()
 
     auto logger = std::make_shared<xt::LoggingCallback>("[MyTrain]", /*log_every_N_batches=*/20, /*log_time=*/true);
     xt::Trainer trainer;
-    trainer.set_max_epochs(10)
-           .set_optimizer(optimizer)
+    trainer.set_max_epochs(10).set_optimizer(optimizer)
            .set_loss_fn([](auto output, auto target)
            {
                return torch::nll_loss(output, target);
            })
-           // .set_lr_scheduler(scheduler) // Optional
-           .add_callback(logger) // Add the logger
-        // .enable_checkpointing(...) // Optional
-        ;
+           .add_callback(logger);
 
     trainer.fit(model, data_loader, &data_loader, torch::Device(torch::kCPU));
 
 
-    for (int epoch = 1; epoch <= num_epochs; ++epoch)
-    {
-        std::cout << "\nEpoch: " << epoch << std::endl;
-        int batch_count = 0;
-        auto epoch_start_time = std::chrono::high_resolution_clock::now();
-
-        for (const auto& batch : data_loader)
-        {
-            // data_loader.begin() calls reset_epoch()
-            torch::Tensor features = batch.first;
-            torch::Tensor labels = batch.second;
-
-            // Simulate some training work on the batch
-            // std::this_thread::sleep_for(std::chrono::milliseconds(20)); // Uncomment to see prefetching benefit
-
-            std::cout << "  Batch " << ++batch_count << " received. Features: " << features.sizes()
-                << ", Labels: " << labels.sizes();
-            if (labels.numel() > 0)
-            {
-                std::cout << " First label: " << labels[0].item<long>();
-            }
-            std::cout << std::endl;
-        }
-        auto epoch_end_time = std::chrono::high_resolution_clock::now();
-        auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(epoch_end_time - epoch_start_time);
-        std::cout << "Epoch " << epoch << " completed in " << duration.count() << "ms. Total batches: " << batch_count
-            << std::endl;
-        if (batch_count == 0 && dataset.size().value_or(0) > 0)
-        {
-            std::cerr << "Error: No batches processed for a non-empty dataset in epoch " << epoch << std::endl;
-        }
-    }
-
+    // for (int epoch = 1; epoch <= num_epochs; ++epoch)
+    // {
+    //     std::cout << "\nEpoch: " << epoch << std::endl;
+    //     int batch_count = 0;
+    //     auto epoch_start_time = std::chrono::high_resolution_clock::now();
+    //
+    //     for (const auto& batch : data_loader)
+    //     {
+    //         // data_loader.begin() calls reset_epoch()
+    //         torch::Tensor features = batch.first;
+    //         torch::Tensor labels = batch.second;
+    //
+    //         // Simulate some training work on the batch
+    //         // std::this_thread::sleep_for(std::chrono::milliseconds(20)); // Uncomment to see prefetching benefit
+    //
+    //         std::cout << "  Batch " << ++batch_count << " received. Features: " << features.sizes()
+    //             << ", Labels: " << labels.sizes();
+    //         if (labels.numel() > 0)
+    //         {
+    //             std::cout << " First label: " << labels[0].item<long>();
+    //         }
+    //         std::cout << std::endl;
+    //     }
+    //     auto epoch_end_time = std::chrono::high_resolution_clock::now();
+    //     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(epoch_end_time - epoch_start_time);
+    //     std::cout << "Epoch " << epoch << " completed in " << duration.count() << "ms. Total batches: " << batch_count
+    //         << std::endl;
+    //     if (batch_count == 0 && dataset.size().value_or(0) > 0)
+    //     {
+    //         std::cerr << "Error: No batches processed for a non-empty dataset in epoch " << epoch << std::endl;
+    //     }
+    // }
+    //
 
     return 0;
 }
