@@ -49,7 +49,6 @@ namespace xt::datasets
 
     public:
         std::vector<torch::Tensor> data;
-
         std::vector<uint8_t> targets;
 
         DataMode mode = DataMode::TRAIN;
