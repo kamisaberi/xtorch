@@ -16,6 +16,7 @@
 
 using namespace std;
 
+#include <torch/nn/parallel/data_parallel.h>
 
 
 
@@ -33,7 +34,6 @@ int main()
 
     auto dataset = xt::datasets::MNIST(
         "/home/kami/Documents/datasets/", xt::datasets::DataMode::TRAIN, false, std::move(compose));
-
 
 
 
