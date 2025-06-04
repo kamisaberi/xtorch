@@ -42,7 +42,7 @@ int main()
     cout << dataset.size().value() << endl;
 
 
-    return 0;
+    // return 0;
     xt::dataloaders::ExtendedDataLoader data_loader(dataset, 64, true, 2, /*prefetch_factor=*/2);
 
     xt::models::LeNet5 model(10);
