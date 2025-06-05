@@ -1,7 +1,6 @@
 #pragma once
 
-#include "include/datasets/common.h"
-
+#include "../../common.h"
 
 namespace xt::datasets {
     class CocoCaptions : public xt::datasets::Dataset {
