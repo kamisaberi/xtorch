@@ -15,7 +15,7 @@ namespace xt::models
         explicit CBAM(int num_classes/* classes */, int in_channels = 1/*  input channels */);
         CBAM(int num_classes, int in_channels, std::vector<int64_t> input_shape);
 
-        torch::Tensor forward(torch::Tensor x) const override;
+        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
         void reset() override;
     };
 }
