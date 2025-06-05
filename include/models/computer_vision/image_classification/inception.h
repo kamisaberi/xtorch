@@ -18,7 +18,7 @@ namespace xt::models
 
         InceptionV1(int num_classes, int in_channels, std::vector<int64_t> input_shape);
 
-        torch::Tensor forward(torch::Tensor x) const override;
+        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
         void reset() override;
     };
 
@@ -30,8 +30,8 @@ namespace xt::models
         InceptionV2(int num_classes /* classes */, int in_channels = 3/* input channels */);
 
         InceptionV2(int num_classes, int in_channels, std::vector<int64_t> input_shape);
+        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
 
-        torch::Tensor forward(torch::Tensor x) const override;
         void reset() override;
     };
 
@@ -44,7 +44,7 @@ namespace xt::models
 
         InceptionV3(int num_classes, int in_channels, std::vector<int64_t> input_shape);
 
-        torch::Tensor forward(torch::Tensor x) const override;
+        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
         void reset() override;
     };
 
@@ -56,8 +56,8 @@ namespace xt::models
         InceptionV4(int num_classes /* classes */, int in_channels = 3/* input channels */);
 
         InceptionV4(int num_classes, int in_channels, std::vector<int64_t> input_shape);
+        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
 
-        torch::Tensor forward(torch::Tensor x) const override;
         void reset() override;
     };
 
