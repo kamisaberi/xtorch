@@ -1,6 +1,6 @@
 #pragma once
 
-#include "include/datasets/common.h"
+#include "../../common.h"
 
 
 using namespace std;
