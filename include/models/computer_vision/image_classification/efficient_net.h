@@ -18,7 +18,7 @@ namespace xt::models
 
         EfficientNetB0(int num_classes, int in_channels, std::vector<int64_t> input_shape);
 
-        torch::Tensor forward(torch::Tensor x) const override;
+        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
         void reset() override;
     };
 
@@ -32,7 +32,8 @@ namespace xt::models
 
         EfficientNetB1(int num_classes, int in_channels, std::vector<int64_t> input_shape);
 
-        torch::Tensor forward(torch::Tensor x) const override;
+        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
+
         void reset() override;
     };
 
@@ -46,7 +47,8 @@ namespace xt::models
 
         EfficientNetB2(int num_classes, int in_channels, std::vector<int64_t> input_shape);
 
-        torch::Tensor forward(torch::Tensor x) const override;
+        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
+
         void reset() override;
     };
 
@@ -59,7 +61,8 @@ namespace xt::models
 
         EfficientNetB3(int num_classes, int in_channels, std::vector<int64_t> input_shape);
 
-        torch::Tensor forward(torch::Tensor x) const override;
+        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
+
         void reset() override;
     };
 
@@ -71,8 +74,8 @@ namespace xt::models
         EfficientNetB4(int num_classes /* classes */, int in_channels = 3/* input channels */);
 
         EfficientNetB4(int num_classes, int in_channels, std::vector<int64_t> input_shape);
+        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
 
-        torch::Tensor forward(torch::Tensor x) const override;
         void reset() override;
     };
 
@@ -85,7 +88,8 @@ namespace xt::models
 
         EfficientNetB5(int num_classes, int in_channels, std::vector<int64_t> input_shape);
 
-        torch::Tensor forward(torch::Tensor x) const override;
+        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
+
         void reset() override;
     };
 
@@ -98,7 +102,8 @@ namespace xt::models
 
         EfficientNetB6(int num_classes, int in_channels, std::vector<int64_t> input_shape);
 
-        torch::Tensor forward(torch::Tensor x) const override;
+        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
+
         void reset() override;
     };
 
@@ -110,8 +115,7 @@ namespace xt::models
         EfficientNetB7(int num_classes /* classes */, int in_channels = 3/* input channels */);
 
         EfficientNetB7(int num_classes, int in_channels, std::vector<int64_t> input_shape);
-
-        torch::Tensor forward(torch::Tensor x) const override;
+        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
         void reset() override;
     };
 
