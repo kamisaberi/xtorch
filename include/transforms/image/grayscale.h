@@ -2,7 +2,8 @@
 #pragma once
 
 
-#include "include/transforms/common.h"
+#include "../common.h"
+
 
 namespace xt::transforms::image
 {
