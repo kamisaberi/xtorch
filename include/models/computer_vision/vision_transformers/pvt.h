@@ -1,5 +1,6 @@
 #pragma once
-#include "include/models/common.h"
+#include "../../common.h"
+
 namespace xt::models
 {
     struct PVTV1 : xt::Cloneable<PVTV1>

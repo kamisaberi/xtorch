@@ -1,6 +1,7 @@
 #pragma once
 
-#include "include/models/common.h"
+#include "../../common.h"
+
 namespace  xt::models
 {
 
