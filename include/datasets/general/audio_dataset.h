@@ -1,6 +1,7 @@
 #pragma once
 
-#include "include/datasets/common.h"
+#include "../common.h"
+
 #include <sndfile.hh>
 
 using namespace std;

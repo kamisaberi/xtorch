@@ -1,7 +1,6 @@
 #pragma once
 
 #include "audio_processing/audio_processing.h"
-#include "base/base.h"
 #include "biomedical_data/biomedical_data.h"
 #include "computer_vision/computer_vision.h"
 #include "general/general.h"
