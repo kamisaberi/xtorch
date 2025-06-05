@@ -11,7 +11,7 @@ namespace xt::models {
 
         DDPG(int num_classes, int in_channels, std::vector <int64_t> input_shape);
 
-        torch::Tensor forward(torch::Tensor x) const override;
+        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
 
         void reset() override;
     };
