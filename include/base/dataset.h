@@ -7,6 +7,7 @@
 #include <map>
 #include <torch/torch.h>
 #include <opencv2/opencv.hpp>
+#include "include/transforms/transforms.h"
 #include "include/utils/utils.h"
 #include "module.h"
 
