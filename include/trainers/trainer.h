@@ -9,8 +9,8 @@
 #include <functional> // For std::function
 #include <limits>     // For std::numeric_limits
 
-#include "include/data_loaders/extended_data_loader.h" // Your DataLoader
-#include "include/base/base.h"     // For xt::Module
+#include "../data_loaders/extended_data_loader.h" // Your DataLoader
+#include "../base/base.h"     // For xt::Module
 #include "callback.h"              // For xt::Callback
 
 namespace xt {
