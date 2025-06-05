@@ -1,6 +1,39 @@
 #include "include/models/computer_vision/image_classification/wide_resnet.h"
 
-namespace xt::models {
+
+using namespace std;
+
+namespace xt::models
+
+{
+    WideResNet::WideResNet(int num_classes, int in_channels)
+    {
+    }
+
+    WideResNet::WideResNet(int num_classes, int in_channels, std::vector<int64_t> input_shape)
+    {
+    }
+
+    void WideResNet::reset()
+    {
+    }
+
+    auto WideResNet::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        std::vector<std::any> any_vec(tensors);
+
+        std::vector<torch::Tensor> tensor_vec;
+        for (const auto& item : any_vec)
+        {
+            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+        }
+
+        torch::Tensor x = tensor_vec[0];
+
+        return x;
+    }
+
+
     // namespace {
     //     ResidualBlock::ResidualBlock(int in_channels, int out_channels, int stride, torch::nn::Sequential downsample) {
     //         conv1 = torch::nn::Sequential(
