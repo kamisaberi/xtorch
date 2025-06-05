@@ -17,7 +17,7 @@ namespace xt::models
     {
     }
 
-    auto CLIPBLIP::forward(std::initializer_list<std::any> tensors) -> std::any
+    auto CLIP::forward(std::initializer_list<std::any> tensors) -> std::any
     {
         std::vector<std::any> any_vec(tensors);
 
