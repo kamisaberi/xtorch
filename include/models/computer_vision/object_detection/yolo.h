@@ -12,7 +12,7 @@ namespace xt::models
 
         YoloV1(int num_classes, int in_channels, std::vector<int64_t> input_shape);
 
-        torch::Tensor forward(torch::Tensor x) const override;
+        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
         void reset() override;
     };
 
@@ -26,7 +26,7 @@ namespace xt::models
 
         YoloV2(int num_classes, int in_channels, std::vector<int64_t> input_shape);
 
-        torch::Tensor forward(torch::Tensor x) const override;
+        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
         void reset() override;
     };
 
@@ -40,7 +40,7 @@ namespace xt::models
 
         YoloV3(int num_classes, int in_channels, std::vector<int64_t> input_shape);
 
-        torch::Tensor forward(torch::Tensor x) const override;
+        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
         void reset() override;
     };
 
@@ -54,7 +54,7 @@ namespace xt::models
 
         YoloV4(int num_classes, int in_channels, std::vector<int64_t> input_shape);
 
-        torch::Tensor forward(torch::Tensor x) const override;
+        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
         void reset() override;
     };
 
@@ -67,7 +67,7 @@ namespace xt::models
 
         YoloV5(int num_classes, int in_channels, std::vector<int64_t> input_shape);
 
-        torch::Tensor forward(torch::Tensor x) const override;
+        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
         void reset() override;
     };
 
@@ -80,7 +80,7 @@ namespace xt::models
 
         YoloV6(int num_classes, int in_channels, std::vector<int64_t> input_shape);
 
-        torch::Tensor forward(torch::Tensor x) const override;
+        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
         void reset() override;
     };
 
