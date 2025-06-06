@@ -188,7 +188,7 @@ packages["libtar-dev"]="libtar:libtar-devel:libtar-devel:libtar:vcpkg:libtar"
 packages["libzip-dev"]="libzip:libzip-devel:libzip-devel:libzip:libzip"
 packages["libsndfile1-dev"]="libsndfile:libsndfile-devel:libsndfile-devel:libsndfile:libsndfile"
 packages["libhdf5-dev"]="hdf5:hdf5-devel:hdf5-devel:hdf5:hdf5"
-packages["onnxruntime"]="onnxruntime:onnxruntime:onnxruntime:onnxruntime:vcpkg:onnxruntime"
+packages["onnxruntime"]="onnxruntime:onnxruntime:onnxruntime:onnxruntime:onnxruntime"
 
 # -----------------------------------------------------------------------------
 # Pre-Installation Checks
