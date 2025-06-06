@@ -8,7 +8,7 @@
 # System Dependency Installer Script
 # Description:
 #   Automatically detects operating system and installs required development
-#   libraries for various multimedia and machine learning dependencies.
+#   libraries for various multimedia and machine learning dependencies, including ONNX Runtime.
 #   Prompts for LibTorch path (with validation loop), updates CMakeLists.txt, and runs make install.
 # Supported Systems:
 #   - Ubuntu, Linux Mint (Debian-based)
@@ -127,6 +127,38 @@ check_and_install() {
 }
 
 # -----------------------------------------------------------------------------
+# ONNX Runtime Installation Function
+# -----------------------------------------------------------------------------
+# Parameters:
+#   None
+# Functionality:
+#   - Sets ONNXRUNTIME_PATH for CMakeLists.txt update based on package manager or vcpkg
+#   - Skips installation since ONNX Runtime is handled via package managers or vcpkg in main loop
+#   - Determines installation path for CMake configuration
+# -----------------------------------------------------------------------------
+install_onnxruntime() {
+    case "$SYSTEM" in
+        ubuntu|mint)
+            ONNXRUNTIME_PATH="/usr"
+            ;;
+        arch|manjaro)
+            ONNXRUNTIME_PATH="/usr"
+            ;;
+        macos)
+            ONNXRUNTIME_PATH=$(brew --prefix onnxruntime)
+            ;;
+        windows)
+            ONNXRUNTIME_PATH=$(echo "$VCPKG_ROOT/installed/x64-windows" | sed 's|\\|/|g')
+            ;;
+        fedora|suse)
+            echo "ONNX Runtime not available via package manager for $SYSTEM. Please install manually: https://onnxruntime.ai/docs/install/"
+            exit 1
+            ;;
+    esac
+    echo "ONNX Runtime path set to: $ONNXRUNTIME_PATH"
+}
+
+# -----------------------------------------------------------------------------
 # Package Mapping Table
 # -----------------------------------------------------------------------------
 # Maps Ubuntu/Mint package names to Arch, Fedora, SUSE, macOS, and Windows equivalents
@@ -138,10 +170,12 @@ check_and_install() {
 #   - libcurl4-openssl-dev: HTTP client library
 #   - zlib1g-dev: Compression library
 #   - libarchive-dev: Multi-format archive library
+#   - onnxruntime: ONNX Runtime for machine learning model inference
 # Notes:
-#   - Windows uses vcpkg for libtar, others use Chocolatey where possible
+#   - Windows uses vcpkg for libtar and onnxruntime, others use Chocolatey where possible
 #   - vcpkg packages are prefixed with 'vcpkg:' to distinguish them
 #   - Fedora and SUSE use -devel suffix for development packages
+#   - ONNX Runtime is installed via apt (Ubuntu), pacman (Manjaro), brew (macOS), or vcpkg (Windows)
 # -----------------------------------------------------------------------------
 declare -A packages
 packages["libcurl4-openssl-dev"]="curl:libcurl-devel:libcurl-devel:curl:curl"
@@ -154,6 +188,7 @@ packages["libtar-dev"]="libtar:libtar-devel:libtar-devel:libtar:vcpkg:libtar"
 packages["libzip-dev"]="libzip:libzip-devel:libzip-devel:libzip:libzip"
 packages["libsndfile1-dev"]="libsndfile:libsndfile-devel:libsndfile-devel:libsndfile:libsndfile"
 packages["libhdf5-dev"]="hdf5:hdf5-devel:hdf5-devel:hdf5:hdf5"
+packages["onnxruntime"]="onnxruntime:onnxruntime:onnxruntime:onnxruntime:vcpkg:onnxruntime"
 
 # -----------------------------------------------------------------------------
 # Pre-Installation Checks
@@ -237,30 +272,43 @@ esac
 # -----------------------------------------------------------------------------
 # Iterates through package list and installs system-specific packages
 # Handles Debian-based, Arch-based, Fedora, SUSE, macOS, and Windows differently
-# Uses vcpkg for specific Windows packages (e.g., libtar)
+# Uses vcpkg for specific Windows packages (e.g., libtar, onnxruntime)
+# Sets ONNXRUNTIME_PATH for supported systems
 # -----------------------------------------------------------------------------
 for ubuntu_pkg in "${!packages[@]}"; do
     IFS=':' read -r arch_pkg fedora_pkg suse_pkg macos_pkg windows_pkg <<< "${packages[$ubuntu_pkg]}"
     case "$SYSTEM" in
         ubuntu|mint)
             check_and_install "$ubuntu_pkg" "apt-get install -y"
+            [[ "$ubuntu_pkg" == "onnxruntime" ]] && install_onnxruntime
             ;;
         arch|manjaro)
             check_and_install "$arch_pkg" "pacman -S --noconfirm"
+            [[ "$ubuntu_pkg" == "onnxruntime" ]] && install_onnxruntime
             ;;
         fedora)
+            if [[ "$ubuntu_pkg" == "onnxruntime" ]]; then
+                echo "ONNX Runtime not available via dnf for Fedora. Please install manually: https://onnxruntime.ai/docs/install/"
+                exit 1
+            fi
             check_and_install "$fedora_pkg" "dnf install -y"
             ;;
         suse)
+            if [[ "$ubuntu_pkg" == "onnxruntime" ]]; then
+                echo "ONNX Runtime not available via zypper for SUSE. Please install manually: https://onnxruntime.ai/docs/install/"
+                exit 1
+            fi
             check_and_install "$suse_pkg" "zypper install -y"
             ;;
         macos)
             check_and_install "$macos_pkg" "brew install"
+            [[ "$ubuntu_pkg" == "onnxruntime" ]] && install_onnxruntime
             ;;
         windows)
             if [[ "$windows_pkg" == vcpkg:* ]]; then
                 vcpkg_pkg="${windows_pkg#vcpkg:}"
                 check_and_install "$vcpkg_pkg" "powershell -NoProfile -ExecutionPolicy Bypass -Command \"cd $VCPKG_ROOT; .\vcpkg install $vcpkg_pkg:x64-windows\""
+                [[ "$ubuntu_pkg" == "onnxruntime" ]] && install_onnxruntime
             else
                 check_and_install "$windows_pkg" "choco install -y"
             fi
@@ -275,6 +323,7 @@ done
 # - Loops to prompt for absolute path to LibTorch until valid
 # - Validates path is absolute and LibTorch exists
 # - Updates CMakeLists.txt with the provided path
+# - Adds ONNX Runtime path to CMakeLists.txt
 # - Runs sudo make install (Linux/macOS) or equivalent on Windows
 # -----------------------------------------------------------------------------
 echo "LibTorch is not available via package managers. Please download and install manually from https://pytorch.org/get-started/locally/"
@@ -349,13 +398,27 @@ fi
 cp "$CMAKELISTS_FILE" "${CMAKELISTS_FILE}.bak"
 echo "Backed up $CMAKELISTS_FILE to ${CMAKELISTS_FILE}.bak"
 
-# Update CMakeLists.txt
+# Update CMakeLists.txt with LibTorch path
 if grep -q "list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/cpp/libtorch/)" "$CMAKELISTS_FILE"; then
     sed -i "s|list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/cpp/libtorch/)|list(APPEND CMAKE_PREFIX_PATH $LIBTORCH_PATH)|" "$CMAKELISTS_FILE"
     echo "Updated CMakeLists.txt with LibTorch path: $LIBTORCH_PATH"
 else
     echo "Warning: Could not find 'list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/cpp/libtorch/)' in $CMAKELISTS_FILE."
-    echo "Please manually add 'list(APPEND CMAKE_PREFIX_PATH $LIBTORCH_PATH)' to $CMAKELISTS_FILE."
+    echo "Adding LibTorch path to CMakeLists.txt."
+    echo "list(APPEND CMAKE_PREFIX_PATH $LIBTORCH_PATH)" >> "$CMAKELISTS_FILE"
+fi
+
+# Update CMakeLists.txt with ONNX Runtime path
+if [[ -n "$ONNXRUNTIME_PATH" ]]; then
+    if grep -q "list(APPEND CMAKE_PREFIX_PATH.*onnxruntime)" "$CMAKELISTS_FILE"; then
+        sed -i "s|list(APPEND CMAKE_PREFIX_PATH.*onnxruntime.*)|list(APPEND CMAKE_PREFIX_PATH $ONNXRUNTIME_PATH)|" "$CMAKELISTS_FILE"
+        echo "Updated CMakeLists.txt with ONNX Runtime path: $ONNXRUNTIME_PATH"
+    else
+        echo "Adding ONNX Runtime path to CMakeLists.txt."
+        echo "list(APPEND CMAKE_PREFIX_PATH $ONNXRUNTIME_PATH)" >> "$CMAKELISTS_FILE"
+    fi
+else
+    echo "Warning: ONNX Runtime path not set. Please manually add it to CMakeLists.txt if required."
 fi
 
 # Run make install (Linux/macOS) or build on Windows
