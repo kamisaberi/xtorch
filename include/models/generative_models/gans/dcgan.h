@@ -20,9 +20,11 @@ namespace xt::models
 
         struct Generator : torch::nn::Module
         {
+        public:
             Generator(int nz, int ngf, int nc);
             torch::Tensor forward(torch::Tensor x);
 
+        private:
             torch::nn::ConvTranspose2d conv1, conv2, conv3, conv4, conv5;
             torch::nn::BatchNorm2d bn1, bn2, bn3, bn4;
         };
