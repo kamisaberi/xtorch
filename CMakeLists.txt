@@ -122,6 +122,7 @@ find_package(OpenSSL REQUIRED)        # Cryptography and SSL/TLS
 find_package(LibLZMA REQUIRED)        # LZMA compression
 find_package(LibArchive REQUIRED)     # Multi-format archive library
 find_package(SndFile REQUIRED)        # Audio file handling
+find_package(onnxruntime REQUIRED)
 #find_package(SndFile REQUIRED
 #        PATHS /usr/lib/x86_64-linux-gnu/cmake
 #        /usr/local/lib/cmake
@@ -146,7 +147,12 @@ target_include_directories(xTorch
 target_link_libraries(xTorch
         ${TORCH_LIBRARIES} ${CURL_LIBRARIES} ${OpenCV_LIBS} ${ZLIB_LIBRARIES}
         ${LIBTAR_LIBRARY} OpenSSL::SSL OpenSSL::Crypto LibLZMA::LibLZMA
-        ${LibArchive_LIBRARIES} ${SndFile_LIBRARIES})
+        ${LibArchive_LIBRARIES} ${SndFile_LIBRARIES}
+        ${ONNXRUNTIME_LIBRARY}
+
+
+
+)
 
 # Optional CUDA paths (commented out by default)
 list(APPEND DCUDA_TOOLKIT_ROOT_DIR /opt/cuda)
