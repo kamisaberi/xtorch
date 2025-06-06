@@ -33,9 +33,11 @@ namespace xt::models
         // Discriminator Network
         struct Discriminator : torch::nn::Module
         {
+        public:
             Discriminator(int nc, int ndf);
             torch::Tensor forward(torch::Tensor x);
 
+        private:
             torch::nn::Conv2d conv1, conv2, conv3, conv4, conv5;
             torch::nn::BatchNorm2d bn1, bn2, bn3;
         };
