@@ -342,56 +342,56 @@ using namespace std;
 
 
 
-#pragma once
-#include <torch/torch.h>
-#include <vector>
-#include <cmath>
-#include <numeric>   // For std::iota
-#include <algorithm> // For std::reverse, std::round
-
-class DDIMSchedulerCpp {
-public:
-    int num_train_timesteps_;
-    torch::Tensor alphas_cumprod_;
-    std::vector<int64_t> timesteps_; // Using int64_t for timesteps
-    int num_inference_steps_ = 0;
-
-    DDIMSchedulerCpp(int train_steps = 1000, double beta_start = 0.00085, double beta_end = 0.012)
-        : num_train_timesteps_(train_steps) {
-        torch::Tensor betas = torch::linspace(beta_start, beta_end, num_train_timesteps_, torch::kFloat64);
-        torch::Tensor alphas = 1.0 - betas;
-        alphas_cumprod_ = torch::cumprod(alphas, 0).to(torch::kFloat32);
-    }
-
-    void set_timesteps(int inference_steps) {
-        num_inference_steps_ = inference_steps;
-        timesteps_.resize(num_inference_steps_);
-        double step_ratio = static_cast<double>(num_train_timesteps_) / num_inference_steps_;
-        for (int i = 0; i < num_inference_steps_; ++i) {
-            timesteps_[i] = static_cast<int64_t>(std::round((num_inference_steps_ - 1 - i) * step_ratio));
-        }
-    }
-
-    torch::Tensor get_alpha_prod_t(int64_t t) {
-        if (t < 0) return torch::tensor({1.0f}, alphas_cumprod_.options());
-        return alphas_cumprod_.index({torch::tensor({t}, torch::kLong)}); // Index with tensor
-    }
-
-    torch::Tensor step(torch::Tensor model_output, int64_t timestep_idx, torch::Tensor sample, double eta = 0.0) {
-        int64_t t = timesteps_[timestep_idx];
-        int64_t prev_t = (timestep_idx + 1 < timesteps_.size()) ? timesteps_[timestep_idx + 1] : -1;
-
-        torch::Tensor alpha_prod_t = get_alpha_prod_t(t);
-        torch::Tensor alpha_prod_t_prev = get_alpha_prod_t(prev_t);
-        torch::Tensor pred_epsilon = model_output;
-        torch::Tensor pred_original_sample = (sample - torch::sqrt(1.0 - alpha_prod_t) * pred_epsilon) / torch::sqrt(alpha_prod_t);
-        torch::Tensor pred_sample_direction = torch::sqrt(1.0 - alpha_prod_t_prev) * pred_epsilon;
-        torch::Tensor prev_sample = torch::sqrt(alpha_prod_t_prev) * pred_original_sample + pred_sample_direction;
-        if (eta > 0) { /* Add noise term based on variance, simplified here */ }
-        return prev_sample;
-    }
-};
-
+// #pragma once
+// #include <torch/torch.h>
+// #include <vector>
+// #include <cmath>
+// #include <numeric>   // For std::iota
+// #include <algorithm> // For std::reverse, std::round
+//
+// class DDIMSchedulerCpp {
+// public:
+//     int num_train_timesteps_;
+//     torch::Tensor alphas_cumprod_;
+//     std::vector<int64_t> timesteps_; // Using int64_t for timesteps
+//     int num_inference_steps_ = 0;
+//
+//     DDIMSchedulerCpp(int train_steps = 1000, double beta_start = 0.00085, double beta_end = 0.012)
+//         : num_train_timesteps_(train_steps) {
+//         torch::Tensor betas = torch::linspace(beta_start, beta_end, num_train_timesteps_, torch::kFloat64);
+//         torch::Tensor alphas = 1.0 - betas;
+//         alphas_cumprod_ = torch::cumprod(alphas, 0).to(torch::kFloat32);
+//     }
+//
+//     void set_timesteps(int inference_steps) {
+//         num_inference_steps_ = inference_steps;
+//         timesteps_.resize(num_inference_steps_);
+//         double step_ratio = static_cast<double>(num_train_timesteps_) / num_inference_steps_;
+//         for (int i = 0; i < num_inference_steps_; ++i) {
+//             timesteps_[i] = static_cast<int64_t>(std::round((num_inference_steps_ - 1 - i) * step_ratio));
+//         }
+//     }
+//
+//     torch::Tensor get_alpha_prod_t(int64_t t) {
+//         if (t < 0) return torch::tensor({1.0f}, alphas_cumprod_.options());
+//         return alphas_cumprod_.index({torch::tensor({t}, torch::kLong)}); // Index with tensor
+//     }
+//
+//     torch::Tensor step(torch::Tensor model_output, int64_t timestep_idx, torch::Tensor sample, double eta = 0.0) {
+//         int64_t t = timesteps_[timestep_idx];
+//         int64_t prev_t = (timestep_idx + 1 < timesteps_.size()) ? timesteps_[timestep_idx + 1] : -1;
+//
+//         torch::Tensor alpha_prod_t = get_alpha_prod_t(t);
+//         torch::Tensor alpha_prod_t_prev = get_alpha_prod_t(prev_t);
+//         torch::Tensor pred_epsilon = model_output;
+//         torch::Tensor pred_original_sample = (sample - torch::sqrt(1.0 - alpha_prod_t) * pred_epsilon) / torch::sqrt(alpha_prod_t);
+//         torch::Tensor pred_sample_direction = torch::sqrt(1.0 - alpha_prod_t_prev) * pred_epsilon;
+//         torch::Tensor prev_sample = torch::sqrt(alpha_prod_t_prev) * pred_original_sample + pred_sample_direction;
+//         if (eta > 0) { /* Add noise term based on variance, simplified here */ }
+//         return prev_sample;
+//     }
+// };
+//
 
 
 
