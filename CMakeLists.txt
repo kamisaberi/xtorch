@@ -24,6 +24,44 @@ if (NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
     message(STATUS "Setting default build type to: ${CMAKE_BUILD_TYPE}")
 endif ()
 
+if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
+    set(CMAKE_TOOLCHAIN_FILE "C:/vcpkg/scripts/buildsystems/vcpkg.cmake" CACHE STRING "Vcpkg toolchain file")
+    list(APPEND CMAKE_PREFIX_PATH "C:/vcpkg/installed/x64-windows")
+endif()
+
+## Find ONNX Runtime GPU
+#find_package(onnxruntime CONFIG)
+#if(onnxruntime_FOUND)
+#    message(STATUS "ONNX Runtime GPU found: ${onnxruntime_LIBRARIES}, ${onnxruntime_INCLUDE_DIRS}")
+#else()
+#    message(WARNING "ONNX Runtime config not found, trying manual search")
+#    find_library(ONNXRUNTIME_LIBRARY
+#            NAMES onnxruntime
+#            PATHS "C:/vcpkg/installed/x64-windows/lib"
+#    )
+#    find_path(ONNXRUNTIME_INCLUDE_DIR
+#            NAMES onnxruntime_c_api.h
+#            PATHS "C:/vcpkg/installed/x64-windows/include"
+#    )
+#    if(ONNXRUNTIME_LIBRARY AND ONNXRUNTIME_INCLUDE_DIR)
+#        message(STATUS "ONNX Runtime GPU found manually: ${ONNXRUNTIME_LIBRARY}, ${ONNXRUNTIME_INCLUDE_DIR}")
+#        add_library(onnxruntime SHARED IMPORTED)
+#        set_target_properties(onnxruntime PROPERTIES
+#                IMPORTED_LOCATION "${ONNXRUNTIME_LIBRARY}"
+#                INTERFACE_INCLUDE_DIRECTORIES "${ONNXRUNTIME_INCLUDE_DIR}"
+#        )
+#    else()
+#        message(FATAL_ERROR "ONNX Runtime GPU not found")
+#    endif()
+#endif()
+
+#
+## Set architecture to x64 (equivalent to -A x64)
+#if(WIN32)
+#    set(CMAKE_GENERATOR_PLATFORM x64 CACHE STRING "" FORCE)
+#endif()
+#
+
 # =============================================================================
 # Source File Collection
 # =============================================================================
@@ -99,7 +137,7 @@ set_target_properties(xTorch PROPERTIES
 # =============================================================================
 # Add custom library paths (LibTorch)
 
-list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/cpp/libtorch/)
+#list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/cpp/libtorch/)
 if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
     list(APPEND CMAKE_PREFIX_PATH E:/LIBRARIES/cpp/libtorch)
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
@@ -112,6 +150,8 @@ endif()
 
 #list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/cpp/libtorch/)
 
+#set(onnxruntime_gpu_DIR "C:/vcpkg/installed/x64-windows/share/onnxruntime-gpu")
+
 
 # Find required dependencies
 find_package(Torch REQUIRED)          # PyTorch C++ API
@@ -122,7 +162,10 @@ find_package(OpenSSL REQUIRED)        # Cryptography and SSL/TLS
 find_package(LibLZMA REQUIRED)        # LZMA compression
 find_package(LibArchive REQUIRED)     # Multi-format archive library
 find_package(SndFile REQUIRED)        # Audio file handling
-find_package(onnxruntime REQUIRED)
+#find_package(onnxruntime-gpu REQUIRED)
+#find_package(libtar REQUIRED)
+find_package(libarchive REQUIRED)
+
 #find_package(SndFile REQUIRED
 #        PATHS /usr/lib/x86_64-linux-gnu/cmake
 #        /usr/local/lib/cmake
@@ -141,7 +184,9 @@ target_include_directories(xTorch
         $<INSTALL_INTERFACE:include>
         ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS}
         ${ZLIB_INCLUDE_DIRS} ${CURL_INCLUDE_DIR}
-        ${LibArchive_INCLUDE_DIRS} ${SndFile_INCLUDE_DIRS})
+        ${LibArchive_INCLUDE_DIRS} ${SndFile_INCLUDE_DIRS}
+        ${onnxruntime_INCLUDE_DIRS}
+)
 
 # Link all required libraries to xTorch
 target_link_libraries(xTorch
@@ -149,6 +194,8 @@ target_link_libraries(xTorch
         ${LIBTAR_LIBRARY} OpenSSL::SSL OpenSSL::Crypto LibLZMA::LibLZMA
         ${LibArchive_LIBRARIES} ${SndFile_LIBRARIES}
         ${ONNXRUNTIME_LIBRARY}
+#        ${onnxruntime_LIBRARIES}
+#        onnxruntime-gpu::onnxruntime-gpu
 
 
 
