@@ -394,6 +394,86 @@ using namespace std;
 //
 
 
+#include "unet_model.h"
+#include "vae_model.h"
+#include "text_encoder_model.h"
+#include "scheduler.h"
+#include <iostream>
+#include <opencv2/opencv.hpp> // For image saving
+
+// Function to save tensor as image (from previous examples)
+void save_image_tensor_cpp_main(torch::Tensor tensor, const std::string& file_path) {
+    tensor = tensor.add(1.0).div(2.0).mul(255.0).clamp(0, 255).to(torch::kU8);
+    tensor = tensor.permute({1, 2, 0}).contiguous();
+    cv::Mat img_mat(tensor.size(0), tensor.size(1), CV_8UC3, tensor.data_ptr<uchar>());
+    cv::cvtColor(img_mat, img_mat, cv::COLOR_RGB2BGR);
+    if (!cv::imwrite(file_path, img_mat)) {
+        std::cerr << "Error: Could not save image to " << file_path << std::endl;
+    } else { std::cout << "Saved image to " << file_path << std::endl; }
+}
+
+// !!! CRITICAL MISSING PIECE: WEIGHT LOADING FROM FILE (e.g., .safetensors or .pth) !!!
+// This is a complex C++ task involving parsing binary files and mapping tensor names.
+// For this example, models will have random weights.
+// Example: void load_weights(torch::nn::Module& model, const std::string& path_to_weights_file);
+
+int main() {
+    torch::Device device = torch::cuda::is_available() ? torch::kCUDA : torch::kCPU;
+    std::cout << "Using device: " << device << std::endl;
+
+    // --- Instantiate Models (Random Weights) ---
+    int latent_channels = 4, image_channels = 3;
+    SimplifiedUNet unet(latent_channels, latent_channels); unet->to(device).eval();
+    SimplifiedVAEDecoder vae_decoder(latent_channels, image_channels); vae_decoder->to(device).eval();
+    SimpleCppTokenizer tokenizer;
+    SimplifiedTextEncoder text_encoder; text_encoder->to(device).eval();
+    std::cout << "Models instantiated (random weights)." << std::endl;
+    // --- Load Weights Here (NOT IMPLEMENTED) ---
+
+    // --- Inference Params ---
+    std::string prompt = "a cat"; std::string neg_prompt = "";
+    int num_steps = 10; double cfg_scale = 7.5; // Fewer steps for quick test
+    int H = 128, W = 128; // Smaller for test
+    int latent_H = H / 8, latent_W = W / 8; // Assuming 8x VAE downsampling
+    double vae_scale = 0.18215;
+
+    // --- Text Embeddings ---
+    auto prompt_ids_vec = tokenizer.encode(prompt);
+    auto neg_ids_vec = tokenizer.encode(neg_prompt);
+    torch::Tensor prompt_ids = torch::tensor(prompt_ids_vec, torch::kLong).unsqueeze(0).to(device);
+    torch::Tensor neg_ids = torch::tensor(neg_ids_vec, torch::kLong).unsqueeze(0).to(device);
+    torch::Tensor text_input_ids = torch::cat({neg_ids, prompt_ids}, 0);
+    torch::Tensor text_embeds;
+    { torch::NoGradGuard no_grad; text_embeds = text_encoder->forward(text_input_ids); }
+
+    // --- Scheduler & Latents ---
+    DDIMSchedulerCpp scheduler; scheduler.set_timesteps(num_steps);
+    torch::Tensor latents = torch::randn({1, latent_channels, latent_H, latent_W}, device);
+
+    // --- Denoising Loop ---
+    std::cout << "Starting denoising loop..." << std::endl;
+    for (int i = 0; i < num_steps; ++i) {
+        int64_t ts_val = scheduler.timesteps_[i];
+        torch::Tensor t = torch::tensor({ts_val}, torch::kLong).to(device).repeat({2}); // For CFG batch
+
+        torch::Tensor latent_model_input = torch::cat({latents, latents}, 0);
+        torch::Tensor noise_pred_batch;
+        { torch::NoGradGuard no_grad; noise_pred_batch = unet->forward(latent_model_input, t, text_embeds); }
+
+        auto noise_slices = noise_pred_batch.chunk(2, 0);
+        torch::Tensor noise_pred = noise_slices[0] + cfg_scale * (noise_slices[1] - noise_slices[0]);
+        latents = scheduler.step(noise_pred, i, latents);
+        std::cout << "Step " << i + 1 << "/" << num_steps << " (ts " << ts_val << ")" << std::endl;
+    }
+
+    // --- Decode & Save ---
+    latents = latents / vae_scale;
+    torch::Tensor image_tensor;
+    { torch::NoGradGuard no_grad; image_tensor = vae_decoder->forward(latents); }
+    save_image_tensor_cpp_main(image_tensor.squeeze(0).detach().cpu(), "sd_cpp_scratch_out.png");
+    std::cout << "C++ 'from scratch' (conceptual) SD finished (output is random noise)." << std::endl;
+    return 0;
+}
 
 
 
