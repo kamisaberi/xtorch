@@ -43,6 +43,6 @@ namespace xt::losses
 
     auto DualSoftmaxLoss::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return xt::losses::dual_softmax_loss(torch::zeros(10));
+        return xt::losses::dual_softmax_loss(torch::zeros(10),torch::zeros(10),torch::zeros(10));
     }
 }
