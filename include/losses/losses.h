@@ -22,7 +22,7 @@
 #include "happier_loss.h"
 #include "hbm_loss.h"
 #include "info_nce_loss.h"
-#include "lovasz_softmax.h"
+#include "lovasz_softmax_loss.h"
 #include "metrix.h"
 #include "multi_loss.h"
 #include "nt_xent.h"
