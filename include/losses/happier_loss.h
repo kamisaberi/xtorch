@@ -4,11 +4,11 @@
 
 namespace xt::losses
 {
-    torch::Tensor happier(torch::Tensor x);
-    class HAPPIER : xt::Module
+    torch::Tensor happier_loss(torch::Tensor x);
+    class HAPPIERLoss : xt::Module
     {
     public:
-        HAPPIER() = default;
+        HAPPIERLoss() = default;
         auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
 
 
