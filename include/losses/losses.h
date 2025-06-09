@@ -12,7 +12,7 @@
 #include "dynamic_smooth_l1_loss.h"
 #include "early_exiting_loss.h"
 #include "elastic_face.h"
-#include "flip.h"
+#include "flip_loss.h"
 #include "focal_loss.h"
 #include "gan_hinge_loss.h"
 #include "gan_least_squares_loss.h"
