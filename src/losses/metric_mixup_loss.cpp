@@ -1,4 +1,4 @@
-#include "include/losses/metrix.h"
+#include "include/losses/metric_mixup_loss.h"
 
 namespace xt::losses
 {
@@ -13,13 +13,10 @@ namespace xt::losses
  * @param eps Small value for numerical stability, default: 1e-6
  * @return Scalar tensor containing the Metric Mixup Loss
  */
-    torch::Tensor metric_mixup_loss(
-        const torch::Tensor& embeddings,
-        const torch::Tensor& labels,
-        float margin = 1.0,
-        float alpha = 1.0,
-        const torch::Tensor& class_weights = torch::Tensor(),
-        float eps = 1e-6)
+    torch::Tensor metric_mixup_loss(const torch::Tensor& embeddings, const torch::Tensor& labels, float margin = 1.0,
+                                    float alpha = 1.0,
+                                    const torch::Tensor& class_weights = torch::Tensor(),
+                                    float eps = 1e-6)
     {
         // Ensure inputs are on the same device
         auto device = embeddings.device();
@@ -88,7 +85,8 @@ namespace xt::losses
         // Shape: [batch_size, batch_size]
 
         // Mask to exclude self-comparisons (diagonal)
-        torch::Tensor mask = torch::ones_like(label_similarities) - torch::eye(batch_size, torch::TensorOptions().device(device));
+        torch::Tensor mask = torch::ones_like(label_similarities) - torch::eye(
+            batch_size, torch::TensorOptions().device(device));
 
         // Compute positive pair loss (minimize distance for similar labels)
         torch::Tensor pos_mask = (label_similarities > 0.5).to(torch::kFloat); // Threshold for positive pairs
@@ -116,8 +114,8 @@ namespace xt::losses
         return loss;
     }
 
-    auto Metrix::forward(std::initializer_list<std::any> tensors) -> std::any
+    auto MetricMixupLoss::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return xt::losses::metrix(torch::zeros(10));
+        return xt::losses::metric_mixup_loss(torch::zeros(10), torch::zeros(10));
     }
 }
