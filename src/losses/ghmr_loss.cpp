@@ -43,7 +43,7 @@ namespace xt::losses
         // Avoid division by zero in bin_width
         if (bin_width.item<float>() < eps)
         {
-            bin_width = torch::tensor(eps, device = device);
+            bin_width = torch::tensor(eps, torch::TensorOptions().device(device));
         }
 
         // Compute bin indices
@@ -51,14 +51,14 @@ namespace xt::losses
         bin_indices = torch::clamp(bin_indices, 0, bins - 1);
 
         // Compute gradient density (number of samples per bin)
-        torch::Tensor bin_counts = torch::zeros({bins}, device = device);
+        torch::Tensor bin_counts = torch::zeros({bins}, torch::TensorOptions().device(device));
         bin_counts.scatter_add_(0, bin_indices, torch::ones_like(bin_indices, torch::kFloat));
 
         // Apply momentum to smooth bin counts (simulate running average)
-        static torch::Tensor running_bin_counts = torch::zeros({bins}, device = device);
+        static torch::Tensor running_bin_counts = torch::zeros({bins}, torch::TensorOptions().device(device));
         if (running_bin_counts.device() != device)
         {
-            running_bin_counts = torch::zeros({bins}, device = device);
+            running_bin_counts = torch::zeros({bins}, torch::TensorOptions().device(device));
         }
         running_bin_counts = momentum * running_bin_counts + (1.0 - momentum) * bin_counts;
         running_bin_counts = running_bin_counts.clamp_min(eps);
