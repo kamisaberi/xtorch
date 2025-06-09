@@ -19,7 +19,7 @@
 #include "generalized_focal_loss.h"
 #include "ghmc_loss.h"
 #include "ghmr_loss.h"
-#include "happier.h"
+#include "happier_loss.h"
 #include "hbm_loss.h"
 #include "info_nce.h"
 #include "lovasz_softmax.h"
