@@ -1,4 +1,4 @@
-#include "include/losses/lovasz_softmax.h"
+#include "include/losses/lovasz_softmax_loss.h"
 
 namespace xt::losses
 {
@@ -35,7 +35,7 @@ namespace xt::losses
         }
 
         int batch_size = logits.size(0);
-        int num_classes = logits.size(1);
+        const int num_classes = logits.size(1);
         int height = logits.size(2);
         int width = logits.size(3);
 
@@ -99,8 +99,8 @@ namespace xt::losses
         return loss;
     }
 
-    auto LovaszSoftmax::forward(std::initializer_list<std::any> tensors) -> std::any
+    auto LovaszSoftmaxLoss::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return xt::losses::lovasz_softmax(torch::zeros(10));
+        return xt::losses::lovasz_softmax_loss(torch::zeros(10), torch::zeros(10));
     }
 }
