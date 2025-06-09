@@ -1,4 +1,4 @@
-#include "include/losses/oa_loss.h"
+#include "include/losses/object_aware_loss.h"
 
 namespace xt::losses
 {
@@ -33,6 +33,6 @@ namespace xt::losses
 
     auto ObjectAwareLoss::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return xt::losses::object_aware_loss(torch::zeros(10));
+        return xt::losses::object_aware_loss(torch::zeros(10), torch::zeros(10), torch::zeros(10));
     }
 }
