@@ -11,11 +11,8 @@ namespace xt::losses
      * @param eps Small value for numerical stability, default: 1e-6
      * @return Scalar tensor containing the InfoNCE Loss
      */
-    torch::Tensor info_nce_loss(
-        const torch::Tensor& embeddings1,
-        const torch::Tensor& embeddings2,
-        float temperature = 0.1,
-        float eps = 1e-6)
+    torch::Tensor info_nce_loss(const torch::Tensor& embeddings1, const torch::Tensor& embeddings2,
+                                float temperature = 0.1, float eps = 1e-6)
     {
         // Ensure inputs are on the same device
         auto device = embeddings1.device();
@@ -59,6 +56,6 @@ namespace xt::losses
 
     auto InfoNCELoss::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return xt::losses::info_nce_loss(torch::zeros(10));
+        return xt::losses::info_nce_loss(torch::zeros(10), torch::zeros(10));
     }
 }
