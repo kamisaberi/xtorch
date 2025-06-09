@@ -23,7 +23,7 @@
 #include "hbm_loss.h"
 #include "info_nce_loss.h"
 #include "lovasz_softmax_loss.h"
-#include "metrix.h"
+#include "metric_mixup_loss.h"
 #include "multi_loss.h"
 #include "nt_xent.h"
 #include "oa_loss.h"
