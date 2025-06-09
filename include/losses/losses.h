@@ -1,10 +1,10 @@
 #pragma once
 
 #include "adaptive_loss.h"
-#include "arc_face.h"
+#include "arcface_loss.h"
 #include "balanced_l1_loss.h"
 #include "cycle_consistency_loss.h"
-#include "dhel.h"
+#include "dhel_loss.h"
 #include "dice_loss.h"
 #include "dice_bce_loss.h"
 #include "dsam_loss.h"
