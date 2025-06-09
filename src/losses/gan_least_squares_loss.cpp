@@ -38,6 +38,6 @@ namespace xt::losses
 
     auto GANLeastSquaresLoss::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return xt::losses::gan_least_squares_loss(torch::zeros(10));
+        return xt::losses::gan_least_squares_loss(torch::zeros(10), torch::zeros(10), "generator");
     }
 }
