@@ -12,13 +12,10 @@ namespace xt::losses
      * @param eps Small value for numerical stability, default: 1e-6
      * @return Scalar tensor containing the GHM-R Loss
      */
-    torch::Tensor ghmr_loss(
-        const torch::Tensor& predictions,
-        const torch::Tensor& targets,
-        int bins = 10,
-        float momentum = 0.9,
-        float beta = 0.1,
-        float eps = 1e-6)
+    torch::Tensor ghmr_loss(const torch::Tensor& predictions, const torch::Tensor& targets, int bins = 10,
+                            float momentum = 0.9,
+                            float beta = 0.1,
+                            float eps = 1e-6)
     {
         // Ensure inputs are on the same device
         auto device = predictions.device();
@@ -85,6 +82,6 @@ namespace xt::losses
 
     auto GHMRLoss::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return xt::losses::ghm_r(torch::zeros(10));
+        return xt::losses::ghmr_loss(torch::zeros(10), torch::zeros(10));
     }
 }
