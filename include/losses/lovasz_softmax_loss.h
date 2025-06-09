@@ -4,11 +4,11 @@
 
 namespace xt::losses
 {
-    torch::Tensor lovasz_softmax(torch::Tensor x);
-    class LovaszSoftmax : xt::Module
+    torch::Tensor lovasz_softmax_loss(torch::Tensor x);
+    class LovaszSoftmaxLoss : xt::Module
     {
     public:
-        LovaszSoftmax() = default;
+        LovaszSoftmaxLoss() = default;
         auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
 
 
