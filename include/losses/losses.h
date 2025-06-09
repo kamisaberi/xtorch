@@ -25,7 +25,7 @@
 #include "lovasz_softmax_loss.h"
 #include "metric_mixup_loss.h"
 #include "multi_loss.h"
-#include "nt_xent.h"
+#include "nt_xent_loss.h"
 #include "oa_loss.h"
 #include "piou_loss.h"
 #include "proxy_anchor_loss.h"

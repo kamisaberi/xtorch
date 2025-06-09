@@ -1,4 +1,4 @@
-#include "include/losses/nt_xent.h"
+#include "include/losses/nt_xent_loss.h"
 
 namespace xt::losses
 {
@@ -46,8 +46,8 @@ namespace xt::losses
         return loss;
     }
 
-    auto NTXent::forward(std::initializer_list<std::any> tensors) -> std::any
+    auto NTXentLoss::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return xt::losses::nt_xent(torch::zeros(10));
+        return xt::losses::nt_xent_loss(torch::zeros(10),torch::zeros(10));
     }
 }

@@ -4,11 +4,11 @@
 
 namespace xt::losses
 {
-    torch::Tensor nt_xent(torch::Tensor x);
-    class NTXent : xt::Module
+    torch::Tensor nt_xent_loss(torch::Tensor x);
+    class NTXentLoss : xt::Module
     {
     public:
-        NTXent() = default;
+        NTXentLoss() = default;
         auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
 
     private:
