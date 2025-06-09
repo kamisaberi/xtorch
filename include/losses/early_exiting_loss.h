@@ -4,11 +4,11 @@
 
 namespace xt::losses
 {
-    torch::Tensor early_exiting(torch::Tensor x);
-    class EarlyExiting : xt::Module
+    torch::Tensor early_exiting_loss(torch::Tensor x);
+    class EarlyExitingLoss : xt::Module
     {
     public:
-        EarlyExiting() = default;
+        EarlyExitingLoss() = default;
         auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
 
 
