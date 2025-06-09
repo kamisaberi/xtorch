@@ -1,14 +1,14 @@
-#include "include/losses/flip.h"
+#include "include/losses/flip_loss.h"
 
 namespace xt::losses
 {
-    torch::Tensor flip(torch::Tensor x)
+    torch::Tensor flip_loss(torch::Tensor x)
     {
         return torch::zeros(10);
     }
 
-    auto FLIP::forward(std::initializer_list<std::any> tensors) -> std::any
+    auto FLIPLoss::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return xt::losses::flip(torch::zeros(10));
+        return xt::losses::flip_loss(torch::zeros(10));
     }
 }
