@@ -4,11 +4,11 @@
 
 namespace xt::losses
 {
-    torch::Tensor oa_loss(torch::Tensor x);
-    class OALoss : xt::Module
+    torch::Tensor object_aware_loss(torch::Tensor x);
+    class ObjectAwareLoss : xt::Module
     {
     public:
-        OALoss() = default;
+        ObjectAwareLoss() = default;
         auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
 
     private:
