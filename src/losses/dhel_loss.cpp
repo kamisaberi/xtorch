@@ -1,13 +1,13 @@
-#include "include/losses/dhel.h"
+#include "include/losses/dhel_loss.h"
 
 namespace xt::losses
 {
-    torch::Tensor dhel(torch::Tensor x)
+    torch::Tensor dhel_loss(torch::Tensor x)
     {
         return torch::zeros(10);
     }
 
-    auto DHEL::forward(std::initializer_list<std::any> tensors) -> std::any
+    auto DHELLoss::forward(std::initializer_list<std::any> tensors) -> std::any
     {
         return xt::losses::dhel(torch::zeros(10));
     }
