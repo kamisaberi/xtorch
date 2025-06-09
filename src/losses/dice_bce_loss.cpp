@@ -3,7 +3,7 @@
 namespace xt::losses
 {
 
-    torch::Tensor dice_loss(const torch::Tensor& input, const torch::Tensor& target, float smooth = 1.0f) {
+    torch::Tensor dice_bce_loss(const torch::Tensor& input, const torch::Tensor& target, float smooth = 1.0f) {
         // Ensure input and target have the same shape
         TORCH_CHECK(input.sizes() == target.sizes(), "Input and target must have the same shape");
         TORCH_CHECK(input.dtype() == torch::kFloat, "Input must be float type");
@@ -25,8 +25,8 @@ namespace xt::losses
     }
 
 
-    auto DiceLoss::forward(std::initializer_list<std::any> tensors) -> std::any
+    auto DiceBCELoss::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return xt::losses::dice_loss(torch::zeros(10) , torch::zeros(10));
+        return xt::losses::dice_bce_loss(torch::zeros(10) , torch::zeros(10));
     }
 }

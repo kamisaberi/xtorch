@@ -6,6 +6,7 @@
 #include "cycle_consistency_loss.h"
 #include "dhel.h"
 #include "dice_loss.h"
+#include "dice_bce_loss.h"
 #include "dsam_loss.h"
 #include "dual_softmax_loss.h"
 #include "dynamic_smooth_l1_loss.h"
