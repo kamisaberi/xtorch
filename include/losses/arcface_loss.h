@@ -4,12 +4,12 @@
 
 namespace xt::losses
 {
-    torch::Tensor arc_Face(torch::Tensor x);
+    torch::Tensor arcface_loss(torch::Tensor x);
 
     class ArcFace : xt::Module
     {
     public:
-        ArcFace() = default;
+        ArcFaceLoss() = default;
         auto forward(std::initializer_list<std::any> tensors) -> std::any override;
 
     private:
