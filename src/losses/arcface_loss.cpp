@@ -1,8 +1,8 @@
-#include "include/losses/arc_face.h"
+#include "include/losses/arcface_loss.h"
 
 namespace xt::losses
 {
-    torch::Tensor arc_Face(const torch::Tensor& features, const torch::Tensor& labels, const torch::Tensor& weights,
+    torch::Tensor arcface_loss(const torch::Tensor& features, const torch::Tensor& labels, const torch::Tensor& weights,
                                float s = 30.0f, float m = 0.5f)
     {
         // Ensure inputs are valid
@@ -51,8 +51,8 @@ namespace xt::losses
         return torch::nn::functional::cross_entropy(logits, labels);
     }
 
-    auto ArcFace::forward(std::initializer_list<std::any> tensors) -> std::any
+    auto ArcFaceLoss::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return xt::losses::arc_Face(torch::zeros(10), torch::zeros(10), torch::zeros(10));
+        return xt::losses::arcface_loss(torch::zeros(10), torch::zeros(10), torch::zeros(10));
     }
 }
