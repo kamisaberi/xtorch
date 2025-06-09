@@ -21,7 +21,7 @@
 #include "ghmr_loss.h"
 #include "happier_loss.h"
 #include "hbm_loss.h"
-#include "info_nce.h"
+#include "info_nce_loss.h"
 #include "lovasz_softmax.h"
 #include "metrix.h"
 #include "multi_loss.h"
