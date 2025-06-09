@@ -1,4 +1,4 @@
-#include "include/losses/happier.h"
+#include "include/losses/happier_loss.h"
 
 namespace xt::losses
 {
@@ -12,12 +12,10 @@ namespace xt::losses
      * @param eps Small value for numerical stability, default: 1e-6
      * @return Scalar tensor containing the HAPPIER Loss
      */
-    torch::Tensor happier_loss(
-        const torch::Tensor& similarities,
-        const torch::Tensor& labels,
-        const torch::Tensor& hierarchy_weights = torch::Tensor(),
-        float tau = 1.0,
-        float eps = 1e-6)
+    torch::Tensor happier_loss(const torch::Tensor& similarities, const torch::Tensor& labels,
+                               const torch::Tensor& hierarchy_weights = torch::Tensor(),
+                               float tau = 1.0,
+                               float eps = 1e-6)
     {
         // Ensure inputs are on the same device
         auto device = similarities.device();
@@ -53,7 +51,8 @@ namespace xt::losses
         torch::Tensor rank_scores = torch::sigmoid(similarities / tau);
 
         // Mask to exclude self-comparisons (diagonal)
-        torch::Tensor mask = torch::ones_like(similarities) - torch::eye(batch_size, torch::TensorOptions().device(device));
+        torch::Tensor mask = torch::ones_like(similarities) - torch::eye(
+            batch_size, torch::TensorOptions().device(device));
 
         // Compute positive and negative contributions
         torch::Tensor pos_scores = rank_scores * label_matches * mask;
@@ -73,8 +72,8 @@ namespace xt::losses
         return loss;
     }
 
-    auto HAPPIER::forward(std::initializer_list<std::any> tensors) -> std::any
+    auto HAPPIERLoss::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return xt::losses::happier(torch::zeros(10));
+        return xt::losses::happier_loss(torch::zeros(10), torch::zeros(10));
     }
 }
