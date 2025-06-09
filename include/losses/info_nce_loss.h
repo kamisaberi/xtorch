@@ -4,11 +4,11 @@
 
 namespace xt::losses
 {
-    torch::Tensor info_nce(torch::Tensor x);
-    class InfoNCE : xt::Module
+    torch::Tensor info_nce_loss(torch::Tensor x);
+    class InfoNCELoss : xt::Module
     {
     public:
-        InfoNCE() = default;
+        InfoNCELoss() = default;
         auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
 
     private:
