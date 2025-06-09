@@ -1,4 +1,4 @@
-#include "include/losses/early_exiting.h"
+#include "include/losses/early_exiting_loss.h"
 
 namespace xt::losses
 {
@@ -51,7 +51,7 @@ namespace xt::losses
         return total_loss;
     }
 
-    auto EarlyExiting::forward(std::initializer_list<std::any> tensors) -> std::any
+    auto EarlyExitingLoss::forward(std::initializer_list<std::any> tensors) -> std::any
     {
         const std::vector<torch::Tensor>& exit_logits = {torch::zeros(10)};
         const std::vector<float>& weights = {0.2f};
