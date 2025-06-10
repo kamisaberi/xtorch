@@ -3,7 +3,7 @@
 #include "common.h"
 
 namespace xt::activations {
-    torch::Tensor smooth_step(torch::Tensor x);
+    torch::Tensor smooth_step(const torch::Tensor& x, double edge0 = 0.0, double edge1 = 1.0);
 
     struct SmoothStep : xt::Module {
     public:
