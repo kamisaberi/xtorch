@@ -1,4 +1,4 @@
-#include "include/losses/uf_loss.h"
+#include "include/losses/unsupervised_feature_loss.h"
 
 namespace xt::losses
 {
