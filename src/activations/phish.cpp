@@ -2,7 +2,7 @@
 
 namespace xt::activations
 {
-    torch::Tensor phish(const torch::Tensor& x, double a = 1.0, double b = 1.0)
+    torch::Tensor phish(const torch::Tensor& x, double a, double b )
     {
         return x * torch::tanh(a * x) + b * x * (1.0 - torch::sigmoid(x));
     }
