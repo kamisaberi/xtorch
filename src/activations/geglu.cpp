@@ -2,7 +2,7 @@
 
 namespace xt::activations
 {
-    torch::Tensor geglu(const torch::Tensor x, int64_t dim = 1) {
+    torch::Tensor geglu(const torch::Tensor x, int64_t dim ) {
         TORCH_CHECK(x.dim() > 0, "Input tensor must have at least one dimension.");
         TORCH_CHECK(dim < x.dim() && dim >= -x.dim(), "Dimension out of range.");
         if (dim < 0) {
