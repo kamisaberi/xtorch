@@ -1,4 +1,4 @@
-#include "include/activations/evo_norms.h"
+#include "include/activations/evonorm_s0.h"
 
 namespace xt::activations
 {
