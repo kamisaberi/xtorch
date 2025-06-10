@@ -4,7 +4,7 @@ namespace xt::activations
 {
     torch::Tensor evonorm_s0(const torch::Tensor& x, const torch::Tensor& gamma, const torch::Tensor& beta,
                              const torch::Tensor& v_param, int64_t num_groups,
-                             double eps = 1e-5)
+                             double eps)
     {
         TORCH_CHECK(x.dim() == 4, "Input tensor x must be 4D (N, C, H, W)");
         int64_t num_channels = x.size(1);
@@ -47,6 +47,6 @@ namespace xt::activations
 
     auto EvonormS0::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return xt::activations::evonorm_s0(torch::zeros(10));
+        return xt::activations::evonorm_s0(torch::zeros(10), torch::zeros(10), torch::zeros(10) < torch::zeros(10), 0);
     }
 }
