@@ -3,7 +3,7 @@
 #include "common.h"
 
 namespace xt::activations {
-    torch::Tensor colu(torch::Tensor x);
+    torch::Tensor colu(torch::Tensor x, double M_val = 1.0);
 
     struct CoLU : xt::Module {
     public:
