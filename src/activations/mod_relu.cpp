@@ -14,6 +14,6 @@ namespace xt::activations
 
     auto ModReLU::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return xt::activations::mod_relu(torch::zeros(10));
+        return xt::activations::mod_relu(torch::zeros(10), torch::zeros(10));
     }
 }
