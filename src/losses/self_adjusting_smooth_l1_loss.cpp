@@ -43,6 +43,6 @@ namespace xt::losses
 
     auto SelfAdjustingSmoothL1Loss::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return xt::losses::self_adjusting_smooth_l1_loss(torch::zeros(10));
+        return xt::losses::self_adjusting_smooth_l1_loss(torch::zeros(10),torch::zeros(10));
     }
 }
