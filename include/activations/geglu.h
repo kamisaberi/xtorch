@@ -3,7 +3,7 @@
 #include "common.h"
 
 namespace xt::activations {
-    torch::Tensor geglu(torch::Tensor x);
+    torch::Tensor geglu(torch::Tensor x, int64_t dim = 1);
 
     struct GeGLU: xt::Module {
     public:
