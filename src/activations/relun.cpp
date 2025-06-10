@@ -2,9 +2,10 @@
 
 namespace xt::activations
 {
-    torch::Tensor relun(torch::Tensor x)
+    torch::Tensor relun(const torch::Tensor& x, double n_val)
     {
-        return torch::zeros(10);
+        TORCH_CHECK(n_val > 0, "n_val (upper bound) must be positive.");
+        return torch::clamp(x, 0.0, n_val);
     }
 
     auto ReLUN::forward(std::initializer_list<std::any> tensors) -> std::any
