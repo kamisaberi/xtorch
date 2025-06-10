@@ -2,9 +2,9 @@
 
 namespace xt::activations
 {
-    torch::Tensor pmish(torch::Tensor x)
+    torch::Tensor pmish(const torch::Tensor& x, double alpha , double beta )
     {
-        return torch::zeros(10);
+        return (x / alpha) * torch::tanh(torch::softplus(alpha * x + beta));
     }
 
     auto PMish::forward(std::initializer_list<std::any> tensors) -> std::any
