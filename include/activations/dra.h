@@ -3,7 +3,7 @@
 #include "common.h"
 
 namespace xt::activations {
-    torch::Tensor dra(torch::Tensor x);
+    torch::Tensor dra(torch::Tensor x, double alpha = 1.0);
 
     struct DRA : xt::Module {
     public:
