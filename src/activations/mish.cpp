@@ -4,7 +4,7 @@ namespace xt::activations
 {
     torch::Tensor mish(torch::Tensor x)
     {
-        return torch::zeros(10);
+        return x * torch::tanh(torch::softplus(x));
     }
 
     auto Mish::forward(std::initializer_list<std::any> tensors) -> std::any
