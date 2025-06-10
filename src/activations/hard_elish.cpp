@@ -2,9 +2,13 @@
 
 namespace xt::activations
 {
-    torch::Tensor hard_elish(torch::Tensor x)
+    torch::Tensor hard_elish(const torch::Tensor& x)
     {
-        return torch::zeros(10);
+        torch::Tensor positive_part = x * torch::clamp(x + 1.0, 0.0, 1.0);
+        torch::Tensor negative_part = (torch::exp(x) - 1.0) * torch::clamp(x + 1.0, 0.0, 1.0);
+
+        torch::Tensor result = torch::where(x >= 0, positive_part, negative_part);
+        return result;
     }
 
     auto HardELiSH::forward(std::initializer_list<std::any> tensors) -> std::any

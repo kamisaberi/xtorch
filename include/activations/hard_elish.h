@@ -3,7 +3,7 @@
 #include "common.h"
 
 namespace xt::activations {
-    torch::Tensor hard_elish(torch::Tensor x);
+    torch::Tensor hard_elish(torch::Tensor& x);
 
     struct HardELiSH : xt::Module {
     public:
