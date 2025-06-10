@@ -2,9 +2,14 @@
 
 namespace xt::activations
 {
-    torch::Tensor colu(torch::Tensor x)
+    torch::Tensor colu(const torch::Tensor& x, double M_val)
     {
-        return torch::zeros(10);
+        torch::Tensor result = torch::where(
+            x < -M_val,
+            2.0 * x + 2.0 * M_val,
+            x + M_val
+        );
+        return result;
     }
 
     auto CoLU::forward(std::initializer_list<std::any> tensors) -> std::any
