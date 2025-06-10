@@ -4,7 +4,7 @@ namespace xt::activations
 {
     torch::Tensor gcu(torch::Tensor x)
     {
-        return torch::zeros(10);
+        return x * torch::cos(x);
     }
 
     auto GCU::forward(std::initializer_list<std::any> tensors) -> std::any
