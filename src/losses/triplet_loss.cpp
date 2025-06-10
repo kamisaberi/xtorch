@@ -74,6 +74,6 @@ namespace xt::losses
 
     auto TripletLoss::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return xt::losses::triplet_loss(torch::zeros(10));
+        return xt::losses::triplet_loss(torch::zeros(10), torch::zeros(10));
     }
 }
