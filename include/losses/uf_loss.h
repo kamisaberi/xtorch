@@ -4,11 +4,11 @@
 
 namespace xt::losses
 {
-    torch::Tensor uf_loss(torch::Tensor x);
-    class UFLoss : xt::Module
+    torch::Tensor unsupervised_feature_loss(torch::Tensor x);
+    class UnsupervisedFeatureLoss : xt::Module
     {
     public:
-        UFLoss() = default;
+        UnsupervisedFeatureLoss() = default;
         auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
 
 
