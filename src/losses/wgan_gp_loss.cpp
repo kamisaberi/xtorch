@@ -15,15 +15,11 @@ namespace xt::losses
      * @param eps Small value for numerical stability, default: 1e-6
      * @return Scalar tensor containing the WGAN-GP Loss
      */
-    torch::Tensor wgan_gp_loss(
-        const torch::Tensor& d_real_logits,
-        const torch::Tensor& d_fake_logits,
-        const torch::Tensor& real_data,
-        const torch::Tensor& fake_data,
-        xt::Module& discriminator,
-        const std::string& mode,
-        float lambda_gp = 10.0,
-        float eps = 1e-6)
+    torch::Tensor wgan_gp_loss(const torch::Tensor& d_real_logits, const torch::Tensor& d_fake_logits,
+                               const torch::Tensor& real_data, const torch::Tensor& fake_data,
+                               std::shared_ptr<xt::Module&> discriminator, const std::string& mode,
+                               float lambda_gp = 10.0,
+                               float eps = 1e-6)
     {
         // Ensure inputs are on the same device
         auto device = d_real_logits.device();
@@ -59,7 +55,7 @@ namespace xt::losses
         interpolates = interpolates.set_requires_grad(true);
 
         // Compute discriminator output for interpolated samples
-        torch::Tensor d_interpolates = std::any_cast<torch::Tensor>(discriminator.forward({interpolates}));
+        torch::Tensor d_interpolates = std::any_cast<torch::Tensor>(discriminator->forward({interpolates}));
         TORCH_CHECK(d_interpolates.dim() == 1, "Discriminator output for interpolates must be 1D (batch_size)");
 
         // Compute gradients of discriminator output w.r.t. interpolated inputs
@@ -79,6 +75,7 @@ namespace xt::losses
 
     auto WGANGPLoss::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return xt::losses::wgan_gp_loss(torch::zeros(10));
+        // return xt::losses::wgan_gp_loss(torch::zeros(10), torch::zeros(10), torch::zeros(10), torch::zeros(10),
+        //                                 nullptr);
     }
 }
