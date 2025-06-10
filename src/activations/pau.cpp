@@ -54,6 +54,6 @@ namespace xt::activations
 
     auto PAU::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return xt::activations::pau(torch::zeros(10));
+        return xt::activations::pau(torch::zeros(10), torch::zeros(10), torch::zeros(10));
     }
 }
