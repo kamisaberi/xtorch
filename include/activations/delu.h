@@ -4,7 +4,7 @@
 
 namespace xt::activations
 {
-    torch::Tensor delu(torch::Tensor x);
+    torch::Tensor delu(torch::Tensor x, double alpha = 1.0, double gamma = 1.0);
 
     struct DELU : xt::Module
     {
