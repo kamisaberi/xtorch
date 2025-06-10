@@ -3,7 +3,7 @@
 #include "common.h"
 
 namespace xt::activations {
-    torch::Tensor reglu(torch::Tensor x);
+    torch::Tensor reglu(const torch::Tensor& x, int64_t dim = 1);
 
     struct ReGLU : xt::Module {
     public:
