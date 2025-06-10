@@ -3,7 +3,7 @@
 #include "common.h"
 
 namespace xt::activations {
-    torch::Tensor siren(torch::Tensor x);
+    torch::Tensor siren(const torch::Tensor& x, double omega_0 = 30.0);
 
     struct Siren : xt::Module {
     public:
