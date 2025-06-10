@@ -3,9 +3,9 @@
 
 namespace xt::activations
 {
-    torch::Tensor aglu(torch::Tensor x)
+    torch::Tensor aglu(const torch::Tensor& x, double s)
     {
-        return torch::zeros(10);
+        return x * torch::sigmoid(s * x);
     }
 
     auto AGLU::forward(std::initializer_list<std::any> tensors) -> std::any
