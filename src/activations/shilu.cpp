@@ -2,9 +2,11 @@
 
 namespace xt::activations
 {
-    torch::Tensor shilu(torch::Tensor x)
+    torch::Tensor shilu(const torch::Tensor& x, double a, double b)
     {
-        return torch::zeros(10);
+        torch::Tensor x_plus_b = x + b;
+        torch::Tensor result = x_plus_b * torch::sigmoid(a * x_plus_b);
+        return result;
     }
 
     auto ShiLU::forward(std::initializer_list<std::any> tensors) -> std::any
