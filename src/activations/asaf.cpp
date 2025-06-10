@@ -2,9 +2,11 @@
 
 namespace xt::activations
 {
-    torch::Tensor asaf(torch::Tensor x)
+    torch::Tensor asaf(const torch::Tensor& x, double p_param, double q_param)
     {
-        return torch::zeros(10);
+        torch::Tensor sig_px = torch::sigmoid(p_param * x);
+        torch::Tensor sig_qx = torch::sigmoid(q_param * x);
+        return x * sig_px + sig_qx - x;
     }
 
     auto ASAF::forward(std::initializer_list<std::any> tensors) -> std::any
