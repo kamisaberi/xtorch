@@ -60,6 +60,6 @@ namespace xt::losses
 
     auto SeesawLoss::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return xt::losses::seesaw_loss(torch::zeros(10));
+        return xt::losses::seesaw_loss(torch::zeros(10), torch::zeros(10), torch::zeros(10));
     }
 }
