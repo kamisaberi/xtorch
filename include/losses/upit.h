@@ -4,11 +4,11 @@
 
 namespace xt::losses
 {
-    torch::Tensor upit(torch::Tensor x);
-    class UPIT : xt::Module
+    torch::Tensor upit_loss(torch::Tensor x);
+    class UPITLoss : xt::Module
     {
     public:
-        UPIT() = default;
+        UPITLoss() = default;
         auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
 
     private:
