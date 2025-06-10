@@ -2,9 +2,9 @@
 
 namespace xt::activations
 {
-    torch::Tensor tanh_exp(torch::Tensor x)
+    torch::Tensor tanh_exp(const torch::Tensor& x)
     {
-        return torch::zeros(10);
+        return x * torch::tanh(torch::exp(x));
     }
 
     auto TanhExp::forward(std::initializer_list<std::any> tensors) -> std::any
