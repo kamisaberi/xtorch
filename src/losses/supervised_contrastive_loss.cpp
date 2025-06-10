@@ -43,6 +43,6 @@ namespace xt::losses
 
     auto SupervisedContrastiveLoss::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return xt::losses::supervised_contrastive_loss(torch::zeros(10));
+        return xt::losses::supervised_contrastive_loss(torch::zeros(10), torch::zeros(10));
     }
 }
