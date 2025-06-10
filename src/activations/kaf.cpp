@@ -3,8 +3,8 @@
 namespace xt::activations
 {
     torch::Tensor kaf(const torch::Tensor& x,
-                                 const torch::Tensor& dictionary_coefs, // Shape [D] or [1, D] for broadcasting
-                                 const torch::Tensor& boundary_params // Shape [D-1] or [1, D-1] for broadcasting
+                      const torch::Tensor& dictionary_coefs, // Shape [D] or [1, D] for broadcasting
+                      const torch::Tensor& boundary_params // Shape [D-1] or [1, D-1] for broadcasting
     )
     {
         TORCH_CHECK(dictionary_coefs.dim() <= 2, "dictionary_coefs must be 1D or 2D");
@@ -63,6 +63,6 @@ namespace xt::activations
 
     auto KAF::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return xt::activations::kaf(torch::zeros(10),torch::zeros(10),torch::zeros(10));
+        return xt::activations::kaf(torch::zeros(10), torch::zeros(10), torch::zeros(10));
     }
 }
