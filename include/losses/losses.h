@@ -36,7 +36,7 @@
 #include "triplet_entropy_loss.h"
 #include "triplet_loss.h"
 #include "unsupervised_feature_loss.h"
-#include "upit.h"
+#include "upit_loss.h"
 #include "varifocal_loss.h"
 #include "vgg_loss.h"
 #include "wgan_gp_loss.h"

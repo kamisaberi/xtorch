@@ -1,4 +1,4 @@
-#include "include/losses/upit.h"
+#include "include/losses/upit_loss.h"
 
 namespace xt::losses
 {
