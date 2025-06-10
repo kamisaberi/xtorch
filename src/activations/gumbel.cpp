@@ -2,9 +2,9 @@
 
 namespace xt::activations
 {
-    torch::Tensor gumbel(torch::Tensor x)
+    torch::Tensor gumbel(const torch::Tensor& x, double beta)
     {
-        return torch::zeros(10);
+        return x * torch::exp(-torch::exp(-(x / beta)));
     }
 
     auto Gumbel::forward(std::initializer_list<std::any> tensors) -> std::any

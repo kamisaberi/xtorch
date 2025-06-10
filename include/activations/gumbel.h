@@ -3,7 +3,7 @@
 #include "common.h"
 
 namespace xt::activations {
-    torch::Tensor gumbel(torch::Tensor x);
+    torch::Tensor gumbel(torch::Tensor x, double beta = 1.0);
 
     struct Gumbel : xt::Module {
     public:
