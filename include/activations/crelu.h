@@ -4,7 +4,7 @@
 
 namespace xt::activations
 {
-    torch::Tensor crelu(torch::Tensor x);
+    torch::Tensor crelu(torch::Tensor x, int64_t dim = 1);
 
     struct CReLU : xt::Module
     {
