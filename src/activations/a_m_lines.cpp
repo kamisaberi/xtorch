@@ -13,15 +13,8 @@ namespace xt::activations
         torch::Tensor mid_values = x;
         torch::Tensor high_values = threshold + high_positive_slope * (x - threshold);
 
-        torch::Tensor result = torch::where(
-            neg_condition,
-            neg_values,
-            torch::where(
-                mid_condition_upper_bound,
-                mid_values,
-                high_values
-            )
-        );
+        torch::Tensor result = torch::where(neg_condition, neg_values, torch::where(
+                                                mid_condition_upper_bound, mid_values, high_values));
 
         return result;
     }
