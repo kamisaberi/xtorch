@@ -2,9 +2,12 @@
 
 namespace xt::activations
 {
-    torch::Tensor crelu(torch::Tensor x)
+    torch::Tensor crelu(const torch::Tensor& x, int64_t dim)
     {
-        return torch::zeros(10);
+        torch::Tensor relu_x = torch::relu(x);
+        torch::Tensor relu_neg_x = torch::relu(-x);
+        torch::Tensor result = torch::cat({relu_x, relu_neg_x}, dim);
+        return result;
     }
 
 
