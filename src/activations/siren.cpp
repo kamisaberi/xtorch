@@ -2,9 +2,9 @@
 
 namespace xt::activations
 {
-    torch::Tensor siren(torch::Tensor x)
+    torch::Tensor siren(const torch::Tensor& x, double omega_0)
     {
-        return torch::zeros(10);
+        return torch::sin(omega_0 * x);
     }
 
     auto Siren::forward(std::initializer_list<std::any> tensors) -> std::any
