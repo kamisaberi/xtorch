@@ -3,7 +3,7 @@
 #include "common.h"
 
 namespace xt::activations {
-    torch::Tensor phish(torch::Tensor x);
+    torch::Tensor phish(const torch::Tensor& x, double a = 1.0, double b = 1.0);
 
     struct Phish : xt::Module {
     public:

@@ -2,9 +2,9 @@
 
 namespace xt::activations
 {
-    torch::Tensor phish(torch::Tensor x)
+    torch::Tensor phish(const torch::Tensor& x, double a = 1.0, double b = 1.0)
     {
-        return torch::zeros(10);
+        return x * torch::tanh(a * x) + b * x * (1.0 - torch::sigmoid(x));
     }
 
     auto Phish::forward(std::initializer_list<std::any> tensors) -> std::any
