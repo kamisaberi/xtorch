@@ -2,9 +2,16 @@
 
 namespace xt::activations
 {
-    torch::Tensor star_relu(torch::Tensor x)
+    torch::Tensor star_relu(const torch::Tensor& x, double scale, double bias, double relu_slope,
+                            double leaky_slope)
     {
-        return torch::zeros(10);
+        torch::Tensor x_transformed = scale * x + bias;
+
+        torch::Tensor positive_part = relu_slope * x_transformed;
+        torch::Tensor negative_part = leaky_slope * x_transformed;
+
+        torch::Tensor result = torch::where(x_transformed >= 0, positive_part, negative_part);
+        return result;
     }
 
     auto StarReLU::forward(std::initializer_list<std::any> tensors) -> std::any
