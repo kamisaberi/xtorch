@@ -3,7 +3,7 @@
 #include "common.h"
 
 namespace xt::activations {
-    torch::Tensor asu(torch::Tensor x);
+    torch::Tensor asu(torch::Tensor x, double alpha = 1.0, double beta = 1.0, double gamma = 0.0);
 
     struct ASU : xt::Module {
     public:
