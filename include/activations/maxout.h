@@ -3,7 +3,7 @@
 #include "common.h"
 
 namespace xt::activations {
-    torch::Tensor maxout(torch::Tensor x);
+    torch::Tensor maxout(const torch::Tensor& x, int64_t num_pieces, int64_t dim = 1) ;
 
     struct Maxout : xt::Module {
     public:
