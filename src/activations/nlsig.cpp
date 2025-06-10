@@ -2,9 +2,11 @@
 
 namespace xt::activations
 {
-    torch::Tensor nlsig(torch::Tensor x)
+    torch::Tensor nlsig(const torch::Tensor& x, double a, double b)
     {
-        return torch::zeros(10);
+        torch::Tensor x_abs = torch::abs(x);
+        torch::Tensor result = (x / (a + b * x_abs));
+        return result;
     }
 
     auto NLSIG::forward(std::initializer_list<std::any> tensors) -> std::any
