@@ -3,7 +3,7 @@
 #include "common.h"
 
 namespace xt::activations {
-    torch::Tensor swiglu(torch::Tensor x);
+    torch::Tensor swiglu(const torch::Tensor& x, int64_t dim = 1, double beta = 1.0);
 
     struct SwiGLU : xt::Module {
     public:
