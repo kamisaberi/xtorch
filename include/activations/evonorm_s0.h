@@ -3,11 +3,11 @@
 #include "common.h"
 
 namespace xt::activations {
-    torch::Tensor evo_norms(torch::Tensor x);
+    torch::Tensor evonorm_s0(torch::Tensor x);
 
-    struct EvoNorms : xt::Module {
+    struct EvonormS0 : xt::Module {
     public:
-        EvoNorms() = default;
+        EvonormS0() = default;
 
         auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
 
