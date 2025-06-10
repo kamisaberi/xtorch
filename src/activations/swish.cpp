@@ -2,9 +2,9 @@
 
 namespace xt::activations
 {
-    torch::Tensor swish(torch::Tensor x)
+    torch::Tensor swish(const torch::Tensor& x, double beta )
     {
-        return torch::zeros(10);
+        return x * torch::sigmoid(beta * x);
     }
 
     auto Swish::forward(std::initializer_list<std::any> tensors) -> std::any
