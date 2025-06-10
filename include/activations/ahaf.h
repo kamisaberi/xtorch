@@ -3,7 +3,7 @@
 #include "common.h"
 
 namespace xt::activations {
-    torch::Tensor ahaf(torch::Tensor x);
+    torch::Tensor ahaf(torch::Tensor x, double p_param = 1.0);
 
     struct AHAF : xt::Module {
     public:
