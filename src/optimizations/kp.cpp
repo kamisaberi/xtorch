@@ -173,7 +173,10 @@ torch::Tensor KPOptimizer::_compute_matrix_inverse_root(const torch::Tensor& mat
     auto damped_matrix = matrix + torch::eye(matrix.size(0), matrix.options()) * damping;
     std::tuple<torch::Tensor, torch::Tensor> eigh_result;
     try {
-        eigh_result = torch::linalg::eigh(damped_matrix, "U");
+        //TODO START We should create EIGH
+        // throw std::runtime_error("We should create EIGH");
+        // eigh_result = torch::linalg::eigh(damped_matrix, "U");
+        //TODO START We should create EIGH
     } catch (const c10::Error& e) {
         return torch::eye(matrix.size(0), matrix.options());
     }
