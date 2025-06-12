@@ -49,7 +49,7 @@ struct DSPTParamState : torch::optim::OptimizerParamState
     TORCH_ARG(torch::Tensor, exp_avg_sq); // v_t (variance)
     TORCH_ARG(torch::Tensor, mask); // The crucial sparsity mask
 
-    DSPTParamState() = default;
+    // DSPTParamState() = default;
     void serialize(torch::serialize::OutputArchive& archive) const override;
     void deserialize(torch::serialize::InputArchive& archive);
     std::unique_ptr<OptimizerParamState> clone() const override;
