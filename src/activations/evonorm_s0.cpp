@@ -47,6 +47,6 @@ namespace xt::activations
 
     auto EvonormS0::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return xt::activations::evonorm_s0(torch::zeros(10), torch::zeros(10), torch::zeros(10) < torch::zeros(10), 0);
+        return xt::activations::evonorm_s0(torch::zeros(10), torch::zeros(10), torch::zeros(10) , torch::zeros(10), 0);
     }
 }
