@@ -137,9 +137,9 @@ torch::Tensor FAOptimizer::step(LossClosure closure) {
 
         // 5. Apply Decoupled Weight Decay & Final Update
         if (group_options.weight_decay() > 0.0) {
-            p.data().add_(p.data(), -group_options.lr() * group_options.weight_decay());
+            p.data().add_(p.data(), -group_options.lr * group_options.weight_decay());
         }
-        p.data().add_(momentum, -group_options.lr());
+        p.data().add_(momentum, -group_options.lr);
     }
     return loss;
 }
@@ -162,9 +162,9 @@ void FAOptimizer::_fallback_to_adam(torch::Tensor& param, const torch::Tensor& g
     auto denom = v_hat.sqrt().add_(options.eps());
 
     if (options.weight_decay() > 0.0) {
-        param.data().add_(param.data(), -options.lr() * options.weight_decay());
+        param.data().add_(param.data(), -options.lr * options.weight_decay());
     }
-    param.data().addcdiv_(m_hat, denom, -options.lr());
+    param.data().addcdiv_(m_hat, denom, -options.lr);
 }
 
 torch::Tensor FAOptimizer::_compute_matrix_inverse_root(const torch::Tensor& matrix, double damping, int root_order) {
