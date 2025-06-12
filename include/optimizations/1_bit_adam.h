@@ -1,3 +1,6 @@
+
+// #error "COMPILING THIS EXACT HEADER FILE NOW" // Add this as the first line
+
 #ifndef ONE_BIT_ADAM_HPP
 #define ONE_BIT_ADAM_HPP
 
@@ -74,16 +77,16 @@ public: // Explicitly public
 };
 
 // --- OneBitAdamParamState ---
-struct OneBitAdamParamState : torch::optim::OptimizerParamState
+struct OneBitAdamParamState : public torch::optim::OptimizerParamState
 {
-public: // <--- THIS IS THE CRUCIAL FIX for the constructor accessibility
+public:
     TORCH_ARG(torch::Tensor, step);
     TORCH_ARG(torch::Tensor, exp_avg);
     TORCH_ARG(torch::Tensor, exp_avg_sq);
     TORCH_ARG(torch::Tensor, error_feedback);
     TORCH_ARG(torch::Tensor, momentum_buffer);
 
-    OneBitAdamParamState() = default; // Now it's explicitly public
+    // OneBitAdamParamState() = default; // Now it's explicitly public
 
     void serialize(torch::serialize::OutputArchive& archive) const override
     {
@@ -99,19 +102,39 @@ public: // <--- THIS IS THE CRUCIAL FIX for the constructor accessibility
         at::Tensor temp_tensor;
 
         if (archive.try_read("step", temp_tensor, /*is_buffer=*/true)) { step_ = temp_tensor; }
-        else { TORCH_WARN("Could not read 'step' tensor from archive."); if (!step_.defined()) step_ = torch::empty({0}); }
+        else
+        {
+            TORCH_WARN("Could not read 'step' tensor from archive.");
+            if (!step_.defined()) step_ = torch::empty({0});
+        }
 
         if (archive.try_read("exp_avg", temp_tensor, /*is_buffer=*/true)) { exp_avg_ = temp_tensor; }
-        else { TORCH_WARN("Could not read 'exp_avg' tensor from archive."); if (!exp_avg_.defined()) exp_avg_ = torch::empty({0}); }
+        else
+        {
+            TORCH_WARN("Could not read 'exp_avg' tensor from archive.");
+            if (!exp_avg_.defined()) exp_avg_ = torch::empty({0});
+        }
 
         if (archive.try_read("exp_avg_sq", temp_tensor, /*is_buffer=*/true)) { exp_avg_sq_ = temp_tensor; }
-        else { TORCH_WARN("Could not read 'exp_avg_sq' tensor from archive."); if (!exp_avg_sq_.defined()) exp_avg_sq_ = torch::empty({0}); }
+        else
+        {
+            TORCH_WARN("Could not read 'exp_avg_sq' tensor from archive.");
+            if (!exp_avg_sq_.defined()) exp_avg_sq_ = torch::empty({0});
+        }
 
         if (archive.try_read("error_feedback", temp_tensor, /*is_buffer=*/true)) { error_feedback_ = temp_tensor; }
-        else { TORCH_WARN("Could not read 'error_feedback' tensor from archive."); if (!error_feedback_.defined()) error_feedback_ = torch::empty({0}); }
+        else
+        {
+            TORCH_WARN("Could not read 'error_feedback' tensor from archive.");
+            if (!error_feedback_.defined()) error_feedback_ = torch::empty({0});
+        }
 
         if (archive.try_read("momentum_buffer", temp_tensor, /*is_buffer=*/true)) { momentum_buffer_ = temp_tensor; }
-        else { TORCH_WARN("Could not read 'momentum_buffer' tensor from archive."); if (!momentum_buffer_.defined()) momentum_buffer_ = torch::empty({0}); }
+        else
+        {
+            TORCH_WARN("Could not read 'momentum_buffer' tensor from archive.");
+            if (!momentum_buffer_.defined()) momentum_buffer_ = torch::empty({0});
+        }
     }
 
     std::unique_ptr<OptimizerParamState> clone() const override
@@ -138,8 +161,8 @@ public:
     void save(torch::serialize::OutputArchive& archive) const override;
     void load(torch::serialize::InputArchive& archive) override;
 
-// protected: // Removed protected, not strictly needed for make_param_state as Optimizer base handles it.
-//     std::unique_ptr<torch::optim::OptimizerParamState> make_param_state();
+    // protected: // Removed protected, not strictly needed for make_param_state as Optimizer base handles it.
+    //     std::unique_ptr<torch::optim::OptimizerParamState> make_param_state();
 };
 
 #endif // ONE_BIT_ADAM_HPP

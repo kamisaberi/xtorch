@@ -18,7 +18,7 @@ struct OneBitLambOptions : torch::optim::OptimizerOptions
     explicit OneBitLambOptions(double learning_rate = 1e-3)
         : torch::optim::OptimizerOptions()
     {
-        this->lr(learning_rate); // Set lr using base class setter
+        this->lr = learning_rate; // Set lr using base class setter
     }
 
     TORCH_ARG(double, beta1) = 0.9;
@@ -31,7 +31,7 @@ struct OneBitLambOptions : torch::optim::OptimizerOptions
 
     void serialize(torch::serialize::OutputArchive& archive) const override
     {
-        archive.write("lr", this->lr());
+        archive.write("lr", this->lr);
         archive.write("beta1", beta1());
         archive.write("beta2", beta2());
         archive.write("eps", eps());
@@ -44,7 +44,7 @@ struct OneBitLambOptions : torch::optim::OptimizerOptions
     {
         c10::IValue ivalue;
 
-        if (archive.try_read("lr", ivalue)) { this->lr(ivalue.toDouble()); }
+        if (archive.try_read("lr", ivalue)) { this->lr = ivalue.toDouble(); }
         else { TORCH_WARN("Could not read 'lr' for OneBitLambOptions"); }
 
         if (archive.try_read("beta1", ivalue)) { beta1_ = ivalue.toDouble(); }
@@ -72,7 +72,7 @@ struct OneBitLambOptions : torch::optim::OptimizerOptions
 
     std::unique_ptr<torch::optim::OptimizerOptions> clone() const override
     {
-        auto cloned_options = std::make_unique<OneBitLambOptions>(this->lr());
+        auto cloned_options = std::make_unique<OneBitLambOptions>(this->lr);
         cloned_options->beta1(this->beta1());
         cloned_options->beta2(this->beta2());
         cloned_options->eps(this->eps());
@@ -84,15 +84,16 @@ struct OneBitLambOptions : torch::optim::OptimizerOptions
 };
 
 // --- Parameter State for OneBitLamb (identical to OneBitAdam's) ---
-struct OneBitLambParamState : torch::optim::OptimizerParamState
+struct OneBitLambParamState : public torch::optim::OptimizerParamState
 {
+public:
     TORCH_ARG(torch::Tensor, step);
     TORCH_ARG(torch::Tensor, exp_avg); // m_t
     TORCH_ARG(torch::Tensor, exp_avg_sq); // v_t
     TORCH_ARG(torch::Tensor, error_feedback); // e_t
     TORCH_ARG(torch::Tensor, momentum_buffer); // Full precision m_t for compression
 
-    OneBitLambParamState() = default;
+    // OneBitLambParamState() = default;
 
     void serialize(torch::serialize::OutputArchive& archive) const override
     {

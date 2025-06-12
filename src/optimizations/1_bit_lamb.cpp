@@ -117,7 +117,7 @@ torch::Tensor OneBitLamb::step(LossClosure closure) {
             }
 
             // Effective learning rate for this parameter
-            double effective_lr = options.lr() * trust_ratio;
+            double effective_lr = options.lr * trust_ratio;
 
             // Parameter update: p_t = p_{t-1} - effective_lr * lamb_update_direction
             p.data().add_(lamb_update_direction, -effective_lr);
