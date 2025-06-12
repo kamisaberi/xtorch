@@ -214,9 +214,9 @@ torch::Tensor FASFA::step(LossClosure closure)
         // 5. Weight Decay & Final Parameter Update
         if (group_options.weight_decay() > 0.0)
         {
-            p.data().add_(p.data(), -group_options.lr() * group_options.weight_decay());
+            p.data().add_(p.data(), -group_options.lr * group_options.weight_decay());
         }
-        p.data().add_(final_update, -group_options.lr());
+        p.data().add_(final_update, -group_options.lr);
     }
     return loss;
 }
@@ -239,9 +239,9 @@ void FASFA::_fallback_to_adam(torch::Tensor& param, const torch::Tensor& grad, F
 
     if (options.weight_decay() > 0.0)
     {
-        param.data().add_(param.data(), -options.lr() * options.weight_decay());
+        param.data().add_(param.data(), -options.lr * options.weight_decay());
     }
-    param.data().addcdiv_(m_hat, denom, -options.lr());
+    param.data().addcdiv_(m_hat, denom, -options.lr);
 }
 
 torch::Tensor FASFA::_compute_grafted_norm(const torch::Tensor& grad, FASFAParamState& state,
@@ -275,7 +275,7 @@ torch::Tensor FASFA::_compute_matrix_inverse_root(const torch::Tensor& matrix, d
     try
     {
         //TODO START We should create EIGH
-        throw std::runtime_error("We should create EIGH")
+        throw std::runtime_error("We should create EIGH");
         // eigh_result = torch::linalg::eigh(damped_matrix, "U");
         //TODO END We should create EIGH
     }
