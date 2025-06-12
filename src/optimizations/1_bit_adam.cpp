@@ -148,7 +148,7 @@ torch::Tensor OneBitAdam::step(LossClosure closure)
 
             // Parameter update: p_t = p_{t-1} - lr * m_hat_t_for_update / denom
             // options.lr() correctly gets the learning rate from the OptimizerOptions base.
-            p.data().addcdiv_(m_t_hat_for_update, denom, -options.lr());
+            p.data().addcdiv_(m_t_hat_for_update, denom, -options.lr);
         }
     }
     return loss;
