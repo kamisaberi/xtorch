@@ -2,8 +2,9 @@
 #include <stdexcept>
 
 // --- DSPTOptions Methods ---
-void DSPTOptions::serialize(torch::serialize::OutputArchive& archive) const {
-    archive.write("lr", this->lr());
+void DSPTOptions::serialize(torch::serialize::OutputArchive& archive) const
+{
+    archive.write("lr", this->lr);
     archive.write("beta1", beta1());
     archive.write("beta2", beta2());
     archive.write("eps", eps());
@@ -15,9 +16,10 @@ void DSPTOptions::serialize(torch::serialize::OutputArchive& archive) const {
     archive.write("low_rank_k", static_cast<int64_t>(low_rank_k()));
 }
 
-void DSPTOptions::deserialize(torch::serialize::InputArchive& archive) {
+void DSPTOptions::deserialize(torch::serialize::InputArchive& archive)
+{
     c10::IValue ivalue;
-    if (archive.try_read("lr", ivalue)) { this->lr(ivalue.toDouble()); }
+    if (archive.try_read("lr", ivalue)) { this->lr = ivalue.toDouble(); }
     if (archive.try_read("beta1", ivalue)) { beta1_ = ivalue.toDouble(); }
     if (archive.try_read("beta2", ivalue)) { beta2_ = ivalue.toDouble(); }
     if (archive.try_read("eps", ivalue)) { eps_ = ivalue.toDouble(); }
@@ -29,8 +31,9 @@ void DSPTOptions::deserialize(torch::serialize::InputArchive& archive) {
     if (archive.try_read("low_rank_k", ivalue)) { low_rank_k_ = ivalue.toInt(); }
 }
 
-std::unique_ptr<torch::optim::OptimizerOptions> DSPTOptions::clone() const {
-    auto cloned = std::make_unique<DSPTOptions>(this->lr());
+std::unique_ptr<torch::optim::OptimizerOptions> DSPTOptions::clone() const
+{
+    auto cloned = std::make_unique<DSPTOptions>(this->lr);
     cloned->beta1(beta1()).beta2(beta2()).eps(eps()).weight_decay(weight_decay())
           .sparsity(sparsity()).prune_rate(prune_rate())
           .prune_frequency(prune_frequency()).start_pruning_step(start_pruning_step())
@@ -39,14 +42,16 @@ std::unique_ptr<torch::optim::OptimizerOptions> DSPTOptions::clone() const {
 }
 
 // --- DSPTParamState Methods ---
-void DSPTParamState::serialize(torch::serialize::OutputArchive& archive) const {
+void DSPTParamState::serialize(torch::serialize::OutputArchive& archive) const
+{
     archive.write("step", step(), true);
     archive.write("exp_avg", exp_avg(), true);
     archive.write("exp_avg_sq", exp_avg_sq(), true);
     archive.write("mask", mask(), true);
 }
 
-void DSPTParamState::deserialize(torch::serialize::InputArchive& archive) {
+void DSPTParamState::deserialize(torch::serialize::InputArchive& archive)
+{
     at::Tensor temp;
     if (archive.try_read("step", temp, true)) { step_ = temp; }
     if (archive.try_read("exp_avg", temp, true)) { exp_avg_ = temp; }
@@ -54,7 +59,8 @@ void DSPTParamState::deserialize(torch::serialize::InputArchive& archive) {
     if (archive.try_read("mask", temp, true)) { mask_ = temp; }
 }
 
-std::unique_ptr<torch::optim::OptimizerParamState> DSPTParamState::clone() const {
+std::unique_ptr<torch::optim::OptimizerParamState> DSPTParamState::clone() const
+{
     auto cloned = std::make_unique<DSPTParamState>();
     if (step().defined()) cloned->step(step().clone());
     if (exp_avg().defined()) cloned->exp_avg(exp_avg().clone());
@@ -65,23 +71,29 @@ std::unique_ptr<torch::optim::OptimizerParamState> DSPTParamState::clone() const
 
 // --- DSPT Implementation ---
 DSPT::DSPT(std::vector<torch::Tensor> params, DSPTOptions options)
-    : torch::optim::Optimizer(std::move(params), std::make_unique<DSPTOptions>(options)) {}
+    : torch::optim::Optimizer(std::move(params), std::make_unique<DSPTOptions>(options))
+{
+}
 
-torch::Tensor DSPT::step(LossClosure closure) {
+torch::Tensor DSPT::step(LossClosure closure)
+{
     torch::NoGradGuard no_grad;
     torch::Tensor loss = {};
     if (closure) { loss = closure(); }
 
-    for (auto& group : param_groups_) {
+    for (auto& group : param_groups_)
+    {
         auto& options = static_cast<DSPTOptions&>(group.options());
-        for (auto& p : group.params()) {
+        for (auto& p : group.params())
+        {
             if (!p.grad().defined()) { continue; }
 
             auto full_grad = p.grad();
             auto& state = static_cast<DSPTParamState&>(*state_.at(p.unsafeGetTensorImpl()));
 
             // Initialize state
-            if (!state.step().defined()) {
+            if (!state.step().defined())
+            {
                 state.step(torch::tensor(0.0, torch::dtype(torch::kFloat64).device(torch::kCPU)));
                 state.exp_avg(torch::zeros_like(p));
                 state.exp_avg_sq(torch::zeros_like(p));
@@ -92,7 +104,8 @@ torch::Tensor DSPT::step(LossClosure closure) {
 
             // 1. Dynamic Pruning and Growing (if scheduled)
             if (current_step_val >= options.start_pruning_step() &&
-                static_cast<long>(current_step_val) % options.prune_frequency() == 0) {
+                static_cast<long>(current_step_val) % options.prune_frequency() == 0)
+            {
                 _update_mask(p, full_grad, state, options);
             }
 
@@ -112,10 +125,11 @@ torch::Tensor DSPT::step(LossClosure closure) {
             auto v_hat = exp_avg_sq / bias_correction2;
             auto denom = v_hat.sqrt().add_(options.eps());
 
-            p.data().addcdiv_(m_hat, denom, -options.lr());
+            p.data().addcdiv_(m_hat, denom, -options.lr);
 
             // 4. Low-Rank update (if enabled)
-            if (options.low_rank_k() > 0) {
+            if (options.low_rank_k() > 0)
+            {
                 _apply_low_rank_update(p, state, options);
             }
 
@@ -130,14 +144,15 @@ void DSPT::_update_mask(
     torch::Tensor& param,
     const torch::Tensor& full_grad,
     DSPTParamState& state,
-    const DSPTOptions& options) {
-
+    const DSPTOptions& options)
+{
     // --- Pruning: Remove weights with smallest magnitude ---
     auto current_mask = state.mask();
     auto num_dense = current_mask.sum().item<int64_t>();
     auto num_to_prune = static_cast<int64_t>(options.prune_rate() * num_dense);
 
-    if (num_to_prune > 0) {
+    if (num_to_prune > 0)
+    {
         // Find scores of active weights (magnitude)
         auto scores = param.detach().abs();
         scores.masked_fill_(current_mask == 0, std::numeric_limits<float>::infinity()); // Ignore already pruned weights
@@ -152,7 +167,8 @@ void DSPT::_update_mask(
 
     // --- Growing: Add new weights with largest gradient magnitude ---
     auto num_to_grow = num_to_prune; // Grow the same number we pruned
-    if (num_to_grow > 0) {
+    if (num_to_grow > 0)
+    {
         // Find scores of inactive weights (gradient magnitude)
         auto grad_scores = full_grad.detach().abs();
         grad_scores.masked_fill_(state.mask() == 1, 0.0); // Ignore already active weights
@@ -169,9 +185,10 @@ void DSPT::_update_mask(
 void DSPT::_apply_low_rank_update(
     torch::Tensor& param,
     DSPTParamState& state,
-    const DSPTOptions& options) {
-
-    if (param.dim() != 2) {
+    const DSPTOptions& options)
+{
+    if (param.dim() != 2)
+    {
         // For simplicity, this implementation only supports low-rank updates for 2D tensors (e.g., Linear layers).
         // A more advanced version would matricize Conv kernels.
         return;
@@ -179,8 +196,6 @@ void DSPT::_apply_low_rank_update(
 
     // Use the momentum tensor as an approximation of the weight change
     auto momentum = state.exp_avg();
-
-
 
 
     //TODO START We should create SVD
@@ -207,14 +222,17 @@ void DSPT::_apply_low_rank_update(
 }
 
 // --- Boilerplate Methods ---
-void DSPT::save(torch::serialize::OutputArchive& archive) const {
+void DSPT::save(torch::serialize::OutputArchive& archive) const
+{
     torch::optim::Optimizer::save(archive);
 }
 
-void DSPT::load(torch::serialize::InputArchive& archive) {
+void DSPT::load(torch::serialize::InputArchive& archive)
+{
     torch::optim::Optimizer::load(archive);
 }
 
-std::unique_ptr<torch::optim::OptimizerParamState> DSPT::make_param_state() {
+std::unique_ptr<torch::optim::OptimizerParamState> DSPT::make_param_state()
+{
     return std::make_unique<DSPTParamState>();
 }
