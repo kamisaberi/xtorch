@@ -84,7 +84,7 @@ torch::Tensor DiagonalAdaFisher::step(LossClosure closure)
             torch::Tensor denom = fisher_diag_ema.sqrt().add_(options.eps());
 
             // Parameter update: p_new = p_old - lr * (grad_final / denom)
-            p.data().addcdiv_(grad_final, denom, -options.lr());
+            p.data().addcdiv_(grad_final, denom, -options.lr);
         }
     }
     return loss;
