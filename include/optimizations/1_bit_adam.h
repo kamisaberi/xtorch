@@ -12,14 +12,15 @@
 #include <cstdint> // For int64_t
 
 // Define custom options for OneBitAdam
-struct OneBitAdamOptions : torch::optim::OptimizerOptions
+struct OneBitAdamOptions : public torch::optim::OptimizerOptions
 {
+public:
     double lr;
 
     explicit OneBitAdamOptions(double learning_rate = 1e-3)
         : torch::optim::OptimizerOptions()
     {
-        this->lr(learning_rate);
+        this->lr= learning_rate;
     }
 
     TORCH_ARG(double, beta1) = 0.9;
@@ -31,7 +32,7 @@ struct OneBitAdamOptions : torch::optim::OptimizerOptions
     void serialize(torch::serialize::OutputArchive& archive) const override
     {
         // Writing fundamental types directly is usually fine, they get converted to IValues
-        archive.write("lr", this->lr());
+        archive.write("lr", this->lr);
         archive.write("beta1", beta1());
         archive.write("beta2", beta2());
         archive.write("eps", eps());
@@ -113,7 +114,7 @@ struct OneBitAdamOptions : torch::optim::OptimizerOptions
 
     std::unique_ptr<torch::optim::OptimizerOptions> clone() const override
     {
-        auto cloned_options = std::make_unique<OneBitAdamOptions>(this->lr());
+        auto cloned_options = std::make_unique<OneBitAdamOptions>(this->lr);
         cloned_options->beta1(this->beta1());
         cloned_options->beta2(this->beta2());
         cloned_options->eps(this->eps());
