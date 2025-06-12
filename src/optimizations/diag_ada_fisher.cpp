@@ -4,31 +4,40 @@
 // --- DiagonalAdaFisher Class Implementation ---
 
 DiagonalAdaFisher::DiagonalAdaFisher(std::vector<torch::Tensor> params, DiagonalAdaFisherOptions options)
-    : torch::optim::Optimizer(std::move(params), std::make_unique<DiagonalAdaFisherOptions>(options)) {}
+    : torch::optim::Optimizer(std::move(params), std::make_unique<DiagonalAdaFisherOptions>(options))
+{
+}
 
 DiagonalAdaFisher::DiagonalAdaFisher(std::vector<torch::Tensor> params, double lr_val)
-    : DiagonalAdaFisher(std::move(params), DiagonalAdaFisherOptions(lr_val)) {}
+    : DiagonalAdaFisher(std::move(params), DiagonalAdaFisherOptions(lr_val))
+{
+}
 
-torch::Tensor DiagonalAdaFisher::step(LossClosure closure) {
+torch::Tensor DiagonalAdaFisher::step(LossClosure closure)
+{
     torch::NoGradGuard no_grad;
     torch::Tensor loss = {};
     if (closure) { loss = closure(); }
 
-    for (auto& group : param_groups_) {
+    for (auto& group : param_groups_)
+    {
         auto& options = static_cast<DiagonalAdaFisherOptions&>(group.options());
 
-        for (auto& p : group.params()) {
+        for (auto& p : group.params())
+        {
             if (!p.grad().defined()) { continue; }
 
             auto grad = p.grad();
-            if (grad.is_sparse()) {
+            if (grad.is_sparse())
+            {
                 throw std::runtime_error("DiagonalAdaFisher does not support sparse gradients.");
             }
 
             auto& state_ptr = state_.at(p.unsafeGetTensorImpl());
             auto& state = static_cast<DiagonalAdaFisherParamState&>(*state_ptr.get());
 
-            if (!state.step().defined()) {
+            if (!state.step().defined())
+            {
                 state.step(torch::tensor(0.0, torch::dtype(torch::kFloat64).device(torch::kCPU)));
                 state.fisher_diag_ema(torch::zeros_like(p, torch::MemoryFormat::Preserve));
             }
@@ -45,7 +54,8 @@ torch::Tensor DiagonalAdaFisher::step(LossClosure closure) {
             // Applying before is common for AdamW-like behavior.
             // Here, we apply it to the gradient directly.
             torch::Tensor grad_final = grad;
-            if (options.weight_decay() != 0.0) {
+            if (options.weight_decay() != 0.0)
+            {
                 // For Fisher/Natural Gradient, WD is often added to the FIM diagonal.
                 // Or, as in AdamW, subtract wd * lr * param from param later.
                 // For simplicity here, like Adam:
@@ -80,14 +90,17 @@ torch::Tensor DiagonalAdaFisher::step(LossClosure closure) {
     return loss;
 }
 
-void DiagonalAdaFisher::save(torch::serialize::OutputArchive& archive) const {
+void DiagonalAdaFisher::save(torch::serialize::OutputArchive& archive) const
+{
     torch::optim::Optimizer::save(archive);
 }
 
-void DiagonalAdaFisher::load(torch::serialize::InputArchive& archive) {
+void DiagonalAdaFisher::load(torch::serialize::InputArchive& archive)
+{
     torch::optim::Optimizer::load(archive);
 }
 
-std::unique_ptr<torch::optim::OptimizerParamState> DiagonalAdaFisher::make_param_state() {
+std::unique_ptr<torch::optim::OptimizerParamState> DiagonalAdaFisher::make_param_state()
+{
     return std::make_unique<DiagonalAdaFisherParamState>();
 }
