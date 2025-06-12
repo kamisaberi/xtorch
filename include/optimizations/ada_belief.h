@@ -68,7 +68,7 @@ struct AdaBeliefParamState : torch::optim::OptimizerParamState {
     TORCH_ARG(torch::Tensor, exp_avg_var);  // s_t (EMA of (g_t - m_t)^2)
     // TORCH_ARG(torch::Tensor, max_exp_avg_var); // For AMSGrad if implemented
 
-    AdaBeliefParamState() = default;
+    // AdaBeliefParamState() = default;
 
     void serialize(torch::serialize::OutputArchive& archive) const override {
         archive.write("step", step(), /*is_buffer=*/true);
