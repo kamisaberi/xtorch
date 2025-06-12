@@ -27,6 +27,7 @@
 #include "demon_adam.h"
 #include "demon_cm.h"
 #include "dfa.h"
+#include "diag_ada_fisher.h"
 #include "distributed_shampoo.h"
 #include "dspt.h"
 #include "eco.h"
