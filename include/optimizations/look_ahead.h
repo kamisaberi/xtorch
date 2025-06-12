@@ -12,26 +12,29 @@
 #include <functional>
 
 // --- Options for the inner Adam optimizer to be wrapped ---
-struct LookaheadInnerAdamOptions : torch::optim::OptimizerOptions {
+struct LookaheadInnerAdamOptions :public torch::optim::OptimizerOptions {
+public:
     explicit LookaheadInnerAdamOptions(double learning_rate = 1e-3)
         : torch::optim::OptimizerOptions() {
         this->lr(learning_rate);
     }
+    TORCH_ARG(double ,  lr) = 1e-6;   // For momentum on the gradient "force"
     TORCH_ARG(double, beta1) = 0.9;
     TORCH_ARG(double, beta2) = 0.999;
     TORCH_ARG(double, eps) = 1e-8;
     TORCH_ARG(double, weight_decay) = 0.0;
-    TORCH_ARG(double ,  lr) = 1e-6;   // For momentum on the gradient "force"
 };
 
 // --- Main Options for Lookahead Optimizer ---
 struct LookaheadOptions : torch::optim::OptimizerOptions {
+public:
     // Note: LR in base class will be for the inner optimizer.
     explicit LookaheadOptions(double learning_rate = 1e-3)
         : torch::optim::OptimizerOptions() {
             this->lr(learning_rate);
         }
 
+    TORCH_ARG(double ,  lr) = 1e-6;   // For momentum on the gradient "force"
     // Lookahead-specific parameters
     TORCH_ARG(double, alpha) = 0.5; // Interpolation factor for slow weights.
     TORCH_ARG(long, k) = 6;         // Sync/update frequency for slow weights.
