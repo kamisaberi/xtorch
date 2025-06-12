@@ -37,8 +37,8 @@ struct GCANSParamState : torch::optim::OptimizerParamState {
     TORCH_ARG(torch::Tensor, momentum_buffer); // For inner SGD
     TORCH_ARG(torch::Tensor, error_feedback);  // Error accumulation
     TORCH_ARG(torch::Tensor, sampling_probs);  // Adaptive sampling probabilities
-
-    GCANSParamState() = default;
+public:
+    // GCANSParamState() = default;
     void serialize(torch::serialize::OutputArchive& archive) const override;
     void deserialize(torch::serialize::InputArchive& archive) ;
     std::unique_ptr<OptimizerParamState> clone() const override;
