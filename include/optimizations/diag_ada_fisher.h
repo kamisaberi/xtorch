@@ -68,7 +68,7 @@ struct DiagonalAdaFisherParamState : torch::optim::OptimizerParamState
     TORCH_ARG(torch::Tensor, step); // Optional, but good for potential bias correction if added
     TORCH_ARG(torch::Tensor, fisher_diag_ema); // EMA of squared gradients (g_t^2)
 
-    DiagonalAdaFisherParamState() = default;
+    // DiagonalAdaFisherParamState() = default;
 
     void serialize(torch::serialize::OutputArchive& archive) const override
     {
