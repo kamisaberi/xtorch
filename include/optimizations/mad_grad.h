@@ -35,7 +35,7 @@ struct MADGRADParamState : torch::optim::OptimizerParamState {
     TORCH_ARG(torch::Tensor, grad_sum_sq);    // v_k in the paper (sum of squared grads + volatility)
     TORCH_ARG(torch::Tensor, grad_prev);      // g_{k-1} to calculate volatility
 
-    MADGRADParamState() = default;
+    // MADGRADParamState() = default;
     void serialize(torch::serialize::OutputArchive& archive) const override;
     void deserialize(torch::serialize::InputArchive& archive) ;
     std::unique_ptr<OptimizerParamState> clone() const override;
