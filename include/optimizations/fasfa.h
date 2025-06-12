@@ -11,8 +11,9 @@
 #include <cstdint>
 
 // --- Options for FASFA (Factor-Wise and Statistical Factor-Wise) Optimizer ---
-struct FASFAOptions : torch::optim::OptimizerOptions
+struct FASFAOptions :public torch::optim::OptimizerOptions
 {
+public:
     double lr;
 
     explicit FASFAOptions(double learning_rate = 1.0) // Grafting makes lr=1.0 a good default
@@ -45,7 +46,7 @@ struct FASFAOptions : torch::optim::OptimizerOptions
 struct FASFAParamState : torch::optim::OptimizerParamState
 {
     TORCH_ARG(torch::Tensor, step);
-
+public:
     // "Factor-Wise" (fast) and "Statistical" (slow) EMAs
     std::vector<torch::Tensor> fast_ema_factors;
     std::vector<torch::Tensor> slow_ema_factors;
@@ -55,7 +56,7 @@ struct FASFAParamState : torch::optim::OptimizerParamState
     TORCH_ARG(torch::Tensor, exp_avg); // m_t
     TORCH_ARG(torch::Tensor, exp_avg_sq); // v_t
 
-    FASFAParamState() = default;
+    // FASFAParamState() = default;
     void serialize(torch::serialize::OutputArchive& archive) const override;
     void deserialize(torch::serialize::InputArchive& archive);
     std::unique_ptr<OptimizerParamState> clone() const override;
