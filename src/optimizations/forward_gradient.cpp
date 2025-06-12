@@ -14,7 +14,7 @@ void ForwardGradientOptions::serialize(torch::serialize::OutputArchive& archive)
 
 void ForwardGradientOptions::deserialize(torch::serialize::InputArchive& archive) {
     c10::IValue ivalue;
-    if (archive.try_read("lr", ivalue)) { this->lr(ivalue.toDouble()); }
+    if (archive.try_read("lr", ivalue)) { this->lr=ivalue.toDouble(); }
     if (archive.try_read("alpha", ivalue)) { alpha_ = ivalue.toDouble(); }
     if (archive.try_read("k", ivalue)) { k_ = ivalue.toInt(); }
     if (archive.try_read("beta1", ivalue)) { beta1_ = ivalue.toDouble(); }
