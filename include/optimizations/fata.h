@@ -11,12 +11,15 @@
 #include <cstdint>
 
 // --- Options for FATA Optimizer ---
-struct FATAOptions : torch::optim::OptimizerOptions {
+struct FATAOptions : torch::optim::OptimizerOptions
+{
 public:
     double lr;
+
     explicit FATAOptions(double learning_rate = 1e-3)
-        : torch::optim::OptimizerOptions() {
-        this->lr=learning_rate;
+        : torch::optim::OptimizerOptions()
+    {
+        this->lr = learning_rate;
     }
 
     // Adam parameters for the final update (on preconditioned gradients)
@@ -34,13 +37,15 @@ public:
     TORCH_ARG(long, start_preconditioning_step) = 250;
 
     void serialize(torch::serialize::OutputArchive& archive) const override;
-    void deserialize(torch::serialize::InputArchive& archive) ;
+    void deserialize(torch::serialize::InputArchive& archive);
     std::unique_ptr<torch::optim::OptimizerOptions> clone() const override;
 };
 
 // --- Parameter State for FATA ---
-struct FATAParamState : torch::optim::OptimizerParamState {
+struct FATAParamState : torch::optim::OptimizerParamState
+{
     TORCH_ARG(torch::Tensor, step);
+
 public:
     // Fast and slow EMAs for Kronecker factors
     std::vector<torch::Tensor> fast_ema_factors;
@@ -48,17 +53,18 @@ public:
     std::vector<torch::Tensor> inv_root_factors;
 
     // Adam states for the preconditioned gradient
-    TORCH_ARG(torch::Tensor, exp_avg);      // m_t
-    TORCH_ARG(torch::Tensor, exp_avg_sq);   // v_t
+    TORCH_ARG(torch::Tensor, exp_avg); // m_t
+    TORCH_ARG(torch::Tensor, exp_avg_sq); // v_t
 
     // FATAParamState() = default;
     void serialize(torch::serialize::OutputArchive& archive) const override;
-    void deserialize(torch::serialize::InputArchive& archive) ;
+    void deserialize(torch::serialize::InputArchive& archive);
     std::unique_ptr<OptimizerParamState> clone() const override;
 };
 
 // --- FATA Optimizer Class ---
-class FATA : public torch::optim::Optimizer {
+class FATA : public torch::optim::Optimizer
+{
 public:
     FATA(std::vector<torch::Tensor> params, FATAOptions options);
 
@@ -68,7 +74,7 @@ public:
     void load(torch::serialize::InputArchive& archive) override;
 
 protected:
-    std::unique_ptr<torch::optim::OptimizerParamState> make_param_state() ;
+    std::unique_ptr<torch::optim::OptimizerParamState> make_param_state();
 
 private:
     // Fallback for 1D params remains a standard Adam update
