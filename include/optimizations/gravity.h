@@ -37,7 +37,7 @@ struct GravityParamState : torch::optim::OptimizerParamState {
     TORCH_ARG(torch::Tensor, exp_avg);      // m_t (Momentum on the gradient force)
     TORCH_ARG(torch::Tensor, exp_avg_sq);   // v_t (Curvature of the loss landscape)
 
-    GravityParamState() = default;
+    // GravityParamState() = default;
     void serialize(torch::serialize::OutputArchive& archive) const override;
     void deserialize(torch::serialize::InputArchive& archive) ;
     std::unique_ptr<OptimizerParamState> clone() const override;
