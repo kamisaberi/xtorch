@@ -134,7 +134,7 @@ torch::Tensor AdaBelief::step(LossClosure closure)
             // Parameter update
             // p_new = p_old - lr * m_hat_t / (sqrt(s_hat_t) + eps_denom)
             // We use options.lr() as the main learning rate. Bias correction for m_t handles the step size adjustment part.
-            p.data().addcdiv_(m_hat_t, denom.add(options.eps()), -options.lr());
+            p.data().addcdiv_(m_hat_t, denom.add(options.eps()), -options.lr);
             // The above denom.add(options.eps()) is one way.
             // Let's refine based on typical AdaBelief code structure:
             // denom = (exp_avg_var / bias_correction2).sqrt().add_(options.eps()); // This is more Adam-like
@@ -158,7 +158,7 @@ torch::Tensor AdaBelief::step(LossClosure closure)
             torch::Tensor final_denom = (s_hat_t + options.eps()).sqrt_().add_(options.eps());
             // Add eps inside and outside sqrt for robustness
 
-            p.data().addcdiv_(m_hat_t, final_denom, -options.lr());
+            p.data().addcdiv_(m_hat_t, final_denom, -options.lr);
         }
     }
     return loss;

@@ -18,7 +18,7 @@ struct DiagonalAdaFisherOptions : torch::optim::OptimizerOptions
     explicit DiagonalAdaFisherOptions(double learning_rate = 1e-2) // RMSProp/AdaGrad often use higher LR
         : torch::optim::OptimizerOptions()
     {
-        this->lr(learning_rate);
+        this->lr=learning_rate;
     }
 
     // Beta for the EMA of squared gradients (diagonal Fisher estimate)
@@ -30,7 +30,7 @@ struct DiagonalAdaFisherOptions : torch::optim::OptimizerOptions
 
     void serialize(torch::serialize::OutputArchive& archive) const override
     {
-        archive.write("lr", this->lr());
+        archive.write("lr", this->lr);
         archive.write("beta", beta());
         archive.write("eps", eps());
         archive.write("weight_decay", weight_decay());
@@ -39,7 +39,7 @@ struct DiagonalAdaFisherOptions : torch::optim::OptimizerOptions
     void deserialize(torch::serialize::InputArchive& archive)
     {
         c10::IValue ivalue;
-        if (archive.try_read("lr", ivalue)) { this->lr(ivalue.toDouble()); }
+        if (archive.try_read("lr", ivalue)) { this->lr=ivalue.toDouble(); }
         else { TORCH_WARN("Could not read 'lr' for DiagonalAdaFisherOptions"); }
 
         if (archive.try_read("beta", ivalue)) { beta_ = ivalue.toDouble(); }
@@ -54,7 +54,7 @@ struct DiagonalAdaFisherOptions : torch::optim::OptimizerOptions
 
     std::unique_ptr<torch::optim::OptimizerOptions> clone() const override
     {
-        auto cloned_options = std::make_unique<DiagonalAdaFisherOptions>(this->lr());
+        auto cloned_options = std::make_unique<DiagonalAdaFisherOptions>(this->lr);
         cloned_options->beta(this->beta());
         cloned_options->eps(this->eps());
         cloned_options->weight_decay(this->weight_decay());
