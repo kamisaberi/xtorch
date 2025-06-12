@@ -41,7 +41,7 @@ struct KPOptions : torch::optim::OptimizerOptions {
 struct KPParamState : torch::optim::OptimizerParamState {
     TORCH_ARG(torch::Tensor, step);
     TORCH_ARG(torch::Tensor, momentum_buffer); // Momentum on the final update
-
+public:
     // Kronecker factor statistics and inverse roots
     torch::Tensor l_ema; // Left factor
     torch::Tensor r_ema; // Right factor
@@ -52,7 +52,7 @@ struct KPParamState : torch::optim::OptimizerParamState {
     TORCH_ARG(torch::Tensor, fallback_exp_avg);
     TORCH_ARG(torch::Tensor, fallback_exp_avg_sq);
 
-    KPParamState() = default;
+    // KPParamState() = default;
     void serialize(torch::serialize::OutputArchive& archive) const override;
     void deserialize(torch::serialize::InputArchive& archive) override;
     std::unique_ptr<OptimizerParamState> clone() const override;
