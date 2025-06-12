@@ -189,4 +189,4 @@ torch::Tensor KPOptimizer::_compute_matrix_inverse_root(const torch::Tensor& mat
 // --- Boilerplate ---
 void KPOptimizer::save(torch::serialize::OutputArchive& archive) const { torch::optim::Optimizer::save(archive); }
 void KPOptimizer::load(torch::serialize::InputArchive& archive) { torch::optim::Optimizer::load(archive); }
-std::unique_ptr<torch::optim::OptimizerParamState> KPOptimizer::make_param_state() { return std::make_unique<KPOptimizer::State>(); }
+std::unique_ptr<torch::optim::OptimizerParamState> KPOptimizer::make_param_state() { return std::make_unique<KPParamState>(); }
