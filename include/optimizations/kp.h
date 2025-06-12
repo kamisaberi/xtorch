@@ -1,27 +1,87 @@
-#pragma once
+#ifndef KP_OPTIMIZER_HPP
+#define KP_OPTIMIZER_HPP
 
-#include "common.h"
+#include <torch/torch.h>
+#include <torch/serialize/archive.h>
 
-namespace xt::optimizations
-{
-    class KP : public torch::optim::Optimizer {
-    public:
-        explicit KP(std::vector<torch::Tensor>&& parameters, double lr = 0.01, double momentum = 0.9);
+#include <cmath>
+#include <vector>
+#include <memory>
+#include <string>
+#include <cstdint>
 
-        using LossClosure = std::function<torch::Tensor()>;
-        torch::Tensor step(LossClosure closure = nullptr) override;
+// --- Options for KP Optimizer ---
+struct KPOptions : torch::optim::OptimizerOptions {
+    explicit KPOptions(double learning_rate = 1.0) // Projection provides step size, so lr can be 1.0
+        : torch::optim::OptimizerOptions() {
+        this->lr(learning_rate);
+    }
 
-        // Getter and setter for learning rate
-        double lr() const { return lr_; }
-        void lr(double lr) { lr_ = lr; }
+    // Momentum on the final projected update
+    TORCH_ARG(double, beta1) = 0.9;
+    // EMA decay for Kronecker factor statistics
+    TORCH_ARG(double, beta2) = 0.999;
+    TORCH_ARG(double ,  lr) = 1e-6;   // For momentum on the gradient "force"
+    TORCH_ARG(double, damping) = 1e-6; // Damping for matrix inverse root
+    TORCH_ARG(double, weight_decay) = 1e-4;
+    TORCH_ARG(int, root_order) = 2; // p-th root, 2=sqrt
+    TORCH_ARG(long, precondition_frequency) = 100;
 
-        // Getter and setter for momentum
-        double momentum() const { return momentum_; }
-        void momentum(double momentum) { momentum_ = momentum; }
+    // Adam parameters for the 1D fallback
+    TORCH_ARG(double, fallback_beta1) = 0.9;
+    TORCH_ARG(double, fallback_beta2) = 0.999;
+    TORCH_ARG(double, fallback_eps) = 1e-8;
 
-    private:
-        double lr_;
-        double momentum_;
-        std::vector<torch::Tensor> velocities_;
-    };
-}
+    void serialize(torch::serialize::OutputArchive& archive) const override;
+    void deserialize(torch::serialize::InputArchive& archive) override;
+    std::unique_ptr<torch::optim::OptimizerOptions> clone() const override;
+};
+
+// --- Parameter State for KP Optimizer ---
+struct KPParamState : torch::optim::OptimizerParamState {
+    TORCH_ARG(torch::Tensor, step);
+    TORCH_ARG(torch::Tensor, momentum_buffer); // Momentum on the final update
+
+    // Kronecker factor statistics and inverse roots
+    torch::Tensor l_ema; // Left factor
+    torch::Tensor r_ema; // Right factor
+    torch::Tensor l_inv_root;
+    torch::Tensor r_inv_root;
+
+    // For Adam fallback
+    TORCH_ARG(torch::Tensor, fallback_exp_avg);
+    TORCH_ARG(torch::Tensor, fallback_exp_avg_sq);
+
+    KPParamState() = default;
+    void serialize(torch::serialize::OutputArchive& archive) const override;
+    void deserialize(torch::serialize::InputArchive& archive) override;
+    std::unique_ptr<OptimizerParamState> clone() const override;
+};
+
+// --- KP Optimizer Class ---
+class KPOptimizer : public torch::optim::Optimizer {
+public:
+    KPOptimizer(std::vector<torch::Tensor> params, KPOptions options);
+
+    using LossClosure = std::function<torch::Tensor()>;
+    torch::Tensor step(LossClosure closure = nullptr) override;
+    void save(torch::serialize::OutputArchive& archive) const override;
+    void load(torch::serialize::InputArchive& archive) override;
+
+protected:
+    std::unique_ptr<torch::optim::OptimizerParamState> make_param_state() override;
+
+private:
+    void _fallback_to_adam(
+        torch::Tensor& param,
+        const torch::Tensor& grad,
+        KPParamState& state,
+        const KPOptions& options);
+
+    torch::Tensor _compute_matrix_inverse_root(
+        const torch::Tensor& matrix,
+        double damping,
+        int root_order);
+};
+
+#endif // KP_OPTIMIZER_HPP
