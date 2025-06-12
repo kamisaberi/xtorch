@@ -33,7 +33,7 @@ struct KPOptions : torch::optim::OptimizerOptions {
     TORCH_ARG(double, fallback_eps) = 1e-8;
 
     void serialize(torch::serialize::OutputArchive& archive) const override;
-    void deserialize(torch::serialize::InputArchive& archive) override;
+    void deserialize(torch::serialize::InputArchive& archive) ;
     std::unique_ptr<torch::optim::OptimizerOptions> clone() const override;
 };
 
@@ -54,7 +54,7 @@ public:
 
     // KPParamState() = default;
     void serialize(torch::serialize::OutputArchive& archive) const override;
-    void deserialize(torch::serialize::InputArchive& archive) override;
+    void deserialize(torch::serialize::InputArchive& archive) ;
     std::unique_ptr<OptimizerParamState> clone() const override;
 };
 
@@ -69,7 +69,7 @@ public:
     void load(torch::serialize::InputArchive& archive) override;
 
 protected:
-    std::unique_ptr<torch::optim::OptimizerParamState> make_param_state() override;
+    std::unique_ptr<torch::optim::OptimizerParamState> make_param_state() ;
 
 private:
     void _fallback_to_adam(
