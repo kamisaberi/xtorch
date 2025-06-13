@@ -199,10 +199,35 @@
 // }
 
 
-
 namespace xt::norm
 {
-    auto CLNCFlow::forward(std::initializer_list<std::any> tensors) -> std::any
+    CINCFlow::CINCFlow(int64_t num_features, int64_t cond_embedding_dim, int64_t hidden_dim_cond_net )
+    // hidden_dim can be 0 for direct map
+        : num_features_(num_features),
+          cond_embedding_dim_(cond_embedding_dim),
+          hidden_dim_cond_net_(hidden_dim_cond_net)
+    {
+        TORCH_CHECK(num_features > 0, "num_features must be positive.");
+        TORCH_CHECK(cond_embedding_dim > 0, "cond_embedding_dim must be positive.");
+
+        if (hidden_dim_cond_net_ <= 0)
+        {
+            // Direct mapping from cond to scale/bias
+            hidden_dim_cond_net_ = cond_embedding_dim_; // Use cond_embedding_dim as input to fc2
+            fc2_cond_ = torch::nn::Linear(hidden_dim_cond_net_, 2 * num_features_);
+            register_module("fc2_cond", fc2_cond_);
+        }
+        else
+        {
+            // Use a hidden layer
+            fc1_cond_ = torch::nn::Linear(cond_embedding_dim_, hidden_dim_cond_net_);
+            fc2_cond_ = torch::nn::Linear(hidden_dim_cond_net_, 2 * num_features_); // Output for log_scale and bias
+            register_module("fc1_cond", fc1_cond_);
+            register_module("fc2_cond", fc2_cond_);
+        }
+    }
+
+    auto CINCFlow::forward(std::initializer_list<std::any> tensors) -> std::any
     {
         return torch::zeros(10);
     }
