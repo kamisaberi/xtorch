@@ -159,7 +159,7 @@
 
 namespace xt::norm
 {
-    ReZero::ReZero(double initial_alpha_value = 0.0)
+    ReZero::ReZero(double initial_alpha_value )
     {
         // alpha_ is a learnable scalar parameter.
         alpha_ = register_parameter("alpha", torch::tensor({initial_alpha_value}));

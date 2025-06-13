@@ -262,13 +262,87 @@
 // }
 
 
-
-
-
 namespace xt::norm
 {
+    SABN::SABN(int64_t num_features,
+               double eps,
+               double momentum,
+               double leaky_relu_slope)
+        : num_features_(num_features),
+          eps_(eps),
+          momentum_(momentum),
+          leaky_relu_slope_(leaky_relu_slope)
+    {
+        TORCH_CHECK(num_features > 0, "num_features must be positive.");
+
+        // --- BN Branch 1 Parameters ---
+        running_mean1_ = register_buffer("running_mean1", torch::zeros({num_features_}));
+        running_var1_ = register_buffer("running_var1", torch::ones({num_features_}));
+        gamma1_ = register_parameter("gamma1", torch::ones({num_features_}));
+        beta1_ = register_parameter("beta1", torch::zeros({num_features_}));
+        num_batches_tracked1_ = register_buffer("num_batches_tracked1", torch::tensor(0, torch::kLong));
+
+        // --- BN Branch 2 Parameters ---
+        running_mean2_ = register_buffer("running_mean2", torch::zeros({num_features_}));
+        running_var2_ = register_buffer("running_var2", torch::ones({num_features_}));
+        gamma2_ = register_parameter("gamma2", torch::ones({num_features_}));
+        beta2_ = register_parameter("beta2", torch::zeros({num_features_}));
+        num_batches_tracked2_ = register_buffer("num_batches_tracked2", torch::tensor(0, torch::kLong));
+
+        // --- Mixing Weights ---
+        // Initialize logits to be equal (e.g., zeros), so initial weights are 0.5 for each branch.
+        // Shape (1, num_features, 1, 1, 2) -> for broadcasting with (N,C,H,W) and then for softmax over last dim.
+        // Or (1, num_features * 2, 1, 1) and reshape.
+        // Let's use (channels, num_branches) for logits, then expand.
+        mixing_logits_ = register_parameter("mixing_logits", torch::zeros({num_features_, 2}));
+    }
+
     auto SABN::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return torch::zeros(10);
+        vector<std::any> tensors_ = tensors;
+        auto x = std::any_cast<torch::Tensor>(tensors_[0]);
+
+
+        // Input x expected to be (N, C, D1, D2, ...) e.g., 4D (N,C,H,W)
+        TORCH_CHECK(x.dim() >= 2, "Input tensor x must have at least 2 dimensions (N, C, ...). Got shape ", x.sizes());
+        TORCH_CHECK(x.size(1) == num_features_,
+                    "Input channels mismatch. Expected ", num_features_, ", got ", x.size(1));
+
+        // Prepare shapes for BN params and reduction dims
+        std::vector<int64_t> reduce_dims_stats; // Dims for mean/var (0, 2, 3, ...)
+        reduce_dims_stats.push_back(0); // Batch dimension
+        for (int64_t i = 2; i < x.dim(); ++i)
+        {
+            reduce_dims_stats.push_back(i);
+        }
+        std::vector<int64_t> param_view_shape(x.dim(), 1); // (1,C,1,1 for NCHW)
+        param_view_shape[1] = num_features_;
+
+
+        // --- Calculate outputs of the two BN branches ---
+        torch::Tensor y_bn1 = bn_branch_forward(x, running_mean1_, running_var1_, num_batches_tracked1_,
+                                                gamma1_, beta1_, reduce_dims_stats, param_view_shape);
+        torch::Tensor y_bn2 = bn_branch_forward(x, running_mean2_, running_var2_, num_batches_tracked2_,
+                                                gamma2_, beta2_, reduce_dims_stats, param_view_shape);
+
+        // --- Calculate mixing weights ---
+        // mixing_logits_ is (C, 2). We want weights (1, C, 1, 1, 2) then reduce.
+        // Or (N, C, H, W, 2) effectively.
+        // Let's make weights (C, 2) -> softmax -> (C, 2)
+        // Then select w1 as (C,1) and w2 as (C,1)
+        // Then reshape to (1,C,1,1) for broadcasting
+        torch::Tensor weights = torch::softmax(mixing_logits_, /*dim=*/1); // Softmax over the "branches" dim (dim 1)
+        // weights shape: (num_features, 2)
+
+        torch::Tensor w1 = weights.select(1, 0).view(param_view_shape); // Weight for branch 1, reshaped to (1,C,1,1,..)
+        torch::Tensor w2 = weights.select(1, 1).view(param_view_shape); // Weight for branch 2, reshaped
+
+        // --- Mix the outputs ---
+        torch::Tensor mixed_bn_output = w1 * y_bn1 + w2 * y_bn2;
+
+        // --- Apply Activation (LeakyReLU) ---
+        torch::Tensor output = torch::leaky_relu(mixed_bn_output, leaky_relu_slope_);
+
+        return output;
     }
 }
