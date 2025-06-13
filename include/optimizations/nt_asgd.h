@@ -31,7 +31,7 @@ struct NTASGDParamState : torch::optim::OptimizerParamState {
     TORCH_ARG(torch::Tensor, averaged_param); // The running average of the parameters (mu)
     TORCH_ARG(torch::Tensor, trigger_step);   // The step 'n' at which averaging was triggered
 
-    NTASGDParamState() = default;
+    // NTASGDParamState() = default;
     void serialize(torch::serialize::OutputArchive& archive) const override;
     void deserialize(torch::serialize::InputArchive& archive) ;
     std::unique_ptr<OptimizerParamState> clone() const override;
