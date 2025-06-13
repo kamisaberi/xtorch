@@ -3,14 +3,16 @@
 #include "common.h"
 
 namespace xt::dropouts {
-    torch::Tensor recurrent_dropout(torch::Tensor x);
 
     struct RecurrentDropout : xt::Module {
     public:
-        RecurrentDropout() = default;
+        RecurrentDropout(double p_drop = 0.5);
         auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
 
     private:
+        double p_drop_; // Probability of an element being zeroed out.
+        double epsilon_ = 1e-7; // For numerical stability in division
+
     };
 }
 
