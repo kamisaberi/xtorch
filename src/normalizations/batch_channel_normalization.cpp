@@ -250,8 +250,157 @@
 
 namespace xt::norm
 {
+    BatchChannelNorm::BatchChannelNorm(int64_t num_features, double eps, double momentum, bool affine,
+                                       bool track_running_stats)
+        : num_features_(num_features),
+          eps_(eps),
+          momentum_(momentum),
+          affine_(affine),
+          track_running_stats_(track_running_stats)
+    {
+        TORCH_CHECK(num_features > 0, "num_features must be positive.");
+
+        if (affine_)
+        {
+            gamma_ = register_parameter("weight", torch::ones({num_features_}));
+            beta_ = register_parameter("bias", torch::zeros({num_features_}));
+        }
+        else
+        {
+            // Still register them as undefined tensors if not affine, PyTorch modules often do this.
+            // Or simply don't declare them. For simplicity here, they won't exist if not affine.
+        }
+
+        if (track_running_stats_)
+        {
+            running_mean_ = register_buffer("running_mean", torch::zeros({num_features_}));
+            running_var_ = register_buffer("running_var", torch::ones({num_features_})); // Start with variance 1
+            num_batches_tracked_ = register_buffer("num_batches_tracked", torch::tensor(0, torch::kLong));
+        }
+        else
+        {
+            // Buffers won't exist if not tracking.
+        }
+    }
+
     auto BatchChannelNorm::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return torch::zeros(10);
+        vector<std::any> tensors_ = tensors;
+        auto x = std::any_cast<torch::Tensor>(tensors_[0]);
+
+        // Input x: (N, C, D1, D2, ...) where C is num_features_
+        // N: Batch size
+        // C: Number of features/channels
+        // D1, D2, ...: Spatial or sequential dimensions
+
+        TORCH_CHECK(x.dim() >= 2, "Input tensor must have at least 2 dimensions (N, C, ...). Got ", x.dim());
+        TORCH_CHECK(x.size(1) == num_features_,
+                    "Number of input features (channels) mismatch. Expected ", num_features_,
+                    ", but got ", x.size(1), " for input of shape ", x.sizes());
+
+        torch::Tensor current_mean;
+        torch::Tensor current_var;
+
+        // Determine dimensions for calculating mean/variance:
+        // Exclude channel dimension (dim 1). Include batch (dim 0) and all spatial/sequential dims (2, 3, ...).
+        std::vector<int64_t> reduce_dims_for_stats;
+        reduce_dims_for_stats.push_back(0); // Batch dimension
+        for (int64_t i = 2; i < x.dim(); ++i)
+        {
+            reduce_dims_for_stats.push_back(i);
+        }
+
+        if (this->is_training() && track_running_stats_)
+        {
+            // Calculate mean and variance over the current batch
+            // The result of mean/var over these dims should be of shape (num_features_)
+            torch::Tensor batch_mean = x.mean(reduce_dims_for_stats, /*keepdim=false*/ false);
+            // For variance, PyTorch's functional batch_norm uses N rather than N-1 for batch variance.
+            // x.var(unbiased=false) would be sum((x-mean)^2)/numel_per_channel
+            // Let N_total be the number of elements over which we average for each channel (N * D1 * D2 * ...)
+            int64_t N_total_per_channel = 1;
+            for (int64_t d : reduce_dims_for_stats) N_total_per_channel *= x.size(d);
+            if (N_total_per_channel == 1 && x.dim() > 2)
+            {
+                // Only one spatial element per batch entry
+                // var will be 0, which is fine with eps.
+                // This matches PyTorch behavior (e.g., BatchNorm2d on 1x1 image)
+            }
+            // For batch_var, we need E[X^2] - (E[X])^2
+            // torch::Tensor batch_var = x.var(reduce_dims_for_stats, /*unbiased=*/false, /*keepdim=false*/ false);
+            // Safer way:
+            auto x_minus_mean_sq = (x - batch_mean.view({1, num_features_, 1, 1})).pow(2); // Reshape for broadcast
+            torch::Tensor batch_var = x_minus_mean_sq.mean(reduce_dims_for_stats, /*keepdim=false*/ false);
+
+
+            // Update running statistics
+            // The momentum in PyTorch's BatchNorm is for the running_mean and running_var,
+            // not a simple average.
+            // running_mean = (1 - momentum) * running_mean + momentum * batch_mean
+            // running_var  = (1 - momentum) * running_var  + momentum * batch_var
+            // No .data() needed for buffers if not in no_grad block
+            running_mean_ = (1.0 - momentum_) * running_mean_ + momentum_ * batch_mean;
+            running_var_ = (1.0 - momentum_) * running_var_ + momentum_ * batch_var;
+
+
+            //TODO SOME BUGS MIGHT RAISE HERE
+            // original code was :
+            // if (num_batches_tracked_)
+            // {
+            //     // Check if defined
+            //     num_batches_tracked_ += 1;
+            // }
+
+            if (num_batches_tracked_[0].item<int64>() == 0)
+            {
+                // Check if defined
+                num_batches_tracked_ += 1;
+            }
+
+            current_mean = batch_mean;
+            current_var = batch_var;
+        }
+        else
+        {
+            if (track_running_stats_)
+            {
+                current_mean = running_mean_;
+                current_var = running_var_;
+            }
+            else
+            {
+                // No tracking, compute stats on current batch but don't update running stats
+                // This mode is less common for BN but possible if track_running_stats=false
+                current_mean = x.mean(reduce_dims_for_stats, /*keepdim=false*/ false);
+                // current_var  = x.var(reduce_dims_for_stats, /*unbiased=*/false, /*keepdim=false*/ false);
+                auto x_minus_mean_sq = (x - current_mean.view({1, num_features_, 1, 1})).pow(2);
+                current_var = x_minus_mean_sq.mean(reduce_dims_for_stats, /*keepdim=false*/ false);
+            }
+        }
+
+        // Reshape mean and var to (1, C, 1, 1, ...) for broadcasting
+        std::vector<int64_t> view_shape(x.dim(), 1);
+        if (x.dim() > 1)
+        {
+            // Should always be true
+            view_shape[1] = num_features_;
+        }
+        else
+        {
+            // Should not happen given dim check
+            view_shape[0] = num_features_;
+        }
+
+        torch::Tensor x_normalized = (x - current_mean.view(view_shape)) / torch::sqrt(
+            current_var.view(view_shape) + eps_);
+
+        if (affine_)
+        {
+            return x_normalized * gamma_.view(view_shape) + beta_.view(view_shape);
+        }
+        else
+        {
+            return x_normalized;
+        }
     }
 }
