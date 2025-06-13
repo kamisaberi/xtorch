@@ -181,7 +181,7 @@ namespace xt::dropouts
     auto AdaptiveDropout::forward(std::initializer_list<std::any> tensors) -> std::any
     {
         vector<std::any> tensors_ = tensors;
-        torch::Tensor input = std::any_cast<torch::Tensor>(tensors_[0]);
+        auto input = std::any_cast<torch::Tensor>(tensors_[0]);
 
         if (!this->is_training())
         {

@@ -109,6 +109,28 @@ namespace xt::dropouts
 
     auto AttentionDropout::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return xt::dropouts::attention_dropout(torch::zeros(10));
+        vector<std::any> tensors_ = tensors;
+        auto input = std::any_cast<torch::Tensor>(tensors_[0]);
+
+
+        if (!this->is_training() || p_ == 0.0) {
+            return input;
+        }
+
+        // If p_ is 1.0, all elements are dropped.
+        if (p_ == 1.0) {
+            return torch::zeros_like(input);
+        }
+
+        // Create a mask where elements are 1 with probability (1.0 - p_)
+        // and 0 with probability p_.
+        // Then, scale the result by 1.0 / (1.0 - p_).
+        // This is the "inverted dropout" technique.
+        torch::Tensor mask = (torch::rand_like(input) < (1.0 - p_)).to(input.dtype());
+
+        // Ensure denominator is not zero (already handled by p_ == 1.0 check, but good for clarity)
+        return (input * mask) / (1.0 - p_);
+
+
     }
 }
