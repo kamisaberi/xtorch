@@ -1,7 +1,6 @@
 #include "include/dropouts/temporal_dropout.h"
 
 
-
 // #include <torch/torch.h>
 // #include <vector>
 // #include <ostream> // For std::ostream
@@ -184,13 +183,71 @@
 
 namespace xt::dropouts
 {
-    torch::Tensor temporal_dropout(torch::Tensor x)
+    TemporalDropout::TemporalDropout(double p_drop_timestep , int time_dim )
+        : p_drop_timestep_(p_drop_timestep), time_dim_(time_dim)
     {
-        return torch::zeros(10);
+        TORCH_CHECK(p_drop_timestep_ >= 0.0 && p_drop_timestep_ <= 1.0,
+                    "TemporalDropout p_drop_timestep must be between 0 and 1.");
+        TORCH_CHECK(time_dim_ >= 0, "time_dim must be non-negative.");
     }
+
 
     auto TemporalDropout::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return xt::dropouts::temporal_dropout(torch::zeros(10));
+        vector<std::any> tensors_ = tensors;
+        auto input = std::any_cast<torch::Tensor>(tensors_[0]);
+
+
+        if (!this->is_training() || p_drop_timestep_ == 0.0)
+        {
+            return input;
+        }
+        if (p_drop_timestep_ == 1.0)
+        {
+            return torch::zeros_like(input);
+        }
+
+        TORCH_CHECK(input.dim() > time_dim_, "Input tensor must have at least time_dim + 1 dimensions.");
+
+        int64_t seq_len = input.size(time_dim_);
+        if (seq_len == 0) return input; // No time steps to drop
+
+        double keep_prob = 1.0 - p_drop_timestep_;
+
+        // Create a mask for time steps: shape (seq_len)
+        // This mask will decide which time steps are kept (1) or dropped (0).
+        torch::Tensor timestep_mask_1d = torch::bernoulli(
+            torch::full({seq_len}, keep_prob, input.options())
+        ).to(input.dtype());
+
+        // Reshape timestep_mask_1d to be broadcastable with the input tensor.
+        // Example: If input is (Batch, SeqLen, Features) and time_dim=1,
+        // mask should be (1, SeqLen, 1) to broadcast over Batch and Features.
+        // Or (Batch, SeqLen, 1) if we want different time steps dropped per batch item.
+        // Let's implement the simpler version: same time steps dropped for all batch items.
+        std::vector<int64_t> broadcast_mask_shape(input.dim(), 1L);
+        broadcast_mask_shape[time_dim_] = seq_len;
+
+        torch::Tensor broadcastable_mask = timestep_mask_1d.view(broadcast_mask_shape);
+
+        // Apply mask and scale (inverted dropout)
+        // Scaling should be based on the number of time steps actually kept.
+        double num_kept_timesteps = timestep_mask_1d.sum().item<double>();
+        double scale_factor;
+        if (num_kept_timesteps > 0)
+        {
+            // scale_factor = 1.0 / keep_prob; // This is if we expect keep_prob fraction of steps
+            scale_factor = static_cast<double>(seq_len) / (num_kept_timesteps + epsilon_);
+        }
+        else
+        {
+            // All time steps were dropped
+            scale_factor = 0; // Effectively zeros out output, which is correct
+        }
+        // If using the simple 1.0/keep_prob, then the scaling factor is just that:
+        // scale_factor = 1.0 / (keep_prob + epsilon_);
+        // Let's use the actual proportion kept for more accurate scaling like DropBlock/SensorDropout.
+
+        return (input * broadcastable_mask) * scale_factor;
     }
 }
