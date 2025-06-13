@@ -141,6 +141,26 @@
 
 namespace xt::dropouts
 {
+    namespace
+    {
+        // Anonymous namespace for helper utility
+        double calculate_initial_log_alpha_value(double initial_dropout_rate)
+        {
+            // Clamp initial_dropout_rate to avoid log(0) or log( división by zero )
+            double epsilon = 1e-7;
+            if (initial_dropout_rate < epsilon)
+            {
+                initial_dropout_rate = epsilon;
+            }
+            if (initial_dropout_rate > 1.0 - epsilon)
+            {
+                initial_dropout_rate = 1.0 - epsilon;
+            }
+            return std::log(initial_dropout_rate / (1.0 - initial_dropout_rate));
+        }
+    }
+
+
     AdaptiveDropout::AdaptiveDropout(c10::IntArrayRef probability_shape, double initial_dropout_rate)
     {
         double initial_log_alpha_val = calculate_initial_log_alpha_value(initial_dropout_rate);
