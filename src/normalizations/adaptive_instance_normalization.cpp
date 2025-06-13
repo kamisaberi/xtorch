@@ -1,7 +1,6 @@
 #include "include/normalizations/adaptive_instance_normalization.h"
 
 
-
 // #include <torch/torch.h>
 // #include <iostream>
 // #include <vector>
@@ -187,8 +186,87 @@
 
 namespace xt::norm
 {
+    AdaptiveInstanceNorm::AdaptiveInstanceNorm(double eps)
+        : eps_(eps)
+    {
+        // Adaptive Instance Normalization does not have its own learnable parameters
+        // for gamma and beta in the traditional sense. These are provided from the style input.
+    }
+
     auto AdaptiveInstanceNorm::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return torch::zeros(10);
+        vector<std::any> tensors_ = tensors;
+        auto content_input = std::any_cast<torch::Tensor>(tensors_[0]);
+        auto style_gamma = std::any_cast<torch::Tensor>(tensors_[1]);
+        auto style_beta = std::any_cast<torch::Tensor>(tensors_[2]);
+
+        // ----- Input Shape Checks -----
+        // content_input: (N, C, H, W) or (N, C, L) or (N, C)
+        // style_gamma: (N, C)
+        // style_beta: (N, C)
+
+        TORCH_CHECK(content_input.dim() >= 2, "Content input tensor must have at least 2 dimensions (N, C, ...). Got ",
+                    content_input.dim());
+        TORCH_CHECK(style_gamma.dim() == 2, "Style gamma tensor must have 2 dimensions (N, C). Got ",
+                    style_gamma.dim());
+        TORCH_CHECK(style_beta.dim() == 2, "Style beta tensor must have 2 dimensions (N, C). Got ", style_beta.dim());
+
+        const int64_t N = content_input.size(0);
+        const int64_t C = content_input.size(1);
+
+        TORCH_CHECK(style_gamma.size(0) == N, "Batch size of content input (", N, ") and style_gamma (",
+                    style_gamma.size(0), ") must match.");
+        TORCH_CHECK(style_gamma.size(1) == C, "Number of channels of content input (", C, ") and style_gamma (",
+                    style_gamma.size(1), ") must match.");
+        TORCH_CHECK(style_beta.size(0) == N, "Batch size of content input (", N, ") and style_beta (",
+                    style_beta.size(0), ") must match.");
+        TORCH_CHECK(style_beta.size(1) == C, "Number of channels of content input (", C, ") and style_beta (",
+                    style_beta.size(1), ") must match.");
+
+        // ----- Instance Normalize content_input -----
+        torch::Tensor normalized_content;
+
+        if (content_input.dim() > 2)
+        {
+            // For inputs like (N, C, H, W) or (N, C, L)
+            // We want to normalize over the spatial/sequential dimensions (dims from 2 onwards)
+            std::vector<int64_t> reduce_dims;
+            for (int64_t i = 2; i < content_input.dim(); ++i)
+            {
+                reduce_dims.push_back(i);
+            }
+
+            // Calculate mean and variance per instance, per channel.
+            // keepdim=true ensures broadcastable shapes.
+            auto mean = content_input.mean(reduce_dims, /*keepdim=*/true);
+            // unbiased=false for population variance.
+            auto var = content_input.var(reduce_dims, /*unbiased=*/false, /*keepdim=*/true);
+
+            normalized_content = (content_input - mean) / torch::sqrt(var + eps_);
+        }
+        else
+        {
+            // content_input.dim() == 2, shape (N, C)
+            // For (N,C) input, each "spatial" element is a single point.
+            // Normalizing a single point: (v - v) / sqrt(var(v) + eps) = 0 / sqrt(0 + eps) = 0.
+            normalized_content = torch::zeros_like(content_input);
+        }
+
+        // ----- Apply Style Parameters (gamma and beta) -----
+        // style_gamma and style_beta are (N, C). They need to be reshaped to
+        // (N, C, 1, 1, ...) to broadcast with normalized_content.
+
+        std::vector<int64_t> style_param_view_shape;
+        style_param_view_shape.push_back(N); // N
+        style_param_view_shape.push_back(C); // C
+        for (int64_t i = 2; i < content_input.dim(); ++i)
+        {
+            style_param_view_shape.push_back(1);
+        }
+
+        auto style_gamma_reshaped = style_gamma.view(style_param_view_shape);
+        auto style_beta_reshaped = style_beta.view(style_param_view_shape);
+
+        return normalized_content * style_gamma_reshaped + style_beta_reshaped;
     }
 }
