@@ -9,10 +9,6 @@
 
 namespace xt::dropouts
 {
-    namespace
-    {
-        double calculate_initial_log_alpha_value(double initial_dropout_rate);
-    }
 
 
     torch::Tensor adaptive_dropout(torch::Tensor x);

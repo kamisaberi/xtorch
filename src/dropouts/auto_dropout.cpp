@@ -182,13 +182,47 @@
 // */
 
 
-
 namespace xt::dropouts
 {
-    torch::Tensor auto_dropout(torch::Tensor x)
+    namespace
     {
-        return torch::zeros(10);
+        // Anonymous namespace for helper utility
+        // Helper to calculate initial log_alpha from an initial dropout rate p.
+        // p = sigmoid(log_alpha)  => log_alpha = log(p / (1-p))
+        double calculate_initial_log_alpha_value(double initial_dropout_rate)
+        {
+            // Clamp initial_dropout_rate to avoid log(0) or log( division by zero )
+            double epsilon = 1e-7; // A small epsilon
+            if (initial_dropout_rate < epsilon)
+            {
+                initial_dropout_rate = epsilon;
+            }
+            if (initial_dropout_rate > 1.0 - epsilon)
+            {
+                initial_dropout_rate = 1.0 - epsilon;
+            }
+            return std::log(initial_dropout_rate / (1.0 - initial_dropout_rate));
+        }
+    } // namespace
+
+    AutoDropout::AutoDropout(c10::IntArrayRef probability_shape, double initial_dropout_rate)
+    {
+        double initial_log_alpha_val = calculate_initial_log_alpha_value(initial_dropout_rate);
+
+        torch::Tensor log_alpha_init;
+        if (probability_shape.empty())
+        {
+            // Scalar probability
+            log_alpha_init = torch::tensor(initial_log_alpha_val, torch::kFloat32);
+        }
+        else
+        {
+            // Create a tensor of the given shape, filled with the initial log_alpha value.
+            log_alpha_init = torch::full(probability_shape, initial_log_alpha_val, torch::kFloat32);
+        }
+        log_alpha_ = register_parameter("log_alpha", log_alpha_init);
     }
+
 
     auto AutoDropout::forward(std::initializer_list<std::any> tensors) -> std::any
     {
