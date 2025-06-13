@@ -187,13 +187,74 @@
 
 namespace xt::dropouts
 {
-    torch::Tensor variational_dropout(torch::Tensor x)
+    namespace
     {
-        return torch::zeros(10);
+        double calculate_initial_log_alpha(double initial_effective_p, double epsilon = 1e-7)
+        {
+            if (initial_effective_p < epsilon) initial_effective_p = epsilon;
+            if (initial_effective_p >= 1.0 - epsilon) initial_effective_p = 1.0 - epsilon - epsilon;
+            // Ensure 1-p is not too small
+            double alpha = initial_effective_p / (1.0 - initial_effective_p);
+            return std::log(alpha + epsilon); // Add epsilon to avoid log(0) if alpha is near 0
+        }
+    }
+
+    VariationalDropout::VariationalDropout(c10::IntArrayRef alpha_shape, double initial_dropout_rate_for_alpha_init)
+    {
+        double initial_log_alpha_val = calculate_initial_log_alpha(initial_dropout_rate_for_alpha_init);
+
+        torch::Tensor log_alpha_init_tensor;
+        if (alpha_shape.empty())
+        {
+            // Scalar alpha
+            log_alpha_init_tensor = torch::tensor(initial_log_alpha_val, torch::kFloat32);
+        }
+        else
+        {
+            log_alpha_init_tensor = torch::full(alpha_shape, initial_log_alpha_val, torch::kFloat32);
+        }
+        log_alpha_ = register_parameter("log_alpha", log_alpha_init_tensor);
     }
 
     auto VariationalDropout::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return xt::dropouts::variational_dropout(torch::zeros(10));
+        vector<std::any> tensors_ = tensors;
+        auto input = std::any_cast<torch::Tensor>(tensors_[0]);
+
+
+        if (!this->is_training())
+        {
+            // During evaluation, Variational Dropout (Kingma et al. version) acts as an identity.
+            // The learned alpha values are expected to have regularized the network.
+            return input;
+        }
+
+        torch::Tensor alpha = torch::exp(log_alpha_); // alpha = variance of N(0,alpha) noise
+
+        // Clamp alpha to prevent it from becoming too small (leading to NaN in sqrt) or excessively large.
+        // The lower bound for alpha (variance) should be positive.
+        alpha = torch::clamp_min(alpha, epsilon_);
+
+
+        // Handle broadcasting of alpha (e.g., for per-channel dropout).
+        torch::Tensor alpha_broadcastable = alpha;
+        if (alpha.dim() == 1 && input.dim() > 1 && alpha.size(0) == input.size(1) && input.size(1) > 0)
+        {
+            // Assuming alpha.size(0) is the channel dimension (dim 1 of input)
+            std::vector<int64_t> view_shape(input.dim(), 1L);
+            view_shape[1] = alpha.size(0); // e.g., [1, C, 1, 1] for NCHW input
+            alpha_broadcastable = alpha.view(view_shape);
+        }
+        // Else: rely on PyTorch's standard broadcasting if alpha is scalar or already matches.
+
+        // Generate standard Gaussian noise epsilon ~ N(0, 1)
+        torch::Tensor noise_std_normal = torch::randn_like(input);
+
+        // Apply noise: output = input * (1 + sqrt(alpha_broadcastable) * noise_std_normal)
+        // This is equivalent to input * N(1, alpha_broadcastable)
+        torch::Tensor scaled_noise = torch::sqrt(alpha_broadcastable) * noise_std_normal;
+        torch::Tensor output = input * (1.0 + scaled_noise);
+
+        return output;
     }
 }
