@@ -211,11 +211,105 @@
 // }
 
 
-
 namespace xt::norm
 {
+    CrossNorm::CrossNorm(int64_t num_features, double eps, bool affine)
+        : num_features_(num_features), eps_(eps), affine_(affine)
+    {
+        TORCH_CHECK(num_features > 0, "num_features must be positive.");
+
+        if (affine_)
+        {
+            gamma_x_ = register_parameter("weight", torch::ones({num_features_})); // For x
+            beta_x_ = register_parameter("bias", torch::zeros({num_features_})); // For x
+        }
+        // No running_mean or running_var needed if stats are always from y_reference.
+    }
+
     auto CrossNorm::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return torch::zeros(10);
+        vector<std::any> tensors_ = tensors;
+        auto x = std::any_cast<torch::Tensor>(tensors_[0]);
+        auto y_reference = std::any_cast<torch::Tensor>(tensors_[1]);
+
+        // x: The tensor to be normalized. (N, C, D1, D2, ...)
+        // y_reference: The tensor from which normalization statistics (mean, var) are derived. (N_y, C, D1_y, D2_y, ...)
+        // C (num_features) must match between x and y_reference.
+        // N and spatial dimensions can differ. Statistics from y_reference will be broadcasted.
+        // For simplicity, we'll assume y_reference also has shape (N, C, D1_y, D2_y, ...)
+        // and we compute instance-wise stats from y and apply to corresponding instance in x.
+
+        TORCH_CHECK(x.dim() >= 2, "Input tensor x must have at least 2 dimensions (N, C, ...). Got ", x.dim());
+        TORCH_CHECK(y_reference.dim() >= 2,
+                    "Reference tensor y_reference must have at least 2 dimensions (N, C, ...). Got ",
+                    y_reference.dim());
+
+        TORCH_CHECK(x.size(1) == num_features_,
+                    "Number of features (channels) in x mismatch. Expected ", num_features_,
+                    ", but got ", x.size(1));
+        TORCH_CHECK(y_reference.size(1) == num_features_,
+                    "Number of features (channels) in y_reference mismatch. Expected ", num_features_,
+                    ", but got ", y_reference.size(1));
+        TORCH_CHECK(x.size(0) == y_reference.size(0),
+                    "Batch sizes of x (", x.size(0), ") and y_reference (", y_reference.size(0),
+                    ") must match for this CrossNorm interpretation.");
+
+
+        // --- 1. Compute mean and variance from y_reference (Instance Normalization style) ---
+        torch::Tensor mean_y;
+        torch::Tensor var_y;
+
+        if (y_reference.dim() > 2)
+        {
+            // y_reference has spatial/sequential dimensions (N, C, D1_y, ...)
+            std::vector<int64_t> reduce_dims_y; // Dims to average over for mean/var from y_reference (D1_y, D2_y, ...)
+            for (int64_t i = 2; i < y_reference.dim(); ++i)
+            {
+                reduce_dims_y.push_back(i);
+            }
+            // keepdim=true for broadcasting
+            mean_y = y_reference.mean(reduce_dims_y, /*keepdim=*/true); // Shape (N_y, C, 1, 1, ...)
+            var_y = y_reference.var(reduce_dims_y, /*unbiased=*/false, /*keepdim=*/true); // Shape (N_y, C, 1, 1, ...)
+        }
+        else
+        {
+            // y_reference is 2D (N_y, C). InstanceNorm on a single point per channel results in mean=value, var=0.
+            mean_y = y_reference; // Each value is its own mean
+            var_y = torch::zeros_like(y_reference); // Variance of a single point is 0
+            // To ensure correct broadcasting later, reshape mean_y and var_y to (N_y, C, 1, 1, ...) like structure for x
+            if (x.dim() > 2)
+            {
+                std::vector<int64_t> view_shape_y_stats;
+                view_shape_y_stats.push_back(y_reference.size(0)); // N_y
+                view_shape_y_stats.push_back(num_features_); // C
+                for (int64_t i = 2; i < x.dim(); ++i)
+                {
+                    // Use x's spatial dims for shaping
+                    view_shape_y_stats.push_back(1);
+                }
+                mean_y = mean_y.view(view_shape_y_stats);
+                var_y = var_y.view(view_shape_y_stats);
+            }
+        }
+
+        // --- 2. Normalize x using statistics from y_reference ---
+        // mean_y and var_y are (N, C, 1, ..., 1) based on y_reference's spatial dims.
+        // x is (N, C, D1_x, D2_x, ...). Broadcasting should work if N and C match.
+        torch::Tensor x_normalized = (x - mean_y) / torch::sqrt(var_y + eps_);
+
+
+        // --- 3. Apply optional affine transformation to x_normalized ---
+        if (affine_)
+        {
+            // gamma_x_ and beta_x_ are (num_features_). Reshape to (1, C, 1, 1, ...) for broadcasting.
+            std::vector<int64_t> affine_param_view_shape(x.dim(), 1);
+            affine_param_view_shape[1] = num_features_;
+
+            return x_normalized * gamma_x_.view(affine_param_view_shape) + beta_x_.view(affine_param_view_shape);
+        }
+        else
+        {
+            return x_normalized;
+        }
     }
 }
