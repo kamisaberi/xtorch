@@ -7,7 +7,7 @@ namespace xt::norm
     struct CINCFlow : xt::Module
     {
     public:
-        CINCFlow(int64_t num_features, int64_t cond_embedding_dim, int64_t hidden_dim_cond_net = 0)
+        CINCFlow(int64_t num_features, int64_t cond_embedding_dim, int64_t hidden_dim_cond_net = 0);
 
         auto forward(std::initializer_list<std::any> tensors) -> std::any override;
 
