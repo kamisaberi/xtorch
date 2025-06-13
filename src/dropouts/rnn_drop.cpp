@@ -1,7 +1,6 @@
 #include "include/dropouts/rnn_drop.h"
 
 
-
 // #include <torch/torch.h>
 // #include <ostream> // For std::ostream
 // #include <vector>  // For std::vector
@@ -205,13 +204,61 @@
 
 namespace xt::dropouts
 {
-    torch::Tensor rnn_drop(torch::Tensor x)
+    RNNDrop::RNNDrop(double p_drop) : p_drop_(p_drop)
     {
-        return torch::zeros(10);
+        TORCH_CHECK(p_drop_ >= 0.0 && p_drop_ <= 1.0, "Dropout probability p_drop must be between 0 and 1.");
     }
 
-    auto RnnDrop::forward(std::initializer_list<std::any> tensors) -> std::any
+    auto RNNDrop::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return xt::dropouts::rnn_drop(torch::zeros(10));
+        vector<std::any> tensors_ = tensors;
+        auto x = std::any_cast<torch::Tensor>(tensors_[0]);
+
+        if (!this->is_training() || p_drop_ == 0.0)
+        {
+            return x; // No dropout if not training or p_drop is 0
+        }
+        if (p_drop_ == 1.0)
+        {
+            return torch::zeros_like(x); // Drop everything if p_drop is 1
+        }
+
+        double keep_prob = 1.0 - p_drop_;
+        torch::Tensor mask;
+
+        if (x.dim() == 3)
+        {
+            // Input shape: (Batch, SeqLen, Features)
+            // Create a mask of shape (Batch, 1, Features) to be broadcast across SeqLen.
+            // This ensures the same features are dropped for all time steps of a given sample.
+            std::vector<int64_t> mask_shape = {x.size(0), 1, x.size(2)};
+            mask = torch::bernoulli(
+                torch::full(mask_shape, keep_prob, x.options())
+            ).to(x.dtype());
+        }
+        else if (x.dim() == 2)
+        {
+            // Input shape: (Batch, Features) or (SeqLen, Features)
+            // Apply standard dropout mask.
+            mask = torch::bernoulli(
+                torch::full_like(x, keep_prob)
+            ).to(x.dtype());
+        }
+        else if (x.dim() == 1)
+        {
+            // Input shape: (Features)
+            // Apply standard dropout mask.
+            mask = torch::bernoulli(
+                torch::full_like(x, keep_prob)
+            ).to(x.dtype());
+        }
+        else
+        {
+            TORCH_CHECK(false, "RNNDrop expects input of dim 1, 2 or 3. Got dim: ", x.dim());
+            return x; // Should not reach here due to TORCH_CHECK
+        }
+
+        // Apply mask and scale (inverted dropout)
+        return (x * mask) / (keep_prob + epsilon_);
     }
 }
