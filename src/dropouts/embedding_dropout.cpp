@@ -1,7 +1,6 @@
 #include "include/dropouts/embedding_dropout.h"
 
 
-
 // #include <torch/torch.h>
 // #include <vector>
 // #include <ostream> // For std::ostream
@@ -167,13 +166,83 @@
 
 namespace xt::dropouts
 {
-    torch::Tensor embedding_dropout(torch::Tensor x)
+    EmbeddingDropout::EmbeddingDropout(double p_drop_entire_embedding )
+        : p_drop_entire_embedding_(p_drop_entire_embedding)
     {
-        return torch::zeros(10);
+        TORCH_CHECK(p_drop_entire_embedding_ >= 0.0 && p_drop_entire_embedding_ <= 1.0,
+                    "EmbeddingDropout probability must be between 0 and 1.");
     }
+
 
     auto EmbeddingDropout::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return xt::dropouts::embedding_dropout(torch::zeros(10));
+        vector<std::any> tensors_ = tensors;
+        auto embedding_output = std::any_cast<torch::Tensor>(tensors_[0]);
+
+        if (!this->is_training() || p_drop_entire_embedding_ == 0.0)
+        {
+            return embedding_output;
+        }
+        if (p_drop_entire_embedding_ == 1.0)
+        {
+            return torch::zeros_like(embedding_output);
+        }
+
+        TORCH_CHECK(embedding_output.dim() >= 2,
+                    "EmbeddingDropout expects input with at least 2 dimensions (e.g., [SeqLen, EmbDim] or [Batch, SeqLen, EmbDim]).");
+
+        double keep_prob = 1.0 - p_drop_entire_embedding_;
+
+        // Determine the shape for the mask. We want to drop entire embedding vectors.
+        // If input is (B, S, E), mask should be (B, S, 1) and broadcast.
+        // If input is (S, E), mask should be (S, 1) and broadcast.
+        torch::IntArrayRef input_sizes = embedding_output.sizes();
+        std::vector<int64_t> mask_shape_vec;
+
+        if (input_sizes.size() == 2)
+        {
+            // (SeqLen or Batch, EmbeddingDim)
+            mask_shape_vec.push_back(input_sizes[0]); // Dropout per row of this 2D tensor
+            mask_shape_vec.push_back(1); // Broadcast across embedding dim
+        }
+        else if (input_sizes.size() == 3)
+        {
+            // (Batch, SeqLen, EmbeddingDim)
+            mask_shape_vec.push_back(input_sizes[0]); // Batch
+            mask_shape_vec.push_back(input_sizes[1]); // Sequence Length - dropout per token in sequence
+            mask_shape_vec.push_back(1); // Broadcast across embedding dim
+        }
+        else
+        {
+            // For other dimensions, this simple approach might not be ideal.
+            // A common case is (Batch, SeqLen, EmbDim).
+            // We'll proceed assuming the last dimension is EmbeddingDim.
+            // This will create a mask that drops elements along all but the last dimension.
+            // This is a more general way: create mask for all but last dim, then unsqueeze last dim.
+            std::vector<int64_t> first_dims_shape;
+            for (size_t i = 0; i < input_sizes.size() - 1; ++i)
+            {
+                first_dims_shape.push_back(input_sizes[i]);
+            }
+            if (first_dims_shape.empty())
+            {
+                // Input was (EmbeddingDim), unlikely but handle
+                first_dims_shape.push_back(1); // Treat as (1, EmbeddingDim)
+            }
+            torch::Tensor mask_first_dims = torch::bernoulli(
+                torch::full(first_dims_shape, keep_prob, embedding_output.options())
+            ).to(embedding_output.dtype());
+            torch::Tensor mask = mask_first_dims.unsqueeze(-1); // Add dim for broadcasting over EmbeddingDim
+            return (embedding_output * mask) / (keep_prob + epsilon_);
+        }
+
+        // Generate mask with shape (B, S, 1) or (S, 1)
+        torch::Tensor mask = torch::bernoulli(
+            torch::full(mask_shape_vec, keep_prob, embedding_output.options())
+        ).to(embedding_output.dtype());
+
+        // Apply mask and scale (inverted dropout)
+        return (embedding_output * mask) / (keep_prob + epsilon_);
+
     }
 }
