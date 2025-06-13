@@ -142,13 +142,61 @@
 
 namespace xt::dropouts
 {
-    torch::Tensor grad_drop(torch::Tensor x)
+    namespace
     {
-        return torch::zeros(10);
+        // Anonymous namespace for helper utility
+        // Calculates logit(p) = log(p / (1-p)) with clamping for numerical stability.
+        double calculate_logit(double p, double epsilon = 1e-7)
+        {
+            p = std::clamp(p, epsilon, 1.0 - epsilon);
+            return std::log(p / (1.0 - p));
+        }
+    } // namespace
+
+
+    GradDrop::GradDrop(double p_drop_at_zero_activation, double sensitivity)
+        : p_drop_at_zero_activation_(p_drop_at_zero_activation),
+          sensitivity_(sensitivity)
+    {
+        TORCH_CHECK(p_drop_at_zero_activation_ >= 0.0 && p_drop_at_zero_activation_ < 1.0,
+                    "p_drop_at_zero_activation must be in [0, 1).");
+        TORCH_CHECK(sensitivity_ >= 0.0, "sensitivity must be non-negative.");
+
+        base_logit_keep_at_zero_ = calculate_logit(1.0 - p_drop_at_zero_activation_, epsilon_);
     }
+
 
     auto GradDrop::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return xt::dropouts::grad_drop(torch::zeros(10));
+        vector<std::any> tensors_ = tensors;
+        auto input = std::any_cast<torch::Tensor>(tensors_[0]);
+
+        if (!this->is_training())
+        {
+            return input;
+        }
+        // If p_drop_at_zero is 0 and sensitivity is 0, it means keep_prob is always logit_keep(1.0)=inf -> sigmoid=1 (no drop)
+        // This case is effectively no dropout if params are set to imply full keep.
+        // A specific check for p_drop_at_zero_ == 0 && sensitivity_ == 0.0 might be redundant
+        // as sigmoid(very_large_number) is 1.0.
+
+        // Calculate element-wise keep probability logits
+        torch::Tensor abs_input = torch::abs(input);
+        torch::Tensor keep_prob_logits = base_logit_keep_at_zero_ + sensitivity_ * abs_input;
+
+        // Calculate element-wise keep probabilities
+        torch::Tensor keep_probabilities = torch::sigmoid(keep_prob_logits);
+
+        // Clamp keep_probabilities to avoid division by zero or extreme scaling.
+        // Esp. if keep_prob can be very close to 0 for some units.
+        torch::Tensor keep_probabilities_clamped = torch::clamp(keep_probabilities, epsilon_, 1.0);
+        // If a keep_probability is 1.0, then that unit is never dropped by this mechanism.
+        // If keep_probability is epsilon_, it's almost always dropped.
+
+        // Generate mask based on these element-wise keep probabilities
+        torch::Tensor mask = torch::bernoulli(keep_probabilities).to(input.dtype());
+
+        // Apply mask and scale (inverted dropout, element-wise scaling)
+        return (input * mask) / keep_probabilities_clamped;
     }
 }
