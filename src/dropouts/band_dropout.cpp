@@ -150,13 +150,75 @@
 
 namespace xt::dropouts
 {
-    torch::Tensor band_dropout(torch::Tensor x)
+    namespace
     {
-        return torch::zeros(10);
+        // Anonymous namespace for helper utility
+        double calculate_logit_from_probability(double probability, double epsilon = 1e-7)
+        {
+            if (probability < epsilon) probability = epsilon;
+            if (probability > 1.0 - epsilon) probability = 1.0 - epsilon;
+            return std::log(probability / (1.0 - probability));
+        }
+    } // namespace
+
+    BandDropout::BandDropout(c10::IntArrayRef params_shape,
+                             double initial_baseline_dropout_rate,
+                             double initial_alpha_value)
+    {
+        double initial_keep_prob_baseline = 1.0 - initial_baseline_dropout_rate;
+        double initial_beta_val = calculate_logit_from_probability(initial_keep_prob_baseline, epsilon_);
+
+        torch::Tensor alpha_init;
+        torch::Tensor beta_init;
+
+        if (params_shape.empty())
+        {
+            alpha_init = torch::tensor(initial_alpha_value, torch::kFloat32);
+            beta_init = torch::tensor(initial_beta_val, torch::kFloat32);
+        }
+        else
+        {
+            alpha_init = torch::full(params_shape, initial_alpha_value, torch::kFloat32);
+            beta_init = torch::full(params_shape, initial_beta_val, torch::kFloat32);
+        }
+        alpha_ = register_parameter("alpha", alpha_init);
+        beta_ = register_parameter("beta", beta_init);
     }
+
 
     auto BandDropout::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return xt::dropouts::band_dropout(torch::zeros(10));
+        vector<std::any> tensors_ = tensors;
+        auto input = std::any_cast<torch::Tensor>(tensors_[0]);
+
+        if (!this->is_training())
+        {
+            return input;
+        }
+
+        torch::Tensor current_alpha = alpha_;
+        torch::Tensor current_beta = beta_;
+
+        if (current_alpha.dim() == 1 && input.dim() > 1 && current_alpha.size(0) == input.size(1) && input.size(1) > 0)
+        {
+            std::vector<int64_t> view_shape(input.dim(), 1L);
+            view_shape[1] = current_alpha.size(0);
+            current_alpha = current_alpha.view(view_shape);
+            if (current_beta.dim() == 1 && current_beta.size(0) == input.size(1))
+            {
+                current_beta = current_beta.view(view_shape);
+            }
+        }
+
+        torch::Tensor keep_prob_logits = current_alpha * torch::abs(input) + current_beta;
+        torch::Tensor keep_probabilities = torch::sigmoid(keep_prob_logits);
+        keep_probabilities = torch::clamp(keep_probabilities, epsilon_, 1.0);
+
+        torch::Tensor random_tensor = torch::rand_like(input);
+        torch::Tensor mask = (random_tensor < keep_probabilities).to(input.dtype());
+
+        torch::Tensor output = (input * mask) / keep_probabilities;
+
+        return output;
     }
 }
