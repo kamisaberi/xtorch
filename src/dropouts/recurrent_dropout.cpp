@@ -224,17 +224,61 @@
 // */
 
 
-
-
 namespace xt::dropouts
 {
-    torch::Tensor recurrent_dropout(torch::Tensor x)
+    RecurrentDropout::RecurrentDropout(double p_drop) : p_drop_(p_drop)
     {
-        return torch::zeros(10);
+        TORCH_CHECK(p_drop_ >= 0.0 && p_drop_ <= 1.0, "Dropout probability p_drop must be between 0 and 1.");
     }
+
 
     auto RecurrentDropout::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return xt::dropouts::recurrent_dropout(torch::zeros(10));
+        vector<std::any> tensors_ = tensors;
+        auto x = std::any_cast<torch::Tensor>(tensors_[0]);
+
+        if (!this->is_training() || p_drop_ == 0.0)
+        {
+            return x;
+        }
+        if (p_drop_ == 1.0)
+        {
+            return torch::zeros_like(x);
+        }
+
+        double keep_prob = 1.0 - p_drop_;
+
+        // Generate a dropout mask. For recurrent dropout, this mask should be
+        // consistent across the time steps for a given sequence sample.
+        // If x is (Batch, Features), the mask is (Batch, Features).
+        // If x is (Batch, SeqLen, Features), to have the same mask across SeqLen for each batch item,
+        // the mask should be generated with shape (Batch, 1, Features) and then broadcast.
+        torch::Tensor mask;
+        if (x.dim() == 3)
+        {
+            // Assuming (Batch, SeqLen, Features)
+            // Create mask of shape (Batch, 1, Features)
+            torch::Tensor mask_template = torch::full({x.size(0), 1, x.size(2)}, keep_prob, x.options());
+            mask = torch::bernoulli(mask_template).to(x.dtype());
+            // This mask will broadcast along the SeqLen dimension.
+        }
+        else if (x.dim() == 2)
+        {
+            // Assuming (Batch, Features) or (SeqLen, Features)
+            // Create mask of shape (Batch, Features)
+            mask = torch::bernoulli(torch::full_like(x, keep_prob)).to(x.dtype());
+        }
+        else if (x.dim() == 1)
+        {
+            // Assuming (Features)
+            mask = torch::bernoulli(torch::full_like(x, keep_prob)).to(x.dtype());
+        }
+        else
+        {
+            TORCH_CHECK(false, "RecurrentDropout expects input of dim 1, 2 or 3.");
+            return x; // Should not reach here
+        }
+
+        return (x * mask) / (keep_prob + epsilon_);
     }
 }
