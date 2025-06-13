@@ -51,7 +51,7 @@ public:
     torch::Tensor l_inv_root;
     torch::Tensor r_inv_root;
 
-    PLOParamState() = default;
+    // PLOParamState() = default;
     void serialize(torch::serialize::OutputArchive& archive) const override;
     void deserialize(torch::serialize::InputArchive& archive) ;
     std::unique_ptr<OptimizerParamState> clone() const override;
