@@ -154,7 +154,7 @@
 
 namespace xt::norm
 {
-    PixelNorm::PixelNorm(double eps = 1e-8)
+    PixelNorm::PixelNorm(double eps)
         : eps_(eps)
     {
         // PixelNorm typically does not have learnable parameters.

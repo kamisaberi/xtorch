@@ -1,9 +1,6 @@
 #include "include/normalizations/power_normalization.h"
 
 
-
-
-
 // #include <torch/torch.h>
 // #include <iostream>
 // #include <vector>
@@ -193,8 +190,84 @@
 
 namespace xt::norm
 {
+    PowerNorm::PowerNorm(double initial_power, // e.g., 0.5 for sqrt normalization
+                         bool learnable_power,
+                         bool apply_l2_norm,
+                         int64_t l2_norm_dim, // -1 for global L2 norm
+                         bool signed_power,
+                         double eps_l2)
+        : power_val_(initial_power),
+          learnable_power_(learnable_power),
+          apply_l2_norm_(apply_l2_norm),
+          l2_norm_dim_(l2_norm_dim),
+          signed_power_(signed_power),
+          eps_l2_(eps_l2)
+    {
+        if (learnable_power_)
+        {
+            // Register power_param_ and initialize it.
+            // The actual power used will be derived from this (e.g., just power_param_ itself, or softplus(power_param_) to keep it positive).
+            // For simplicity, let power_param_ directly be the power.
+            power_param_ = register_parameter("power_exponent", torch::tensor({initial_power}));
+        }
+        // If not learnable, power_val_ is used directly.
+    }
+
     auto PowerNorm::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return torch::zeros(10);
+        vector<std::any> tensors_ = tensors;
+        auto x = std::any_cast<torch::Tensor>(tensors_[0]);
+
+        // x: input tensor
+
+        torch::Tensor x_processed = x;
+
+        // --- 1. Optional L2 Normalization ---
+        if (apply_l2_norm_)
+        {
+            torch::Tensor norm;
+            if (l2_norm_dim_ == -1)
+            {
+                // Global L2 norm
+                norm = x_processed.norm();
+            }
+            else
+            {
+                // L2 norm along a specific dimension
+                TORCH_CHECK(x_processed.dim() > l2_norm_dim_ && l2_norm_dim_ >= 0,
+                            "Input tensor rank must be greater than l2_norm_dim, and l2_norm_dim must be non-negative or -1.");
+                norm = x_processed.norm(2, l2_norm_dim_, /*keepdim=*/true);
+            }
+            x_processed = x_processed / (norm + eps_l2_);
+        }
+
+        // --- 2. Power Transformation ---
+        double current_power = learnable_power_ ? power_param_.item<double>() : power_val_;
+
+        torch::Tensor output;
+        if (signed_power_)
+        {
+            // output = sgn(x) * |x|^p
+            // torch::sgn and torch::pow handle this well.
+            // torch::abs(x_processed) might be needed if power can be non-integer and x_processed can be negative.
+            // pow(negative_base, non_integer_exponent) is complex or NaN.
+            // sgn(x) * (|x| + eps_for_pow)^p to avoid pow(0, p<1) issues if needed, but torch.pow should handle.
+            output = torch::sgn(x_processed) * torch::pow(torch::abs(x_processed), current_power);
+        }
+        else
+        {
+            // output = x^p
+            // This can result in NaN if x contains negative values and current_power is not an integer.
+            // A common use case for x^p is when x is known to be non-negative (e.g., after ReLU).
+            if ((x_processed < 0).any().item<bool>() && (current_power != std::round(current_power) || current_power <
+                0))
+            {
+                TORCH_WARN_ONCE(
+                    "Applying non-signed power with potentially negative inputs and non-integer/negative exponent. This may result in NaNs.");
+            }
+            output = torch::pow(x_processed, current_power);
+        }
+
+        return output;
     }
 }
