@@ -264,6 +264,7 @@
 
 namespace xt::norm
 {
+
     SABN::SABN(int64_t num_features,
                double eps,
                double momentum,
@@ -345,4 +346,34 @@ namespace xt::norm
 
         return output;
     }
+
+
+    torch::Tensor SABN::bn_branch_forward(
+    const torch::Tensor& x_input,
+    torch::Tensor& running_mean,
+    torch::Tensor& running_var,
+    torch::Tensor& num_batches_tracked,
+    const torch::Tensor& gamma,
+    const torch::Tensor& beta,
+    const std::vector<int64_t>& reduce_dims_stats,
+    const std::vector<int64_t>& param_view_shape) {
+
+        torch::Tensor current_mean, current_var;
+        if (this->is_training()) {
+            current_mean = x_input.mean(reduce_dims_stats, false);
+            current_var = (x_input - current_mean.view(param_view_shape)).pow(2).mean(reduce_dims_stats, false);
+
+            running_mean = (1.0 - momentum_) * running_mean + momentum_ * current_mean.detach();
+            running_var  = (1.0 - momentum_) * running_var  + momentum_ * current_var.detach();
+            num_batches_tracked += 1;
+        } else {
+            current_mean = running_mean;
+            current_var = running_var;
+        }
+
+        torch::Tensor x_bn = (x_input - current_mean.view(param_view_shape)) /
+                             torch::sqrt(current_var.view(param_view_shape) + eps_);
+        return x_bn * gamma.view(param_view_shape) + beta.view(param_view_shape);
+    }
+
 }
