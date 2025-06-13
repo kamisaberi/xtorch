@@ -1,7 +1,6 @@
 #include "include/normalizations/mode_normalization.h"
 
 
-
 // #include <torch/torch.h>
 // #include <iostream>
 // #include <vector>
@@ -228,11 +227,101 @@
 // }
 
 
-
 namespace xt::norm
 {
+    ModeNorm::ModeNorm(int64_t num_features, int64_t num_modes, double eps_in)
+        : num_features_(num_features),
+          num_modes_(num_modes),
+          eps_in_(eps_in)
+    {
+        TORCH_CHECK(num_features > 0, "num_features must be positive.");
+        TORCH_CHECK(num_modes > 0, "num_modes must be positive.");
+
+        // Initialize mode-specific learnable affine parameters
+        // gammas are typically initialized to 1, betas to 0 for each mode.
+        gammas_ = register_parameter("gammas", torch::ones({num_modes_, num_features_}));
+        betas_ = register_parameter("betas", torch::zeros({num_modes_, num_features_}));
+    }
+
     auto ModeNorm::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return torch::zeros(10);
+        vector<std::any> tensors_ = tensors;
+        auto x = std::any_cast<torch::Tensor>(tensors_[0]);
+        auto mode_index = std::any_cast<torch::Tensor>(tensors_[1]);
+
+        // x: input tensor (N, C, D1, D2, ...) where C is num_features_
+        // mode_index: LongTensor of shape (N,) or (N, 1) or scalar if broadcasting.
+        //             Contains integers from 0 to num_modes_ - 1.
+        //             If shape is (N,), each sample in the batch can have a different mode.
+
+        TORCH_CHECK(x.dim() >= 2, "Input tensor x must have at least 2 dimensions (N, C, ...). Got shape ", x.sizes());
+        TORCH_CHECK(x.size(1) == num_features_,
+                    "Input channels mismatch. Expected ", num_features_, ", got ", x.size(1));
+        TORCH_CHECK(mode_index.scalar_type() == torch::kLong, "mode_index must be a LongTensor.");
+        TORCH_CHECK(mode_index.min().item<int64_t>() >= 0 && mode_index.max().item<int64_t>() < num_modes_,
+                    "mode_index values out of bounds [0, ", num_modes_ - 1, "].");
+
+        int64_t N = x.size(0);
+
+        // --- 1. Base Instance Normalization (without its own affine) ---
+        torch::Tensor x_in; // Instance Normalized x
+        if (x.dim() > 2)
+        {
+            // Input has spatial/sequential dimensions (N, C, D1, ...)
+            std::vector<int64_t> reduce_dims_in;
+            for (int64_t i = 2; i < x.dim(); ++i) reduce_dims_in.push_back(i);
+            auto mean = x.mean(reduce_dims_in, /*keepdim=*/true);
+            auto var = x.var(reduce_dims_in, /*unbiased=*/false, /*keepdim=*/true);
+            x_in = (x - mean) / torch::sqrt(var + eps_in_);
+        }
+        else
+        {
+            // Input is 2D (N, C). InstanceNorm on a single point per channel results in 0.
+            x_in = torch::zeros_like(x);
+        }
+
+        // --- 2. Select mode-specific gamma and beta ---
+        // mode_index could be (N,) or (N,1). We need to select rows from gammas_ and betas_.
+        // gammas_ is (num_modes, num_features)
+        // betas_ is (num_modes, num_features)
+        // torch::index_select or embedding-like lookup
+        torch::Tensor selected_gamma = gammas_.index_select(0, mode_index.view(-1)); // (N_effective, num_features)
+        torch::Tensor selected_beta = betas_.index_select(0, mode_index.view(-1)); // (N_effective, num_features)
+
+        // N_effective will be N if mode_index is (N,).
+        // If mode_index was a scalar and applied to all N samples, we'd need to handle that.
+        // For simplicity, assume mode_index.view(-1) has N elements.
+        // Or, if mode_index is scalar, repeat it N times.
+        if (mode_index.numel() == 1 && N > 1)
+        {
+            auto single_mode_idx_val = mode_index.item<int64_t>(); // Get the scalar value
+            torch::Tensor single_mode_idx_tensor = torch::tensor({single_mode_idx_val}, torch::kLong).to(
+                mode_index.device());
+            selected_gamma = gammas_.index_select(0, single_mode_idx_tensor); // (1, num_features)
+            selected_beta = betas_.index_select(0, single_mode_idx_tensor); // (1, num_features)
+            // These will then broadcast to (N, num_features) when reshaped for affine.
+        }
+        else if (mode_index.numel() != N)
+        {
+            TORCH_CHECK(false, "mode_index numel (", mode_index.numel(), ") must match batch size N (", N,
+                        ") or be 1.");
+        }
+
+
+        // --- 3. Reshape selected Gamma and Beta for broadcasting ---
+        // Desired shape: (N, C, 1, 1, ...) to match x_in (N, C, D1, D2, ...)
+        std::vector<int64_t> affine_param_view_shape;
+        affine_param_view_shape.push_back(selected_gamma.size(0)); // Should be N or 1
+        affine_param_view_shape.push_back(num_features_); // C
+        for (int64_t i = 2; i < x.dim(); ++i)
+        {
+            affine_param_view_shape.push_back(1);
+        }
+
+        selected_gamma = selected_gamma.view(affine_param_view_shape);
+        selected_beta = selected_beta.view(affine_param_view_shape);
+
+        // --- 4. Apply mode-specific affine transformation ---
+        return selected_gamma * x_in + selected_beta;
     }
 }

@@ -7,7 +7,7 @@ namespace xt::norm
     struct MixtureNorm : xt::Module
     {
     public:
-        MixtureNorm(int64_t num_features,
+        explicit MixtureNorm(int64_t num_features,
                     double eps_bn = 1e-5, double momentum_bn = 0.1, bool affine_bn = true,
                     double eps_in = 1e-5, bool affine_in = true);
 
