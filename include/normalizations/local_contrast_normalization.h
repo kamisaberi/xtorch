@@ -7,7 +7,7 @@ namespace xt::norm
     struct LocalContrastNorm : xt::Module
     {
     public:
-        LocalContrastNorm::LocalContrastNorm(int64_t kernel_size = 5,
+        explicit LocalContrastNorm(int64_t kernel_size = 5,
                                              double alpha = 1.0, // Often 1.0 or related to kernel_size
                                              double beta = 0.5, // Or a small value like 0.0001
                                              double eps = 1e-5);
