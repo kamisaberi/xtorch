@@ -137,13 +137,55 @@
 
 namespace xt::dropouts
 {
-    torch::Tensor spatial_dropout(torch::Tensor x)
+    SpatialDropout::SpatialDropout(double p_drop_channel) : p_drop_channel_(p_drop_channel)
     {
-        return torch::zeros(10);
+        TORCH_CHECK(p_drop_channel_ >= 0.0 && p_drop_channel_ <= 1.0,
+                    "SpatialDropout probability p_drop_channel must be between 0 and 1.");
     }
+
 
     auto SpatialDropout::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return xt::dropouts::spatial_dropout(torch::zeros(10));
+        vector<std::any> tensors_ = tensors;
+        auto input = std::any_cast<torch::Tensor>(tensors_[0]);
+
+        if (!this->is_training() || p_drop_channel_ == 0.0)
+        {
+            return input;
+        }
+        if (p_drop_channel_ == 1.0)
+        {
+            return torch::zeros_like(input);
+        }
+
+        TORCH_CHECK(input.dim() >= 2, "SpatialDropout input must be at least 2D (e.g., [Batch, Channels, ...]).");
+
+        int64_t num_channels = input.size(1); // Assuming channel dimension is 1
+        if (num_channels == 0) return input; // No channels to drop
+
+        double keep_prob = 1.0 - p_drop_channel_;
+
+        // Create a mask for channels: shape (1, num_channels, 1, 1, ...) or (Batch, num_channels, 1, 1,...)
+        // The paper suggests a per-batch-item channel mask, but often a single channel mask
+        // is applied to all items in the batch for simplicity/efficiency, or per-batch-item mask.
+        // Let's implement per-batch-item channel mask for generality.
+        // Mask shape: (BatchSize, NumChannels)
+        torch::Tensor channel_mask_2d = torch::bernoulli(
+            torch::full({input.size(0), num_channels}, keep_prob, input.options())
+        ).to(input.dtype());
+
+        // Reshape channel_mask_2d to be broadcastable with the input tensor.
+        // If input is (N, C, H, W), mask should be (N, C, 1, 1).
+        // If input is (N, C, L), mask should be (N, C, 1).
+        // If input is (N, C), mask is already (N, C).
+        torch::Tensor broadcastable_mask = channel_mask_2d;
+        for (int d = 2; d < input.dim(); ++d)
+        {
+            broadcastable_mask = broadcastable_mask.unsqueeze(-1);
+        }
+        // Now broadcastable_mask has shape like (N, C, 1, ..., 1) matching input's rank.
+
+        // Apply mask and scale (inverted dropout)
+        return (input * broadcastable_mask) / (keep_prob + epsilon_);
     }
 }
