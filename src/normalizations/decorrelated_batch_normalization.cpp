@@ -1,7 +1,6 @@
 #include "include/normalizations/decorrelated_batch_normalization.h"
 
 
-
 // #include <torch/torch.h>
 // #include <iostream>
 // #include <vector>
@@ -256,11 +255,133 @@
 // }
 
 
-
 namespace xt::norm
 {
+    DecorrelatedBatchNorm::DecorrelatedBatchNorm(int64_t num_features,
+                                                 double eps_bn,
+                                                 double momentum_bn,
+                                                 bool affine_bn, // Often false or fixed for DBN's BN part
+                                                 bool affine_final)
+        : num_features_(num_features),
+          eps_bn_(eps_bn),
+          momentum_bn_(momentum_bn),
+          affine_bn_(affine_bn),
+          affine_final_(affine_final)
+    {
+        TORCH_CHECK(num_features > 0, "num_features must be positive.");
+
+        // --- Standard Batch Normalization Part ---
+        // Always track running stats for BN part, as it's standard.
+        running_mean_bn_ = register_buffer("running_mean_bn", torch::zeros({num_features_}));
+        running_var_bn_ = register_buffer("running_var_bn", torch::ones({num_features_}));
+        num_batches_tracked_bn_ = register_buffer("num_batches_tracked_bn", torch::tensor(0, torch::kLong));
+
+        if (affine_bn_)
+        {
+            gamma_bn_ = register_parameter("gamma_bn", torch::ones({num_features_}));
+            beta_bn_ = register_parameter("beta_bn", torch::zeros({num_features_}));
+        }
+
+        // --- Decorrelation Part ---
+        // Initialize W. Ideally, it starts as an identity matrix or close to it.
+        // Or it can be learned from scratch.
+        // For a whitening matrix W (like Sigma^{-1/2}), W W^T = Sigma^{-1}.
+        // If W is initialized as Identity, it means no decorrelation initially.
+        decorrelation_matrix_W_ = register_parameter("decorrelation_matrix_W", torch::eye(num_features_));
+
+        // --- Final Affine Part ---
+        if (affine_final_)
+        {
+            gamma_final_ = register_parameter("gamma_final", torch::ones({num_features_}));
+            beta_final_ = register_parameter("beta_final", torch::zeros({num_features_}));
+        }
+    }
+
     auto DecorrelatedBatchNorm::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return torch::zeros(10);
+        vector<std::any> tensors_ = tensors;
+        auto x = std::any_cast<torch::Tensor>(tensors_[0]);
+
+
+        // Input x is expected to be 2D: (N, C) where C is num_features_.
+        // If x is 4D (N,C,H,W), it should be flattened to (N, C*H*W) before passing here,
+        // or this module needs to handle the reshape.
+        // For this implementation, let's assume x is already (N, num_features_).
+
+        TORCH_CHECK(x.dim() == 2, "Input tensor x must be 2D (Batch, Features). Got shape ", x.sizes());
+        TORCH_CHECK(x.size(1) == num_features_,
+                    "Number of input features (dim 1) mismatch. Expected ", num_features_,
+                    ", but got ", x.size(1));
+
+        // --- 1. Standard Batch Normalization ---
+        torch::Tensor current_mean_bn;
+        torch::Tensor current_var_bn;
+
+        if (this->is_training())
+        {
+            // Mean and Var are calculated per feature across the batch
+            current_mean_bn = x.mean(/*dim=*/0, /*keepdim=false*/ false); // Shape (num_features_)
+            // current_var_bn = x.var(/*dim=*/0, /*unbiased=*/false, /*keepdim=false*/ false); // Shape (num_features_)
+            // More stable variance: E[X^2] - (E[X])^2
+            current_var_bn = (x - current_mean_bn).pow(2).mean(/*dim=*/0, /*keepdim=false*/false);
+
+
+            running_mean_bn_ = (1.0 - momentum_bn_) * running_mean_bn_ + momentum_bn_ * current_mean_bn.detach();
+            // Detach for running stats
+            running_var_bn_ = (1.0 - momentum_bn_) * running_var_bn_ + momentum_bn_ * current_var_bn.detach();
+
+            //TODO SOME BUGS MIGHT RAISE HERE
+            // original code was :
+            // if (num_batches_tracked_bn_)
+            // {
+            //     // Check if defined
+            //     num_batches_tracked_bn_ += 1;
+            // }
+
+            if (num_batches_tracked_bn_[0].item<int64>() == 0)
+            {
+                // Check if defined
+                num_batches_tracked_bn_ += 1;
+            }
+        }
+        else
+        {
+            current_mean_bn = running_mean_bn_;
+            current_var_bn = running_var_bn_;
+        }
+
+        torch::Tensor x_bn = (x - current_mean_bn) / torch::sqrt(current_var_bn + eps_bn_);
+
+        if (affine_bn_)
+        {
+            x_bn = x_bn * gamma_bn_ + beta_bn_;
+        }
+
+        // --- 2. Decorrelation Step ---
+        // x_bn is (N, num_features_). decorrelation_matrix_W_ is (num_features_, num_features_).
+        // We want to transform each feature vector: y = x_bn @ W^T  (or W @ x_bn^T then transpose)
+        // If W is Sigma^{-1/2}, then y = Sigma^{-1/2} * x_bn
+        // The DBN paper formulation is often y = W(x - mu)/sigma.
+        // If x_bn already incorporates (x-mu)/sigma, then y = W * x_bn
+        // Let's assume y_i = sum_j W_ij * x_bn_j. This is x_bn @ W.T
+        torch::Tensor x_decorrelated = torch::matmul(x_bn, decorrelation_matrix_W_.t()); // (N, num_features_)
+
+        // Note on IterNorm:
+        // A full IterNorm would compute covariance of x_bn: Sigma = (x_bn.T @ x_bn) / N
+        // Then find Sigma^{-1/2} using Newton's iteration:
+        // Y_0 = I
+        // Y_{k+1} = 0.5 * (Y_k + (Y_k @ Sigma)^{-T})  (or similar variants for Sigma^{-1/2})
+        // W = Y_final (or Sigma @ Y_final for Sigma^{1/2} if W is applied as W*x)
+        // This is computationally intensive for each forward pass if not carefully optimized or if N is large.
+        // Learning W directly is a simplification. The gradient will try to make W a decorrelating transform.
+
+        // --- 3. Optional Final Affine Transformation ---
+        if (affine_final_)
+        {
+            // gamma_final_ and beta_final_ are (num_features_). They broadcast.
+            x_decorrelated = x_decorrelated * gamma_final_ + beta_final_;
+        }
+
+        return x_decorrelated;
     }
 }
