@@ -1,7 +1,6 @@
 #include "include/normalizations/online_normalization.h"
 
 
-
 // #include <torch/torch.h>
 // #include <iostream>
 // #include <vector>
@@ -217,13 +216,95 @@
 // }
 
 
-
-
-
 namespace xt::norm
 {
+    OnlineNorm::OnlineNorm(int64_t num_features,
+                           double eps,
+                           double momentum_mu, // Paper suggests 0.1 or 0.01 for mu
+                           double momentum_sigma, // Paper suggests 0.1 or 0.001 for sigma
+                           bool affine_gn)
+        : num_features_(num_features),
+          eps_(eps),
+          momentum_mu_(momentum_mu),
+          momentum_sigma_(momentum_sigma),
+          affine_gn_(affine_gn)
+    {
+        TORCH_CHECK(num_features > 0, "num_features must be positive.");
+
+        if (affine_gn_)
+        {
+            alpha_ = register_parameter("alpha", torch::ones({1, num_features_, 1, 1})); // For NCHW broadcasting
+            beta_ = register_parameter("beta", torch::zeros({1, num_features_, 1, 1}));
+        }
+        else
+        {
+            // If not affine, g(x) = x. Register non-learnable identity transform.
+            alpha_ = register_buffer("alpha_const", torch::ones({1, num_features_, 1, 1}));
+            beta_ = register_buffer("beta_const", torch::zeros({1, num_features_, 1, 1}));
+        }
+
+        // Initialize online statistics buffers
+        online_mu_ = register_buffer("online_mu", torch::zeros({1, num_features_, 1, 1}));
+        online_sigma_sq_ = register_buffer("online_sigma_sq", torch::ones({1, num_features_, 1, 1}));
+        // Initialize variance to 1
+
+        num_batches_tracked_ = register_buffer("num_batches_tracked", torch::tensor(0, torch::kLong));
+    }
+
     auto OnlineNorm::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return torch::zeros(10);
+        vector<std::any> tensors_ = tensors;
+        auto x = std::any_cast<torch::Tensor>(tensors_[0]);
+
+        // Input x is expected to be 4D: (N, C, H, W)
+        TORCH_CHECK(x.dim() == 4, "Input tensor must be 4D (N, C, H, W). Got shape ", x.sizes());
+        TORCH_CHECK(x.size(1) == num_features_,
+                    "Input channels mismatch. Expected ", num_features_, ", got ", x.size(1));
+
+        // --- 1. Affirmative part: g(x) = alpha * x + beta ---
+        // alpha_ and beta_ are (1,C,1,1) and broadcast with x (N,C,H,W)
+        torch::Tensor y = alpha_ * x + beta_;
+
+        // --- 2. Online estimation of E[y] and Var[y] and Normalization h(y) ---
+        // During training, update online stats and use them.
+        // During eval, use the frozen online stats.
+        // The key is that online_mu and online_sigma_sq are treated as constants for grad computation of h(y).
+        // This is implicitly handled by using .detach() when updating them,
+        // or by PyTorch's default behavior for buffers if they are not direct inputs to grad-requiring ops.
+
+        torch::Tensor current_batch_mu;
+        torch::Tensor current_batch_sigma_sq;
+
+        // Statistics are computed over N, H, W for each channel C
+        std::vector<int64_t> reduce_dims_stats = {0, 2, 3}; // Batch, Height, Width
+
+        if (this->is_training())
+        {
+            // Calculate statistics of y from the current batch
+            current_batch_mu = y.mean(reduce_dims_stats, /*keepdim=*/true); // Shape (1, C, 1, 1)
+            current_batch_sigma_sq = y.var(reduce_dims_stats, /*unbiased=*/false, /*keepdim=*/true);
+            // Shape (1, C, 1, 1)
+
+            // Update online statistics
+            if (num_batches_tracked_.item<int64_t>() == 0)
+            {
+                // First batch: initialize online stats directly from batch stats
+                online_mu_.copy_(current_batch_mu.detach());
+                online_sigma_sq_.copy_(current_batch_sigma_sq.detach());
+            }
+            else
+            {
+                online_mu_ = (1.0 - momentum_mu_) * online_mu_.detach() + momentum_mu_ * current_batch_mu.detach();
+                online_sigma_sq_ = (1.0 - momentum_sigma_) * online_sigma_sq_.detach() + momentum_sigma_ *
+                    current_batch_sigma_sq.detach();
+            }
+            num_batches_tracked_ += 1;
+        }
+        // For normalization, always use the current (potentially updated if training) online_mu_ and online_sigma_sq_
+        // These are detached during update, so they act as constants for the normalization step's gradient.
+
+        torch::Tensor y_normalized = (y - online_mu_) / torch::sqrt(online_sigma_sq_ + eps_);
+
+        return y_normalized;
     }
 }
