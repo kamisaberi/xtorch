@@ -226,6 +226,50 @@ namespace xt::dropouts
 
     auto AutoDropout::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return xt::dropouts::auto_dropout(torch::zeros(10));
+        vector<std::any> tensors_ = tensors;
+        auto input = std::any_cast<torch::Tensor>(tensors_[0]);
+
+        if (!this->is_training())
+        {
+            return input; // During evaluation, dropout is inactive.
+        }
+
+        // Calculate dropout probability p from log_alpha.
+        // p will have gradients flowing back to log_alpha_ due to sigmoid.
+        torch::Tensor p = torch::sigmoid(log_alpha_);
+
+        // Clamp p to prevent keep_prob from being too close to 0 or 1, ensuring numerical stability.
+        // Sigmoid output is (0,1), so p is already >0 and <1 if log_alpha_ is finite.
+        // This clamp is a safeguard or for when very extreme log_alpha values might occur.
+        // Crucially, it ensures (1-p) is not zero for the division.
+        p = torch::clamp(p, 0.0, 1.0 - 1e-7); // Ensure p < 1.0
+
+        torch::Tensor keep_prob = 1.0 - p; // Probability of NOT dropping out.
+        torch::Tensor kp_broadcastable = keep_prob;
+
+        // Heuristic for broadcasting keep_prob (e.g., for per-channel dropout in conv layers).
+        // If keep_prob is 1D (e.g. shape [C]) and input is multi-dimensional (e.g. [N, C, H, W]),
+        // and its size matches input's dim 1 (assumed channel dimension), reshape for broadcasting.
+        if (keep_prob.dim() == 1 && input.dim() > 1 && keep_prob.size(0) == input.size(1))
+        {
+            std::vector<int64_t> view_shape(input.dim(), 1L); // Create shape like [1, 1, ..., 1]
+            view_shape[1] = keep_prob.size(0); // Set channel dimension, e.g., [1, C, 1, 1]
+            kp_broadcastable = keep_prob.view(view_shape);
+        }
+        // If shapes are otherwise, rely on standard PyTorch broadcasting rules.
+        // If incompatible shapes that aren't handled by the heuristic, PyTorch will raise an error.
+
+        // Standard inverted dropout:
+        // 1. Generate a random tensor with the same shape as input.
+        // 2. Create a binary mask: 1 if random_val < keep_prob, 0 otherwise.
+        // 3. Apply mask.
+        // 4. Scale by 1/keep_prob.
+        torch::Tensor random_tensor = torch::rand_like(input);
+        torch::Tensor mask = (random_tensor < kp_broadcastable).to(input.dtype());
+
+        // kp_broadcastable is guaranteed to be >= 1e-7 due to p clamping.
+        torch::Tensor output = (input * mask) / kp_broadcastable;
+
+        return output;
     }
 }
