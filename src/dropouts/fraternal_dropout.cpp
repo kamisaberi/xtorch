@@ -1,7 +1,6 @@
 #include "include/dropouts/fraternal_dropout.h"
 
 
-
 // #include <torch/torch.h>
 // #include <tuple>   // For std::tuple
 // #include <ostream> // For std::ostream
@@ -221,13 +220,104 @@
 
 namespace xt::dropouts
 {
-    torch::Tensor fraternal_dropout(torch::Tensor x)
+    FraternalDropout::FraternalDropout(double p_drop, double p_same_mask)
+        : p_drop_(p_drop), p_same_mask_(p_same_mask)
     {
-        return torch::zeros(10);
+        TORCH_CHECK(p_drop_ >= 0.0 && p_drop_ <= 1.0, "p_drop must be between 0 and 1.");
+        TORCH_CHECK(p_same_mask_ >= 0.0 && p_same_mask_ <= 1.0, "p_same_mask must be between 0 and 1.");
     }
 
     auto FraternalDropout::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return xt::dropouts::fraternal_dropout(torch::zeros(10));
+        vector<std::any> tensors_ = tensors;
+        auto input_alpha = std::any_cast<torch::Tensor>(tensors_[0]);
+        auto input_beta = std::any_cast<torch::Tensor>(tensors_[1]);
+
+        TORCH_CHECK(input_alpha.sizes() == input_beta.sizes(),
+                    "Input tensors for FraternalDropout must have the same shape.");
+
+        if (!this->is_training() || p_drop_ == 0.0)
+        {
+            tuple<torch::Tensor, torch::Tensor> outputs = {input_alpha, input_beta};
+            return outputs; // No dropout if not training or p_drop is 0
+        }
+
+        double keep_prob = 1.0 - p_drop_;
+
+        // 1. Create the primary dropout mask (mask_alpha)
+        // This mask determines which elements are kept (1) or dropped (0) for the alpha network.
+        torch::Tensor mask_alpha_binary = torch::bernoulli(
+            torch::full_like(input_alpha, keep_prob)
+        ).to(input_alpha.dtype());
+
+        // 2. Decide if beta network uses the same mask or the inverse mask
+        torch::Tensor mask_beta_binary;
+        if (torch::rand({1}, input_alpha.options()).item<double>() < p_same_mask_)
+        {
+            // Beta uses the same mask as alpha
+            mask_beta_binary = mask_alpha_binary;
+        }
+        else
+        {
+            // Beta uses the inverse mask of alpha
+            // Inverse means what alpha drops, beta keeps, and vice-versa.
+            mask_beta_binary = 1.0 - mask_alpha_binary;
+        }
+
+        torch::Tensor output_alpha, output_beta;
+
+        // Apply dropout to alpha network (inverted dropout)
+        if (p_drop_ == 1.0)
+        {
+            // If alpha drops everything
+            output_alpha = torch::zeros_like(input_alpha);
+        }
+        else
+        {
+            output_alpha = (input_alpha * mask_alpha_binary) / (keep_prob + epsilon_);
+        }
+
+        // Apply dropout to beta network
+        // If beta uses the inverse mask, its effective "keep probability" for scaling
+        // is (1 - keep_prob) = p_drop_.
+        // If beta uses the same mask, its effective keep probability is 'keep_prob'.
+
+        if (mask_beta_binary.is_same(mask_alpha_binary))
+        {
+            // Beta uses same mask
+            if (p_drop_ == 1.0)
+            {
+                // If alpha (and thus beta) drops everything
+                output_beta = torch::zeros_like(input_beta);
+            }
+            else
+            {
+                output_beta = (input_beta * mask_beta_binary) / (keep_prob + epsilon_);
+            }
+        }
+        else
+        {
+            // Beta uses inverse mask
+            if (keep_prob == 1.0)
+            {
+                // If alpha keeps everything (p_drop_ == 0, handled at start)
+                // then inverse mask drops everything for beta.
+                output_beta = torch::zeros_like(input_beta);
+            }
+            else if (keep_prob == 0.0)
+            {
+                // If alpha drops everything (p_drop_ == 1.0)
+                // then inverse mask keeps everything for beta.
+                output_beta = input_beta / (p_drop_ + epsilon_); // Scaled by 1/1.0
+            }
+            else
+            {
+                // Effective keep probability for beta is p_drop (since it keeps what alpha drops)
+                output_beta = (input_beta * mask_beta_binary) / (p_drop_ + epsilon_);
+            }
+        }
+
+        tuple<torch::Tensor, torch::Tensor> outputs = {output_alpha, output_beta};
+        return outputs;
     }
 }
