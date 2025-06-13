@@ -268,8 +268,67 @@
 
 namespace xt::norm
 {
+    VirtualBatchNorm::VirtualBatchNorm(int64_t num_features, double eps, bool affine)
+        : num_features_(num_features),
+          eps_(eps),
+          affine_(affine)
+    {
+        TORCH_CHECK(num_features > 0, "num_features must be positive.");
+
+        if (affine_)
+        {
+            gamma_ = register_parameter("weight", torch::ones({num_features_}));
+            beta_ = register_parameter("bias", torch::zeros({num_features_}));
+        }
+
+        // Initialize reference stat buffers as undefined or placeholders.
+        // They will be properly sized and filled by init_reference_stats.
+        // Registering them ensures they are part of the module's state.
+        mu_ref_ = register_buffer("mu_ref", torch::Tensor());
+        var_ref_ = register_buffer("var_ref", torch::Tensor());
+        initialized_flag_ = register_buffer("initialized_flag", torch::tensor(0, torch::kBool));
+    }
+
     auto VirtualBatchNorm::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return torch::zeros(10);
+        vector<std::any> tensors_ = tensors;
+        auto x = std::any_cast<torch::Tensor>(tensors_[0]);
+
+
+        TORCH_CHECK(initialized_flag_.item<bool>(),
+                    "VirtualBatchNorm reference statistics not initialized. Call init_reference_stats() first.");
+        TORCH_CHECK(x.dim() >= 2, "Input tensor x must have at least 2 dimensions (N, C, ...). Got shape ", x.sizes());
+        TORCH_CHECK(x.size(1) == num_features_,
+                    "Input channels mismatch. Expected ", num_features_, ", got ", x.size(1));
+
+        // mu_ref_ and var_ref_ are stored, e.g., as (1, C, 1, 1) if initialized with 4D x_ref.
+        // They need to broadcast with x.
+        // If mu_ref_/var_ref_ are (C,) and x is (N,C,H,W), then reshape to (1,C,1,1).
+        // Our init_reference_stats stores them in broadcastable form (e.g., 1,C,1,1 for 4D x_ref).
+        // If x.dim() is different from the dim assumed during init, this might need adjustment.
+        // For this implementation, assume mu_ref_ and var_ref_ are already in a shape
+        // like (1, C, 1, ..., 1) that matches x.dim() after channel dim.
+        TORCH_CHECK(mu_ref_.dim() == x.dim() && var_ref_.dim() == x.dim(),
+                    "Dimensionality of stored reference stats (mu_ref dim: ", mu_ref_.dim(),
+                    ") must match input x dim (", x.dim(), ") for broadcasting. "
+                    "Ensure init_reference_stats was called with x_ref of appropriate dimensionality "
+                    "or adjust reshaping. Current mu_ref shape: ", mu_ref_.sizes());
+
+
+        // Normalize x using the stored reference statistics mu_ref_ and var_ref_
+        torch::Tensor x_normalized = (x - mu_ref_) / torch::sqrt(var_ref_ + eps_);
+
+        // Apply learnable affine transformation
+        if (affine_)
+        {
+            // gamma_ and beta_ are (num_features_). Reshape for broadcasting.
+            std::vector<int64_t> affine_param_view_shape(x.dim(), 1);
+            affine_param_view_shape[1] = num_features_;
+            return x_normalized * gamma_.view(affine_param_view_shape) + beta_.view(affine_param_view_shape);
+        }
+        else
+        {
+            return x_normalized;
+        }
     }
 }
