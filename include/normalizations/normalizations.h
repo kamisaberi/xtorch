@@ -20,7 +20,7 @@
 #include "local_response_normalization.h"
 #include "mixture_normalization.h"
 #include "mode_normalization.h"
-#include "mpn.h"
+#include "mpn_normalization.h"
 #include "online_normalization.h"
 #include "pixel_normalization.h"
 #include "power_normalization.h"
