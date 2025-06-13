@@ -177,20 +177,24 @@ namespace xt::dropouts
         vector<std::any> tensors_ = tensors;
         auto input = std::any_cast<torch::Tensor>(tensors_[0]);
         auto current_step_ = std::any_cast<torch::Tensor>(tensors_[1]);
-        double current_step = current_step_[1];
+        double current_step = current_step_[1].item<double>();
 
-        if (!this->is_training()) {
+        if (!this->is_training())
+        {
             current_p_ = 0.0; // No dropout during evaluation
             return input;
         }
 
         double start_rate, end_rate;
-        if (increase_rate_) {
+        if (increase_rate_)
+        {
             start_rate = initial_dropout_rate_;
             end_rate = final_dropout_rate_;
-        } else {
+        }
+        else
+        {
             start_rate = initial_dropout_rate_; // Higher rate at the start
-            end_rate = final_dropout_rate_;     // Lower rate at the end
+            end_rate = final_dropout_rate_; // Lower rate at the end
         }
 
         // Calculate progress ratio (0.0 to 1.0)
@@ -203,10 +207,12 @@ namespace xt::dropouts
         // Ensure current_p_ is valid (it should be if start/end rates are valid)
         current_p_ = std::min(1.0, std::max(0.0, current_p_));
 
-        if (current_p_ == 0.0) {
+        if (current_p_ == 0.0)
+        {
             return input;
         }
-        if (current_p_ == 1.0) {
+        if (current_p_ == 1.0)
+        {
             return torch::zeros_like(input);
         }
 
