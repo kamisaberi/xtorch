@@ -218,8 +218,94 @@
 
 namespace xt::norm
 {
+    SPADE::SPADE(int64_t norm_num_features,
+                 int64_t seg_map_channels,
+                 int64_t hidden_channels_mlp, // Common choice
+                 double eps_bn,
+                 double momentum_bn)
+        : norm_num_features_(norm_num_features),
+          seg_map_channels_(seg_map_channels),
+          hidden_channels_mlp_(hidden_channels_mlp),
+          eps_bn_(eps_bn),
+          momentum_bn_(momentum_bn)
+    {
+        TORCH_CHECK(norm_num_features_ > 0, "norm_num_features must be positive.");
+        TORCH_CHECK(seg_map_channels_ > 0, "seg_map_channels must be positive.");
+        TORCH_CHECK(hidden_channels_mlp_ > 0, "hidden_channels_mlp must be positive.");
+
+        // 1. Initialize Batch Normalization (without affine transform)
+        // The affine transform (gamma, beta) will come from the seg_map processing.
+        batch_norm_ = torch::nn::BatchNorm2d(
+            torch::nn::BatchNorm2dOptions(norm_num_features_).eps(eps_bn_).momentum(momentum_bn_).affine(false)
+        );
+        register_module("batch_norm", batch_norm_);
+
+        // 2. Initialize the MLP (CNN) for processing the segmentation map
+        // This MLP takes the seg_map (resized to x's H,W) and outputs gamma & beta maps.
+        // Kernel size 3, padding 1 is common to preserve spatial dims.
+        mlp_shared_conv1_ = torch::nn::Conv2d(
+            torch::nn::Conv2dOptions(seg_map_channels_, hidden_channels_mlp_, 3).padding(1)
+        );
+        register_module("mlp_shared_conv1", mlp_shared_conv1_);
+
+        // Output layers for gamma and beta. Each has `norm_num_features_` output channels.
+        mlp_gamma_conv2_ = torch::nn::Conv2d(
+            torch::nn::Conv2dOptions(hidden_channels_mlp_, norm_num_features_, 3).padding(1)
+        );
+        register_module("mlp_gamma_conv2", mlp_gamma_conv2_);
+
+        mlp_beta_conv2_ = torch::nn::Conv2d(
+            torch::nn::Conv2dOptions(hidden_channels_mlp_, norm_num_features_, 3).padding(1)
+        );
+        register_module("mlp_beta_conv2", mlp_beta_conv2_);
+    }
+
     auto SPADE::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return torch::zeros(10);
+        vector<std::any> tensors_ = tensors;
+        auto x = std::any_cast<torch::Tensor>(tensors_[0]);
+        auto seg_map_orig = std::any_cast<torch::Tensor>(tensors_[1]);
+
+        // x: input feature map (N, norm_C, Hx, Wx)
+        // seg_map_orig: semantic segmentation map (N, seg_C, Hs, Ws)
+
+        TORCH_CHECK(x.dim() == 4, "Input feature map x must be 4D (N, C, H, W). Got shape ", x.sizes());
+        TORCH_CHECK(x.size(1) == norm_num_features_,
+                    "Input x channels mismatch. Expected ", norm_num_features_, ", got ", x.size(1));
+        TORCH_CHECK(seg_map_orig.dim() == 4, "Segmentation map must be 4D (N, C_seg, H, W). Got shape ",
+                    seg_map_orig.sizes());
+        TORCH_CHECK(seg_map_orig.size(1) == seg_map_channels_,
+                    "Segmentation map channels mismatch. Expected ", seg_map_channels_, ", got ", seg_map_orig.size(1));
+        TORCH_CHECK(x.size(0) == seg_map_orig.size(0), "Batch sizes of x and seg_map must match.");
+
+        // --- 1. Normalize x using Batch Normalization (no affine) ---
+        torch::Tensor x_normalized = batch_norm_->forward(x); // (N, norm_C, Hx, Wx)
+
+        // --- 2. Process segmentation map to get gamma and beta ---
+        // Resize seg_map_orig to match spatial dimensions of x if they differ.
+        torch::Tensor seg_map_processed = seg_map_orig;
+        if (seg_map_orig.size(2) != x.size(2) || seg_map_orig.size(3) != x.size(3))
+        {
+            seg_map_processed = torch::nn::functional::interpolate(
+                seg_map_orig,
+                torch::nn::functional::InterpolateFuncOptions()
+                .size(std::vector<int64_t>{x.size(2), x.size(3)})
+                .mode(torch::kNearest) // or kBilinear, kNearest for discrete maps
+            );
+        }
+        // seg_map_processed shape: (N, seg_C, Hx, Wx)
+
+        // Pass through the MLP (CNN layers)
+        torch::Tensor actv = mlp_shared_conv1_->forward(seg_map_processed);
+        actv = torch::relu(actv); // Common activation
+
+        torch::Tensor gamma_spatial = mlp_gamma_conv2_->forward(actv); // (N, norm_C, Hx, Wx)
+        torch::Tensor beta_spatial = mlp_beta_conv2_->forward(actv); // (N, norm_C, Hx, Wx)
+
+        // --- 3. Apply spatially-adaptive modulation ---
+        // output = gamma_spatial * x_normalized + beta_spatial
+        torch::Tensor output = x_normalized * gamma_spatial + beta_spatial;
+
+        return output;
     }
 }
