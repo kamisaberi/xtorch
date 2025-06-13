@@ -163,13 +163,54 @@
 
 namespace xt::dropouts
 {
-    torch::Tensor drop_pathway(torch::Tensor x)
+    DropPathway::DropPathway(double p_drop) : p_drop_(p_drop)
     {
-        return torch::zeros(10);
+        TORCH_CHECK(p_drop_ >= 0.0 && p_drop_ <= 1.0, "DropPathway probability p_drop must be between 0 and 1.");
     }
 
     auto DropPathway::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return xt::dropouts::drop_pathway(torch::zeros(10));
+        vector<std::any> tensors_ = tensors;
+        auto input = std::any_cast<torch::Tensor>(tensors_[0]);
+
+
+        if (!this->is_training() || p_drop_ == 0.0)
+        {
+            return input; // Pass through if not training or no dropout
+        }
+        if (p_drop_ == 1.0)
+        {
+            return torch::zeros_like(input); // Drop everything if p_drop is 1.0
+        }
+
+        TORCH_CHECK(input.dim() >= 1,
+                    "DropPathway input must have at least one dimension (expected batch dimension at dim 0).");
+
+        int64_t batch_size = input.size(0);
+        double keep_prob = 1.0 - p_drop_;
+
+        // Create a per-sample binary mask (1 for keep, 0 for drop)
+        // This mask is applied to each sample in the batch independently.
+        torch::Tensor random_tensor = torch::rand({batch_size}, input.options());
+        torch::Tensor keep_mask_1d = (random_tensor < keep_prob).to(input.dtype());
+
+        // Reshape mask to be broadcastable with the input tensor.
+        // If input is (N, C, H, W), mask becomes (N, 1, 1, 1).
+        std::vector<int64_t> view_shape(input.dim(), 1L);
+        if (input.dim() > 0)
+        {
+            // Should always be true due to TORCH_CHECK above
+            view_shape[0] = batch_size;
+        }
+        else
+        {
+            // Defensive coding, should not be reached
+            return input;
+        }
+        torch::Tensor keep_mask = keep_mask_1d.view(view_shape);
+
+        // Apply the mask and scale the output (inverted dropout).
+        // Kept pathways are scaled by 1/keep_prob.
+        return (input * keep_mask) / (keep_prob + epsilon_);
     }
 }
