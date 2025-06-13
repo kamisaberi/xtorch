@@ -160,13 +160,51 @@
 
 namespace xt::dropouts
 {
-    torch::Tensor zone_out(torch::Tensor x)
+    ZoneOut::ZoneOut(double p_zoneout_h) : p_zoneout_h_(p_zoneout_h)
     {
-        return torch::zeros(10);
+        TORCH_CHECK(p_zoneout_h_ >= 0.0 && p_zoneout_h_ <= 1.0,
+                    "Zoneout probability p_zoneout_h must be between 0 and 1.");
     }
+
 
     auto ZoneOut::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return xt::dropouts::zone_out(torch::zeros(10));
+        vector<std::any> tensors_ = tensors;
+        auto prev_state_h = std::any_cast<torch::Tensor>(tensors_[0]);
+        auto current_state_h_candidate = std::any_cast<torch::Tensor>(tensors_[1]);
+
+
+        TORCH_CHECK(prev_state_h.sizes() == current_state_h_candidate.sizes(),
+                    "prev_state_h and current_state_h_candidate must have the same shape for Zoneout.");
+
+        if (!this->is_training() || p_zoneout_h_ == 0.0)
+        {
+            // If not training or no zoneout, use the newly computed candidate state.
+            return current_state_h_candidate;
+        }
+        if (p_zoneout_h_ == 1.0)
+        {
+            // If p_zoneout is 1.0, always copy the previous state.
+            return prev_state_h;
+        }
+
+        // Generate a binary mask.
+        // Where mask is 1, we "zone out" (copy prev_state_h).
+        // Where mask is 0, we update (use current_state_h_candidate).
+        torch::Tensor zoneout_mask = torch::bernoulli(
+            torch::full_like(prev_state_h, p_zoneout_h_) // Probability of zoning out (keeping previous)
+        ).to(prev_state_h.dtype()); // Ensure mask has same dtype for multiplication
+
+        // Combine states:
+        // zoned_out_state = zoneout_mask * prev_state_h + (1 - zoneout_mask) * current_state_h_candidate;
+        // The paper (Section 2.1) defines it as:
+        // h_t = d_t * h_t-1 + (1 - d_t) * h_hat_t
+        // where d_t is the binary mask (1 for zoneout, 0 for update), drawn with prob p_zoneout_h.
+        // So, our zoneout_mask corresponds to d_t.
+
+        torch::Tensor next_state_h = (zoneout_mask * prev_state_h) +
+            ((1.0 - zoneout_mask) * current_state_h_candidate);
+
+        return next_state_h;
     }
 }
