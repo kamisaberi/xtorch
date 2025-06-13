@@ -155,13 +155,65 @@
 
 namespace xt::dropouts
 {
-    torch::Tensor curriculum_dropout(torch::Tensor x)
+    CurriculumDropout::CurriculumDropout(
+        double initial_dropout_rate,
+        double final_dropout_rate,
+        int64_t total_curriculum_steps, // e.g., total training steps or epochs for curriculum
+        bool increase_rate // Default: decrease rate from initial to final
+    ) : initial_dropout_rate_(initial_dropout_rate),
+        final_dropout_rate_(final_dropout_rate),
+        total_curriculum_steps_(std::max(int64_t(1), total_curriculum_steps)), // Ensure at least 1 step
+        increase_rate_(increase_rate)
     {
-        return torch::zeros(10);
+        TORCH_CHECK(initial_dropout_rate_ >= 0.0 && initial_dropout_rate_ <= 1.0,
+                    "Initial dropout rate must be between 0 and 1.");
+        TORCH_CHECK(final_dropout_rate_ >= 0.0 && final_dropout_rate_ <= 1.0,
+                    "Final dropout rate must be between 0 and 1.");
     }
+
 
     auto CurriculumDropout::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return xt::dropouts::curriculum_dropout(torch::zeros(10));
+        vector<std::any> tensors_ = tensors;
+        auto input = std::any_cast<torch::Tensor>(tensors_[0]);
+        auto current_step_ = std::any_cast<torch::Tensor>(tensors_[1]);
+        double current_step = current_step_[1];
+
+        if (!this->is_training()) {
+            current_p_ = 0.0; // No dropout during evaluation
+            return input;
+        }
+
+        double start_rate, end_rate;
+        if (increase_rate_) {
+            start_rate = initial_dropout_rate_;
+            end_rate = final_dropout_rate_;
+        } else {
+            start_rate = initial_dropout_rate_; // Higher rate at the start
+            end_rate = final_dropout_rate_;     // Lower rate at the end
+        }
+
+        // Calculate progress ratio (0.0 to 1.0)
+        double progress_ratio = static_cast<double>(current_step) / static_cast<double>(total_curriculum_steps_);
+        progress_ratio = std::min(1.0, std::max(0.0, progress_ratio)); // Clamp to [0, 1]
+
+        // Linear interpolation for the dropout rate
+        current_p_ = start_rate + (end_rate - start_rate) * progress_ratio;
+
+        // Ensure current_p_ is valid (it should be if start/end rates are valid)
+        current_p_ = std::min(1.0, std::max(0.0, current_p_));
+
+        if (current_p_ == 0.0) {
+            return input;
+        }
+        if (current_p_ == 1.0) {
+            return torch::zeros_like(input);
+        }
+
+        // Standard inverted dropout
+        double keep_prob = 1.0 - current_p_;
+        torch::Tensor mask = (torch::rand_like(input) < keep_prob).to(input.dtype());
+
+        return (input * mask) / keep_prob;
     }
 }
