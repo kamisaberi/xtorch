@@ -100,12 +100,11 @@
 // */
 
 
-
 namespace xt::dropouts
 {
-    torch::Tensor attention_dropout(torch::Tensor x)
+    AttentionDropout::AttentionDropout(double p) : p_(p)
     {
-        return torch::zeros(10);
+        TORCH_CHECK(p_ >= 0.0 && p_ <= 1.0, "Dropout probability has to be between 0 and 1, but got ", p_);
     }
 
     auto AttentionDropout::forward(std::initializer_list<std::any> tensors) -> std::any
