@@ -154,11 +154,51 @@
 // }
 
 
-
 namespace xt::norm
 {
+    CosineNorm::CosineNorm(int64_t dim, double eps, bool learnable_tau, double initial_tau)
+        : dim_(dim), eps_(eps), learnable_tau_(learnable_tau)
+    {
+        if (learnable_tau_)
+        {
+            // Initialize tau as a learnable scalar parameter.
+            // Some papers initialize tau to a specific value, e.g., 1.0 or 20.0
+            tau_ = register_parameter("tau", torch::tensor({initial_tau}));
+        }
+    }
+
     auto CosineNorm::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return torch::zeros(10);
+        vector<std::any> tensors_ = tensors;
+        auto x = std::any_cast<torch::Tensor>(tensors_[0]);
+
+
+        // x: input tensor, e.g., (N, C) or (N, C, H, W)
+        // dim_: The dimension over which to compute the L2 norm and normalize.
+        //       For (N,C) features, dim_ would typically be 1 (the C dimension).
+        //       For (N,C,H,W) and normalizing each spatial feature vector independently,
+        //       dim_ would still usually be 1 (the C dimension).
+
+        TORCH_CHECK(x.dim() > dim_, "Input tensor dimension (", x.dim(),
+                    ") must be greater than normalization dimension (", dim_, ").");
+
+        // Calculate L2 norm along the specified dimension
+        // norm_p(p=2, dim=dim_, keepdim=true)
+        torch::Tensor norm = x.norm(2, dim_, /*keepdim=*/true);
+
+        // Normalize x
+        // Add eps to norm to prevent division by zero if norm is very small.
+        torch::Tensor x_normalized = x / (norm + eps_);
+
+        if (learnable_tau_)
+        {
+            // Scale by the learnable temperature tau
+            // tau_ is a scalar, so it will broadcast.
+            return x_normalized * tau_;
+        }
+        else
+        {
+            return x_normalized;
+        }
     }
 }
