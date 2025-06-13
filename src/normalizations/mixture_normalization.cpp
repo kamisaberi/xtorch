@@ -236,8 +236,129 @@
 
 namespace xt::norm
 {
+    MixtureNorm::MixtureNorm(int64_t num_features,
+                             double eps_bn, double momentum_bn, bool affine_bn,
+                             double eps_in, bool affine_in)
+        : num_features_(num_features),
+          eps_bn_(eps_bn), momentum_bn_(momentum_bn), affine_bn_(affine_bn),
+          eps_in_(eps_in), affine_in_(affine_in)
+    {
+        TORCH_CHECK(num_features > 0, "num_features must be positive.");
+
+        // --- Batch Normalization Part ---
+        running_mean_bn_ = register_buffer("running_mean_bn", torch::zeros({num_features_}));
+        running_var_bn_ = register_buffer("running_var_bn", torch::ones({num_features_}));
+        num_batches_tracked_bn_ = register_buffer("num_batches_tracked_bn", torch::tensor(0, torch::kLong));
+
+        if (affine_bn_)
+        {
+            gamma_bn_ = register_parameter("gamma_bn", torch::ones({num_features_}));
+            beta_bn_ = register_parameter("beta_bn", torch::zeros({num_features_}));
+        }
+
+        // --- Instance Normalization Part ---
+        if (affine_in_)
+        {
+            gamma_in_ = register_parameter("gamma_in", torch::ones({num_features_}));
+            beta_in_ = register_parameter("beta_in", torch::zeros({num_features_}));
+        }
+
+        // --- Mixing Parameter ---
+        // Initialize lambda_raw_ s.t. initial lambda is 0.5 (sigmoid(0) = 0.5)
+        // Or initialize to favor one, e.g. sigmoid(large_negative) -> 0 (favors IN)
+        // or sigmoid(large_positive) -> 1 (favors BN). Let's start with 0.5.
+        lambda_raw_ = register_parameter("lambda_raw", torch::zeros({1, num_features_, 1, 1})); // For NCHW broadcasting
+    }
+
     auto MixtureNorm::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return torch::zeros(10);
+        vector<std::any> tensors_ = tensors;
+        auto x = std::any_cast<torch::Tensor>(tensors_[0]);
+
+        // Input x expected to be (N, C, D1, D2, ...) e.g., 4D (N,C,H,W)
+        TORCH_CHECK(x.dim() >= 2, "Input tensor x must have at least 2 dimensions (N, C, ...). Got shape ", x.sizes());
+        TORCH_CHECK(x.size(1) == num_features_,
+                    "Input channels mismatch. Expected ", num_features_, ", got ", x.size(1));
+
+        int64_t N = x.size(0);
+        // --- Output of Batch Normalization (y_bn) ---
+        torch::Tensor y_bn;
+        {
+            torch::Tensor current_mean_bn, current_var_bn;
+            std::vector<int64_t> reduce_dims_bn;
+            reduce_dims_bn.push_back(0);
+            for (int64_t i = 2; i < x.dim(); ++i) reduce_dims_bn.push_back(i);
+
+            if (this->is_training())
+            {
+                current_mean_bn = x.mean(reduce_dims_bn, false);
+                std::vector<int64_t> view_shape_mean(x.dim(), 1);
+                view_shape_mean[1] = num_features_;
+                current_var_bn = (x - current_mean_bn.view(view_shape_mean)).pow(2).mean(reduce_dims_bn, false);
+
+                running_mean_bn_ = (1.0 - momentum_bn_) * running_mean_bn_ + momentum_bn_ * current_mean_bn.detach();
+                running_var_bn_ = (1.0 - momentum_bn_) * running_var_bn_ + momentum_bn_ * current_var_bn.detach();
+
+                //TODO SOME BUGS MIGHT RAISE HERE
+                // original code was :
+                // if (num_batches_tracked_bn_)
+                // {
+                //     // Check if defined
+                //     num_batches_tracked_bn_ += 1;
+                // }
+
+                if (num_batches_tracked_bn_[0].item<int64>() == 0)
+                {
+                    // Check if defined
+                    num_batches_tracked_bn_ += 1;
+                }
+
+            }
+            else
+            {
+                current_mean_bn = running_mean_bn_;
+                current_var_bn = running_var_bn_;
+            }
+            std::vector<int64_t> bn_param_view_shape(x.dim(), 1);
+            bn_param_view_shape[1] = num_features_;
+            y_bn = (x - current_mean_bn.view(bn_param_view_shape)) /
+                torch::sqrt(current_var_bn.view(bn_param_view_shape) + eps_bn_);
+            if (affine_bn_)
+            {
+                y_bn = y_bn * gamma_bn_.view(bn_param_view_shape) + beta_bn_.view(bn_param_view_shape);
+            }
+        }
+
+        // --- Output of Instance Normalization (y_in) ---
+        torch::Tensor y_in;
+        {
+            if (x.dim() > 2)
+            {
+                std::vector<int64_t> reduce_dims_in;
+                for (int64_t i = 2; i < x.dim(); ++i) reduce_dims_in.push_back(i);
+                auto mean_in = x.mean(reduce_dims_in, true);
+                auto var_in = x.var(reduce_dims_in, false, true);
+                y_in = (x - mean_in) / torch::sqrt(var_in + eps_in_);
+            }
+            else
+            {
+                // x.dim() == 2 (N,C)
+                y_in = torch::zeros_like(x); // IN of a single point is 0
+            }
+            if (affine_in_)
+            {
+                std::vector<int64_t> in_param_view_shape(x.dim(), 1);
+                in_param_view_shape[1] = num_features_;
+                y_in = y_in * gamma_in_.view(in_param_view_shape) + beta_in_.view(in_param_view_shape);
+            }
+        }
+
+        // --- Mix the outputs ---
+        torch::Tensor lambda_ = torch::sigmoid(lambda_raw_); // Shape (1, C, 1, 1)
+
+        // lambda_ will broadcast with y_bn and y_in if they are (N,C,H,W)
+        torch::Tensor output = lambda_ * y_bn + (1.0 - lambda_) * y_in;
+
+        return output;
     }
 }
