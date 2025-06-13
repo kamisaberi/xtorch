@@ -151,13 +151,84 @@
 
 namespace xt::dropouts
 {
-    torch::Tensor checkerboard_dropout(torch::Tensor x)
+    CheckerboardDropout::CheckerboardDropout(bool drop_even_sum_indices)
+        : drop_even_sum_indices_(drop_even_sum_indices)
     {
-        return torch::zeros(10);
     }
+
 
     auto CheckerboardDropout::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return xt::dropouts::checkerboard_dropout(torch::zeros(10));
+        vector<std::any> tensors_ = tensors;
+        auto input = std::any_cast<torch::Tensor>(tensors_[0]);
+
+        if (!this->is_training())
+        {
+            return input;
+        }
+
+        const auto input_dim = input.dim();
+        TORCH_CHECK(input_dim > 0, "CheckerboardDropout expects non-scalar input.");
+
+        torch::Tensor mask_template; // This will be 0 for dropped, 1 for kept
+
+        if (input_dim == 1)
+        {
+            // 1D checkerboard: applies to the single dimension
+            int64_t L = input.size(0);
+            if (L == 0) return input; // Handle empty tensor
+
+            auto l_indices = torch::arange(L, input.options().dtype(torch::kLong));
+            auto characteristic_sum = l_indices % 2; // Will be 0 or 1
+
+            if (drop_even_sum_indices_)
+            {
+                // Drop if characteristic_sum is 0 (even), so keep if it's 1 (odd)
+                mask_template = (characteristic_sum == 1).to(input.dtype());
+            }
+            else
+            {
+                // Drop if characteristic_sum is 1 (odd), so keep if it's 0 (even)
+                mask_template = (characteristic_sum == 0).to(input.dtype());
+            }
+        }
+        else
+        {
+            // input_dim >= 2
+            // 2D+ checkerboard: applies to the last two dimensions (e.g., H, W)
+            int64_t H = input.size(-2);
+            int64_t W = input.size(-1);
+            if (H == 0 || W == 0) return input; // Handle empty spatial dimensions
+
+            auto h_indices = torch::arange(H, input.options().dtype(torch::kLong));
+            auto w_indices = torch::arange(W, input.options().dtype(torch::kLong));
+
+            // Create 2D grids for H and W indices
+            std::vector<torch::Tensor> grids = torch::meshgrid({h_indices, w_indices}, "ij"); // "ij" indexing gives HxW
+            auto h_grid = grids[0]; // Shape (H, W)
+            auto w_grid = grids[1]; // Shape (H, W)
+
+            auto characteristic_sum = (h_grid + w_grid) % 2; // Shape (H, W), values are 0 or 1
+
+            if (drop_even_sum_indices_)
+            {
+                // Drop if characteristic_sum is 0 (even), so keep if it's 1 (odd)
+                mask_template = (characteristic_sum == 1).to(input.dtype());
+            }
+            else
+            {
+                // Drop if characteristic_sum is 1 (odd), so keep if it's 0 (even)
+                mask_template = (characteristic_sum == 0).to(input.dtype());
+            }
+
+            // Reshape mask_template (H,W) to be broadcastable with input (e.g., 1,1,H,W for NCHW)
+            for (int64_t i = 0; i < input_dim - 2; ++i)
+            {
+                mask_template = mask_template.unsqueeze(0);
+            }
+        }
+
+        // Apply the mask. Kept elements are scaled by 2.0 because 50% of elements are dropped.
+        return (input * mask_template) * 2.0;
     }
 }
