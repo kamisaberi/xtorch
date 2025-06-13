@@ -1,4 +1,4 @@
-#include "include/normalizations/clnc_flow.h"
+#include "include/normalizations/cinc_flow.h"
 
 //
 // #include <torch/torch.h>
