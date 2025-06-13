@@ -230,17 +230,102 @@
 // */
 
 
-
-
 namespace xt::dropouts
 {
-    torch::Tensor concrete_dropout(torch::Tensor x)
+    namespace
     {
-        return torch::zeros(10);
+        // Anonymous namespace for helper utility
+        // Calculates initial log_alpha from an initial dropout rate p.
+        // log_alpha = log(p / (1-p))
+        double calculate_initial_log_alpha_value(double initial_dropout_rate, double epsilon = 1e-7)
+        {
+            if (initial_dropout_rate < epsilon)
+            {
+                initial_dropout_rate = epsilon;
+            }
+            if (initial_dropout_rate > 1.0 - epsilon)
+            {
+                initial_dropout_rate = 1.0 - epsilon;
+            }
+            return std::log(initial_dropout_rate / (1.0 - initial_dropout_rate));
+        }
+    } // namespace
+
+
+    ConcreteDropout::ConcreteDropout(
+        c10::IntArrayRef probability_shape, // Shape of log_alpha (empty for scalar)
+        double initial_dropout_rate, // Desired initial dropout probability p
+        double temperature, // Temperature for Concrete distribution
+        double dropout_regularizer) // Multiplier for the regularization term
+        : temperature_(temperature), dropout_regularizer_factor_(dropout_regularizer)
+    {
+        TORCH_CHECK(temperature_ > 0, "Temperature for Concrete Dropout must be positive.");
+
+        double initial_log_alpha_val = calculate_initial_log_alpha_value(initial_dropout_rate, epsilon_);
+
+        torch::Tensor log_alpha_init;
+        if (probability_shape.empty())
+        {
+            // Scalar probability
+            log_alpha_init = torch::tensor(initial_log_alpha_val, torch::kFloat32);
+        }
+        else
+        {
+            // Create a tensor of the given shape, filled with the initial log_alpha value.
+            log_alpha_init = torch::full(probability_shape, initial_log_alpha_val, torch::kFloat32);
+        }
+        log_alpha_ = register_parameter("log_alpha", log_alpha_init);
     }
+
 
     auto ConcreteDropout::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return xt::dropouts::concrete_dropout(torch::zeros(10));
+        vector<std::any> tensors_ = tensors;
+        auto input = std::any_cast<torch::Tensor>(tensors_[0]);
+
+        if (!this->is_training())
+        {
+            // During evaluation, Concrete Dropout (typically) acts as an identity function.
+            // The learned dropout probabilities are expected to have regularized the network weights.
+            return input;
+        }
+
+        // Calculate dropout probability p from log_alpha.
+        torch::Tensor p = torch::sigmoid(log_alpha_);
+
+        // Clamp p for numerical stability in subsequent log operations.
+        p = torch::clamp(p, epsilon_, 1.0 - epsilon_);
+
+        // Handle broadcasting of p (e.g., for per-channel dropout).
+        torch::Tensor p_broadcastable = p;
+        if (p.dim() == 1 && input.dim() > 1 && p.size(0) == input.size(1) && input.size(1) > 0)
+        {
+            // Assuming p.size(0) is the channel dimension (dim 1 of input)
+            std::vector<int64_t> view_shape(input.dim(), 1L);
+            view_shape[1] = p.size(0); // e.g., [1, C, 1, 1] for NCHW input
+            p_broadcastable = p.view(view_shape);
+        }
+        // Else: rely on PyTorch's standard broadcasting rules if p is scalar or already matches input.
+
+        // Sample u ~ Uniform(epsilon, 1-epsilon) for numerical stability in logs.
+        // The shape of unif_noise should match p_broadcastable to generate a mask of that shape.
+        torch::Tensor unif_noise = torch::rand(p_broadcastable.sizes(), input.options());
+        unif_noise = torch::clamp(unif_noise, epsilon_, 1.0 - epsilon_);
+
+        // Calculate logits for the Concrete distribution:
+        // logit_concrete = (logit(p) + logit(u)) / temperature
+        torch::Tensor logit_p = torch::log(p_broadcastable) - torch::log(1.0 - p_broadcastable);
+        torch::Tensor logit_unif = torch::log(unif_noise) - torch::log(1.0 - unif_noise);
+
+        torch::Tensor concrete_logits = (logit_p + logit_unif) / temperature_;
+        torch::Tensor concrete_mask = torch::sigmoid(concrete_logits);
+        // This is the continuous mask z ~ Concrete(p, temp)
+
+        // Apply the continuous mask.
+        // Note: Unlike standard inverted dropout, scaling by 1/keep_prob is not typically done here.
+        // The regularization term and learning process adjust for this.
+        torch::Tensor output = input * concrete_mask;
+
+        return output;
     }
 }
