@@ -14,7 +14,7 @@
 struct SM3Options : torch::optim::OptimizerOptions {
     explicit SM3Options(double learning_rate = 0.1) // SM3 often uses SGD-like LR
         : torch::optim::OptimizerOptions() {
-        this.lr(learning_rate);
+        this->lr(learning_rate);
     }
 
     // Momentum parameter
