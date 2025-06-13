@@ -201,7 +201,7 @@
 
 namespace xt::norm
 {
-    CINCFlow::CINCFlow(int64_t num_features, int64_t cond_embedding_dim, int64_t hidden_dim_cond_net )
+    CINCFlow::CINCFlow(int64_t num_features, int64_t cond_embedding_dim, int64_t hidden_dim_cond_net)
     // hidden_dim can be 0 for direct map
         : num_features_(num_features),
           cond_embedding_dim_(cond_embedding_dim),
@@ -229,6 +229,70 @@ namespace xt::norm
 
     auto CINCFlow::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return torch::zeros(10);
+        vector<std::any> tensors_ = tensors;
+        auto x = std::any_cast<torch::Tensor>(tensors_[0]);
+        auto cond = std::any_cast<torch::Tensor>(tensors_[1]);
+
+        // x: input tensor, e.g., (N, C) or (N, C, H, W) or (N, C, L)
+        // cond: conditioning tensor, e.g., (N, cond_embedding_dim_)
+
+        TORCH_CHECK(x.size(0) == cond.size(0), "Batch size of x and cond must match. Got x: ", x.size(0), ", cond: ",
+                    cond.size(0));
+        TORCH_CHECK(x.size(1) == num_features_, "Input x channels (dim 1) must match num_features. Expected: ",
+                    num_features_, ", got: ", x.size(1));
+        TORCH_CHECK(cond.dim() == 2 && cond.size(1) == cond_embedding_dim_,
+                    "Conditioning input 'cond' must be 2D with shape (N, cond_embedding_dim). Got shape: ",
+                    cond.sizes());
+
+        // --- 1. Compute scale and bias from conditioning input ---
+        torch::Tensor cond_processed = cond;
+        if (fc1_cond_)
+        {
+            // If hidden layer exists
+            cond_processed = fc1_cond_->forward(cond_processed);
+            cond_processed = torch::relu(cond_processed); // Common to add activation
+        }
+        torch::Tensor log_scale_and_bias = fc2_cond_->forward(cond_processed); // (N, 2 * num_features_)
+
+        // Split into log_scale and bias
+        auto chunks = torch::chunk(log_scale_and_bias, 2, /*dim=*/1);
+        torch::Tensor log_scale_params = chunks[0]; // (N, num_features_)
+        torch::Tensor bias_params = chunks[1]; // (N, num_features_)
+
+        // Typically, the scale parameter is made positive, e.g., by exp(log_scale)
+        // To prevent scale from becoming too large or small, sometimes tanh is used on log_scale_params.
+        // For simplicity, using exp directly. Add a constant for stability if desired e.g. torch::exp(log_scale_params + 2.0)
+        torch::Tensor scale = torch::exp(log_scale_params); // (N, num_features_)
+
+        // --- 2. Reshape scale and bias for broadcasting with x ---
+        // We want scale and bias to be (N, C, 1, 1, ...) to multiply with x (N, C, D1, D2, ...)
+        std::vector<int64_t> view_shape;
+        view_shape.push_back(x.size(0)); // N
+        view_shape.push_back(num_features_); // C
+        for (int64_t i = 2; i < x.dim(); ++i)
+        {
+            view_shape.push_back(1);
+        }
+        torch::Tensor scale_reshaped = scale.view(view_shape);
+        torch::Tensor bias_reshaped = bias_params.view(view_shape);
+
+        // --- 3. Apply affine transformation ---
+        torch::Tensor y = scale_reshaped * x + bias_reshaped;
+
+        // --- 4. Compute log-determinant of the Jacobian ---
+        // For y_i = s_i * x_i + b_i, the Jacobian is diagonal with entries s_i.
+        // The log-determinant is sum(log|s_i|) over all transformed dimensions.
+        // log_scale = log(exp(log_scale_params)) = log_scale_params
+        // We need to sum log_scale_params across channels and multiply by spatial/sequential dimensions.
+        torch::Tensor log_det_jacobian = log_scale_params.sum(/*dim=*/1); // Sum over C, result (N,)
+
+        // If x has spatial/sequential dimensions (D1, D2, ...), multiply by their product.
+        for (int64_t i = 2; i < x.dim(); ++i)
+        {
+            log_det_jacobian = log_det_jacobian * x.size(i);
+        }
+        // log_det_jacobian is now of shape (N,)
+
+        return std::make_tuple(y, log_det_jacobian);
     }
 }
