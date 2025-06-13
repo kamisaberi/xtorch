@@ -1,7 +1,6 @@
 #include "include/normalizations/rezero.h"
 
 
-
 // #include <torch/torch.h>
 // #include <iostream>
 // #include <vector>
@@ -158,11 +157,22 @@
 // }
 
 
-
 namespace xt::norm
 {
-    auto Rezero::forward(std::initializer_list<std::any> tensors) -> std::any
+    ReZero::ReZero(double initial_alpha_value = 0.0)
     {
-        return torch::zeros(10);
+        // alpha_ is a learnable scalar parameter.
+        alpha_ = register_parameter("alpha", torch::tensor({initial_alpha_value}));
+    }
+
+    auto ReZero::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        vector<std::any> tensors_ = tensors;
+        auto fx = std::any_cast<torch::Tensor>(tensors_[0]);
+
+        // fx: The output of the function F(x) within a residual block.
+        // This module scales fx by the learnable alpha.
+        // The residual connection x_skip + (alpha * fx) is typically handled outside this module.
+        return fx * alpha_;
     }
 }
