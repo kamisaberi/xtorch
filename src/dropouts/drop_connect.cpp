@@ -112,8 +112,31 @@ namespace xt::dropouts
         return torch::zeros(10);
     }
 
+    DropConnect::DropConnect(double p_drop ) : p_drop_(p_drop)
+    {
+        TORCH_CHECK(p_drop_ >= 0.0 && p_drop_ <= 1.0, "DropConnect probability p_drop must be between 0 and 1.");
+    }
+
     auto DropConnect::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return xt::dropouts::drop_connect(torch::zeros(10));
+        vector<std::any> tensors_ = tensors;
+        auto weight_tensor = std::any_cast<torch::Tensor>(tensors_[0]);
+
+        if (!this->is_training() || p_drop_ == 0.0)
+        {
+            return weight_tensor;
+        }
+
+        if (p_drop_ == 1.0)
+        {
+            return torch::zeros_like(weight_tensor);
+        }
+
+        double keep_prob = 1.0 - p_drop_;
+        torch::Tensor mask = torch::bernoulli(
+            torch::full_like(weight_tensor, keep_prob)
+        ).to(weight_tensor.dtype());
+
+        return (weight_tensor * mask) / (keep_prob + epsilon_);
     }
 }
