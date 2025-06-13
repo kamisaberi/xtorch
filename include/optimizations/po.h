@@ -33,7 +33,7 @@ struct POParamState : torch::optim::OptimizerParamState {
     TORCH_ARG(torch::Tensor, step);
     TORCH_ARG(torch::Tensor, exp_avg); // m_t (momentum)
 
-    POParamState() = default;
+    // POParamState() = default;
     void serialize(torch::serialize::OutputArchive& archive) const override;
     void deserialize(torch::serialize::InputArchive& archive) ;
     std::unique_ptr<OptimizerParamState> clone() const override;
