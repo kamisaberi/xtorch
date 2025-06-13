@@ -1,7 +1,6 @@
 #include "include/dropouts/sensor_dropout.h"
 
 
-
 // #include <torch/torch.h>
 // #include <vector>
 // #include <numeric>   // For std::iota, std::accumulate
@@ -190,16 +189,123 @@
 //
 
 
-
 namespace xt::dropouts
 {
-    torch::Tensor sensor_dropout(torch::Tensor x)
+    SensorDropout::SensorDropout(const std::vector<int64_t>& sensor_splits, double p_drop_sensor )
+        : p_drop_sensor_(p_drop_sensor), sensor_splits_(sensor_splits)
     {
-        return torch::zeros(10);
+        TORCH_CHECK(p_drop_sensor_ >= 0.0 && p_drop_sensor_ <= 1.0,
+                    "p_drop_sensor must be between 0 and 1.");
+        TORCH_CHECK(!sensor_splits_.empty(), "sensor_splits cannot be empty.");
+        for (int64_t split_size : sensor_splits_)
+        {
+            TORCH_CHECK(split_size > 0, "Each sensor split size must be positive.");
+        }
+        total_features_ = std::accumulate(sensor_splits_.begin(), sensor_splits_.end(), 0LL);
     }
+
 
     auto SensorDropout::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return xt::dropouts::sensor_dropout(torch::zeros(10));
+        vector<std::any> tensors_ = tensors;
+        auto input = std::any_cast<torch::Tensor>(tensors_[0]);
+
+        if (!this->is_training() || p_drop_sensor_ == 0.0 || sensor_splits_.empty())
+        {
+            return input;
+        }
+
+        TORCH_CHECK(input.size(-1) == total_features_,
+                    "Input's last dimension size (", input.size(-1),
+                    ") does not match total_features_ from sensor_splits (", total_features_, ").");
+
+        int num_sensors = sensor_splits_.size();
+        if (num_sensors == 0) return input;
+
+        // Create a per-sensor keep/drop decision mask
+        // This mask is (num_sensors), 1 if sensor is kept, 0 if dropped.
+        torch::Tensor sensor_decision_mask_1d = torch::bernoulli(
+            torch::full({num_sensors}, 1.0 - p_drop_sensor_, input.options())
+        ).to(input.dtype());
+
+        // If all sensors are decided to be dropped (unlikely but possible if p_drop_sensor_ is high)
+        // and p_drop_sensor_ < 1.0, we might want to ensure at least one sensor is kept.
+        // For simplicity now, we allow all to be dropped if p_drop_sensor_ is high enough.
+        // If p_drop_sensor_ == 1.0, all sensors are dropped.
+        if (p_drop_sensor_ == 1.0)
+        {
+            return torch::zeros_like(input);
+        }
+
+        // Construct the full feature mask based on sensor_decision_mask_1d
+        std::vector<torch::Tensor> feature_mask_parts;
+        feature_mask_parts.reserve(num_sensors);
+        int64_t num_kept_sensors = 0;
+        int64_t num_kept_features = 0;
+
+        for (int i = 0; i < num_sensors; ++i)
+        {
+            bool keep_this_sensor = sensor_decision_mask_1d[i].item<double>() > 0.5;
+            int64_t current_sensor_features = sensor_splits_[i];
+            if (keep_this_sensor)
+            {
+                feature_mask_parts.push_back(torch::ones({current_sensor_features},
+                                                         input.options().dtype(input.dtype())));
+                num_kept_sensors++;
+                num_kept_features += current_sensor_features;
+            }
+            else
+            {
+                feature_mask_parts.push_back(torch::zeros({current_sensor_features},
+                                                          input.options().dtype(input.dtype())));
+            }
+        }
+
+        // If all sensors happened to be dropped by chance (and p_drop_sensor < 1.0),
+        // to prevent division by zero or empty output, one could force keeping one sensor.
+        // For this version, if num_kept_features is 0, we'll return zeros.
+        // A more robust way would be to ensure at least one sensor is kept unless p_drop_sensor_ == 1.0.
+        // This can be done by re-sampling sensor_decision_mask_1d if it's all zeros,
+        // or by adjusting the scaling factor.
+        if (num_kept_features == 0 && p_drop_sensor_ < 1.0)
+        {
+            // This situation means all sensors were dropped by chance.
+            // If the goal is to always have some signal, one might force-keep a random sensor.
+            // Or, accept that this pass has no sensor data.
+            // For scaling, this means scale factor would be infinite. Let's return zeros.
+            return torch::zeros_like(input);
+        }
+
+
+        torch::Tensor feature_mask = torch::cat(feature_mask_parts, 0); // Shape (TotalFeatures)
+
+        // Reshape feature_mask to be broadcastable with input
+        // If input is (Batch, TotalFeatures), mask needs to be (1, TotalFeatures) or (TotalFeatures)
+        // If input is (TotalFeatures), mask is fine.
+        if (input.dim() > 1 && feature_mask.dim() == 1)
+        {
+            // e.g. input (B,F), mask (F)
+            // feature_mask is already (TotalFeatures), broadcasting rules will handle it
+        }
+
+        // Scaling: The paper "DropBlock" and others scale by (total_area / kept_area).
+        // Here, we scale by (total_num_features / num_kept_features) IF we only considered
+        // the features of active sensors.
+        // A simpler scaling is to scale by 1 / (1 - effective_feature_drop_rate).
+        // The effective feature drop rate is not simply p_drop_sensor_.
+        // Let's scale by the proportion of sensors kept, assuming features are somewhat evenly important.
+        // Or, more accurately, by proportion of features kept.
+        double scale_factor;
+        if (num_kept_features > 0)
+        {
+            scale_factor = static_cast<double>(total_features_) / (static_cast<double>(num_kept_features) + epsilon_);
+        }
+        else
+        {
+            // All features dropped
+            scale_factor = 0; // Effectively, output is zero. This happens if p_drop_sensor_ = 1.0 or by chance.
+        }
+
+        return (input * feature_mask) * scale_factor;
     }
 }
