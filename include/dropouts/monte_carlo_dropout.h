@@ -2,17 +2,16 @@
 
 #include "common.h"
 
-namespace xt::dropouts {
-    torch::Tensor monte_carlo_dropout(torch::Tensor x);
-
-    struct MonteCarloDropout : xt::Module {
+namespace xt::dropouts
+{
+    struct MonteCarloDropout : xt::Module
+    {
     public:
-        MonteCarloDropout() = default;
-        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
+        MonteCarloDropout(double p_drop = 0.5);
+        auto forward(std::initializer_list<std::any> tensors) -> std::any override;
 
     private:
+        double p_drop_; // Probability of an element to be zeroed out.
+        double epsilon_ = 1e-7; // For numerical stability in division
     };
 }
-
-
-

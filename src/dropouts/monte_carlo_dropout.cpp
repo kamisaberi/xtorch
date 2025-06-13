@@ -145,16 +145,37 @@
 // */
 
 
-
 namespace xt::dropouts
 {
-    torch::Tensor monte_carlo_dropout(torch::Tensor x)
+    MonteCarloDropout::MonteCarloDropout(double p_drop ) : p_drop_(p_drop)
     {
-        return torch::zeros(10);
+        TORCH_CHECK(p_drop_ >= 0.0 && p_drop_ <= 1.0, "Dropout probability p_drop must be between 0 and 1.");
     }
+
 
     auto MonteCarloDropout::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return xt::dropouts::monte_carlo_dropout(torch::zeros(10));
+        vector<std::any> tensors_ = tensors;
+        auto input = std::any_cast<torch::Tensor>(tensors_[0]);
+
+        if (!this->is_training() || p_drop_ == 0.0)
+        {
+            // If not in "training mode" (dropout active) or if p_drop is zero,
+            // return the input as is.
+            return input;
+        }
+
+        if (p_drop_ == 1.0)
+        {
+            // If dropout probability is one, all elements are zeroed out.
+            return torch::zeros_like(input);
+        }
+
+        double keep_prob = 1.0 - p_drop_;
+        torch::Tensor mask = torch::bernoulli(
+            torch::full_like(input, keep_prob)
+        ).to(input.dtype());
+
+        return (input * mask) / (keep_prob + epsilon_);
     }
 }
