@@ -4,7 +4,7 @@
 #include "adaptive_instance_normalization.h"
 #include "attentive_normalization.h"
 #include "batch_channel_normalization.h"
-#include "clnc_flow.h"
+#include "cinc_flow.h"
 #include "conditional_batch_normalization.h"
 #include "conditional_instance_normalization.h"
 #include "cosine_normalization.h"
