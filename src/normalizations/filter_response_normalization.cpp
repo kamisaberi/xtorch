@@ -174,11 +174,62 @@
 // }
 
 
-
 namespace xt::norm
 {
+    FilterResponseNorm::FilterResponseNorm(int64_t num_features, double eps)
+        : num_features_(num_features),
+          eps_(eps)
+    {
+        TORCH_CHECK(num_features > 0, "num_features must be positive.");
+
+        // Initialize learnable parameters
+        // gamma and beta are similar to BatchNorm's affine parameters
+        gamma_ = register_parameter("gamma", torch::ones({1, num_features_, 1, 1})); // Shape for broadcasting with NCHW
+        beta_ = register_parameter("beta", torch::zeros({1, num_features_, 1, 1})); // Shape for broadcasting
+
+        // tau is the learnable threshold for TLU
+        // Initializing tau to zero means TLU initially behaves like ReLU around zero if gamma > 0
+        tau_ = register_parameter("tau", torch::zeros({1, num_features_, 1, 1})); // Shape for broadcasting
+    }
+
     auto FilterResponseNorm::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return torch::zeros(10);
+        vector<std::any> tensors_ = tensors;
+        auto x = std::any_cast<torch::Tensor>(tensors_[0]);
+
+
+        // Input x is expected to be 4D: (N, C, H, W)
+        // C must be num_features_
+        TORCH_CHECK(x.dim() == 4, "Input tensor must be 4D (N, C, H, W). Got shape ", x.sizes());
+        TORCH_CHECK(x.size(1) == num_features_,
+                    "Input channels mismatch. Expected ", num_features_, ", got ", x.size(1));
+
+        // --- 1. FRN: Normalization Step ---
+        // Calculate sum of squares over spatial dimensions (H, W) for each channel and each batch instance.
+        // x_squared = x^2
+        torch::Tensor x_squared = x.pow(2);
+
+        // Sum over spatial dimensions (H, W), which are dims 2 and 3.
+        // keepdim=true to maintain shape for broadcasting.
+        // nu2 = sum_{h,w} x^2_{n,c,h,w} / (H*W)  (mean square)
+        torch::Tensor nu2 = x_squared.mean(std::vector<int64_t>{2, 3}, /*keepdim=*/true);
+        // nu2 shape: (N, C, 1, 1)
+
+        // Normalize x: x_hat = x / sqrt(nu2 + eps)
+        torch::Tensor x_frn = x * torch::rsqrt(nu2 + eps_); // Using rsqrt for 1/sqrt(...)
+        // x_frn shape: (N, C, H, W)
+
+        // Apply learnable affine transformation (gamma, beta)
+        torch::Tensor x_affine = x_frn * gamma_ + beta_;
+        // x_affine shape: (N, C, H, W)
+
+
+        // --- 2. TLU: Thresholded Linear Unit ---
+        // y = max(x_affine, tau)
+        torch::Tensor output = torch::max(x_affine, tau_);
+        // output shape: (N, C, H, W)
+
+        return output;
+
     }
 }
