@@ -154,8 +154,42 @@
 
 namespace xt::norm
 {
+    PixelNorm::PixelNorm(double eps = 1e-8)
+        : eps_(eps)
+    {
+        // PixelNorm typically does not have learnable parameters.
+    }
+
     auto PixelNorm::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return torch::zeros(10);
+        vector<std::any> tensors_ = tensors;
+        auto x = std::any_cast<torch::Tensor>(tensors_[0]);
+
+        // Input x is expected to be 4D: (N, C, H, W)
+        TORCH_CHECK(x.dim() == 4, "Input tensor must be 4D (N, C, H, W). Got shape ", x.sizes());
+
+        // --- PixelNorm Calculation ---
+        // For each pixel (h,w), normalize the C-dimensional feature vector.
+        // x_chw = x_chw / sqrt(mean(x_c'hw^2 over c') + eps)
+
+        // 1. Square the input: x^2
+        torch::Tensor x_squared = x.pow(2); // Shape (N, C, H, W)
+
+        // 2. Calculate mean of squares across the channel dimension (dim=1)
+        // Keepdim=true to maintain shape for broadcasting.
+        torch::Tensor mean_sq_across_channels = x_squared.mean(/*dim=*/1, /*keepdim=*/true);
+        // mean_sq_across_channels shape: (N, 1, H, W)
+
+        // 3. Calculate the normalization factor: 1.0 / sqrt(mean_sq_across_channels + eps)
+        // This is equivalent to rsqrt(mean_sq_across_channels + eps)
+        torch::Tensor norm_factor = torch::rsqrt(mean_sq_across_channels + eps_);
+        // norm_factor shape: (N, 1, H, W)
+
+        // 4. Multiply the original input x by the normalization factor.
+        // The norm_factor will broadcast across the channel dimension.
+        torch::Tensor output = x * norm_factor;
+        // output shape: (N, C, H, W)
+
+        return output;
     }
 }
