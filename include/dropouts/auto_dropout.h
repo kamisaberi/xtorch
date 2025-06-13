@@ -9,7 +9,7 @@ namespace xt::dropouts
     struct AutoDropout : xt::Module
     {
     public:
-        AutoDropout(c10::IntArrayRef probability_shape = {}, double initial_dropout_rate = 0.05);
+        explicit AutoDropout(c10::IntArrayRef probability_shape = {}, double initial_dropout_rate = 0.05);
         auto forward(std::initializer_list<std::any> tensors) -> std::any override;
 
     private:
