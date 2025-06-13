@@ -1,7 +1,6 @@
 #include "include/dropouts/shake_drop.h"
 
 
-
 // #include <torch/torch.h>
 // #include <random>  // For std::uniform_real_distribution, std::mt19937
 // #include <ostream> // For std::ostream
@@ -167,13 +166,50 @@
 
 namespace xt::dropouts
 {
-    torch::Tensor shake_drop(torch::Tensor x)
+    ShakeDrop::ShakeDrop(double p_drop )
+        : p_drop_(p_drop), gen_(std::random_device{}())
     {
-        return torch::zeros(10);
+        // Seed with random_device
+        TORCH_CHECK(p_drop_ >= 0.0 && p_drop_ <= 1.0, "p_drop must be between 0 and 1.");
     }
 
     auto ShakeDrop::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return xt::dropouts::shake_drop(torch::zeros(10));
+        vector<std::any> tensors_ = tensors;
+        auto branch_output = std::any_cast<torch::Tensor>(tensors_[0]);
+
+        if (!this->is_training())
+        {
+            // Evaluation mode: scale by expected value of the forward scaling factor.
+            // E[scaling_factor] = p_drop_ * E[alpha] + (1 - p_drop_) * E[beta]
+            // E[alpha] = (alpha_range_min_ + alpha_range_max_) / 2.0 = (-1+1)/2 = 0
+            // E[beta]  = (beta_range_min_ + beta_range_max_) / 2.0   = (0+2)/2 = 1
+            // So, E[scaling_factor] = p_drop_ * 0 + (1 - p_drop_) * 1 = 1 - p_drop_
+            return branch_output * (1.0 - p_drop_);
+        }
+
+        // Training mode: apply stochastic scaling
+        double rand_val_for_choice = std::uniform_real_distribution<double>(0.0, 1.0)(gen_);
+        double scale_factor;
+
+        if (rand_val_for_choice < p_drop_)
+        {
+            // Apply alpha scaling (uniform from [-1, 1])
+            scale_factor = std::uniform_real_distribution<double>(
+                alpha_range_min_, alpha_range_max_
+            )(gen_);
+        }
+        else
+        {
+            // Apply beta scaling (uniform from [0, 2])
+            scale_factor = std::uniform_real_distribution<double>(
+                beta_range_min_, beta_range_max_
+            )(gen_);
+        }
+
+        // The scale_factor is a scalar, applied to the entire branch_output tensor.
+        // The paper suggests per-channel or per-sample randomness for some variants (Shake-Shake),
+        // but the core ShakeDrop applies a single random scalar per branch activation.
+        return branch_output * scale_factor;
     }
 }
