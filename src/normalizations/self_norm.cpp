@@ -1,7 +1,6 @@
 #include "include/normalizations/self_norm.h"
 
 
-
 // #include <torch/torch.h>
 // #include <iostream>
 // #include <vector>
@@ -156,11 +155,29 @@
 // }
 
 
-
 namespace xt::norm
 {
+    SelfNorm::SelfNorm(bool inplace) : inplace_(inplace)
+    {
+        // No learnable parameters for SELU itself.
+    }
+
     auto SelfNorm::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return torch::zeros(10);
+        vector<std::any> tensors_ = tensors;
+        auto x = std::any_cast<torch::Tensor>(tensors_[0]);
+
+        // Apply the SELU activation function.
+        // torch::selu(input, inplace)
+        // If using nn::SELUM(), it also has an inplace option.
+
+        if (inplace_)
+        {
+            return torch::selu_(x); // In-place version
+        }
+        else
+        {
+            return torch::selu(x); // Out-of-place version
+        }
     }
 }
