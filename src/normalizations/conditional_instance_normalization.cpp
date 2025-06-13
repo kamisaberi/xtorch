@@ -1,7 +1,6 @@
 #include "include/normalizations/conditional_instance_normalization.h"
 
 
-
 // #include <torch/torch.h>
 // #include <iostream>
 // #include <vector>
@@ -204,12 +203,110 @@
 // }
 
 
-
-
 namespace xt::norm
 {
+    ConditionalInstanceNorm::ConditionalInstanceNorm(int64_t num_features,
+                                                     int64_t cond_embedding_dim,
+                                                     int64_t cond_hidden_dim, // 0 means no hidden layer for cond net
+                                                     double eps)
+        : num_features_(num_features),
+          cond_embedding_dim_(cond_embedding_dim),
+          cond_hidden_dim_(cond_hidden_dim),
+          eps_(eps)
+    {
+        TORCH_CHECK(num_features > 0, "num_features must be positive.");
+        TORCH_CHECK(cond_embedding_dim > 0, "cond_embedding_dim must be positive.");
+
+        // Instance Normalization does not have running_mean/var in the same way BN does.
+        // Statistics are computed per instance.
+
+        // Setup conditioning network
+        if (cond_hidden_dim_ <= 0)
+        {
+            // Direct mapping from conditioning_input to gamma/beta
+            fc_cond_out_ = torch::nn::Linear(cond_embedding_dim_, 2 * num_features_); // 2 for gamma and beta
+            register_module("fc_cond_out", fc_cond_out_);
+        }
+        else
+        {
+            fc_cond1_ = torch::nn::Linear(cond_embedding_dim_, cond_hidden_dim_);
+            fc_cond_out_ = torch::nn::Linear(cond_hidden_dim_, 2 * num_features_);
+            register_module("fc_cond1", fc_cond1_);
+            register_module("fc_cond_out", fc_cond_out_);
+        }
+    }
+
     auto ConditionalInstanceNorm::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return torch::zeros(10);
+        vector<std::any> tensors_ = tensors;
+        auto x = std::any_cast<torch::Tensor>(tensors_[0]);
+        auto conditioning_input = std::any_cast<torch::Tensor>(tensors_[1]);
+
+        // x: input tensor (N, C, D1, D2, ...) where C is num_features_
+        // conditioning_input: (N, cond_embedding_dim_)
+
+        TORCH_CHECK(x.dim() >= 2, "Input tensor x must have at least 2 dimensions (N, C, ...). Got ", x.dim());
+        TORCH_CHECK(x.size(0) == conditioning_input.size(0),
+                    "Batch size of x (", x.size(0), ") and conditioning_input (", conditioning_input.size(0),
+                    ") must match.");
+        TORCH_CHECK(x.size(1) == num_features_,
+                    "Number of input features (channels) in x mismatch. Expected ", num_features_,
+                    ", but got ", x.size(1), " for input x of shape ", x.sizes());
+        TORCH_CHECK(conditioning_input.dim() == 2 && conditioning_input.size(1) == cond_embedding_dim_,
+                    "Conditioning input must be 2D with shape (N, cond_embedding_dim). Got shape: ",
+                    conditioning_input.sizes());
+
+
+        // --- 1. Instance Normalization part ---
+        torch::Tensor x_normalized;
+
+        if (x.dim() > 2)
+        {
+            // Input has spatial/sequential dimensions (N, C, D1, ...)
+            std::vector<int64_t> reduce_dims_for_stats; // Dims to average over for mean/var (D1, D2, ...)
+            for (int64_t i = 2; i < x.dim(); ++i)
+            {
+                reduce_dims_for_stats.push_back(i);
+            }
+            // keepdim=true for broadcasting
+            auto mean = x.mean(reduce_dims_for_stats, /*keepdim=*/true);
+            auto var = x.var(reduce_dims_for_stats, /*unbiased=*/false, /*keepdim=*/true);
+            x_normalized = (x - mean) / torch::sqrt(var + eps_);
+        }
+        else
+        {
+            // Input is 2D (N, C). InstanceNorm on a single point per channel results in 0.
+            x_normalized = torch::zeros_like(x);
+        }
+
+        // --- 2. Generate Gamma and Beta from conditioning_input ---
+        torch::Tensor cond_features = conditioning_input;
+        if (fc_cond1_)
+        {
+            // If hidden layer exists
+            cond_features = fc_cond1_->forward(cond_features);
+            cond_features = torch::relu(cond_features); // Common activation
+        }
+        torch::Tensor gamma_beta_params = fc_cond_out_->forward(cond_features); // (N, 2 * num_features_)
+
+        auto chunks = torch::chunk(gamma_beta_params, 2, /*dim=*/1);
+        torch::Tensor gamma_generated = chunks[0]; // (N, num_features_)
+        torch::Tensor beta_generated = chunks[1]; // (N, num_features_)
+
+        // --- 3. Reshape generated Gamma and Beta for broadcasting ---
+        // Desired shape: (N, C, 1, 1, ...) to match x_normalized (N, C, D1, D2, ...)
+        std::vector<int64_t> affine_param_view_shape;
+        affine_param_view_shape.push_back(x.size(0)); // N
+        affine_param_view_shape.push_back(num_features_); // C
+        for (int64_t i = 2; i < x.dim(); ++i)
+        {
+            affine_param_view_shape.push_back(1);
+        }
+
+        gamma_generated = gamma_generated.view(affine_param_view_shape);
+        beta_generated = beta_generated.view(affine_param_view_shape);
+
+        // --- 4. Apply conditional affine transformation ---
+        return gamma_generated * x_normalized + beta_generated;
     }
 }
