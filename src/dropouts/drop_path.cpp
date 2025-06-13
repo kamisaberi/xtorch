@@ -120,13 +120,50 @@
 
 namespace xt::dropouts
 {
-    torch::Tensor drop_path(torch::Tensor x)
+    DropPath::DropPath(double p_drop) : p_drop_(p_drop)
     {
-        return torch::zeros(10);
+        TORCH_CHECK(p_drop_ >= 0.0 && p_drop_ <= 1.0, "DropPath probability p_drop must be between 0 and 1.");
     }
 
     auto DropPath::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return xt::dropouts::drop_path(torch::zeros(10));
+        vector<std::any> tensors_ = tensors;
+        auto input = std::any_cast<torch::Tensor>(tensors_[0]);
+
+        if (!this->is_training() || p_drop_ == 0.0)
+        {
+            return input;
+        }
+        if (p_drop_ == 1.0)
+        {
+            return torch::zeros_like(input);
+        }
+
+        TORCH_CHECK(input.dim() >= 1,
+                    "DropPath input must have at least one dimension (expected batch dimension at dim 0).");
+
+        int64_t batch_size = input.size(0);
+        double keep_prob = 1.0 - p_drop_;
+
+        // Create a per-sample mask (1 to keep, 0 to drop)
+        torch::Tensor random_tensor = torch::rand({batch_size}, input.options());
+        torch::Tensor keep_mask_1d = (random_tensor < keep_prob).to(input.dtype());
+
+        // Reshape mask to be broadcastable with input: (N, 1, 1, ...)
+        std::vector<int64_t> view_shape(input.dim(), 1L);
+        if (input.dim() > 0)
+        {
+            // Should always be true due to TORCH_CHECK above
+            view_shape[0] = batch_size;
+        }
+        else
+        {
+            // Should not happen, but defensive
+            return input; // Or error
+        }
+        torch::Tensor keep_mask = keep_mask_1d.view(view_shape);
+
+        // Apply mask and scale (inverted dropout)
+        return (input * keep_mask) / (keep_prob + epsilon_);
     }
 }
