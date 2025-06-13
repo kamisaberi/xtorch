@@ -226,11 +226,120 @@
 // }
 
 
-
 namespace xt::norm
 {
+    LocalResponseNorm::LocalResponseNorm(int64_t size, double alpha, double beta, double k)
+        : size_(size),
+          alpha_(alpha),
+          beta_(beta),
+          k_(k)
+    {
+        TORCH_CHECK(size_ > 0 && size_ % 2 == 1, "LRN size must be a positive odd integer.");
+    }
+
     auto LocalResponseNorm::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return torch::zeros(10);
+        vector<std::any> tensors_ = tensors;
+        auto x = std::any_cast<torch::Tensor>(tensors_[0]);
+
+        // Input x is expected to be 4D: (N, C, H, W)
+        TORCH_CHECK(x.dim() == 4, "Input tensor must be 4D (N, C, H, W). Got shape ", x.sizes());
+
+        int64_t N = x.size(0);
+        int64_t C = x.size(1);
+        int64_t H = x.size(2);
+        int64_t W = x.size(3);
+
+        // --- LRN Calculation ---
+        // Denominator: (k + alpha/n * sum_neighbors(a^2) )^beta
+        // Note: PyTorch's nn.LocalResponseNorm uses alpha * sum(...) instead of alpha/n * sum(...)
+        // The original AlexNet paper divides alpha by n. We'll follow PyTorch's nn.LocalResponseNorm convention
+        // which does NOT divide alpha by n in its formula: (k + alpha * sum(...))^beta.
+        // If you need the division by n for alpha, you'd adjust `alpha_` at construction or here.
+        // Let's stick to the PyTorch's nn.LocalResponseNorm formula:
+        // b_i = a_i / (k + (alpha / size) * sum_{j in window} a_j^2 ) ^ beta
+        // The `alpha / size` part is what nn.LocalResponseNorm does internally if `alpha` is given as input.
+        // Or, more directly like Krizhevsky paper: (k + alpha * sum a_j^2)^beta,
+        // where alpha is small (e.g., 1e-4) and n is the sum window size.
+        // Let's use the Krizhevsky formula with `alpha_` directly.
+        // If PyTorch's `nn.LocalResponseNorm` is the target, then the sum is over `size_` channels,
+        // and the `alpha` parameter to `nn.LocalResponseNorm` gets internally divided by `size_`.
+        // To match PyTorch's nn.LocalResponseNorm behavior given its parameters:
+        // actual_alpha_for_sum = this->alpha_ / this->size_;
+        // But the common formula has alpha directly multiplying the sum.
+        // Let's use `div_term = x.pow(2).unsqueeze(1)` and then a 1D average pool on channel dim.
+
+        // Create a tensor for the sum of squares.
+        // We need to sum over a window of `size_` channels.
+        // This can be done efficiently using a 1D average pooling operation on the squared input,
+        // applied across the channel dimension.
+        // We need to treat (N,C,H,W) as (N*H*W, C) then pool, then reshape. Or use Conv3D with 1xSIZE_x1x1 kernel.
+        // PyTorch's nn.LocalResponseNorm does this more directly.
+
+        // Simpler direct approach for clarity (can be optimized with conv/pool):
+        torch::Tensor x_squared = x.pow(2);
+        torch::Tensor sum_sq = torch::zeros_like(x);
+
+        // Half window size for channels
+        int radius = (size_ - 1) / 2;
+
+        // Pad x_squared along channel dimension for easier window sum
+        // Pad with (radius, radius) on dimension 1 (channels)
+        auto x_squared_padded = torch::constant_pad_nd(x_squared, {0, 0, 0, 0, radius, radius, 0, 0}, 0.0);
+
+        // Iterate and sum (conceptually, implemented with slicing)
+        for (int64_t i = 0; i < C; ++i)
+        {
+            // Slice the padded tensor to get the window for channel i
+            // The window for original channel `i` is from `i` to `i + size_ -1` in the padded tensor.
+            sum_sq.select(1, i) = x_squared_padded.slice(1, i, i + size_).sum(1);
+        }
+        // This direct sum might be slightly different from a pooling average if edge effects are handled differently.
+        // PyTorch's LRN uses a sum, and `alpha` is usually scaled by `size_`.
+        // If we want to match torch.nn.functional.local_response_norm exactly:
+        // It's `x_sq = x.pow(2)`
+        // `x_sq_sum = torch.empty_like(x_sq)`
+        // `for c in range(C):`
+        // `  begin = max(0, c - size // 2)`
+        // `  end = min(C, c + size // 2 + 1)`
+        // `  x_sq_sum[:, c] = x_sq[:, begin:end].sum(dim=1)`
+        // `norm_val = k_ + (alpha_ / size_) * x_sq_sum` (This is if alpha is scaled by size)
+        // `norm_val = norm_val.pow(beta_)`
+        // `return x / norm_val`
+
+        // Let's implement the sum more directly using torch::nn::functional::avg_pool1d as a trick
+        // Reshape x_squared to (N*H*W, 1, C) to use 1D pooling as a sliding window sum
+        // Or (N, H*W, C) then permute to (N, C, H*W)
+        auto x_sq_reshaped = x_squared.permute({0, 2, 3, 1}).contiguous(); // (N, H, W, C)
+        x_sq_reshaped = x_sq_reshaped.view({-1, C}); // (N*H*W, C)
+        x_sq_reshaped = x_sq_reshaped.unsqueeze(1); // (N*H*W, 1, C) for AvgPool1d (expects N, Cin, Lin)
+
+        // Using AvgPool1d to simulate sum pooling: avg_pool * kernel_size = sum_pool
+        // Padding for AvgPool1d: kernel_size_ must be odd. padding = (kernel_size_ - 1) / 2
+        // This is a common way to implement LRN's sum.
+        auto avg_pool_op = torch::nn::AvgPool1d(torch::nn::AvgPool1dOptions(size_)
+                                                .stride(1)
+                                                .padding(radius)
+                                                .count_include_pad(false));
+        // Important for edges if not using custom padding
+        // Krizhevsky's LRN effectively zero-pads.
+
+        torch::Tensor sum_pooled_sq = avg_pool_op(x_sq_reshaped) * size_; // (N*H*W, 1, C)
+        sum_pooled_sq = sum_pooled_sq.squeeze(1); // (N*H*W, C)
+        sum_pooled_sq = sum_pooled_sq.view({N, H, W, C});
+        sum_pooled_sq = sum_pooled_sq.permute({0, 3, 1, 2}).contiguous(); // (N, C, H, W)
+
+        // Denominator calculation
+        // The parameter `alpha` in PyTorch's nn.LocalResponseNorm corresponds to `alpha_param / size_`
+        // where `alpha_param` is the one you pass to the constructor.
+        // So, if we want to match, use `alpha_ / size_`.
+        // If following original paper more directly (where alpha is small):
+        torch::Tensor denominator = sum_pooled_sq * (alpha_
+            /* / size_ : if matching torch.nn.LRN precisely with its alpha meaning */) + k_;
+        denominator = denominator.pow(beta_);
+
+        torch::Tensor output = x / denominator;
+
+        return output;
     }
 }
