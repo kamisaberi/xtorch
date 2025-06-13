@@ -116,13 +116,48 @@
 
 namespace xt::dropouts
 {
-    torch::Tensor gaussian_dropout(torch::Tensor x)
+    GaussianDropout::GaussianDropout(double p_rate ) : p_rate_(p_rate)
     {
-        return torch::zeros(10);
+        TORCH_CHECK(p_rate_ >= 0.0 && p_rate_ < 1.0,
+                    "GaussianDropout p_rate must be between 0 and 1 (exclusive of 1).");
+        if (p_rate_ == 0.0)
+        {
+            alpha_ = 0.0;
+        }
+        else
+        {
+            // alpha = p / (1-p) as suggested in the original dropout paper
+            alpha_ = p_rate_ / (1.0 - p_rate_);
+        }
     }
+
 
     auto GaussianDropout::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return xt::dropouts::gaussian_dropout(torch::zeros(10));
+        vector<std::any> tensors_ = tensors;
+        auto input = std::any_cast<torch::Tensor>(tensors_[0]);
+
+        if (!this->is_training() || p_rate_ == 0.0)
+        {
+            // If not in training mode or if effective dropout rate is zero,
+            // return the input as is.
+            return input;
+        }
+
+        // Generate multiplicative noise.
+        // We want noise ~ N(1, alpha).
+        // This can be achieved by generating noise_std_normal ~ N(0, 1),
+        // then scaling: 1 + noise_std_normal * sqrt(alpha).
+
+        // randn_like generates noise from N(0, 1)
+        torch::Tensor noise_std_normal = torch::randn_like(input);
+
+        // Multiplicative noise: 1 + N(0, alpha) = N(1, alpha)
+        torch::Tensor multiplicative_noise = 1.0 + (noise_std_normal * std::sqrt(alpha_));
+
+        return input * multiplicative_noise;
+
+
+
     }
 }
