@@ -207,11 +207,78 @@
 // }
 
 
-
 namespace xt::norm
 {
-    auto MPN::forward(std::initializer_list<std::any> tensors) -> std::any
+    MPNNorm::MPNNorm(const std::vector<int64_t>& normalized_shape, // e.g., {num_features}
+                     double eps,
+                     bool elementwise_affine)
+        : normalized_shape_(normalized_shape),
+          eps_(eps),
+          elementwise_affine_(elementwise_affine)
     {
-        return torch::zeros(10);
+        TORCH_CHECK(!normalized_shape_.empty(), "normalized_shape cannot be empty.");
+        // For typical node features (NumNodes, NumFeatures) or (N, MaxNodes, NumFeatures),
+        // normalized_shape_ would be {NumFeatures}.
+
+        if (elementwise_affine_)
+        {
+            // Gamma and beta will have the same shape as normalized_shape_
+            gamma_ = register_parameter("weight", torch::ones(normalized_shape_)); // PyTorch LN naming
+            beta_ = register_parameter("bias", torch::zeros(normalized_shape_)); // PyTorch LN naming
+        }
+    }
+
+    auto MPNNorm::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        vector<std::any> tensors_ = tensors;
+        auto x = std::any_cast<torch::Tensor>(tensors_[0]);
+
+        // Input x: (..., F1, F2, ..., Fk) where {F1, ..., Fk} matches normalized_shape_
+        // For GNNs, common shapes:
+        // - (NumTotalNodes, NumFeatures) -> normalized_shape_ = {NumFeatures}
+        // - (BatchSize, NumNodesPerGraph, NumFeatures) -> normalized_shape_ = {NumFeatures}
+
+        // Check that the trailing dimensions of x match normalized_shape_
+        TORCH_CHECK(x.dim() >= normalized_shape_.size(),
+                    "Input tensor rank (", x.dim(), ") must be at least the rank of normalized_shape (",
+                    normalized_shape_.size(), ").");
+        for (size_t i = 0; i < normalized_shape_.size(); ++i)
+        {
+            TORCH_CHECK(x.size(-normalized_shape_.size() + i) == normalized_shape_[i],
+                        "Trailing dimensions of input x do not match normalized_shape. Expected shape ending with ",
+                        torch::IntArrayRef(normalized_shape_), ", got input shape ", x.sizes());
+        }
+
+        // --- Layer Normalization Logic ---
+        // Mean and variance are computed over the 'normalized_shape_' dimensions.
+        // These are the last D dimensions, where D = normalized_shape_.size().
+        // For example, if normalized_shape_ = {C}, we normalize over the last dimension.
+        // If normalized_shape_ = {H, W}, we normalize over the last two dimensions.
+
+        std::vector<int64_t> reduction_axes;
+        for (size_t i = 0; i < normalized_shape_.size(); ++i)
+        {
+            reduction_axes.push_back(-(static_cast<int64_t>(normalized_shape_.size()) - i)); // -D, -D+1, ..., -1
+        }
+
+        // keepdim=true to allow broadcasting
+        auto mean = x.mean(reduction_axes, /*keepdim=*/true);
+        // unbiased=false for population variance
+        auto var = x.var(reduction_axes, /*unbiased=*/false, /*keepdim=*/true);
+
+        torch::Tensor x_normalized = (x - mean) / torch::sqrt(var + eps_);
+
+        if (elementwise_affine_)
+        {
+            // gamma_ and beta_ have shape normalized_shape_.
+            // They need to be broadcastable with x_normalized.
+            // If normalized_shape_ is {C} and x is (N,L,C), gamma_ is (C).
+            // It will broadcast correctly during multiplication.
+            return x_normalized * gamma_ + beta_;
+        }
+        else
+        {
+            return x_normalized;
+        }
     }
 }
