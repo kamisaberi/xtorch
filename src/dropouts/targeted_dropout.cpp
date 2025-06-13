@@ -1,8 +1,6 @@
 #include "include/dropouts/targeted_dropout.h"
 
 
-
-
 // #include <torch/torch.h>
 // #include <algorithm> // For std::sort, std::vector::erase
 // #include <vector>    // For std::vector
@@ -224,16 +222,91 @@
 // */
 
 
-
 namespace xt::dropouts
 {
-    torch::Tensor targeted_dropout(torch::Tensor x)
+    TargetedDropout::TargetedDropout(double drop_fraction, bool scale_kept)
+        : drop_fraction_(drop_fraction), scale_kept_(scale_kept)
     {
-        return torch::zeros(10);
+        TORCH_CHECK(drop_fraction_ >= 0.0 && drop_fraction_ < 1.0,
+                    // Cannot drop 100% this way easily without issues
+                    "TargetedDropout drop_fraction must be in [0, 1).");
     }
 
     auto TargetedDropout::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return xt::dropouts::targeted_dropout(torch::zeros(10));
+        vector<std::any> tensors_ = tensors;
+        auto input = std::any_cast<torch::Tensor>(tensors_[0]);
+
+        if (!this->is_training() || drop_fraction_ == 0.0)
+        {
+            return input;
+        }
+
+        TORCH_CHECK(input.dim() >= 1, "TargetedDropout input must be at least 1D.");
+
+        torch::Tensor output = input.clone(); // Work on a copy
+
+        // This dropout is typically applied per sample in a batch if input is batched.
+        // We'll iterate over the batch dimension if present.
+        // Or, if applied to a weight matrix, it's applied globally.
+        // For simplicity, let's assume if dim > 1, dim 0 is batch.
+        // And dropout is applied to features in the last dimension.
+
+        if (input.dim() == 1)
+        {
+            // Single sample or global application (e.g., to flattened weights)
+            apply_targeted_dropout_to_slice(output);
+        }
+        else
+        {
+            // Batched input, apply per sample along the last dimension
+            for (int64_t i = 0; i < input.size(0); ++i)
+            {
+                // If input is (B, F), slice is (F)
+                // If input is (B, S, F), slice is (S, F), need to flatten or iterate S too.
+                // For simplicity, let's assume features are in the last dim, and we operate on it.
+                // If input is (B, C, H, W), this gets complex.
+                // This simple version will assume features are in the last dim and apply dropout there per batch item.
+                // More complex targeting (e.g. per channel spatially) would need different logic.
+
+                // This version targets units along the *last dimension* independently for each item in the first dim.
+                if (input.dim() == 2)
+                {
+                    // (Batch, Features)
+                    apply_targeted_dropout_to_slice(output[i]);
+                }
+                else
+                {
+                    // For >2D, e.g. (B, S, F), one might flatten (S,F) or apply along F for each S.
+                    // Or (B, C, H, W) -> flatten (C,H,W) or operate per channel.
+                    // This is a simplification: flattens all but batch dim.
+                    // This means dropout is applied across all non-batch elements for each batch item.
+                    int64_t batch_size = input.size(0);
+                    torch::Tensor flat_input_per_batch_item = output[i].flatten();
+                    apply_targeted_dropout_to_slice(flat_input_per_batch_item);
+                    output[i] = flat_input_per_batch_item.view_as(output[i]); // Reshape back
+                }
+            }
+        }
+        return output;
+    }
+
+    void TargetedDropout::apply_targeted_dropout_to_slice(torch::Tensor slice)
+    {
+        // slice is assumed to be 1D here for simplicity of topk
+        TORCH_CHECK(slice.dim() == 1, "apply_targeted_dropout_to_slice expects a 1D tensor slice.");
+        if (slice.numel() == 0) return;
+
+        int64_t num_elements_to_drop = static_cast<int64_t>(std::floor(drop_fraction_ * slice.numel()));
+        if (num_elements_to_drop == 0)
+        {
+            return; // Nothing to drop
+        }
+        if (num_elements_to_drop >= slice.numel())
+        {
+            // Should not happen if drop_fraction < 1.0
+            slice.zero_();
+            return;
+        }
     }
 }
