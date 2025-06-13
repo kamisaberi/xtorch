@@ -1,7 +1,5 @@
 #include "include/dropouts/spectral_dropout.h"
-
-
-
+#include <torch/fft.h> // For FFT operations
 
 
 // #include <torch/torch.h>
@@ -203,13 +201,87 @@
 
 namespace xt::dropouts
 {
-    torch::Tensor spectral_dropout(torch::Tensor x)
+    SpectralDropout::SpectralDropout(double p_drop_freq) : p_drop_freq_(p_drop_freq)
     {
-        return torch::zeros(10);
+        TORCH_CHECK(p_drop_freq_ >= 0.0 && p_drop_freq_ <= 1.0,
+                    "SpectralDropout p_drop_freq must be between 0 and 1.");
     }
 
     auto SpectralDropout::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return xt::dropouts::spectral_dropout(torch::zeros(10));
+        vector<std::any> tensors_ = tensors;
+        auto weight_tensor = std::any_cast<torch::Tensor>(tensors_[0]);
+
+        if (!this->is_training() || p_drop_freq_ == 0.0)
+        {
+            return weight_tensor;
+        }
+        if (p_drop_freq_ == 1.0)
+        {
+            // Dropping all frequencies effectively zeros out the weights (DC component might be an exception
+            // depending on exact masking, but if DC is also dropped, it's zeros).
+            // A more nuanced p_drop_freq_=1 might preserve DC or mean. For simplicity, zero out.
+            return torch::zeros_like(weight_tensor);
+        }
+
+        TORCH_CHECK(weight_tensor.dim() == 2, "SpectralDropout currently implemented for 2D weight tensors only.");
+        TORCH_CHECK(weight_tensor.is_floating_point() || weight_tensor.is_complex(),
+                    "Weight tensor must be floating point or complex for FFT.");
+
+        torch::Tensor input_weights = weight_tensor;
+        if (!input_weights.is_complex())
+        {
+            // FFT expects complex input, but fftn/fftn can take real and return complex.
+            // Using rfft2 for real input to complex output (half-spectrum due to Hermitian symmetry)
+        }
+
+        // 1. Compute FFT of the weights
+        // For real inputs, rfft2 gives the non-redundant half of the spectrum.
+        torch::Tensor weight_fft = torch::fft::rfft2(input_weights, /*s=*/c10::nullopt, /*dim=*/{-2, -1}, /*norm=*/
+                                                     "backward");
+        // norm="backward" makes ifft(fft(x)) = x. Default "forward" has 1/N scaling on ifft.
+        // "ortho" gives sqrt(1/N) on both. "backward" is common for this type of op.
+
+        // 2. Generate a dropout mask in the frequency domain
+        // The mask should be generated for the shape of weight_fft.
+        // For rfft2 output, the last dimension is (N/2 + 1).
+
+        double keep_prob = 1.0 - p_drop_freq_;
+        torch::Tensor freq_mask = torch::bernoulli(
+            torch::full_like(weight_fft, keep_prob) // Full_like works for complex by making real/imag parts same
+        ).to(weight_fft.dtype()); // Ensure mask is complex if weight_fft is complex.
+        // For complex, bernoulli on full_like acts on real part then casts.
+        // A more precise way for complex mask:
+        // torch::Tensor real_mask_vals = torch::bernoulli(torch::full(weight_fft.sizes(), keep_prob, weight_fft.options().dtype(input_weights.scalar_type())));
+        // freq_mask = torch::complex(real_mask_vals, torch::zeros_like(real_mask_vals));
+
+        // Note on Hermitian symmetry for rfft:
+        // The DC component (0,0) and Nyquist component (if present and N is even) are real.
+        // Other components have conjugates. Dropping one requires dropping its conjugate.
+        // A simple Bernoulli mask on the rfft output inherently handles this if a component
+        // and its implicit conjugate are both derived from the same Bernoulli trial.
+        // However, a more careful masking strategy would explicitly preserve/handle DC and symmetry.
+        // For this "simple" version, we apply a uniform Bernoulli mask.
+        // A common strategy is to always keep the DC component (freq_mask[0,0] = 1.0).
+        // if (weight_fft.size(0) > 0 && weight_fft.size(1) > 0) {
+        //    freq_mask.index_put_({0,0}, torch::complex(torch::tensor(1.0, weight_fft.options().dtype(input_weights.scalar_type())),
+        //                                              torch::tensor(0.0, weight_fft.options().dtype(input_weights.scalar_type())) ) );
+        // }
+
+
+        // 3. Apply the mask
+        torch::Tensor masked_weight_fft = weight_fft * freq_mask;
+
+        // 4. Compute Inverse FFT to get modified weights
+        // irfft2 expects the half-spectrum (output of rfft2) and original spatial dimensions.
+        torch::Tensor modified_weights = torch::fft::irfft2(masked_weight_fft, /*s=*/
+                                                            input_weights.sizes().slice(input_weights.dim() - 2),
+                                                            /*dim=*/{-2, -1}, /*norm=*/"backward");
+
+        // Scaling: Inverted dropout scaling.
+        // The number of "effective" components in rfft2 output is roughly half the full FFT.
+        // If we drop p_drop_freq_ of these, we keep (1-p_drop_freq_).
+        // Scale by 1/keep_prob.
+        return modified_weights / (keep_prob + epsilon_);
     }
 }
