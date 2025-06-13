@@ -1,7 +1,6 @@
 #include "include/dropouts/scheduled_drop_path.h"
 
 
-
 // #include <torch/torch.h>
 // #include <vector>
 // #include <algorithm> // For std::min, std::max
@@ -201,13 +200,77 @@
 
 namespace xt::dropouts
 {
-    torch::Tensor scheduled_drop_path(torch::Tensor x)
+    ScheduledDropPath::ScheduledDropPath(
+        double final_drop_rate, // The target drop rate at the end of the schedule
+        int64_t total_curriculum_steps, // Total steps for the schedule
+        double initial_drop_rate // Starting drop rate (often 0 for DropPath)
+    ) : initial_drop_rate_(initial_drop_rate),
+        final_drop_rate_(final_drop_rate),
+        total_curriculum_steps_(std::max(int64_t(1), total_curriculum_steps)),
+        increase_rate_(final_drop_rate_ > initial_drop_rate_) // Automatically determine if increasing
     {
-        return torch::zeros(10);
+        TORCH_CHECK(initial_drop_rate_ >= 0.0 && initial_drop_rate_ <= 1.0,
+                    "Initial drop rate must be between 0 and 1.");
+        TORCH_CHECK(final_drop_rate_ >= 0.0 && final_drop_rate_ <= 1.0, "Final drop rate must be between 0 and 1.");
     }
+
 
     auto ScheduledDropPath::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return xt::dropouts::scheduled_drop_path(torch::zeros(10));
+        vector<std::any> tensors_ = tensors;
+        auto input = std::any_cast<torch::Tensor>(tensors_[0]);
+
+        int64 current_step = std::any_cast<int64>(tensors_[1]);
+
+        if (!this->is_training())
+        {
+            current_p_drop_ = 0.0; // No dropout during evaluation
+            return input;
+        }
+
+        double start_rate = initial_drop_rate_;
+        double end_rate = final_drop_rate_;
+
+        // Calculate progress ratio (0.0 to 1.0)
+        double progress_ratio = static_cast<double>(current_step) / static_cast<double>(total_curriculum_steps_);
+        progress_ratio = std::min(1.0, std::max(0.0, progress_ratio)); // Clamp to [0, 1]
+
+        // Linear interpolation for the drop rate
+        current_p_drop_ = start_rate + (end_rate - start_rate) * progress_ratio;
+        current_p_drop_ = std::min(1.0, std::max(0.0, current_p_drop_)); // Ensure valid probability
+
+        if (current_p_drop_ == 0.0)
+        {
+            return input;
+        }
+        if (current_p_drop_ == 1.0)
+        {
+            return torch::zeros_like(input);
+        }
+
+        TORCH_CHECK(input.dim() >= 1,
+                    "ScheduledDropPath input must have at least one dimension (expected batch dimension at dim 0).");
+
+        int64_t batch_size = input.size(0);
+        double keep_prob = 1.0 - current_p_drop_;
+
+        // Create a per-sample mask (1 to keep, 0 to drop)
+        torch::Tensor random_tensor = torch::rand({batch_size}, input.options());
+        torch::Tensor keep_mask_1d = (random_tensor < keep_prob).to(input.dtype());
+
+        // Reshape mask to be broadcastable with input: (N, 1, 1, ...)
+        std::vector<int64_t> view_shape(input.dim(), 1L);
+        if (input.dim() > 0)
+        {
+            view_shape[0] = batch_size;
+        }
+        else
+        {
+            // Should not happen
+            return input;
+        }
+        torch::Tensor keep_mask = keep_mask_1d.view(view_shape);
+
+        return (input * keep_mask) / (keep_prob + epsilon_);
     }
 }
