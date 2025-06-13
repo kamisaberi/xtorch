@@ -1,27 +1,80 @@
-#pragma once
+#ifndef YELLOWFIN_OPTIMIZER_HPP
+#define YELLOWFIN_OPTIMIZER_HPP
 
-#include "common.h"
+#include <torch/torch.h>
+#include <torch/serialize/archive.h>
 
-namespace xt::optimizations
-{
-    class YellowFIN : public torch::optim::Optimizer {
-    public:
-        explicit YellowFIN(std::vector<torch::Tensor>&& parameters, double lr = 0.01, double momentum = 0.9);
+#include <cmath>
+#include <vector>
+#include <memory>
+#include <string>
+#include <cstdint>
 
-        using LossClosure = std::function<torch::Tensor()>;
-        torch::Tensor step(LossClosure closure = nullptr) override;
+// --- Options for YellowFin Optimizer ---
+// YellowFin is mostly self-tuning, so it has fewer user-facing knobs.
+struct YellowFinOptions : torch::optim::OptimizerOptions {
+    explicit YellowFinOptions(double learning_rate = 1.0) // Initial LR, will be overridden
+        : torch::optim::OptimizerOptions() {
+        this->lr(learning_rate);
+    }
 
-        // Getter and setter for learning rate
-        double lr() const { return lr_; }
-        void lr(double lr) { lr_ = lr; }
+    // EMA decay for smoothing the measurements
+    TORCH_ARG(double, beta) = 0.999;
+    TORCH_ARG(double, weight_decay) = 0.0;
+    // Curvature range clipping for stability
+    TORCH_ARG(double, curv_min_clamp) = 1e-6;
+    TORCH_ARG(double, curv_max_clamp) = 1e6;
+    TORCH_ARG(double, lr) = 1e-6;
 
-        // Getter and setter for momentum
-        double momentum() const { return momentum_; }
-        void momentum(double momentum) { momentum_ = momentum; }
+    void serialize(torch::serialize::OutputArchive& archive) const override;
+    void deserialize(torch::serialize::InputArchive& archive) ;
+    std::unique_ptr<torch::optim::OptimizerOptions> clone() const override;
+};
 
-    private:
-        double lr_;
-        double momentum_;
-        std::vector<torch::Tensor> velocities_;
-    };
-}
+// --- Parameter State for YellowFin Optimizer ---
+// State is global, not per-parameter, which is unique.
+// We will store it in the first parameter's state dictionary.
+struct YellowFinGlobalState {
+    // Smoothed measurements
+    double h_min_ema = 0.0;
+    double h_max_ema = 0.0;
+    double grad_var_ema = 0.0;
+
+    // Tuned hyperparameters
+    double tuned_lr = 1.0;
+    double tuned_momentum = 0.0;
+
+    // For calculating curvature
+    torch::Tensor prev_grad_flat;
+    torch::Tensor prev_param_flat;
+};
+
+// --- Per-parameter state is just momentum ---
+struct YellowFinParamState : torch::optim::OptimizerParamState {
+    TORCH_ARG(torch::Tensor, momentum_buffer);
+
+    // YellowFinParamState() = default;
+    void serialize(torch::serialize::OutputArchive& archive) const override;
+    void deserialize(torch::serialize::InputArchive& archive) ;
+    std::unique_ptr<OptimizerParamState> clone() const override;
+};
+
+// --- YellowFin Optimizer Class ---
+class YellowFin : public torch::optim::Optimizer {
+public:
+    YellowFin(std::vector<torch::Tensor> params, YellowFinOptions options);
+
+    using LossClosure = std::function<torch::Tensor()>;
+    torch::Tensor step(LossClosure closure = nullptr) override;
+    void save(torch::serialize::OutputArchive& archive) const override;
+    void load(torch::serialize::InputArchive& archive) override;
+
+protected:
+    std::unique_ptr<torch::optim::OptimizerParamState> make_param_state() ;
+
+private:
+    YellowFinGlobalState global_state_; // All tuning happens globally
+    long step_count_ = 0;
+};
+
+#endif // YELLOWFIN_OPTIMIZER_HPP
