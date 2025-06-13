@@ -199,16 +199,80 @@
 // */
 
 
-
 namespace xt::dropouts
 {
-    torch::Tensor variational_gaussian_dropout(torch::Tensor x)
+    namespace
     {
-        return torch::zeros(10);
+        double calculate_initial_log_alpha_for_vgd(double initial_effective_p, double epsilon = 1e-7)
+        {
+            if (initial_effective_p < epsilon) initial_effective_p = epsilon;
+            // Ensure 1-p is not too small to avoid large alpha or log(inf)
+            if (initial_effective_p >= 1.0 - epsilon) initial_effective_p = 1.0 - epsilon - epsilon;
+            double alpha = initial_effective_p / (1.0 - initial_effective_p);
+            // Add epsilon to alpha before log to prevent log(0) if alpha is extremely small (e.g. p_initial ~ 0)
+            return std::log(alpha + epsilon);
+        }
     }
+
+    VariationalGaussianDropout::VariationalGaussianDropout(c10::IntArrayRef alpha_shape,
+                                                           double initial_dropout_rate_for_alpha_init)
+    {
+        double initial_log_alpha_val = calculate_initial_log_alpha_for_vgd(initial_dropout_rate_for_alpha_init);
+
+        torch::Tensor log_alpha_init_tensor;
+        if (alpha_shape.empty())
+        {
+            // Scalar alpha (global noise variance)
+            log_alpha_init_tensor = torch::tensor(initial_log_alpha_val, torch::kFloat32);
+        }
+        else
+        {
+            // Per-feature/unit alpha
+            log_alpha_init_tensor = torch::full(alpha_shape, initial_log_alpha_val, torch::kFloat32);
+        }
+        log_alpha_ = register_parameter("log_alpha", log_alpha_init_tensor);
+    }
+
 
     auto VariationalGaussianDropout::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return xt::dropouts::variational_gaussian_dropout(torch::zeros(10));
+        vector<std::any> tensors_ = tensors;
+        auto input = std::any_cast<torch::Tensor>(tensors_[0]);
+
+        if (!this->is_training())
+        {
+            // In evaluation mode, Variational Gaussian Dropout acts as an identity function.
+            // The learned noise variances (alpha) are expected to have regularized the model's weights.
+            return input;
+        }
+
+        // Calculate alpha = exp(log_alpha). alpha is the variance of the N(0,alpha) noise component.
+        torch::Tensor alpha = torch::exp(log_alpha_);
+
+        // Clamp alpha to ensure it's positive and not excessively large for stability.
+        // A small positive lower bound is crucial for sqrt.
+        alpha = torch::clamp_min(alpha, epsilon_);
+
+        // Handle broadcasting of alpha if it's per-channel/feature.
+        torch::Tensor alpha_broadcastable = alpha;
+        if (alpha.dim() == 1 && input.dim() > 1 && alpha.size(0) == input.size(1) && input.size(1) > 0)
+        {
+            // Assume input is (Batch, Channels, ...) and alpha is (Channels)
+            std::vector<int64_t> view_shape(input.dim(), 1L); // e.g., [1,1,...,1]
+            view_shape[1] = alpha.size(0); // e.g., [1,C,1,1] for NCHW
+            alpha_broadcastable = alpha.view(view_shape);
+        }
+        // Else: rely on PyTorch's standard broadcasting rules if alpha is scalar or already matches input's feature dims.
+
+        // Generate standard Gaussian noise: noise_draw ~ N(0, 1)
+        torch::Tensor noise_draw = torch::randn_like(input);
+
+        // Apply the reparameterized noise:
+        // output = input * (1 + sqrt(alpha_broadcastable) * noise_draw)
+        // This is equivalent to multiplying input by a random variable from N(1, alpha_broadcastable).
+        torch::Tensor scaled_noise_component = torch::sqrt(alpha_broadcastable) * noise_draw;
+        torch::Tensor output = input * (1.0 + scaled_noise_component);
+
+        return output;
     }
 }
