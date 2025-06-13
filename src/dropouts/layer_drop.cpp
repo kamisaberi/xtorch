@@ -182,7 +182,7 @@
 
 namespace xt::dropouts
 {
-    LayerDrop::LayerDrop(double p_drop_layer = 0.1) : p_drop_layer_(p_drop_layer)
+    LayerDrop::LayerDrop(double p_drop_layer ) : p_drop_layer_(p_drop_layer)
     {
         TORCH_CHECK(p_drop_layer_ >= 0.0 && p_drop_layer_ <= 1.0,
                     "LayerDrop probability p_drop_layer must be between 0 and 1.");
