@@ -208,8 +208,120 @@
 
 namespace xt::norm
 {
+    InstanceLevelMetaNorm::InstanceLevelMetaNorm(int64_t num_features,
+                                                 int64_t meta_hidden_dim,
+                                                 // 0 or less means direct map after pooling
+                                                 double eps_in)
+        : num_features_(num_features),
+          meta_hidden_dim_(meta_hidden_dim),
+          eps_in_(eps_in)
+    {
+        TORCH_CHECK(num_features > 0, "num_features must be positive.");
+
+        // Meta-network for generating gamma and beta
+        // For NCHW, after AdaptiveAvgPool2d, input to fc_meta1 will be (N, C, 1, 1) -> flatten to (N, C)
+        avg_pool_ = torch::nn::AdaptiveAvgPool2d(torch::nn::AdaptiveAvgPool2dOptions({1, 1}));
+        register_module("avg_pool_meta", avg_pool_);
+
+        if (meta_hidden_dim_ <= 0)
+        {
+            // Direct mapping from pooled features to gamma/beta
+            fc_meta_out_ = torch::nn::Linear(num_features_, 2 * num_features_); // Input C, output 2*C
+            register_module("fc_meta_out", fc_meta_out_);
+        }
+        else
+        {
+            fc_meta1_ = torch::nn::Linear(num_features_, meta_hidden_dim_);
+            fc_meta_out_ = torch::nn::Linear(meta_hidden_dim_, 2 * num_features_); // Output for gamma and beta
+            register_module("fc_meta1", fc_meta1_);
+            register_module("fc_meta_out", fc_meta_out_);
+        }
+        // No explicit gamma/beta parameters for the IN part itself if they are fully predicted.
+        // Or, one could have standard IN affine params and *additionally* predict modulations.
+        // This impl assumes gamma/beta are entirely predicted.
+    }
+
     auto InstanceLevelMetaNorm::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return torch::zeros(10);
+        vector<std::any> tensors_ = tensors;
+        auto x = std::any_cast<torch::Tensor>(tensors_[0]);
+
+        // x: input tensor, e.g., (N, C, H, W) or (N, C, L)
+        // C must be num_features_
+
+        TORCH_CHECK(x.dim() >= 2, "Input tensor x must have at least 2 dimensions (N, C, ...). Got shape ", x.sizes());
+        TORCH_CHECK(x.size(1) == num_features_,
+                    "Input channels mismatch. Expected ", num_features_, ", got ", x.size(1));
+
+        int64_t N = x.size(0);
+        // --- 1. Standard Instance Normalization ---
+        torch::Tensor x_in; // Instance Normalized x
+
+        if (x.dim() > 2)
+        {
+            // Input has spatial/sequential dimensions (N, C, D1, ...)
+            std::vector<int64_t> reduce_dims_in; // Dims for mean/var (D1, D2, ...)
+            for (int64_t i = 2; i < x.dim(); ++i)
+            {
+                reduce_dims_in.push_back(i);
+            }
+            auto mean = x.mean(reduce_dims_in, /*keepdim=*/true);
+            auto var = x.var(reduce_dims_in, /*unbiased=*/false, /*keepdim=*/true);
+            x_in = (x - mean) / torch::sqrt(var + eps_in_);
+        }
+        else
+        {
+            // Input is 2D (N, C). InstanceNorm on a single point per channel results in 0.
+            x_in = torch::zeros_like(x);
+        }
+
+        // --- 2. Generate Gamma and Beta from the "Meta Network" using x itself ---
+        torch::Tensor instance_features_for_meta;
+        if (x.dim() == 4)
+        {
+            // NCHW
+            instance_features_for_meta = avg_pool_->forward(x); // (N, C, 1, 1)
+            instance_features_for_meta = instance_features_for_meta.view({N, -1}); // Flatten to (N, C)
+        }
+        else if (x.dim() == 3)
+        {
+            // NCL (e.g., 1D Conv)
+            // Global average pooling over L dimension
+            instance_features_for_meta = x.mean(/*dim=*/2, /*keepdim=false*/false); // (N, C)
+        }
+        else
+        {
+            // x.dim() == 2 (NC)
+            instance_features_for_meta = x; // Use x directly as features
+        }
+        // instance_features_for_meta is now (N, num_features_)
+
+        torch::Tensor meta_params = instance_features_for_meta;
+        if (fc_meta1_)
+        {
+            meta_params = fc_meta1_->forward(meta_params);
+            meta_params = torch::relu(meta_params); // Common activation for hidden layer
+        }
+        meta_params = fc_meta_out_->forward(meta_params); // (N, 2 * num_features_)
+
+        auto chunks = torch::chunk(meta_params, 2, /*dim=*/1);
+        torch::Tensor gamma_predicted = chunks[0]; // (N, num_features_)
+        torch::Tensor beta_predicted = chunks[1]; // (N, num_features_)
+
+        // --- 3. Reshape predicted Gamma and Beta for broadcasting ---
+        // Desired shape: (N, C, 1, 1, ...) to match x_in (N, C, D1, D2, ...)
+        std::vector<int64_t> affine_param_view_shape;
+        affine_param_view_shape.push_back(N); // N
+        affine_param_view_shape.push_back(num_features_); // C
+        for (int64_t i = 2; i < x.dim(); ++i)
+        {
+            affine_param_view_shape.push_back(1);
+        }
+
+        gamma_predicted = gamma_predicted.view(affine_param_view_shape);
+        beta_predicted = beta_predicted.view(affine_param_view_shape);
+
+        // --- 4. Apply "meta" affine transformation ---
+        return gamma_predicted * x_in + beta_predicted;
     }
 }
