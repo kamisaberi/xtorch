@@ -44,5 +44,15 @@ namespace xt::norm
         // Weight for branch2 will be (1 - weight_branch1).
         // Or, more generally, K logits for K branches, then softmax. Let's use 2 logits for 2 branches.
         torch::Tensor mixing_logits_; // Shape (1, C, 1, 1, num_branches=2)
+
+        torch::Tensor bn_branch_forward(
+            const torch::Tensor& x_input,
+            torch::Tensor& running_mean,
+            torch::Tensor& running_var,
+            torch::Tensor& num_batches_tracked,
+            const torch::Tensor& gamma,
+            const torch::Tensor& beta,
+            const std::vector<int64_t>& reduce_dims_stats,
+            const std::vector<int64_t>& param_view_shape);
     };
 }
