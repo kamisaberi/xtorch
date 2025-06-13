@@ -180,16 +180,45 @@
 // */
 
 
-
 namespace xt::dropouts
 {
-    torch::Tensor layer_drop(torch::Tensor x)
+    LayerDrop::LayerDrop(double p_drop_layer = 0.1) : p_drop_layer_(p_drop_layer)
     {
-        return torch::zeros(10);
+        TORCH_CHECK(p_drop_layer_ >= 0.0 && p_drop_layer_ <= 1.0,
+                    "LayerDrop probability p_drop_layer must be between 0 and 1.");
     }
 
     auto LayerDrop::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return xt::dropouts::layer_drop(torch::zeros(10));
+        vector<std::any> tensors_ = tensors;
+        auto input_to_potentially_droppable_layer = std::any_cast<torch::Tensor>(tensors_[0]);
+
+        if (!this->is_training() || p_drop_layer_ == 0.0)
+        {
+            // Process the layer (by returning something that signals 'process')
+            // Or, more simply, the calling code checks this LayerDrop and decides.
+            // For this version, let's assume it returns input if dropped.
+            return input_to_potentially_droppable_layer; // Placeholder if not dropping
+        }
+        if (p_drop_layer_ == 1.0)
+        {
+            return input_to_potentially_droppable_layer; // Layer is dropped, effectively an identity
+        }
+
+        if (torch::rand({1}).item<double>() < p_drop_layer_)
+        {
+            // Drop the layer: return the input itself, effectively making the layer an identity.
+            return input_to_potentially_droppable_layer;
+        }
+        else
+        {
+            // Don't drop the layer: here, we'd typically signal to the calling code
+            // to process the layer. For a self-contained module, this is tricky.
+            // The boolean return from the other `forward()` is cleaner for external control.
+            // This version is less common for LayerDrop's typical usage pattern.
+            // Let's stick to the boolean one for clarity of its role as a gate controller.
+            // If this `forward` was to return the actual processed output, it would need the layer.
+            return input_to_potentially_droppable_layer; // Placeholder, real processing happens outside
+        }
     }
 }
