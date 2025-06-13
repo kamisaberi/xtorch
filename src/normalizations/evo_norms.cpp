@@ -208,8 +208,100 @@
 
 namespace xt::norm
 {
+    EvoNorm::EvoNorm(int64_t num_features, int64_t groups, double eps, bool apply_bias)
+        : num_features_(num_features),
+          groups_(groups),
+          eps_(eps),
+          apply_bias_(apply_bias)
+    {
+        TORCH_CHECK(num_features > 0, "num_features must be positive.");
+        TORCH_CHECK(groups > 0, "groups must be positive.");
+        TORCH_CHECK(num_features % groups_ == 0, "num_features must be divisible by groups.");
+
+        // Initialize learnable parameter 'v'
+        // Often initialized to ones or with some specific scheme. Let's use ones.
+        v_ = register_parameter("v", torch::ones({1, num_features_, 1, 1})); // Shape for broadcasting with NCHW
+
+        if (apply_bias_)
+        {
+            beta_ = register_parameter("beta", torch::zeros({1, num_features_, 1, 1})); // Shape for broadcasting
+        }
+    }
+
     auto EvoNorm::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return torch::zeros(10);
+        vector<std::any> tensors_ = tensors;
+        auto x = std::any_cast<torch::Tensor>(tensors_[0]);
+
+        // Input x is expected to be 4D: (N, C, H, W)
+        // C must be num_features_
+        TORCH_CHECK(x.dim() == 4, "Input tensor must be 4D (N, C, H, W). Got shape ", x.sizes());
+        TORCH_CHECK(x.size(1) == num_features_,
+                    "Input channels mismatch. Expected ", num_features_, ", got ", x.size(1));
+
+        int64_t N = x.size(0);
+        int64_t C = x.size(1); // num_features_
+        int64_t H = x.size(2);
+        int64_t W = x.size(3);
+
+        int64_t channels_per_group = C / groups_;
+
+        // --- Compute Group Standard Deviation ---
+        // Reshape x to (N, groups, channels_per_group, H, W) to compute std over (channels_per_group, H, W)
+        torch::Tensor x_reshaped_for_std = x.view({N, groups_, channels_per_group, H, W});
+
+        // Calculate variance over dimensions (channels_per_group, H, W) which are dims 2, 3, 4
+        // keepdim=true to maintain shape for broadcasting
+        // unbiased=false for population variance, usually preferred
+        torch::Tensor group_var = x_reshaped_for_std.var(std::vector<int64_t>{2, 3, 4}, /*unbiased=*/false, /*keepdim=*/
+                                                         true);
+        // group_var shape: (N, groups_, 1, 1, 1)
+
+        torch::Tensor group_std = torch::sqrt(group_var + eps_); // Shape: (N, groups_, 1, 1, 1)
+
+        // Reshape group_std back to be broadcastable with original x shape (N, C, H, W)
+        // We need to repeat the std dev for each channel within its group.
+        // group_std: (N, groups_, 1, 1, 1) -> (N, groups_, 1, 1, 1, 1) -> tile -> (N, groups, channels_per_group, 1, 1)
+        // -> reshape to (N, C, 1, 1)
+        // A simpler way: reshape to (N, groups, 1, 1, 1) then use repeat_interleave or careful view+expand
+        // Or, more directly:
+        group_std = group_std.view({N, groups_, 1, 1, 1}); // Ensure it's 5D for tile/repeat
+        // For each N, G, want to expand out to C/G for the channel dim
+        // This is equivalent to PyTorch's `std.reshape(N, self.groups, 1, 1, 1).repeat(1, 1, C // self.groups, H, W).reshape(N, C, H, W)`
+        // Simplified if we just need to divide x by it:
+        // We can reshape group_std to (N, groups_, 1) and x to (N, groups_, channels_per_group * H * W)
+        // then divide, then reshape x back.
+        // Or, use `torch::nn::functional::group_norm`'s way of doing std calculation if available & suitable.
+        // Let's make `group_std` broadcast correctly with `x` of shape (N, C, H, W).
+        // Original `group_std` is `(N, groups, 1, 1, 1)`. We want `(N, C, 1, 1)` effectively.
+        // Each of the `groups` std values should apply to `channels_per_group` channels.
+        torch::Tensor group_std_broadcastable = group_std.repeat_interleave(channels_per_group, /*dim=*/1);
+        // Repeats along group dim effectively
+        // but we want to expand it to match C channels
+        // Reshape group_std: (N, groups, 1, 1, 1)
+        // We need to make it (N, C, 1, 1) where for each group g, its std value is used for all channels_per_group in that group.
+        group_std = group_std.reshape({N, groups_, 1}); // (N, G, 1)
+        group_std = group_std.repeat_interleave(channels_per_group, /*dim=*/1); // (N, C, 1)
+        group_std = group_std.view({N, C, 1, 1}); // (N, C, 1, 1) to broadcast with (N,C,H,W)
+
+
+        // --- EvoNorm-S0 Calculation ---
+        // Numerator: v * x
+        // Denominator: group_std
+        // sigmoid_arg = (v * x) / group_std  --- this is one interpretation
+        // OR sigmoid_arg = v * x , and then y = x * sigmoid(sigmoid_arg) / group_std  --- another common interpretation.
+        // The paper's figure 2 formula: y = x * sigmoid(v*x / max(std, eps))
+        // So, let's follow that:
+        torch::Tensor numerator = v_ * x; // v_ is (1,C,1,1), x is (N,C,H,W) -> (N,C,H,W)
+        torch::Tensor norm_input = numerator / group_std; // (N,C,H,W)
+
+        torch::Tensor y = x * torch::sigmoid(norm_input); // (N,C,H,W)
+
+        if (apply_bias_)
+        {
+            y = y + beta_; // beta_ is (1,C,1,1)
+        }
+
+        return y;
     }
 }
