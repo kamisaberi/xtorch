@@ -7,27 +7,14 @@
 #include <ostream>   // For std::ostream
 
 
-namespace
-{
-    // Anonymous namespace for helper utility
-    double calculate_initial_log_alpha_value(double initial_dropout_rate)
-    {
-        // Clamp initial_dropout_rate to avoid log(0) or log( división by zero )
-        double epsilon = 1e-7;
-        if (initial_dropout_rate < epsilon)
-        {
-            initial_dropout_rate = epsilon;
-        }
-        if (initial_dropout_rate > 1.0 - epsilon)
-        {
-            initial_dropout_rate = 1.0 - epsilon;
-        }
-        return std::log(initial_dropout_rate / (1.0 - initial_dropout_rate));
-    }
-}
-
 namespace xt::dropouts
 {
+    namespace
+    {
+        double calculate_initial_log_alpha_value(double initial_dropout_rate);
+    }
+
+
     torch::Tensor adaptive_dropout(torch::Tensor x);
 
     struct AdaptiveDropout : xt::Module
