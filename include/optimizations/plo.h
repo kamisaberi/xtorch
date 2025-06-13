@@ -11,7 +11,8 @@
 #include <cstdint>
 
 // --- Options for PLO (Projected Lookahead Optimizer) ---
-struct PLOOptions : torch::optim::OptimizerOptions {
+struct PLOOptions :public torch::optim::OptimizerOptions {
+public:
     explicit PLOOptions(double learning_rate = 1.0) // Both Lookahead and Projection are self-tuning
         : torch::optim::OptimizerOptions() {
         this->lr(learning_rate);
@@ -36,7 +37,7 @@ struct PLOOptions : torch::optim::OptimizerOptions {
 };
 
 // --- Parameter State for PLO ---
-struct PLOParamState : torch::optim::OptimizerParamState {
+struct PLOParamState :public torch::optim::OptimizerParamState {
     TORCH_ARG(torch::Tensor, step);
 
     // Lookahead state
@@ -44,6 +45,7 @@ struct PLOParamState : torch::optim::OptimizerParamState {
 
     // Inner Projected Optimizer state
     TORCH_ARG(torch::Tensor, momentum_buffer);
+public:
     torch::Tensor l_ema; // Left factor
     torch::Tensor r_ema; // Right factor
     torch::Tensor l_inv_root;
