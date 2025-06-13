@@ -310,13 +310,155 @@
 // }
 
 
-
-
-
 namespace xt::norm
 {
+    SwitchableNorm::SwitchableNorm(int64_t num_features,
+                                   double eps_bn, double momentum_bn, bool affine_bn,
+                                   double eps_in, bool affine_in,
+                                   double eps_ln, bool affine_ln)
+        : num_features_(num_features),
+          eps_bn_(eps_bn), momentum_bn_(momentum_bn), affine_bn_(affine_bn),
+          eps_in_(eps_in), affine_in_(affine_in),
+          eps_ln_(eps_ln), affine_ln_(affine_ln)
+    {
+        TORCH_CHECK(num_features > 0, "num_features must be positive.");
+
+        // BN
+        running_mean_bn_ = register_buffer("running_mean_bn", torch::zeros({num_features_}));
+        running_var_bn_ = register_buffer("running_var_bn", torch::ones({num_features_}));
+        num_batches_tracked_bn_ = register_buffer("num_batches_tracked_bn", torch::tensor(0, torch::kLong));
+        if (affine_bn_)
+        {
+            gamma_bn_ = register_parameter("gamma_bn", torch::ones({num_features_}));
+            beta_bn_ = register_parameter("beta_bn", torch::zeros({num_features_}));
+        }
+
+        // IN
+        if (affine_in_)
+        {
+            gamma_in_ = register_parameter("gamma_in", torch::ones({num_features_}));
+            beta_in_ = register_parameter("beta_in", torch::zeros({num_features_}));
+        }
+
+        // LN - Dynamically initialized in first forward pass for (C,H,W) normalization.
+
+        // Switching logits: (num_features, 3) for BN, IN, LN scores per channel.
+        // Initialized to zeros for equal initial weighting via softmax.
+        switching_logits_ = register_parameter("switching_logits", torch::zeros({num_features_, kNumNormalizers}));
+    }
+
     auto SwitchableNorm::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return torch::zeros(10);
+        vector<std::any> tensors_ = tensors;
+        auto x = std::any_cast<torch::Tensor>(tensors_[0]);
+
+        // Input x expected to be 4D (N,C,H,W)
+        TORCH_CHECK(x.dim() == 4, "Input tensor must be 4D (N, C, H, W). Got shape ", x.sizes());
+        TORCH_CHECK(x.size(1) == num_features_,
+                    "Input channels mismatch. Expected ", num_features_, ", got ", x.size(1));
+
+        int64_t N = x.size(0);
+        int64_t C = x.size(1);
+        int64_t H = x.size(2);
+        int64_t W = x.size(3);
+
+        std::vector<int64_t> affine_param_view_shape = {1, C, 1, 1}; // For broadcasting BN/IN affine params
+
+        // --- Batch Normalization (y_bn) ---
+        torch::Tensor y_bn;
+        {
+            torch::Tensor current_mean_bn, current_var_bn;
+            std::vector<int64_t> reduce_dims_bn = {0, 2, 3}; // N, H, W
+
+            if (this->is_training())
+            {
+                current_mean_bn = x.mean(reduce_dims_bn, false);
+                current_var_bn = (x - current_mean_bn.view(affine_param_view_shape)).pow(2).mean(reduce_dims_bn, false);
+                running_mean_bn_ = (1.0 - momentum_bn_) * running_mean_bn_ + momentum_bn_ * current_mean_bn.detach();
+                running_var_bn_ = (1.0 - momentum_bn_) * running_var_bn_ + momentum_bn_ * current_var_bn.detach();
+                //TODO SOME BUGS MIGHT RAISE HERE
+                // original code was :
+                // if (num_batches_tracked_bn_)
+                // {
+                //     // Check if defined
+                //     num_batches_tracked_bn_ += 1;
+                // }
+
+                if (num_batches_tracked_bn_[0].item<int64>() == 0)
+                {
+                    // Check if defined
+                    num_batches_tracked_bn_ += 1;
+                }
+            }
+            else
+            {
+                current_mean_bn = running_mean_bn_;
+                current_var_bn = running_var_bn_;
+            }
+            torch::Tensor x_bn_norm = (x - current_mean_bn.view(affine_param_view_shape)) /
+                torch::sqrt(current_var_bn.view(affine_param_view_shape) + eps_bn_);
+            if (affine_bn_)
+            {
+                y_bn = x_bn_norm * gamma_bn_.view(affine_param_view_shape) + beta_bn_.view(affine_param_view_shape);
+            }
+            else
+            {
+                y_bn = x_bn_norm;
+            }
+        }
+
+        // --- Instance Normalization (y_in) ---
+        torch::Tensor y_in;
+        {
+            std::vector<int64_t> reduce_dims_in = {2, 3}; // H, W
+            auto mean_in = x.mean(reduce_dims_in, true);
+            auto var_in = x.var(reduce_dims_in, false, true); // unbiased=false, keepdim=true
+            torch::Tensor x_in_norm = (x - mean_in) / torch::sqrt(var_in + eps_in_);
+            if (affine_in_)
+            {
+                y_in = x_in_norm * gamma_in_.view(affine_param_view_shape) + beta_in_.view(affine_param_view_shape);
+            }
+            else
+            {
+                y_in = x_in_norm;
+            }
+        }
+
+        // --- Layer Normalization (y_ln) ---
+        torch::Tensor y_ln;
+        {
+            // Initialize or ensure LayerNorm is correctly configured for current C, H, W
+            if (!layer_norm_ || (layer_norm_ && layer_norm_->options.normalized_shape() != std::vector<int64_t>
+                {C, H, W}))
+            {
+                if (layer_norm_ && (layer_norm_->options.normalized_shape() != std::vector<int64_t>{C, H, W}))
+                {
+                    TORCH_WARN_ONCE(
+                        "Re-initializing LayerNorm due to shape change (C,H,W). This might reset learned LN affine parameters if H or W changed.");
+                }
+                normalized_shape_ln_ = {C, H, W};
+                auto ln_options = torch::nn::LayerNormOptions(normalized_shape_ln_).eps(eps_ln_).elementwise_affine(
+                    affine_ln_);
+                layer_norm_ = torch::nn::LayerNorm(ln_options);
+                this->register_module("layer_norm_dynamic", layer_norm_); // Make sure it's registered
+                layer_norm_->to(x.device());
+            }
+            y_ln = layer_norm_->forward(x); // If affine_ln=false, LN module applies normalization only.
+            // If affine_ln=true, LN module also applies its internal gamma_ln, beta_ln.
+        }
+
+        // --- Calculate mixing weights ---
+        // switching_logits_ is (C, 3). Softmax over dim 1 (normalizers).
+        torch::Tensor weights = torch::softmax(switching_logits_, /*dim=*/1); // Shape (C, 3)
+
+        // Reshape weights for broadcasting: (1, C, 1, 1) for each normalizer's weight
+        torch::Tensor w_bn = weights.select(1, 0).view(affine_param_view_shape);
+        torch::Tensor w_in = weights.select(1, 1).view(affine_param_view_shape);
+        torch::Tensor w_ln = weights.select(1, 2).view(affine_param_view_shape);
+
+        // --- Mix the outputs ---
+        torch::Tensor output = w_bn * y_bn + w_in * y_in + w_ln * y_ln;
+
+        return output;
     }
 }
