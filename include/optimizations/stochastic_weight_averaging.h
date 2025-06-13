@@ -1,27 +1,35 @@
-#pragma once
+#ifndef SWA_OPTIMIZER_HPP
+#define SWA_OPTIMIZER_HPP
 
-#include "common.h"
+#include <torch/torch.h>
+#include <vector>
+#include <memory>
+#include <functional>
 
-namespace xt::optimizations
-{
-    class StochasticWeightAveraging : public torch::optim::Optimizer {
-    public:
-        explicit StochasticWeightAveraging(std::vector<torch::Tensor>&& parameters, double lr = 0.01, double momentum = 0.9);
+// --- StochasticWeightAveraging Wrapper Class ---
+// This is a wrapper, not a direct optimizer. It contains a base optimizer.
+class StochasticWeightAveraging {
+public:
+    // The constructor takes an existing, fully-configured optimizer.
+    StochasticWeightAveraging(std::unique_ptr<torch::optim::Optimizer> base_optimizer,
+                               int swa_start_step,
+                               int swa_update_frequency = 1);
 
-        using LossClosure = std::function<torch::Tensor()>;
-        torch::Tensor step(LossClosure closure = nullptr) override;
+    // Standard optimizer methods that delegate to the base optimizer
+    void zero_grad();
+    torch::Tensor step(torch::optim::Optimizer::LossClosure closure = nullptr);
 
-        // Getter and setter for learning rate
-        double lr() const { return lr_; }
-        void lr(double lr) { lr_ = lr; }
+    // SWA-specific methods
+    // Call this at the end of training to use the averaged weights
+    void swap_swa_weights();
 
-        // Getter and setter for momentum
-        double momentum() const { return momentum_; }
-        void momentum(double momentum) { momentum_ = momentum; }
+private:
+    std::unique_ptr<torch::optim::Optimizer> base_optimizer_;
+    std::vector<torch::Tensor> swa_params_; // Stores the running average of weights
+    int64_t swa_start_step_;
+    int64_t swa_update_frequency_;
+    int64_t n_averaged_ = 0; // Number of models we have averaged so far
+    int64_t global_step_ = 0;
+};
 
-    private:
-        double lr_;
-        double momentum_;
-        std::vector<torch::Tensor> velocities_;
-    };
-}
+#endif // SWA_OPTIMIZER_HPP
