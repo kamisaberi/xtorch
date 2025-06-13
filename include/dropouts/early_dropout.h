@@ -2,17 +2,17 @@
 
 #include "common.h"
 
-namespace xt::dropouts {
-    torch::Tensor early_dropout(torch::Tensor x);
+namespace xt::dropouts
+{
 
-    struct EarlyDropout : xt::Module {
+    struct EarlyDropout : xt::Module
+    {
     public:
-        EarlyDropout() = default;
-        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
+        EarlyDropout(double p_drop = 0.5);
+        auto forward(std::initializer_list<std::any> tensors) -> std::any override;
 
     private:
+        double p_drop_; // Probability of an element to be zeroed out.
+        double epsilon_ = 1e-7; // For numerical stability in division
     };
 }
-
-
-

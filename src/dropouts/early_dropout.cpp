@@ -107,13 +107,46 @@
 
 namespace xt::dropouts
 {
-    torch::Tensor early_dropout(torch::Tensor x)
+    EarlyDropout::EarlyDropout(double p_drop) : p_drop_(p_drop)
     {
-        return torch::zeros(10);
+        TORCH_CHECK(p_drop_ >= 0.0 && p_drop_ <= 1.0, "Dropout probability p_drop must be between 0 and 1.");
     }
+
 
     auto EarlyDropout::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return xt::dropouts::early_dropout(torch::zeros(10));
+        vector<std::any> tensors_ = tensors;
+        auto input = std::any_cast<torch::Tensor>(tensors_[0]);
+
+
+        if (!this->is_training() || p_drop_ == 0.0)
+        {
+            // If not in training mode or if dropout probability is zero,
+            // return the input as is.
+            return input;
+        }
+
+        if (p_drop_ == 1.0)
+        {
+            // If dropout probability is one, all elements are zeroed out.
+            return torch::zeros_like(input);
+        }
+
+        // Calculate keep probability.
+        double keep_prob = 1.0 - p_drop_;
+
+        // Create a binary mask:
+        // Elements are 1 with probability 'keep_prob' (kept)
+        // Elements are 0 with probability 'p_drop_' (dropped)
+        // The mask has the same shape and device as the input.
+        torch::Tensor mask = torch::bernoulli(
+            torch::full_like(input, keep_prob)
+        ).to(input.dtype());
+
+        // Apply the mask: zero out elements where mask is 0.
+        // Scale the remaining elements by 1/keep_prob (inverted dropout).
+        // This scaling ensures that the expected sum of outputs remains the same
+        // as the sum of inputs, which means no changes are needed during inference.
+        return (input * mask) / (keep_prob + epsilon_);
     }
 }
