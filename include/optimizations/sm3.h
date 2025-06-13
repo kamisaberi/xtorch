@@ -1,27 +1,60 @@
-#pragma once
+#ifndef SM3_OPTIMIZER_HPP
+#define SM3_OPTIMIZER_HPP
 
-#include "common.h"
+#include <torch/torch.h>
+#include <torch/serialize/archive.h>
 
-namespace xt::optimizations
-{
-    class SM3 : public torch::optim::Optimizer {
-    public:
-        explicit SM3(std::vector<torch::Tensor>&& parameters, double lr = 0.01, double momentum = 0.9);
+#include <cmath>
+#include <vector>
+#include <memory>
+#include <string>
+#include <cstdint>
 
-        using LossClosure = std::function<torch::Tensor()>;
-        torch::Tensor step(LossClosure closure = nullptr) override;
+// --- Options for SM3 Optimizer ---
+struct SM3Options : torch::optim::OptimizerOptions {
+    explicit SM3Options(double learning_rate = 0.1) // SM3 often uses SGD-like LR
+        : torch::optim::OptimizerOptions() {
+        this.lr(learning_rate);
+    }
 
-        // Getter and setter for learning rate
-        double lr() const { return lr_; }
-        void lr(double lr) { lr_ = lr; }
+    // Momentum parameter
+    TORCH_ARG(double, beta) = 0.9;
+    TORCH_ARG(double, eps) = 1e-8;
+    TORCH_ARG(double, lr) = 1e-6;
 
-        // Getter and setter for momentum
-        double momentum() const { return momentum_; }
-        void momentum(double momentum) { momentum_ = momentum; }
+    void serialize(torch::serialize::OutputArchive& archive) const override;
+    void deserialize(torch::serialize::InputArchive& archive) ;
+    std::unique_ptr<torch::optim::OptimizerOptions> clone() const override;
+};
 
-    private:
-        double lr_;
-        double momentum_;
-        std::vector<torch::Tensor> velocities_;
-    };
-}
+// --- Parameter State for SM3 Optimizer ---
+struct SM3ParamState : torch::optim::OptimizerParamState {
+    // For 2D+ tensors
+    torch::Tensor row_accumulator;
+    torch::Tensor col_accumulator;
+
+    // For all tensors
+    TORCH_ARG(torch::Tensor, momentum_buffer);
+
+    // SM3ParamState() = default;
+    void serialize(torch::serialize::OutputArchive& archive) const override;
+    void deserialize(torch::serialize::InputArchive& archive) ;
+    std::unique_ptr<OptimizerParamState> clone() const override;
+};
+
+// --- SM3 Optimizer Class ---
+class SM3 : public torch::optim::Optimizer {
+public:
+    SM3(std::vector<torch::Tensor> params, SM3Options options);
+    explicit SM3(std::vector<torch::Tensor> params, double lr = 0.1);
+
+    using LossClosure = std::function<torch::Tensor()>;
+    torch::Tensor step(LossClosure closure = nullptr) override;
+    void save(torch::serialize::OutputArchive& archive) const override;
+    void load(torch::serialize::InputArchive& archive) override;
+
+protected:
+    std::unique_ptr<torch::optim::OptimizerParamState> make_param_state() ;
+};
+
+#endif // SM3_OPTIMIZER_HPP
