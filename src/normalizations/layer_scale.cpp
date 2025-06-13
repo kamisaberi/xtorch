@@ -1,8 +1,6 @@
 #include "include/normalizations/layer_scale.h"
 
 
-
-
 // #include <torch/torch.h>
 // #include <iostream>
 // #include <vector>
@@ -157,11 +155,60 @@
 // }
 
 
-
 namespace xt::norm
 {
+    LayerScale::LayerScale(int64_t dim, double initial_value)
+        : dim_(dim),
+          initial_value_(initial_value)
+    {
+        TORCH_CHECK(dim > 0, "Dimension 'dim' must be positive.");
+
+        // Initialize lambda_ as a learnable parameter vector of size 'dim_'.
+        // All elements are initialized to initial_value_.
+        lambda_ = register_parameter("lambda", torch::full({dim_}, initial_value_));
+    }
+
     auto LayerScale::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        return torch::zeros(10);
+        vector<std::any> tensors_ = tensors;
+        auto x = std::any_cast<torch::Tensor>(tensors_[0]);
+
+        // Input x can have various shapes, but its channel/feature dimension
+        // must match this->dim_.
+        // Common shapes:
+        // - (Batch, NumTokens, Channels) for Transformers (dim_ = Channels, lambda applied to last dim)
+        // - (Batch, Channels, Height, Width) for CNNs (dim_ = Channels, lambda applied to dim 1)
+
+        // We need to ensure lambda_ broadcasts correctly with x.
+        // lambda_ is 1D: (dim_).
+        // If x is (N, L, C) and dim_ == C, lambda should be (1, 1, C) for broadcasting.
+        // If x is (N, C, H, W) and dim_ == C, lambda should be (1, C, 1, 1) for broadcasting.
+
+        TORCH_CHECK(x.size(-1) == dim_ || (x.dim() > 1 && x.size(1) == dim_),
+                    "The size of the feature dimension of input x does not match LayerScale dim. "
+                    "Input feature dim size: ", (x.dim() > 1 && x.size(1) == dim_ ? x.size(1) : x.size(-1)),
+                    ", LayerScale dim: ", dim_, ", Input shape: ", x.sizes());
+
+
+        std::vector<int64_t> lambda_shape_for_broadcast(x.dim(), 1);
+
+        if (x.size(-1) == dim_)
+        {
+            // Assume feature dimension is the last one, e.g., (N, L, C)
+            lambda_shape_for_broadcast[x.dim() - 1] = dim_;
+        }
+        else if (x.dim() > 1 && x.size(1) == dim_)
+        {
+            // Assume feature dimension is the second one (channel dim for NCHW), e.g., (N, C, H, W)
+            lambda_shape_for_broadcast[1] = dim_;
+        }
+        else
+        {
+            // This case should be caught by the TORCH_CHECK above, but as a fallback:
+            TORCH_CHECK(false, "Could not determine broadcasting shape for lambda. Input shape: ", x.sizes(),
+                        " LayerScale dim: ", dim_);
+        }
+
+        return x * lambda_.view(lambda_shape_for_broadcast);
     }
 }
