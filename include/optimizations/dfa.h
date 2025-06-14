@@ -1,27 +1,43 @@
-#pragma once
+#ifndef DFA_OPTIMIZER_HPP
+#define DFA_OPTIMIZER_HPP
 
-#include "common.h"
+#include <torch/torch.h>
+#include <vector>
+#include <memory>
+#include <functional>
+#include <unordered_map>
 
-namespace xt::optimizations
-{
-    class DFA : public torch::optim::Optimizer {
-    public:
-        explicit DFA(std::vector<torch::Tensor>&& parameters, double lr = 0.01, double momentum = 0.9);
+// --- Options for DFA ---
+struct DFAOptions {
+    double learning_rate = 0.01;
+};
 
-        using LossClosure = std::function<torch::Tensor()>;
-        torch::Tensor step(LossClosure closure = nullptr) override;
+// --- Per-layer state for DFA (simpler now) ---
+struct DFALayerState {
+    // A raw pointer is fine here since the model owns the module and will outlive the optimizer
+    torch::nn::LinearImpl* module_impl;
+    torch::Tensor feedback_matrix; // The fixed, random feedback matrix 'B'
+};
 
-        // Getter and setter for learning rate
-        double lr() const { return lr_; }
-        void lr(double lr) { lr_ = lr; }
+// --- DFA Optimizer Class (Meta-Optimizer) ---
+class DFA {
+public:
+    DFA(std::shared_ptr<torch::nn::Module> model, DFAOptions options);
 
-        // Getter and setter for momentum
-        double momentum() const { return momentum_; }
-        void momentum(double momentum) { momentum_ = momentum; }
+    void step(const torch::Tensor& input, const torch::Tensor& target,
+              const std::function<torch::Tensor(torch::Tensor, torch::Tensor)>& loss_fn_derivative);
 
-    private:
-        double lr_;
-        double momentum_;
-        std::vector<torch::Tensor> velocities_;
-    };
-}
+    void zero_grad() {} // No-op
+
+private:
+    std::shared_ptr<torch::nn::Module> model_;
+    DFAOptions options_;
+
+    // Store state for hidden layers
+    std::vector<DFALayerState> dfa_hidden_states_;
+
+    // Store a direct pointer to the final layer implementation
+    torch::nn::LinearImpl* final_layer_impl_ = nullptr;
+};
+
+#endif // DFA_OPTIMIZER_HPP
