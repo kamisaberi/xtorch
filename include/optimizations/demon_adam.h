@@ -1,27 +1,62 @@
-#pragma once
+#ifndef DEMON_ADAM_OPTIMIZER_HPP
+#define DEMON_ADAM_OPTIMIZER_HPP
 
-#include "common.h"
+#include <torch/torch.h>
+#include <torch/serialize/archive.h>
 
-namespace xt::optimizations
-{
-    class DemonAdam : public torch::optim::Optimizer {
-    public:
-        explicit DemonAdam(std::vector<torch::Tensor>&& parameters, double lr = 0.01, double momentum = 0.9);
+#include <cmath>
+#include <vector>
+#include <memory>
+#include <string>
+#include <cstdint>
 
-        using LossClosure = std::function<torch::Tensor()>;
-        torch::Tensor step(LossClosure closure = nullptr) override;
+// --- Options for DemonAdam Optimizer ---
+struct DemonAdamOptions : torch::optim::OptimizerOptions {
+    explicit DemonAdamOptions(double learning_rate = 1e-3)
+        : torch::optim::OptimizerOptions() {
+        this->lr(learning_rate);
+    }
 
-        // Getter and setter for learning rate
-        double lr() const { return lr_; }
-        void lr(double lr) { lr_ = lr; }
+    // Dynamic momentum (beta1) decay parameters
+    TORCH_ARG(double, beta1_initial) = 0.99;
+    TORCH_ARG(double, beta1_final) = 0.9;
+    TORCH_ARG(long, total_steps) = 100000; // Steps over which beta1 decays
 
-        // Getter and setter for momentum
-        double momentum() const { return momentum_; }
-        void momentum(double momentum) { momentum_ = momentum; }
+    // Standard Adam parameters
+    TORCH_ARG(double, beta2) = 0.999;
+    TORCH_ARG(double, eps) = 1e-8;
+    TORCH_ARG(double, weight_decay) = 0.0;
 
-    private:
-        double lr_;
-        double momentum_;
-        std::vector<torch::Tensor> velocities_;
-    };
-}
+    void serialize(torch::serialize::OutputArchive& archive) const override;
+    void deserialize(torch::serialize::InputArchive& archive) override;
+    std::unique_ptr<torch::optim::OptimizerOptions> clone() const override;
+};
+
+// --- Parameter State for DemonAdam ---
+struct DemonAdamParamState : torch::optim::OptimizerParamState {
+    TORCH_ARG(torch::Tensor, step);
+    TORCH_ARG(torch::Tensor, exp_avg);      // m_t
+    TORCH_ARG(torch::Tensor, exp_avg_sq);   // v_t
+
+    DemonAdamParamState() = default;
+    void serialize(torch::serialize::OutputArchive& archive) const override;
+    void deserialize(torch::serialize::InputArchive& archive) override;
+    std::unique_ptr<OptimizerParamState> clone() const override;
+};
+
+// --- DemonAdam Optimizer Class ---
+class DemonAdam : public torch::optim::Optimizer {
+public:
+    DemonAdam(std::vector<torch::Tensor> params, DemonAdamOptions options);
+    explicit DemonAdam(std::vector<torch::Tensor> params, double lr = 1e-3);
+
+    using LossClosure = std::function<torch::Tensor()>;
+    torch::Tensor step(LossClosure closure = nullptr) override;
+    void save(torch::serialize::OutputArchive& archive) const override;
+    void load(torch::serialize::InputArchive& archive) override;
+
+protected:
+    std::unique_ptr<torch::optim::OptimizerParamState> make_param_state() override;
+};
+
+#endif // DEMON_ADAM_OPTIMIZER_HPP
