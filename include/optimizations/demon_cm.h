@@ -1,27 +1,58 @@
-#pragma once
+#ifndef DEMON_CM_OPTIMIZER_HPP
+#define DEMON_CM_OPTIMIZER_HPP
 
-#include "common.h"
+#include <torch/torch.h>
+#include <torch/serialize/archive.h>
 
-namespace xt::optimizations
-{
-    class DemonCM : public torch::optim::Optimizer {
-    public:
-        explicit DemonCM(std::vector<torch::Tensor>&& parameters, double lr = 0.01, double momentum = 0.9);
+#include <cmath>
+#include <vector>
+#include <memory>
+#include <string>
+#include <cstdint>
 
-        using LossClosure = std::function<torch::Tensor()>;
-        torch::Tensor step(LossClosure closure = nullptr) override;
+// --- Options for DemonCM Optimizer ---
+struct DemonCMOptions : torch::optim::OptimizerOptions {
+    explicit DemonCMOptions(double learning_rate = 0.1)
+        : torch::optim::OptimizerOptions() {
+        this->lr(learning_rate);
+    }
 
-        // Getter and setter for learning rate
-        double lr() const { return lr_; }
-        void lr(double lr) { lr_ = lr; }
+    // Decaying momentum parameters
+    TORCH_ARG(double, beta_initial) = 0.99;
+    TORCH_ARG(double, beta_final) = 0.5;
+    TORCH_ARG(long, total_steps) = 100000;
 
-        // Getter and setter for momentum
-        double momentum() const { return momentum_; }
-        void momentum(double momentum) { momentum_ = momentum; }
+    TORCH_ARG(double, weight_decay) = 1e-4;
 
-    private:
-        double lr_;
-        double momentum_;
-        std::vector<torch::Tensor> velocities_;
-    };
-}
+    void serialize(torch::serialize::OutputArchive& archive) const override;
+    void deserialize(torch::serialize::InputArchive& archive) override;
+    std::unique_ptr<torch::optim::OptimizerOptions> clone() const override;
+};
+
+// --- Parameter State for DemonCM Optimizer ---
+struct DemonCMParamState : torch::optim::OptimizerParamState {
+    TORCH_ARG(torch::Tensor, step);
+    TORCH_ARG(torch::Tensor, momentum_buffer);
+
+    DemonCMParamState() = default;
+    void serialize(torch::serialize::OutputArchive& archive) const override;
+    void deserialize(torch::serialize::InputArchive& archive) override;
+    std::unique_ptr<OptimizerParamState> clone() const override;
+};
+
+// --- DemonCM Optimizer Class ---
+class DemonCM : public torch::optim::Optimizer {
+public:
+    DemonCM(std::vector<torch::Tensor> params, DemonCMOptions options);
+    explicit DemonCM(std::vector<torch::Tensor> params, double lr = 0.1);
+
+    using LossClosure = std::function<torch::Tensor()>;
+    torch::Tensor step(LossClosure closure = nullptr) override;
+    void save(torch::serialize::OutputArchive& archive) const override;
+    void load(torch::serialize::InputArchive& archive) override;
+
+protected:
+    std::unique_ptr<torch::optim::OptimizerParamState> make_param_state() override;
+};
+
+#endif // DEMON_CM_OPTIMIZER_HPP
