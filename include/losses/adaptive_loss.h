@@ -11,7 +11,6 @@ namespace xt::losses {
     public:
         AdaptiveLoss() = default;
         auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
-
     private:
     };
 
