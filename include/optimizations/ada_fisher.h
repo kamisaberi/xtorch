@@ -1,27 +1,60 @@
-#pragma once
+#ifndef ADAFISHER_OPTIMIZER_HPP
+#define ADAFISHER_OPTIMIZER_HPP
 
-#include "common.h"
+#include <torch/torch.h>
+#include <torch/serialize/archive.h>
 
-namespace xt::optimizations
-{
-    class AdaFisher : public torch::optim::Optimizer {
-    public:
-        explicit AdaFisher(std::vector<torch::Tensor>&& parameters, double lr = 0.01, double momentum = 0.9);
+#include <cmath>
+#include <vector>
+#include <memory>
+#include <string>
+#include <cstdint>
 
-        using LossClosure = std::function<torch::Tensor()>;
-        torch::Tensor step(LossClosure closure = nullptr) override;
+// --- Options for AdaFisher Optimizer ---
+struct AdaFisherOptions : torch::optim::OptimizerOptions {
+    explicit AdaFisherOptions(double learning_rate = 1e-3)
+        : torch::optim::OptimizerOptions() {
+        this->lr(learning_rate);
+    }
 
-        // Getter and setter for learning rate
-        double lr() const { return lr_; }
-        void lr(double lr) { lr_ = lr; }
+    // Decay rate for momentum on the natural gradient
+    TORCH_ARG(double, beta1) = 0.9;
+    // Decay rate for the EMA of the Fisher information estimate
+    TORCH_ARG(double, beta2) = 0.999;
 
-        // Getter and setter for momentum
-        double momentum() const { return momentum_; }
-        void momentum(double momentum) { momentum_ = momentum; }
+    TORCH_ARG(double, eps) = 1e-8; // Damping term for the denominator
+    TORCH_ARG(double, weight_decay) = 0.0;
 
-    private:
-        double lr_;
-        double momentum_;
-        std::vector<torch::Tensor> velocities_;
-    };
-}
+    void serialize(torch::serialize::OutputArchive& archive) const override;
+    void deserialize(torch::serialize::InputArchive& archive) override;
+    std::unique_ptr<torch::optim::OptimizerOptions> clone() const override;
+};
+
+// --- Parameter State for AdaFisher Optimizer ---
+struct AdaFisherParamState : torch::optim::OptimizerParamState {
+    TORCH_ARG(torch::Tensor, step);
+    TORCH_ARG(torch::Tensor, exp_avg);          // m_t (Momentum on the natural gradient)
+    TORCH_ARG(torch::Tensor, fisher_diag_ema);  // F_t (EMA of squared gradients)
+
+    AdaFisherParamState() = default;
+    void serialize(torch::serialize::OutputArchive& archive) const override;
+    void deserialize(torch::serialize::InputArchive& archive) override;
+    std::unique_ptr<OptimizerParamState> clone() const override;
+};
+
+// --- AdaFisher Optimizer Class ---
+class AdaFisher : public torch::optim::Optimizer {
+public:
+    AdaFisher(std::vector<torch::Tensor> params, AdaFisherOptions options);
+    explicit AdaFisher(std::vector<torch::Tensor> params, double lr = 1e-3);
+
+    using LossClosure = std::function<torch::Tensor()>;
+    torch::Tensor step(LossClosure closure = nullptr) override;
+    void save(torch::serialize::OutputArchive& archive) const override;
+    void load(torch::serialize::InputArchive& archive) override;
+
+protected:
+    std::unique_ptr<torch::optim::OptimizerParamState> make_param_state() override;
+};
+
+#endif // ADAFISHER_OPTIMIZER_HPP
