@@ -1,27 +1,66 @@
-#pragma once
+#ifndef AGGMO_OPTIMIZER_HPP
+#define AGGMO_OPTIMIZER_HPP
 
-#include "common.h"
+#include <torch/torch.h>
+#include <torch/serialize/archive.h>
 
-namespace xt::optimizations
-{
-    class AggMo : public torch::optim::Optimizer {
-    public:
-        explicit AggMo(std::vector<torch::Tensor>&& parameters, double lr = 0.01, double momentum = 0.9);
+#include <cmath>
+#include <vector>
+#include <memory>
+#include <string>
+#include <cstdint>
 
-        using LossClosure = std::function<torch::Tensor()>;
-        torch::Tensor step(LossClosure closure = nullptr) override;
+// --- Options for AggMo Optimizer ---
+struct AggMoOptions : torch::optim::OptimizerOptions {
+    explicit AggMoOptions(double learning_rate = 0.1) // Often uses SGD-like LRs
+        : torch::optim::OptimizerOptions() {
+        this->lr(learning_rate);
+        // Default betas for AggMo (from the paper)
+        betas_ = {0.0, 0.9, 0.99};
+    }
 
-        // Getter and setter for learning rate
-        double lr() const { return lr_; }
-        void lr(double lr) { lr_ = lr; }
+    // Vector of beta values for each momentum buffer
+    // This is not a TORCH_ARG directly, as it's a std::vector.
+    // We handle its serialization/deserialization manually.
+    std::vector<double> betas_;
+    AggMoOptions& betas(const std::vector<double>& new_betas) {
+        betas_ = new_betas;
+        return *this;
+    }
+    const std::vector<double>& betas() const { return betas_; }
 
-        // Getter and setter for momentum
-        double momentum() const { return momentum_; }
-        void momentum(double momentum) { momentum_ = momentum; }
 
-    private:
-        double lr_;
-        double momentum_;
-        std::vector<torch::Tensor> velocities_;
-    };
-}
+    TORCH_ARG(double, weight_decay) = 0.0;
+
+    void serialize(torch::serialize::OutputArchive& archive) const override;
+    void deserialize(torch::serialize::InputArchive& archive) override;
+    std::unique_ptr<torch::optim::OptimizerOptions> clone() const override;
+};
+
+// --- Parameter State for AggMo Optimizer ---
+struct AggMoParamState : torch::optim::OptimizerParamState {
+    // A vector of momentum buffers, one for each beta
+    std::vector<torch::Tensor> momentum_buffers;
+
+    AggMoParamState() = default;
+    void serialize(torch::serialize::OutputArchive& archive) const override;
+    void deserialize(torch::serialize::InputArchive& archive) override;
+    std::unique_ptr<OptimizerParamState> clone() const override;
+};
+
+// --- AggMo Optimizer Class ---
+class AggMo : public torch::optim::Optimizer {
+public:
+    AggMo(std::vector<torch::Tensor> params, AggMoOptions options);
+    explicit AggMo(std::vector<torch::Tensor> params, double lr = 0.1);
+
+    using LossClosure = std::function<torch::Tensor()>;
+    torch::Tensor step(LossClosure closure = nullptr) override;
+    void save(torch::serialize::OutputArchive& archive) const override;
+    void load(torch::serialize::InputArchive& archive) override;
+
+protected:
+    std::unique_ptr<torch::optim::OptimizerParamState> make_param_state() override;
+};
+
+#endif // AGGMO_OPTIMIZER_HPP
