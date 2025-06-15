@@ -26,10 +26,11 @@ struct AMSBoundOptions : torch::optim::OptimizerOptions {
 
     TORCH_ARG(double, eps) = 1e-8;
     TORCH_ARG(double, weight_decay) = 0.0;
+    TORCH_ARG(double ,  lr) = 1e-6;
     // AMSGrad is inherent, so no toggle is needed
 
     void serialize(torch::serialize::OutputArchive& archive) const override;
-    void deserialize(torch::serialize::InputArchive& archive) override;
+    void deserialize(torch::serialize::InputArchive& archive) ;
     std::unique_ptr<torch::optim::OptimizerOptions> clone() const override;
 };
 
@@ -42,7 +43,7 @@ struct AMSBoundParamState : torch::optim::OptimizerParamState {
 
     AMSBoundParamState() = default;
     void serialize(torch::serialize::OutputArchive& archive) const override;
-    void deserialize(torch::serialize::InputArchive& archive) override;
+    void deserialize(torch::serialize::InputArchive& archive) ;
     std::unique_ptr<OptimizerParamState> clone() const override;
 };
 
@@ -58,7 +59,7 @@ public:
     void load(torch::serialize::InputArchive& archive) override;
 
 protected:
-    std::unique_ptr<torch::optim::OptimizerParamState> make_param_state() override;
+    std::unique_ptr<torch::optim::OptimizerParamState> make_param_state() ;
 };
 
 #endif // AMSBOUND_OPTIMIZER_HPP
