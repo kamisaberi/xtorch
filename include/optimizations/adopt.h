@@ -27,7 +27,7 @@ struct AdOptParamState : torch::optim::OptimizerParamState {
     TORCH_ARG(torch::Tensor, grad_ema);      // Smoothed gradient (for smoothness estimation)
     TORCH_ARG(torch::Tensor, grad_sq_ema);   // Smoothed squared gradient
 
-    AdOptParamState() = default;
+    // AdOptParamState() = default;
     std::unique_ptr<OptimizerParamState> clone() const override {
         auto cloned = std::make_unique<AdOptParamState>();
         if(step().defined()) cloned->step(step().clone());
