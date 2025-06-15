@@ -18,7 +18,7 @@ struct AggMoOptions : torch::optim::OptimizerOptions {
         // Default betas for AggMo (from the paper)
         betas_ = {0.0, 0.9, 0.99};
     }
-
+    TORCH_ARG(double ,  lr) = 1e-6;
     // Vector of beta values for each momentum buffer
     // This is not a TORCH_ARG directly, as it's a std::vector.
     // We handle its serialization/deserialization manually.
@@ -33,7 +33,7 @@ struct AggMoOptions : torch::optim::OptimizerOptions {
     TORCH_ARG(double, weight_decay) = 0.0;
 
     void serialize(torch::serialize::OutputArchive& archive) const override;
-    void deserialize(torch::serialize::InputArchive& archive) override;
+    void deserialize(torch::serialize::InputArchive& archive) ;
     std::unique_ptr<torch::optim::OptimizerOptions> clone() const override;
 };
 
@@ -44,7 +44,7 @@ struct AggMoParamState : torch::optim::OptimizerParamState {
 
     AggMoParamState() = default;
     void serialize(torch::serialize::OutputArchive& archive) const override;
-    void deserialize(torch::serialize::InputArchive& archive) override;
+    void deserialize(torch::serialize::InputArchive& archive) ;
     std::unique_ptr<OptimizerParamState> clone() const override;
 };
 
@@ -60,7 +60,7 @@ public:
     void load(torch::serialize::InputArchive& archive) override;
 
 protected:
-    std::unique_ptr<torch::optim::OptimizerParamState> make_param_state() override;
+    std::unique_ptr<torch::optim::OptimizerParamState> make_param_state() ;
 };
 
 #endif // AGGMO_OPTIMIZER_HPP
