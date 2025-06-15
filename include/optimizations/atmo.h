@@ -19,6 +19,7 @@ struct ATMOOptions : torch::optim::OptimizerOptions {
         betas_ = {0.0, 0.9, 0.99};
     }
     TORCH_ARG(double ,  lr) = 1e-6;
+public:
     // Vector of beta values for each momentum buffer
     std::vector<double> betas_;
     ATMOOptions& betas(const std::vector<double>& new_betas) {
