@@ -5,6 +5,8 @@
 #include <vector>
 #include <memory>
 #include <functional>
+#include "base/module.h"
+
 
 // Forward declaration of the model class is good practice
 struct MyModel;
@@ -21,7 +23,7 @@ class DeepEnsemblesOptimizer {
 public:
     // The constructor takes a factory function to create new model instances
     DeepEnsemblesOptimizer(
-        std::function<std::shared_ptr<torch::nn::Module>()> model_factory,
+        std::function<std::shared_ptr<xt::Module>()> model_factory,
         DeepEnsemblesOptions options);
 
     // The step function needs data and a loss function to train the ensemble
@@ -36,7 +38,7 @@ public:
     void eval();  // Helper to set all models to eval mode
 
 private:
-    std::vector<std::shared_ptr<torch::nn::Module>> ensemble_models_;
+    std::vector<std::shared_ptr<xt::Module>> ensemble_models_;
     std::vector<std::unique_ptr<torch::optim::AdamW>> ensemble_optimizers_;
     DeepEnsemblesOptions options_;
 };

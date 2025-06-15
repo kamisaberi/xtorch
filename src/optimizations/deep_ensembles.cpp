@@ -1,18 +1,21 @@
 #include "include/optimizations/deep_ensembles.h"
 #include <stdexcept>
 
+#include "base/module.h"
+
 // --- DeepEnsemblesOptimizer Implementation ---
 
 DeepEnsemblesOptimizer::DeepEnsemblesOptimizer(
-    std::function<std::shared_ptr<torch::nn::Module>()> model_factory,
+    std::function<std::shared_ptr<xt::Module>()> model_factory,
     DeepEnsemblesOptions options)
-    : options_(std::move(options)) {
-
+    : options_(std::move(options))
+{
     TORCH_CHECK(model_factory, "A valid model factory function must be provided.");
     TORCH_CHECK(options_.ensemble_size > 0, "Ensemble size must be positive.");
 
     // Create the ensemble of models and their corresponding optimizers
-    for (int i = 0; i < options_.ensemble_size; ++i) {
+    for (int i = 0; i < options_.ensemble_size; ++i)
+    {
         // Create a new, independently initialized model
         auto model = model_factory();
         ensemble_models_.push_back(model);
@@ -26,8 +29,10 @@ DeepEnsemblesOptimizer::DeepEnsemblesOptimizer(
     }
 }
 
-void DeepEnsemblesOptimizer::zero_grad() {
-    for (auto& optimizer : ensemble_optimizers_) {
+void DeepEnsemblesOptimizer::zero_grad()
+{
+    for (auto& optimizer : ensemble_optimizers_)
+    {
         optimizer->zero_grad();
     }
 }
@@ -35,17 +40,18 @@ void DeepEnsemblesOptimizer::zero_grad() {
 std::vector<torch::Tensor> DeepEnsemblesOptimizer::step(
     const torch::Tensor& input,
     const torch::Tensor& target,
-    const std::function<torch::Tensor(torch::Tensor, torch::Tensor)>& loss_fn) {
-
+    const std::function<torch::Tensor(torch::Tensor, torch::Tensor)>& loss_fn)
+{
     std::vector<torch::Tensor> losses;
 
     // Iterate through the ensemble, training each model independently on the batch
-    for (int i = 0; i < options_.ensemble_size; ++i) {
+    for (int i = 0; i < options_.ensemble_size; ++i)
+    {
         auto& model = ensemble_models_[i];
         auto& optimizer = ensemble_optimizers_[i];
 
         // Forward pass for this specific model
-        auto output = model->forward(input);
+        auto output = std::any_cast<torch::Tensor>(model->forward({input}));
 
         // Compute loss
         auto loss = loss_fn(output, target);
@@ -61,13 +67,15 @@ std::vector<torch::Tensor> DeepEnsemblesOptimizer::step(
     return losses;
 }
 
-torch::Tensor DeepEnsemblesOptimizer::predict(const torch::Tensor& input) {
+torch::Tensor DeepEnsemblesOptimizer::predict(const torch::Tensor& input)
+{
     torch::NoGradGuard no_grad;
     std::vector<torch::Tensor> all_predictions;
 
     // Get predictions from every model in the ensemble
-    for (const auto& model : ensemble_models_) {
-        auto output = model->forward(input);
+    for (const auto& model : ensemble_models_)
+    {
+        auto output = std::any_cast<torch::Tensor>(model->forward({input}));
         // For classification, it's common to average probabilities (after softmax)
         // For regression, you'd average the raw outputs.
         // We'll assume classification and apply softmax.
@@ -82,14 +90,18 @@ torch::Tensor DeepEnsemblesOptimizer::predict(const torch::Tensor& input) {
     return mean_preds;
 }
 
-void DeepEnsemblesOptimizer::train() {
-    for (auto& model : ensemble_models_) {
+void DeepEnsemblesOptimizer::train()
+{
+    for (auto& model : ensemble_models_)
+    {
         model->train();
     }
 }
 
-void DeepEnsemblesOptimizer::eval() {
-    for (auto& model : ensemble_models_) {
+void DeepEnsemblesOptimizer::eval()
+{
+    for (auto& model : ensemble_models_)
+    {
         model->eval();
     }
 }
