@@ -23,9 +23,10 @@ struct DemonCMOptions : torch::optim::OptimizerOptions {
     TORCH_ARG(long, total_steps) = 100000;
 
     TORCH_ARG(double, weight_decay) = 1e-4;
+    TORCH_ARG(double ,  lr) = 1e-6;
 
     void serialize(torch::serialize::OutputArchive& archive) const override;
-    void deserialize(torch::serialize::InputArchive& archive) override;
+    void deserialize(torch::serialize::InputArchive& archive) ;
     std::unique_ptr<torch::optim::OptimizerOptions> clone() const override;
 };
 
@@ -36,7 +37,7 @@ struct DemonCMParamState : torch::optim::OptimizerParamState {
 
     DemonCMParamState() = default;
     void serialize(torch::serialize::OutputArchive& archive) const override;
-    void deserialize(torch::serialize::InputArchive& archive) override;
+    void deserialize(torch::serialize::InputArchive& archive) ;
     std::unique_ptr<OptimizerParamState> clone() const override;
 };
 
@@ -52,7 +53,7 @@ public:
     void load(torch::serialize::InputArchive& archive) override;
 
 protected:
-    std::unique_ptr<torch::optim::OptimizerParamState> make_param_state() override;
+    std::unique_ptr<torch::optim::OptimizerParamState> make_param_state() ;
 };
 
 #endif // DEMON_CM_OPTIMIZER_HPP
