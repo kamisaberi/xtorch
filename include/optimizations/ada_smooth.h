@@ -40,7 +40,7 @@ struct AdaSmoothParamState : torch::optim::OptimizerParamState {
     TORCH_ARG(torch::Tensor, exp_avg_sq);   // v_t (Adam's second moment)
     TORCH_ARG(torch::Tensor, smooth_update); // s_t (EMA of final update steps)
 
-    AdaSmoothParamState() = default;
+    // AdaSmoothParamState() = default;
     void serialize(torch::serialize::OutputArchive& archive) const override;
     void deserialize(torch::serialize::InputArchive& archive) ;
     std::unique_ptr<OptimizerParamState> clone() const override;
