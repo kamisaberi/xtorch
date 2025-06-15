@@ -24,9 +24,10 @@ struct AdaFisherOptions : torch::optim::OptimizerOptions {
 
     TORCH_ARG(double, eps) = 1e-8; // Damping term for the denominator
     TORCH_ARG(double, weight_decay) = 0.0;
+    TORCH_ARG(double ,  lr) = 1e-6;
 
     void serialize(torch::serialize::OutputArchive& archive) const override;
-    void deserialize(torch::serialize::InputArchive& archive) override;
+    void deserialize(torch::serialize::InputArchive& archive) ;
     std::unique_ptr<torch::optim::OptimizerOptions> clone() const override;
 };
 
@@ -38,7 +39,7 @@ struct AdaFisherParamState : torch::optim::OptimizerParamState {
 
     AdaFisherParamState() = default;
     void serialize(torch::serialize::OutputArchive& archive) const override;
-    void deserialize(torch::serialize::InputArchive& archive) override;
+    void deserialize(torch::serialize::InputArchive& archive) ;
     std::unique_ptr<OptimizerParamState> clone() const override;
 };
 
@@ -54,7 +55,7 @@ public:
     void load(torch::serialize::InputArchive& archive) override;
 
 protected:
-    std::unique_ptr<torch::optim::OptimizerParamState> make_param_state() override;
+    std::unique_ptr<torch::optim::OptimizerParamState> make_param_state() ;
 };
 
 #endif // ADAFISHER_OPTIMIZER_HPP
