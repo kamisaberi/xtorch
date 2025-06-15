@@ -154,7 +154,7 @@ torch::Tensor Adafactor::step(LossClosure closure) {
 
             // Clip update and apply weight decay
             auto update_norm = update.norm() / std::sqrt(update.numel());
-            if (update_norm > group_options.clip_threshold()) {
+            if ((update_norm > group_options.clip_threshold()).item<bool>()) {
                 update.mul_(group_options.clip_threshold() / update_norm);
             }
 
