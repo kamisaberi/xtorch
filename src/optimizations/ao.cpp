@@ -125,5 +125,5 @@ torch::Tensor AO::step(LossClosure closure) {
 
 // --- Boilerplate Methods ---
 void AO::save(torch::serialize::OutputArchive& archive) const { torch::optim::Optimizer::save(archive); }
-void AO::load(torch::serialize::OutputArchive& archive) { torch::optim::Optimizer::load(archive); }
+void AO::load(torch::serialize::InputArchive& archive) { torch::optim::Optimizer::load(archive); }
 std::unique_ptr<torch::optim::OptimizerParamState> AO::make_param_state() { return std::make_unique<AOParamState>(); }
