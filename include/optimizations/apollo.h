@@ -29,7 +29,7 @@ struct ApolloParamState : torch::optim::OptimizerParamState {
     TORCH_ARG(torch::Tensor, hess_diag_ema); // v_t (EMA of Hessian diagonal)
     TORCH_ARG(torch::Tensor, bias_rectifier); // B_t (running max of v_hat)
 
-    ApolloParamState() = default;
+    // ApolloParamState() = default;
     std::unique_ptr<OptimizerParamState> clone() const override {
         auto cloned = std::make_unique<ApolloParamState>();
         if(step().defined()) cloned->step(step().clone());

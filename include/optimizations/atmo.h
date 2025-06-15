@@ -41,7 +41,7 @@ struct ATMOParamState : torch::optim::OptimizerParamState {
     // A vector of momentum buffers, one for each beta
     std::vector<torch::Tensor> momentum_buffers;
 
-    ATMOParamState() = default;
+    // ATMOParamState() = default;
     void serialize(torch::serialize::OutputArchive& archive) const override;
     void deserialize(torch::serialize::InputArchive& archive) ;
     std::unique_ptr<OptimizerParamState> clone() const override;
