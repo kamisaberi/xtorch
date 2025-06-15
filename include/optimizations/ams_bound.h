@@ -41,7 +41,7 @@ struct AMSBoundParamState : torch::optim::OptimizerParamState {
     TORCH_ARG(torch::Tensor, exp_avg_sq);   // v_t
     TORCH_ARG(torch::Tensor, max_exp_avg_sq); // For AMSGrad
 
-    AMSBoundParamState() = default;
+    // AMSBoundParamState() = default;
     void serialize(torch::serialize::OutputArchive& archive) const override;
     void deserialize(torch::serialize::InputArchive& archive) ;
     std::unique_ptr<OptimizerParamState> clone() const override;
