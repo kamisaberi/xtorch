@@ -18,7 +18,7 @@ struct ATMOOptions : torch::optim::OptimizerOptions {
         // Default betas representing different timescales
         betas_ = {0.0, 0.9, 0.99};
     }
-
+    TORCH_ARG(double ,  lr) = 1e-6;
     // Vector of beta values for each momentum buffer
     std::vector<double> betas_;
     ATMOOptions& betas(const std::vector<double>& new_betas) {
@@ -32,7 +32,7 @@ struct ATMOOptions : torch::optim::OptimizerOptions {
     TORCH_ARG(double, eps) = 1e-8; // For stable norm calculation
 
     void serialize(torch::serialize::OutputArchive& archive) const override;
-    void deserialize(torch::serialize::InputArchive& archive) override;
+    void deserialize(torch::serialize::InputArchive& archive) ;
     std::unique_ptr<torch::optim::OptimizerOptions> clone() const override;
 };
 
@@ -43,7 +43,7 @@ struct ATMOParamState : torch::optim::OptimizerParamState {
 
     ATMOParamState() = default;
     void serialize(torch::serialize::OutputArchive& archive) const override;
-    void deserialize(torch::serialize::InputArchive& archive) override;
+    void deserialize(torch::serialize::InputArchive& archive) ;
     std::unique_ptr<OptimizerParamState> clone() const override;
 };
 
@@ -59,7 +59,7 @@ public:
     void load(torch::serialize::InputArchive& archive) override;
 
 protected:
-    std::unique_ptr<torch::optim::OptimizerParamState> make_param_state() override;
+    std::unique_ptr<torch::optim::OptimizerParamState> make_param_state() ;
 };
 
 #endif // ATMO_OPTIMIZER_HPP
