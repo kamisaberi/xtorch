@@ -37,7 +37,7 @@ struct DemonParamState : torch::optim::OptimizerParamState {
     TORCH_ARG(torch::Tensor, step);
     TORCH_ARG(torch::Tensor, momentum_buffer);
 
-    DemonParamState() = default;
+    // DemonParamState() = default;
     void serialize(torch::serialize::OutputArchive& archive) const override;
     void deserialize(torch::serialize::InputArchive& archive) ;
     std::unique_ptr<OptimizerParamState> clone() const override;
