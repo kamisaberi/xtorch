@@ -11,7 +11,7 @@
 #include <cstdint>
 
 // --- Options for AggMo Optimizer ---
-struct AggMoOptions : torch::optim::OptimizerOptions {
+struct AggMoOptions :public torch::optim::OptimizerOptions {
     explicit AggMoOptions(double learning_rate = 0.1) // Often uses SGD-like LRs
         : torch::optim::OptimizerOptions() {
         this->lr(learning_rate);
@@ -22,6 +22,8 @@ struct AggMoOptions : torch::optim::OptimizerOptions {
     // Vector of beta values for each momentum buffer
     // This is not a TORCH_ARG directly, as it's a std::vector.
     // We handle its serialization/deserialization manually.
+public:
+
     std::vector<double> betas_;
     AggMoOptions& betas(const std::vector<double>& new_betas) {
         betas_ = new_betas;
@@ -38,10 +40,10 @@ struct AggMoOptions : torch::optim::OptimizerOptions {
 };
 
 // --- Parameter State for AggMo Optimizer ---
-struct AggMoParamState : torch::optim::OptimizerParamState {
+struct AggMoParamState : public torch::optim::OptimizerParamState {
     // A vector of momentum buffers, one for each beta
     std::vector<torch::Tensor> momentum_buffers;
-
+public:
     // AggMoParamState() = default;
     void serialize(torch::serialize::OutputArchive& archive) const override;
     void deserialize(torch::serialize::InputArchive& archive) ;
