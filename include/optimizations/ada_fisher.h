@@ -37,7 +37,7 @@ struct AdaFisherParamState : torch::optim::OptimizerParamState {
     TORCH_ARG(torch::Tensor, exp_avg);          // m_t (Momentum on the natural gradient)
     TORCH_ARG(torch::Tensor, fisher_diag_ema);  // F_t (EMA of squared gradients)
 
-    AdaFisherParamState() = default;
+    // AdaFisherParamState() = default;
     void serialize(torch::serialize::OutputArchive& archive) const override;
     void deserialize(torch::serialize::InputArchive& archive) ;
     std::unique_ptr<OptimizerParamState> clone() const override;

@@ -8,6 +8,7 @@
 
 // --- Options for AdaHessian Optimizer ---
 struct AdaHessianOptions {
+public:
     // We use a custom struct because this is a meta-optimizer
     double lr = 0.1;
     double beta1 = 0.9;
@@ -24,12 +25,12 @@ struct AdaHessianOptions {
 };
 
 // --- Per-parameter state for AdaHessian ---
-struct AdaHessianParamState : torch::optim::OptimizerParamState {
+struct AdaHessianParamState :public torch::optim::OptimizerParamState {
     TORCH_ARG(torch::Tensor, step);
     TORCH_ARG(torch::Tensor, exp_avg);      // m_t
     TORCH_ARG(torch::Tensor, exp_avg_sq);   // v_t (EMA of Hessian diagonal squared)
-
-    AdaHessianParamState() = default;
+public:
+    // AdaHessianParamState() = default;
     std::unique_ptr<OptimizerParamState> clone() const override {
         auto cloned = std::make_unique<AdaHessianParamState>();
         if(step().defined()) cloned->step(step().clone());
