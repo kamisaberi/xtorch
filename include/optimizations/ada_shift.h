@@ -40,7 +40,7 @@ public:
     // A queue to store recent squared gradients for the delayed update
     std::deque<torch::Tensor> grad_sq_history;
 
-    AdaShiftParamState() = default;
+    // AdaShiftParamState() = default;
     void serialize(torch::serialize::OutputArchive& archive) const override;
     void deserialize(torch::serialize::InputArchive& archive) ;
     std::unique_ptr<OptimizerParamState> clone() const override;
