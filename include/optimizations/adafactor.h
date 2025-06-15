@@ -45,7 +45,7 @@ public:
 
     // Note: No exp_avg (m_t) is stored in the default memory-efficient version.
 
-    AdafactorParamState() = default;
+    // AdafactorParamState() = default;
     void serialize(torch::serialize::OutputArchive& archive) const override;
     void deserialize(torch::serialize::InputArchive& archive) ;
     std::unique_ptr<OptimizerParamState> clone() const override;
