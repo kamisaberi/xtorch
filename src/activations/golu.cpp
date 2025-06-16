@@ -2,7 +2,7 @@
 
 namespace xt::activations
 {
-    torch::Tensor golu(const torch::Tensor& x, double alpha, int64_t dim)
+    torch::Tensor golu(const torch::Tensor x, double alpha, int64_t dim)
     {
         TORCH_CHECK(x.dim() > 0, "Input tensor must have at least one dimension.");
         TORCH_CHECK(dim < x.dim() && dim >= -x.dim(), "Dimension out of range.");
