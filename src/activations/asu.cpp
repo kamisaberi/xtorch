@@ -2,7 +2,7 @@
 
 namespace xt::activations
 {
-    torch::Tensor asu(const torch::Tensor& x, double alpha, double beta, double gamma)
+    torch::Tensor asu(const torch::Tensor x, double alpha, double beta, double gamma)
     {
         torch::Tensor beta_x = beta * x;
         torch::Tensor sig_beta_x = torch::sigmoid(beta_x);
