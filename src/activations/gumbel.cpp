@@ -2,7 +2,7 @@
 
 namespace xt::activations
 {
-    torch::Tensor gumbel(const torch::Tensor& x, double beta)
+    torch::Tensor gumbel(const torch::Tensor x, double beta)
     {
         return x * torch::exp(-torch::exp(-(x / beta)));
     }

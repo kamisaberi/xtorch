@@ -3,7 +3,7 @@
 
 namespace xt::activations
 {
-    torch::Tensor ahaf(const torch::Tensor& x, double p_param)
+    torch::Tensor ahaf(const torch::Tensor x, double p_param)
     {
         torch::Tensor p_x = p_param * x;
         torch::Tensor tanh_p_x = torch::tanh(p_x);

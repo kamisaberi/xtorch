@@ -3,7 +3,7 @@
 
 namespace xt::activations
 {
-    torch::Tensor andhra(const torch::Tensor& x, double alpha, double beta)
+    torch::Tensor andhra(const torch::Tensor x, double alpha, double beta)
     {
         torch::Tensor alpha_x = alpha * x;
         torch::Tensor sig_alpha_x = torch::sigmoid(alpha_x);
