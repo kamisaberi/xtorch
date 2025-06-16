@@ -2,7 +2,7 @@
 
 namespace xt::activations
 {
-    torch::Tensor aria(const torch::Tensor& x, double alpha, double beta)
+    torch::Tensor aria(const torch::Tensor x, double alpha, double beta)
     {
         torch::Tensor x_pow_alpha = torch::pow(x, alpha);
         torch::Tensor arg_tanh = beta * x_pow_alpha;
