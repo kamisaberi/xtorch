@@ -32,7 +32,7 @@ struct LARSOptions : torch::optim::OptimizerOptions {
 struct LARSParamState : torch::optim::OptimizerParamState {
     TORCH_ARG(torch::Tensor, momentum_buffer);
 
-    LARSParamState() = default;
+    // LARSParamState() = default;
     void serialize(torch::serialize::OutputArchive& archive) const override;
     void deserialize(torch::serialize::InputArchive& archive) ;
     std::unique_ptr<OptimizerParamState> clone() const override;

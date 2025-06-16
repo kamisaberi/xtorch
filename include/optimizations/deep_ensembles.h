@@ -5,7 +5,7 @@
 #include <vector>
 #include <memory>
 #include <functional>
-#include "base/module.h"
+#include "../base/module.h"
 
 
 // Forward declaration of the model class is good practice
