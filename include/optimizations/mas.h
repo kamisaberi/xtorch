@@ -10,7 +10,7 @@
 #include <string>
 #include <cstdint>
 
-#include "data_loaders/extended_data_loader.h"
+#include "../data_loaders/extended_data_loader.h"
 
 // --- Options for MAS Optimizer ---
 struct MASOptions : torch::optim::OptimizerOptions {
