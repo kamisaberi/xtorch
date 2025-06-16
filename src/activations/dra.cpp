@@ -2,7 +2,7 @@
 
 namespace xt::activations
 {
-    torch::Tensor dra(const torch::Tensor& x, double alpha ) {
+    torch::Tensor dra(const torch::Tensor x, double alpha ) {
         torch::Tensor x_cubed = torch::pow(x, 3.0);
         torch::Tensor arg_sigmoid = alpha * x_cubed;
         torch::Tensor sig_val = torch::sigmoid(arg_sigmoid);

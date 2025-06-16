@@ -2,7 +2,7 @@
 
 namespace xt::activations
 {
-    torch::Tensor asaf(const torch::Tensor& x, double p_param, double q_param)
+    torch::Tensor asaf(const torch::Tensor x, double p_param, double q_param)
     {
         torch::Tensor sig_px = torch::sigmoid(p_param * x);
         torch::Tensor sig_qx = torch::sigmoid(q_param * x);
