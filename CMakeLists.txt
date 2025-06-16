@@ -221,6 +221,32 @@ if (NOT TARGET uninstall)
             COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake)
 endif ()
 
+
+# === ADD THIS BLOCK START ===
+#
+# This block executes the setup.sh script during the 'make install' process.
+# It uses install(CODE ...) to run a CMake command at install time.
+#
+# The execute_process command runs an external script. We pass
+# ${CMAKE_INSTALL_PREFIX} as a command-line argument to the script so it
+# knows where to create the venv.
+#
+install(CODE "
+    message(STATUS \"Executing post-install script: setup.sh\")
+    execute_process(
+        COMMAND sh ${CMAKE_CURRENT_SOURCE_DIR}/scripts/setup.sh \"${CMAKE_INSTALL_PREFIX}\"
+        RESULT_VARIABLE res
+    )
+    if(NOT res EQUAL 0)
+        message(FATAL_ERROR \"Post-install script failed with exit code \${res}\")
+    endif()
+"
+)
+# === ADD THIS BLOCK END ===
+
+
+
+
 # =============================================================================
 # Subdirectories
 # =============================================================================
