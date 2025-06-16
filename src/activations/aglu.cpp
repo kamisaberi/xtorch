@@ -3,7 +3,7 @@
 
 namespace xt::activations
 {
-    torch::Tensor aglu(const torch::Tensor& x, double s)
+    torch::Tensor aglu(const torch::Tensor x, double s)
     {
         return x * torch::sigmoid(s * x);
     }
