@@ -2,7 +2,7 @@
 
 namespace xt::activations
 {
-    torch::Tensor coslu(torch::Tensor& x)
+    torch::Tensor coslu(torch::Tensor&x)
     {
         torch::Tensor positive_part = x * torch::cos(x);
         torch::Tensor negative_part = x * torch::exp(x);
