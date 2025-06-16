@@ -2,7 +2,7 @@
 
 namespace xt::activations
 {
-    torch::Tensor fem(const torch::Tensor& x, double alpha, double beta)
+    torch::Tensor fem(const torch::Tensor x, double alpha, double beta)
     {
         torch::Tensor x_plus_alpha = x + alpha;
         torch::Tensor softplus_term = torch::softplus(x_plus_alpha); // softplus(y) = ln(1 + exp(y))
