@@ -1,17 +1,46 @@
 #include "include/optimizations/ada_hessian.h"
-#include <stdexcept>
 #include <torch/autograd.h> // Include for torch::autograd::backward
-
-// ... (Other methods like the constructor, zero_grad, _init_state are correct) ...
+#include <stdexcept>
 
 // --- AdaHessian Implementation ---
+
+// CONSTRUCTOR IMPLEMENTATION
+AdaHessian::AdaHessian(std::vector<torch::Tensor> params, AdaHessianOptions options)
+    : params_(std::move(params)), options_(std::move(options)) {
+    // The state is initialized lazily in the step function via _init_state,
+    // so the constructor can be simple.
+}
+
+// _init_state HELPER IMPLEMENTATION
+void AdaHessian::_init_state(torch::Tensor& p) {
+    // Check if state for this parameter already exists.
+    if (state_.find(p.unsafeGetTensorImpl()) == state_.end()) {
+        // If not, create a new state object.
+        auto new_state = std::make_unique<AdaHessianParamState>();
+        new_state->step(torch::tensor(0.0, torch::dtype(torch::kFloat64).device(torch::kCPU)));
+        new_state->exp_avg(torch::zeros_like(p));
+        new_state->exp_avg_sq(torch::zeros_like(p));
+        state_[p.unsafeGetTensorImpl()] = std::move(new_state);
+    }
+}
+
+// zero_grad IMPLEMENTATION
+void AdaHessian::zero_grad() {
+    // Iterate through all parameters and zero out their gradients if they exist.
+    for (auto& p : params_) {
+        if (p.grad().defined()) {
+            p.grad().detach_(); // Detach from the graph
+            p.grad().zero_();   // Zero the values
+        }
+    }
+}
+
 
 // CORRECTED step method
 void AdaHessian::step(torch::Tensor& loss) {
     TORCH_CHECK(torch::GradMode::is_enabled(), "AdaHessian::step() must be called with autograd enabled.");
 
     // --- First Backward Pass: Compute standard gradients dL/dw ---
-    // Use torch::autograd::backward to keep the graph alive for the second pass.
     torch::autograd::backward({loss}, /*grad_tensors=*/{}, /*retain_graph=*/true);
 
     // Store the standard gradients and create the random vector z
@@ -27,16 +56,14 @@ void AdaHessian::step(torch::Tensor& loss) {
     }
 
     // --- Second Backward Pass: Compute H*z ---
-    // Compute the dot product of the standard gradients and z
     torch::Tensor grad_z_dot_product = torch::tensor(0.0, loss.options());
     for(size_t i = 0; i < standard_grads.size(); ++i) {
         grad_z_dot_product += (standard_grads[i] * z_vectors[i]).sum();
     }
 
-    // We need to zero out the old grads before the second pass.
+    // We must zero out the .grad attributes before the second backward pass.
     zero_grad();
     // The second backward pass computes d(grad_z_dot_product)/dw, which is H*z.
-    // We don't need to retain the graph after this.
     grad_z_dot_product.backward();
 
     // Now, p.grad() contains the H*z vectors.
@@ -55,11 +82,8 @@ void AdaHessian::step(torch::Tensor& loss) {
         auto& m = state.exp_avg();
         auto& v = state.exp_avg_sq();
 
-        // The original gradient from the first backward pass
         const auto& grad = standard_grads[i];
-        // The H*z vector from the second backward pass
         const auto& hessian_vec_prod = p.grad(); // Currently holds H*z
-        // The Rademacher vector
         const auto& z = z_vectors[i];
 
         // 1. Approximate Hessian diagonal: D_t = |H_t*z| * z
