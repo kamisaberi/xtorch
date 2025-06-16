@@ -100,15 +100,15 @@ set_target_properties(xTorch PROPERTIES
 # Add custom library paths (LibTorch)
 
 list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/cpp/libtorch/)
-if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
+if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
     list(APPEND CMAKE_PREFIX_PATH E:/LIBRARIES/cpp/libtorch)
-elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+elseif (CMAKE_SYSTEM_NAME STREQUAL "Linux")
     list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/cpp/libtorch/)
-elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
+elseif (CMAKE_SYSTEM_NAME STREQUAL "Darwin")
     list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/cpp/libtorch/)
-else()
+else ()
     message(WARNING "Unsupported OS: ${CMAKE_SYSTEM_NAME}")
-endif()
+endif ()
 
 #list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/cpp/libtorch/)
 
@@ -151,7 +151,6 @@ target_link_libraries(xTorch
         ${ONNXRUNTIME_LIBRARY}
 
 
-
 )
 
 # Optional CUDA paths (commented out by default)
@@ -168,15 +167,24 @@ install(TARGETS xTorch EXPORT xTorchTargets
         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
         ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
         RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-        INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+        INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+
+)
+
 
 # Convert project name to lowercase for installation paths
 string(TOLOWER "${PROJECT_NAME}" PROJECT_NAME_LOWER)
+
 
 # Install headers and third-party files
 install(FILES xtorch.h DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME_LOWER})
 install(DIRECTORY include DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME_LOWER})
 install(DIRECTORY third_party DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME_LOWER})
+
+
+install(DIRECTORY python/xtorch_py/ DESTINATION ${CMAKE_INSTALL_DATADIR}/${PROJECT_NAME_LOWER}/py_modules)
+install(FILES python/requirements.txt DESTINATION ${CMAKE_INSTALL_DATADIR}/${PROJECT_NAME_LOWER})
+
 
 # CMake package configuration for find_package() support
 install(EXPORT xTorchTargets
