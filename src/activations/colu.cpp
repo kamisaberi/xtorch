@@ -2,7 +2,7 @@
 
 namespace xt::activations
 {
-    torch::Tensor colu(const torch::Tensor& x, double M_val)
+    torch::Tensor colu(const torch::Tensor x, double M_val)
     {
         torch::Tensor result = torch::where(
             x < -M_val,
