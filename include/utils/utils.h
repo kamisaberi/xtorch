@@ -36,6 +36,8 @@
 // String manipulation
 #include "videos.h"      // String utility functions
 
+#include "path.h"      // String utility functions
+
 /*
  * Author: Kamran Saberifard
  * Email: kamisaberi@gmail.com
