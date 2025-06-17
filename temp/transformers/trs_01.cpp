@@ -5,7 +5,7 @@
 #include <cstdlib> // For std::system
 #include <filesystem> // For path manipulation
 
-#include "xtorch.h"
+#include "include/utils/utils.h"
 
 
 // This assumes you have the get_library_paths() function available
