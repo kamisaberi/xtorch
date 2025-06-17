@@ -74,6 +74,7 @@ set(LIBRARY_SOURCE_FILES
         ${TRAINER_FILES}
         ${TRANSFORM_FILES}
         ${UTILITY_FILES}
+        path.cpp
 )
 
 # =============================================================================
