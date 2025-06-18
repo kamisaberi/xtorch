@@ -2089,6 +2089,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 set(BASE_SOURCE_FILES
         ../src/base/module1.cpp
+        ../path.cpp
 )
 
 
