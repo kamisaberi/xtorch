@@ -1,15 +1,7 @@
-#ifndef KP_OPTIMIZER_HPP
-#define KP_OPTIMIZER_HPP
+#pragma once
 
-#include <torch/torch.h>
-#include <torch/serialize/archive.h>
 
-#include <cmath>
-#include <vector>
-#include <memory>
-#include <string>
-#include <cstdint>
-
+#include "common.h"
 // --- Options for KP Optimizer ---
 struct KPOptions : torch::optim::OptimizerOptions {
     explicit KPOptions(double learning_rate = 1.0) // Projection provides step size, so lr can be 1.0
@@ -84,4 +76,3 @@ private:
         int root_order);
 };
 
-#endif // KP_OPTIMIZER_HPP
