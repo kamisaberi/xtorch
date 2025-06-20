@@ -1,15 +1,7 @@
-#ifndef FASFA_OPTIMIZER_HPP
-#define FASFA_OPTIMIZER_HPP
+#pragma once
 
-#include <torch/torch.h>
-#include <torch/serialize/archive.h>
 
-#include <cmath>
-#include <vector>
-#include <memory>
-#include <string>
-#include <cstdint>
-
+#include "common.h"
 // --- Options for FASFA (Factor-Wise and Statistical Factor-Wise) Optimizer ---
 struct FASFAOptions :public torch::optim::OptimizerOptions
 {
@@ -94,4 +86,3 @@ private:
         int root_order);
 };
 
-#endif // FASFA_OPTIMIZER_HPP
