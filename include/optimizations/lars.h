@@ -1,15 +1,7 @@
-#ifndef LARS_OPTIMIZER_HPP
-#define LARS_OPTIMIZER_HPP
+#pragma once
 
-#include <torch/torch.h>
-#include <torch/serialize/archive.h>
 
-#include <cmath>
-#include <vector>
-#include <memory>
-#include <string>
-#include <cstdint>
-
+#include "common.h"
 // --- Options for LARS Optimizer ---
 struct LARSOptions : torch::optim::OptimizerOptions {
     explicit LARSOptions(double learning_rate = 0.1)
@@ -53,4 +45,3 @@ protected:
     std::unique_ptr<torch::optim::OptimizerParamState> make_param_state() ;
 };
 
-#endif // LARS_OPTIMIZER_HPP
