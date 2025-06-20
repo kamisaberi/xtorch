@@ -17,3 +17,7 @@
 #include <memory>
 #include <string>
 #include <cstdint>
+#include <torch/torch.h>
+#include <vector>
+#include <memory>
+#include <functional>

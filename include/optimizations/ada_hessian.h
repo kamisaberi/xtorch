@@ -1,11 +1,7 @@
-#ifndef ADAHESSIAN_OPTIMIZER_HPP
-#define ADAHESSIAN_OPTIMIZER_HPP
+#pragma once
 
-#include <torch/torch.h>
-#include <vector>
-#include <memory>
-#include <functional>
 
+#include "common.h"
 // --- Options for AdaHessian Optimizer ---
 struct AdaHessianOptions {
 public:
@@ -58,4 +54,3 @@ private:
     void _init_state(torch::Tensor& p);
 };
 
-#endif // ADAHESSIAN_OPTIMIZER_HPP
