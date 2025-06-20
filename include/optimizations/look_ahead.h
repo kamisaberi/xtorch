@@ -1,15 +1,7 @@
-#ifndef LOOKAHEAD_OPTIMIZER_HPP
-#define LOOKAHEAD_OPTIMIZER_HPP
+#pragma once
 
-#include <torch/torch.h>
-#include <torch/serialize/archive.h>
 
-#include <cmath>
-#include <vector>
-#include <memory>
-#include <string>
-#include <cstdint>
-#include <functional>
+#include "common.h"
 
 // --- Options for the inner Adam optimizer to be wrapped ---
 struct LookaheadInnerAdamOptions :public torch::optim::OptimizerOptions {
@@ -81,4 +73,3 @@ protected:
     std::unique_ptr<torch::optim::OptimizerParamState> make_param_state() ;
 };
 
-#endif // LOOKAHEAD_OPTIMIZER_HPP
