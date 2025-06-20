@@ -1,14 +1,7 @@
-#ifndef MADGRAD_OPTIMIZER_HPP
-#define MADGRAD_OPTIMIZER_HPP
+#pragma once
 
-#include <torch/torch.h>
-#include <torch/serialize/archive.h>
 
-#include <cmath>
-#include <vector>
-#include <memory>
-#include <string>
-#include <cstdint>
+#include "common.h"
 
 // --- Options for MADGRAD Optimizer ---
 struct MADGRADOptions : torch::optim::OptimizerOptions {
@@ -56,4 +49,3 @@ protected:
     std::unique_ptr<torch::optim::OptimizerParamState> make_param_state() ;
 };
 
-#endif // MADGRAD_OPTIMIZER_HPP
