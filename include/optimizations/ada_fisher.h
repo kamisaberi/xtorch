@@ -1,15 +1,7 @@
-#ifndef ADAFISHER_OPTIMIZER_HPP
-#define ADAFISHER_OPTIMIZER_HPP
+#pragma once
 
-#include <torch/torch.h>
-#include <torch/serialize/archive.h>
 
-#include <cmath>
-#include <vector>
-#include <memory>
-#include <string>
-#include <cstdint>
-
+#include "common.h"
 // --- Options for AdaFisher Optimizer ---
 struct AdaFisherOptions : torch::optim::OptimizerOptions {
     explicit AdaFisherOptions(double learning_rate = 1e-3)
@@ -58,4 +50,3 @@ protected:
     std::unique_ptr<torch::optim::OptimizerParamState> make_param_state() ;
 };
 
-#endif // ADAFISHER_OPTIMIZER_HPP
