@@ -1,8 +1,4 @@
-
-// #error "COMPILING THIS EXACT HEADER FILE NOW" // Add this as the first line
-
-#ifndef ONE_BIT_ADAM_HPP
-#define ONE_BIT_ADAM_HPP
+#pragma once
 
 #include <torch/torch.h>
 #include <torch/serialize/archive.h>
@@ -165,4 +161,3 @@ public:
     //     std::unique_ptr<torch::optim::OptimizerParamState> make_param_state();
 };
 
-#endif // ONE_BIT_ADAM_HPP
