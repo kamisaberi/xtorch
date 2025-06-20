@@ -1,15 +1,7 @@
-#ifndef PLO_OPTIMIZER_HPP
-#define PLO_OPTIMIZER_HPP
+#pragma once
 
-#include <torch/torch.h>
-#include <torch/serialize/archive.h>
 
-#include <cmath>
-#include <vector>
-#include <memory>
-#include <string>
-#include <cstdint>
-
+#include "common.h"
 // --- Options for PLO (Projected Lookahead Optimizer) ---
 struct PLOOptions :public torch::optim::OptimizerOptions {
 public:
@@ -83,4 +75,3 @@ private:
         int root_order);
 };
 
-#endif // PLO_OPTIMIZER_HPP
