@@ -1,14 +1,7 @@
-#ifndef DEMON_CM_OPTIMIZER_HPP
-#define DEMON_CM_OPTIMIZER_HPP
+#pragma once
 
-#include <torch/torch.h>
-#include <torch/serialize/archive.h>
 
-#include <cmath>
-#include <vector>
-#include <memory>
-#include <string>
-#include <cstdint>
+#include "common.h"
 
 // --- Options for DemonCM Optimizer ---
 struct DemonCMOptions : torch::optim::OptimizerOptions {
@@ -56,4 +49,3 @@ protected:
     std::unique_ptr<torch::optim::OptimizerParamState> make_param_state() ;
 };
 
-#endif // DEMON_CM_OPTIMIZER_HPP
