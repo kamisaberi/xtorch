@@ -1,14 +1,7 @@
-#ifndef INFO_OPTIMIZER_HPP
-#define INFO_OPTIMIZER_HPP
+#pragma once
 
-#include <torch/torch.h>
-#include <torch/serialize/archive.h>
 
-#include <cmath>
-#include <vector>
-#include <memory>
-#include <string>
-#include <cstdint>
+#include "common.h"
 
 // --- Options for INFO Optimizer ---
 struct InfoOptions : torch::optim::OptimizerOptions {
@@ -65,4 +58,3 @@ protected:
     std::unique_ptr<torch::optim::OptimizerParamState> make_param_state() ;
 };
 
-#endif // INFO_OPTIMIZER_HPP
