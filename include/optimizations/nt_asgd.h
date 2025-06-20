@@ -1,10 +1,7 @@
-#ifndef NT_ASGD_OPTIMIZER_HPP
-#define NT_ASGD_OPTIMIZER_HPP
+#pragma once
 
-#include <torch/torch.h>
-#include <vector>
-#include <memory>
-#include <deque>
+
+#include "common.h"
 
 // --- Options for NT-ASGD Optimizer ---
 struct NTASGDOptions : torch::optim::OptimizerOptions {
@@ -62,4 +59,3 @@ private:
     bool is_triggered_ = false;
 };
 
-#endif // NT_ASGD_OPTIMIZER_HPP
