@@ -1,15 +1,7 @@
-#ifndef DEMON_ADAM_OPTIMIZER_HPP
-#define DEMON_ADAM_OPTIMIZER_HPP
+#pragma once
 
-#include <torch/torch.h>
-#include <torch/serialize/archive.h>
 
-#include <cmath>
-#include <vector>
-#include <memory>
-#include <string>
-#include <cstdint>
-
+#include "common.h"
 // --- Options for DemonAdam Optimizer ---
 struct DemonAdamOptions : torch::optim::OptimizerOptions {
     explicit DemonAdamOptions(double learning_rate = 1e-3)
@@ -60,4 +52,3 @@ protected:
     std::unique_ptr<torch::optim::OptimizerParamState> make_param_state() ;
 };
 
-#endif // DEMON_ADAM_OPTIMIZER_HPP
