@@ -1,15 +1,7 @@
-#ifndef QHADAM_OPTIMIZER_HPP
-#define QHADAM_OPTIMIZER_HPP
+#pragma once
 
-#include <torch/torch.h>
-#include <torch/serialize/archive.h>
 
-#include <cmath>
-#include <vector>
-#include <memory>
-#include <string>
-#include <cstdint>
-
+#include "common.h"
 // --- Options for QHAdam Optimizer ---
 struct QHAdamOptions : torch::optim::OptimizerOptions {
     explicit QHAdamOptions(double learning_rate = 1e-3)
@@ -61,4 +53,3 @@ protected:
     std::unique_ptr<torch::optim::OptimizerParamState> make_param_state() ;
 };
 
-#endif // QHADAM_OPTIMIZER_HPP
