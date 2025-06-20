@@ -1,14 +1,7 @@
-#ifndef FA_OPTIMIZER_HPP
-#define FA_OPTIMIZER_HPP
+#pragma once
 
-#include <torch/torch.h>
-#include <torch/serialize/archive.h>
 
-#include <cmath>
-#include <vector>
-#include <memory>
-#include <string>
-#include <cstdint>
+#include "common.h"
 
 // --- Options for FA Optimizer ---
 struct FAOptions :public torch::optim::OptimizerOptions {
@@ -82,4 +75,3 @@ private:
         int root_order);
 };
 
-#endif // FA_OPTIMIZER_HPP
