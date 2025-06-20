@@ -1,14 +1,7 @@
-#ifndef LAMB_OPTIMIZER_HPP
-#define LAMB_OPTIMIZER_HPP
+#pragma once
 
-#include <torch/torch.h>
-#include <torch/serialize/archive.h>
 
-#include <cmath>
-#include <vector>
-#include <memory>
-#include <string>
-#include <cstdint>
+#include "common.h"
 
 // --- Options for LAMB Optimizer ---
 struct LambOptions : torch::optim::OptimizerOptions {
@@ -55,4 +48,3 @@ protected:
     std::unique_ptr<torch::optim::OptimizerParamState> make_param_state() ;
 };
 
-#endif // LAMB_OPTIMIZER_HPP
