@@ -1,11 +1,7 @@
-#ifndef APOLLO_OPTIMIZER_HPP
-#define APOLLO_OPTIMIZER_HPP
+#pragma once
 
-#include <torch/torch.h>
-#include <vector>
-#include <memory>
-#include <functional>
 
+#include "common.h"
 // --- Options for Apollo Optimizer ---
 struct ApolloOptions {
     double lr = 1e-2; // Apollo can often use a higher base LR
@@ -56,4 +52,3 @@ private:
     void _init_state(torch::Tensor& p);
 };
 
-#endif // APOLLO_OPTIMIZER_HPP
