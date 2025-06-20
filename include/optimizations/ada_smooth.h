@@ -1,14 +1,7 @@
-#ifndef ADASMOOTH_OPTIMIZER_HPP
-#define ADASMOOTH_OPTIMIZER_HPP
+#pragma once
 
-#include <torch/torch.h>
-#include <torch/serialize/archive.h>
 
-#include <cmath>
-#include <vector>
-#include <memory>
-#include <string>
-#include <cstdint>
+#include "common.h"
 
 // --- Options for AdaSmooth Optimizer ---
 struct AdaSmoothOptions : torch::optim::OptimizerOptions {
@@ -60,5 +53,3 @@ public:
 protected:
     std::unique_ptr<torch::optim::OptimizerParamState> make_param_state() ;
 };
-
-#endif // ADASMOOTH_OPTIMIZER_HPP
