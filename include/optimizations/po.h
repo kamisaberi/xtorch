@@ -1,15 +1,7 @@
-#ifndef PO_OPTIMIZER_HPP
-#define PO_OPTIMIZER_HPP
+#pragma once
 
-#include <torch/torch.h>
-#include <torch/serialize/archive.h>
 
-#include <cmath>
-#include <vector>
-#include <memory>
-#include <string>
-#include <cstdint>
-
+#include "common.h"
 // --- Options for PO (Projected Optimizer) ---
 struct POOptions : torch::optim::OptimizerOptions {
     explicit POOptions(double learning_rate = 1.0) // Projection provides a dynamic LR scale
@@ -54,4 +46,3 @@ protected:
     std::unique_ptr<torch::optim::OptimizerParamState> make_param_state() ;
 };
 
-#endif // PO_OPTIMIZER_HPP
