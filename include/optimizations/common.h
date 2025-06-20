@@ -22,4 +22,5 @@
 #include <memory>
 #include <functional>
 #include "../base/module.h"
+#include "../data_loaders/extended_data_loader.h"
 
