@@ -1,15 +1,7 @@
-#ifndef ONE_BIT_LAMB_HPP
-#define ONE_BIT_LAMB_HPP
+#pragma once
 
-#include <torch/torch.h>
-#include <torch/serialize/archive.h>
 
-#include <cmath>
-#include <vector>
-#include <memory>
-#include <string>
-#include <cstdint> // For int64_t
-
+#include "common.h"
 // --- Options for OneBitLamb ---
 struct OneBitLambOptions : torch::optim::OptimizerOptions
 {
@@ -171,4 +163,3 @@ protected:
     std::unique_ptr<torch::optim::OptimizerParamState> make_param_state();
 };
 
-#endif // ONE_BIT_LAMB_HPP
