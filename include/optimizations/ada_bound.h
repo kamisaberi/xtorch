@@ -1,15 +1,8 @@
-#ifndef ADABOUND_OPTIMIZER_HPP
-#define ADABOUND_OPTIMIZER_HPP
 
-#include <torch/torch.h>
-#include <torch/serialize/archive.h>
+#pragma once
 
-#include <cmath>
-#include <vector>
-#include <memory>
-#include <string>
-#include <cstdint>
 
+#include "common.h"
 // --- Options for AdaBound Optimizer (Corrected) ---
 struct AdaBoundOptions : torch::optim::OptimizerOptions {
     explicit AdaBoundOptions(double learning_rate = 1e-3)
@@ -62,5 +55,3 @@ public:
 protected:
     std::unique_ptr<torch::optim::OptimizerParamState> make_param_state() ;
 };
-
-#endif // ADABOUND_OPTIMIZER_HPP
