@@ -1,15 +1,7 @@
-#ifndef AMSGRAD_OPTIMIZER_HPP
-#define AMSGRAD_OPTIMIZER_HPP
+#pragma once
 
-#include <torch/torch.h>
-#include <torch/serialize/archive.h>
 
-#include <cmath>
-#include <vector>
-#include <memory>
-#include <string>
-#include <cstdint>
-
+#include "common.h"
 // --- Options for AMSGrad Optimizer ---
 struct AMSGradOptions : torch::optim::OptimizerOptions {
     explicit AMSGradOptions(double learning_rate = 1e-3)
@@ -56,4 +48,3 @@ protected:
     std::unique_ptr<torch::optim::OptimizerParamState> make_param_state() ;
 };
 
-#endif // AMSGRAD_OPTIMIZER_HPP
