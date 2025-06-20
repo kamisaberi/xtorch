@@ -1,15 +1,7 @@
-#ifndef DSPT_OPTIMIZER_HPP
-#define DSPT_OPTIMIZER_HPP
+#pragma once
 
-#include <torch/torch.h>
-#include <torch/serialize/archive.h>
 
-#include <cmath>
-#include <vector>
-#include <memory>
-#include <string>
-#include <cstdint>
-
+#include "common.h"
 // --- Options for DSPT ---
 struct DSPTOptions : torch::optim::OptimizerOptions
 {
@@ -82,4 +74,3 @@ private:
         const DSPTOptions& options);
 };
 
-#endif // DSPT_OPTIMIZER_HPP
