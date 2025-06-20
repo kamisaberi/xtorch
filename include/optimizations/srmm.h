@@ -1,14 +1,7 @@
-#ifndef SRMM_OPTIMIZER_HPP
-#define SRMM_OPTIMIZER_HPP
+#pragma once
 
-#include <torch/torch.h>
-#include <torch/serialize/archive.h>
 
-#include <cmath>
-#include <vector>
-#include <memory>
-#include <string>
-#include <cstdint>
+#include "common.h"
 
 // --- Options for SRMM Optimizer ---
 struct SRMMOptions : torch::optim::OptimizerOptions
@@ -58,4 +51,3 @@ protected:
     std::unique_ptr<torch::optim::OptimizerParamState> make_param_state() ;
 };
 
-#endif // SRMM_OPTIMIZER_HPP
