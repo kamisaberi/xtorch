@@ -1,13 +1,7 @@
 #pragma once
 
-#include <torch/torch.h>
-#include <torch/serialize/archive.h>
 
-#include <cmath>
-#include <vector>
-#include <memory>
-#include <string>
-#include <cstdint>
+#include "common.h"
 
 // Define custom options for OneBitAdam
 struct OneBitAdamOptions : public torch::optim::OptimizerOptions
@@ -160,4 +154,3 @@ public:
     // protected: // Removed protected, not strictly needed for make_param_state as Optimizer base handles it.
     //     std::unique_ptr<torch::optim::OptimizerParamState> make_param_state();
 };
-
