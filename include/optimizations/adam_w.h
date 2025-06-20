@@ -1,14 +1,7 @@
-#ifndef ADAMW_OPTIMIZER_HPP
-#define ADAMW_OPTIMIZER_HPP
+#pragma once
 
-#include <torch/torch.h>
-#include <torch/serialize/archive.h>
 
-#include <cmath>
-#include <vector>
-#include <memory>
-#include <string>
-#include <cstdint>
+#include "common.h"
 
 // --- Options for AdamW Optimizer ---
 // The options are identical to Adam, the difference is in the implementation.
@@ -59,4 +52,3 @@ protected:
     std::unique_ptr<torch::optim::OptimizerParamState> make_param_state() ;
 };
 
-#endif // ADAMW_OPTIMIZER_HPP
