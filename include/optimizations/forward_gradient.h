@@ -1,15 +1,7 @@
-#ifndef FORWARD_GRADIENT_OPTIMIZER_HPP
-#define FORWARD_GRADIENT_OPTIMIZER_HPP
+#pragma once
 
-#include <torch/torch.h>
-#include <torch/serialize/archive.h>
 
-#include <cmath>
-#include <vector>
-#include <memory>
-#include <string>
-#include <cstdint>
-
+#include "common.h"
 // --- Options for ForwardGradient (Lookahead) Optimizer ---
 struct ForwardGradientOptions : torch::optim::OptimizerOptions
 {
@@ -70,4 +62,3 @@ protected:
     std::unique_ptr<torch::optim::OptimizerParamState> make_param_state();
 };
 
-#endif // FORWARD_GRADIENT_OPTIMIZER_HPP
