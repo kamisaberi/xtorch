@@ -1,14 +1,7 @@
-#ifndef RADAM_OPTIMIZER_HPP
-#define RADAM_OPTIMIZER_HPP
+#pragma once
 
-#include <torch/torch.h>
-#include <torch/serialize/archive.h>
 
-#include <cmath>
-#include <vector>
-#include <memory>
-#include <string>
-#include <cstdint>
+#include "common.h"
 
 // --- Options for RAdam Optimizer ---
 struct RAdamOptions : torch::optim::OptimizerOptions {
@@ -55,4 +48,3 @@ protected:
     std::unique_ptr<torch::optim::OptimizerParamState> make_param_state() ;
 };
 
-#endif // RADAM_OPTIMIZER_HPP
