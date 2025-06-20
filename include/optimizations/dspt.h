@@ -2,75 +2,77 @@
 
 
 #include "common.h"
-// --- Options for DSPT ---
-struct DSPTOptions : torch::optim::OptimizerOptions
+namespace xt::optim
 {
-    double lr;
-
-    explicit DSPTOptions(double learning_rate = 1e-3)
-        : torch::optim::OptimizerOptions()
+    // --- Options for DSPT ---
+    struct DSPTOptions : torch::optim::OptimizerOptions
     {
-        this->lr = learning_rate;
-    }
+        double lr;
 
-    // Base Adam optimizer parameters
-    TORCH_ARG(double, beta1) = 0.9;
-    TORCH_ARG(double, beta2) = 0.999;
-    TORCH_ARG(double, eps) = 1e-8;
-    TORCH_ARG(double, weight_decay) = 0.0;
+        explicit DSPTOptions(double learning_rate = 1e-3)
+            : torch::optim::OptimizerOptions()
+        {
+            this->lr = learning_rate;
+        }
 
-    // Sparsity parameters
-    TORCH_ARG(double, sparsity) = 0.9; // Target sparsity (e.g., 90% of weights are zero)
-    TORCH_ARG(double, prune_rate) = 0.1; // Fraction of *dense* weights to prune/grow at each update
-    TORCH_ARG(long, prune_frequency) = 1000;
-    TORCH_ARG(long, start_pruning_step) = 2000;
+        // Base Adam optimizer parameters
+        TORCH_ARG(double, beta1) = 0.9;
+        TORCH_ARG(double, beta2) = 0.999;
+        TORCH_ARG(double, eps) = 1e-8;
+        TORCH_ARG(double, weight_decay) = 0.0;
 
-    // Low-rank update parameters
-    TORCH_ARG(int, low_rank_k) = 1; // Rank of the low-rank update. k=0 disables this feature.
+        // Sparsity parameters
+        TORCH_ARG(double, sparsity) = 0.9; // Target sparsity (e.g., 90% of weights are zero)
+        TORCH_ARG(double, prune_rate) = 0.1; // Fraction of *dense* weights to prune/grow at each update
+        TORCH_ARG(long, prune_frequency) = 1000;
+        TORCH_ARG(long, start_pruning_step) = 2000;
 
-    void serialize(torch::serialize::OutputArchive& archive) const override;
-    void deserialize(torch::serialize::InputArchive& archive);
-    std::unique_ptr<torch::optim::OptimizerOptions> clone() const override;
-};
+        // Low-rank update parameters
+        TORCH_ARG(int, low_rank_k) = 1; // Rank of the low-rank update. k=0 disables this feature.
 
-// --- Parameter State for DSPT ---
-struct DSPTParamState : torch::optim::OptimizerParamState
-{
-    TORCH_ARG(torch::Tensor, step);
-    TORCH_ARG(torch::Tensor, exp_avg); // m_t (momentum)
-    TORCH_ARG(torch::Tensor, exp_avg_sq); // v_t (variance)
-    TORCH_ARG(torch::Tensor, mask); // The crucial sparsity mask
+        void serialize(torch::serialize::OutputArchive& archive) const override;
+        void deserialize(torch::serialize::InputArchive& archive);
+        std::unique_ptr<torch::optim::OptimizerOptions> clone() const override;
+    };
 
-    // DSPTParamState() = default;
-    void serialize(torch::serialize::OutputArchive& archive) const override;
-    void deserialize(torch::serialize::InputArchive& archive);
-    std::unique_ptr<OptimizerParamState> clone() const override;
-};
+    // --- Parameter State for DSPT ---
+    struct DSPTParamState : torch::optim::OptimizerParamState
+    {
+        TORCH_ARG(torch::Tensor, step);
+        TORCH_ARG(torch::Tensor, exp_avg); // m_t (momentum)
+        TORCH_ARG(torch::Tensor, exp_avg_sq); // v_t (variance)
+        TORCH_ARG(torch::Tensor, mask); // The crucial sparsity mask
 
-// --- DSPT Optimizer Class ---
-class DSPT : public torch::optim::Optimizer
-{
-public:
-    DSPT(std::vector<torch::Tensor> params, DSPTOptions options);
+        // DSPTParamState() = default;
+        void serialize(torch::serialize::OutputArchive& archive) const override;
+        void deserialize(torch::serialize::InputArchive& archive);
+        std::unique_ptr<OptimizerParamState> clone() const override;
+    };
 
-    using LossClosure = std::function<torch::Tensor()>;
-    torch::Tensor step(LossClosure closure = nullptr) override;
-    void save(torch::serialize::OutputArchive& archive) const override;
-    void load(torch::serialize::InputArchive& archive) override;
+    // --- DSPT Optimizer Class ---
+    class DSPT : public torch::optim::Optimizer
+    {
+    public:
+        DSPT(std::vector<torch::Tensor> params, DSPTOptions options);
 
-protected:
-    std::unique_ptr<torch::optim::OptimizerParamState> make_param_state();
+        using LossClosure = std::function<torch::Tensor()>;
+        torch::Tensor step(LossClosure closure = nullptr) override;
+        void save(torch::serialize::OutputArchive& archive) const override;
+        void load(torch::serialize::InputArchive& archive) override;
 
-private:
-    void _update_mask(
-        torch::Tensor& param,
-        const torch::Tensor& full_grad,
-        DSPTParamState& state,
-        const DSPTOptions& options);
+    protected:
+        std::unique_ptr<torch::optim::OptimizerParamState> make_param_state();
 
-    void _apply_low_rank_update(
-        torch::Tensor& param,
-        DSPTParamState& state,
-        const DSPTOptions& options);
-};
+    private:
+        void _update_mask(
+            torch::Tensor& param,
+            const torch::Tensor& full_grad,
+            DSPTParamState& state,
+            const DSPTOptions& options);
 
+        void _apply_low_rank_update(
+            torch::Tensor& param,
+            DSPTParamState& state,
+            const DSPTOptions& options);
+    };
+}
