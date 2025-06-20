@@ -1,14 +1,7 @@
-#ifndef FATA_OPTIMIZER_HPP
-#define FATA_OPTIMIZER_HPP
+#pragma once
 
-#include <torch/torch.h>
-#include <torch/serialize/archive.h>
 
-#include <cmath>
-#include <vector>
-#include <memory>
-#include <string>
-#include <cstdint>
+#include "common.h"
 
 // --- Options for FATA Optimizer ---
 struct FATAOptions : torch::optim::OptimizerOptions
@@ -90,4 +83,3 @@ private:
         int root_order);
 };
 
-#endif // FATA_OPTIMIZER_HPP
