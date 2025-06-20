@@ -1,15 +1,7 @@
-#ifndef DEMON_OPTIMIZER_HPP
-#define DEMON_OPTIMIZER_HPP
+#pragma once
 
-#include <torch/torch.h>
-#include <torch/serialize/archive.h>
 
-#include <cmath>
-#include <vector>
-#include <memory>
-#include <string>
-#include <cstdint>
-
+#include "common.h"
 // --- Options for Demon Optimizer ---
 struct DemonOptions : torch::optim::OptimizerOptions {
     explicit DemonOptions(double learning_rate = 0.1) // SGD-like LR
@@ -58,4 +50,3 @@ protected:
     std::unique_ptr<torch::optim::OptimizerParamState> make_param_state() ;
 };
 
-#endif // DEMON_OPTIMIZER_HPP
