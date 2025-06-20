@@ -1,15 +1,7 @@
-#ifndef ADASHIFT_OPTIMIZER_HPP
-#define ADASHIFT_OPTIMIZER_HPP
+#pragma once
 
-#include <torch/torch.h>
-#include <torch/serialize/archive.h>
 
-#include <cmath>
-#include <vector>
-#include <memory>
-#include <string>
-#include <cstdint>
-#include <deque>
+#include "common.h"
 
 // --- Options for AdaShift Optimizer ---
 struct AdaShiftOptions :public torch::optim::OptimizerOptions {
@@ -61,4 +53,3 @@ protected:
     std::unique_ptr<torch::optim::OptimizerParamState> make_param_state() ;
 };
 
-#endif // ADASHIFT_OPTIMIZER_HPP
