@@ -1,14 +1,7 @@
-#ifndef ADAFACTOR_OPTIMIZER_HPP
-#define ADAFACTOR_OPTIMIZER_HPP
+#pragma once
 
-#include <torch/torch.h>
-#include <torch/serialize/archive.h>
 
-#include <cmath>
-#include <vector>
-#include <memory>
-#include <string>
-#include <cstdint>
+#include "common.h"
 
 // --- Options for Adafactor Optimizer ---
 struct AdafactorOptions : torch::optim::OptimizerOptions {
@@ -68,4 +61,3 @@ private:
     double _get_relative_step_size(const torch::Tensor& param, long step);
 };
 
-#endif // ADAFACTOR_OPTIMIZER_HPP
