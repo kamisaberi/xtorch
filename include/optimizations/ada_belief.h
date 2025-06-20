@@ -1,14 +1,7 @@
-#ifndef ADA_BELIEF_HPP
-#define ADA_BELIEF_HPP
+#pragma once
 
-#include <torch/torch.h>
-#include <torch/serialize/archive.h>
 
-#include <cmath>
-#include <vector>
-#include <memory>
-#include <string>
-#include <cstdint> // For int64_t
+#include "common.h"
 
 // --- Options for AdaBelief ---
 struct AdaBeliefOptions : torch::optim::OptimizerOptions {
@@ -112,4 +105,3 @@ protected:
     std::unique_ptr<torch::optim::OptimizerParamState> make_param_state() ;
 };
 
-#endif // ADA_BELIEF_HPP
