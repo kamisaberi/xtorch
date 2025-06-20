@@ -1,15 +1,7 @@
-#ifndef SLAMB_OPTIMIZER_HPP
-#define SLAMB_OPTIMIZER_HPP
+#pragma once
 
-#include <torch/torch.h>
-#include <torch/serialize/archive.h>
 
-#include <cmath>
-#include <vector>
-#include <memory>
-#include <string>
-#include <cstdint>
-
+#include "common.h"
 // --- Options for SLAMB Optimizer ---
 struct SLAMBOptions : torch::optim::OptimizerOptions {
     explicit SLAMBOptions(double learning_rate = 1e-3)
@@ -59,4 +51,3 @@ protected:
     std::unique_ptr<torch::optim::OptimizerParamState> make_param_state() ;
 };
 
-#endif // SLAMB_OPTIMIZER_HPP
