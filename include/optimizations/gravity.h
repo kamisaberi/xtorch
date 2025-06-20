@@ -1,15 +1,7 @@
-#ifndef GRAVITY_OPTIMIZER_HPP
-#define GRAVITY_OPTIMIZER_HPP
+#pragma once
 
-#include <torch/torch.h>
-#include <torch/serialize/archive.h>
 
-#include <cmath>
-#include <vector>
-#include <memory>
-#include <string>
-#include <cstdint>
-
+#include "common.h"
 // --- Options for Gravity Optimizer ---
 struct GravityOptions : torch::optim::OptimizerOptions {
     explicit GravityOptions(double learning_rate = 1e-3)
@@ -57,4 +49,3 @@ protected:
     std::unique_ptr<torch::optim::OptimizerParamState> make_param_state() ;
 };
 
-#endif // GRAVITY_OPTIMIZER_HPP
