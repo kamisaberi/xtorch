@@ -1,12 +1,7 @@
-#ifndef DEEP_ENSEMBLES_OPTIMIZER_HPP
-#define DEEP_ENSEMBLES_OPTIMIZER_HPP
+#pragma once
 
-#include <torch/torch.h>
-#include <vector>
-#include <memory>
-#include <functional>
-#include "../base/module.h"
 
+#include "common.h"
 
 // Forward declaration of the model class is good practice
 struct MyModel;
@@ -43,4 +38,3 @@ private:
     DeepEnsemblesOptions options_;
 };
 
-#endif // DEEP_ENSEMBLES_OPTIMIZER_HPP
