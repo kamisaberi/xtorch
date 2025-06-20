@@ -1,15 +1,7 @@
-#ifndef ADAMOD_OPTIMIZER_HPP
-#define ADAMOD_OPTIMIZER_HPP
+#pragma once
 
-#include <torch/torch.h>
-#include <torch/serialize/archive.h>
 
-#include <cmath>
-#include <vector>
-#include <memory>
-#include <string>
-#include <cstdint>
-
+#include "common.h"
 // --- Options for AdaMod Optimizer ---
 struct AdaModOptions : torch::optim::OptimizerOptions {
     explicit AdaModOptions(double learning_rate = 1e-3)
@@ -57,4 +49,3 @@ protected:
     std::unique_ptr<torch::optim::OptimizerParamState> make_param_state() ;
 };
 
-#endif // ADAMOD_OPTIMIZER_HPP
