@@ -1,10 +1,7 @@
-#ifndef ADOPT_OPTIMIZER_HPP
-#define ADOPT_OPTIMIZER_HPP
+#pragma once
 
-#include <torch/torch.h>
-#include <vector>
-#include <memory>
-#include <functional>
+
+#include "common.h"
 
 // --- Options for AdOpt Optimizer ---
 struct AdOptOptions {
@@ -55,4 +52,3 @@ private:
     void _init_state(torch::Tensor& p);
 };
 
-#endif // ADOPT_OPTIMIZER_HPP
