@@ -1,15 +1,7 @@
-#ifndef ADASQRT_OPTIMIZER_HPP
-#define ADASQRT_OPTIMIZER_HPP
+#pragma once
 
-#include <torch/torch.h>
-#include <torch/serialize/archive.h>
 
-#include <cmath>
-#include <vector>
-#include <memory>
-#include <string>
-#include <cstdint>
-
+#include "common.h"
 // --- Options for AdaSqrt Optimizer ---
 struct AdaSqrtOptions : torch::optim::OptimizerOptions {
     explicit AdaSqrtOptions(double learning_rate = 1e-3)
@@ -55,4 +47,3 @@ protected:
     std::unique_ptr<torch::optim::OptimizerParamState> make_param_state() ;
 };
 
-#endif // ADASQRT_OPTIMIZER_HPP
