@@ -1,15 +1,7 @@
-#ifndef SM3_OPTIMIZER_HPP
-#define SM3_OPTIMIZER_HPP
+#pragma once
 
-#include <torch/torch.h>
-#include <torch/serialize/archive.h>
 
-#include <cmath>
-#include <vector>
-#include <memory>
-#include <string>
-#include <cstdint>
-
+#include "common.h"
 // --- Options for SM3 Optimizer ---
 struct SM3Options : torch::optim::OptimizerOptions {
     explicit SM3Options(double learning_rate = 0.1) // SM3 often uses SGD-like LR
@@ -57,4 +49,3 @@ protected:
     std::unique_ptr<torch::optim::OptimizerParamState> make_param_state() ;
 };
 
-#endif // SM3_OPTIMIZER_HPP
