@@ -24,3 +24,4 @@
 #include "../base/module.h"
 #include "../data_loaders/extended_data_loader.h"
 
+#include <deque>
