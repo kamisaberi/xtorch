@@ -1,11 +1,7 @@
-#ifndef SWA_OPTIMIZER_HPP
-#define SWA_OPTIMIZER_HPP
+#pragma once
 
-#include <torch/torch.h>
-#include <vector>
-#include <memory>
-#include <functional>
 
+#include "common.h"
 // --- StochasticWeightAveraging Wrapper Class ---
 // This is a wrapper, not a direct optimizer. It contains a base optimizer.
 class StochasticWeightAveraging {
@@ -32,4 +28,3 @@ private:
     int64_t global_step_ = 0;
 };
 
-#endif // SWA_OPTIMIZER_HPP
