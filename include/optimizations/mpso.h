@@ -1,10 +1,7 @@
-#ifndef MPSO_OPTIMIZER_HPP
-#define MPSO_OPTIMIZER_HPP
+#pragma once
 
-#include <torch/torch.h>
-#include <vector>
-#include <memory>
-#include <functional>
+
+#include "common.h"
 
 namespace xt
 {
@@ -62,4 +59,3 @@ private:
                           const std::function<torch::Tensor(torch::Tensor, torch::Tensor)>& loss_fn);
 };
 
-#endif // MPSO_OPTIMIZER_HPP
