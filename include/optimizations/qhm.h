@@ -1,15 +1,7 @@
-#ifndef QHM_OPTIMIZER_HPP
-#define QHM_OPTIMIZER_HPP
+#pragma once
 
-#include <torch/torch.h>
-#include <torch/serialize/archive.h>
 
-#include <cmath>
-#include <vector>
-#include <memory>
-#include <string>
-#include <cstdint>
-
+#include "common.h"
 // --- Options for QHM Optimizer ---
 struct QHMOptions : torch::optim::OptimizerOptions {
     explicit QHMOptions(double learning_rate = 0.1) // QHM often uses SGD-like LRs
@@ -55,4 +47,3 @@ protected:
     std::unique_ptr<torch::optim::OptimizerParamState> make_param_state() ;
 };
 
-#endif // QHM_OPTIMIZER_HPP
