@@ -10,3 +10,10 @@
 #include <torch/optim/optimizer.h>
 #include <torch/torch.h> // Ensure Tensor and std::function are included
 #include <vector>
+#include <torch/torch.h>
+#include <torch/serialize/archive.h>
+#include <cmath>
+#include <vector>
+#include <memory>
+#include <string>
+#include <cstdint>
