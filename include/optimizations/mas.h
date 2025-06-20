@@ -1,17 +1,7 @@
-#ifndef MAS_OPTIMIZER_HPP
-#define MAS_OPTIMIZER_HPP
+#pragma once
 
-#include <torch/torch.h>
-#include <torch/serialize/archive.h>
 
-#include <cmath>
-#include <vector>
-#include <memory>
-#include <string>
-#include <cstdint>
-
-#include "../data_loaders/extended_data_loader.h"
-
+#include "common.h"
 // --- Options for MAS Optimizer ---
 struct MASOptions : torch::optim::OptimizerOptions {
     explicit MASOptions(double learning_rate = 1e-3)
@@ -69,4 +59,3 @@ protected:
     std::unique_ptr<torch::optim::OptimizerParamState> make_param_state() ;
 };
 
-#endif // MAS_OPTIMIZER_HPP
