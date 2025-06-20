@@ -1,15 +1,7 @@
-#ifndef YELLOWFIN_OPTIMIZER_HPP
-#define YELLOWFIN_OPTIMIZER_HPP
+#pragma once
 
-#include <torch/torch.h>
-#include <torch/serialize/archive.h>
 
-#include <cmath>
-#include <vector>
-#include <memory>
-#include <string>
-#include <cstdint>
-
+#include "common.h"
 // --- Options for YellowFin Optimizer ---
 // YellowFin is mostly self-tuning, so it has fewer user-facing knobs.
 struct YellowFinOptions : torch::optim::OptimizerOptions {
@@ -77,4 +69,3 @@ private:
     long step_count_ = 0;
 };
 
-#endif // YELLOWFIN_OPTIMIZER_HPP
