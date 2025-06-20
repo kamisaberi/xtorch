@@ -1,15 +1,7 @@
-#ifndef ATMO_OPTIMIZER_HPP
-#define ATMO_OPTIMIZER_HPP
+#pragma once
 
-#include <torch/torch.h>
-#include <torch/serialize/archive.h>
 
-#include <cmath>
-#include <vector>
-#include <memory>
-#include <string>
-#include <cstdint>
-
+#include "common.h"
 // --- Options for ATMO Optimizer ---
 struct ATMOOptions : torch::optim::OptimizerOptions {
     explicit ATMOOptions(double learning_rate = 0.1) // Uses SGD-like LRs
@@ -63,4 +55,3 @@ protected:
     std::unique_ptr<torch::optim::OptimizerParamState> make_param_state() ;
 };
 
-#endif // ATMO_OPTIMIZER_HPP
