@@ -1,14 +1,7 @@
-#ifndef AO_OPTIMIZER_HPP
-#define AO_OPTIMIZER_HPP
+#pragma once
 
-#include <torch/torch.h>
-#include <torch/serialize/archive.h>
 
-#include <cmath>
-#include <vector>
-#include <memory>
-#include <string>
-#include <cstdint>
+#include "common.h"
 
 // --- Options for AO (Adaptive-Overdrive) Optimizer ---
 struct AOOptions : torch::optim::OptimizerOptions {
@@ -58,4 +51,3 @@ protected:
     std::unique_ptr<torch::optim::OptimizerParamState> make_param_state() ;
 };
 
-#endif // AO_OPTIMIZER_HPP
