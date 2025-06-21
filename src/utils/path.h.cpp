@@ -59,7 +59,7 @@ namespace xt
         paths.share_dir = paths.install_prefix / "share" / "xtorch"; // Assuming "xtorch" subfolder
         paths.venv_dir = paths.share_dir / "venv";
         paths.python_executable = paths.venv_dir / "bin" / "python";
-        paths.conversion_script = paths.share_dir / "tools" / "convert_hf_model.py"; // Path to your python script
+        paths.conversion_script = paths.share_dir / "py_modules" / "convert_hf_model.py"; // Path to your python script
 
         // Basic check
         if (!fs::exists(paths.venv_dir))
