@@ -125,7 +125,9 @@ namespace xt
         const fs::path& output_torchscript_path,
         int batch_size,
         int image_size,
-        int channels)
+        int channels,
+        VerboseType verbose
+    )
     {
         auto paths_opt = get_internal_library_paths();
         if (!paths_opt)

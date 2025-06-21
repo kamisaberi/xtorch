@@ -18,6 +18,12 @@ namespace xt
 {
     namespace fs = std::filesystem;
 
+    enum class VerboseType
+    {
+        NONE = 0,
+        ERRORS = 1,
+        EVERYTHING = 2,
+    };
     /**
      * @brief Struct to hold essential xTorch installation paths.
      */
@@ -59,6 +65,7 @@ namespace xt
      * @param batch_size Batch size for dummy input during tracing.
      * @param image_size Image size (height/width) for dummy input.
      * @param channels Number of channels for dummy input.
+     * @param verbose display outputs
      * @return True on success, false on failure.
      */
     XT_UTILS_PUBLIC bool convert_hf_model_to_torchscript_from_lib(
@@ -66,6 +73,7 @@ namespace xt
         const fs::path& output_torchscript_path,
         int batch_size = 1,
         int image_size = 224,
-        int channels = 3
+        int channels = 3,
+        VerboseType verbose = VerboseType::NONE
     );
 } // namespace xtorch
