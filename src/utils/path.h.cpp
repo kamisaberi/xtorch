@@ -153,12 +153,14 @@ namespace xt
             return false;
         }
 
+        int verbose_value = static_cast<int>(verbose);
         std::string command = quote_if_needed(paths.python_executable) + " " +
             quote_if_needed(paths.conversion_script) + " " +
             quote_if_needed(output_torchscript_path) +
             " --model_name " + quote_if_needed(hf_model_name) +
             " --batch_size " + std::to_string(batch_size) +
             " --image_size " + std::to_string(image_size) +
+            " --verbose " + std::to_string(verbose_value) +
             " --channels " + std::to_string(channels);
 
         if (verbose == VerboseType::EVERYTHING)
