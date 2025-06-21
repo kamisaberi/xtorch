@@ -83,24 +83,27 @@ def main():
         device = torch.device("cpu")
     else:
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
-    print(f"[Python Script] Using device: {device}")
-    print(f"[Python Script] --- Configuration ---")
-    print(f"[Python Script] Hugging Face Model: {args.model_name}")
-    print(f"[Python Script] Output TorchScript Path: {args.output_path}")
-    print(f"[Python Script] Dummy Input Batch Size: {args.batch_size}")
-    print(f"[Python Script] Dummy Input Channels: {args.channels}")
-    print(f"[Python Script] Verbose: {args.verbose}")
+    verbose = args.verbose
+    if verbose == 2:
+        print(f"[Python Script] Using device: {device}")
+        print(f"[Python Script] --- Configuration ---")
+        print(f"[Python Script] Hugging Face Model: {args.model_name}")
+        print(f"[Python Script] Output TorchScript Path: {args.output_path}")
+        print(f"[Python Script] Dummy Input Batch Size: {args.batch_size}")
+        print(f"[Python Script] Dummy Input Channels: {args.channels}")
+        print(f"[Python Script] Verbose: {args.verbose}")
 
     try:
         # Ensure output directory exists
         output_dir = os.path.dirname(args.output_path)
         if output_dir and not os.path.exists(output_dir):
-            print(f"[Python Script] Creating output directory: {output_dir}")
+            if verbose == 2:
+                print(f"[Python Script] Creating output directory: {output_dir}")
             os.makedirs(output_dir)
 
         # Load model from Hugging Face
-        print(f"[Python Script] Loading model '{args.model_name}' from Hugging Face Hub...")
+        if verbose == 2:
+            print(f"[Python Script] Loading model '{args.model_name}' from Hugging Face Hub...")
         # For image classification, AutoModelForImageClassification is generally suitable.
         # If the model has a specific config for image size, it might be used.
         hf_model = AutoModelForImageClassification.from_pretrained(args.model_name).to(device)
@@ -109,18 +112,22 @@ def main():
         # Determine image size for dummy input
         image_size_to_use = args.image_size
         if image_size_to_use is None:
-            print("[Python Script] Attempting to infer image size from model config or feature extractor...")
+            if verbose == 2:
+                print("[Python Script] Attempting to infer image size from model config or feature extractor...")
             try:
                 # Try to get from model's config (common for ViT, ConvNeXT)
                 config = AutoConfig.from_pretrained(args.model_name)
                 if hasattr(config, 'image_size') and isinstance(config.image_size, int):
                     image_size_to_use = config.image_size
-                    print(f"[Python Script] Inferred image_size from model config: {image_size_to_use}")
+                    if verbose == 2:
+                        print(f"[Python Script] Inferred image_size from model config: {image_size_to_use}")
                 elif hasattr(config, 'input_size') and isinstance(config.input_size, (list, tuple)) and len(config.input_size) >= 2: # e.g. timm models
                     image_size_to_use = config.input_size[-1] # Often H, W or C, H, W
-                    print(f"[Python Script] Inferred image_size from model config.input_size: {image_size_to_use}")
+                    if verbose == 2:
+                        print(f"[Python Script] Inferred image_size from model config.input_size: {image_size_to_use}")
             except Exception as e_config:
-                print(f"[Python Script] Could not get image_size from model config: {e_config}")
+                if verbose == 2:
+                    print(f"[Python Script] Could not get image_size from model config: {e_config}")
 
             if image_size_to_use is None: # If still None, try feature extractor
                 try:
@@ -136,18 +143,23 @@ def main():
                                     image_size_to_use = feature_extractor.size['height']
                                 else: # Non-square, pick one (e.g., height, or make it an error/warning)
                                     image_size_to_use = feature_extractor.size['height']
-                                    print(f"[Python Script] Warning: Inferred non-square size from feature_extractor, using height: {image_size_to_use}")
+                                    if verbose == 2:
+                                        print(f"[Python Script] Warning: Inferred non-square size from feature_extractor, using height: {image_size_to_use}")
                             elif 'shortest_edge' in feature_extractor.size:
                                 image_size_to_use = feature_extractor.size['shortest_edge']
-                        print(f"[Python Script] Inferred image_size from feature extractor: {image_size_to_use}")
+                        if verbose == 2:
+                            print(f"[Python Script] Inferred image_size from feature extractor: {image_size_to_use}")
                 except Exception as e_feat:
-                    print(f"[Python Script] Could not get image_size from feature extractor: {e_feat}")
+                    if verbose == 1 or verbose == 2:
+                        print(f"[Python Script] Could not get image_size from feature extractor: {e_feat}")
 
             if image_size_to_use is None: # If still none after all attempts
                 image_size_to_use = 224 # Fallback to a common default
-                print(f"[Python Script] Could not infer image_size. Defaulting to: {image_size_to_use}")
+                if verbose == 2:
+                    print(f"[Python Script] Could not infer image_size. Defaulting to: {image_size_to_use}")
 
-        print(f"[Python Script] Using Dummy Input Image Size (HxW): {image_size_to_use}x{image_size_to_use}")
+        if verbose == 2:
+            print(f"[Python Script] Using Dummy Input Image Size (HxW): {image_size_to_use}x{image_size_to_use}")
 
 
         # Wrap the model
@@ -162,7 +174,8 @@ def main():
             image_size_to_use
         ).to(device)
 
-        print(f"[Python Script] Tracing model with dummy input shape: {list(dummy_input.shape)} on device: {dummy_input.device}")
+        if verbose == 2:
+            print(f"[Python Script] Tracing model with dummy input shape: {list(dummy_input.shape)} on device: {dummy_input.device}")
 
         # Trace the model to convert to TorchScript
         # Using check_trace=False can sometimes help with complex models, but it's good to keep it True if possible.
@@ -171,15 +184,17 @@ def main():
         # Save the TorchScript model
         traced_model.save(args.output_path)
 
-        print(f"\n[Python Script] SUCCESS!")
-        print(f"[Python Script] Model '{args.model_name}' converted to TorchScript.")
-        print(f"[Python Script] Saved at: '{args.output_path}'")
+        if verbose == 2:
+            print(f"\n[Python Script] SUCCESS!")
+            print(f"[Python Script] Model '{args.model_name}' converted to TorchScript.")
+            print(f"[Python Script] Saved at: '{args.output_path}'")
         sys.exit(0) # Exit with success code
 
     except Exception as e:
-        print(f"\n[Python Script] ERROR: An exception occurred during model conversion.", file=sys.stderr)
-        print(f"[Python Script] Model: {args.model_name}", file=sys.stderr)
-        print(f"[Python Script] Exception: {type(e).__name__}: {e}", file=sys.stderr)
+        if verbose == 1 or verbose == 2:
+            print(f"\n[Python Script] ERROR: An exception occurred during model conversion.", file=sys.stderr)
+            print(f"[Python Script] Model: {args.model_name}", file=sys.stderr)
+            print(f"[Python Script] Exception: {type(e).__name__}: {e}", file=sys.stderr)
         # For more detailed debugging, uncomment the next line:
         # import traceback
         # print(traceback.format_exc(), file=sys.stderr)
