@@ -132,20 +132,24 @@ namespace xt
         auto paths_opt = get_internal_library_paths();
         if (!paths_opt)
         {
-            std::cerr << "xTorch Utils ERROR: Cannot run model conversion, library paths unknown." << std::endl;
+            if (verbose == VerboseType::ERRORS || verbose == VerboseType::EVERYTHING)
+                std::cerr << "xTorch Utils ERROR: Cannot run model conversion, library paths unknown." << std::endl;
             return false;
         }
         const XTorchPaths& paths = *paths_opt;
 
         if (!fs::exists(paths.python_executable))
         {
-            std::cerr << "xTorch Utils ERROR: Python executable not found at: " << paths.python_executable << std::endl;
+            if (verbose == VerboseType::ERRORS || verbose == VerboseType::EVERYTHING)
+                std::cerr << "xTorch Utils ERROR: Python executable not found at: " << paths.python_executable <<
+                    std::endl;
             return false;
         }
         if (!fs::exists(paths.conversion_script))
         {
-            std::cerr << "xTorch Utils ERROR: Python conversion script not found at: " << paths.conversion_script <<
-                std::endl;
+            if (verbose == VerboseType::ERRORS || verbose == VerboseType::EVERYTHING)
+                std::cerr << "xTorch Utils ERROR: Python conversion script not found at: " << paths.conversion_script <<
+                    std::endl;
             return false;
         }
 
@@ -157,19 +161,24 @@ namespace xt
             " --image_size " + std::to_string(image_size) +
             " --channels " + std::to_string(channels);
 
-        std::cout << "[xTorch Utils] Executing model conversion command: " << command << std::endl;
+        if (verbose == VerboseType::EVERYTHING)
+            std::cout << "[xTorch Utils] Executing model conversion command: " << command << std::endl;
         int result = std::system(command.c_str());
 
         if (result == 0)
         {
-            std::cout << "[xTorch Utils] Python model conversion script executed successfully (or reported success)." <<
-                std::endl;
+            if (verbose == VerboseType::EVERYTHING)
+                std::cout <<
+                    "[xTorch Utils] Python model conversion script executed successfully (or reported success)." <<
+                    std::endl;
             return true;
         }
         else
         {
-            std::cerr << "[xTorch Utils] Python model conversion script failed or reported error. Exit code: " << result
-                << std::endl;
+            if (verbose == VerboseType::ERRORS || verbose == VerboseType::EVERYTHING)
+                std::cerr << "[xTorch Utils] Python model conversion script failed or reported error. Exit code: " <<
+                    result
+                    << std::endl;
             return false;
         }
     }
