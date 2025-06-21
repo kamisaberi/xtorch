@@ -69,6 +69,13 @@ def main():
         help="Force model loading and tracing on CPU, even if CUDA is available."
     )
 
+    parser.add_argument(
+        "--verbose",
+        type=int,
+        default=0,
+        help="Verbose type (0: NONE, 1: ERRORS,2: EVERYTHING) "
+    )
+
     args = parser.parse_args()
 
     # Determine device
@@ -83,6 +90,7 @@ def main():
     print(f"[Python Script] Output TorchScript Path: {args.output_path}")
     print(f"[Python Script] Dummy Input Batch Size: {args.batch_size}")
     print(f"[Python Script] Dummy Input Channels: {args.channels}")
+    print(f"[Python Script] Verbose: {args.verbose}")
 
     try:
         # Ensure output directory exists

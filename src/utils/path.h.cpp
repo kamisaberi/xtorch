@@ -51,7 +51,6 @@ namespace xt
 
         if (lib_path_fs.empty())
         {
-
             std::cerr << "xTorch Utils ERROR: Could not determine own library path." << std::endl;
             return std::nullopt;
         }
