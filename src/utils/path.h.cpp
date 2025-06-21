@@ -160,7 +160,7 @@ namespace xt
             " --model_name " + quote_if_needed(hf_model_name) +
             " --batch_size " + std::to_string(batch_size) +
             " --image_size " + std::to_string(image_size) +
-            // " --verbose " + std::to_string(verbose_value) +
+            " --verbose " + std::to_string(verbose_value) +
             " --channels " + std::to_string(channels);
 
 
