@@ -82,42 +82,42 @@ namespace xt
         return s;
     }
 
-    // Implementation of download_file
-    bool download_file(const std::string& url, const fs::path& destination_path)
-    {
-        std::cout << "[xTorch Utils] Attempting to download: " << url << std::endl;
-        std::cout << "[xTorch Utils] To destination: " << destination_path << std::endl;
-
-        // Ensure parent directory exists
-        if (destination_path.has_parent_path())
-        {
-            fs::create_directories(destination_path.parent_path());
-        }
-
-        // Using curl as an example. You might prefer a C++ HTTP library for robustness.
-        // Ensure curl is installed on the system where this runs.
-        std::string command = "curl -L -o " + quote_if_needed(destination_path) + " " + quote_if_needed(url);
-        // Add --silent or -s for less verbose curl output: "curl -s -L -o ..."
-
-        std::cout << "[xTorch Utils] Executing download command: " << command << std::endl;
-        int result = std::system(command.c_str());
-
-        if (result == 0 && fs::exists(destination_path))
-        {
-            std::cout << "[xTorch Utils] Download successful." << std::endl;
-            return true;
-        }
-        else
-        {
-            std::cerr << "[xTorch Utils] Download failed. Curl exit code: " << result << std::endl;
-            if (fs::exists(destination_path))
-            {
-                // Clean up partial download
-                fs::remove(destination_path);
-            }
-            return false;
-        }
-    }
+    // // Implementation of download_file
+    // bool download_file(const std::string& url, const fs::path& destination_path)
+    // {
+    //     std::cout << "[xTorch Utils] Attempting to download: " << url << std::endl;
+    //     std::cout << "[xTorch Utils] To destination: " << destination_path << std::endl;
+    //
+    //     // Ensure parent directory exists
+    //     if (destination_path.has_parent_path())
+    //     {
+    //         fs::create_directories(destination_path.parent_path());
+    //     }
+    //
+    //     // Using curl as an example. You might prefer a C++ HTTP library for robustness.
+    //     // Ensure curl is installed on the system where this runs.
+    //     std::string command = "curl -L -o " + quote_if_needed(destination_path) + " " + quote_if_needed(url);
+    //     // Add --silent or -s for less verbose curl output: "curl -s -L -o ..."
+    //
+    //     std::cout << "[xTorch Utils] Executing download command: " << command << std::endl;
+    //     int result = std::system(command.c_str());
+    //
+    //     if (result == 0 && fs::exists(destination_path))
+    //     {
+    //         std::cout << "[xTorch Utils] Download successful." << std::endl;
+    //         return true;
+    //     }
+    //     else
+    //     {
+    //         std::cerr << "[xTorch Utils] Download failed. Curl exit code: " << result << std::endl;
+    //         if (fs::exists(destination_path))
+    //         {
+    //             // Clean up partial download
+    //             fs::remove(destination_path);
+    //         }
+    //         return false;
+    //     }
+    // }
 
     // Implementation of convert_hf_model_to_torchscript_from_lib
     bool convert_hf_model_to_torchscript_from_lib(

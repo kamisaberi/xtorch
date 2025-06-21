@@ -40,16 +40,16 @@ namespace xt
     XT_UTILS_PUBLIC std::optional<XTorchPaths> get_internal_library_paths();
 
 
-    /**
-     * @brief Downloads a file from a given URL to a specified destination path.
-     * This function uses system tools (like curl or wget) or a C++ HTTP library.
-     * For this example, we'll simulate it with a system call to curl.
-     *
-     * @param url The URL of the file to download.
-     * @param destination_path The full path (including filename) to save the downloaded file.
-     * @return True on success, false on failure.
-     */
-    XT_UTILS_PUBLIC bool download_file(const std::string& url, const fs::path& destination_path);
+    // /**
+    //  * @brief Downloads a file from a given URL to a specified destination path.
+    //  * This function uses system tools (like curl or wget) or a C++ HTTP library.
+    //  * For this example, we'll simulate it with a system call to curl.
+    //  *
+    //  * @param url The URL of the file to download.
+    //  * @param destination_path The full path (including filename) to save the downloaded file.
+    //  * @return True on success, false on failure.
+    //  */
+    // XT_UTILS_PUBLIC bool download_file(const std::string& url, const fs::path& destination_path);
 
     /**
      * @brief Converts a Hugging Face model to TorchScript using the internal Python script.
