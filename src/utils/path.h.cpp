@@ -10,7 +10,7 @@
 #include <dlfcn.h>
 #endif
 
-namespace xtorch
+namespace xt
 {
     // Internal helper to get the path of libxTorch.so itself
     // This is NOT exported directly.

@@ -14,7 +14,7 @@
 #define XT_UTILS_PUBLIC __attribute__ ((visibility ("default")))
 #endif
 
-namespace xtorch
+namespace xt
 {
     namespace fs = std::filesystem;
 
