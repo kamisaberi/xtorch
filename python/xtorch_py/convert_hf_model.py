@@ -1,9 +1,10 @@
 import torch
-import torchvision # Often a helpful import, though not directly used unless you add transforms
+import torchvision  # Often a helpful import, though not directly used unless you add transforms
 from transformers import AutoModelForImageClassification, AutoConfig, AutoFeatureExtractor
 import sys
 import argparse
 import os
+
 
 # Wrapper class to ensure the traced model outputs only the logits (or desired output)
 class ModelWrapper(torch.nn.Module):
@@ -18,7 +19,7 @@ class ModelWrapper(torch.nn.Module):
 
         if hasattr(outputs, 'logits'):
             return outputs.logits
-        elif torch.is_tensor(outputs): # Some simpler models might directly return logits tensor
+        elif torch.is_tensor(outputs):  # Some simpler models might directly return logits tensor
             return outputs
         else:
             # You might need to inspect 'outputs' for other models if this fails.
@@ -27,6 +28,7 @@ class ModelWrapper(torch.nn.Module):
                 f"Model output type {type(outputs)} not recognized. "
                 "Expected an object with a 'logits' attribute or a direct tensor."
             )
+
 
 def main():
     parser = argparse.ArgumentParser(
@@ -53,7 +55,7 @@ def main():
     parser.add_argument(
         "--image_size",
         type=int,
-        default=None, # Allow inferring from model config if possible
+        default=None,  # Allow inferring from model config if possible
         help="Height and width for the dummy input image (e.g., 224 for 224x224). "
              "If not provided, attempts to infer from model config or feature extractor."
     )
@@ -107,7 +109,7 @@ def main():
         # For image classification, AutoModelForImageClassification is generally suitable.
         # If the model has a specific config for image size, it might be used.
         hf_model = AutoModelForImageClassification.from_pretrained(args.model_name).to(device)
-        hf_model.eval() # Set to evaluation mode (important for dropout, batchnorm layers)
+        hf_model.eval()  # Set to evaluation mode (important for dropout, batchnorm layers)
 
         # Determine image size for dummy input
         image_size_to_use = args.image_size
@@ -121,18 +123,19 @@ def main():
                     image_size_to_use = config.image_size
                     if verbose == 2:
                         print(f"[Python Script] Inferred image_size from model config: {image_size_to_use}")
-                elif hasattr(config, 'input_size') and isinstance(config.input_size, (list, tuple)) and len(config.input_size) >= 2: # e.g. timm models
-                    image_size_to_use = config.input_size[-1] # Often H, W or C, H, W
+                elif hasattr(config, 'input_size') and isinstance(config.input_size, (list, tuple)) and len(
+                        config.input_size) >= 2:  # e.g. timm models
+                    image_size_to_use = config.input_size[-1]  # Often H, W or C, H, W
                     if verbose == 2:
                         print(f"[Python Script] Inferred image_size from model config.input_size: {image_size_to_use}")
             except Exception as e_config:
                 if verbose == 2:
                     print(f"[Python Script] Could not get image_size from model config: {e_config}")
 
-            if image_size_to_use is None: # If still None, try feature extractor
+            if image_size_to_use is None:  # If still None, try feature extractor
                 try:
                     feature_extractor = AutoFeatureExtractor.from_pretrained(args.model_name)
-                    if hasattr(feature_extractor, 'size'): # Common attribute
+                    if hasattr(feature_extractor, 'size'):  # Common attribute
                         # 'size' can be an int or a dict like {'shortest_edge': 224} or {'height': 224, 'width': 224}
                         if isinstance(feature_extractor.size, int):
                             image_size_to_use = feature_extractor.size
@@ -141,10 +144,11 @@ def main():
                             if 'height' in feature_extractor.size and 'width' in feature_extractor.size:
                                 if feature_extractor.size['height'] == feature_extractor.size['width']:
                                     image_size_to_use = feature_extractor.size['height']
-                                else: # Non-square, pick one (e.g., height, or make it an error/warning)
+                                else:  # Non-square, pick one (e.g., height, or make it an error/warning)
                                     image_size_to_use = feature_extractor.size['height']
                                     if verbose == 2:
-                                        print(f"[Python Script] Warning: Inferred non-square size from feature_extractor, using height: {image_size_to_use}")
+                                        print(
+                                            f"[Python Script] Warning: Inferred non-square size from feature_extractor, using height: {image_size_to_use}")
                             elif 'shortest_edge' in feature_extractor.size:
                                 image_size_to_use = feature_extractor.size['shortest_edge']
                         if verbose == 2:
@@ -153,14 +157,13 @@ def main():
                     if verbose == 1 or verbose == 2:
                         print(f"[Python Script] Could not get image_size from feature extractor: {e_feat}")
 
-            if image_size_to_use is None: # If still none after all attempts
-                image_size_to_use = 224 # Fallback to a common default
+            if image_size_to_use is None:  # If still none after all attempts
+                image_size_to_use = 224  # Fallback to a common default
                 if verbose == 2:
                     print(f"[Python Script] Could not infer image_size. Defaulting to: {image_size_to_use}")
 
         if verbose == 2:
             print(f"[Python Script] Using Dummy Input Image Size (HxW): {image_size_to_use}x{image_size_to_use}")
-
 
         # Wrap the model
         model_to_trace = ModelWrapper(hf_model).to(device)
@@ -175,11 +178,12 @@ def main():
         ).to(device)
 
         if verbose == 2:
-            print(f"[Python Script] Tracing model with dummy input shape: {list(dummy_input.shape)} on device: {dummy_input.device}")
+            print(
+                f"[Python Script] Tracing model with dummy input shape: {list(dummy_input.shape)} on device: {dummy_input.device}")
 
         # Trace the model to convert to TorchScript
         # Using check_trace=False can sometimes help with complex models, but it's good to keep it True if possible.
-        traced_model = torch.jit.trace(model_to_trace, dummy_input, strict=False) # strict=False can be more lenient
+        traced_model = torch.jit.trace(model_to_trace, dummy_input, strict=False)  # strict=False can be more lenient
 
         # Save the TorchScript model
         traced_model.save(args.output_path)
@@ -188,7 +192,7 @@ def main():
             print(f"\n[Python Script] SUCCESS!")
             print(f"[Python Script] Model '{args.model_name}' converted to TorchScript.")
             print(f"[Python Script] Saved at: '{args.output_path}'")
-        sys.exit(0) # Exit with success code
+        sys.exit(0)  # Exit with success code
 
     except Exception as e:
         if verbose == 1 or verbose == 2:
@@ -198,7 +202,8 @@ def main():
         # For more detailed debugging, uncomment the next line:
         # import traceback
         # print(traceback.format_exc(), file=sys.stderr)
-        sys.exit(1) # Exit with error code
+        sys.exit(1)  # Exit with error code
+
 
 if __name__ == "__main__":
     main()

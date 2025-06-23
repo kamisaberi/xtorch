@@ -24,6 +24,7 @@ namespace xt
         ERRORS = 1,
         EVERYTHING = 2,
     };
+
     /**
      * @brief Struct to hold essential xTorch installation paths.
      */
