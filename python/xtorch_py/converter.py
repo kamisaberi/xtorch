@@ -4,6 +4,7 @@ import torch.nn as nn
 import struct
 from collections import OrderedDict
 
+
 # 1. Define the IDENTICAL model architecture in Python.
 #    This must exactly match the C++ 'struct Net'.
 class Net(nn.Module):
@@ -16,6 +17,7 @@ class Net(nn.Module):
         x = torch.relu(self.fc1(x))
         x = self.fc2(x)
         return x
+
 
 # --- HELPER FUNCTION TO LOAD THE RAW WEIGHTS ---
 def load_parameters(file_path):
@@ -35,7 +37,7 @@ def load_parameters(file_path):
 
             # Read tensor data
             num_elements = torch.prod(torch.tensor(shape)).item()
-            num_bytes = num_elements * 4 # Assuming float32
+            num_bytes = num_elements * 4  # Assuming float32
 
             raw_data = f.read(num_bytes)
             tensor = torch.frombuffer(raw_data, dtype=torch.float32).view(shape)
@@ -44,6 +46,7 @@ def load_parameters(file_path):
             print(f"Loaded '{param_name}' with shape {list(shape)}")
 
     return state_dict
+
 
 print("--- Step 2: Python Converter ---")
 
@@ -67,7 +70,7 @@ except Exception as e:
 #    holds the weights trained by C++.
 try:
     print("\nTracing the model to create an independent file...")
-    dummy_input = torch.randn(1, 1) # Input shape must match model's input
+    dummy_input = torch.randn(1, 1)  # Input shape must match model's input
     traced_model = torch.jit.trace(py_model, dummy_input)
 
     # 5. Save the final model.

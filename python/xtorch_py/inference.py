@@ -62,7 +62,7 @@ print(f"Input: {input_tensor.item():.2f}")
 print(f"Predicted Output: {output.item():.4f}")
 print(f"(Expected value is approximately 48.0)")
 
-if abs(output.item() - 48.0) < 5.0: # Allow for some training inaccuracy
+if abs(output.item() - 48.0) < 5.0:  # Allow for some training inaccuracy
     print("\n✅ Verification PASSED: The output is close to the expected value.")
 else:
     print("\n⚠️ Verification WARNING: The output is not close to the expected value.")
