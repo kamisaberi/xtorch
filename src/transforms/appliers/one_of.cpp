@@ -6,6 +6,7 @@ namespace xt::transforms {
     OneOf::OneOf() = default;
 
     OneOf::OneOf(std::vector <xt::Module> transforms) : xt::Module(), transforms(std::move(transforms)) {
+        throw std::runtime_error("OneOf applier is not yet implemented.");
     }
 
 
