@@ -8,6 +8,7 @@ namespace xt::transforms
 
     RandomApply::RandomApply(std::vector<xt::Module> transforms): xt::Module(), transforms(std::move(transforms))
     {
+        throw std::runtime_error("RandomApply applier is not yet implemented.");
     }
 
 
