@@ -36,10 +36,10 @@ int main()
         "/home/kami/Documents/datasets/", xt::datasets::DataMode::TRAIN, false, std::move(compose));
 
 
-    int num_epochs = 2;
-    auto datum = dataset.get(0);
-    cout << datum.data.sizes() << endl;
-    cout << dataset.size().value() << endl;
+    // int num_epochs = 2;
+    // auto datum = dataset.get(0);
+    // cout << datum.data.sizes() << endl;
+    // cout << dataset.size().value() << endl;
 
 
     // return 0;
