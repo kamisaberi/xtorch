@@ -2,9 +2,6 @@
 
 namespace xt::datasets
 {
-
-
-
     // torch::data::Example<> MNIST::get(size_t index) {
     //     cout << "MNIST GET" << endl;
     //     return {data[index], torch::tensor(targets[index])};
@@ -39,7 +36,8 @@ namespace xt::datasets
 
     MNIST::MNIST(const std::string& root, xt::datasets::DataMode mode, bool download,
                  std::unique_ptr<xt::Module> transformer, std::unique_ptr<xt::Module> target_transformer):
-        xt::datasets::Dataset(mode, std::move(transformer), std::move(target_transformer)),root(root), download(download)
+        xt::datasets::Dataset(mode, std::move(transformer), std::move(target_transformer)), root(root),
+        download(download)
     {
         check_resources();
         load_data();
