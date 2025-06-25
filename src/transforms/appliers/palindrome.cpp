@@ -6,6 +6,7 @@ namespace xt::transforms
 
     Palindrome::Palindrome(std::vector<xt::Module> transforms): xt::Module(), transforms(std::move(transforms))
     {
+        throw std::runtime_error("Palindrome applier is not yet implemented.");
     }
 
 
