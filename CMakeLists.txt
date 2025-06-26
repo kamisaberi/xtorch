@@ -55,38 +55,6 @@ file(GLOB_RECURSE UTILITY_FILES CONFIGURE_DEPENDS src/utils/*.cpp)
 file(GLOB_RECURSE HEADER_FILES CONFIGURE_DEPENDS ./include/*.h)
 
 
-find_package(glfw3 REQUIRED)
-find_package(OpenGL REQUIRED)
-
-# --- Add ImGui ---
-add_library(imgui
-        third_party/imgui/imgui.cpp
-        third_party/imgui/imgui_draw.cpp
-        third_party/imgui/imgui_tables.cpp
-        third_party/imgui/imgui_widgets.cpp
-        third_party/imgui/imgui_demo.cpp
-)
-target_include_directories(imgui PUBLIC third_party/imgui)
-
-# ImGui Backend for GLFW and OpenGL3
-add_library(imgui_backend_glfw_gl3
-        third_party/imgui/backends/imgui_impl_glfw.cpp
-        third_party/imgui/backends/imgui_impl_opengl3.cpp
-)
-target_include_directories(imgui_backend_glfw_gl3 PUBLIC third_party/imgui libs/imgui/backends)
-
-# ======================================================================
-# THE FIX IS HERE: We link to the 'glfw' target, not 'glfw3'
-target_link_libraries(imgui_backend_glfw_gl3 PUBLIC imgui glfw OpenGL::GL)
-# ======================================================================
-
-# --- Add ImPlot ---
-add_library(implot
-        third_party/implot/implot.cpp
-        third_party/implot/implot_items.cpp
-)
-target_include_directories(implot PUBLIC third_party/implot third_party/imgui)
-target_link_libraries(implot PUBLIC imgui)
 
 
 
@@ -161,6 +129,45 @@ find_package(LibLZMA REQUIRED)        # LZMA compression
 find_package(LibArchive REQUIRED)     # Multi-format archive library
 find_package(SndFile REQUIRED)        # Audio file handling
 find_package(onnxruntime REQUIRED)
+
+
+
+find_package(glfw3 REQUIRED)
+find_package(OpenGL REQUIRED)
+
+# --- Add ImGui ---
+add_library(imgui
+        third_party/imgui/imgui.cpp
+        third_party/imgui/imgui_draw.cpp
+        third_party/imgui/imgui_tables.cpp
+        third_party/imgui/imgui_widgets.cpp
+        third_party/imgui/imgui_demo.cpp
+)
+target_include_directories(imgui PUBLIC third_party/imgui)
+
+# ImGui Backend for GLFW and OpenGL3
+add_library(imgui_backend_glfw_gl3
+        third_party/imgui/backends/imgui_impl_glfw.cpp
+        third_party/imgui/backends/imgui_impl_opengl3.cpp
+)
+target_include_directories(imgui_backend_glfw_gl3 PUBLIC third_party/imgui third_party/imgui/backends)
+
+# ======================================================================
+# THE FIX IS HERE: We link to the 'glfw' target, not 'glfw3'
+target_link_libraries(imgui_backend_glfw_gl3 PUBLIC imgui glfw OpenGL::GL)
+# ======================================================================
+
+# --- Add ImPlot ---
+add_library(implot
+        third_party/implot/implot.cpp
+        third_party/implot/implot_items.cpp
+)
+target_include_directories(implot PUBLIC third_party/implot third_party/imgui)
+target_link_libraries(implot PUBLIC imgui)
+
+
+
+
 #find_package(SndFile REQUIRED
 #        PATHS /usr/lib/x86_64-linux-gnu/cmake
 #        /usr/local/lib/cmake
@@ -182,11 +189,11 @@ target_include_directories(xTorch
         ${LibArchive_INCLUDE_DIRS} ${SndFile_INCLUDE_DIRS})
 
 # Link all required libraries to xTorch
-target_link_libraries(xTorch
+target_link_libraries(xTorch PRIVATE
         ${TORCH_LIBRARIES} ${CURL_LIBRARIES} ${OpenCV_LIBS} ${ZLIB_LIBRARIES}
         ${LIBTAR_LIBRARY} OpenSSL::SSL OpenSSL::Crypto LibLZMA::LibLZMA
         ${LibArchive_LIBRARIES} ${SndFile_LIBRARIES}
-        ${ONNXRUNTIME_LIBRARY}
+        ${ONNXRUNTIME_LIBRARY} imgui_backend_glfw_gl3 implot
 
 
 )
