@@ -54,6 +54,43 @@ file(GLOB_RECURSE UTILITY_FILES CONFIGURE_DEPENDS src/utils/*.cpp)
 # Collect all header files from include directory
 file(GLOB_RECURSE HEADER_FILES CONFIGURE_DEPENDS ./include/*.h)
 
+
+find_package(glfw3 REQUIRED)
+find_package(OpenGL REQUIRED)
+
+# --- Add ImGui ---
+add_library(imgui
+        third_party/imgui/imgui.cpp
+        third_party/imgui/imgui_draw.cpp
+        third_party/imgui/imgui_tables.cpp
+        third_party/imgui/imgui_widgets.cpp
+        third_party/imgui/imgui_demo.cpp
+)
+target_include_directories(imgui PUBLIC third_party/imgui)
+
+# ImGui Backend for GLFW and OpenGL3
+add_library(imgui_backend_glfw_gl3
+        third_party/imgui/backends/imgui_impl_glfw.cpp
+        third_party/imgui/backends/imgui_impl_opengl3.cpp
+)
+target_include_directories(imgui_backend_glfw_gl3 PUBLIC third_party/imgui libs/imgui/backends)
+
+# ======================================================================
+# THE FIX IS HERE: We link to the 'glfw' target, not 'glfw3'
+target_link_libraries(imgui_backend_glfw_gl3 PUBLIC imgui glfw OpenGL::GL)
+# ======================================================================
+
+# --- Add ImPlot ---
+add_library(implot
+        third_party/implot/implot.cpp
+        third_party/implot/implot_items.cpp
+)
+target_include_directories(implot PUBLIC third_party/implot third_party/imgui)
+target_link_libraries(implot PUBLIC imgui)
+
+
+
+
 # Combine all source files into single list for library target
 set(LIBRARY_SOURCE_FILES
         ${ACTIVATION_FILES}
@@ -244,8 +281,6 @@ install(CODE "
 "
 )
 # === ADD THIS BLOCK END ===
-
-
 
 
 # =============================================================================
