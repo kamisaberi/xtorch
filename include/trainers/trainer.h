@@ -71,6 +71,8 @@ namespace xt {
         std::string checkpoint_metric_monitor_; // e.g., "val_loss"
         std::string checkpoint_mode_;           // "min" or "max"
         double best_metric_value_;
+
+
     };
 
 } // namespace xt
