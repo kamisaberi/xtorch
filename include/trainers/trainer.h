@@ -185,7 +185,7 @@ namespace xt {
             torch::Tensor data = batch_data.first.to(device);
             torch::Tensor target = batch_data.second.to(device);
             std::any output_any = model_ptr_->forward({data});
-            torch::Tensor output = std::any_cast<torch::Tensor>(output_any);
+            auto output = std::any_cast<torch::Tensor>(output_any);
             torch::Tensor loss = loss_fn_(output, target);
             running_val_loss += loss.item<double>() * data.size(0);
             num_val_samples_processed += data.size(0);
