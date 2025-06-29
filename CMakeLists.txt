@@ -15,6 +15,9 @@ cmake_minimum_required(VERSION 3.28 FATAL_ERROR)
 # Project definition with version and language (C++)
 project(xTorch VERSION 0.2.0 LANGUAGES CXX)
 
+add_definitions(-D_GLIBCXX_USE_CXX11_ABI=1)
+
+
 # =============================================================================
 # Build Configuration
 # =============================================================================
