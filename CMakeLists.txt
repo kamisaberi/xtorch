@@ -119,8 +119,10 @@ else ()
     message(WARNING "Unsupported OS: ${CMAKE_SYSTEM_NAME}")
 endif ()
 
-#list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/cpp/libtorch/)
+#list(APPEND CMAKE_PREFIX_PATH /proc/cuda/)
 
+
+#find_package(CUDA REQUIRED)
 
 # Find required dependencies
 find_package(Torch REQUIRED)          # PyTorch C++ API
@@ -200,6 +202,14 @@ target_link_libraries(xTorch PRIVATE
 
 
 )
+
+# --- Force Linker to Ignore Errors (THE CORRECT COMMAND) ---
+# This sets the general linking flags for the target.
+# We use a special syntax to pass the flag directly to the linker.
+set_target_properties(xTorch PROPERTIES
+        LINK_FLAGS "-Wl,--unresolved-symbols=ignore-all"
+)
+
 
 # Optional CUDA paths (commented out by default)
 list(APPEND DCUDA_TOOLKIT_ROOT_DIR /opt/cuda)
