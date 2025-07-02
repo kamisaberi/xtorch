@@ -6,6 +6,10 @@ tutorial/site
 tutorial/docs/doxygen
 third_party/libtorch/
 third_party/onnxruntime/
-third_party/libtorch.zip
+#third_party/libtorch.zip
+#third_party/onnxruntime-linux-x64-gpu-1.22.0.tgz
+third_party/*.zip
+third_party/*.tgz
+third_party/*.tar.gz
 #torch-extension/build/
 #torch-extension/cmake-build-debug/
