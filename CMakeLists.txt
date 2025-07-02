@@ -358,14 +358,44 @@ find_path(LIBTAR_INCLUDE_DIR tar.h REQUIRED)
 
 
 
-# Configure include directories for the library
+## Configure include directories for the library
+#target_include_directories(xTorch
+#        PRIVATE
+#        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+#        $<INSTALL_INTERFACE:include>
+#        ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS}
+#        ${ZLIB_INCLUDE_DIRS} ${CURL_INCLUDE_DIR}
+#        ${LibArchive_INCLUDE_DIRS} ${SndFile_INCLUDE_DIRS})
+
+
+
+# ADD THESE TWO NEW BLOCKS INSTEAD
+# ==============================================================================
+
+# 1. PUBLIC includes: These are for consumers of your library.
+#    This is your library's own public API, located in the 'include' folder.
 target_include_directories(xTorch
-        PRIVATE
+        PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
         $<INSTALL_INTERFACE:include>
-        ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS}
-        ${ZLIB_INCLUDE_DIRS} ${CURL_INCLUDE_DIR}
-        ${LibArchive_INCLUDE_DIRS} ${SndFile_INCLUDE_DIRS})
+)
+
+# 2. PRIVATE includes: These are only needed to build xTorch itself.
+#    This prevents local build paths (like for LibTorch) from "leaking"
+#    into the public interface, which fixes the error.
+target_include_directories(xTorch
+        PRIVATE
+        ${TORCH_INCLUDE_DIRS}
+        ${ONNXRUNTIME_INCLUDE_DIR} # This was missing from this section before
+        ${CURL_INCLUDE_DIR}
+        ${OpenCV_INCLUDE_DIRS}
+        ${ZLIB_INCLUDE_DIRS}
+        ${LibLZMA_INCLUDE_DIRS}
+        ${LibArchive_INCLUDE_DIRS}
+        ${SndFile_INCLUDE_DIRS}
+        ${LIBTAR_INCLUDE_DIR}
+)
+# ==============================================================================
 
 
 
