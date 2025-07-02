@@ -153,6 +153,24 @@ find_package(OpenGL REQUIRED)
 
 
 
+# --- 2. Find ONNX Runtime (Local Setup) ---
+# Define the path to our local ONNX Runtime include directory
+set(ONNXRUNTIME_INCLUDE_DIR "/home/kami/libs/cpp/onnxruntime-linux-x64-gpu-1.22.0/include")
+
+# Find the ONNX Runtime library file.
+# The name might be onnxruntime.so (Linux), onnxruntime.dylib (macOS), or onnxruntime.lib (Windows)
+find_library(
+        ONNXRUNTIME_LIBRARY
+        NAMES onnxruntime
+        PATHS "/home/kami/libs/cpp/onnxruntime-linux-x64-gpu-1.22.0/lib"
+        REQUIRED
+)
+message(STATUS "Found ONNX Runtime Library: ${ONNXRUNTIME_LIBRARY}")
+
+# Add the ONNX Runtime include directory to the project's include paths
+
+include_directories(${ONNXRUNTIME_INCLUDE_DIR})
+
 # ====================================================================
 #  Fetch and Build libsndfile as part of this project
 # ====================================================================
@@ -243,6 +261,7 @@ target_link_libraries(xTorch PRIVATE
         ${LIBTAR_LIBRARY} OpenSSL::SSL OpenSSL::Crypto LibLZMA::LibLZMA
         ${LibArchive_LIBRARIES} ${SndFile_LIBRARIES}
         sndfile
+        ${ONNXRUNTIME_LIBRARY}
         # ${ONNXRUNTIME_LIBRARY}
         imgui_backend_glfw_gl3 implot
 
