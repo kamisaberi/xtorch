@@ -121,6 +121,8 @@ endif ()
 
 #list(APPEND CMAKE_PREFIX_PATH /proc/cuda/)
 
+# set(SndFile_INCLUDE_DIR "/usr/include")
+# set(SndFile_LIBRARY "/usr/lib/x86_64-linux-gnu/libsndfile.so")
 
 #find_package(CUDA REQUIRED)
 
@@ -132,13 +134,53 @@ find_package(ZLIB REQUIRED)           # Compression library
 find_package(OpenSSL REQUIRED)        # Cryptography and SSL/TLS
 find_package(LibLZMA REQUIRED)        # LZMA compression
 find_package(LibArchive REQUIRED)     # Multi-format archive library
-find_package(SndFile REQUIRED)        # Audio file handling
-find_package(onnxruntime REQUIRED)
+
+
+# find_package(SndFile REQUIRED)        # Audio file handling
+
+
+# find_package(onnxruntime REQUIRED)
 
 
 
 find_package(glfw3 REQUIRED)
 find_package(OpenGL REQUIRED)
+
+
+
+
+
+
+
+
+# ====================================================================
+#  Fetch and Build libsndfile as part of this project
+# ====================================================================
+
+# Include the FetchContent module, which gives us the necessary commands
+include(FetchContent)
+
+# Declare the dependency we want to fetch from its Git repository
+FetchContent_Declare(
+  sndfile                                     # A unique name for this content
+  GIT_REPOSITORY https://github.com/libsndfile/libsndfile.git # The official repo URL
+  GIT_TAG        1.2.2                        # Use a specific, stable release tag for reproducibility!
+)
+
+# This command will download and configure the dependency.
+# It makes the targets defined in sndfile's CMakeLists.txt (like 'sndfile')
+# available to our project.
+FetchContent_MakeAvailable(sndfile)
+
+# ====================================================================
+
+
+
+
+
+
+
+
 
 # --- Add ImGui ---
 add_library(imgui
@@ -198,7 +240,9 @@ target_link_libraries(xTorch PRIVATE
         ${TORCH_LIBRARIES} ${CURL_LIBRARIES} ${OpenCV_LIBS} ${ZLIB_LIBRARIES}
         ${LIBTAR_LIBRARY} OpenSSL::SSL OpenSSL::Crypto LibLZMA::LibLZMA
         ${LibArchive_LIBRARIES} ${SndFile_LIBRARIES}
-        ${ONNXRUNTIME_LIBRARY} imgui_backend_glfw_gl3 implot
+        sndfile
+        # ${ONNXRUNTIME_LIBRARY}
+        imgui_backend_glfw_gl3 implot
 
 
 )
