@@ -158,25 +158,27 @@ find_package(OpenGL REQUIRED)
 # ====================================================================
 
 # Include the FetchContent module, which gives us the necessary commands
-include(FetchContent)
+# include(FetchContent)
 
 # Declare the dependency we want to fetch from its Git repository
-FetchContent_Declare(
-  sndfile                                     # A unique name for this content
-  GIT_REPOSITORY https://github.com/libsndfile/libsndfile.git # The official repo URL
-  GIT_TAG        1.2.2                        # Use a specific, stable release tag for reproducibility!
-)
+# FetchContent_Declare(
+#   sndfile                                     # A unique name for this content
+#   GIT_REPOSITORY https://github.com/libsndfile/libsndfile.git # The official repo URL
+#   GIT_TAG        1.2.2                        # Use a specific, stable release tag for reproducibility!
+# )
 
 # This command will download and configure the dependency.
 # It makes the targets defined in sndfile's CMakeLists.txt (like 'sndfile')
 # available to our project.
-FetchContent_MakeAvailable(sndfile)
+# FetchContent_MakeAvailable(sndfile)
 
 # ====================================================================
 
 
 
 
+
+add_subdirectory(third_party/sndfile)
 
 
 
