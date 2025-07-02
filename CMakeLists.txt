@@ -18,6 +18,111 @@ project(xTorch VERSION 0.2.0 LANGUAGES CXX)
 add_definitions(-D_GLIBCXX_USE_CXX11_ABI=1)
 
 
+
+# --- 1. Define Dependency Configuration ---
+# All URLs, hashes, and paths are defined here for easy updates.
+# NOTE: You MUST update these URLs and hashes for your specific OS and library versions!
+# Find URLs from: https://pytorch.org/get-started/locally/ and https://github.com/microsoft/onnxruntime/releases
+
+set(DEPS_DIR "${CMAKE_SOURCE_DIR}/third_party")
+set(LIBTORCH_DIR "${DEPS_DIR}/libtorch")
+set(ONNXRUNTIME_DIR "${DEPS_DIR}/onnxruntime")
+
+# Example for Linux CPU
+set(LIBTORCH_URL "https://download.pytorch.org/libtorch/cu128/libtorch-cxx11-abi-shared-with-deps-2.7.1%2Bcu128.zip")
+set(LIBTORCH_SHA256 "ae513b437ae99150744ef1d06b02a4ecbbb9275c9ffe540c88909623e3293041")
+set(ONNXRUNTIME_URL "https://github.com/microsoft/onnxruntime/releases/download/v1.22.0/onnxruntime-linux-x64-gpu-1.22.0.tgz")
+set(ONNXRUNTIME_SHA256 "2a19dbfa403672ec27378c3d40a68f793ac7a6327712cd0e8240a86be2b10c55")
+
+
+# Create the third_party directory if it doesn't exist
+if(NOT EXISTS "${DEPS_DIR}")
+    file(MAKE_DIRECTORY "${DEPS_DIR}")
+endif()
+
+# --- 2. Fetch LibTorch if it doesn't exist locally ---
+if(NOT EXISTS "${LIBTORCH_DIR}")
+    message(STATUS "LibTorch not found locally. Downloading and extracting...")
+    set(LIBTORCH_ARCHIVE "${DEPS_DIR}/libtorch.zip")
+
+    # Download the file with a hash check for security
+    file(DOWNLOAD ${LIBTORCH_URL} ${LIBTORCH_ARCHIVE}
+            EXPECTED_HASH SHA256=${LIBTORCH_SHA256}
+            SHOW_PROGRESS)
+
+    # Extract the archive
+    message(STATUS "Extracting LibTorch...")
+    execute_process(
+            COMMAND ${CMAKE_COMMAND} -E tar xzf ${LIBTORCH_ARCHIVE}
+            WORKING_DIRECTORY ${DEPS_DIR}
+    )
+    # The zip file correctly contains a top-level 'libtorch' folder.
+
+    # Clean up the downloaded archive
+    file(REMOVE ${LIBTORCH_ARCHIVE})
+    message(STATUS "LibTorch setup complete in ${LIBTORCH_DIR}")
+else()
+    message(STATUS "Found local LibTorch at ${LIBTORCH_DIR}")
+endif()
+
+# --- 3. Fetch ONNX Runtime if it doesn't exist locally ---
+if(NOT EXISTS "${ONNXRUNTIME_DIR}")
+    message(STATUS "ONNX Runtime not found locally. Downloading and extracting...")
+    # The archive extension can be .zip or .tgz
+    string(REGEX MATCH "([^/]+)$" ONNXRUNTIME_FILENAME ${ONNXRUNTIME_URL})
+    set(ONNXRUNTIME_ARCHIVE "${DEPS_DIR}/${ONNXRUNTIME_FILENAME}")
+
+    file(DOWNLOAD ${ONNXRUNTIME_URL} ${ONNXRUNTIME_ARCHIVE}
+            EXPECTED_HASH SHA256=${ONNXRUNTIME_SHA256}
+            SHOW_PROGRESS)
+
+    message(STATUS "Extracting ONNX Runtime...")
+    # Extract to a temporary directory first, as the top-level folder name is versioned
+    set(ONNXRUNTIME_TEMP_DIR "${DEPS_DIR}/onnxruntime_temp")
+    file(MAKE_DIRECTORY ${ONNXRUNTIME_TEMP_DIR})
+    execute_process(
+            COMMAND ${CMAKE_COMMAND} -E tar xzf ${ONNXRUNTIME_ARCHIVE}
+            WORKING_DIRECTORY ${ONNXRUNTIME_TEMP_DIR}
+    )
+
+    # Find the single created directory inside the temp folder
+    file(GLOB EXTRACTED_DIR "${ONNXRUNTIME_TEMP_DIR}/*")
+    # Rename it to our desired standard name 'onnxruntime'
+    file(RENAME ${EXTRACTED_DIR} ${ONNXRUNTIME_DIR})
+
+    # Clean up the temporary directory and archive
+    file(REMOVE_RECURSE ${ONNXRUNTIME_TEMP_DIR})
+    file(REMOVE ${ONNXRUNTIME_ARCHIVE})
+    message(STATUS "ONNX Runtime setup complete in ${ONNXRUNTIME_DIR}")
+else()
+    message(STATUS "Found local ONNX Runtime at ${ONNXRUNTIME_DIR}")
+endif()
+
+
+# --- 4. Find and Configure the Libraries (now that they are guaranteed to exist) ---
+# This section is identical to the original "local setup" guide.
+
+# Find LibTorch
+set(CMAKE_PREFIX_PATH "${LIBTORCH_DIR}")
+find_package(Torch REQUIRED)
+message(STATUS "Configured LibTorch: ${TORCH_VERSION}")
+
+# Find ONNX Runtime
+set(ONNXRUNTIME_INCLUDE_DIR "${ONNXRUNTIME_DIR}/include")
+find_library(
+        ONNXRUNTIME_LIBRARY
+        NAMES onnxruntime
+        PATHS "${ONNXRUNTIME_DIR}/lib"
+        REQUIRED
+)
+message(STATUS "Configured ONNX Runtime Library: ${ONNXRUNTIME_LIBRARY}")
+include_directories(${ONNXRUNTIME_INCLUDE_DIR})
+
+
+
+
+
+
 # =============================================================================
 # Build Configuration
 # =============================================================================
