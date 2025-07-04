@@ -394,6 +394,7 @@ target_include_directories(xTorch
         ${LibArchive_INCLUDE_DIRS}
         ${SndFile_INCLUDE_DIRS}
         ${LIBTAR_INCLUDE_DIR}
+        ${LIBZIP_INCLUDE_DIRS}  # Add this line
 )
 # ==============================================================================
 
@@ -410,6 +411,7 @@ target_link_libraries(xTorch PRIVATE
         ${ONNXRUNTIME_LIBRARY}
         # ${ONNXRUNTIME_LIBRARY}
         imgui_backend_glfw_gl3 implot
+        ${LIBZIP_LIBRARIES}  # Add this line
 
 
 )
