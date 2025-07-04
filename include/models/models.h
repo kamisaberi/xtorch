@@ -1,6 +1,6 @@
 #pragma once
 
-#include "base.h"
+#include "../base/base.h"
 #include "computer_vision/computer_vision.h"
 #include "generative_models/generative_models.h"
 #include "graph_neural_networks/graph_neural_networks.h"
