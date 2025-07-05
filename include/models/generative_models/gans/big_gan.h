@@ -12,6 +12,9 @@ namespace xt::models
 
         torch::Tensor forward(torch::Tensor x, torch::Tensor y);
 
+
+
+
     private:
         torch::nn::BatchNorm2d bn;
         torch::nn::Linear gamma_embed, beta_embed;
