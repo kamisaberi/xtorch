@@ -2,7 +2,6 @@
 
 #include "../common.h"
 
-
 using namespace std;
 namespace fs = std::filesystem;
 
@@ -12,7 +11,9 @@ namespace xt::datasets
     struct PairedImageDataset : torch::data::Dataset<PairedImageDataset>
     {
         PairedImageDataset (
+
         const std::string &input_dir,
+
         const std::string& target_dir
         );
 
