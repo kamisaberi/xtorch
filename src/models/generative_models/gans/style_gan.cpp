@@ -181,11 +181,8 @@ using namespace std;
 //
 
 
-
-
 namespace xt::models
 {
-
     torch::Tensor StyleGAN::ada_in(torch::Tensor x, torch::Tensor ys, torch::Tensor yb)
     {
         auto mean = x.mean({2, 3}, true);
@@ -197,10 +194,9 @@ namespace xt::models
     }
 
 
-
     StyleGAN::MappingNetwork::MappingNetwork(int64_t z_dim, int64_t w_dim)
-    : fc0(z_dim, w_dim), fc1(w_dim, w_dim), fc2(w_dim, w_dim), fc3(w_dim, w_dim),
-      fc4(w_dim, w_dim), fc5(w_dim, w_dim), fc6(w_dim, w_dim), fc7(w_dim, w_dim)
+        : fc0(z_dim, w_dim), fc1(w_dim, w_dim), fc2(w_dim, w_dim), fc3(w_dim, w_dim),
+          fc4(w_dim, w_dim), fc5(w_dim, w_dim), fc6(w_dim, w_dim), fc7(w_dim, w_dim)
     {
         register_module("fc0", fc0);
         register_module("fc1", fc1);
@@ -227,9 +223,9 @@ namespace xt::models
 
 
     StyleGAN::SynthesisBlock::SynthesisBlock(int64_t in_channels, int64_t out_channels, int64_t w_dim)
-    : conv(torch::nn::Conv2dOptions(in_channels, out_channels, 3).padding(1)),
-      style_s(torch::nn::Linear(w_dim, out_channels)),
-      style_b(torch::nn::Linear(w_dim, out_channels))
+        : conv(torch::nn::Conv2dOptions(in_channels, out_channels, 3).padding(1)),
+          style_s(torch::nn::Linear(w_dim, out_channels)),
+          style_b(torch::nn::Linear(w_dim, out_channels))
     {
         register_module("conv", conv);
         register_module("style_s", style_s);
@@ -247,10 +243,12 @@ namespace xt::models
 
 
     StyleGAN::SynthesisNetwork::SynthesisNetwork(int64_t w_dim)
-    : initial(torch::nn::Linear(w_dim, 4 * 4 * 64)),
-      block1(64, 64, w_dim), block2(64, 32, w_dim), block3(32, 16, w_dim),
-      to_rgb(torch::nn::Conv2dOptions(16, 1, 1))
+        : initial(torch::nn::Linear(w_dim, 4 * 4 * 64)),
+          to_rgb(torch::nn::Conv2dOptions(16, 1, 1))
     {
+        block1 = std::make_shared<SynthesisBlock>(64, 64, w_dim);
+        block2 = std::make_shared<SynthesisBlock>(64, 32, w_dim);
+        block3 = std::make_shared<SynthesisBlock>(32, 16, w_dim);
         register_module("initial", initial);
         register_module("block1", block1);
         register_module("block2", block2);
@@ -272,8 +270,9 @@ namespace xt::models
     }
 
     StyleGAN::StyleGANGenerator::StyleGANGenerator(int64_t z_dim, int64_t w_dim)
-    : mapping(z_dim, w_dim), synthesis(w_dim)
     {
+        mapping = std::make_shared<MappingNetwork>(z_dim, w_dim);
+        synthesis = std::make_shared<SynthesisNetwork>(w_dim);
         register_module("mapping", mapping);
         register_module("synthesis", synthesis);
     }
@@ -283,7 +282,6 @@ namespace xt::models
         auto w = mapping->forward(z);
         return synthesis->forward(w);
     }
-
 
 
     StyleGAN::StyleGAN(int num_classes, int in_channels)

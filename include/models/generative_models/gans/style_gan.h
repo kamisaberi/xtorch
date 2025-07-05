@@ -42,7 +42,7 @@ namespace xt::models
             torch::Tensor forward(torch::Tensor w);
 
             torch::nn::Linear initial;
-            SynthesisBlock block1, block2, block3;
+            std::shared_ptr<SynthesisBlock> block1, block2, block3;
             torch::nn::Conv2d to_rgb;
         };
 
@@ -53,8 +53,8 @@ namespace xt::models
 
             torch::Tensor forward(torch::Tensor z);
 
-            MappingNetwork mapping;
-            SynthesisNetwork synthesis;
+            std::shared_ptr<MappingNetwork> mapping;
+            std::shared_ptr<SynthesisNetwork> synthesis;
         };
 
 
