@@ -60,7 +60,7 @@ namespace xt::models
         BigGAN(int num_classes, int in_channels, std::vector<int64_t> input_shape);
 
 
-        struct GeneratorBlock : xt::Module
+        struct GeneratorBlock : torch::nn::Module
         {
             GeneratorBlock(int64_t in_channels, int64_t out_channels, int64_t num_classes)
             {
@@ -94,17 +94,17 @@ namespace xt::models
         struct BigGANGenerator : torch::nn::Module
         {
             BigGANGenerator(int64_t z_dim, int64_t num_classes)
-                : linear(torch::nn::Linear(z_dim + num_classes, 4 * 4 * 256)),
-                  block1(256, 128, num_classes),
-                  block2(128, 64, num_classes),
-                  bn(64, num_classes),
-                  conv(torch::nn::Conv2dOptions(64, 1, 3).padding(1))
+                : linear(torch::nn::Linear(z_dim + num_classes, 4 * 4 * 256))
+
             {
                 register_module("linear", linear);
+                block1 = std::make_shared<GeneratorBlock>(256, 128, num_classes);
                 register_module("block1", block1);
+                block2 = std::make_shared<GeneratorBlock>(128, 64, num_classes);
                 register_module("block2", block2);
+                bn = std::make_shared<ConditionalBatchNorm>(64, num_classes);
                 register_module("bn", bn);
-                conv = SpectralNormConv(torch::nn::Conv2dOptions(64, 1, 3).padding(1));
+                conv = std::make_shared<SpectralNormConv>(torch::nn::Conv2dOptions(64, 1, 3).padding(1));
                 register_module("conv", conv);
             }
 
@@ -120,9 +120,9 @@ namespace xt::models
             }
 
             torch::nn::Linear linear;
-            GeneratorBlock block1, block2;
-            ConditionalBatchNorm bn;
-            SpectralNormConv conv;
+            std::shared_ptr<GeneratorBlock> block1, block2;
+            std::shared_ptr<ConditionalBatchNorm> bn;
+            std::shared_ptr<SpectralNormConv> conv;
         };
 
 
