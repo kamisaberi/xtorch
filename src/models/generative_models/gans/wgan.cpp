@@ -221,6 +221,38 @@ using namespace std;
 
 namespace xt::models
 {
+
+
+    WGAN::GeneratorImpl::GeneratorImpl(int latent_dim)
+    {
+        fc = register_module("fc", torch::nn::Linear(latent_dim, 256 * 4 * 4));
+        conv1 = register_module("conv1", torch::nn::ConvTranspose2d(
+                                    torch::nn::ConvTranspose2dOptions(256, 128, 4).stride(2).padding(1)));
+        conv2 = register_module("conv2", torch::nn::ConvTranspose2d(
+                                    torch::nn::ConvTranspose2dOptions(128, 64, 4).stride(2).padding(1)));
+        conv3 = register_module("conv3", torch::nn::ConvTranspose2d(
+                                    torch::nn::ConvTranspose2dOptions(64, 1, 3).stride(1).padding(1)));
+        bn1 = register_module("bn1", torch::nn::BatchNorm2d(256));
+        bn2 = register_module("bn2", torch::nn::BatchNorm2d(128));
+        bn3 = register_module("bn3", torch::nn::BatchNorm2d(64));
+        relu = register_module("relu", torch::nn::ReLU());
+    }
+
+    torch::Tensor WGAN::GeneratorImpl::forward(torch::Tensor z)
+    {
+        auto batch_size = z.size(0);
+        z = relu->forward(fc->forward(z)); // [batch, 256 * 4 * 4]
+        z = z.view({batch_size, 256, 4, 4}); // [batch, 256, 4, 4]
+        z = relu->forward(bn1->forward(conv1->forward(z))); // [batch, 128, 8, 8]
+        z = relu->forward(bn2->forward(conv2->forward(z))); // [batch, 64, 16, 16]
+        z = torch::sigmoid(conv3->forward(bn3->forward(z))); // [batch, 1, 28, 28]
+        return z;
+    }
+
+
+
+
+
     WGAN::WGAN(int num_classes, int in_channels)
     {
     }
