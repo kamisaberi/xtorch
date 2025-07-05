@@ -33,7 +33,7 @@ namespace xt::models
             torch::nn::Conv2d conv_down1, conv_down2;
             torch::nn::ConvTranspose2d conv_up1, conv_up2;
             torch::nn::InstanceNorm2d norm_in, norm_down1, norm_down2, norm_up1, norm_up2;
-            ResidualBlock res1, res2, res3, res4, res5, res6;
+            std::shared_ptr<ResidualBlock> res1, res2, res3, res4, res5, res6;
         };
 
         struct Discriminator : torch::nn::Module
