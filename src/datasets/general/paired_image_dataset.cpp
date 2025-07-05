@@ -1,6 +1,6 @@
 
 
-#include "include/datasets/general/pai"
+#include "include/datasets/general/paired_image_dataset.h"
 
 namespace xt::datasets {
 
@@ -52,9 +52,6 @@ namespace xt::datasets {
         {
             return input_paths_.size();
         }
-
-
-
 
 }
 
