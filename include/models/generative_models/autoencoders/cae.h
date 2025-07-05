@@ -10,13 +10,17 @@ namespace xt::models
     private:
 
     public:
-        CAE(int num_classes /* classes */, int in_channels = 3/* input channels */);
+        CAE(int latent_dim = 128);
 
-        CAE(int num_classes, int in_channels, std::vector<int64_t> input_shape);
-
-
-        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
+        auto forward(std::initializer_list<std::any> tensors) -> std::any override;
         void reset() override;
-    };
 
+    private:
+        torch::nn::Conv2d enc_conv1{nullptr}, enc_conv2{nullptr}, enc_conv3{nullptr};
+        torch::nn::Linear enc_fc{nullptr};
+        torch::nn::Linear dec_fc{nullptr};
+        torch::nn::ConvTranspose2d dec_conv1{nullptr}, dec_conv2{nullptr}, dec_conv3{nullptr};
+        torch::nn::ReLU relu{nullptr};
+        torch::nn::Sigmoid sigmoid{nullptr};
+    };
 }
