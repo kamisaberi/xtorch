@@ -41,21 +41,9 @@ namespace xt::models
         // Discriminator Block
         struct DiscriminatorBlockImpl : torch::nn::Module
         {
-            DiscriminatorBlockImpl(int in_channels, int out_channels)
-            {
-                conv = register_module("conv", torch::nn::Conv2d(
-                                           torch::nn::Conv2dOptions(in_channels, out_channels,
-                                                                    4).stride(2).padding(1)));
-                bn = register_module("bn", torch::nn::BatchNorm2d(out_channels));
-                lrelu = register_module("lrelu", torch::nn::LeakyReLU(
-                                            torch::nn::LeakyReLUOptions().negative_slope(0.2)));
-            }
+            DiscriminatorBlockImpl(int in_channels, int out_channels);
 
-            torch::Tensor forward(torch::Tensor x)
-            {
-                x = lrelu->forward(bn->forward(conv->forward(x)));
-                return x;
-            }
+            torch::Tensor forward(torch::Tensor x);
 
             torch::nn::Conv2d conv{nullptr};
             torch::nn::BatchNorm2d bn{nullptr};
