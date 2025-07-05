@@ -5,268 +5,161 @@
 
 namespace xt::models
 {
-    //class HSigmoid(nn.Module):
-    //    def __init__(self):
-    //        """Hard Sigmoid activation function."""
-    //        super().__init__()
-    //        self.relu6 = nn.ReLU6(inplace=True)
-    //
-    //    def forward(self, x):
-    //        x = self.relu6(x + 3) / 6
-    //        return x
-    struct HSigmoid : torch::nn::Module
+    // Squeeze-and-Excitation Module
+    struct SEModuleImpl : torch::nn::Module
     {
-    public:
-        HSigmoid();
+        SEModuleImpl(int in_channels, int reduction = 4)
+        {
+            fc1 = register_module("fc1", torch::nn::Linear(in_channels, in_channels / reduction));
+            fc2 = register_module("fc2", torch::nn::Linear(in_channels / reduction, in_channels));
+        }
 
-        torch::Tensor forward(torch::Tensor x);
+        torch::Tensor forward(torch::Tensor x)
+        {
+            // x: [batch, in_channels, h, w]
+            auto avg_pool = torch::avg_pool2d(x, {x.size(2), x.size(3)}).squeeze(-1).squeeze(-1);
+            // [batch, in_channels]
+            auto se = torch::relu(fc1->forward(avg_pool)); // [batch, in_channels/reduction]
+            se = torch::sigmoid(fc2->forward(se)).unsqueeze(-1).unsqueeze(-1); // [batch, in_channels, 1, 1]
+            return x * se; // Element-wise multiplication
+        }
 
-    private:
-        torch::nn::ReLU6 relu6;
-    };
-
-    //---------------------------------------------------------------------------
-
-    //class HSwish(nn.Module):
-    //    def __init__(self):
-    //        """Hard Swish activation function."""
-    //        super().__init__()
-    //        self.relu6 = nn.ReLU6(inplace=True)
-    //
-    //    def forward(self, x):
-    //        x = x * self.relu6(x + 3) / 6
-    //        return x
-    //
-    //
-    struct HSwish : torch::nn::Module
-    {
-    public:
-        HSwish();
-
-        torch::Tensor forward(torch::Tensor x);
-
-    private:
-        torch::nn::ReLU6 relu6;
-    };
-
-    //---------------------------------------------------------------------------
-
-    //class SqueezeExcite(nn.Module):
-    //    def __init__(self,input_channels: int,squeeze: int = 4,) -> None:
-    //        """
-    //        Squeeze-and-Excitation block.
-    //
-    //        Args:
-    //        input_channels (`int`): Number of input channels.
-    //        squeeze (`int`, optional): Squeeze ratio. Defaults to 4.
-    //        """
-    //        super().__init__()
-    //
-    //        self.SE = nn.Sequential(
-    //                nn.AdaptiveAvgPool2d(output_size=1),
-    //                nn.Conv2d(input_channels, out_channels=input_channels//squeeze, kernel_size=1, stride=1, bias=False),
-    //        nn.BatchNorm2d(input_channels//squeeze),
-    //        nn.ReLU(inplace=True),
-    //        nn.Conv2d(input_channels//squeeze, input_channels, kernel_size=1, stride=1, bias=False),
-    //        nn.BatchNorm2d(input_channels),
-    //                HSigmoid(),
-    //        )
-    //
-    //    def forward(self, x):
-    //        x = x * self.SE(x)
-    //        return x
-
-    struct SqueezeExcite : torch::nn::Module
-    {
-    public:
-        SqueezeExcite(int input_channels, int squeeze = 4);
-
-        torch::Tensor forward(torch::Tensor x);
-
-    private:
-        torch::nn::Sequential SE = nullptr;
+        torch::nn::Linear fc1{nullptr}, fc2{nullptr};
     };
 
 
-    //---------------------------------------------------------------------------
+    TORCH_MODULE(SEModule);
 
-    //class Bottleneck(nn.Module):
-    //    def __init__(self,input_channels: int,kernel: int,stride: int,expansion: int,output_channels: int,activation: nn.Module,se: bool = False,) -> None:
-    //        """
-    //        MobileNetV3 bottleneck block.
-    //
-    //        Args:
-    //        input_channels (`int`): Number of input channels.
-    //        kernel (`int`): Convolution kernel size.
-    //        stride (`int`): Convolution stride.
-    //        expansion (`int`): Expansion size, indicating the middle layer's output channels.
-    //        output_channels (`int`): Number of final output channels.
-    //        activation (`nn.Module`): Activation function.
-    //        se (`bool`, optional): Whether to use Squeeze-and-Excitation. Defaults to False.
-    //        """
-    //        super().__init__()
-    //
-    //        self.bottleneck = nn.Sequential(
-    //        # expansion
-    //                nn.Conv2d(input_channels, expansion, kernel_size=1, stride=1, bias=False),
-    //                nn.BatchNorm2d(expansion),
-    //                activation,
-    //
-    //        # depth-wise convolution
-    //                nn.Conv2d(expansion, expansion, kernel_size=kernel, stride=stride, padding=kernel//2, groups=expansion, bias=False),
-    //        nn.BatchNorm2d(expansion),
-    //                activation,
-    //
-    //        # squeeze-and-excite
-    //                SqueezeExcite(expansion) if se else nn.Identity(),
-    //
-    //        # point-wise convolution
-    //                nn.Conv2d(expansion, output_channels, kernel_size=1, stride=1, bias=False),
-    //        nn.BatchNorm2d(output_channels),
-    //                activation,
-    //        )
-    //
-    //        # for residual skip connecting when the input size is different from output size
-    //        self.downsample = None if input_channels == output_channels and stride == 1 else nn.Sequential(
-    //                nn.Conv2d(input_channels, output_channels, kernel_size=1, stride=stride, bias=False),
-    //        nn.BatchNorm2d(output_channels),
-    //        )
-    //
-    //
-    //    def forward(self, x):
-    //        residual = x
-    //        output = self.bottleneck(x)
-    //
-    //        if self.downsample:
-    //        residual = self.downsample(x)
-    //
-    //        output = output + residual
-    //
-    //        return output
-
-    struct Bottleneck : torch::nn::Module
+    // Depthwise Separable Convolution
+    struct DepthwiseSeparableConvImpl : torch::nn::Module
     {
-    public:
-        Bottleneck(int input_channels, int kernel, int stride, int expansion, int output_channels,
-                   torch::nn::Module activation, bool se = false);
+        DepthwiseSeparableConvImpl(int in_channels, int out_channels, int stride)
+        {
+            dw_conv = register_module("dw_conv", torch::nn::Conv2d(
+                                          torch::nn::Conv2dOptions(in_channels, in_channels, 3).stride(stride).
+                                          padding(1).groups(in_channels)));
+            dw_bn = register_module("dw_bn", torch::nn::BatchNorm2d(in_channels));
+            pw_conv = register_module("pw_conv", torch::nn::Conv2d(
+                                          torch::nn::Conv2dOptions(in_channels, out_channels, 1).stride(1)));
+            pw_bn = register_module("pw_bn", torch::nn::BatchNorm2d(out_channels));
+        }
 
-        torch::Tensor forward(torch::Tensor x);
+        torch::Tensor forward(torch::Tensor x)
+        {
+            x = torch::relu(dw_bn->forward(dw_conv->forward(x))); // Depthwise
+            x = torch::relu(pw_bn->forward(pw_conv->forward(x))); // Pointwise
+            return x;
+        }
 
-    private:
-        torch::nn::Sequential bottleneck;
-        torch::nn::Sequential downsample;
+        torch::nn::Conv2d dw_conv{nullptr}, pw_conv{nullptr};
+        torch::nn::BatchNorm2d dw_bn{nullptr}, pw_bn{nullptr};
     };
 
+    TORCH_MODULE(DepthwiseSeparableConv);
 
-    //---------------------------------------------------------------------------
-
-
-    //class MobileNetV3(nn.Module):
-    //    def __init__(self,input_channels: int,num_classes: int,dropout_prob: float = 0.5,) -> None:
-    //        """
-    //        MobileNetV3 (Large) model.
-    //
-    //        Args:
-    //        input_channels (`int`): Number of input channels.
-    //        num_classes (`int`): Number of classes.
-    //        dropout_prob (`float`, optional): Dropout probability. Defaults to 0.5.
-    //        """
-    //        super().__init__()
-    //
-    //        self.initial_conv = nn.Sequential(
-    //                nn.Conv2d(in_channels=input_channels, out_channels=16, kernel_size=3, stride=2),
-    //                nn.BatchNorm2d(16),
-    //                HSwish(),
-    //        )
-    //
-    //        self.bottlenecks = nn.Sequential(
-    //                Bottleneck(input_channels=16, kernel=3, stride=1, expansion=16, output_channels=16, activation=nn.ReLU(inplace=True)),
-    //                Bottleneck(input_channels=16, kernel=3, stride=2, expansion=64, output_channels=24, activation=nn.ReLU(inplace=True)),
-    //                Bottleneck(input_channels=24, kernel=3, stride=1, expansion=72, output_channels=24, activation=nn.ReLU(inplace=True)),
-
-    //                Bottleneck(input_channels=24, kernel=5, stride=2, expansion=72, output_channels=40, activation=nn.ReLU(inplace=True), se=True),
-    //                Bottleneck(input_channels=40, kernel=5, stride=1, expansion=120, output_channels=40, activation=nn.ReLU(inplace=True), se=True),
-    //                Bottleneck(input_channels=40, kernel=5, stride=1, expansion=120, output_channels=40, activation=nn.ReLU(inplace=True), se=True),
-
-
-    //                Bottleneck(input_channels=40, kernel=3, stride=2, expansion=240, output_channels=80, activation=HSwish()),
-    //                Bottleneck(input_channels=80, kernel=3, stride=1, expansion=200, output_channels=80, activation=HSwish()),
-    //                Bottleneck(input_channels=80, kernel=3, stride=1, expansion=184, output_channels=80, activation=HSwish()),
-    //                Bottleneck(input_channels=80, kernel=3, stride=1, expansion=184, output_channels=80, activation=HSwish()),
-
-
-    //                Bottleneck(input_channels=80, kernel=3, stride=1, expansion=480, output_channels=112, activation=HSwish(), se=True),
-    //                Bottleneck(input_channels=112, kernel=3, stride=1, expansion=672, output_channels=112, activation=HSwish(), se=True),
-    //                Bottleneck(input_channels=112, kernel=5, stride=2, expansion=672, output_channels=160, activation=HSwish(), se=True),
-    //                Bottleneck(input_channels=160, kernel=5, stride=1, expansion=960, output_channels=160, activation=HSwish(), se=True),
-    //                Bottleneck(input_channels=160, kernel=5, stride=1, expansion=960, output_channels=160, activation=HSwish(), se=True),
-    //        )
-    //
-    //        self.final_conv = nn.Sequential(
-    //                nn.Conv2d(in_channels=160, out_channels=960, kernel_size=1, stride=1, bias=False),
-    //                nn.BatchNorm2d(960),
-    //                HSwish(),
-    //        )
-    //
-    //        self.pool = nn.AdaptiveAvgPool2d(output_size=1)
-    //
-    //        self.classifier = nn.Sequential(
-    //                nn.Linear(960, 1280),
-    //                HSwish(),
-    //                nn.Dropout(p=dropout_prob, inplace=True),
-    //                nn.Linear(1280, num_classes),
-    //        )
-    //
-    //    def forward(self, x):
-    //        x = self.initial_conv(x)
-    //        x = self.bottlenecks(x)
-    //        x = self.final_conv(x)
-    //        x = self.pool(x)
-    //        x = torch.flatten(x, 1)
-    //        x = self.classifier(x)
-    //        return x
-
-    struct MobileNetV1 : xt::Module
+    // Inverted Residual Block
+    struct InvertedResidualBlockImpl : torch::nn::Module
     {
-    public:
-        MobileNetV1(int input_channels, int num_classes, float dropout_prob = 0.5);
-        torch::Tensor forward(torch::Tensor x);
+        InvertedResidualBlockImpl(int in_channels, int exp_channels, int out_channels, int stride, bool use_se)
+            : use_se_(use_se)
+        {
+            expand_conv = nullptr;
+            if (in_channels != exp_channels)
+            {
+                expand_conv = register_module("expand_conv", torch::nn::Conv2d(
+                                                  torch::nn::Conv2dOptions(in_channels, exp_channels, 1).stride(1)));
+                expand_bn = register_module("expand_bn", torch::nn::BatchNorm2d(exp_channels));
+            }
+            dw_conv = register_module("dw_conv", torch::nn::Conv2d(
+                                          torch::nn::Conv2dOptions(exp_channels, exp_channels, 3).stride(stride).
+                                          padding(1).groups(exp_channels)));
+            dw_bn = register_module("dw_bn", torch::nn::BatchNorm2d(exp_channels));
+            if (use_se)
+            {
+                se = register_module("se", SEModule(exp_channels));
+            }
+            project_conv = register_module("project_conv", torch::nn::Conv2d(
+                                               torch::nn::Conv2dOptions(exp_channels, out_channels, 1).stride(1)));
+            project_bn = register_module("project_bn", torch::nn::BatchNorm2d(out_channels));
+        }
 
-    private:
-        torch::nn::Sequential initial_conv;
-        torch::nn::Sequential bottlenecks;
-        torch::nn::Sequential final_conv;
-        torch::nn::AdaptiveAvgPool2d pool;
-        torch::nn::Sequential classifier;
+        torch::Tensor forward(torch::Tensor x)
+        {
+            auto residual = x;
+            // Expansion
+            if (expand_conv)
+            {
+                x = torch::relu(expand_bn->forward(expand_conv->forward(x)));
+            }
+            // Depthwise
+            x = torch::relu(dw_bn->forward(dw_conv->forward(x)));
+            // Squeeze-and-Excitation
+            if (use_se_)
+            {
+                x = se->forward(x);
+            }
+            // Projection
+            x = project_bn->forward(project_conv->forward(x));
+            // Residual connection if shapes match
+            if (x.sizes() == residual.sizes())
+            {
+                x = x + residual;
+            }
+            return x;
+        }
+
+        bool use_se_;
+        torch::nn::Conv2d expand_conv{nullptr}, dw_conv{nullptr}, project_conv{nullptr};
+        torch::nn::BatchNorm2d expand_bn{nullptr}, dw_bn{nullptr}, project_bn{nullptr};
+        SEModule se{nullptr};
     };
 
+    TORCH_MODULE(InvertedResidualBlock);
 
-    struct MobileNetV2 : xt::Module
+    // Simplified MobileNetV3-Small
+    struct MobileNetV3Impl : torch::nn::Module
     {
-    public:
-        MobileNetV2(int input_channels, int num_classes, float dropout_prob = 0.5);
-        torch::Tensor forward(torch::Tensor x);
+        MobileNetV3Impl(int in_channels, int num_classes)
+        {
+            // Stem
+            stem_conv = register_module("stem_conv", torch::nn::Conv2d(
+                                            torch::nn::Conv2dOptions(in_channels, 16, 3).stride(2).padding(1)));
+            stem_bn = register_module("stem_bn", torch::nn::BatchNorm2d(16));
 
-    private:
-        torch::nn::Sequential initial_conv;
-        torch::nn::Sequential bottlenecks;
-        torch::nn::Sequential final_conv;
-        torch::nn::AdaptiveAvgPool2d pool;
-        torch::nn::Sequential classifier;
+            // Blocks: {in_channels, exp_channels, out_channels, stride, use_se}
+            blocks = torch::nn::Sequential(
+                InvertedResidualBlock(16, 16, 16, 2, true), // [batch, 16, 8, 8]
+                InvertedResidualBlock(16, 72, 24, 2, false), // [batch, 24, 4, 4]
+                InvertedResidualBlock(24, 88, 24, 1, false), // [batch, 24, 4, 4]
+                InvertedResidualBlock(24, 96, 40, 2, true) // [batch, 40, 2, 2]
+            );
+            register_module("blocks", blocks);
+
+            // Head
+            head_conv = register_module("head_conv", torch::nn::Conv2d(
+                                            torch::nn::Conv2dOptions(40, 128, 1).stride(1)));
+            head_bn = register_module("head_bn", torch::nn::BatchNorm2d(128));
+            pool = register_module("pool", torch::nn::AdaptiveAvgPool2d(1));
+            fc = register_module("fc", torch::nn::Linear(128, num_classes));
+        }
+
+        torch::Tensor forward(torch::Tensor x)
+        {
+            // x: [batch, in_channels, 32, 32]
+            x = torch::relu(stem_bn->forward(stem_conv->forward(x))); // [batch, 16, 16, 16]
+            x = blocks->forward(x); // [batch, 40, 2, 2]
+            x = torch::relu(head_bn->forward(head_conv->forward(x))); // [batch, 128, 2, 2]
+            x = pool->forward(x).view({x.size(0), -1}); // [batch, 128]
+            x = fc->forward(x); // [batch, num_classes]
+            return x;
+        }
+
+        torch::nn::Conv2d stem_conv{nullptr}, head_conv{nullptr};
+        torch::nn::BatchNorm2d stem_bn{nullptr}, head_bn{nullptr};
+        torch::nn::Sequential blocks{nullptr};
+        torch::nn::AdaptiveAvgPool2d pool{nullptr};
+        torch::nn::Linear fc{nullptr};
     };
 
-
-    struct MobileNetV3 : xt::Module
-    {
-    public:
-        MobileNetV3(int input_channels, int num_classes, float dropout_prob = 0.5);
-        torch::Tensor forward(torch::Tensor x);
-
-    private:
-        torch::nn::Sequential initial_conv;
-        torch::nn::Sequential bottlenecks;
-        torch::nn::Sequential final_conv;
-        torch::nn::AdaptiveAvgPool2d pool;
-        torch::nn::Sequential classifier;
-    };
+    TORCH_MODULE(MobileNetV3);
 }
