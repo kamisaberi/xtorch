@@ -338,6 +338,31 @@ namespace xt::models
     }
 
 
+    CycleGAN::Discriminator::Discriminator()
+    : conv1(torch::nn::Conv2dOptions(1, 64, 4).stride(2).padding(1)),
+      conv2(torch::nn::Conv2dOptions(64, 128, 4).stride(2).padding(1)),
+      norm2(128),
+      conv3(torch::nn::Conv2dOptions(128, 256, 4).stride(2).padding(1)),
+      norm3(256),
+      conv4(torch::nn::Conv2dOptions(256, 1, 4).padding(1))
+    {
+        register_module("conv1", conv1);
+        register_module("conv2", conv2);
+        register_module("norm2", norm2);
+        register_module("conv3", conv3);
+        register_module("norm3", norm3);
+        register_module("conv4", conv4);
+    }
+
+    torch::Tensor CycleGAN::Discriminator::forward(torch::Tensor x)
+    {
+        auto out = torch::leaky_relu(conv1->forward(x), 0.2);
+        out = torch::leaky_relu(norm2->forward(conv2->forward(out)), 0.2);
+        out = torch::leaky_relu(norm3->forward(conv3->forward(out)), 0.2);
+        out = conv4->forward(out);
+        return out;
+    }
+
 
 
     CycleGAN::CycleGAN(int num_classes, int in_channels)
