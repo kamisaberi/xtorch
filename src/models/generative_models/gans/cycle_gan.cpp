@@ -286,6 +286,60 @@ namespace xt::models
     }
 
 
+
+    CycleGAN::Generator::Generator()
+    : conv_in(torch::nn::Conv2dOptions(1, 64, 7).padding(3)),
+      norm_in(64),
+      conv_down1(torch::nn::Conv2dOptions(64, 128, 3).stride(2).padding(1)),
+      norm_down1(128),
+      conv_down2(torch::nn::Conv2dOptions(128, 256, 3).stride(2).padding(1)),
+      norm_down2(256),
+      res1(256), res2(256), res3(256), res4(256), res5(256), res6(256),
+      conv_up1(torch::nn::ConvTranspose2dOptions(256, 128, 3).stride(2).padding(1).output_padding(1)),
+      norm_up1(128),
+      conv_up2(torch::nn::ConvTranspose2dOptions(128, 64, 3).stride(2).padding(1).output_padding(1)),
+      norm_up2(64),
+      conv_out(torch::nn::Conv2dOptions(64, 1, 7).padding(3))
+    {
+        register_module("conv_in", conv_in);
+        register_module("norm_in", norm_in);
+        register_module("conv_down1", conv_down1);
+        register_module("norm_down1", norm_down1);
+        register_module("conv_down2", conv_down2);
+        register_module("norm_down2", norm_down2);
+        register_module("res1", res1);
+        register_module("res2", res2);
+        register_module("res3", res3);
+        register_module("res4", res4);
+        register_module("res5", res5);
+        register_module("res6", res6);
+        register_module("conv_up1", conv_up1);
+        register_module("norm_up1", norm_up1);
+        register_module("conv_up2", conv_up2);
+        register_module("norm_up2", norm_up2);
+        register_module("conv_out", conv_out);
+    }
+
+    torch::Tensor CycleGAN::Generator::forward(torch::Tensor x)
+    {
+        auto out = torch::relu(norm_in->forward(conv_in->forward(x)));
+        out = torch::relu(norm_down1->forward(conv_down1->forward(out)));
+        out = torch::relu(norm_down2->forward(conv_down2->forward(out)));
+        out = res1->forward(out);
+        out = res2->forward(out);
+        out = res3->forward(out);
+        out = res4->forward(out);
+        out = res5->forward(out);
+        out = res6->forward(out);
+        out = torch::relu(norm_up1->forward(conv_up1->forward(out)));
+        out = torch::relu(norm_up2->forward(conv_up2->forward(out)));
+        out = torch::tanh(conv_out->forward(out));
+        return out;
+    }
+
+
+
+
     CycleGAN::CycleGAN(int num_classes, int in_channels)
     {
     }
