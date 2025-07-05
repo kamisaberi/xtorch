@@ -196,13 +196,33 @@ using namespace std;
 
 namespace xt::models
 {
-    DAE::DAE(int num_classes, int in_channels)
+    DAE::DAE(int latent_dim)
     {
+        // Encoder
+        enc_conv1 = register_module("enc_conv1", torch::nn::Conv2d(
+                                        torch::nn::Conv2dOptions(1, 16, 3).stride(2).padding(1)));
+        enc_conv2 = register_module("enc_conv2", torch::nn::Conv2d(
+                                        torch::nn::Conv2dOptions(16, 32, 3).stride(2).padding(1)));
+        enc_conv3 = register_module("enc_conv3", torch::nn::Conv2d(
+                                        torch::nn::Conv2dOptions(32, 64, 3).stride(2).padding(1)));
+        enc_fc = register_module("enc_fc", torch::nn::Linear(64 * 4 * 4, latent_dim));
+
+        // Decoder
+        dec_fc = register_module("dec_fc", torch::nn::Linear(latent_dim, 64 * 4 * 4));
+        dec_conv1 = register_module("dec_conv1", torch::nn::ConvTranspose2d(
+                                        torch::nn::ConvTranspose2dOptions(64, 32, 3).stride(2).padding(1).
+                                        output_padding(1)));
+        dec_conv2 = register_module("dec_conv2", torch::nn::ConvTranspose2d(
+                                        torch::nn::ConvTranspose2dOptions(32, 16, 3).stride(2).padding(1).
+                                        output_padding(1)));
+        dec_conv3 = register_module("dec_conv3", torch::nn::ConvTranspose2d(
+                                        torch::nn::ConvTranspose2dOptions(16, 1, 3).stride(2).padding(1).output_padding(
+                                            1)));
+
+        relu = register_module("relu", torch::nn::ReLU());
+        sigmoid = register_module("sigmoid", torch::nn::Sigmoid());
     }
 
-    DAE::DAE(int num_classes, int in_channels, std::vector<int64_t> input_shape)
-    {
-    }
 
     void DAE::reset()
     {
@@ -219,6 +239,20 @@ namespace xt::models
         }
 
         torch::Tensor x = tensor_vec[0];
+
+        // Encoder
+        x = relu->forward(enc_conv1->forward(x)); // [batch, 16, 14, 14] for 28x28 input
+        x = relu->forward(enc_conv2->forward(x)); // [batch, 32, 7, 7]
+        x = relu->forward(enc_conv3->forward(x)); // [batch, 64, 4, 4]
+        x = x.view({-1, 64 * 4 * 4});
+        x = enc_fc->forward(x); // [batch, latent_dim]
+
+        // Decoder
+        x = relu->forward(dec_fc->forward(x)); // [batch, 64 * 4 * 4]
+        x = x.view({-1, 64, 4, 4});
+        x = relu->forward(dec_conv1->forward(x)); // [batch, 32, 7, 7]
+        x = relu->forward(dec_conv2->forward(x)); // [batch, 16, 14, 14]
+        x = sigmoid->forward(dec_conv3->forward(x)); // [batch, 1, 28, 28]
 
         return x;
     }
