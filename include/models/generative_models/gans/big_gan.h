@@ -63,8 +63,6 @@ namespace xt::models
         struct GeneratorBlock : xt::Module
         {
             GeneratorBlock(int64_t in_channels, int64_t out_channels, int64_t num_classes)
-                : conv1(torch::nn::Conv2dOptions(in_channels, out_channels, 3).padding(1)),
-                  conv2(torch::nn::Conv2dOptions(out_channels, out_channels, 3).padding(1))
             {
                 bn1 = std::make_shared<ConditionalBatchNorm>(in_channels, num_classes);
                 register_module("bn1", bn1);
