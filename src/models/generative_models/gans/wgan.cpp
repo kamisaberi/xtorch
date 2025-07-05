@@ -250,6 +250,30 @@ namespace xt::models
     }
 
 
+    WGAN::CriticImpl::CriticImpl()
+    {
+        conv1 = register_module("conv1", torch::nn::Conv2d(
+                                    torch::nn::Conv2dOptions(1, 64, 4).stride(2).padding(1)));
+        conv2 = register_module("conv2", torch::nn::Conv2d(
+                                    torch::nn::Conv2dOptions(64, 128, 4).stride(2).padding(1)));
+        conv3 = register_module("conv3", torch::nn::Conv2d(
+                                    torch::nn::Conv2dOptions(128, 256, 4).stride(2).padding(1)));
+        fc = register_module("fc", torch::nn::Linear(256 * 3 * 3, 1));
+        lrelu = register_module("lrelu", torch::nn::LeakyReLU(
+                                    torch::nn::LeakyReLUOptions().negative_slope(0.2)));
+    }
+
+    torch::Tensor WGAN::CriticImpl::forward(torch::Tensor x)
+    {
+        x = lrelu->forward(conv1->forward(x)); // [batch, 64, 14, 14]
+        x = lrelu->forward(conv2->forward(x)); // [batch, 128, 7, 7]
+        x = lrelu->forward(conv3->forward(x)); // [batch, 256, 3, 3]
+        auto batch_size = x.size(0);
+        x = x.view({batch_size, -1}); // [batch, 256 * 3 * 3]
+        x = fc->forward(x); // [batch, 1]
+        return x;
+    }
+
 
 
 
