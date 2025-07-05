@@ -13,8 +13,6 @@ namespace xt::models
     public:
         AE(int latent_dim = 32);
 
-        AE(int num_classes, int in_channels, std::vector<int64_t> input_shape);
-
         auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
         void reset() override;
 
