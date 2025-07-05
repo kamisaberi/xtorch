@@ -188,6 +188,7 @@ set(LIBRARY_SOURCE_FILES
         ${TRANSFORM_FILES}
         ${UTILITY_FILES}
         path.cpp
+        include/datasets/general/paired_image_dataset.h
 )
 
 # =============================================================================
