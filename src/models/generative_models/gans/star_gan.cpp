@@ -6,7 +6,6 @@ using namespace std;
 //STARGAN GROK
 
 
-
 // #include <torch/torch.h>
 // #include <opencv2/opencv.hpp>
 // #include <opencv2/imgproc.hpp>
@@ -306,9 +305,98 @@ using namespace std;
 // }
 
 
-
 namespace xt::models
 {
+    StarGAN::StarGANGeneratorImpl::StarGANGeneratorImpl(int num_domains) : num_domains_(num_domains)
+    {
+        // Encoder
+        conv1 = register_module("conv1", torch::nn::Conv2d(
+                                    torch::nn::Conv2dOptions(1 + num_domains, 64, 4).stride(2).padding(1)));
+        // [batch, 64, 14, 14]
+        conv2 = register_module("conv2", torch::nn::Conv2d(
+                                    torch::nn::Conv2dOptions(64, 128, 4).stride(2).padding(1)));
+        // [batch, 128, 7, 7]
+        conv3 = register_module("conv3", torch::nn::Conv2d(
+                                    torch::nn::Conv2dOptions(128, 256, 4).stride(2).padding(1)));
+        // [batch, 256, 3, 3]
+
+        // Decoder
+        deconv3 = register_module("deconv3", torch::nn::ConvTranspose2d(
+                                      torch::nn::ConvTranspose2dOptions(256, 128, 4).stride(2).padding(1)));
+        // [batch, 128, 7, 7]
+        deconv2 = register_module("deconv2", torch::nn::ConvTranspose2d(
+                                      torch::nn::ConvTranspose2dOptions(128, 64, 4).stride(2).padding(1)));
+        // [batch, 64, 14, 14]
+        deconv1 = register_module("deconv1", torch::nn::ConvTranspose2d(
+                                      torch::nn::ConvTranspose2dOptions(64, 1, 4).stride(2).padding(1)));
+        // [batch, 1, 28, 28]
+
+        bn1 = register_module("bn1", torch::nn::BatchNorm2d(64));
+        bn2 = register_module("bn2", torch::nn::BatchNorm2d(128));
+        bn3 = register_module("bn3", torch::nn::BatchNorm2d(256));
+        bn4 = register_module("bn4", torch::nn::BatchNorm2d(128));
+        bn5 = register_module("bn5", torch::nn::BatchNorm2d(64));
+        relu = register_module("relu", torch::nn::ReLU());
+        tanh = register_module("tanh", torch::nn::Tanh());
+    }
+
+    torch::Tensor StarGAN::StarGANGeneratorImpl::forward(torch::Tensor x, torch::Tensor domain_label)
+    {
+        auto batch_size = x.size(0);
+        // Expand domain label to spatial dimensions and concatenate
+        domain_label = domain_label.view({batch_size, num_domains_, 1, 1}).expand(
+            {-1, -1, x.size(2), x.size(3)});
+        x = torch::cat({x, domain_label}, 1); // [batch, 1 + num_domains, 28, 28]
+
+        // Encoder
+        auto e1 = relu->forward(bn1->forward(conv1->forward(x))); // [batch, 64, 14, 14]
+        auto e2 = relu->forward(bn2->forward(conv2->forward(e1))); // [batch, 128, 7, 7]
+        auto e3 = relu->forward(bn3->forward(conv3->forward(e2))); // [batch, 256, 3, 3]
+
+        // Decoder
+        auto d3 = relu->forward(bn4->forward(deconv3->forward(e3))); // [batch, 128, 7, 7]
+        auto d2 = relu->forward(bn5->forward(deconv2->forward(d3))); // [batch, 64, 14, 14]
+        auto d1 = tanh->forward(deconv1->forward(d2)); // [batch, 1, 28, 28]
+
+        return d1;
+    }
+
+
+    StarGAN::StarGANDiscriminatorImpl::StarGANDiscriminatorImpl(int num_domains) : num_domains_(num_domains)
+    {
+        conv1 = register_module("conv1", torch::nn::Conv2d(
+                                    torch::nn::Conv2dOptions(1, 64, 4).stride(2).padding(1)));
+        // [batch, 64, 14, 14]
+        conv2 = register_module("conv2", torch::nn::Conv2d(
+                                    torch::nn::Conv2dOptions(64, 128, 4).stride(2).padding(1)));
+        // [batch, 128, 7, 7]
+        conv3 = register_module("conv3", torch::nn::Conv2d(
+                                    torch::nn::Conv2dOptions(128, 256, 4).stride(2).padding(1)));
+        // [batch, 256, 3, 3]
+        conv_src = register_module("conv_src", torch::nn::Conv2d(
+                                       torch::nn::Conv2dOptions(256, 1, 3).stride(1).padding(1)));
+        // [batch, 1, 3, 3]
+        conv_cls = register_module("conv_cls", torch::nn::Conv2d(
+                                       torch::nn::Conv2dOptions(256, num_domains, 3).stride(1).padding(1)));
+        // [batch, num_domains, 3, 3]
+        bn1 = register_module("bn1", torch::nn::BatchNorm2d(64));
+        bn2 = register_module("bn2", torch::nn::BatchNorm2d(128));
+        bn3 = register_module("bn3", torch::nn::BatchNorm2d(256));
+        lrelu = register_module("lrelu", torch::nn::LeakyReLU(
+                                    torch::nn::LeakyReLUOptions().negative_slope(0.2)));
+    }
+
+    std::tuple<torch::Tensor, torch::Tensor> StarGAN::StarGANDiscriminatorImpl::forward(torch::Tensor x)
+    {
+        x = lrelu->forward(bn1->forward(conv1->forward(x))); // [batch, 64, 14, 14]
+        x = lrelu->forward(bn2->forward(conv2->forward(x))); // [batch, 128, 7, 7]
+        x = lrelu->forward(bn3->forward(conv3->forward(x))); // [batch, 256, 3, 3]
+        auto src = conv_src->forward(x); // [batch, 1, 3, 3] (real/fake)
+        auto cls = conv_cls->forward(x); // [batch, num_domains, 3, 3] (domain classification)
+        return {src, cls};
+    }
+
+
     StarGAN::StarGAN(int num_classes, int in_channels)
     {
     }
