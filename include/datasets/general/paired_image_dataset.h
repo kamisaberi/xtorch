@@ -9,7 +9,6 @@ namespace fs = std::filesystem;
 
 namespace xt::datasets
 {
-    // Paired Image Dataset
     struct PairedImageDataset : torch::data::Dataset<PairedImageDataset>
     {
         PairedImageDataset (
