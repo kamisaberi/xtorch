@@ -162,13 +162,28 @@ using namespace std;
 
 namespace xt::models
 {
-    AE::AE(int num_classes, int in_channels)
+    AE::AE(int latent_dim)
     {
+        // Encoder
+        enc_conv1 = register_module("enc_conv1", torch::nn::Conv2d(
+                                        torch::nn::Conv2dOptions(1, 16, 3).stride(2).padding(1)));
+        enc_conv2 = register_module("enc_conv2", torch::nn::Conv2d(
+                                        torch::nn::Conv2dOptions(16, 32, 3).stride(2).padding(1)));
+        enc_fc = register_module("enc_fc", torch::nn::Linear(32 * 7 * 7, latent_dim));
+
+        // Decoder
+        dec_fc = register_module("dec_fc", torch::nn::Linear(latent_dim, 32 * 7 * 7));
+        dec_conv1 = register_module("dec_conv1", torch::nn::ConvTranspose2d(
+                                        torch::nn::ConvTranspose2dOptions(32, 16, 3).stride(2).padding(1).
+                                        output_padding(1)));
+        dec_conv2 = register_module("dec_conv2", torch::nn::ConvTranspose2d(
+                                        torch::nn::ConvTranspose2dOptions(16, 1, 3).stride(2).padding(1).output_padding(
+                                            1)));
+
+        relu = register_module("relu", torch::nn::ReLU());
+        sigmoid = register_module("sigmoid", torch::nn::Sigmoid());
     }
 
-    AE::AE(int num_classes, int in_channels, std::vector<int64_t> input_shape)
-    {
-    }
 
     void AE::reset()
     {
