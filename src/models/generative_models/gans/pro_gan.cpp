@@ -334,6 +334,22 @@ using namespace std;
 
 namespace xt::models
 {
+    ProGAN::GeneratorBlockImpl::GeneratorBlockImpl(int in_channels, int out_channels)
+    {
+        conv = register_module("conv", torch::nn::ConvTranspose2d(
+                                   torch::nn::ConvTranspose2dOptions(in_channels, out_channels, 4).stride(2).
+                                   padding(1)));
+        bn = register_module("bn", torch::nn::BatchNorm2d(out_channels));
+        relu = register_module("relu", torch::nn::ReLU());
+    }
+
+    torch::Tensor ProGAN::GeneratorBlockImpl::forward(torch::Tensor x)
+    {
+        x = relu->forward(bn->forward(conv->forward(x)));
+        return x;
+    }
+
+
     ProGAN::ProGAN(int num_classes, int in_channels)
     {
     }
