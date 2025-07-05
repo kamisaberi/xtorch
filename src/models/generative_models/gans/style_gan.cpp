@@ -185,6 +185,12 @@ using namespace std;
 
 namespace xt::models
 {
+
+
+
+
+
+
     StyleGAN::StyleGAN(int num_classes, int in_channels)
     {
     }
