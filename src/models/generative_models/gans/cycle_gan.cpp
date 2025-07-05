@@ -1,4 +1,5 @@
 #include "include/models/generative_models/gans/cycle_gan.h"
+#include "models/generative_models/gans/cycle_gan.h"
 
 
 using namespace std;
@@ -286,21 +287,25 @@ namespace xt::models
     }
 
 
-
     CycleGAN::Generator::Generator()
-    : conv_in(torch::nn::Conv2dOptions(1, 64, 7).padding(3)),
-      norm_in(64),
-      conv_down1(torch::nn::Conv2dOptions(64, 128, 3).stride(2).padding(1)),
-      norm_down1(128),
-      conv_down2(torch::nn::Conv2dOptions(128, 256, 3).stride(2).padding(1)),
-      norm_down2(256),
-      res1(256), res2(256), res3(256), res4(256), res5(256), res6(256),
-      conv_up1(torch::nn::ConvTranspose2dOptions(256, 128, 3).stride(2).padding(1).output_padding(1)),
-      norm_up1(128),
-      conv_up2(torch::nn::ConvTranspose2dOptions(128, 64, 3).stride(2).padding(1).output_padding(1)),
-      norm_up2(64),
-      conv_out(torch::nn::Conv2dOptions(64, 1, 7).padding(3))
+        : conv_in(torch::nn::Conv2dOptions(1, 64, 7).padding(3)),
+          norm_in(64),
+          conv_down1(torch::nn::Conv2dOptions(64, 128, 3).stride(2).padding(1)),
+          norm_down1(128),
+          conv_down2(torch::nn::Conv2dOptions(128, 256, 3).stride(2).padding(1)),
+          norm_down2(256),
+          conv_up1(torch::nn::ConvTranspose2dOptions(256, 128, 3).stride(2).padding(1).output_padding(1)),
+          norm_up1(128),
+          conv_up2(torch::nn::ConvTranspose2dOptions(128, 64, 3).stride(2).padding(1).output_padding(1)),
+          norm_up2(64),
+          conv_out(torch::nn::Conv2dOptions(64, 1, 7).padding(3))
     {
+        res1 = std::make_shared<ResidualBlock>(256);
+        res2 = std::make_shared<ResidualBlock>(256);
+        res3 = std::make_shared<ResidualBlock>(256);
+        res4 = std::make_shared<ResidualBlock>(256);
+        res5 = std::make_shared<ResidualBlock>(256);
+        res6 = std::make_shared<ResidualBlock>(256);
         register_module("conv_in", conv_in);
         register_module("norm_in", norm_in);
         register_module("conv_down1", conv_down1);
@@ -339,12 +344,12 @@ namespace xt::models
 
 
     CycleGAN::Discriminator::Discriminator()
-    : conv1(torch::nn::Conv2dOptions(1, 64, 4).stride(2).padding(1)),
-      conv2(torch::nn::Conv2dOptions(64, 128, 4).stride(2).padding(1)),
-      norm2(128),
-      conv3(torch::nn::Conv2dOptions(128, 256, 4).stride(2).padding(1)),
-      norm3(256),
-      conv4(torch::nn::Conv2dOptions(256, 1, 4).padding(1))
+        : conv1(torch::nn::Conv2dOptions(1, 64, 4).stride(2).padding(1)),
+          conv2(torch::nn::Conv2dOptions(64, 128, 4).stride(2).padding(1)),
+          norm2(128),
+          conv3(torch::nn::Conv2dOptions(128, 256, 4).stride(2).padding(1)),
+          norm3(256),
+          conv4(torch::nn::Conv2dOptions(256, 1, 4).padding(1))
     {
         register_module("conv1", conv1);
         register_module("conv2", conv2);
@@ -362,7 +367,6 @@ namespace xt::models
         out = conv4->forward(out);
         return out;
     }
-
 
 
     CycleGAN::CycleGAN(int num_classes, int in_channels)
