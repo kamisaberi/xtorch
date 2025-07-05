@@ -21,6 +21,21 @@ namespace xt::models
             torch::nn::InstanceNorm2d norm1, norm2;
         };
 
+
+        struct Generator : torch::nn::Module
+        {
+            Generator();
+
+            torch::Tensor forward(torch::Tensor x);
+
+            torch::nn::Conv2d conv_in, conv_out;
+            torch::nn::Conv2d conv_down1, conv_down2;
+            torch::nn::ConvTranspose2d conv_up1, conv_up2;
+            torch::nn::InstanceNorm2d norm_in, norm_down1, norm_down2, norm_up1, norm_up2;
+            ResidualBlock res1, res2, res3, res4, res5, res6;
+        };
+
+
         CycleGAN(int num_classes /* classes */, int in_channels = 3/* input channels */);
 
         CycleGAN(int num_classes, int in_channels, std::vector<int64_t> input_shape);
