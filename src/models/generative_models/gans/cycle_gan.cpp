@@ -265,11 +265,27 @@ using namespace std;
 // }
 
 
-
-
-
 namespace xt::models
 {
+    CycleGAN::ResidualBlock::ResidualBlock(int64_t channels)
+        : conv1(torch::nn::Conv2dOptions(channels, channels, 3).padding(1)),
+          conv2(torch::nn::Conv2dOptions(channels, channels, 3).padding(1)),
+          norm1(channels), norm2(channels)
+    {
+        register_module("conv1", conv1);
+        register_module("conv2", conv2);
+        register_module("norm1", norm1);
+        register_module("norm2", norm2);
+    }
+
+    torch::Tensor CycleGAN::ResidualBlock::forward(torch::Tensor x)
+    {
+        auto out = torch::relu(norm1->forward(conv1->forward(x)));
+        out = norm2->forward(conv2->forward(out));
+        return x + out; // Residual connection
+    }
+
+
     CycleGAN::CycleGAN(int num_classes, int in_channels)
     {
     }
