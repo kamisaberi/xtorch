@@ -200,6 +200,17 @@ namespace xt::models
         }
 
         torch::Tensor x = tensor_vec[0];
+        // Encoder
+        x = relu->forward(enc_conv1->forward(x)); // [batch, 16, 14, 14] for 28x28 input
+        x = relu->forward(enc_conv2->forward(x)); // [batch, 32, 7, 7]
+        x = x.view({-1, 32 * 7 * 7});
+        x = enc_fc->forward(x); // [batch, latent_dim]
+
+        // Decoder
+        x = relu->forward(dec_fc->forward(x)); // [batch, 32 * 7 * 7]
+        x = x.view({-1, 32, 7, 7});
+        x = relu->forward(dec_conv1->forward(x)); // [batch, 16, 14, 14]
+        x = sigmoid->forward(dec_conv2->forward(x)); // [batch, 1, 28, 28]
 
         return x;
     }
