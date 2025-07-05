@@ -4,9 +4,6 @@
 using namespace std;
 
 
-
-
-
 // #include <torch/torch.h>
 // #include <opencv2/opencv.hpp>
 // #include <opencv2/imgproc.hpp>
@@ -187,18 +184,31 @@ using namespace std;
 //
 
 
-
-
-
 namespace xt::models
 {
-    VAE::VAE(int num_classes, int in_channels)
+    VAE::VAE(int latent_dim) : latent_dim_(latent_dim)
     {
+        // Encoder
+        enc_conv1 = register_module("enc_conv1", torch::nn::Conv2d(
+                                        torch::nn::Conv2dOptions(1, 16, 3).stride(2).padding(1)));
+        enc_conv2 = register_module("enc_conv2", torch::nn::Conv2d(
+                                        torch::nn::Conv2dOptions(16, 32, 3).stride(2).padding(1)));
+        enc_fc_mu = register_module("enc_fc_mu", torch::nn::Linear(32 * 7 * 7, latent_dim));
+        enc_fc_logvar = register_module("enc_fc_logvar", torch::nn::Linear(32 * 7 * 7, latent_dim));
+
+        // Decoder
+        dec_fc = register_module("dec_fc", torch::nn::Linear(latent_dim, 32 * 7 * 7));
+        dec_conv1 = register_module("dec_conv1", torch::nn::ConvTranspose2d(
+                                        torch::nn::ConvTranspose2dOptions(32, 16, 3).stride(2).padding(1).
+                                        output_padding(1)));
+        dec_conv2 = register_module("dec_conv2", torch::nn::ConvTranspose2d(
+                                        torch::nn::ConvTranspose2dOptions(16, 1, 3).stride(2).padding(1).output_padding(
+                                            1)));
+
+        relu = register_module("relu", torch::nn::ReLU());
+        sigmoid = register_module("sigmoid", torch::nn::Sigmoid());
     }
 
-    VAE::VAE(int num_classes, int in_channels, std::vector<int64_t> input_shape)
-    {
-    }
 
     void VAE::reset()
     {
@@ -216,6 +226,26 @@ namespace xt::models
 
         torch::Tensor x = tensor_vec[0];
 
-        return x;
+        // Encoder
+        x = relu->forward(enc_conv1->forward(x)); // [batch, 16, 14, 14]
+        x = relu->forward(enc_conv2->forward(x)); // [batch, 32, 7, 7]
+        x = x.view({-1, 32 * 7 * 7});
+        auto mu = enc_fc_mu->forward(x); // [batch, latent_dim]
+        auto logvar = enc_fc_logvar->forward(x); // [batch, latent_dim]
+
+        // Reparameterization trick
+        auto std = torch::exp(0.5 * logvar);
+        auto eps = torch::randn_like(std);
+        auto z = mu + eps * std; // [batch, latent_dim]
+
+        // Decoder
+        x = relu->forward(dec_fc->forward(z)); // [batch, 32 * 7 * 7]
+        x = x.view({-1, 32, 7, 7});
+        x = relu->forward(dec_conv1->forward(x)); // [batch, 16, 14, 14]
+        x = sigmoid->forward(dec_conv2->forward(x)); // [batch, 1, 28, 28]
+
+        std::tuple<torch::Tensor, torch::Tensor, torch::Tensor> res = {x, mu, logvar};
+        return res;
+
     }
 }
