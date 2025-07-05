@@ -9,3 +9,4 @@
 #include "text_dataset.h"
 #include "time_series_dataset.h"
 #include "video_dataset.h"
+#include "paired_image_dataset.h"
