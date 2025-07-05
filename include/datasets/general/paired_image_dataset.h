@@ -1,5 +1,4 @@
 #pragma once
-
 #include "../common.h"
 
 using namespace std;
@@ -8,7 +7,7 @@ namespace fs = std::filesystem;
 
 namespace xt::datasets
 {
-    struct PairedImageDataset : torch::data::Dataset<PairedImageDataset>
+    class PairedImageDataset :  torch::data::Dataset<PairedImageDataset>
     {
         PairedImageDataset (
 
@@ -23,3 +22,4 @@ namespace xt::datasets
         std::vector<std::string> input_paths_, target_paths_;
     };
 }
+
