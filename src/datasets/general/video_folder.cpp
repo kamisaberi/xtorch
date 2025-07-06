@@ -1,5 +1,5 @@
 
-#include "include/datasets/general/video_dataset.h"
+#include "include/datasets/general/video_folder.h"
 
 namespace xt::datasets {
 
