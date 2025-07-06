@@ -3,15 +3,27 @@
 
 namespace xt::transforms::image
 {
-    CenterCrop::CenterCrop(std::vector<int64_t> size) : size(size) {
-        if (size.size() != 2) {
+    CenterCrop::CenterCrop(std::vector<int64_t> size) : size(size)
+    {
+        if (size.size() != 2)
+        {
             throw std::invalid_argument("CenterCrop size must have exactly 2 elements (height, width).");
         }
     }
 
-    torch::Tensor CenterCrop::operator()(torch::Tensor input) {
+    auto Resize::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        std::vector<std::any> any_vec(tensors);
+        std::vector<torch::Tensor> tensor_vec;
+        for (const auto& item : any_vec)
+        {
+            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+        }
+
+        torch::Tensor input = tensor_vec[0];
         int64_t input_dims = input.dim();
-        if (input_dims < 2) {
+        if (input_dims < 2)
+        {
             throw std::runtime_error("Input tensor must have at least 2 dimensions for cropping.");
         }
 
@@ -22,7 +34,8 @@ namespace xt::transforms::image
         int64_t target_w = size[1];
 
         // Validate input size is large enough
-        if (input_h < target_h || input_w < target_w) {
+        if (input_h < target_h || input_w < target_w)
+        {
             throw std::runtime_error("Input dimensions must be >= target size for cropping.");
         }
 
@@ -34,8 +47,6 @@ namespace xt::transforms::image
 
         // Crop height (dim -2) and width (dim -1)
         return input.slice(input_dims - 2, h_start, h_end)
-                .slice(input_dims - 1, w_start, w_end);
+                    .slice(input_dims - 1, w_start, w_end);
     }
-
-
 }
