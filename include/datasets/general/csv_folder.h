@@ -6,13 +6,13 @@
 
 
 namespace xt::datasets {
-    class CSVDataset : public xt::datasets::Dataset {
+    class CSVFolder : public xt::datasets::Dataset {
     public :
-        CSVDataset(const std::string &file_path);
+        CSVFolder(const std::string &file_path);
 
-        CSVDataset(const std::string &file_path, DataMode mode);
+        CSVFolder(const std::string &file_path, DataMode mode);
 
-        CSVDataset(const std::string &file_path, DataMode mode, vector<int> x_indices, int y_index);
+        CSVFolder(const std::string &file_path, DataMode mode, vector<int> x_indices, int y_index);
 
         CSVDataset(const std::string &file_path, DataMode mode, vector<int> x_indices, vector<int> y_indices);
 
@@ -41,4 +41,21 @@ namespace xt::datasets {
     };
 
 
+    class StackedCSVDataset : public xt::datasets::Dataset {
+    public :
+        StackedCSVDataset(const std::string &folder_path);
+
+        StackedCSVDataset(const std::string &folder_path, DataMode mode);
+
+        StackedCSVDataset(const std::string &folder_path, DataMode mode, bool load_sub_folders);
+
+        StackedCSVDataset(const std::string &folder_path, DataMode mode, bool load_sub_folders,
+                          std::unique_ptr<xt::Module> transformer);
+
+    private:
+        vector<string> labels_name;
+        bool load_sub_folders = false;
+
+        void load_data();
+    };
 }
