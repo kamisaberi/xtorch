@@ -37,6 +37,7 @@ namespace xt::datasets {
         bool download = false;
         fs::path root;
         fs::path dataset_path;
+        vector<fs::path> files ;
 
 
         void load_data();
