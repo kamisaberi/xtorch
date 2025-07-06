@@ -11,7 +11,7 @@ namespace xt::transforms::image
         }
     }
 
-    auto Resize::forward(std::initializer_list<std::any> tensors) -> std::any
+    auto CenterCrop::forward(std::initializer_list<std::any> tensors) -> std::any
     {
         std::vector<std::any> any_vec(tensors);
         std::vector<torch::Tensor> tensor_vec;
