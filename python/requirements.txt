@@ -3,4 +3,5 @@ torch
 torchvision
 torchaudio
 transformers
+gdown
 
