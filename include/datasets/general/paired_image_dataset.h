@@ -1,25 +1,26 @@
 #pragma once
+
+
 #include "../common.h"
 
-using namespace std;
-namespace fs = std::filesystem;
 
 
-namespace xt::datasets
-{
-    class PairedImageDataset :  torch::data::Dataset<PairedImageDataset>
-    {
-        PairedImageDataset (
+namespace xt::datasets {
 
-        const std::string &input_dir,
+    class PairedImageDataset : public xt::datasets::Dataset {
+    public :
+        PairedImageDataset(const std::string &file_path);
+        PairedImageDataset(const std::string &file_path,DataMode mode);
+        PairedImageDataset(const std::string &file_path,DataMode mode , std::unique_ptr<xt::Module> target_transformer);
 
-        const std::string& target_dir
-        );
-
-        torch::data::Example<> get(size_t index) override;
-        torch::optional<size_t> size() const override;
-
-        std::vector<std::string> input_paths_, target_paths_;
+    private:
+        vector<string> labels_name;
+        bool load_sub_folders = false;
+        void load_data();
     };
-}
 
+
+
+
+
+}
