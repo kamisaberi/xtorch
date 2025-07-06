@@ -40,7 +40,7 @@ namespace xt::datasets
     {
         fs::path pth = this->root / dataset_folder_name / images_folder;
 
-        for (auto& file : fs::directory_iterator(pth.path()))
+        for (auto& file : fs::directory_iterator(pth))
         {
             if (!file.is_directory())
             {
@@ -57,4 +57,18 @@ namespace xt::datasets
     void CelebA::check_resources()
     {
     }
+
+
+    torch::data::Example<> CelebA::get(size_t index)
+    {
+        torch::Tensor tensor = xt::utils::image::convertImageToTensor(files[index]);
+
+        return {tensor, torch::tensor(targets[index])};
+    }
+
+    torch::optional<size_t> CelebA::size() const
+    {
+        return files.size();
+    }
+
 }

@@ -21,6 +21,10 @@ namespace xt::datasets {
                    std::unique_ptr<xt::Module> transformer,
                    std::unique_ptr<xt::Module> target_transformer);
 
+        torch::data::Example<> get(size_t index) override;
+
+        torch::optional<size_t> size() const override;
+
     private:
         vector<std::tuple<string, string, fs::path> > resources = {
             {"0B7EVK8r0v71pZjFTYXZWM3FlRnM", "00d2c5bc6d35e252742224ab0c1e8fcb", "img_align_celeba.zip"},
@@ -44,5 +48,8 @@ namespace xt::datasets {
         void load_data();
 
         void check_resources();
+
+
+
     };
 }
