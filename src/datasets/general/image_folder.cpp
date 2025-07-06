@@ -64,8 +64,9 @@ namespace xt::datasets
                     {
                         if (!file.is_directory())
                         {
-                            torch::Tensor tensor = xt::utils::image::convertImageToTensor(file.path());
-                            data.push_back(tensor);
+                            files.push_back(file.path());
+                            // torch::Tensor tensor = xt::utils::image::convertImageToTensor(file.path());
+                            // data.push_back(tensor);
                             targets.push_back(labels_name.size() - 1);
                         }
                     }
@@ -76,13 +77,26 @@ namespace xt::datasets
                     {
                         if (!file.is_directory())
                         {
-                            torch::Tensor tensor = xt::utils::image::convertImageToTensor(file.path());
-                            data.push_back(tensor);
+                            files.push_back(file.path());
+                            // torch::Tensor tensor = xt::utils::image::convertImageToTensor(file.path());
+                            // data.push_back(tensor);
                             targets.push_back(labels_name.size() - 1);
                         }
                     }
                 }
             }
         }
+    }
+
+    torch::data::Example<> ImageFolder::get(size_t index)
+    {
+        torch::Tensor tensor = xt::utils::image::convertImageToTensor(files[index]);
+
+        return {tensor, torch::tensor(targets[index])};
+    }
+
+    torch::optional<size_t> ImageFolder::size() const
+    {
+        return files.size();
     }
 }

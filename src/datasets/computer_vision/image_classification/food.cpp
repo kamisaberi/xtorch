@@ -153,17 +153,18 @@ namespace xt::datasets
 
                 // Load and process image
                 fs::path img_path = images_path / fs::path(line + ".jpg");
-                torch::Tensor tensor = xt::utils::image::convertImageToTensor(img_path);
-
-                // Apply transforms if specified
-                if (transformer != nullptr)
-                {
-                    tensor = std::any_cast<torch::Tensor>((*transformer)({tensor}));
-                    // tensor = (*transformer)(tensor);
-                }
-
-                // Store results
-                this->data.push_back(tensor);
+                files.push_back(img_path);
+                // torch::Tensor tensor = xt::utils::image::convertImageToTensor(img_path);
+                //
+                // // Apply transforms if specified
+                // if (transformer != nullptr)
+                // {
+                //     tensor = std::any_cast<torch::Tensor>((*transformer)({tensor}));
+                //     // tensor = (*transformer)(tensor);
+                // }
+                //
+                // // Store results
+                // this->data.push_back(tensor);
                 this->targets.push_back(classes_map[label]);
             }
         }
