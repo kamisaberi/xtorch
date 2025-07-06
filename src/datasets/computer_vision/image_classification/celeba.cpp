@@ -31,6 +31,7 @@ namespace xt::datasets
         xt::datasets::Dataset(mode, std::move(transformer), std::move(target_transformer))
     {
         this->dataset_path = fs::path(root) / this->dataset_folder_name;
+        cout << this->dataset_path << endl;
         check_resources();
         load_data();
     }
@@ -38,7 +39,9 @@ namespace xt::datasets
 
     void CelebA::load_data()
     {
+        cout << this->dataset_path << endl;
         fs::path pth = this->root / dataset_folder_name / images_folder;
+        cout << pth << endl;
 
         for (auto& file : fs::directory_iterator(pth))
         {
