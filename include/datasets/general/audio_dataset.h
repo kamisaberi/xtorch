@@ -22,14 +22,14 @@ namespace xt::datasets
                 std::istringstream iss(line);
                 std::string filename, label_str;
                 iss >> filename >> label_str;
-                file_paths.push_back(audio_dir + "/" + filename + ".wav");
+                files.push_back(audio_dir + "/" + filename + ".wav");
                 labels.push_back(std::stoi(label_str));
             }
         }
 
         torch::data::Example<> get(size_t index) override
         {
-            SndfileHandle file(file_paths[index]);
+            SndfileHandle file(files[index]);
             std::vector<float> samples(file.frames());
             file.read(&samples[0], file.frames());
             auto options = torch::TensorOptions().dtype(torch::kFloat32).device(torch::kCPU);
@@ -40,11 +40,11 @@ namespace xt::datasets
 
         torch::optional<size_t> size() const override
         {
-            return file_paths.size();
+            return files.size();
         }
 
     private:
-        std::vector<std::string> file_paths;
+        std::vector<std::string> files;
         std::vector<int> labels;
     };
 
