@@ -47,7 +47,7 @@ namespace xt::datasets
                 files.push_back(file.path());
                 // torch::Tensor tensor = xt::utils::image::convertImageToTensor(file.path());
                 // data.push_back(tensor);
-                // targets.push_back(labels_name.size() - 1);
+                targets.push_back(0);
             }
         }
 
@@ -62,6 +62,11 @@ namespace xt::datasets
     torch::data::Example<> CelebA::get(size_t index)
     {
         torch::Tensor tensor = xt::utils::image::convertImageToTensor(files[index]);
+
+        if (transformer != nullptr)
+        {
+            tensor = std::any_cast<torch::Tensor>((*transformer)({tensor}));
+        }
 
         return {tensor, torch::tensor(targets[index])};
     }
