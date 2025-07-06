@@ -188,7 +188,6 @@ set(LIBRARY_SOURCE_FILES
         ${TRANSFORM_FILES}
         ${UTILITY_FILES}
         path.cpp
-        include/datasets/general/paired_image_dataset.h
 )
 
 # =============================================================================
@@ -420,9 +419,9 @@ target_link_libraries(xTorch PRIVATE
 # --- Force Linker to Ignore Errors (THE CORRECT COMMAND) ---
 # This sets the general linking flags for the target.
 # We use a special syntax to pass the flag directly to the linker.
-set_target_properties(xTorch PROPERTIES
-        LINK_FLAGS "-Wl,--unresolved-symbols=ignore-all"
-)
+#set_target_properties(xTorch PROPERTIES
+#        LINK_FLAGS "-Wl,--unresolved-symbols=ignore-all"
+#)
 
 
 # Optional CUDA paths (commented out by default)
