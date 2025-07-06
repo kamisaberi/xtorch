@@ -124,7 +124,7 @@ namespace xt::datasets
                 // Apply transforms if specified
                 if (transformer != nullptr)
                 {
-                    tensor =std::any_cast<torch::Tensor>((*transformer)({tensor}));
+                    tensor = std::any_cast<torch::Tensor>((*transformer)({tensor}));
                     // tensor = (*transformer)(tensor);
                 }
 
@@ -158,7 +158,7 @@ namespace xt::datasets
                 // Apply transforms if specified
                 if (transformer != nullptr)
                 {
-                    tensor =std::any_cast<torch::Tensor>((*transformer)({tensor}));
+                    tensor = std::any_cast<torch::Tensor>((*transformer)({tensor}));
                     // tensor = (*transformer)(tensor);
                 }
 

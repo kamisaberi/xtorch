@@ -6,20 +6,19 @@
 using namespace std;
 namespace fs = std::filesystem;
 
-namespace xt::datasets {
-    class Food101 : public xt::datasets::Dataset {
+namespace xt::datasets
+{
+    class Food101 : public xt::datasets::Dataset
+    {
     public:
-
-
         explicit Food101(const std::string& root);
         Food101(const std::string& root, xt::datasets::DataMode mode);
         Food101(const std::string& root, xt::datasets::DataMode mode, bool download);
         Food101(const std::string& root, xt::datasets::DataMode mode, bool download,
-                   std::unique_ptr<xt::Module> transformer);
+                std::unique_ptr<xt::Module> transformer);
         Food101(const std::string& root, xt::datasets::DataMode mode, bool download,
-                   std::unique_ptr<xt::Module> transformer,
-                   std::unique_ptr<xt::Module> target_transformer);
-
+                std::unique_ptr<xt::Module> transformer,
+                std::unique_ptr<xt::Module> target_transformer);
 
     private:
         std::string url = "http://data.vision.ee.ethz.ch/cvl/food-101.tar.gz";
