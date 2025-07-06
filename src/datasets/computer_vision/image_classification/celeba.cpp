@@ -30,6 +30,7 @@ namespace xt::datasets
                    std::unique_ptr<xt::Module> transformer, std::unique_ptr<xt::Module> target_transformer):
         xt::datasets::Dataset(mode, std::move(transformer), std::move(target_transformer))
     {
+        this->root = fs::path(root);
         this->dataset_path = fs::path(root) / this->dataset_folder_name;
         cout << this->dataset_path << endl;
         check_resources();
