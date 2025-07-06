@@ -7,8 +7,6 @@
 
 namespace xt::datasets {
 
-
-
     class EDFDataset : public xt::datasets::Dataset {
     public :
         EDFDataset(const std::string &file_path);
