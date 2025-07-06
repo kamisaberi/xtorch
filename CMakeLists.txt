@@ -239,6 +239,8 @@ find_package(ZLIB REQUIRED)           # Compression library
 find_package(OpenSSL REQUIRED)        # Cryptography and SSL/TLS
 find_package(LibLZMA REQUIRED)        # LZMA compression
 find_package(LibArchive REQUIRED)     # Multi-format archive library
+find_library(LIBTAR_LIBRARY tar REQUIRED)
+find_path(LIBTAR_INCLUDE_DIR tar.h REQUIRED)
 
 
 # find_package(SndFile REQUIRED)        # Audio file handling
@@ -298,6 +300,8 @@ find_package(OpenGL REQUIRED)
 # ====================================================================
 
 
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(LIBZIP REQUIRED libzip)
 
 
 
