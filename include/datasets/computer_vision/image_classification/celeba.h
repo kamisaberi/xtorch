@@ -34,6 +34,7 @@ namespace xt::datasets {
 
 
         fs::path dataset_folder_name = "celeba";
+        fs::path images_folder = "img_align_celeba";
         bool download = false;
         fs::path root;
         fs::path dataset_path;
