@@ -168,4 +168,21 @@ namespace xt::datasets
             }
         }
     }
+
+    torch::data::Example<> Food101::get(size_t index)
+    {
+        torch::Tensor tensor = xt::utils::image::convertImageToTensor(files[index]);
+
+        // Apply transforms if specified
+        if (transformer != nullptr)
+        {
+            tensor = std::any_cast<torch::Tensor>((*transformer)({tensor}));
+        }
+        return {tensor, torch::tensor(targets[index])};
+    }
+
+    torch::optional<size_t> Food101::size() const
+    {
+        return files.size();
+    }
 }

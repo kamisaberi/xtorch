@@ -20,8 +20,13 @@ namespace xt::datasets
                 std::unique_ptr<xt::Module> transformer,
                 std::unique_ptr<xt::Module> target_transformer);
 
+        torch::data::Example<> get(size_t index) override;
+
+        torch::optional<size_t> size() const override;
+
     private:
         std::string url = "http://data.vision.ee.ethz.ch/cvl/food-101.tar.gz";
+        vector<fs::path> files ;
 
         fs::path dataset_file_name = "food-101.tar.gz";
 
