@@ -20,19 +20,5 @@ namespace xt::datasets {
     };
 
 
-    class StackedEDFDataset : public xt::datasets::Dataset {
-    public :
-        StackedEDFDataset(const std::string &folder_path);
-        StackedEDFDataset(const std::string &folder_path,DataMode mode);
-        StackedEDFDataset(const std::string &folder_path,DataMode mode, bool load_sub_folders);
-        StackedEDFDataset(const std::string &folder_path,DataMode mode, bool load_sub_folders , std::unique_ptr<xt::Module> target_transformer);
-
-    private:
-        vector<string> labels_name;
-        bool load_sub_folders = false;
-        void load_data();
-    };
-
-
 
 }

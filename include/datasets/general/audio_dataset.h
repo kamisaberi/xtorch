@@ -48,28 +48,6 @@ namespace xt::datasets
         std::vector<int> labels;
     };
 
-    class StackedAudioDataset : public xt::datasets::Dataset
-    {
-    public :
-        StackedAudioDataset(const std::string& folder_path);
-
-        StackedAudioDataset(const std::string& folder_path, DataMode mode);
-
-        StackedAudioDataset(const std::string& folder_path, DataMode mode, bool load_sub_folders);
-
-        StackedAudioDataset(const std::string& folder_path, DataMode mode, bool load_sub_folders,
-                            std::unique_ptr<xt::Module> transformer);
-
-        StackedAudioDataset(const std::string& folder_path, DataMode mode, bool load_sub_folders,
-                            std::unique_ptr<xt::Module> transformer,
-                            std::unique_ptr<xt::Module> target_transformer);
-
-    private:
-        vector<string> labels_name;
-        bool load_sub_folders = false;
-
-        void load_data();
-    };
 }
 
 
