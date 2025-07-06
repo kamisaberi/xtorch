@@ -402,19 +402,41 @@ target_include_directories(xTorch
 
 
 
-# Link all required libraries to xTorch
-target_link_libraries(xTorch PRIVATE
-        ${TORCH_LIBRARIES} ${CURL_LIBRARIES} ${OpenCV_LIBS} ${ZLIB_LIBRARIES}
-        ${LIBTAR_LIBRARY} OpenSSL::SSL OpenSSL::Crypto LibLZMA::LibLZMA
-        ${LibArchive_LIBRARIES} ${SndFile_LIBRARIES}
+## Link all required libraries to xTorch
+#target_link_libraries(xTorch PRIVATE
+#        ${TORCH_LIBRARIES} ${CURL_LIBRARIES} ${OpenCV_LIBS} ${ZLIB_LIBRARIES}
+#        ${LIBTAR_LIBRARY} OpenSSL::SSL OpenSSL::Crypto LibLZMA::LibLZMA
+#        ${LibArchive_LIBRARIES} ${SndFile_LIBRARIES}
+#        sndfile
+#        ${ONNXRUNTIME_LIBRARY}
+#        # ${ONNXRUNTIME_LIBRARY}
+#        imgui_backend_glfw_gl3 implot
+#        PUBLIC
+#        ${LIBZIP_LIBRARIES}  # Add this line
+#)
+
+target_link_libraries(xTorch
+        PUBLIC
+        ${TORCH_LIBRARIES}    # Almost certainly public
+        ${OpenCV_LIBS}        # Likely public if you use cv::Mat in headers
+        ${LIBZIP_LIBRARIES}   # This is the direct cause of your error.
+        ${ONNXRUNTIME_LIBRARY}# Likely public if you expose ONNX features
+
+        PRIVATE
+        # These are likely implementation details not exposed in your headers.
+        ${CURL_LIBRARIES}
+        ${ZLIB_LIBRARIES}
+        ${LIBTAR_LIBRARY}
+        OpenSSL::SSL
+        OpenSSL::Crypto
+        LibLZMA::LibLZMA
+        ${LibArchive_LIBRARIES}
+        ${SndFile_LIBRARIES}
         sndfile
-        ${ONNXRUNTIME_LIBRARY}
-        # ${ONNXRUNTIME_LIBRARY}
-        imgui_backend_glfw_gl3 implot
-        ${LIBZIP_LIBRARIES}  # Add this line
-
-
+        imgui_backend_glfw_gl3
+        implot
 )
+
 
 # --- Force Linker to Ignore Errors (THE CORRECT COMMAND) ---
 # This sets the general linking flags for the target.
@@ -422,6 +444,11 @@ target_link_libraries(xTorch PRIVATE
 #set_target_properties(xTorch PROPERTIES
 #        LINK_FLAGS "-Wl,--unresolved-symbols=ignore-all"
 #)
+set_target_properties(xTorch PROPERTIES
+        LINK_FLAGS "-Wl,--no-undefined"
+)
+
+target_link_options(xTorch PRIVATE "-Wl,--no-undefined")
 
 
 # Optional CUDA paths (commented out by default)
