@@ -14,21 +14,21 @@ namespace xt::datasets {
 
         CSVFolder(const std::string &file_path, DataMode mode, vector<int> x_indices, int y_index);
 
-        CSVDataset(const std::string &file_path, DataMode mode, vector<int> x_indices, vector<int> y_indices);
+        CSVFolder(const std::string &file_path, DataMode mode, vector<int> x_indices, vector<int> y_indices);
 
-        CSVDataset(const std::string &file_path, DataMode mode, vector<string> x_titles, string y_title);
+        CSVFolder(const std::string &file_path, DataMode mode, vector<string> x_titles, string y_title);
 
-        CSVDataset(const std::string &file_path, DataMode mode, vector<string> x_titles, vector<string> y_titles);
+        CSVFolder(const std::string &file_path, DataMode mode, vector<string> x_titles, vector<string> y_titles);
 
-        CSVDataset(const std::string &file_path, DataMode mode, std::unique_ptr<xt::Module> transformer);
+        CSVFolder(const std::string &file_path, DataMode mode, std::unique_ptr<xt::Module> transformer);
 
-        CSVDataset(const std::string &file_path, DataMode mode, vector<int> x_indices, int y_index, std::unique_ptr<xt::Module> transformer);
+        CSVFolder(const std::string &file_path, DataMode mode, vector<int> x_indices, int y_index, std::unique_ptr<xt::Module> transformer);
 
-        CSVDataset(const std::string &file_path, DataMode mode, vector<int> x_indices, vector<int> y_indices, std::unique_ptr<xt::Module> transformer);
+        CSVFolder(const std::string &file_path, DataMode mode, vector<int> x_indices, vector<int> y_indices, std::unique_ptr<xt::Module> transformer);
 
-        CSVDataset(const std::string &file_path, DataMode mode, vector<string> x_titles, string y_title, std::unique_ptr<xt::Module> transformer);
+        CSVFolder(const std::string &file_path, DataMode mode, vector<string> x_titles, string y_title, std::unique_ptr<xt::Module> transformer);
 
-        CSVDataset(const std::string &file_path, DataMode mode, vector<string> x_titles, vector<string> y_titles, std::unique_ptr<xt::Module> transformer);
+        CSVFolder(const std::string &file_path, DataMode mode, vector<string> x_titles, vector<string> y_titles, std::unique_ptr<xt::Module> transformer);
 
     private:
         string file_path_;
@@ -41,21 +41,4 @@ namespace xt::datasets {
     };
 
 
-    class StackedCSVDataset : public xt::datasets::Dataset {
-    public :
-        StackedCSVDataset(const std::string &folder_path);
-
-        StackedCSVDataset(const std::string &folder_path, DataMode mode);
-
-        StackedCSVDataset(const std::string &folder_path, DataMode mode, bool load_sub_folders);
-
-        StackedCSVDataset(const std::string &folder_path, DataMode mode, bool load_sub_folders,
-                          std::unique_ptr<xt::Module> transformer);
-
-    private:
-        vector<string> labels_name;
-        bool load_sub_folders = false;
-
-        void load_data();
-    };
 }
