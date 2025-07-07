@@ -56,7 +56,10 @@ namespace xt::datasets
                 fs::remove_all(this->dataset_path);
                 should_download = true;
             }
-            should_download= false;
+            else
+            {
+                should_download = false;
+            }
         }
         cout << "cr 04" << endl;
         if (should_download)
@@ -65,7 +68,7 @@ namespace xt::datasets
             fs::create_directories(this->dataset_path);
             for (auto resource : resources)
             {
-                cout << "cr 0401"  << endl;
+                cout << "cr 0401" << endl;
                 auto [file_id , md5_hash , file_name] = resource;
                 fs::path abs_path = this->dataset_path / file_name;
                 xt::utils::download_from_google_drive(file_id, md5_hash, abs_path.string());
