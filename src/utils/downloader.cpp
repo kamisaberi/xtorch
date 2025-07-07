@@ -15,7 +15,7 @@
  */
 
 #include "../../include/utils/downloader.h"
-
+#include "include/utils/path.h" // The header we just defined
 using namespace std;
 namespace fs = std::filesystem;
 
@@ -108,9 +108,46 @@ namespace xt::utils {
      * - Converts Google Drive ID to proper URL
      * - Uses the standard download function
      */
-    std::tuple<bool, std::string> download_from_google_drive(std::string gid, std::string outPath) {
-        string url = rebuild_google_drive_link(gid);
-        auto [result, path] = download(url, outPath);
+    std::tuple<bool, std::string> download_from_google_drive(std::string file_id, std::string output) {
+
+
+
+        auto paths_opt = get_internal_library_paths();
+        const XTorchPaths& paths = *paths_opt;
+
+        std::string command = xt::quote_if_needed(paths.python_executable) + " " +
+            quote_if_needed(paths.conversion_script) + " " +
+            quote_if_needed(output_torchscript_path) +
+            " --model_name " + quote_if_needed(hf_model_name) +
+            " --batch_size " + std::to_string(batch_size) +
+            " --image_size " + std::to_string(image_size) +
+            " --verbose " + std::to_string(verbose_value) +
+            " --channels " + std::to_string(channels);
+
+
+        if (verbose == VerboseType::EVERYTHING)
+            std::cout << "[xTorch Utils] Executing model conversion command: " << command << std::endl;
+        int result = std::system(command.c_str());
+
+        if (result == 0)
+        {
+            if (verbose == VerboseType::EVERYTHING)
+                std::cout <<
+                    "[xTorch Utils] Python model conversion script executed successfully (or reported success)." <<
+                    std::endl;
+            return true;
+        }
+        else
+        {
+            if (verbose == VerboseType::ERRORS || verbose == VerboseType::EVERYTHING)
+                std::cerr << "[xTorch Utils] Python model conversion script failed or reported error. Exit code: " <<
+                    result
+                    << std::endl;
+            return false;
+        }
+
+
+
         return std::make_tuple(result, path);
     }
 } // namespace xt::utils

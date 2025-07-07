@@ -39,6 +39,8 @@ namespace xt
         // Add other paths as needed
     };
 
+    std::string quote_if_needed(const fs::path& p);
+
     /**
      * @brief Retrieves the essential installation paths for the xTorch library.
      * This function is part of libxTorch.so and determines paths relative to itself.
