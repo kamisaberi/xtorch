@@ -1,34 +1,7 @@
-import torch
-import torchvision  # Often a helpful import, though not directly used unless you add transforms
-from transformers import AutoModelForImageClassification, AutoConfig, AutoFeatureExtractor
 import sys
 import argparse
 import os
-
-
-# Wrapper class to ensure the traced model outputs only the logits (or desired output)
-class ModelWrapper(torch.nn.Module):
-    def __init__(self, model):
-        super().__init__()
-        self.model = model
-
-    def forward(self, x):
-        # The output structure can vary between Hugging Face models.
-        # Most image classification models return an object with a 'logits' attribute.
-        outputs = self.model(x)
-
-        if hasattr(outputs, 'logits'):
-            return outputs.logits
-        elif torch.is_tensor(outputs):  # Some simpler models might directly return logits tensor
-            return outputs
-        else:
-            # You might need to inspect 'outputs' for other models if this fails.
-            # e.g., print(type(outputs), dir(outputs))
-            raise TypeError(
-                f"Model output type {type(outputs)} not recognized. "
-                "Expected an object with a 'logits' attribute or a direct tensor."
-            )
-
+import gdown
 
 def main():
     parser = argparse.ArgumentParser(
