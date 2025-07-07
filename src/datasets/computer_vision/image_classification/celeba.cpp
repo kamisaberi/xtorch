@@ -56,6 +56,7 @@ namespace xt::datasets
                 fs::remove_all(this->dataset_path);
                 should_download = true;
             }
+            should_download= false;
         }
         cout << "cr 04" << endl;
         if (should_download)
