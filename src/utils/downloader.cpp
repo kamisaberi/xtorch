@@ -118,7 +118,7 @@ namespace xt::utils {
      * - Converts Google Drive ID to proper URL
      * - Uses the standard download function
      */
-    std::tuple<bool, std::string> download_from_gdrive(std::string gid, std::string outPath) {
+    std::tuple<bool, std::string> download_from_google_drive(std::string gid, std::string outPath) {
         string url = rebuild_google_drive_link(gid);
         auto [result, path] = download(url, outPath);
         return std::make_tuple(result, path);

@@ -62,5 +62,5 @@ namespace xt::utils {
      * @example 
      * auto [success, message] = download_from_gdrive("1a2b3c4d5e6f7g8h9i0j", "gdrive_file.zip");
      */
-    std::tuple<bool, std::string> download_from_gdrive(std::string gid, std::string outPath);
+    std::tuple<bool, std::string> download_from_google_drive(std::string gid, std::string outPath);
 }
