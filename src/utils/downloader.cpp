@@ -116,9 +116,9 @@ namespace xt::utils
     {
         auto paths_opt = get_internal_library_paths();
         const XTorchPaths& paths = *paths_opt;
-
+        fs::path s = fs::path("download_google_drive.py");
         std::string command = xt::quote_if_needed(paths.python_executable) + " " +
-            quote_if_needed(paths.conversion_script) + " " +
+            quote_if_needed(s) + " " +
             quote_if_needed(file_id) +
             " --md5 " + quote_if_needed(md5) +
             " --output " + quote_if_needed(output);
