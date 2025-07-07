@@ -19,8 +19,8 @@
 using namespace std;
 namespace fs = std::filesystem;
 
-namespace xt::utils {
-
+namespace xt::utils
+{
     /**
      * @brief Callback function for processing HTTP headers
      * @param buffer Pointer to received header data
@@ -32,11 +32,13 @@ namespace xt::utils {
      * This callback processes HTTP headers to extract Content-Length information.
      * Currently not used in the main download function (commented out).
      */
-    size_t header_callback(char *buffer, size_t size, size_t nitems, void *userdata) {
+    size_t header_callback(char* buffer, size_t size, size_t nitems, void* userdata)
+    {
         std::string header(buffer, size * nitems);
 
         // Look for the Content-Length header
-        if (header.find("Content-Length:") != std::string::npos) {
+        if (header.find("Content-Length:") != std::string::npos)
+        {
             size_t pos = header.find(":") + 1;
             std::string length = header.substr(pos);
             // Trim whitespace
@@ -44,7 +46,7 @@ namespace xt::utils {
             length.erase(length.find_last_not_of(" \t\n\r") + 1);
 
             // Convert to size_t and store in userdata
-            *(static_cast<size_t *>(userdata)) = std::stoul(length);
+            *(static_cast<size_t*>(userdata)) = std::stoul(length);
         }
 
         return nitems * size;
@@ -64,15 +66,17 @@ namespace xt::utils {
      * - Saves to specified output directory
      * - Basic error handling
      */
-    std::tuple<bool, std::string> download(std::string &url, std::string outPath) {
+    std::tuple<bool, std::string> download(std::string& url, std::string outPath)
+    {
         cout << url << endl;
-        CURL *curl;
-        FILE *fp;
+        CURL* curl;
+        FILE* fp;
         CURLcode res;
         size_t file_size = 0;
 
         curl = curl_easy_init();
-        if (curl) {
+        if (curl)
+        {
             string outFile = (fs::path(outPath) / fs::path(url).filename()).string();
             fp = fopen(outFile.c_str(), "wb");
             curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
@@ -108,47 +112,20 @@ namespace xt::utils {
      * - Converts Google Drive ID to proper URL
      * - Uses the standard download function
      */
-    std::tuple<bool, std::string> download_from_google_drive(std::string file_id, std::string output) {
-
-
-
+    std::tuple<bool, std::string> download_from_google_drive(std::string file_id, string md5, std::string output)
+    {
         auto paths_opt = get_internal_library_paths();
         const XTorchPaths& paths = *paths_opt;
 
         std::string command = xt::quote_if_needed(paths.python_executable) + " " +
             quote_if_needed(paths.conversion_script) + " " +
-            quote_if_needed(output_torchscript_path) +
-            " --model_name " + quote_if_needed(hf_model_name) +
-            " --batch_size " + std::to_string(batch_size) +
-            " --image_size " + std::to_string(image_size) +
-            " --verbose " + std::to_string(verbose_value) +
-            " --channels " + std::to_string(channels);
+            quote_if_needed(file_id) +
+            " --md5 " + quote_if_needed(md5) +
+            " --output " + quote_if_needed(output);
 
-
-        if (verbose == VerboseType::EVERYTHING)
-            std::cout << "[xTorch Utils] Executing model conversion command: " << command << std::endl;
         int result = std::system(command.c_str());
 
-        if (result == 0)
-        {
-            if (verbose == VerboseType::EVERYTHING)
-                std::cout <<
-                    "[xTorch Utils] Python model conversion script executed successfully (or reported success)." <<
-                    std::endl;
-            return true;
-        }
-        else
-        {
-            if (verbose == VerboseType::ERRORS || verbose == VerboseType::EVERYTHING)
-                std::cerr << "[xTorch Utils] Python model conversion script failed or reported error. Exit code: " <<
-                    result
-                    << std::endl;
-            return false;
-        }
-
-
-
-        return std::make_tuple(result, path);
+        return std::make_tuple(result, output);
     }
 } // namespace xt::utils
 
