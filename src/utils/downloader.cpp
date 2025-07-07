@@ -50,16 +50,6 @@ namespace xt::utils {
         return nitems * size;
     }
 
-    /**
-     * @brief Reconstructs Google Drive download URL from file ID
-     * @param gid Google Drive file ID
-     * @return std::string Constructed download URL
-     *
-     * Converts a Google Drive file ID into a direct download URL.
-     */
-    std::string rebuild_google_drive_link(std::string gid) {
-        return "https://drive.google.com/uc?id=" + gid;
-    }
 
     /**
      * @brief Downloads a file from a given URL

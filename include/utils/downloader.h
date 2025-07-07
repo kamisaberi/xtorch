@@ -39,16 +39,6 @@ namespace xt::utils {
      */
     std::tuple<bool, std::string> download(std::string &url, std::string outPath);
 
-    /**
-     * @brief Reconstructs a direct download link from a Google Drive shareable link
-     * @param gid The Google Drive file ID or shareable URL
-     * @return A reconstructed direct download URL
-     * @throws None
-     * @note Handles both file IDs and full Google Drive URLs
-     * @example 
-     * string directLink = rebuild_google_drive_link("1a2b3c4d5e6f7g8h9i0j");
-     */
-    std::string rebuild_google_drive_link(std::string gid);
 
     /**
      * @brief Downloads a file from Google Drive
