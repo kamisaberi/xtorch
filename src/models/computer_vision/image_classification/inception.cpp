@@ -1889,134 +1889,101 @@ namespace xt::models
     }
 
 
-    // Auxiliary Classifier
-    struct AuxClassifierImpl : torch::nn::Module
+    AuxClassifierImpl::AuxClassifierImpl(int in_channels, int num_classes)
     {
-        AuxClassifierImpl(int in_channels, int num_classes)
-        {
-            conv = register_module("conv", torch::nn::Conv2d(
-                                       torch::nn::Conv2dOptions(in_channels, 128, 1).bias(false)));
-            bn = register_module("bn", torch::nn::BatchNorm2d(128));
-            fc1 = register_module("fc1", torch::nn::Linear(128 * 4 * 4, 1024));
-            fc2 = register_module("fc2", torch::nn::Linear(1024, num_classes));
-            pool = register_module("pool", torch::nn::AvgPool2d(
-                                       torch::nn::AvgPool2dOptions(5).stride(3)));
-        }
+        conv = register_module("conv", torch::nn::Conv2d(
+                                   torch::nn::Conv2dOptions(in_channels, 128, 1).bias(false)));
+        bn = register_module("bn", torch::nn::BatchNorm2d(128));
+        fc1 = register_module("fc1", torch::nn::Linear(128 * 4 * 4, 1024));
+        fc2 = register_module("fc2", torch::nn::Linear(1024, num_classes));
+        pool = register_module("pool", torch::nn::AvgPool2d(
+                                   torch::nn::AvgPool2dOptions(5).stride(3)));
+    }
 
-        torch::Tensor forward(torch::Tensor x)
-        {
-            x = pool->forward(x);
-            x = torch::relu(bn->forward(conv->forward(x)));
-            x = x.view({x.size(0), -1});
-            x = torch::relu(fc1->forward(x));
-            x = fc2->forward(x);
-            return x;
-        }
-
-        torch::nn::Conv2d conv{nullptr};
-        torch::nn::BatchNorm2d bn{nullptr};
-        torch::nn::Linear fc1{nullptr}, fc2{nullptr};
-        torch::nn::AvgPool2d pool{nullptr};
-    };
-
-    TORCH_MODULE(AuxClassifier);
-
-
-    // Reduction-A Module
-    struct ReductionAModuleImpl : torch::nn::Module
+    torch::Tensor AuxClassifierImpl::forward(torch::Tensor x)
     {
-        ReductionAModuleImpl(int in_channels, int k, int l, int m, int n)
-        {
-            // Branch 1: 3x3 max pool
-            branch_pool = register_module("branch_pool", torch::nn::MaxPool2d(
-                                              torch::nn::MaxPool2dOptions(3).stride(2)));
+        x = pool->forward(x);
+        x = torch::relu(bn->forward(conv->forward(x)));
+        x = x.view({x.size(0), -1});
+        x = torch::relu(fc1->forward(x));
+        x = fc2->forward(x);
+        return x;
+    }
 
-            // Branch 2: 3x3 conv (stride 2)
-            branch3x3 = register_module("branch3x3", torch::nn::Conv2d(
-                                            torch::nn::Conv2dOptions(in_channels, n, 3).stride(2).bias(false)));
-            bn3x3 = register_module("bn3x3", torch::nn::BatchNorm2d(n));
 
-            // Branch 3: 1x1 conv -> 3x3 conv -> 3x3 conv (stride 2)
-            branch3x3dbl_1 = register_module("branch3x3dbl_1", torch::nn::Conv2d(
-                                                 torch::nn::Conv2dOptions(in_channels, k, 1).bias(false)));
-            bn3x3dbl_1 = register_module("bn3x3dbl_1", torch::nn::BatchNorm2d(k));
-            branch3x3dbl_2 = register_module("branch3x3dbl_2", torch::nn::Conv2d(
-                                                 torch::nn::Conv2dOptions(k, l, 3).padding(1).bias(false)));
-            bn3x3dbl_2 = register_module("bn3x3dbl_2", torch::nn::BatchNorm2d(l));
-            branch3x3dbl_3 = register_module("branch3x3dbl_3", torch::nn::Conv2d(
-                                                 torch::nn::Conv2dOptions(l, m, 3).stride(2).bias(false)));
-            bn3x3dbl_3 = register_module("bn3x3dbl_3", torch::nn::BatchNorm2d(m));
-        }
-
-        torch::Tensor forward(torch::Tensor x)
-        {
-            auto branch1 = branch_pool->forward(x);
-            auto branch2 = torch::relu(bn3x3->forward(branch3x3->forward(x)));
-            auto branch3 = torch::relu(bn3x3dbl_1->forward(branch3x3dbl_1->forward(x)));
-            branch3 = torch::relu(bn3x3dbl_2->forward(branch3x3dbl_2->forward(branch3)));
-            branch3 = torch::relu(bn3x3dbl_3->forward(branch3x3dbl_3->forward(branch3)));
-            return torch::cat({branch1, branch2, branch3}, 1);
-        }
-
-        torch::nn::MaxPool2d branch_pool{nullptr};
-        torch::nn::Conv2d branch3x3{nullptr}, branch3x3dbl_1{nullptr}, branch3x3dbl_2{nullptr}, branch3x3dbl_3{nullptr};
-        torch::nn::BatchNorm2d bn3x3{nullptr}, bn3x3dbl_1{nullptr}, bn3x3dbl_2{nullptr}, bn3x3dbl_3{nullptr};
-    };
-
-    TORCH_MODULE(ReductionAModule);
-
-    // Reduction-B Module
-    struct ReductionBModuleImpl : torch::nn::Module
+    ReductionAModuleImpl::ReductionAModuleImpl(int in_channels, int k, int l, int m, int n)
     {
-        ReductionBModuleImpl(int in_channels)
-        {
-            // Branch 1: 3x3 max pool
-            branch_pool = register_module("branch_pool", torch::nn::MaxPool2d(
-                                              torch::nn::MaxPool2dOptions(3).stride(2)));
+        // Branch 1: 3x3 max pool
+        branch_pool = register_module("branch_pool", torch::nn::MaxPool2d(
+                                          torch::nn::MaxPool2dOptions(3).stride(2)));
 
-            // Branch 2: 1x1 conv -> 3x3 conv (stride 2)
-            branch3x3_1 = register_module("branch3x3_1", torch::nn::Conv2d(
-                                              torch::nn::Conv2dOptions(in_channels, 192, 1).bias(false)));
-            bn3x3_1 = register_module("bn3x3_1", torch::nn::BatchNorm2d(192));
-            branch3x3_2 = register_module("branch3x3_2", torch::nn::Conv2d(
-                                              torch::nn::Conv2dOptions(192, 192, 3).stride(2).bias(false)));
-            bn3x3_2 = register_module("bn3x3_2", torch::nn::BatchNorm2d(192));
+        // Branch 2: 3x3 conv (stride 2)
+        branch3x3 = register_module("branch3x3", torch::nn::Conv2d(
+                                        torch::nn::Conv2dOptions(in_channels, n, 3).stride(2).bias(false)));
+        bn3x3 = register_module("bn3x3", torch::nn::BatchNorm2d(n));
 
-            // Branch 3: 1x1 conv -> 1x7 conv -> 7x1 conv -> 3x3 conv (stride 2)
-            branch7x7_1 = register_module("branch7x7_1", torch::nn::Conv2d(
-                                              torch::nn::Conv2dOptions(in_channels, 256, 1).bias(false)));
-            bn7x7_1 = register_module("bn7x7_1", torch::nn::BatchNorm2d(256));
-            branch7x7_2 = register_module("branch7x7_2", torch::nn::Conv2d(
-                                              torch::nn::Conv2dOptions(256, 256, {1, 7}).padding({0, 3}).bias(false)));
-            bn7x7_2 = register_module("bn7x7_2", torch::nn::BatchNorm2d(256));
-            branch7x7_3 = register_module("branch7x7_3", torch::nn::Conv2d(
-                                              torch::nn::Conv2dOptions(256, 320, {7, 1}).padding({3, 0}).bias(false)));
-            bn7x7_3 = register_module("bn7x7_3", torch::nn::BatchNorm2d(320));
-            branch7x7_4 = register_module("branch7x7_4", torch::nn::Conv2d(
-                                              torch::nn::Conv2dOptions(320, 320, 3).stride(2).bias(false)));
-            bn7x7_4 = register_module("bn7x7_4", torch::nn::BatchNorm2d(320));
-        }
+        // Branch 3: 1x1 conv -> 3x3 conv -> 3x3 conv (stride 2)
+        branch3x3dbl_1 = register_module("branch3x3dbl_1", torch::nn::Conv2d(
+                                             torch::nn::Conv2dOptions(in_channels, k, 1).bias(false)));
+        bn3x3dbl_1 = register_module("bn3x3dbl_1", torch::nn::BatchNorm2d(k));
+        branch3x3dbl_2 = register_module("branch3x3dbl_2", torch::nn::Conv2d(
+                                             torch::nn::Conv2dOptions(k, l, 3).padding(1).bias(false)));
+        bn3x3dbl_2 = register_module("bn3x3dbl_2", torch::nn::BatchNorm2d(l));
+        branch3x3dbl_3 = register_module("branch3x3dbl_3", torch::nn::Conv2d(
+                                             torch::nn::Conv2dOptions(l, m, 3).stride(2).bias(false)));
+        bn3x3dbl_3 = register_module("bn3x3dbl_3", torch::nn::BatchNorm2d(m));
+    }
 
-        torch::Tensor forward(torch::Tensor x)
-        {
-            auto branch1 = branch_pool->forward(x);
-            auto branch2 = torch::relu(bn3x3_1->forward(branch3x3_1->forward(x)));
-            branch2 = torch::relu(bn3x3_2->forward(branch3x3_2->forward(branch2)));
-            auto branch3 = torch::relu(bn7x7_1->forward(branch7x7_1->forward(x)));
-            branch3 = torch::relu(bn7x7_2->forward(branch7x7_2->forward(branch3)));
-            branch3 = torch::relu(bn7x7_3->forward(branch7x7_3->forward(branch3)));
-            branch3 = torch::relu(bn7x7_4->forward(branch7x7_4->forward(branch3)));
-            return torch::cat({branch1, branch2, branch3}, 1);
-        }
+    torch::Tensor ReductionAModuleImpl::forward(torch::Tensor x)
+    {
+        auto branch1 = branch_pool->forward(x);
+        auto branch2 = torch::relu(bn3x3->forward(branch3x3->forward(x)));
+        auto branch3 = torch::relu(bn3x3dbl_1->forward(branch3x3dbl_1->forward(x)));
+        branch3 = torch::relu(bn3x3dbl_2->forward(branch3x3dbl_2->forward(branch3)));
+        branch3 = torch::relu(bn3x3dbl_3->forward(branch3x3dbl_3->forward(branch3)));
+        return torch::cat({branch1, branch2, branch3}, 1);
+    }
 
-        torch::nn::MaxPool2d branch_pool{nullptr};
-        torch::nn::Conv2d branch3x3_1{nullptr}, branch3x3_2{nullptr};
-        torch::nn::Conv2d branch7x7_1{nullptr}, branch7x7_2{nullptr}, branch7x7_3{nullptr}, branch7x7_4{nullptr};
-        torch::nn::BatchNorm2d bn3x3_1{nullptr}, bn3x3_2{nullptr};
-        torch::nn::BatchNorm2d bn7x7_1{nullptr}, bn7x7_2{nullptr}, bn7x7_3{nullptr}, bn7x7_4{nullptr};
-    };
+    ReductionBModuleImpl::ReductionBModuleImpl(int in_channels)
+    {
+        // Branch 1: 3x3 max pool
+        branch_pool = register_module("branch_pool", torch::nn::MaxPool2d(
+                                          torch::nn::MaxPool2dOptions(3).stride(2)));
 
-    TORCH_MODULE(ReductionBModule);
+        // Branch 2: 1x1 conv -> 3x3 conv (stride 2)
+        branch3x3_1 = register_module("branch3x3_1", torch::nn::Conv2d(
+                                          torch::nn::Conv2dOptions(in_channels, 192, 1).bias(false)));
+        bn3x3_1 = register_module("bn3x3_1", torch::nn::BatchNorm2d(192));
+        branch3x3_2 = register_module("branch3x3_2", torch::nn::Conv2d(
+                                          torch::nn::Conv2dOptions(192, 192, 3).stride(2).bias(false)));
+        bn3x3_2 = register_module("bn3x3_2", torch::nn::BatchNorm2d(192));
+
+        // Branch 3: 1x1 conv -> 1x7 conv -> 7x1 conv -> 3x3 conv (stride 2)
+        branch7x7_1 = register_module("branch7x7_1", torch::nn::Conv2d(
+                                          torch::nn::Conv2dOptions(in_channels, 256, 1).bias(false)));
+        bn7x7_1 = register_module("bn7x7_1", torch::nn::BatchNorm2d(256));
+        branch7x7_2 = register_module("branch7x7_2", torch::nn::Conv2d(
+                                          torch::nn::Conv2dOptions(256, 256, {1, 7}).padding({0, 3}).bias(false)));
+        bn7x7_2 = register_module("bn7x7_2", torch::nn::BatchNorm2d(256));
+        branch7x7_3 = register_module("branch7x7_3", torch::nn::Conv2d(
+                                          torch::nn::Conv2dOptions(256, 320, {7, 1}).padding({3, 0}).bias(false)));
+        bn7x7_3 = register_module("bn7x7_3", torch::nn::BatchNorm2d(320));
+        branch7x7_4 = register_module("branch7x7_4", torch::nn::Conv2d(
+                                          torch::nn::Conv2dOptions(320, 320, 3).stride(2).bias(false)));
+        bn7x7_4 = register_module("bn7x7_4", torch::nn::BatchNorm2d(320));
+    }
+
+    torch::Tensor ReductionBModuleImpl::forward(torch::Tensor x)
+    {
+        auto branch1 = branch_pool->forward(x);
+        auto branch2 = torch::relu(bn3x3_1->forward(branch3x3_1->forward(x)));
+        branch2 = torch::relu(bn3x3_2->forward(branch3x3_2->forward(branch2)));
+        auto branch3 = torch::relu(bn7x7_1->forward(branch7x7_1->forward(x)));
+        branch3 = torch::relu(bn7x7_2->forward(branch7x7_2->forward(branch3)));
+        branch3 = torch::relu(bn7x7_3->forward(branch7x7_3->forward(branch3)));
+        branch3 = torch::relu(bn7x7_4->forward(branch7x7_4->forward(branch3)));
+        return torch::cat({branch1, branch2, branch3}, 1);
+    }
 
 
     // InceptionV1 (GoogLeNet)
