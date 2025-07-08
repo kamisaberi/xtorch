@@ -2086,7 +2086,7 @@ namespace xt::models
     // }
 
 
-    InceptionV2Impl::InceptionV2Impl(int num_classes = 10)
+    InceptionV2Impl::InceptionV2Impl(int num_classes )
     {
         // Stem
         conv1 = register_module("conv1", torch::nn::Conv2d(
