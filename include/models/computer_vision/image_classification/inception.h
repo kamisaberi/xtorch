@@ -29,62 +29,9 @@ namespace xt::models
     // Inception-A Module (Basic Inception block with factorized convolutions)
     struct InceptionAModuleImpl : torch::nn::Module
     {
-        InceptionAModuleImpl(int in_channels, int pool_features)
-        {
-            // Branch 1: 1x1 conv
-            branch1x1 = register_module("branch1x1", torch::nn::Conv2d(
-                                            torch::nn::Conv2dOptions(in_channels, 64, 1).bias(false)));
-            bn1x1 = register_module("bn1x1", torch::nn::BatchNorm2d(64));
+        InceptionAModuleImpl(int in_channels, int pool_features);
 
-            // Branch 2: 1x1 conv -> 3x3 conv
-            branch3x3_1 = register_module("branch3x3_1", torch::nn::Conv2d(
-                                              torch::nn::Conv2dOptions(in_channels, 48, 1).bias(false)));
-            bn3x3_1 = register_module("bn3x3_1", torch::nn::BatchNorm2d(48));
-            branch3x3_2 = register_module("branch3x3_2", torch::nn::Conv2d(
-                                              torch::nn::Conv2dOptions(48, 64, 3).padding(1).bias(false)));
-            bn3x3_2 = register_module("bn3x3_2", torch::nn::BatchNorm2d(64));
-
-            // Branch 3: 1x1 conv -> 3x3 conv -> 3x3 conv
-            branch3x3dbl_1 = register_module("branch3x3dbl_1", torch::nn::Conv2d(
-                                                 torch::nn::Conv2dOptions(in_channels, 64, 1).bias(false)));
-            bn3x3dbl_1 = register_module("bn3x3dbl_1", torch::nn::BatchNorm2d(64));
-            branch3x3dbl_2 = register_module("branch3x3dbl_2", torch::nn::Conv2d(
-                                                 torch::nn::Conv2dOptions(64, 96, 3).padding(1).bias(false)));
-            bn3x3dbl_2 = register_module("bn3x3dbl_2", torch::nn::BatchNorm2d(96));
-            branch3x3dbl_3 = register_module("branch3x3dbl_3", torch::nn::Conv2d(
-                                                 torch::nn::Conv2dOptions(96, 96, 3).padding(1).bias(false)));
-            bn3x3dbl_3 = register_module("bn3x3dbl_3", torch::nn::BatchNorm2d(96));
-
-            // Branch 4: Avg pool -> 1x1 conv
-            branch_pool = register_module("branch_pool", torch::nn::AvgPool2d(
-                                              torch::nn::AvgPool2dOptions(3).stride(1).padding(1)));
-            branch_pool_conv = register_module("branch_pool_conv", torch::nn::Conv2d(
-                                                   torch::nn::Conv2dOptions(
-                                                       in_channels, pool_features, 1).bias(false)));
-            bn_pool = register_module("bn_pool", torch::nn::BatchNorm2d(pool_features));
-        }
-
-        torch::Tensor forward(torch::Tensor x)
-        {
-            // Branch 1
-            auto branch1 = torch::relu(bn1x1->forward(branch1x1->forward(x)));
-
-            // Branch 2
-            auto branch2 = torch::relu(bn3x3_1->forward(branch3x3_1->forward(x)));
-            branch2 = torch::relu(bn3x3_2->forward(branch3x3_2->forward(branch2)));
-
-            // Branch 3
-            auto branch3 = torch::relu(bn3x3dbl_1->forward(branch3x3dbl_1->forward(x)));
-            branch3 = torch::relu(bn3x3dbl_2->forward(branch3x3dbl_2->forward(branch3)));
-            branch3 = torch::relu(bn3x3dbl_3->forward(branch3x3dbl_3->forward(branch3)));
-
-            // Branch 4
-            auto branch4 = branch_pool->forward(x);
-            branch4 = torch::relu(bn_pool->forward(branch_pool_conv->forward(branch4)));
-
-            // Concatenate along channel dimension
-            return torch::cat({branch1, branch2, branch3, branch4}, 1);
-        }
+        torch::Tensor forward(torch::Tensor x);
 
         torch::nn::Conv2d branch1x1{nullptr}, branch3x3_1{nullptr}, branch3x3_2{nullptr};
         torch::nn::Conv2d branch3x3dbl_1{nullptr}, branch3x3dbl_2{nullptr}, branch3x3dbl_3{nullptr};
