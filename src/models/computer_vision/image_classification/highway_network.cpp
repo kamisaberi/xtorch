@@ -192,27 +192,63 @@ using namespace std;
 // }
 
 
-namespace xt::models
-{
-    HighwayNetwork::HighwayNetwork(int num_classes, int in_channels)
-    {
+namespace xt::models {
+    // Highway Layer
+    HighwayLayerImpl::HighwayLayerImpl(int input_size) {
+        // Transform gate: W_T * x + b_T
+        transform = register_module("transform", torch::nn::Linear(input_size, input_size));
+        // Plain layer: W * x + b
+        plain = register_module("plain", torch::nn::Linear(input_size, input_size));
+        // Initialize transform gate bias to encourage carrying input initially
+        transform->bias.data().fill_(-2.0);
     }
 
-    HighwayNetwork::HighwayNetwork(int num_classes, int in_channels, std::vector<int64_t> input_shape)
-    {
+    torch::Tensor HighwayLayerImpl::forward(torch::Tensor x) {
+        // Transform gate output: sigmoid(W_T * x + b_T)
+        auto T = torch::sigmoid(transform->forward(x));
+        // Plain output: relu(W * x + b)
+        auto H = torch::relu(plain->forward(x));
+        // Highway output: T * H + (1 - T) * x
+        return T * H + (1.0 - T) * x;
     }
 
-    void HighwayNetwork::reset()
-    {
+    HighwayNetworkImpl::HighwayNetworkImpl(int input_size, int num_classes, int num_layers) {
+        // Input layer
+        input_layer = register_module("input_layer", torch::nn::Linear(input_size, input_size));
+
+        // Highway layers
+        for (int i = 0; i < num_layers; ++i) {
+            layers->push_back(HighwayLayer(input_size));
+            register_module("highway_" + std::to_string(i), layers->back());
+        }
+
+        // Output layer
+        output_layer = register_module("output_layer", torch::nn::Linear(input_size, num_classes));
     }
 
-    auto HighwayNetwork::forward(std::initializer_list<std::any> tensors) -> std::any
-    {
-        std::vector<std::any> any_vec(tensors);
+    torch::Tensor HighwayNetworkImpl::forward(torch::Tensor x) {
+        x = torch::relu(input_layer->forward(x));
+        for (auto &layer: *layers) {
+            x = layer->forward(x);
+        }
+        x = output_layer->forward(x);
+        return x;
+    }
 
-        std::vector<torch::Tensor> tensor_vec;
-        for (const auto& item : any_vec)
-        {
+    HighwayNetwork::HighwayNetwork(int num_classes, int in_channels) {
+    }
+
+    HighwayNetwork::HighwayNetwork(int num_classes, int in_channels, std::vector <int64_t> input_shape) {
+    }
+
+    void HighwayNetwork::reset() {
+    }
+
+    auto HighwayNetwork::forward(std::initializer_list <std::any> tensors) -> std::any {
+        std::vector <std::any> any_vec(tensors);
+
+        std::vector <torch::Tensor> tensor_vec;
+        for (const auto &item: any_vec) {
             tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
         }
 
