@@ -92,6 +92,22 @@ namespace xt::models {
     TORCH_MODULE(DenseNet201);
 
 
+    // DenseNet264
+    struct DenseNet264Impl : torch::nn::Module {
+        DenseNet264Impl(int num_classes = 10, int growth_rate = 32, int init_channels = 64);
+
+        torch::Tensor forward(torch::Tensor x);
+
+        torch::nn::Conv2d conv0{nullptr};
+        torch::nn::BatchNorm2d bn0{nullptr}, bn_final{nullptr};
+        DenseBlock dense1{nullptr}, dense2{nullptr}, dense3{nullptr}, dense4{nullptr};
+        TransitionLayer trans1{nullptr}, trans2{nullptr}, trans3{nullptr};
+        torch::nn::Linear fc{nullptr};
+    };
+
+    TORCH_MODULE(DenseNet264);
+
+
     struct DenseNet121 : xt::Cloneable<DenseNet121> {
     private:
 
