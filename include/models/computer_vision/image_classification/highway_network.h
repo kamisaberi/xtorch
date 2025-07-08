@@ -22,7 +22,7 @@ namespace xt::models {
         torch::Tensor forward(torch::Tensor x);
 
         torch::nn::Linear input_layer{nullptr}, output_layer{nullptr};
-        torch::nn::ModuleList layers{torch::nn::ModuleList()};
+        vector<xt::Module> layers;
     };
 
     TORCH_MODULE(HighwayNetwork);

@@ -192,9 +192,11 @@ using namespace std;
 // }
 
 
-namespace xt::models {
+namespace xt::models
+{
     // Highway Layer
-    HighwayLayerImpl::HighwayLayerImpl(int input_size) {
+    HighwayLayerImpl::HighwayLayerImpl(int input_size)
+    {
         // Transform gate: W_T * x + b_T
         transform = register_module("transform", torch::nn::Linear(input_size, input_size));
         // Plain layer: W * x + b
@@ -203,7 +205,8 @@ namespace xt::models {
         transform->bias.data().fill_(-2.0);
     }
 
-    torch::Tensor HighwayLayerImpl::forward(torch::Tensor x) {
+    torch::Tensor HighwayLayerImpl::forward(torch::Tensor x)
+    {
         // Transform gate output: sigmoid(W_T * x + b_T)
         auto T = torch::sigmoid(transform->forward(x));
         // Plain output: relu(W * x + b)
@@ -212,24 +215,29 @@ namespace xt::models {
         return T * H + (1.0 - T) * x;
     }
 
-    HighwayNetworkImpl::HighwayNetworkImpl(int input_size, int num_classes, int num_layers) {
+    HighwayNetworkImpl::HighwayNetworkImpl(int input_size, int num_classes, int num_layers)
+    {
         // Input layer
         input_layer = register_module("input_layer", torch::nn::Linear(input_size, input_size));
 
         // Highway layers
-        for (int i = 0; i < num_layers; ++i) {
-            layers->push_back(HighwayLayer(input_size));
-            register_module("highway_" + std::to_string(i), layers[layers->size()-1]);
+        for (int i = 0; i < num_layers; ++i)
+        {
+            layers.push_back(HighwayLayer(input_size));
+            register_module("highway_" + std::to_string(i), layers[layers->size() - 1]);
         }
 
         // Output layer
         output_layer = register_module("output_layer", torch::nn::Linear(input_size, num_classes));
     }
 
-    torch::Tensor HighwayNetworkImpl::forward(torch::Tensor x) {
+    torch::Tensor HighwayNetworkImpl::forward(torch::Tensor x)
+    {
         x = torch::relu(input_layer->forward(x));
-        for (auto &layer: *layers) {
-            x = layer->forward(x);
+        for (auto& layer : layers)
+        {
+            layer.forward({x});
+            x = std::any_cast<torch::Tensor>(layer.forward({x}));
         }
         x = output_layer->forward(x);
         return x;
