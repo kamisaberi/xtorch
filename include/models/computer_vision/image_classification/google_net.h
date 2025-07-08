@@ -18,7 +18,6 @@ namespace xt::models
         torch::nn::BatchNorm2d bn1x1{nullptr}, bn3x3_reduce{nullptr}, bn3x3{nullptr};
         torch::nn::BatchNorm2d bn5x5_reduce{nullptr}, bn5x5{nullptr}, bn_pool_proj{nullptr};
         torch::nn::MaxPool2d pool{nullptr};
-        torch::nn::Conv2d pool_proj{nullptr};
     };
 
     TORCH_MODULE(InceptionModule);
