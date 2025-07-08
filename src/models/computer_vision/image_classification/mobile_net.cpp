@@ -661,10 +661,7 @@ namespace xt::models
 {
 
 
-        // Depthwise Separable Convolution
-    struct DepthwiseSeparableConvImpl : torch::nn::Module
-    {
-        DepthwiseSeparableConvImpl(int in_channels, int out_channels, int stride)
+        DepthwiseSeparableConvImpl::DepthwiseSeparableConvImpl(int in_channels, int out_channels, int stride)
         {
             dw_conv = register_module("dw_conv", torch::nn::Conv2d(
                                           torch::nn::Conv2dOptions(in_channels, in_channels, 3).stride(stride).
@@ -675,23 +672,14 @@ namespace xt::models
             pw_bn = register_module("pw_bn", torch::nn::BatchNorm2d(out_channels));
         }
 
-        torch::Tensor forward(torch::Tensor x)
+        torch::Tensor DepthwiseSeparableConvImpl::forward(torch::Tensor x)
         {
             x = torch::relu(dw_bn->forward(dw_conv->forward(x))); // Depthwise
             x = torch::relu(pw_bn->forward(pw_conv->forward(x))); // Pointwise
             return x;
         }
 
-        torch::nn::Conv2d dw_conv{nullptr}, pw_conv{nullptr};
-        torch::nn::BatchNorm2d dw_bn{nullptr}, pw_bn{nullptr};
-    };
-
-    TORCH_MODULE(DepthwiseSeparableConv);
-
-    // Simplified MobileNetV1
-    struct MobileNetV1Impl : torch::nn::Module
-    {
-        MobileNetV1Impl(int in_channels, int num_classes)
+        MobileNetV1Impl::MobileNetV1Impl(int in_channels, int num_classes)
         {
             // Stem
             stem_conv = register_module("stem_conv", torch::nn::Conv2d(
@@ -712,7 +700,7 @@ namespace xt::models
             fc = register_module("fc", torch::nn::Linear(256, num_classes));
         }
 
-        torch::Tensor forward(torch::Tensor x)
+        torch::Tensor MobileNetV1Impl::forward(torch::Tensor x)
         {
             // x: [batch, in_channels, 32, 32]
             x = torch::relu(stem_bn->forward(stem_conv->forward(x))); // [batch, 32, 16, 16]
@@ -722,14 +710,6 @@ namespace xt::models
             return x;
         }
 
-        torch::nn::Conv2d stem_conv{nullptr};
-        torch::nn::BatchNorm2d stem_bn{nullptr};
-        torch::nn::Sequential blocks{nullptr};
-        torch::nn::AdaptiveAvgPool2d pool{nullptr};
-        torch::nn::Linear fc{nullptr};
-    };
-
-    TORCH_MODULE(MobileNetV1);
 
     // Inverted Residual Block
     struct InvertedResidualBlockImpl : torch::nn::Module
