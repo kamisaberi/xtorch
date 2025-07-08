@@ -3,40 +3,42 @@
 #include "../../common.h"
 
 
-namespace xt::models {
+namespace xt::models
+{
+    // Inception Module
+    struct InceptionModuleImpl : torch::nn::Module
+    {
+        InceptionModuleImpl(int in_channels, int ch1x1, int ch3x3red, int ch3x3, int ch5x5red, int ch5x5,
+                            int pool_proj_count);
 
-        // Inception Module
-        struct InceptionModuleImpl : torch::nn::Module {
-                InceptionModuleImpl(int in_channels, int ch1x1, int ch3x3red, int ch3x3, int ch5x5red, int ch5x5,
-                                    int pool_proj);
+        torch::Tensor forward(torch::Tensor x);
 
-                torch::Tensor forward(torch::Tensor x);
+        torch::nn::Conv2d conv1x1{nullptr}, conv3x3_reduce{nullptr}, conv3x3{nullptr};
+        torch::nn::Conv2d conv5x5_reduce{nullptr}, conv5x5{nullptr}, pool_proj{nullptr};
+        torch::nn::BatchNorm2d bn1x1{nullptr}, bn3x3_reduce{nullptr}, bn3x3{nullptr};
+        torch::nn::BatchNorm2d bn5x5_reduce{nullptr}, bn5x5{nullptr}, bn_pool_proj{nullptr};
+        torch::nn::MaxPool2d pool{nullptr};
+        torch::nn::Conv2d pool_proj{nullptr};
+    };
 
-                torch::nn::Conv2d conv1x1{nullptr}, conv3x3_reduce{nullptr}, conv3x3{nullptr};
-                torch::nn::Conv2d conv5x5_reduce{nullptr}, conv5x5{nullptr}, pool_proj{nullptr};
-                torch::nn::BatchNorm2d bn1x1{nullptr}, bn3x3_reduce{nullptr}, bn3x3{nullptr};
-                torch::nn::BatchNorm2d bn5x5_reduce{nullptr}, bn5x5{nullptr}, bn_pool_proj{nullptr};
-                torch::nn::MaxPool2d pool{nullptr};
-        };
+    TORCH_MODULE(InceptionModule);
 
-        TORCH_MODULE(InceptionModule);
+    // Simplified GoogLeNet
+    struct GoogLeNetImpl : torch::nn::Module
+    {
+        GoogLeNetImpl(int in_channels, int num_classes);
 
-        // Simplified GoogLeNet
-        struct GoogLeNetImpl : torch::nn::Module {
-                GoogLeNetImpl(int in_channels, int num_classes);
+        torch::Tensor forward(torch::Tensor x);
 
-                torch::Tensor forward(torch::Tensor x);
+        torch::nn::Conv2d stem_conv{nullptr};
+        torch::nn::BatchNorm2d stem_bn{nullptr};
+        InceptionModule inception1{nullptr}, inception2{nullptr};
+        torch::nn::MaxPool2d pool{nullptr};
+        torch::nn::AdaptiveAvgPool2d global_pool{nullptr};
+        torch::nn::Linear fc{nullptr};
+    };
 
-                torch::nn::Conv2d stem_conv{nullptr};
-                torch::nn::BatchNorm2d stem_bn{nullptr};
-                InceptionModule inception1{nullptr}, inception2{nullptr};
-                torch::nn::MaxPool2d pool{nullptr};
-                torch::nn::AdaptiveAvgPool2d global_pool{nullptr};
-                torch::nn::Linear fc{nullptr};
-        };
-
-        TORCH_MODULE(GoogLeNet);
-
+    TORCH_MODULE(GoogLeNet);
 
 
     // struct GoogLeNet : xt::Cloneable<GoogLeNet> {
@@ -51,6 +53,4 @@ namespace xt::models {
     //
     //     void reset() override;
     // };
-
-
 }

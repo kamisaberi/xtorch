@@ -226,7 +226,7 @@ namespace xt::models {
 
     // Inception Module
     InceptionModuleImpl::InceptionModuleImpl(int in_channels, int ch1x1, int ch3x3red, int ch3x3, int ch5x5red,
-                                             int ch5x5, int pool_proj) {
+                                             int ch5x5, int pool_proj_count) {
         // Branch 1: 1x1 conv
         conv1x1 = register_module("conv1x1", torch::nn::Conv2d(
                 torch::nn::Conv2dOptions(in_channels, ch1x1, 1).stride(1)));
@@ -252,8 +252,8 @@ namespace xt::models {
         pool = register_module("pool", torch::nn::MaxPool2d(
                 torch::nn::MaxPool2dOptions(3).stride(1).padding(1)));
         pool_proj = register_module("pool_proj", torch::nn::Conv2d(
-                torch::nn::Conv2dOptions(in_channels, pool_proj, 1).stride(1)));
-        bn_pool_proj = register_module("bn_pool_proj", torch::nn::BatchNorm2d(pool_proj));
+                torch::nn::Conv2dOptions(in_channels, pool_proj_count, 1).stride(1)));
+        bn_pool_proj = register_module("bn_pool_proj", torch::nn::BatchNorm2d(pool_proj_count));
     }
 
     torch::Tensor InceptionModuleImpl::forward(torch::Tensor x) {
