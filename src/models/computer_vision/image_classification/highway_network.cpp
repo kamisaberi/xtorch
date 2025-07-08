@@ -224,7 +224,7 @@ namespace xt::models
         for (int i = 0; i < num_layers; ++i)
         {
             layers.push_back(HighwayLayer(input_size));
-            register_module("highway_" + std::to_string(i), layers[layers->size() - 1]);
+            register_module("highway_" + std::to_string(i), layers[layers.size() - 1]);
         }
 
         // Output layer
