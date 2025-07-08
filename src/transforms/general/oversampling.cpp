@@ -9,7 +9,8 @@ namespace xt::transforms::general {
     }
 
     auto OverSampling::forward(std::initializer_list <std::any> tensors) -> std::any {
-        return torch::zeros(10);
+        //TODO
+        //return torch::zeros(10);
     }
 
 
