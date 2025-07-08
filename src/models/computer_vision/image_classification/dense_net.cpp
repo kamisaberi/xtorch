@@ -4,7 +4,6 @@
 using namespace std;
 
 
-
 // #include <torch/torch.h>
 // #include <iostream>
 // #include <vector>
@@ -266,8 +265,6 @@ using namespace std;
 //
 //     return 0;
 // }
-
-
 
 
 // #include <torch/torch.h>
@@ -533,11 +530,6 @@ using namespace std;
 // }
 
 
-
-
-
-
-
 // #include <torch/torch.h>
 // #include <iostream>
 // #include <vector>
@@ -799,11 +791,6 @@ using namespace std;
 //
 //     return 0;
 // }
-
-
-
-
-
 
 
 //
@@ -1070,21 +1057,22 @@ using namespace std;
 // }
 
 
-
-namespace xt::models {
-
+namespace xt::models
+{
     // Dense Layer (Bottleneck: 1x1 conv -> 3x3 conv)
-    DenseLayerImpl::DenseLayerImpl(int in_channels, int growth_rate) {
+    DenseLayerImpl::DenseLayerImpl(int in_channels, int growth_rate)
+    {
         bn1 = register_module("bn1", torch::nn::BatchNorm2d(in_channels));
         conv1 = register_module("conv1", torch::nn::Conv2d(
-                torch::nn::Conv2dOptions(in_channels, 4 * growth_rate, 1).bias(false)));
+                                    torch::nn::Conv2dOptions(in_channels, 4 * growth_rate, 1).bias(false)));
         bn2 = register_module("bn2", torch::nn::BatchNorm2d(4 * growth_rate));
         conv2 = register_module("conv2", torch::nn::Conv2d(
-                torch::nn::Conv2dOptions(4 * growth_rate, growth_rate, 3).padding(1).bias(false)));
+                                    torch::nn::Conv2dOptions(4 * growth_rate, growth_rate, 3).padding(1).bias(false)));
     }
 
 
-    torch::Tensor DenseLayerImpl::forward(torch::Tensor x) {
+    torch::Tensor DenseLayerImpl::forward(torch::Tensor x)
+    {
         auto out = torch::relu(bn1->forward(x));
         out = conv1->forward(out);
         out = torch::relu(bn2->forward(out));
@@ -1093,29 +1081,35 @@ namespace xt::models {
     }
 
     // Dense Block
-    DenseBlockImpl::DenseBlockImpl(int num_layers, int in_channels, int growth_rate) {
-        for (int i = 0; i < num_layers; ++i) {
+    DenseBlockImpl::DenseBlockImpl(int num_layers, int in_channels, int growth_rate)
+    {
+        for (int i = 0; i < num_layers; ++i)
+        {
             layers->push_back(DenseLayer(in_channels + i * growth_rate, growth_rate));
-            register_module("denselayer_" + std::to_string(i), layers->back());
+            register_module("denselayer_" + std::to_string(i), layers[layers->size() - 1]);
         }
     }
 
-    torch::Tensor DenseBlockImpl::forward(torch::Tensor x) {
-        for (auto &layer: *layers) {
+    torch::Tensor DenseBlockImpl::forward(torch::Tensor x)
+    {
+        for (auto& layer : *layers)
+        {
             x = layer->forward(x);
         }
         return x;
     }
 
-    TransitionLayerImpl::TransitionLayerImpl(int in_channels, int out_channels) {
+    TransitionLayerImpl::TransitionLayerImpl(int in_channels, int out_channels)
+    {
         bn = register_module("bn", torch::nn::BatchNorm2d(in_channels));
         conv = register_module("conv", torch::nn::Conv2d(
-                torch::nn::Conv2dOptions(in_channels, out_channels, 1).bias(false)));
+                                   torch::nn::Conv2dOptions(in_channels, out_channels, 1).bias(false)));
         pool = register_module("pool", torch::nn::AvgPool2d(
-                torch::nn::AvgPool2dOptions(2).stride(2)));
+                                   torch::nn::AvgPool2dOptions(2).stride(2)));
     }
 
-    torch::Tensor TransitionLayerImpl::forward(torch::Tensor x) {
+    torch::Tensor TransitionLayerImpl::forward(torch::Tensor x)
+    {
         x = torch::relu(bn->forward(x));
         x = conv->forward(x);
         x = pool->forward(x);
@@ -1123,10 +1117,11 @@ namespace xt::models {
     }
 
     // DenseNet121
-    DenseNet121Impl::DenseNet121Impl(int num_classes = 10, int growth_rate = 32, int init_channels = 64) {
+    DenseNet121Impl::DenseNet121Impl(int num_classes, int growth_rate, int init_channels)
+    {
         // Initial conv layer
         conv0 = register_module("conv0", torch::nn::Conv2d(
-                torch::nn::Conv2dOptions(3, init_channels, 3).stride(1).padding(1).bias(false)));
+                                    torch::nn::Conv2dOptions(3, init_channels, 3).stride(1).padding(1).bias(false)));
         bn0 = register_module("bn0", torch::nn::BatchNorm2d(init_channels));
 
         // Dense blocks and transition layers
@@ -1154,7 +1149,8 @@ namespace xt::models {
         fc = register_module("fc", torch::nn::Linear(num_features, num_classes));
     }
 
-    torch::Tensor DenseNet121Impl::forward(torch::Tensor x) {
+    torch::Tensor DenseNet121Impl::forward(torch::Tensor x)
+    {
         x = torch::relu(bn0->forward(conv0->forward(x))); // [batch, 64, 32, 32]
         x = dense1->forward(x);
         x = trans1->forward(x); // [batch, num_features/2, 16, 16]
@@ -1171,33 +1167,34 @@ namespace xt::models {
     }
 
 
-    DenseNet121::DenseNet121(int num_classes, int in_channels) {
-    }
-
-    DenseNet121::DenseNet121(int num_classes, int in_channels, std::vector <int64_t> input_shape) {
-    }
-
-    void DenseNet121::reset() {
-    }
-
-    auto DenseNet121::forward(std::initializer_list <std::any> tensors) -> std::any {
-        std::vector <std::any> any_vec(tensors);
-
-        std::vector <torch::Tensor> tensor_vec;
-        for (const auto &item: any_vec) {
-            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
-        }
-
-        torch::Tensor x = tensor_vec[0];
-
-        return x;
-    }
+    // DenseNet121::DenseNet121(int num_classes, int in_channels) {
+    // }
+    //
+    // DenseNet121::DenseNet121(int num_classes, int in_channels, std::vector <int64_t> input_shape) {
+    // }
+    //
+    // void DenseNet121::reset() {
+    // }
+    //
+    // auto DenseNet121::forward(std::initializer_list <std::any> tensors) -> std::any {
+    //     std::vector <std::any> any_vec(tensors);
+    //
+    //     std::vector <torch::Tensor> tensor_vec;
+    //     for (const auto &item: any_vec) {
+    //         tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+    //     }
+    //
+    //     torch::Tensor x = tensor_vec[0];
+    //
+    //     return x;
+    // }
 
     // DenseNet169
-    DenseNet169Impl::DenseNet169Impl(int num_classes = 10, int growth_rate = 32, int init_channels = 64) {
+    DenseNet169Impl::DenseNet169Impl(int num_classes, int growth_rate, int init_channels)
+    {
         // Initial conv layer
         conv0 = register_module("conv0", torch::nn::Conv2d(
-                torch::nn::Conv2dOptions(3, init_channels, 3).stride(1).padding(1).bias(false)));
+                                    torch::nn::Conv2dOptions(3, init_channels, 3).stride(1).padding(1).bias(false)));
         bn0 = register_module("bn0", torch::nn::BatchNorm2d(init_channels));
 
         // Dense blocks and transition layers
@@ -1225,7 +1222,8 @@ namespace xt::models {
         fc = register_module("fc", torch::nn::Linear(num_features, num_classes));
     }
 
-    torch::Tensor DenseNet169Impl::forward(torch::Tensor x) {
+    torch::Tensor DenseNet169Impl::forward(torch::Tensor x)
+    {
         x = torch::relu(bn0->forward(conv0->forward(x))); // [batch, 64, 32, 32]
         x = dense1->forward(x);
         x = trans1->forward(x); // [batch, num_features/2, 16, 16]
@@ -1241,34 +1239,35 @@ namespace xt::models {
         return x;
     }
 
-    DenseNet169::DenseNet169(int num_classes, int in_channels) {
-    }
-
-    DenseNet169::DenseNet169(int num_classes, int in_channels, std::vector <int64_t> input_shape) {
-    }
-
-    void DenseNet169::reset() {
-    }
-
-    auto DenseNet169::forward(std::initializer_list <std::any> tensors) -> std::any {
-        std::vector <std::any> any_vec(tensors);
-
-        std::vector <torch::Tensor> tensor_vec;
-        for (const auto &item: any_vec) {
-            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
-        }
-
-        torch::Tensor x = tensor_vec[0];
-
-        return x;
-    }
+    // DenseNet169::DenseNet169(int num_classes, int in_channels) {
+    // }
+    //
+    // DenseNet169::DenseNet169(int num_classes, int in_channels, std::vector <int64_t> input_shape) {
+    // }
+    //
+    // void DenseNet169::reset() {
+    // }
+    //
+    // auto DenseNet169::forward(std::initializer_list <std::any> tensors) -> std::any {
+    //     std::vector <std::any> any_vec(tensors);
+    //
+    //     std::vector <torch::Tensor> tensor_vec;
+    //     for (const auto &item: any_vec) {
+    //         tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+    //     }
+    //
+    //     torch::Tensor x = tensor_vec[0];
+    //
+    //     return x;
+    // }
 
 
     // DenseNet201
-    DenseNet201Impl::DenseNet201Impl(int num_classes = 10, int growth_rate = 32, int init_channels = 64) {
+    DenseNet201Impl::DenseNet201Impl(int num_classes, int growth_rate, int init_channels)
+    {
         // Initial conv layer
         conv0 = register_module("conv0", torch::nn::Conv2d(
-                torch::nn::Conv2dOptions(3, init_channels, 3).stride(1).padding(1).bias(false)));
+                                    torch::nn::Conv2dOptions(3, init_channels, 3).stride(1).padding(1).bias(false)));
         bn0 = register_module("bn0", torch::nn::BatchNorm2d(init_channels));
 
         // Dense blocks and transition layers
@@ -1296,7 +1295,8 @@ namespace xt::models {
         fc = register_module("fc", torch::nn::Linear(num_features, num_classes));
     }
 
-    torch::Tensor DenseNet201Impl::forward(torch::Tensor x) {
+    torch::Tensor DenseNet201Impl::forward(torch::Tensor x)
+    {
         x = torch::relu(bn0->forward(conv0->forward(x))); // [batch, 64, 32, 32]
         x = dense1->forward(x);
         x = trans1->forward(x); // [batch, num_features/2, 16, 16]
@@ -1313,34 +1313,35 @@ namespace xt::models {
     }
 
 
-    DenseNet201::DenseNet201(int num_classes, int in_channels) {
-    }
-
-    DenseNet201::DenseNet201(int num_classes, int in_channels, std::vector <int64_t> input_shape) {
-    }
-
-    void DenseNet201::reset() {
-    }
-
-    auto DenseNet201::forward(std::initializer_list <std::any> tensors) -> std::any {
-        std::vector <std::any> any_vec(tensors);
-
-        std::vector <torch::Tensor> tensor_vec;
-        for (const auto &item: any_vec) {
-            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
-        }
-
-        torch::Tensor x = tensor_vec[0];
-
-        return x;
-    }
+    // DenseNet201::DenseNet201(int num_classes, int in_channels) {
+    // }
+    //
+    // DenseNet201::DenseNet201(int num_classes, int in_channels, std::vector <int64_t> input_shape) {
+    // }
+    //
+    // void DenseNet201::reset() {
+    // }
+    //
+    // auto DenseNet201::forward(std::initializer_list <std::any> tensors) -> std::any {
+    //     std::vector <std::any> any_vec(tensors);
+    //
+    //     std::vector <torch::Tensor> tensor_vec;
+    //     for (const auto &item: any_vec) {
+    //         tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+    //     }
+    //
+    //     torch::Tensor x = tensor_vec[0];
+    //
+    //     return x;
+    // }
 
 
     // DenseNet264
-    DenseNet264Impl::DenseNet264Impl(int num_classes = 10, int growth_rate = 32, int init_channels = 64) {
+    DenseNet264Impl::DenseNet264Impl(int num_classes, int growth_rate, int init_channels)
+    {
         // Initial conv layer
         conv0 = register_module("conv0", torch::nn::Conv2d(
-                torch::nn::Conv2dOptions(3, init_channels, 3).stride(1).padding(1).bias(false)));
+                                    torch::nn::Conv2dOptions(3, init_channels, 3).stride(1).padding(1).bias(false)));
         bn0 = register_module("bn0", torch::nn::BatchNorm2d(init_channels));
 
         // Dense blocks and transition layers
@@ -1368,7 +1369,8 @@ namespace xt::models {
         fc = register_module("fc", torch::nn::Linear(num_features, num_classes));
     }
 
-    torch::Tensor DenseNet264Impl::forward(torch::Tensor x) {
+    torch::Tensor DenseNet264Impl::forward(torch::Tensor x)
+    {
         x = torch::relu(bn0->forward(conv0->forward(x))); // [batch, 64, 32, 32]
         x = dense1->forward(x);
         x = trans1->forward(x); // [batch, num_features/2, 16, 16]
@@ -1385,27 +1387,25 @@ namespace xt::models {
     }
 
 
-    DenseNet264::DenseNet264(int num_classes, int in_channels) {
-    }
-
-    DenseNet264::DenseNet264(int num_classes, int in_channels, std::vector <int64_t> input_shape) {
-    }
-
-    void DenseNet264::reset() {
-    }
-
-    auto DenseNet264::forward(std::initializer_list <std::any> tensors) -> std::any {
-        std::vector <std::any> any_vec(tensors);
-
-        std::vector <torch::Tensor> tensor_vec;
-        for (const auto &item: any_vec) {
-            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
-        }
-
-        torch::Tensor x = tensor_vec[0];
-
-        return x;
-    }
-
-
+    // DenseNet264::DenseNet264(int num_classes, int in_channels) {
+    // }
+    //
+    // DenseNet264::DenseNet264(int num_classes, int in_channels, std::vector <int64_t> input_shape) {
+    // }
+    //
+    // void DenseNet264::reset() {
+    // }
+    //
+    // auto DenseNet264::forward(std::initializer_list <std::any> tensors) -> std::any {
+    //     std::vector <std::any> any_vec(tensors);
+    //
+    //     std::vector <torch::Tensor> tensor_vec;
+    //     for (const auto &item: any_vec) {
+    //         tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+    //     }
+    //
+    //     torch::Tensor x = tensor_vec[0];
+    //
+    //     return x;
+    // }
 }
