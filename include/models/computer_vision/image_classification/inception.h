@@ -43,95 +43,23 @@ namespace xt::models {
 
     TORCH_MODULE(InceptionV1);
 
-    // // InceptionV2
-// struct InceptionV2Impl : torch::nn::Module {
-//     InceptionV2Impl(int num_classes = 10) {
-//         // Stem
-//         conv1 = register_module("conv1", torch::nn::Conv2d(
-//             torch::nn::Conv2dOptions(3, 32, 3).stride(1).padding(1).bias(false))); // Simplified stride
-//         bn1 = register_module("bn1", torch::nn::BatchNorm2d(32));
-//         conv2 = register_module("conv2", torch::nn::Conv2d(
-//             torch::nn::Conv2dOptions(32, 32, 3).padding(1).bias(false)));
-//         bn2 = register_module("bn2", torch::nn::BatchNorm2d(32));
-//         conv3 = register_module("conv3", torch::nn::Conv2d(
-//             torch::nn::Conv2dOptions(32, 64, 3).padding(1).bias(false)));
-//         bn3 = register_module("bn3", torch::nn::BatchNorm2d(64));
-//         pool1 = register_module("pool1", torch::nn::MaxPool2d(
-//             torch::nn::MaxPool2dOptions(3).stride(2).padding(1)));
-//         conv4 = register_module("conv4", torch::nn::Conv2d(
-//             torch::nn::Conv2dOptions(64, 80, 1).bias(false)));
-//         bn4 = register_module("bn4", torch::nn::BatchNorm2d(80));
-//         conv5 = register_module("conv5", torch::nn::Conv2d(
-//             torch::nn::Conv2dOptions(80, 192, 3).padding(1).bias(false)));
-//         bn5 = register_module("bn5", torch::nn::BatchNorm2d(192));
-//         pool2 = register_module("pool2", torch::nn::MaxPool2d(
-//             torch::nn::MaxPool2dOptions(3).stride(2).padding(1)));
-//
-//         // Inception modules
-//         inception3a = register_module("inception3a", InceptionAModule(192, 32));
-//         inception3b = register_module("inception3b", InceptionAModule(256, 64));
-//         inception3c = register_module("inception3c", InceptionAModule(320, 64));
-//         inception4a = register_module("inception4a", InceptionBModule(384));
-//         inception5a = register_module("inception5a", InceptionAModule(480, 128));
-//         inception5b = register_module("inception5b", InceptionAModule(608, 128));
-//         inception5c = register_module("inception5c", InceptionAModule(736, 128));
-//         inception5d = register_module("inception5d", InceptionAModule(736, 128));
-//         inception6a = register_module("inception6a", InceptionBModule(736));
-//         inception7a = register_module("inception7a", InceptionCModule(832, 128));
-//         inception7b = register_module("inception7b", InceptionCModule(832, 160));
-//         inception7c = register_module("inception7c", InceptionCModule(832, 192));
-//
-//         // Head
-//         avg_pool = register_module("avg_pool", torch::nn::AdaptiveAvgPool2d(
-//             torch::nn::AdaptiveAvgPool2dOptions({1, 1})));
-//         dropout = register_module("dropout", torch::nn::Dropout(0.4));
-//         fc = register_module("fc", torch::nn::Linear(768, num_classes));
-//     }
-//
-//     torch::Tensor forward(torch::Tensor x) {
-//         // Stem: [batch, 3, 32, 32]
-//         x = torch::relu(bn1->forward(conv1->forward(x))); // [batch, 32, 32, 32]
-//         x = torch::relu(bn2->forward(conv2->forward(x))); // [batch, 32, 32, 32]
-//         x = torch::relu(bn3->forward(conv3->forward(x))); // [batch, 64, 32, 32]
-//         x = pool1->forward(x); // [batch, 64, 16, 16]
-//         x = torch::relu(bn4->forward(conv4->forward(x))); // [batch, 80, 16, 16]
-//         x = torch::relu(bn5->forward(conv5->forward(x))); // [batch, 192, 16, 16]
-//         x = pool2->forward(x); // [batch, 192, 8, 8]
-//
-//         // Inception modules
-//         x = inception3a->forward(x); // [batch, 256, 8, 8]
-//         x = inception3b->forward(x); // [batch, 320, 8, 8]
-//         x = inception3c->forward(x); // [batch, 384, 8, 8]
-//         x = inception4a->forward(x); // [batch, 480, 4, 4]
-//         x = inception5a->forward(x); // [batch, 608, 4, 4]
-//         x = inception5b->forward(x); // [batch, 736, 4, 4]
-//         x = inception5c->forward(x); // [batch, 736, 4, 4]
-//         x = inception5d->forward(x); // [batch, 736, 4, 4]
-//         x = inception6a->forward(x); // [batch, 832, 2, 2]
-//         x = inception7a->forward(x); // [batch, 832, 2, 2]
-//         x = inception7b->forward(x); // [batch, 832, 2, 2]
-//         x = inception7c->forward(x); // [batch, 768, 2, 2]
-//
-//         // Head
-//         x = avg_pool->forward(x); // [batch, 768, 1, 1]
-//         x = x.view({x.size(0), -1}); // [batch, 768]
-//         x = dropout->forward(x);
-//         x = fc->forward(x); // [batch, num_classes]
-//         return x;
-//     }
-//
-//     torch::nn::Conv2d conv1{nullptr}, conv2{nullptr}, conv3{nullptr}, conv4{nullptr}, conv5{nullptr};
-//     torch::nn::BatchNorm2d bn1{nullptr}, bn2{nullptr}, bn3{nullptr}, bn4{nullptr}, bn5{nullptr};
-//     torch::nn::MaxPool2d pool1{nullptr}, pool2{nullptr};
-//     torch::nn::AdaptiveAvgPool2d avg_pool{nullptr};
-//     torch::nn::Dropout dropout{nullptr};
-//     torch::nn::Linear fc{nullptr};
-//     InceptionAModule inception3a{nullptr}, inception3b{nullptr}, inception3c{nullptr};
-//     InceptionBModule inception4a{nullptr}, inception6a{nullptr};
-//     InceptionAModule inception5a{nullptr}, inception5b{nullptr}, inception5c{nullptr}, inception5d{nullptr};
-//     InceptionCModule inception7a{nullptr}, inception7b{nullptr}, inception7c{nullptr};
-// };
-// TORCH_MODULE(InceptionV2);
+    // InceptionV2
+struct InceptionV2Impl : torch::nn::Module {
+    InceptionV2Impl(int num_classes = 10);
+    torch::Tensor forward(torch::Tensor x);
+
+    torch::nn::Conv2d conv1{nullptr}, conv2{nullptr}, conv3{nullptr}, conv4{nullptr}, conv5{nullptr};
+    torch::nn::BatchNorm2d bn1{nullptr}, bn2{nullptr}, bn3{nullptr}, bn4{nullptr}, bn5{nullptr};
+    torch::nn::MaxPool2d pool1{nullptr}, pool2{nullptr};
+    torch::nn::AdaptiveAvgPool2d avg_pool{nullptr};
+    torch::nn::Dropout dropout{nullptr};
+    torch::nn::Linear fc{nullptr};
+    InceptionAModule inception3a{nullptr}, inception3b{nullptr}, inception3c{nullptr};
+    InceptionBModule inception4a{nullptr}, inception6a{nullptr};
+    InceptionAModule inception5a{nullptr}, inception5b{nullptr}, inception5c{nullptr}, inception5d{nullptr};
+    InceptionCModule inception7a{nullptr}, inception7b{nullptr}, inception7c{nullptr};
+};
+TORCH_MODULE(InceptionV2);
 
 
 // // InceptionV3
