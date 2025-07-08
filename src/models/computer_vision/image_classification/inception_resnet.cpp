@@ -652,72 +652,53 @@ using namespace std;
 
 namespace xt::models
 {
-    struct BasicConv2dImpl : torch::nn::Module
+    BasicConv2dImpl::BasicConv2dImpl(int in_planes, int out_planes, int kernel_size, int stride, int padding, bool relu)
+        : use_relu(relu)
     {
-        torch::nn::Conv2d conv{nullptr};
-        torch::nn::BatchNorm2d bn{nullptr};
-        bool use_relu;
+        conv = register_module("conv", torch::nn::Conv2d(
+                                   torch::nn::Conv2dOptions(in_planes, out_planes, kernel_size)
+                                   .stride(stride).padding(padding).bias(false)));
+        bn = register_module("bn", torch::nn::BatchNorm2d(out_planes));
+    }
 
-        BasicConv2dImpl(int in_planes, int out_planes, int kernel_size, int stride, int padding, bool relu = true)
-            : use_relu(relu)
-        {
-            conv = register_module("conv", torch::nn::Conv2d(
-                                       torch::nn::Conv2dOptions(in_planes, out_planes, kernel_size)
-                                       .stride(stride).padding(padding).bias(false)));
-            bn = register_module("bn", torch::nn::BatchNorm2d(out_planes));
-        }
-
-        torch::Tensor forward(torch::Tensor x)
-        {
-            x = conv(x);
-            x = bn(x);
-            if (use_relu)
-            {
-                x = torch::relu(x);
-            }
-            return x;
-        }
-    };
-
-    TORCH_MODULE(BasicConv2d);
-
-
-    // Inception-ResNet-A block
-    struct InceptionResNetAImpl : torch::nn::Module
+    torch::Tensor BasicConv2dImpl::forward(torch::Tensor x)
     {
-        BasicConv2d b0, b1_0, b1_1, b2_0, b2_1, b2_2;
-        torch::nn::Conv2d conv;
-        double scale;
-
-        InceptionResNetAImpl(int in_planes, double scale = 1.0) : b0(in_planes, 32, 1, 1, 0),
-                                                                  b1_0(in_planes, 32, 1, 1, 0), b1_1(32, 32, 3, 1, 1),
-                                                                  b2_0(in_planes, 32, 1, 1, 0), b2_1(32, 48, 3, 1, 1),
-                                                                  b2_2(48, 64, 3, 1, 1),
-                                                                  conv(torch::nn::Conv2dOptions(128, 384, 1).stride(1).
-                                                                      padding(0)), scale(scale)
+        x = conv(x);
+        x = bn(x);
+        if (use_relu)
         {
-            register_module("b0", b0);
-            register_module("b1_0", b1_0);
-            register_module("b1_1", b1_1);
-            register_module("b2_0", b2_0);
-            register_module("b2_1", b2_1);
-            register_module("b2_2", b2_2);
-            register_module("conv2d", conv);
+            x = torch::relu(x);
         }
+        return x;
+    }
 
-        torch::Tensor forward(torch::Tensor x)
-        {
-            auto x0 = b0->forward(x);
-            auto x1 = b1_1->forward(b1_0->forward(x));
-            auto x2 = b2_2->forward(b2_1->forward(b2_0->forward(x)));
-            auto mixed = torch::cat({x0, x1, x2}, 1);
-            auto up = conv(mixed);
-            x = x + up * scale;
-            return torch::relu(x);
-        }
-    };
 
-    TORCH_MODULE(InceptionResNetA);
+    InceptionResNetAImpl::InceptionResNetAImpl(int in_planes, double scale = 1.0) : b0(in_planes, 32, 1, 1, 0),
+        b1_0(in_planes, 32, 1, 1, 0), b1_1(32, 32, 3, 1, 1),
+        b2_0(in_planes, 32, 1, 1, 0), b2_1(32, 48, 3, 1, 1),
+        b2_2(48, 64, 3, 1, 1),
+        conv(torch::nn::Conv2dOptions(128, 384, 1).stride(1).
+                                                   padding(0)), scale(scale)
+    {
+        register_module("b0", b0);
+        register_module("b1_0", b1_0);
+        register_module("b1_1", b1_1);
+        register_module("b2_0", b2_0);
+        register_module("b2_1", b2_1);
+        register_module("b2_2", b2_2);
+        register_module("conv2d", conv);
+    }
+
+    torch::Tensor InceptionResNetAImpl::forward(torch::Tensor x)
+    {
+        auto x0 = b0->forward(x);
+        auto x1 = b1_1->forward(b1_0->forward(x));
+        auto x2 = b2_2->forward(b2_1->forward(b2_0->forward(x)));
+        auto mixed = torch::cat({x0, x1, x2}, 1);
+        auto up = conv(mixed);
+        x = x + up * scale;
+        return torch::relu(x);
+    }
 
     // Inception-ResNet-B block
     struct InceptionResNetBImpl : torch::nn::Module
