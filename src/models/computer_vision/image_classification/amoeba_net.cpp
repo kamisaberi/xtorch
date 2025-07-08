@@ -338,7 +338,7 @@ namespace xt::models
     }
 
 
-    AmoebaNetImpl::AmoebaNetImpl(int in_channels, int num_classes, int channels = 64)
+    AmoebaNetImpl::AmoebaNetImpl(int in_channels, int num_classes, int channels )
     {
         stem = register_module("stem", torch::nn::Conv2d(
                                    torch::nn::Conv2dOptions(in_channels, channels, 3).stride(1).padding(1)));
