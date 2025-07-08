@@ -43,6 +43,321 @@ namespace xt::models {
 
     TORCH_MODULE(InceptionV1);
 
+    // // InceptionV2
+// struct InceptionV2Impl : torch::nn::Module {
+//     InceptionV2Impl(int num_classes = 10) {
+//         // Stem
+//         conv1 = register_module("conv1", torch::nn::Conv2d(
+//             torch::nn::Conv2dOptions(3, 32, 3).stride(1).padding(1).bias(false))); // Simplified stride
+//         bn1 = register_module("bn1", torch::nn::BatchNorm2d(32));
+//         conv2 = register_module("conv2", torch::nn::Conv2d(
+//             torch::nn::Conv2dOptions(32, 32, 3).padding(1).bias(false)));
+//         bn2 = register_module("bn2", torch::nn::BatchNorm2d(32));
+//         conv3 = register_module("conv3", torch::nn::Conv2d(
+//             torch::nn::Conv2dOptions(32, 64, 3).padding(1).bias(false)));
+//         bn3 = register_module("bn3", torch::nn::BatchNorm2d(64));
+//         pool1 = register_module("pool1", torch::nn::MaxPool2d(
+//             torch::nn::MaxPool2dOptions(3).stride(2).padding(1)));
+//         conv4 = register_module("conv4", torch::nn::Conv2d(
+//             torch::nn::Conv2dOptions(64, 80, 1).bias(false)));
+//         bn4 = register_module("bn4", torch::nn::BatchNorm2d(80));
+//         conv5 = register_module("conv5", torch::nn::Conv2d(
+//             torch::nn::Conv2dOptions(80, 192, 3).padding(1).bias(false)));
+//         bn5 = register_module("bn5", torch::nn::BatchNorm2d(192));
+//         pool2 = register_module("pool2", torch::nn::MaxPool2d(
+//             torch::nn::MaxPool2dOptions(3).stride(2).padding(1)));
+//
+//         // Inception modules
+//         inception3a = register_module("inception3a", InceptionAModule(192, 32));
+//         inception3b = register_module("inception3b", InceptionAModule(256, 64));
+//         inception3c = register_module("inception3c", InceptionAModule(320, 64));
+//         inception4a = register_module("inception4a", InceptionBModule(384));
+//         inception5a = register_module("inception5a", InceptionAModule(480, 128));
+//         inception5b = register_module("inception5b", InceptionAModule(608, 128));
+//         inception5c = register_module("inception5c", InceptionAModule(736, 128));
+//         inception5d = register_module("inception5d", InceptionAModule(736, 128));
+//         inception6a = register_module("inception6a", InceptionBModule(736));
+//         inception7a = register_module("inception7a", InceptionCModule(832, 128));
+//         inception7b = register_module("inception7b", InceptionCModule(832, 160));
+//         inception7c = register_module("inception7c", InceptionCModule(832, 192));
+//
+//         // Head
+//         avg_pool = register_module("avg_pool", torch::nn::AdaptiveAvgPool2d(
+//             torch::nn::AdaptiveAvgPool2dOptions({1, 1})));
+//         dropout = register_module("dropout", torch::nn::Dropout(0.4));
+//         fc = register_module("fc", torch::nn::Linear(768, num_classes));
+//     }
+//
+//     torch::Tensor forward(torch::Tensor x) {
+//         // Stem: [batch, 3, 32, 32]
+//         x = torch::relu(bn1->forward(conv1->forward(x))); // [batch, 32, 32, 32]
+//         x = torch::relu(bn2->forward(conv2->forward(x))); // [batch, 32, 32, 32]
+//         x = torch::relu(bn3->forward(conv3->forward(x))); // [batch, 64, 32, 32]
+//         x = pool1->forward(x); // [batch, 64, 16, 16]
+//         x = torch::relu(bn4->forward(conv4->forward(x))); // [batch, 80, 16, 16]
+//         x = torch::relu(bn5->forward(conv5->forward(x))); // [batch, 192, 16, 16]
+//         x = pool2->forward(x); // [batch, 192, 8, 8]
+//
+//         // Inception modules
+//         x = inception3a->forward(x); // [batch, 256, 8, 8]
+//         x = inception3b->forward(x); // [batch, 320, 8, 8]
+//         x = inception3c->forward(x); // [batch, 384, 8, 8]
+//         x = inception4a->forward(x); // [batch, 480, 4, 4]
+//         x = inception5a->forward(x); // [batch, 608, 4, 4]
+//         x = inception5b->forward(x); // [batch, 736, 4, 4]
+//         x = inception5c->forward(x); // [batch, 736, 4, 4]
+//         x = inception5d->forward(x); // [batch, 736, 4, 4]
+//         x = inception6a->forward(x); // [batch, 832, 2, 2]
+//         x = inception7a->forward(x); // [batch, 832, 2, 2]
+//         x = inception7b->forward(x); // [batch, 832, 2, 2]
+//         x = inception7c->forward(x); // [batch, 768, 2, 2]
+//
+//         // Head
+//         x = avg_pool->forward(x); // [batch, 768, 1, 1]
+//         x = x.view({x.size(0), -1}); // [batch, 768]
+//         x = dropout->forward(x);
+//         x = fc->forward(x); // [batch, num_classes]
+//         return x;
+//     }
+//
+//     torch::nn::Conv2d conv1{nullptr}, conv2{nullptr}, conv3{nullptr}, conv4{nullptr}, conv5{nullptr};
+//     torch::nn::BatchNorm2d bn1{nullptr}, bn2{nullptr}, bn3{nullptr}, bn4{nullptr}, bn5{nullptr};
+//     torch::nn::MaxPool2d pool1{nullptr}, pool2{nullptr};
+//     torch::nn::AdaptiveAvgPool2d avg_pool{nullptr};
+//     torch::nn::Dropout dropout{nullptr};
+//     torch::nn::Linear fc{nullptr};
+//     InceptionAModule inception3a{nullptr}, inception3b{nullptr}, inception3c{nullptr};
+//     InceptionBModule inception4a{nullptr}, inception6a{nullptr};
+//     InceptionAModule inception5a{nullptr}, inception5b{nullptr}, inception5c{nullptr}, inception5d{nullptr};
+//     InceptionCModule inception7a{nullptr}, inception7b{nullptr}, inception7c{nullptr};
+// };
+// TORCH_MODULE(InceptionV2);
+
+
+// // InceptionV3
+// struct InceptionV3Impl : torch::nn::Module {
+//     InceptionV3Impl(int num_classes = 10, bool aux_logits = true) : aux_logits_(aux_logits) {
+//         // Stem
+//         conv1 = register_module("conv1", torch::nn::Conv2d(
+//             torch::nn::Conv2dOptions(3, 32, 3).stride(1).padding(1).bias(false))); // Simplified stride
+//         bn1 = register_module("bn1", torch::nn::BatchNorm2d(32));
+//         conv2 = register_module("conv2", torch::nn::Conv2d(
+//             torch::nn::Conv2dOptions(32, 32, 3).padding(1).bias(false)));
+//         bn2 = register_module("bn2", torch::nn::BatchNorm2d(32));
+//         conv3 = register_module("conv3", torch::nn::Conv2d(
+//             torch::nn::Conv2dOptions(32, 64, 3).padding(1).bias(false)));
+//         bn3 = register_module("bn3", torch::nn::BatchNorm2d(64));
+//         pool1 = register_module("pool1", torch::nn::MaxPool2d(
+//             torch::nn::MaxPool2dOptions(3).stride(2).padding(1)));
+//         conv4 = register_module("conv4", torch::nn::Conv2d(
+//             torch::nn::Conv2dOptions(64, 80, 1).bias(false)));
+//         bn4 = register_module("bn4", torch::nn::BatchNorm2d(80));
+//         conv5 = register_module("conv5", torch::nn::Conv2d(
+//             torch::nn::Conv2dOptions(80, 192, 3).padding(1).bias(false)));
+//         bn5 = register_module("bn5", torch::nn::BatchNorm2d(192));
+//         pool2 = register_module("pool2", torch::nn::MaxPool2d(
+//             torch::nn::MaxPool2dOptions(3).stride(2).padding(1)));
+//
+//         // Inception modules
+//         inception_a1 = register_module("inception_a1", InceptionAModule(192, 32));
+//         inception_a2 = register_module("inception_a2", InceptionAModule(256, 64));
+//         inception_a3 = register_module("inception_a3", InceptionAModule(288, 64));
+//         inception_b = register_module("inception_b", InceptionBModule(288));
+//         inception_c1 = register_module("inception_c1", InceptionAModule(768, 128));
+//         inception_c2 = register_module("inception_c2", InceptionAModule(768, 128));
+//         inception_c3 = register_module("inception_c3", InceptionAModule(768, 128));
+//         inception_c4 = register_module("inception_c4", InceptionAModule(768, 128));
+//         inception_d = register_module("inception_d", InceptionBModule(768));
+//         inception_e1 = register_module("inception_e1", InceptionCModule(1280, 192));
+//         inception_e2 = register_module("inception_e2", InceptionCModule(2048, 320));
+//
+//         // Auxiliary classifier
+//         if (aux_logits_) {
+//             aux_classifier = register_module("aux_classifier", AuxClassifier(768, num_classes));
+//         }
+//
+//         // Head
+//         avg_pool = register_module("avg_pool", torch::nn::AdaptiveAvgPool2d(
+//             torch::nn::AdaptiveAvgPool2dOptions({1, 1})));
+//         dropout = register_module("dropout", torch::nn::Dropout(0.5));
+//         fc = register_module("fc", torch::nn::Linear(2048, num_classes));
+//     }
+//
+//     std::tuple<torch::Tensor, torch::Tensor> forward(torch::Tensor x) {
+//         // Stem: [batch, 3, 32, 32]
+//         x = torch::relu(bn1->forward(conv1->forward(x))); // [batch, 32, 32, 32]
+//         x = torch::relu(bn2->forward(conv2->forward(x))); // [batch, 32, 32, 32]
+//         x = torch::relu(bn3->forward(conv3->forward(x))); // [batch, 64, 32, 32]
+//         x = pool1->forward(x); // [batch, 64, 16, 16]
+//         x = torch::relu(bn4->forward(conv4->forward(x))); // [batch, 80, 16, 16]
+//         x = torch::relu(bn5->forward(conv5->forward(x))); // [batch, 192, 16, 16]
+//         x = pool2->forward(x); // [batch, 192, 8, 8]
+//
+//         // Inception-A
+//         x = inception_a1->forward(x); // [batch, 256, 8, 8]
+//         x = inception_a2->forward(x); // [batch, 288, 8, 8]
+//         x = inception_a3->forward(x); // [batch, 288, 8, 8]
+//
+//         // Inception-B
+//         x = inception_b->forward(x); // [batch, 768, 4, 4]
+//
+//         // Inception-C
+//         x = inception_c1->forward(x); // [batch, 768, 4, 4]
+//         x = inception_c2->forward(x); // [batch, 768, 4, 4]
+//         x = inception_c3->forward(x); // [batch, 768, 4, 4]
+//         torch::Tensor aux_output;
+//         if (aux_logits_ && training()) {
+//             aux_output = aux_classifier->forward(x);
+//         }
+//         x = inception_c4->forward(x); // [batch, 768, 4, 4]
+//
+//         // Inception-D
+//         x = inception_d->forward(x); // [batch, 1280, 2, 2]
+//
+//         // Inception-E
+//         x = inception_e1->forward(x); // [batch, 2048, 2, 2]
+//         x = inception_e2->forward(x); // [batch, 2048, 2, 2]
+//
+//         // Head
+//         x = avg_pool->forward(x); // [batch, 2048, 1, 1]
+//         x = x.view({x.size(0), -1}); // [batch, 2048]
+//         x = dropout->forward(x);
+//         x = fc->forward(x); // [batch, num_classes]
+//
+//         return std::make_tuple(x, aux_output);
+//     }
+//
+//     bool aux_logits_;
+//     torch::nn::Conv2d conv1{nullptr}, conv2{nullptr}, conv3{nullptr}, conv4{nullptr}, conv5{nullptr};
+//     torch::nn::BatchNorm2d bn1{nullptr}, bn2{nullptr}, bn3{nullptr}, bn4{nullptr}, bn5{nullptr};
+//     torch::nn::MaxPool2d pool1{nullptr}, pool2{nullptr};
+//     torch::nn::AdaptiveAvgPool2d avg_pool{nullptr};
+//     torch::nn::Dropout dropout{nullptr};
+//     torch::nn::Linear fc{nullptr};
+//     InceptionAModule inception_a1{nullptr}, inception_a2{nullptr}, inception_a3{nullptr};
+//     InceptionBModule inception_b{nullptr}, inception_d{nullptr};
+//     InceptionAModule inception_c1{nullptr}, inception_c2{nullptr}, inception_c3{nullptr}, inception_c4{nullptr};
+//     InceptionCModule inception_e1{nullptr}, inception_e2{nullptr};
+//     AuxClassifier aux_classifier{nullptr};
+// };
+// TORCH_MODULE(InceptionV3);
+
+// // InceptionV4
+// struct InceptionV4Impl : torch::nn::Module {
+//     InceptionV4Impl(int num_classes = 10) {
+//         // Stem
+//         conv1 = register_module("conv1", torch::nn::Conv2d(
+//             torch::nn::Conv2dOptions(3, 32, 3).stride(1).padding(1).bias(false)));
+//         bn1 = register_module("bn1", torch::nn::BatchNorm2d(32));
+//         conv2 = register_module("conv2", torch::nn::Conv2d(
+//             torch::nn::Conv2dOptions(32, 32, 3).padding(1).bias(false)));
+//         bn2 = register_module("bn2", torch::nn::BatchNorm2d(32));
+//         conv3 = register_module("conv3", torch::nn::Conv2d(
+//             torch::nn::Conv2dOptions(32, 64, 3).padding(1).bias(false)));
+//         bn3 = register_module("bn3", torch::nn::BatchNorm2d(64));
+//         pool1 = register_module("pool1", torch::nn::MaxPool2d(
+//             torch::nn::MaxPool2dOptions(3).stride(2).padding(1)));
+//         conv4 = register_module("conv4", torch::nn::Conv2d(
+//             torch::nn::Conv2dOptions(64, 96, 3).padding(1).bias(false)));
+//         bn4 = register_module("bn4", torch::nn::BatchNorm2d(96));
+//         conv5 = register_module("conv5", torch::nn::Conv2d(
+//             torch::nn::Conv2dOptions(96, 64, 1).bias(false)));
+//         bn5 = register_module("bn5", torch::nn::BatchNorm2d(64));
+//         conv6 = register_module("conv6", torch::nn::Conv2d(
+//             torch::nn::Conv2dOptions(64, 96, 3).padding(1).bias(false)));
+//         bn6 = register_module("bn6", torch::nn::BatchNorm2d(96));
+//         conv7 = register_module("conv7", torch::nn::Conv2d(
+//             torch::nn::Conv2dOptions(160, 192, 3).stride(2).bias(false)));
+//         bn7 = register_module("bn7", torch::nn::BatchNorm2d(192));
+//
+//         // Inception modules
+//         inception_a1 = register_module("inception_a1", InceptionAModule(192));
+//         inception_a2 = register_module("inception_a2", InceptionAModule(384));
+//         inception_a3 = register_module("inception_a3", InceptionAModule(384));
+//         inception_a4 = register_module("inception_a4", InceptionAModule(384));
+//         reduction_a = register_module("reduction_a", ReductionAModule(384, 192, 224, 256, 384));
+//         inception_b1 = register_module("inception_b1", InceptionBModule(1024));
+//         inception_b2 = register_module("inception_b2", InceptionBModule(1024));
+//         inception_b3 = register_module("inception_b3", InceptionBModule(1024));
+//         inception_b4 = register_module("inception_b4", InceptionBModule(1024));
+//         inception_b5 = register_module("inception_b5", InceptionBModule(1024));
+//         inception_b6 = register_module("inception_b6", InceptionBModule(1024));
+//         inception_b7 = register_module("inception_b7", InceptionBModule(1024));
+//         reduction_b = register_module("reduction_b", ReductionBModule(1024));
+//         inception_c1 = register_module("inception_c1", InceptionCModule(1536));
+//         inception_c2 = register_module("inception_c2", InceptionCModule(1536));
+//         inception_c3 = register_module("inception_c3", InceptionCModule(1536));
+//
+//         // Head
+//         avg_pool = register_module("avg_pool", torch::nn::AdaptiveAvgPool2d(
+//             torch::nn::AdaptiveAvgPool2dOptions({1, 1})));
+//         dropout = register_module("dropout", torch::nn::Dropout(0.8));
+//         fc = register_module("fc", torch::nn::Linear(1536, num_classes));
+//     }
+//
+//     torch::Tensor forward(torch::Tensor x) {
+//         // Stem: [batch, 3, 32, 32]
+//         x = torch::relu(bn1->forward(conv1->forward(x))); // [batch, 32, 32, 32]
+//         x = torch::relu(bn2->forward(conv2->forward(x))); // [batch, 32, 32, 32]
+//         x = torch::relu(bn3->forward(conv3->forward(x))); // [batch, 64, 32, 32]
+//         x = pool1->forward(x); // [batch, 64, 16, 16]
+//         x = torch::relu(bn4->forward(conv4->forward(x))); // [batch, 96, 16, 16]
+//         auto branch1 = torch::relu(bn5->forward(conv5->forward(x))); // [batch, 64, 16, 16]
+//         auto branch2 = torch::relu(bn6->forward(conv6->forward(x))); // [batch, 96, 16, 16]
+//         x = torch::cat({branch1, branch2}, 1); // [batch, 160, 16, 16]
+//         x = torch::relu(bn7->forward(conv7->forward(x))); // [batch, 192, 8, 8]
+//
+//         // Inception-A
+//         x = inception_a1->forward(x); // [batch, 384, 8, 8]
+//         x = inception_a2->forward(x); // [batch, 384, 8, 8]
+//         x = inception_a3->forward(x); // [batch, 384, 8, 8]
+//         x = inception_a4->forward(x); // [batch, 384, 8, 8]
+//
+//         // Reduction-A
+//         x = reduction_a->forward(x); // [batch, 1024, 4, 4]
+//
+//         // Inception-B
+//         x = inception_b1->forward(x); // [batch, 1024, 4, 4]
+//         x = inception_b2->forward(x); // [batch, 1024, 4, 4]
+//         x = inception_b3->forward(x); // [batch, 1024, 4, 4]
+//         x = inception_b4->forward(x); // [batch, 1024, 4, 4]
+//         x = inception_b5->forward(x); // [batch, 1024, 4, 4]
+//         x = inception_b6->forward(x); // [batch, 1024, 4, 4]
+//         x = inception_b7->forward(x); // [batch, 1024, 4, 4]
+//
+//         // Reduction-B
+//         x = reduction_b->forward(x); // [batch, 1536, 2, 2]
+//
+//         // Inception-C
+//         x = inception_c1->forward(x); // [batch, 1536, 2, 2]
+//         x = inception_c2->forward(x); // [batch, 1536, 2, 2]
+//         x = inception_c3->forward(x); // [batch, 1536, 2, 2]
+//
+//         // Head
+//         x = avg_pool->forward(x); // [batch, 1536, 1, 1]
+//         x = x.view({x.size(0), -1}); // [batch, 1536]
+//         x = dropout->forward(x);
+//         x = fc->forward(x); // [batch, num_classes]
+//         return x;
+//     }
+//
+//     torch::nn::Conv2d conv1{nullptr}, conv2{nullptr}, conv3{nullptr}, conv4{nullptr};
+//     torch::nn::Conv2d conv5{nullptr}, conv6{nullptr}, conv7{nullptr};
+//     torch::nn::BatchNorm2d bn1{nullptr}, bn2{nullptr}, bn3{nullptr}, bn4{nullptr};
+//     torch::nn::BatchNorm2d bn5{nullptr}, bn6{nullptr}, bn7{nullptr};
+//     torch::nn::MaxPool2d pool1{nullptr};
+//     torch::nn::AdaptiveAvgPool2d avg_pool{nullptr};
+//     torch::nn::Dropout dropout{nullptr};
+//     torch::nn::Linear fc{nullptr};
+//     InceptionAModule inception_a1{nullptr}, inception_a2{nullptr}, inception_a3{nullptr}, inception_a4{nullptr};
+//     ReductionAModule reduction_a{nullptr};
+//     InceptionBModule inception_b1{nullptr}, inception_b2{nullptr}, inception_b3{nullptr};
+//     InceptionBModule inception_b4{nullptr}, inception_b5{nullptr}, inception_b6{nullptr}, inception_b7{nullptr};
+//     ReductionBModule reduction_b{nullptr};
+//     InceptionCModule inception_c1{nullptr}, inception_c2{nullptr}, inception_c3{nullptr};
+// };
+// TORCH_MODULE(InceptionV4);
+
 
     struct InceptionV1 : xt::Cloneable<InceptionV1> {
     private:
