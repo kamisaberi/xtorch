@@ -2174,13 +2174,19 @@ using namespace std;
 
 
 
-// Swish activation (x * sigmoid(x))
-torch::Tensor swish(torch::Tensor x) {
-    return x * torch::sigmoid(x);
-}
+
+
+
+namespace xt::models
+{
+
+
+    // Swish activation (x * sigmoid(x))
+    torch::Tensor swish(torch::Tensor x) {
+        return x * torch::sigmoid(x);
+    }
 
 // Squeeze-and-Excitation Block
-struct SEBlockImpl : torch::nn::Module {
     SEBlockImpl::SEBlockImpl(int in_channels, int reduction) {
         fc1 = register_module("fc1", torch::nn::Linear(in_channels, in_channels / reduction));
         fc2 = register_module("fc2", torch::nn::Linear(in_channels / reduction, in_channels));
@@ -2195,13 +2201,8 @@ struct SEBlockImpl : torch::nn::Module {
         return x * out;
     }
 
-    torch::nn::Linear fc1{nullptr}, fc2{nullptr};
-};
-TORCH_MODULE(SEBlock);
-
 // MBConv Block (Inverted Residual with Depthwise Separable Conv)
-struct MBConvBlockImpl : torch::nn::Module {
-    MBConvBlockImpl(int in_channels, int out_channels, int expansion, int kernel_size, int stride, int reduction) {
+    MBConvBlockImpl::MBConvBlockImpl(int in_channels, int out_channels, int expansion, int kernel_size, int stride, int reduction) {
         int expanded_channels = in_channels * expansion;
         bool has_se = reduction > 0;
 
@@ -2227,7 +2228,7 @@ struct MBConvBlockImpl : torch::nn::Module {
         skip_connection = (in_channels == out_channels && stride == 1);
     }
 
-    torch::Tensor forward(torch::Tensor x) {
+    torch::Tensor MBConvBlockImpl::forward(torch::Tensor x) {
         auto out = x;
         if (expand_conv) {
             out = swish(bn0->forward(expand_conv->forward(out)));
@@ -2243,16 +2244,9 @@ struct MBConvBlockImpl : torch::nn::Module {
         return out;
     }
 
-    torch::nn::Conv2d expand_conv{nullptr}, depthwise_conv{nullptr}, pointwise_conv{nullptr};
-    torch::nn::BatchNorm2d bn0{nullptr}, bn1{nullptr}, bn2{nullptr};
-    SEBlock se{nullptr};
-    bool skip_connection;
-};
-TORCH_MODULE(MBConvBlock);
 
 // EfficientNetB0
-struct EfficientNetB0Impl : torch::nn::Module {
-    EfficientNetB0Impl(int num_classes = 10) {
+    EfficientNetB0Impl::EfficientNetB0Impl(int num_classes = 10) {
         // Initial stem
         stem_conv = register_module("stem_conv", torch::nn::Conv2d(
                 torch::nn::Conv2dOptions(3, 32, 3).stride(1).padding(1).bias(false))); // Simplified stride
@@ -2287,7 +2281,7 @@ struct EfficientNetB0Impl : torch::nn::Module {
         fc = register_module("fc", torch::nn::Linear(1280, num_classes));
     }
 
-    torch::Tensor forward(torch::Tensor x) {
+    torch::Tensor EfficientNetB0Impl::forward(torch::Tensor x) {
         x = swish(bn0->forward(stem_conv->forward(x))); // [batch, 32, 32, 32]
         for (auto& block : *blocks) {
             x = block->forward(x);
@@ -2299,24 +2293,10 @@ struct EfficientNetB0Impl : torch::nn::Module {
         return x;
     }
 
-    torch::nn::Conv2d stem_conv{nullptr}, head_conv{nullptr};
-    torch::nn::BatchNorm2d bn0{nullptr}, bn1{nullptr};
-    torch::nn::Linear fc{nullptr};
-    torch::nn::ModuleList blocks{torch::nn::ModuleList()};
-};
-TORCH_MODULE(EfficientNetB0);
 
 
 
 
-
-
-
-
-
-
-namespace xt::models
-{
     EfficientNetB0::EfficientNetB0(int num_classes, int in_channels)
     {
     }

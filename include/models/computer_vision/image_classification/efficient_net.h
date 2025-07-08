@@ -9,10 +9,7 @@ using namespace std;
 namespace xt::models {
 
     // Swish activation (x * sigmoid(x))
-    torch::Tensor swish(torch::Tensor x) {
-        return x * torch::sigmoid(x);
-    }
-
+    torch::Tensor swish(torch::Tensor x);
     // Squeeze-and-Excitation Block
     struct SEBlockImpl : torch::nn::Module {
         SEBlockImpl(int in_channels, int reduction);
