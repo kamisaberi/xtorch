@@ -835,7 +835,7 @@ namespace xt::models
         return x;
     }
 
-    InceptionResNetV1Impl::InceptionResNetV1Impl(int num_classes = 10)
+    InceptionResNetV1Impl::InceptionResNetV1Impl(int num_classes )
     // **MODIFICATION 1: Input channels changed from 3 to 1 for MNIST**
         : conv2d_1a(1, 32, 3, 2, 0),
           conv2d_2a(32, 32, 3, 1, 0),
@@ -907,7 +907,7 @@ namespace xt::models
     }
 
 
-    InceptionResNetV2Impl::InceptionResNetV2Impl(int num_classes = 10)
+    InceptionResNetV2Impl::InceptionResNetV2Impl(int num_classes )
     // **MODIFICATION 1: Input channels changed from 3 to 1 for MNIST**
         : stem(1),
           reduction_a(320, 256, 256, 384, 384),
