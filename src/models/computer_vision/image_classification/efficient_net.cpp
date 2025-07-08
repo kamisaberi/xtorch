@@ -2326,6 +2326,57 @@ namespace xt::models
 
 
 
+    EfficientNetB1Impl::EfficientNetB1Impl(int num_classes = 10) {
+         // Initial stem
+         stem_conv = register_module("stem_conv", torch::nn::Conv2d(
+             torch::nn::Conv2dOptions(3, 32, 3).stride(1).padding(1).bias(false))); // Simplified stride
+         bn0 = register_module("bn0", torch::nn::BatchNorm2d(32));
+
+         // MBConv blocks configuration: {num_repeats, in_channels, out_channels, expansion, kernel_size, stride, se_reduction}
+         std::vector<std::tuple<int, int, int, int, int, int, int>> config = {
+             {1, 32, 16, 1, 3, 1, 4},   // Stage 1
+             {2, 16, 24, 6, 3, 2, 4},   // Stage 2
+             {2, 24, 40, 6, 5, 2, 4},   // Stage 3
+             {3, 40, 80, 6, 3, 2, 4},   // Stage 4
+             {3, 80, 112, 6, 5, 1, 4},  // Stage 5
+             {4, 112, 192, 6, 5, 2, 4}, // Stage 6
+             {2, 192, 320, 6, 3, 1, 4}, // Stage 7 (increased repeats vs. B0)
+             {1, 320, 320, 6, 3, 1, 4}  // Stage 8 (extra stage vs. B0)
+         };
+
+         int stage_idx = 0;
+         for (const auto& [num_repeats, in_ch, out_ch, expansion, kernel, stride, reduction] : config) {
+             for (int i = 0; i < num_repeats; ++i) {
+                 int s = (i == 0) ? stride : 1;
+                 blocks->push_back(MBConvBlock(in_ch, out_ch, expansion, kernel, s, reduction));
+                 register_module("block_" + std::to_string(stage_idx) + "_" + std::to_string(i), blocks->back());
+                 in_ch = out_ch;
+             }
+             stage_idx++;
+         }
+
+         // Head
+         head_conv = register_module("head_conv", torch::nn::Conv2d(
+             torch::nn::Conv2dOptions(320, 1280, 1).bias(false)));
+         bn1 = register_module("bn1", torch::nn::BatchNorm2d(1280));
+         fc = register_module("fc", torch::nn::Linear(1280, num_classes));
+     }
+
+     torch::Tensor EfficientNetB1Impl::forward(torch::Tensor x) {
+         x = swish(bn0->forward(stem_conv->forward(x))); // [batch, 32, 32, 32]
+         for (auto& block : *blocks) {
+             x = block->forward(x);
+         }
+         x = swish(bn1->forward(head_conv->forward(x)));
+         x = torch::avg_pool2d(x, x.size(2)); // Global avg pool: [batch, 1280, 1, 1]
+         x = x.view({x.size(0), -1}); // [batch, 1280]
+         x = fc->forward(x); // [batch, num_classes]
+         return x;
+     }
+
+
+
+
 
 
 
