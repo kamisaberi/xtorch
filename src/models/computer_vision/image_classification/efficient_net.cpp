@@ -2181,12 +2181,12 @@ torch::Tensor swish(torch::Tensor x) {
 
 // Squeeze-and-Excitation Block
 struct SEBlockImpl : torch::nn::Module {
-    SEBlockImpl(int in_channels, int reduction) {
+    SEBlockImpl::SEBlockImpl(int in_channels, int reduction) {
         fc1 = register_module("fc1", torch::nn::Linear(in_channels, in_channels / reduction));
         fc2 = register_module("fc2", torch::nn::Linear(in_channels / reduction, in_channels));
     }
 
-    torch::Tensor forward(torch::Tensor x) {
+    torch::Tensor SEBlockImpl::forward(torch::Tensor x) {
         auto batch = x.size(0);
         auto channels = x.size(1);
         auto avg = torch::avg_pool2d(x, {x.size(2), x.size(3)}).view({batch, channels});
