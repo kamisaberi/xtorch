@@ -168,7 +168,7 @@ namespace xt::models
     // InceptionV3
     struct InceptionV3Impl : torch::nn::Module
     {
-        InceptionV3Impl(int num_classes = 10, bool aux_logits = true) : aux_logits_(aux_logits);
+        InceptionV3Impl(int num_classes = 10, bool aux_logits = true) ;
 
         std::tuple<torch::Tensor, torch::Tensor> forward(torch::Tensor x);
 
