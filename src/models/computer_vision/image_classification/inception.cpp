@@ -1719,175 +1719,174 @@ namespace xt::models
     }
 
 
+    InceptionAModuleImpl::InceptionAModuleImpl(int in_channels, int pool_features)
+    {
+        // Branch 1: 1x1 conv
+        branch1x1 = register_module("branch1x1", torch::nn::Conv2d(
+                                        torch::nn::Conv2dOptions(in_channels, 64, 1).bias(false)));
+        bn1x1 = register_module("bn1x1", torch::nn::BatchNorm2d(64));
 
-        InceptionAModuleImpl::InceptionAModuleImpl(int in_channels, int pool_features)
-        {
-            // Branch 1: 1x1 conv
-            branch1x1 = register_module("branch1x1", torch::nn::Conv2d(
-                                            torch::nn::Conv2dOptions(in_channels, 64, 1).bias(false)));
-            bn1x1 = register_module("bn1x1", torch::nn::BatchNorm2d(64));
+        // Branch 2: 1x1 conv -> 3x3 conv
+        branch3x3_1 = register_module("branch3x3_1", torch::nn::Conv2d(
+                                          torch::nn::Conv2dOptions(in_channels, 48, 1).bias(false)));
+        bn3x3_1 = register_module("bn3x3_1", torch::nn::BatchNorm2d(48));
+        branch3x3_2 = register_module("branch3x3_2", torch::nn::Conv2d(
+                                          torch::nn::Conv2dOptions(48, 64, 3).padding(1).bias(false)));
+        bn3x3_2 = register_module("bn3x3_2", torch::nn::BatchNorm2d(64));
 
-            // Branch 2: 1x1 conv -> 3x3 conv
-            branch3x3_1 = register_module("branch3x3_1", torch::nn::Conv2d(
-                                              torch::nn::Conv2dOptions(in_channels, 48, 1).bias(false)));
-            bn3x3_1 = register_module("bn3x3_1", torch::nn::BatchNorm2d(48));
-            branch3x3_2 = register_module("branch3x3_2", torch::nn::Conv2d(
-                                              torch::nn::Conv2dOptions(48, 64, 3).padding(1).bias(false)));
-            bn3x3_2 = register_module("bn3x3_2", torch::nn::BatchNorm2d(64));
+        // Branch 3: 1x1 conv -> 3x3 conv -> 3x3 conv
+        branch3x3dbl_1 = register_module("branch3x3dbl_1", torch::nn::Conv2d(
+                                             torch::nn::Conv2dOptions(in_channels, 64, 1).bias(false)));
+        bn3x3dbl_1 = register_module("bn3x3dbl_1", torch::nn::BatchNorm2d(64));
+        branch3x3dbl_2 = register_module("branch3x3dbl_2", torch::nn::Conv2d(
+                                             torch::nn::Conv2dOptions(64, 96, 3).padding(1).bias(false)));
+        bn3x3dbl_2 = register_module("bn3x3dbl_2", torch::nn::BatchNorm2d(96));
+        branch3x3dbl_3 = register_module("branch3x3dbl_3", torch::nn::Conv2d(
+                                             torch::nn::Conv2dOptions(96, 96, 3).padding(1).bias(false)));
+        bn3x3dbl_3 = register_module("bn3x3dbl_3", torch::nn::BatchNorm2d(96));
 
-            // Branch 3: 1x1 conv -> 3x3 conv -> 3x3 conv
-            branch3x3dbl_1 = register_module("branch3x3dbl_1", torch::nn::Conv2d(
-                                                 torch::nn::Conv2dOptions(in_channels, 64, 1).bias(false)));
-            bn3x3dbl_1 = register_module("bn3x3dbl_1", torch::nn::BatchNorm2d(64));
-            branch3x3dbl_2 = register_module("branch3x3dbl_2", torch::nn::Conv2d(
-                                                 torch::nn::Conv2dOptions(64, 96, 3).padding(1).bias(false)));
-            bn3x3dbl_2 = register_module("bn3x3dbl_2", torch::nn::BatchNorm2d(96));
-            branch3x3dbl_3 = register_module("branch3x3dbl_3", torch::nn::Conv2d(
-                                                 torch::nn::Conv2dOptions(96, 96, 3).padding(1).bias(false)));
-            bn3x3dbl_3 = register_module("bn3x3dbl_3", torch::nn::BatchNorm2d(96));
+        // Branch 4: Avg pool -> 1x1 conv
+        branch_pool = register_module("branch_pool", torch::nn::AvgPool2d(
+                                          torch::nn::AvgPool2dOptions(3).stride(1).padding(1)));
+        branch_pool_conv = register_module("branch_pool_conv", torch::nn::Conv2d(
+                                               torch::nn::Conv2dOptions(
+                                                   in_channels, pool_features, 1).bias(false)));
+        bn_pool = register_module("bn_pool", torch::nn::BatchNorm2d(pool_features));
+    }
 
-            // Branch 4: Avg pool -> 1x1 conv
-            branch_pool = register_module("branch_pool", torch::nn::AvgPool2d(
-                                              torch::nn::AvgPool2dOptions(3).stride(1).padding(1)));
-            branch_pool_conv = register_module("branch_pool_conv", torch::nn::Conv2d(
-                                                   torch::nn::Conv2dOptions(
-                                                       in_channels, pool_features, 1).bias(false)));
-            bn_pool = register_module("bn_pool", torch::nn::BatchNorm2d(pool_features));
-        }
+    torch::Tensor InceptionAModuleImpl::forward(torch::Tensor x)
+    {
+        // Branch 1
+        auto branch1 = torch::relu(bn1x1->forward(branch1x1->forward(x)));
 
-        torch::Tensor InceptionAModuleImpl::forward(torch::Tensor x)
-        {
-            // Branch 1
-            auto branch1 = torch::relu(bn1x1->forward(branch1x1->forward(x)));
+        // Branch 2
+        auto branch2 = torch::relu(bn3x3_1->forward(branch3x3_1->forward(x)));
+        branch2 = torch::relu(bn3x3_2->forward(branch3x3_2->forward(branch2)));
 
-            // Branch 2
-            auto branch2 = torch::relu(bn3x3_1->forward(branch3x3_1->forward(x)));
-            branch2 = torch::relu(bn3x3_2->forward(branch3x3_2->forward(branch2)));
+        // Branch 3
+        auto branch3 = torch::relu(bn3x3dbl_1->forward(branch3x3dbl_1->forward(x)));
+        branch3 = torch::relu(bn3x3dbl_2->forward(branch3x3dbl_2->forward(branch3)));
+        branch3 = torch::relu(bn3x3dbl_3->forward(branch3x3dbl_3->forward(branch3)));
 
-            // Branch 3
-            auto branch3 = torch::relu(bn3x3dbl_1->forward(branch3x3dbl_1->forward(x)));
-            branch3 = torch::relu(bn3x3dbl_2->forward(branch3x3dbl_2->forward(branch3)));
-            branch3 = torch::relu(bn3x3dbl_3->forward(branch3x3dbl_3->forward(branch3)));
+        // Branch 4
+        auto branch4 = branch_pool->forward(x);
+        branch4 = torch::relu(bn_pool->forward(branch_pool_conv->forward(branch4)));
 
-            // Branch 4
-            auto branch4 = branch_pool->forward(x);
-            branch4 = torch::relu(bn_pool->forward(branch_pool_conv->forward(branch4)));
-
-            // Concatenate along channel dimension
-            return torch::cat({branch1, branch2, branch3, branch4}, 1);
-        }
-
-
-        InceptionBModuleImpl::InceptionBModuleImpl(int in_channels)
-        {
-            // Branch 1: 3x3 max pool
-            branch_pool = register_module("branch_pool", torch::nn::MaxPool2d(
-                                              torch::nn::MaxPool2dOptions(3).stride(2).padding(1)));
-
-            // Branch 2: 1x1 conv -> 3x3 conv -> 3x3 conv (stride 2)
-            branch3x3_1 = register_module("branch3x3_1", torch::nn::Conv2d(
-                                              torch::nn::Conv2dOptions(in_channels, 64, 1).bias(false)));
-            bn3x3_1 = register_module("bn3x3_1", torch::nn::BatchNorm2d(64));
-            branch3x3_2 = register_module("branch3x3_2", torch::nn::Conv2d(
-                                              torch::nn::Conv2dOptions(64, 96, 3).padding(1).bias(false)));
-            bn3x3_2 = register_module("bn3x3_2", torch::nn::BatchNorm2d(96));
-            branch3x3_3 = register_module("branch3x3_3", torch::nn::Conv2d(
-                                              torch::nn::Conv2dOptions(96, 96, 3).stride(2).bias(false)));
-            bn3x3_3 = register_module("bn3x3_3", torch::nn::BatchNorm2d(96));
-        }
-
-        torch::Tensor InceptionBModuleImpl::forward(torch::Tensor x)
-        {
-            // Branch 1
-            auto branch1 = branch_pool->forward(x);
-
-            // Branch 2
-            auto branch2 = torch::relu(bn3x3_1->forward(branch3x3_1->forward(x)));
-            branch2 = torch::relu(bn3x3_2->forward(branch3x3_2->forward(branch2)));
-            branch2 = torch::relu(bn3x3_3->forward(branch3x3_3->forward(branch2)));
-
-            // Concatenate along channel dimension
-            return torch::cat({branch1, branch2}, 1);
-        }
+        // Concatenate along channel dimension
+        return torch::cat({branch1, branch2, branch3, branch4}, 1);
+    }
 
 
-        InceptionCModuleImpl::InceptionCModuleImpl(int in_channels, int channels_7x7)
-        {
-            // Branch 1: 1x1 conv
-            branch1x1 = register_module("branch1x1", torch::nn::Conv2d(
-                                            torch::nn::Conv2dOptions(in_channels, 192, 1).bias(false)));
-            bn1x1 = register_module("bn1x1", torch::nn::BatchNorm2d(192));
+    InceptionBModuleImpl::InceptionBModuleImpl(int in_channels)
+    {
+        // Branch 1: 3x3 max pool
+        branch_pool = register_module("branch_pool", torch::nn::MaxPool2d(
+                                          torch::nn::MaxPool2dOptions(3).stride(2).padding(1)));
 
-            // Branch 2: 1x1 conv -> 1x7 conv -> 7x1 conv
-            branch7x7_1 = register_module("branch7x7_1", torch::nn::Conv2d(
-                                              torch::nn::Conv2dOptions(in_channels, channels_7x7, 1).bias(false)));
-            bn7x7_1 = register_module("bn7x7_1", torch::nn::BatchNorm2d(channels_7x7));
-            branch7x7_2 = register_module("branch7x7_2", torch::nn::Conv2d(
-                                              torch::nn::Conv2dOptions(channels_7x7, channels_7x7, {1, 7}).padding({
-                                                  0, 3
-                                              }).bias(false)));
-            bn7x7_2 = register_module("bn7x7_2", torch::nn::BatchNorm2d(channels_7x7));
-            branch7x7_3 = register_module("branch7x7_3", torch::nn::Conv2d(
-                                              torch::nn::Conv2dOptions(channels_7x7, 192, {7, 1}).padding({3, 0}).bias(
-                                                  false)));
-            bn7x7_3 = register_module("bn7x7_3", torch::nn::BatchNorm2d(192));
+        // Branch 2: 1x1 conv -> 3x3 conv -> 3x3 conv (stride 2)
+        branch3x3_1 = register_module("branch3x3_1", torch::nn::Conv2d(
+                                          torch::nn::Conv2dOptions(in_channels, 64, 1).bias(false)));
+        bn3x3_1 = register_module("bn3x3_1", torch::nn::BatchNorm2d(64));
+        branch3x3_2 = register_module("branch3x3_2", torch::nn::Conv2d(
+                                          torch::nn::Conv2dOptions(64, 96, 3).padding(1).bias(false)));
+        bn3x3_2 = register_module("bn3x3_2", torch::nn::BatchNorm2d(96));
+        branch3x3_3 = register_module("branch3x3_3", torch::nn::Conv2d(
+                                          torch::nn::Conv2dOptions(96, 96, 3).stride(2).bias(false)));
+        bn3x3_3 = register_module("bn3x3_3", torch::nn::BatchNorm2d(96));
+    }
 
-            // Branch 3: 1x1 conv -> 1x7 conv -> 7x1 conv -> 1x7 conv -> 7x1 conv
-            branch7x7dbl_1 = register_module("branch7x7dbl_1", torch::nn::Conv2d(
-                                                 torch::nn::Conv2dOptions(in_channels, channels_7x7, 1).bias(false)));
-            bn7x7dbl_1 = register_module("bn7x7dbl_1", torch::nn::BatchNorm2d(channels_7x7));
-            branch7x7dbl_2 = register_module("branch7x7dbl_2", torch::nn::Conv2d(
-                                                 torch::nn::Conv2dOptions(channels_7x7, channels_7x7, {1, 7}).padding({
-                                                     0, 3
-                                                 }).bias(false)));
-            bn7x7dbl_2 = register_module("bn7x7dbl_2", torch::nn::BatchNorm2d(channels_7x7));
-            branch7x7dbl_3 = register_module("branch7x7dbl_3", torch::nn::Conv2d(
-                                                 torch::nn::Conv2dOptions(channels_7x7, channels_7x7, {7, 1}).padding({
-                                                     3, 0
-                                                 }).bias(false)));
-            bn7x7dbl_3 = register_module("bn7x7dbl_3", torch::nn::BatchNorm2d(channels_7x7));
-            branch7x7dbl_4 = register_module("branch7x7dbl_4", torch::nn::Conv2d(
-                                                 torch::nn::Conv2dOptions(channels_7x7, channels_7x7, {1, 7}).padding({
-                                                     0, 3
-                                                 }).bias(false)));
-            bn7x7dbl_4 = register_module("bn7x7dbl_4", torch::nn::BatchNorm2d(channels_7x7));
-            branch7x7dbl_5 = register_module("branch7x7dbl_5", torch::nn::Conv2d(
-                                                 torch::nn::Conv2dOptions(channels_7x7, 192, {7, 1}).padding({3, 0}).
-                                                 bias(false)));
-            bn7x7dbl_5 = register_module("bn7x7dbl_5", torch::nn::BatchNorm2d(192));
+    torch::Tensor InceptionBModuleImpl::forward(torch::Tensor x)
+    {
+        // Branch 1
+        auto branch1 = branch_pool->forward(x);
 
-            // Branch 4: Avg pool -> 1x1 conv
-            branch_pool = register_module("branch_pool", torch::nn::AvgPool2d(
-                                              torch::nn::AvgPool2dOptions(3).stride(1).padding(1)));
-            branch_pool_conv = register_module("branch_pool_conv", torch::nn::Conv2d(
-                                                   torch::nn::Conv2dOptions(in_channels, 192, 1).bias(false)));
-            bn_pool = register_module("bn_pool", torch::nn::BatchNorm2d(192));
-        }
+        // Branch 2
+        auto branch2 = torch::relu(bn3x3_1->forward(branch3x3_1->forward(x)));
+        branch2 = torch::relu(bn3x3_2->forward(branch3x3_2->forward(branch2)));
+        branch2 = torch::relu(bn3x3_3->forward(branch3x3_3->forward(branch2)));
 
-        torch::Tensor InceptionCModuleImpl::forward(torch::Tensor x)
-        {
-            // Branch 1
-            auto branch1 = torch::relu(bn1x1->forward(branch1x1->forward(x)));
+        // Concatenate along channel dimension
+        return torch::cat({branch1, branch2}, 1);
+    }
 
-            // Branch 2
-            auto branch2 = torch::relu(bn7x7_1->forward(branch7x7_1->forward(x)));
-            branch2 = torch::relu(bn7x7_2->forward(branch7x7_2->forward(branch2)));
-            branch2 = torch::relu(bn7x7_3->forward(branch7x7_3->forward(branch2)));
 
-            // Branch 3
-            auto branch3 = torch::relu(bn7x7dbl_1->forward(branch7x7dbl_1->forward(x)));
-            branch3 = torch::relu(bn7x7dbl_2->forward(branch7x7dbl_2->forward(branch3)));
-            branch3 = torch::relu(bn7x7dbl_3->forward(branch7x7dbl_3->forward(branch3)));
-            branch3 = torch::relu(bn7x7dbl_4->forward(branch7x7dbl_4->forward(branch3)));
-            branch3 = torch::relu(bn7x7dbl_5->forward(branch7x7dbl_5->forward(branch3)));
+    InceptionCModuleImpl::InceptionCModuleImpl(int in_channels, int channels_7x7)
+    {
+        // Branch 1: 1x1 conv
+        branch1x1 = register_module("branch1x1", torch::nn::Conv2d(
+                                        torch::nn::Conv2dOptions(in_channels, 192, 1).bias(false)));
+        bn1x1 = register_module("bn1x1", torch::nn::BatchNorm2d(192));
 
-            // Branch 4
-            auto branch4 = branch_pool->forward(x);
-            branch4 = torch::relu(bn_pool->forward(branch_pool_conv->forward(branch4)));
+        // Branch 2: 1x1 conv -> 1x7 conv -> 7x1 conv
+        branch7x7_1 = register_module("branch7x7_1", torch::nn::Conv2d(
+                                          torch::nn::Conv2dOptions(in_channels, channels_7x7, 1).bias(false)));
+        bn7x7_1 = register_module("bn7x7_1", torch::nn::BatchNorm2d(channels_7x7));
+        branch7x7_2 = register_module("branch7x7_2", torch::nn::Conv2d(
+                                          torch::nn::Conv2dOptions(channels_7x7, channels_7x7, {1, 7}).padding({
+                                              0, 3
+                                          }).bias(false)));
+        bn7x7_2 = register_module("bn7x7_2", torch::nn::BatchNorm2d(channels_7x7));
+        branch7x7_3 = register_module("branch7x7_3", torch::nn::Conv2d(
+                                          torch::nn::Conv2dOptions(channels_7x7, 192, {7, 1}).padding({3, 0}).bias(
+                                              false)));
+        bn7x7_3 = register_module("bn7x7_3", torch::nn::BatchNorm2d(192));
 
-            // Concatenate along channel dimension
-            return torch::cat({branch1, branch2, branch3, branch4}, 1);
-        }
+        // Branch 3: 1x1 conv -> 1x7 conv -> 7x1 conv -> 1x7 conv -> 7x1 conv
+        branch7x7dbl_1 = register_module("branch7x7dbl_1", torch::nn::Conv2d(
+                                             torch::nn::Conv2dOptions(in_channels, channels_7x7, 1).bias(false)));
+        bn7x7dbl_1 = register_module("bn7x7dbl_1", torch::nn::BatchNorm2d(channels_7x7));
+        branch7x7dbl_2 = register_module("branch7x7dbl_2", torch::nn::Conv2d(
+                                             torch::nn::Conv2dOptions(channels_7x7, channels_7x7, {1, 7}).padding({
+                                                 0, 3
+                                             }).bias(false)));
+        bn7x7dbl_2 = register_module("bn7x7dbl_2", torch::nn::BatchNorm2d(channels_7x7));
+        branch7x7dbl_3 = register_module("branch7x7dbl_3", torch::nn::Conv2d(
+                                             torch::nn::Conv2dOptions(channels_7x7, channels_7x7, {7, 1}).padding({
+                                                 3, 0
+                                             }).bias(false)));
+        bn7x7dbl_3 = register_module("bn7x7dbl_3", torch::nn::BatchNorm2d(channels_7x7));
+        branch7x7dbl_4 = register_module("branch7x7dbl_4", torch::nn::Conv2d(
+                                             torch::nn::Conv2dOptions(channels_7x7, channels_7x7, {1, 7}).padding({
+                                                 0, 3
+                                             }).bias(false)));
+        bn7x7dbl_4 = register_module("bn7x7dbl_4", torch::nn::BatchNorm2d(channels_7x7));
+        branch7x7dbl_5 = register_module("branch7x7dbl_5", torch::nn::Conv2d(
+                                             torch::nn::Conv2dOptions(channels_7x7, 192, {7, 1}).padding({3, 0}).
+                                             bias(false)));
+        bn7x7dbl_5 = register_module("bn7x7dbl_5", torch::nn::BatchNorm2d(192));
+
+        // Branch 4: Avg pool -> 1x1 conv
+        branch_pool = register_module("branch_pool", torch::nn::AvgPool2d(
+                                          torch::nn::AvgPool2dOptions(3).stride(1).padding(1)));
+        branch_pool_conv = register_module("branch_pool_conv", torch::nn::Conv2d(
+                                               torch::nn::Conv2dOptions(in_channels, 192, 1).bias(false)));
+        bn_pool = register_module("bn_pool", torch::nn::BatchNorm2d(192));
+    }
+
+    torch::Tensor InceptionCModuleImpl::forward(torch::Tensor x)
+    {
+        // Branch 1
+        auto branch1 = torch::relu(bn1x1->forward(branch1x1->forward(x)));
+
+        // Branch 2
+        auto branch2 = torch::relu(bn7x7_1->forward(branch7x7_1->forward(x)));
+        branch2 = torch::relu(bn7x7_2->forward(branch7x7_2->forward(branch2)));
+        branch2 = torch::relu(bn7x7_3->forward(branch7x7_3->forward(branch2)));
+
+        // Branch 3
+        auto branch3 = torch::relu(bn7x7dbl_1->forward(branch7x7dbl_1->forward(x)));
+        branch3 = torch::relu(bn7x7dbl_2->forward(branch7x7dbl_2->forward(branch3)));
+        branch3 = torch::relu(bn7x7dbl_3->forward(branch7x7dbl_3->forward(branch3)));
+        branch3 = torch::relu(bn7x7dbl_4->forward(branch7x7dbl_4->forward(branch3)));
+        branch3 = torch::relu(bn7x7dbl_5->forward(branch7x7dbl_5->forward(branch3)));
+
+        // Branch 4
+        auto branch4 = branch_pool->forward(x);
+        branch4 = torch::relu(bn_pool->forward(branch_pool_conv->forward(branch4)));
+
+        // Concatenate along channel dimension
+        return torch::cat({branch1, branch2, branch3, branch4}, 1);
+    }
 
 
     // Auxiliary Classifier
@@ -2020,33 +2019,8 @@ namespace xt::models
     TORCH_MODULE(ReductionBModule);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     // InceptionV1 (GoogLeNet)
-    InceptionV1Impl::InceptionV1Impl(int num_classes )
+    InceptionV1Impl::InceptionV1Impl(int num_classes)
     {
         // Stem
         conv1 = register_module("conv1", torch::nn::Conv2d(
@@ -2146,28 +2120,31 @@ namespace xt::models
 
 
     // InceptionV2
-    struct InceptionV2Impl : torch::nn::Module {
-        InceptionV2Impl(int num_classes = 10) {
+    struct InceptionV2Impl : torch::nn::Module
+    {
+        InceptionV2Impl(int num_classes = 10)
+        {
             // Stem
             conv1 = register_module("conv1", torch::nn::Conv2d(
-                torch::nn::Conv2dOptions(3, 32, 3).stride(1).padding(1).bias(false))); // Simplified stride
+                                        torch::nn::Conv2dOptions(3, 32, 3).stride(1).padding(1).bias(false)));
+            // Simplified stride
             bn1 = register_module("bn1", torch::nn::BatchNorm2d(32));
             conv2 = register_module("conv2", torch::nn::Conv2d(
-                torch::nn::Conv2dOptions(32, 32, 3).padding(1).bias(false)));
+                                        torch::nn::Conv2dOptions(32, 32, 3).padding(1).bias(false)));
             bn2 = register_module("bn2", torch::nn::BatchNorm2d(32));
             conv3 = register_module("conv3", torch::nn::Conv2d(
-                torch::nn::Conv2dOptions(32, 64, 3).padding(1).bias(false)));
+                                        torch::nn::Conv2dOptions(32, 64, 3).padding(1).bias(false)));
             bn3 = register_module("bn3", torch::nn::BatchNorm2d(64));
             pool1 = register_module("pool1", torch::nn::MaxPool2d(
-                torch::nn::MaxPool2dOptions(3).stride(2).padding(1)));
+                                        torch::nn::MaxPool2dOptions(3).stride(2).padding(1)));
             conv4 = register_module("conv4", torch::nn::Conv2d(
-                torch::nn::Conv2dOptions(64, 80, 1).bias(false)));
+                                        torch::nn::Conv2dOptions(64, 80, 1).bias(false)));
             bn4 = register_module("bn4", torch::nn::BatchNorm2d(80));
             conv5 = register_module("conv5", torch::nn::Conv2d(
-                torch::nn::Conv2dOptions(80, 192, 3).padding(1).bias(false)));
+                                        torch::nn::Conv2dOptions(80, 192, 3).padding(1).bias(false)));
             bn5 = register_module("bn5", torch::nn::BatchNorm2d(192));
             pool2 = register_module("pool2", torch::nn::MaxPool2d(
-                torch::nn::MaxPool2dOptions(3).stride(2).padding(1)));
+                                        torch::nn::MaxPool2dOptions(3).stride(2).padding(1)));
 
             // Inception modules
             inception3a = register_module("inception3a", InceptionAModule(192, 32));
@@ -2185,12 +2162,13 @@ namespace xt::models
 
             // Head
             avg_pool = register_module("avg_pool", torch::nn::AdaptiveAvgPool2d(
-                torch::nn::AdaptiveAvgPool2dOptions({1, 1})));
+                                           torch::nn::AdaptiveAvgPool2dOptions({1, 1})));
             dropout = register_module("dropout", torch::nn::Dropout(0.4));
             fc = register_module("fc", torch::nn::Linear(768, num_classes));
         }
 
-        torch::Tensor forward(torch::Tensor x) {
+        torch::Tensor forward(torch::Tensor x)
+        {
             // Stem: [batch, 3, 32, 32]
             x = torch::relu(bn1->forward(conv1->forward(x))); // [batch, 32, 32, 32]
             x = torch::relu(bn2->forward(conv2->forward(x))); // [batch, 32, 32, 32]
@@ -2233,6 +2211,7 @@ namespace xt::models
         InceptionAModule inception5a{nullptr}, inception5b{nullptr}, inception5c{nullptr}, inception5d{nullptr};
         InceptionCModule inception7a{nullptr}, inception7b{nullptr}, inception7c{nullptr};
     };
+
     TORCH_MODULE(InceptionV2);
 
 
@@ -2264,28 +2243,31 @@ namespace xt::models
     // }
 
     // InceptionV3
-    struct InceptionV3Impl : torch::nn::Module {
-        InceptionV3Impl(int num_classes = 10, bool aux_logits = true) : aux_logits_(aux_logits) {
+    struct InceptionV3Impl : torch::nn::Module
+    {
+        InceptionV3Impl(int num_classes = 10, bool aux_logits = true) : aux_logits_(aux_logits)
+        {
             // Stem
             conv1 = register_module("conv1", torch::nn::Conv2d(
-                torch::nn::Conv2dOptions(3, 32, 3).stride(1).padding(1).bias(false))); // Simplified stride
+                                        torch::nn::Conv2dOptions(3, 32, 3).stride(1).padding(1).bias(false)));
+            // Simplified stride
             bn1 = register_module("bn1", torch::nn::BatchNorm2d(32));
             conv2 = register_module("conv2", torch::nn::Conv2d(
-                torch::nn::Conv2dOptions(32, 32, 3).padding(1).bias(false)));
+                                        torch::nn::Conv2dOptions(32, 32, 3).padding(1).bias(false)));
             bn2 = register_module("bn2", torch::nn::BatchNorm2d(32));
             conv3 = register_module("conv3", torch::nn::Conv2d(
-                torch::nn::Conv2dOptions(32, 64, 3).padding(1).bias(false)));
+                                        torch::nn::Conv2dOptions(32, 64, 3).padding(1).bias(false)));
             bn3 = register_module("bn3", torch::nn::BatchNorm2d(64));
             pool1 = register_module("pool1", torch::nn::MaxPool2d(
-                torch::nn::MaxPool2dOptions(3).stride(2).padding(1)));
+                                        torch::nn::MaxPool2dOptions(3).stride(2).padding(1)));
             conv4 = register_module("conv4", torch::nn::Conv2d(
-                torch::nn::Conv2dOptions(64, 80, 1).bias(false)));
+                                        torch::nn::Conv2dOptions(64, 80, 1).bias(false)));
             bn4 = register_module("bn4", torch::nn::BatchNorm2d(80));
             conv5 = register_module("conv5", torch::nn::Conv2d(
-                torch::nn::Conv2dOptions(80, 192, 3).padding(1).bias(false)));
+                                        torch::nn::Conv2dOptions(80, 192, 3).padding(1).bias(false)));
             bn5 = register_module("bn5", torch::nn::BatchNorm2d(192));
             pool2 = register_module("pool2", torch::nn::MaxPool2d(
-                torch::nn::MaxPool2dOptions(3).stride(2).padding(1)));
+                                        torch::nn::MaxPool2dOptions(3).stride(2).padding(1)));
 
             // Inception modules
             inception_a1 = register_module("inception_a1", InceptionAModule(192, 32));
@@ -2301,18 +2283,20 @@ namespace xt::models
             inception_e2 = register_module("inception_e2", InceptionCModule(2048, 320));
 
             // Auxiliary classifier
-            if (aux_logits_) {
+            if (aux_logits_)
+            {
                 aux_classifier = register_module("aux_classifier", AuxClassifier(768, num_classes));
             }
 
             // Head
             avg_pool = register_module("avg_pool", torch::nn::AdaptiveAvgPool2d(
-                torch::nn::AdaptiveAvgPool2dOptions({1, 1})));
+                                           torch::nn::AdaptiveAvgPool2dOptions({1, 1})));
             dropout = register_module("dropout", torch::nn::Dropout(0.5));
             fc = register_module("fc", torch::nn::Linear(2048, num_classes));
         }
 
-        std::tuple<torch::Tensor, torch::Tensor> forward(torch::Tensor x) {
+        std::tuple<torch::Tensor, torch::Tensor> forward(torch::Tensor x)
+        {
             // Stem: [batch, 3, 32, 32]
             x = torch::relu(bn1->forward(conv1->forward(x))); // [batch, 32, 32, 32]
             x = torch::relu(bn2->forward(conv2->forward(x))); // [batch, 32, 32, 32]
@@ -2335,7 +2319,8 @@ namespace xt::models
             x = inception_c2->forward(x); // [batch, 768, 4, 4]
             x = inception_c3->forward(x); // [batch, 768, 4, 4]
             torch::Tensor aux_output;
-            if (aux_logits_ && training()) {
+            if (aux_logits_ && training())
+            {
                 aux_output = aux_classifier->forward(x);
             }
             x = inception_c4->forward(x); // [batch, 768, 4, 4]
@@ -2369,6 +2354,7 @@ namespace xt::models
         InceptionCModule inception_e1{nullptr}, inception_e2{nullptr};
         AuxClassifier aux_classifier{nullptr};
     };
+
     TORCH_MODULE(InceptionV3);
 
 
@@ -2400,31 +2386,33 @@ namespace xt::models
     // }
 
     // InceptionV4
-    struct InceptionV4Impl : torch::nn::Module {
-        InceptionV4Impl(int num_classes = 10) {
+    struct InceptionV4Impl : torch::nn::Module
+    {
+        InceptionV4Impl(int num_classes = 10)
+        {
             // Stem
             conv1 = register_module("conv1", torch::nn::Conv2d(
-                torch::nn::Conv2dOptions(3, 32, 3).stride(1).padding(1).bias(false)));
+                                        torch::nn::Conv2dOptions(3, 32, 3).stride(1).padding(1).bias(false)));
             bn1 = register_module("bn1", torch::nn::BatchNorm2d(32));
             conv2 = register_module("conv2", torch::nn::Conv2d(
-                torch::nn::Conv2dOptions(32, 32, 3).padding(1).bias(false)));
+                                        torch::nn::Conv2dOptions(32, 32, 3).padding(1).bias(false)));
             bn2 = register_module("bn2", torch::nn::BatchNorm2d(32));
             conv3 = register_module("conv3", torch::nn::Conv2d(
-                torch::nn::Conv2dOptions(32, 64, 3).padding(1).bias(false)));
+                                        torch::nn::Conv2dOptions(32, 64, 3).padding(1).bias(false)));
             bn3 = register_module("bn3", torch::nn::BatchNorm2d(64));
             pool1 = register_module("pool1", torch::nn::MaxPool2d(
-                torch::nn::MaxPool2dOptions(3).stride(2).padding(1)));
+                                        torch::nn::MaxPool2dOptions(3).stride(2).padding(1)));
             conv4 = register_module("conv4", torch::nn::Conv2d(
-                torch::nn::Conv2dOptions(64, 96, 3).padding(1).bias(false)));
+                                        torch::nn::Conv2dOptions(64, 96, 3).padding(1).bias(false)));
             bn4 = register_module("bn4", torch::nn::BatchNorm2d(96));
             conv5 = register_module("conv5", torch::nn::Conv2d(
-                torch::nn::Conv2dOptions(96, 64, 1).bias(false)));
+                                        torch::nn::Conv2dOptions(96, 64, 1).bias(false)));
             bn5 = register_module("bn5", torch::nn::BatchNorm2d(64));
             conv6 = register_module("conv6", torch::nn::Conv2d(
-                torch::nn::Conv2dOptions(64, 96, 3).padding(1).bias(false)));
+                                        torch::nn::Conv2dOptions(64, 96, 3).padding(1).bias(false)));
             bn6 = register_module("bn6", torch::nn::BatchNorm2d(96));
             conv7 = register_module("conv7", torch::nn::Conv2d(
-                torch::nn::Conv2dOptions(160, 192, 3).stride(2).bias(false)));
+                                        torch::nn::Conv2dOptions(160, 192, 3).stride(2).bias(false)));
             bn7 = register_module("bn7", torch::nn::BatchNorm2d(192));
 
             // Inception modules
@@ -2447,12 +2435,13 @@ namespace xt::models
 
             // Head
             avg_pool = register_module("avg_pool", torch::nn::AdaptiveAvgPool2d(
-                torch::nn::AdaptiveAvgPool2dOptions({1, 1})));
+                                           torch::nn::AdaptiveAvgPool2dOptions({1, 1})));
             dropout = register_module("dropout", torch::nn::Dropout(0.8));
             fc = register_module("fc", torch::nn::Linear(1536, num_classes));
         }
 
-        torch::Tensor forward(torch::Tensor x) {
+        torch::Tensor forward(torch::Tensor x)
+        {
             // Stem: [batch, 3, 32, 32]
             x = torch::relu(bn1->forward(conv1->forward(x))); // [batch, 32, 32, 32]
             x = torch::relu(bn2->forward(conv2->forward(x))); // [batch, 32, 32, 32]
@@ -2513,10 +2502,8 @@ namespace xt::models
         ReductionBModule reduction_b{nullptr};
         InceptionCModule inception_c1{nullptr}, inception_c2{nullptr}, inception_c3{nullptr};
     };
+
     TORCH_MODULE(InceptionV4);
-
-
-
 
 
     // InceptionV4::InceptionV4(int num_classes, int in_channels)
