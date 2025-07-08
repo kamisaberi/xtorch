@@ -222,27 +222,55 @@ using namespace std;
 //
 //     return 0;
 // }
-namespace xt::models
-{
-    GoogLeNet::GoogLeNet(int num_classes, int in_channels)
-    {
+namespace xt::models {
+
+    // Inception Module
+    struct InceptionModuleImpl : torch::nn::Module {
+        InceptionModuleImpl(int in_channels, int ch1x1, int ch3x3red, int ch3x3, int ch5x5red, int ch5x5,
+                            int pool_proj);
+
+        torch::Tensor forward(torch::Tensor x);
+
+        torch::nn::Conv2d conv1x1{nullptr}, conv3x3_reduce{nullptr}, conv3x3{nullptr};
+        torch::nn::Conv2d conv5x5_reduce{nullptr}, conv5x5{nullptr}, pool_proj{nullptr};
+        torch::nn::BatchNorm2d bn1x1{nullptr}, bn3x3_reduce{nullptr}, bn3x3{nullptr};
+        torch::nn::BatchNorm2d bn5x5_reduce{nullptr}, bn5x5{nullptr}, bn_pool_proj{nullptr};
+        torch::nn::MaxPool2d pool{nullptr};
+    };
+
+    TORCH_MODULE(InceptionModule);
+
+    // Simplified GoogLeNet
+    struct GoogLeNetImpl : torch::nn::Module {
+        GoogLeNetImpl(int in_channels, int num_classes);
+
+        torch::Tensor forward(torch::Tensor x);
+
+        torch::nn::Conv2d stem_conv{nullptr};
+        torch::nn::BatchNorm2d stem_bn{nullptr};
+        InceptionModule inception1{nullptr}, inception2{nullptr};
+        torch::nn::MaxPool2d pool{nullptr};
+        torch::nn::AdaptiveAvgPool2d global_pool{nullptr};
+        torch::nn::Linear fc{nullptr};
+    };
+
+    TORCH_MODULE(GoogLeNet);
+
+
+    GoogLeNet::GoogLeNet(int num_classes, int in_channels) {
     }
 
-    GoogLeNet::GoogLeNet(int num_classes, int in_channels, std::vector<int64_t> input_shape)
-    {
+    GoogLeNet::GoogLeNet(int num_classes, int in_channels, std::vector <int64_t> input_shape) {
     }
 
-    void GoogLeNet::reset()
-    {
+    void GoogLeNet::reset() {
     }
 
-    auto GoogLeNet::forward(std::initializer_list<std::any> tensors) -> std::any
-    {
-        std::vector<std::any> any_vec(tensors);
+    auto GoogLeNet::forward(std::initializer_list <std::any> tensors) -> std::any {
+        std::vector <std::any> any_vec(tensors);
 
-        std::vector<torch::Tensor> tensor_vec;
-        for (const auto& item : any_vec)
-        {
+        std::vector <torch::Tensor> tensor_vec;
+        for (const auto &item: any_vec) {
             tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
         }
 
