@@ -206,63 +206,63 @@ public:
 };
 
 
-// // EfficientNetB6
-// struct EfficientNetB6Impl : torch::nn::Module {
-//     EfficientNetB6Impl(int num_classes = 10) {
-//         // Initial stem
-//         stem_conv = register_module("stem_conv", torch::nn::Conv2d(
-//             torch::nn::Conv2dOptions(3, 56, 3).stride(1).padding(1).bias(false))); // Simplified stride, increased channels
-//         bn0 = register_module("bn0", torch::nn::BatchNorm2d(56));
-//
-//         // MBConv blocks configuration: {num_repeats, in_channels, out_channels, expansion, kernel_size, stride, se_reduction}
-//         std::vector<std::tuple<int, int, int, int, int, int, int>> config = {
-//             {3, 56, 32, 1, 3, 1, 4},   // Stage 1
-//             {5, 32, 40, 6, 3, 2, 4},   // Stage 2
-//             {6, 40, 72, 6, 5, 2, 4},   // Stage 3
-//             {8, 72, 144, 6, 3, 2, 4},  // Stage 4
-//             {9, 144, 200, 6, 5, 1, 4}, // Stage 5
-//             {11, 200, 344, 6, 5, 2, 4}, // Stage 6
-//             {5, 344, 576, 6, 3, 1, 4}, // Stage 7
-//             {2, 576, 576, 6, 3, 1, 4}  // Stage 8
-//         };
-//
-//         int stage_idx = 0;
-//         for (const auto& [num_repeats, in_ch, out_ch, expansion, kernel, stride, reduction] : config) {
-//             for (int i = 0; i < num_repeats; ++i) {
-//                 int s = (i == 0) ? stride : 1;
-//                 blocks->push_back(MBConvBlock(in_ch, out_ch, expansion, kernel, s, reduction));
-//                 register_module("block_" + std::to_string(stage_idx) + "_" + std::to_string(i), blocks->back());
-//                 in_ch = out_ch;
-//             }
-//             stage_idx++;
-//         }
-//
-//         // Head
-//         head_conv = register_module("head_conv", torch::nn::Conv2d(
-//             torch::nn::Conv2dOptions(576, 2304, 1).bias(false))); // Increased channels vs. B5
-//         bn1 = register_module("bn1", torch::nn::BatchNorm2d(2304));
-//         fc = register_module("fc", torch::nn::Linear(2304, num_classes));
-//     }
-//
-//     torch::Tensor forward(torch::Tensor x) {
-//         x = swish(bn0->forward(stem_conv->forward(x))); // [batch, 56, 32, 32]
-//         for (auto& block : *blocks) {
-//             x = block->forward(x);
-//         }
-//         x = swish(bn1->forward(head_conv->forward(x)));
-//         x = torch::avg_pool2d(x, x.size(2)); // Global avg pool: [batch, 2304, 1, 1]
-//         x = x.view({x.size(0), -1}); // [batch, 2304]
-//         x = fc->forward(x); // [batch, num_classes]
-//         return x;
-//     }
-//
-//     torch::nn::Conv2d stem_conv{nullptr}, head_conv{nullptr};
-//     torch::nn::BatchNorm2d bn0{nullptr}, bn1{nullptr};
-//     torch::nn::Linear fc{nullptr};
-//     torch::nn::ModuleList blocks{torch::nn::ModuleList()};
-// };
-// TORCH_MODULE(EfficientNetB6);
-//
+ // EfficientNetB6
+ struct EfficientNetB6Impl : torch::nn::Module {
+     EfficientNetB6Impl(int num_classes = 10) {
+         // Initial stem
+         stem_conv = register_module("stem_conv", torch::nn::Conv2d(
+             torch::nn::Conv2dOptions(3, 56, 3).stride(1).padding(1).bias(false))); // Simplified stride, increased channels
+         bn0 = register_module("bn0", torch::nn::BatchNorm2d(56));
+
+         // MBConv blocks configuration: {num_repeats, in_channels, out_channels, expansion, kernel_size, stride, se_reduction}
+         std::vector<std::tuple<int, int, int, int, int, int, int>> config = {
+             {3, 56, 32, 1, 3, 1, 4},   // Stage 1
+             {5, 32, 40, 6, 3, 2, 4},   // Stage 2
+             {6, 40, 72, 6, 5, 2, 4},   // Stage 3
+             {8, 72, 144, 6, 3, 2, 4},  // Stage 4
+             {9, 144, 200, 6, 5, 1, 4}, // Stage 5
+             {11, 200, 344, 6, 5, 2, 4}, // Stage 6
+             {5, 344, 576, 6, 3, 1, 4}, // Stage 7
+             {2, 576, 576, 6, 3, 1, 4}  // Stage 8
+         };
+
+         int stage_idx = 0;
+         for (const auto& [num_repeats, in_ch, out_ch, expansion, kernel, stride, reduction] : config) {
+             for (int i = 0; i < num_repeats; ++i) {
+                 int s = (i == 0) ? stride : 1;
+                 blocks->push_back(MBConvBlock(in_ch, out_ch, expansion, kernel, s, reduction));
+                 register_module("block_" + std::to_string(stage_idx) + "_" + std::to_string(i), blocks->back());
+                 in_ch = out_ch;
+             }
+             stage_idx++;
+         }
+
+         // Head
+         head_conv = register_module("head_conv", torch::nn::Conv2d(
+             torch::nn::Conv2dOptions(576, 2304, 1).bias(false))); // Increased channels vs. B5
+         bn1 = register_module("bn1", torch::nn::BatchNorm2d(2304));
+         fc = register_module("fc", torch::nn::Linear(2304, num_classes));
+     }
+
+     torch::Tensor forward(torch::Tensor x) {
+         x = swish(bn0->forward(stem_conv->forward(x))); // [batch, 56, 32, 32]
+         for (auto& block : *blocks) {
+             x = block->forward(x);
+         }
+         x = swish(bn1->forward(head_conv->forward(x)));
+         x = torch::avg_pool2d(x, x.size(2)); // Global avg pool: [batch, 2304, 1, 1]
+         x = x.view({x.size(0), -1}); // [batch, 2304]
+         x = fc->forward(x); // [batch, num_classes]
+         return x;
+     }
+
+     torch::nn::Conv2d stem_conv{nullptr}, head_conv{nullptr};
+     torch::nn::BatchNorm2d bn0{nullptr}, bn1{nullptr};
+     torch::nn::Linear fc{nullptr};
+     torch::nn::ModuleList blocks{torch::nn::ModuleList()};
+ };
+ TORCH_MODULE(EfficientNetB6);
+
 
 
 
