@@ -1778,10 +1778,7 @@ namespace xt::models
         }
 
 
-    // Inception-B Module (Grid size reduction with factorized convolutions)
-    struct InceptionBModuleImpl : torch::nn::Module
-    {
-        InceptionBModuleImpl(int in_channels)
+        InceptionBModuleImpl::InceptionBModuleImpl(int in_channels)
         {
             // Branch 1: 3x3 max pool
             branch_pool = register_module("branch_pool", torch::nn::MaxPool2d(
@@ -1799,7 +1796,7 @@ namespace xt::models
             bn3x3_3 = register_module("bn3x3_3", torch::nn::BatchNorm2d(96));
         }
 
-        torch::Tensor forward(torch::Tensor x)
+        torch::Tensor InceptionBModuleImpl::forward(torch::Tensor x)
         {
             // Branch 1
             auto branch1 = branch_pool->forward(x);
@@ -1813,17 +1810,8 @@ namespace xt::models
             return torch::cat({branch1, branch2}, 1);
         }
 
-        torch::nn::MaxPool2d branch_pool{nullptr};
-        torch::nn::Conv2d branch3x3_1{nullptr}, branch3x3_2{nullptr}, branch3x3_3{nullptr};
-        torch::nn::BatchNorm2d bn3x3_1{nullptr}, bn3x3_2{nullptr}, bn3x3_3{nullptr};
-    };
 
-    TORCH_MODULE(InceptionBModule);
-
-    // Inception-C Module (Asymmetric convolutions: nx1 and 1xn)
-    struct InceptionCModuleImpl : torch::nn::Module
-    {
-        InceptionCModuleImpl(int in_channels, int channels_7x7)
+        InceptionCModuleImpl::InceptionCModuleImpl(int in_channels, int channels_7x7)
         {
             // Branch 1: 1x1 conv
             branch1x1 = register_module("branch1x1", torch::nn::Conv2d(
@@ -1876,7 +1864,7 @@ namespace xt::models
             bn_pool = register_module("bn_pool", torch::nn::BatchNorm2d(192));
         }
 
-        torch::Tensor forward(torch::Tensor x)
+        torch::Tensor InceptionCModuleImpl::forward(torch::Tensor x)
         {
             // Branch 1
             auto branch1 = torch::relu(bn1x1->forward(branch1x1->forward(x)));
@@ -1900,17 +1888,6 @@ namespace xt::models
             // Concatenate along channel dimension
             return torch::cat({branch1, branch2, branch3, branch4}, 1);
         }
-
-        torch::nn::Conv2d branch1x1{nullptr}, branch7x7_1{nullptr}, branch7x7_2{nullptr}, branch7x7_3{nullptr};
-        torch::nn::Conv2d branch7x7dbl_1{nullptr}, branch7x7dbl_2{nullptr}, branch7x7dbl_3{nullptr};
-        torch::nn::Conv2d branch7x7dbl_4{nullptr}, branch7x7dbl_5{nullptr}, branch_pool_conv{nullptr};
-        torch::nn::BatchNorm2d bn1x1{nullptr}, bn7x7_1{nullptr}, bn7x7_2{nullptr}, bn7x7_3{nullptr};
-        torch::nn::BatchNorm2d bn7x7dbl_1{nullptr}, bn7x7dbl_2{nullptr}, bn7x7dbl_3{nullptr};
-        torch::nn::BatchNorm2d bn7x7dbl_4{nullptr}, bn7x7dbl_5{nullptr}, bn_pool{nullptr};
-        torch::nn::AvgPool2d branch_pool{nullptr};
-    };
-
-    TORCH_MODULE(InceptionCModule);
 
 
     // Auxiliary Classifier
