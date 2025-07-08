@@ -16,7 +16,7 @@ namespace xt::datasets
         }
     }
 
-    torch::data::Example<> AudioDataset::get(size_t index) override
+    torch::data::Example<> AudioDataset::get(size_t index)
     {
         SndfileHandle file(files[index]);
         std::vector<float> samples(file.frames());
@@ -27,7 +27,7 @@ namespace xt::datasets
         return {waveform, label};
     }
 
-    torch::optional<size_t> AudioDataset::size() const override
+    torch::optional<size_t> AudioDataset::size() const
     {
         return files.size();
     }
