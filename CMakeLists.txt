@@ -307,6 +307,14 @@ pkg_check_modules(LIBZIP REQUIRED libzip)
 
 add_subdirectory(third_party/sndfile)
 
+# --- ADD THIS LINE ---
+# Now, set the property specifically for the 'sndfile' target
+set_target_properties(sndfile PROPERTIES POSITION_INDEPENDENT_CODE ON)
+
+# ... the rest of your CMakeLists.txt ...
+
+#add_library(xTorch SHARED ${SOURCES})
+#target_link_libraries(xTorch PRIVATE sndfile)
 
 
 
