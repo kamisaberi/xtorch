@@ -784,7 +784,7 @@ namespace xt::models
     }
 
 
-    SEModuleImpl::SEModuleImpl(int in_channels, int reduction = 4)
+    SEModuleImpl::SEModuleImpl(int in_channels, int reduction )
     {
         fc1 = register_module("fc1", torch::nn::Linear(in_channels, in_channels / reduction));
         fc2 = register_module("fc2", torch::nn::Linear(in_channels / reduction, in_channels));
