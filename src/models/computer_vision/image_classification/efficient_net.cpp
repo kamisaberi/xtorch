@@ -2246,7 +2246,7 @@ namespace xt::models {
 
 
 // EfficientNetB0
-    EfficientNetB0Impl::EfficientNetB0Impl(int num_classes = 10) {
+    EfficientNetB0Impl::EfficientNetB0Impl(int num_classes ) {
         // Initial stem
         stem_conv = register_module("stem_conv", torch::nn::Conv2d(
                 torch::nn::Conv2dOptions(3, 32, 3).stride(1).padding(1).bias(false))); // Simplified stride
@@ -2268,7 +2268,7 @@ namespace xt::models {
             for (int i = 0; i < num_repeats; ++i) {
                 int s = (i == 0) ? stride : 1;
                 blocks->push_back(MBConvBlock(in_ch, out_ch, expansion, kernel, s, reduction));
-                register_module("block_" + std::to_string(stage_idx) + "_" + std::to_string(i), blocks->back());
+                register_module("block_" + std::to_string(stage_idx) + "_" + std::to_string(i), blocks[blocks->size()-1]);
                 in_ch = out_ch;
             }
             stage_idx++;
@@ -2294,27 +2294,27 @@ namespace xt::models {
     }
 
 
-    EfficientNetB0::EfficientNetB0(int num_classes, int in_channels) {
-    }
-
-    EfficientNetB0::EfficientNetB0(int num_classes, int in_channels, std::vector <int64_t> input_shape) {
-    }
-
-    void EfficientNetB0::reset() {
-    }
-
-    auto EfficientNetB0::forward(std::initializer_list <std::any> tensors) -> std::any {
-        std::vector <std::any> any_vec(tensors);
-
-        std::vector <torch::Tensor> tensor_vec;
-        for (const auto &item: any_vec) {
-            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
-        }
-
-        torch::Tensor x = tensor_vec[0];
-
-        return x;
-    }
+    // EfficientNetB0::EfficientNetB0(int num_classes, int in_channels) {
+    // }
+    //
+    // EfficientNetB0::EfficientNetB0(int num_classes, int in_channels, std::vector <int64_t> input_shape) {
+    // }
+    //
+    // void EfficientNetB0::reset() {
+    // }
+    //
+    // auto EfficientNetB0::forward(std::initializer_list <std::any> tensors) -> std::any {
+    //     std::vector <std::any> any_vec(tensors);
+    //
+    //     std::vector <torch::Tensor> tensor_vec;
+    //     for (const auto &item: any_vec) {
+    //         tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+    //     }
+    //
+    //     torch::Tensor x = tensor_vec[0];
+    //
+    //     return x;
+    // }
 
 
     EfficientNetB1Impl::EfficientNetB1Impl(int num_classes = 10) {
@@ -2340,7 +2340,7 @@ namespace xt::models {
             for (int i = 0; i < num_repeats; ++i) {
                 int s = (i == 0) ? stride : 1;
                 blocks->push_back(MBConvBlock(in_ch, out_ch, expansion, kernel, s, reduction));
-                register_module("block_" + std::to_string(stage_idx) + "_" + std::to_string(i), blocks->back());
+                register_module("block_" + std::to_string(stage_idx) + "_" + std::to_string(i), blocks[blocks->size()-1]);
                 in_ch = out_ch;
             }
             stage_idx++;
@@ -2366,27 +2366,27 @@ namespace xt::models {
     }
 
 
-    EfficientNetB1::EfficientNetB1(int num_classes, int in_channels) {
-    }
-
-    EfficientNetB1::EfficientNetB1(int num_classes, int in_channels, std::vector <int64_t> input_shape) {
-    }
-
-    void EfficientNetB1::reset() {
-    }
-
-    auto EfficientNetB1::forward(std::initializer_list <std::any> tensors) -> std::any {
-        std::vector <std::any> any_vec(tensors);
-
-        std::vector <torch::Tensor> tensor_vec;
-        for (const auto &item: any_vec) {
-            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
-        }
-
-        torch::Tensor x = tensor_vec[0];
-
-        return x;
-    }
+    // EfficientNetB1::EfficientNetB1(int num_classes, int in_channels) {
+    // }
+    //
+    // EfficientNetB1::EfficientNetB1(int num_classes, int in_channels, std::vector <int64_t> input_shape) {
+    // }
+    //
+    // void EfficientNetB1::reset() {
+    // }
+    //
+    // auto EfficientNetB1::forward(std::initializer_list <std::any> tensors) -> std::any {
+    //     std::vector <std::any> any_vec(tensors);
+    //
+    //     std::vector <torch::Tensor> tensor_vec;
+    //     for (const auto &item: any_vec) {
+    //         tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+    //     }
+    //
+    //     torch::Tensor x = tensor_vec[0];
+    //
+    //     return x;
+    // }
 
 
     // EfficientNetB2
@@ -2413,7 +2413,7 @@ namespace xt::models {
             for (int i = 0; i < num_repeats; ++i) {
                 int s = (i == 0) ? stride : 1;
                 blocks->push_back(MBConvBlock(in_ch, out_ch, expansion, kernel, s, reduction));
-                register_module("block_" + std::to_string(stage_idx) + "_" + std::to_string(i), blocks->back());
+                register_module("block_" + std::to_string(stage_idx) + "_" + std::to_string(i), blocks[blocks->size()-1]);
                 in_ch = out_ch;
             }
             stage_idx++;
@@ -2439,27 +2439,27 @@ namespace xt::models {
     }
 
 
-    EfficientNetB2::EfficientNetB2(int num_classes, int in_channels) {
-    }
-
-    EfficientNetB2::EfficientNetB2(int num_classes, int in_channels, std::vector <int64_t> input_shape) {
-    }
-
-    void EfficientNetB2::reset() {
-    }
-
-    auto EfficientNetB2::forward(std::initializer_list <std::any> tensors) -> std::any {
-        std::vector <std::any> any_vec(tensors);
-
-        std::vector <torch::Tensor> tensor_vec;
-        for (const auto &item: any_vec) {
-            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
-        }
-
-        torch::Tensor x = tensor_vec[0];
-
-        return x;
-    }
+    // EfficientNetB2::EfficientNetB2(int num_classes, int in_channels) {
+    // }
+    //
+    // EfficientNetB2::EfficientNetB2(int num_classes, int in_channels, std::vector <int64_t> input_shape) {
+    // }
+    //
+    // void EfficientNetB2::reset() {
+    // }
+    //
+    // auto EfficientNetB2::forward(std::initializer_list <std::any> tensors) -> std::any {
+    //     std::vector <std::any> any_vec(tensors);
+    //
+    //     std::vector <torch::Tensor> tensor_vec;
+    //     for (const auto &item: any_vec) {
+    //         tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+    //     }
+    //
+    //     torch::Tensor x = tensor_vec[0];
+    //
+    //     return x;
+    // }
 
 
     // EfficientNetB3
@@ -2487,7 +2487,7 @@ namespace xt::models {
             for (int i = 0; i < num_repeats; ++i) {
                 int s = (i == 0) ? stride : 1;
                 blocks->push_back(MBConvBlock(in_ch, out_ch, expansion, kernel, s, reduction));
-                register_module("block_" + std::to_string(stage_idx) + "_" + std::to_string(i), blocks->back());
+                register_module("block_" + std::to_string(stage_idx) + "_" + std::to_string(i), blocks[blocks->size()-1]);
                 in_ch = out_ch;
             }
             stage_idx++;
@@ -2513,27 +2513,27 @@ namespace xt::models {
     }
 
 
-    EfficientNetB3::EfficientNetB3(int num_classes, int in_channels) {
-    }
-
-    EfficientNetB3::EfficientNetB3(int num_classes, int in_channels, std::vector <int64_t> input_shape) {
-    }
-
-    void EfficientNetB3::reset() {
-    }
-
-    auto EfficientNetB3::forward(std::initializer_list <std::any> tensors) -> std::any {
-        std::vector <std::any> any_vec(tensors);
-
-        std::vector <torch::Tensor> tensor_vec;
-        for (const auto &item: any_vec) {
-            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
-        }
-
-        torch::Tensor x = tensor_vec[0];
-
-        return x;
-    }
+    // EfficientNetB3::EfficientNetB3(int num_classes, int in_channels) {
+    // }
+    //
+    // EfficientNetB3::EfficientNetB3(int num_classes, int in_channels, std::vector <int64_t> input_shape) {
+    // }
+    //
+    // void EfficientNetB3::reset() {
+    // }
+    //
+    // auto EfficientNetB3::forward(std::initializer_list <std::any> tensors) -> std::any {
+    //     std::vector <std::any> any_vec(tensors);
+    //
+    //     std::vector <torch::Tensor> tensor_vec;
+    //     for (const auto &item: any_vec) {
+    //         tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+    //     }
+    //
+    //     torch::Tensor x = tensor_vec[0];
+    //
+    //     return x;
+    // }
 
     // EfficientNetB4
     EfficientNetB4Impl::EfficientNetB4Impl(int num_classes = 10) {
@@ -2560,7 +2560,7 @@ namespace xt::models {
             for (int i = 0; i < num_repeats; ++i) {
                 int s = (i == 0) ? stride : 1;
                 blocks->push_back(MBConvBlock(in_ch, out_ch, expansion, kernel, s, reduction));
-                register_module("block_" + std::to_string(stage_idx) + "_" + std::to_string(i), blocks->back());
+                register_module("block_" + std::to_string(stage_idx) + "_" + std::to_string(i), blocks[blocks->size()-1]);
                 in_ch = out_ch;
             }
             stage_idx++;
@@ -2586,27 +2586,27 @@ namespace xt::models {
     }
 
 
-    EfficientNetB4::EfficientNetB4(int num_classes, int in_channels) {
-    }
-
-    EfficientNetB4::EfficientNetB4(int num_classes, int in_channels, std::vector <int64_t> input_shape) {
-    }
-
-    void EfficientNetB4::reset() {
-    }
-
-    auto EfficientNetB4::forward(std::initializer_list <std::any> tensors) -> std::any {
-        std::vector <std::any> any_vec(tensors);
-
-        std::vector <torch::Tensor> tensor_vec;
-        for (const auto &item: any_vec) {
-            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
-        }
-
-        torch::Tensor x = tensor_vec[0];
-
-        return x;
-    }
+    // EfficientNetB4::EfficientNetB4(int num_classes, int in_channels) {
+    // }
+    //
+    // EfficientNetB4::EfficientNetB4(int num_classes, int in_channels, std::vector <int64_t> input_shape) {
+    // }
+    //
+    // void EfficientNetB4::reset() {
+    // }
+    //
+    // auto EfficientNetB4::forward(std::initializer_list <std::any> tensors) -> std::any {
+    //     std::vector <std::any> any_vec(tensors);
+    //
+    //     std::vector <torch::Tensor> tensor_vec;
+    //     for (const auto &item: any_vec) {
+    //         tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+    //     }
+    //
+    //     torch::Tensor x = tensor_vec[0];
+    //
+    //     return x;
+    // }
 
 
     // EfficientNetB5
@@ -2634,7 +2634,7 @@ namespace xt::models {
             for (int i = 0; i < num_repeats; ++i) {
                 int s = (i == 0) ? stride : 1;
                 blocks->push_back(MBConvBlock(in_ch, out_ch, expansion, kernel, s, reduction));
-                register_module("block_" + std::to_string(stage_idx) + "_" + std::to_string(i), blocks->back());
+                register_module("block_" + std::to_string(stage_idx) + "_" + std::to_string(i), blocks[blocks->size()-1]);
                 in_ch = out_ch;
             }
             stage_idx++;
@@ -2660,27 +2660,27 @@ namespace xt::models {
     }
 
 
-    EfficientNetB5::EfficientNetB5(int num_classes, int in_channels) {
-    }
-
-    EfficientNetB5::EfficientNetB5(int num_classes, int in_channels, std::vector <int64_t> input_shape) {
-    }
-
-    void EfficientNetB5::reset() {
-    }
-
-    auto EfficientNetB5::forward(std::initializer_list <std::any> tensors) -> std::any {
-        std::vector <std::any> any_vec(tensors);
-
-        std::vector <torch::Tensor> tensor_vec;
-        for (const auto &item: any_vec) {
-            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
-        }
-
-        torch::Tensor x = tensor_vec[0];
-
-        return x;
-    }
+    // EfficientNetB5::EfficientNetB5(int num_classes, int in_channels) {
+    // }
+    //
+    // EfficientNetB5::EfficientNetB5(int num_classes, int in_channels, std::vector <int64_t> input_shape) {
+    // }
+    //
+    // void EfficientNetB5::reset() {
+    // }
+    //
+    // auto EfficientNetB5::forward(std::initializer_list <std::any> tensors) -> std::any {
+    //     std::vector <std::any> any_vec(tensors);
+    //
+    //     std::vector <torch::Tensor> tensor_vec;
+    //     for (const auto &item: any_vec) {
+    //         tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+    //     }
+    //
+    //     torch::Tensor x = tensor_vec[0];
+    //
+    //     return x;
+    // }
 
 
     // EfficientNetB6
@@ -2708,7 +2708,7 @@ namespace xt::models {
             for (int i = 0; i < num_repeats; ++i) {
                 int s = (i == 0) ? stride : 1;
                 blocks->push_back(MBConvBlock(in_ch, out_ch, expansion, kernel, s, reduction));
-                register_module("block_" + std::to_string(stage_idx) + "_" + std::to_string(i), blocks->back());
+                register_module("block_" + std::to_string(stage_idx) + "_" + std::to_string(i), blocks[blocks->size()-1]);
                 in_ch = out_ch;
             }
             stage_idx++;
@@ -2734,27 +2734,27 @@ namespace xt::models {
     }
 
 
-    EfficientNetB6::EfficientNetB6(int num_classes, int in_channels) {
-    }
-
-    EfficientNetB6::EfficientNetB6(int num_classes, int in_channels, std::vector <int64_t> input_shape) {
-    }
-
-    void EfficientNetB6::reset() {
-    }
-
-    auto EfficientNetB6::forward(std::initializer_list <std::any> tensors) -> std::any {
-        std::vector <std::any> any_vec(tensors);
-
-        std::vector <torch::Tensor> tensor_vec;
-        for (const auto &item: any_vec) {
-            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
-        }
-
-        torch::Tensor x = tensor_vec[0];
-
-        return x;
-    }
+    // EfficientNetB6::EfficientNetB6(int num_classes, int in_channels) {
+    // }
+    //
+    // EfficientNetB6::EfficientNetB6(int num_classes, int in_channels, std::vector <int64_t> input_shape) {
+    // }
+    //
+    // void EfficientNetB6::reset() {
+    // }
+    //
+    // auto EfficientNetB6::forward(std::initializer_list <std::any> tensors) -> std::any {
+    //     std::vector <std::any> any_vec(tensors);
+    //
+    //     std::vector <torch::Tensor> tensor_vec;
+    //     for (const auto &item: any_vec) {
+    //         tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+    //     }
+    //
+    //     torch::Tensor x = tensor_vec[0];
+    //
+    //     return x;
+    // }
 
 
     EfficientNetB7Impl::EfficientNetB7Impl(int num_classes = 10) {
@@ -2781,7 +2781,7 @@ namespace xt::models {
             for (int i = 0; i < num_repeats; ++i) {
                 int s = (i == 0) ? stride : 1;
                 blocks->push_back(MBConvBlock(in_ch, out_ch, expansion, kernel, s, reduction));
-                register_module("block_" + std::to_string(stage_idx) + "_" + std::to_string(i), blocks->back());
+                register_module("block_" + std::to_string(stage_idx) + "_" + std::to_string(i), blocks[blocks->size()-1]);
                 in_ch = out_ch;
             }
             stage_idx++;
@@ -2807,27 +2807,27 @@ namespace xt::models {
     }
 
 
-    EfficientNetB7::EfficientNetB7(int num_classes, int in_channels) {
-    }
-
-    EfficientNetB7::EfficientNetB7(int num_classes, int in_channels, std::vector <int64_t> input_shape) {
-    }
-
-    void EfficientNetB7::reset() {
-    }
-
-    auto EfficientNetB7::forward(std::initializer_list <std::any> tensors) -> std::any {
-        std::vector <std::any> any_vec(tensors);
-
-        std::vector <torch::Tensor> tensor_vec;
-        for (const auto &item: any_vec) {
-            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
-        }
-
-        torch::Tensor x = tensor_vec[0];
-
-        return x;
-    }
+    // EfficientNetB7::EfficientNetB7(int num_classes, int in_channels) {
+    // }
+    //
+    // EfficientNetB7::EfficientNetB7(int num_classes, int in_channels, std::vector <int64_t> input_shape) {
+    // }
+    //
+    // void EfficientNetB7::reset() {
+    // }
+    //
+    // auto EfficientNetB7::forward(std::initializer_list <std::any> tensors) -> std::any {
+    //     std::vector <std::any> any_vec(tensors);
+    //
+    //     std::vector <torch::Tensor> tensor_vec;
+    //     for (const auto &item: any_vec) {
+    //         tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+    //     }
+    //
+    //     torch::Tensor x = tensor_vec[0];
+    //
+    //     return x;
+    // }
 
 
 }
