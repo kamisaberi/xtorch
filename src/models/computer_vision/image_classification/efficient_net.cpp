@@ -2331,13 +2331,15 @@ namespace xt::models
         int stage_idx = 0;
         for (const auto& [num_repeats, in_ch, out_ch, expansion, kernel, stride, reduction] : config)
         {
+            int in_cht = in_ch;
+            int out_cht = out_ch;
             for (int i = 0; i < num_repeats; ++i)
             {
                 int s = (i == 0) ? stride : 1;
-                blocks->push_back(MBConvBlock(in_ch, out_ch, expansion, kernel, s, reduction));
+                blocks->push_back(MBConvBlock(in_cht, out_cht, expansion, kernel, s, reduction));
                 register_module("block_" + std::to_string(stage_idx) + "_" + std::to_string(i),
                                 blocks[blocks->size() - 1]);
-                in_ch = out_ch;
+                in_cht = out_cht;
             }
             stage_idx++;
         }
@@ -2411,13 +2413,15 @@ namespace xt::models
         int stage_idx = 0;
         for (const auto& [num_repeats, in_ch, out_ch, expansion, kernel, stride, reduction] : config)
         {
+            int in_cht = in_ch;
+            int out_cht = out_ch;
             for (int i = 0; i < num_repeats; ++i)
             {
                 int s = (i == 0) ? stride : 1;
-                blocks->push_back(MBConvBlock(in_ch, out_ch, expansion, kernel, s, reduction));
+                blocks->push_back(MBConvBlock(in_cht, out_cht, expansion, kernel, s, reduction));
                 register_module("block_" + std::to_string(stage_idx) + "_" + std::to_string(i),
                                 blocks[blocks->size() - 1]);
-                in_ch = out_ch;
+                in_cht = out_cht;
             }
             stage_idx++;
         }
@@ -2492,13 +2496,15 @@ namespace xt::models
         int stage_idx = 0;
         for (const auto& [num_repeats, in_ch, out_ch, expansion, kernel, stride, reduction] : config)
         {
+            int in_cht = in_ch;
+            int out_cht = out_ch;
             for (int i = 0; i < num_repeats; ++i)
             {
                 int s = (i == 0) ? stride : 1;
-                blocks->push_back(MBConvBlock(in_ch, out_ch, expansion, kernel, s, reduction));
+                blocks->push_back(MBConvBlock(in_cht, out_cht, expansion, kernel, s, reduction));
                 register_module("block_" + std::to_string(stage_idx) + "_" + std::to_string(i),
                                 blocks[blocks->size() - 1]);
-                in_ch = out_ch;
+                in_cht = out_cht;
             }
             stage_idx++;
         }
@@ -2572,13 +2578,15 @@ namespace xt::models
         int stage_idx = 0;
         for (const auto& [num_repeats, in_ch, out_ch, expansion, kernel, stride, reduction] : config)
         {
+            int in_cht = in_ch;
+            int out_cht = out_ch;
             for (int i = 0; i < num_repeats; ++i)
             {
                 int s = (i == 0) ? stride : 1;
-                blocks->push_back(MBConvBlock(in_ch, out_ch, expansion, kernel, s, reduction));
+                blocks->push_back(MBConvBlock(in_cht, out_cht, expansion, kernel, s, reduction));
                 register_module("block_" + std::to_string(stage_idx) + "_" + std::to_string(i),
                                 blocks[blocks->size() - 1]);
-                in_ch = out_ch;
+                in_cht = out_cht;
             }
             stage_idx++;
         }
@@ -2653,13 +2661,15 @@ namespace xt::models
         int stage_idx = 0;
         for (const auto& [num_repeats, in_ch, out_ch, expansion, kernel, stride, reduction] : config)
         {
+            int in_cht = in_ch;
+            int out_cht = out_ch;
             for (int i = 0; i < num_repeats; ++i)
             {
                 int s = (i == 0) ? stride : 1;
-                blocks->push_back(MBConvBlock(in_ch, out_ch, expansion, kernel, s, reduction));
+                blocks->push_back(MBConvBlock(in_cht, out_cht, expansion, kernel, s, reduction));
                 register_module("block_" + std::to_string(stage_idx) + "_" + std::to_string(i),
                                 blocks[blocks->size() - 1]);
-                in_ch = out_ch;
+                in_cht = out_cht;
             }
             stage_idx++;
         }
@@ -2734,13 +2744,15 @@ namespace xt::models
         int stage_idx = 0;
         for (const auto& [num_repeats, in_ch, out_ch, expansion, kernel, stride, reduction] : config)
         {
+            int in_cht = in_ch;
+            int out_cht = out_ch;
             for (int i = 0; i < num_repeats; ++i)
             {
                 int s = (i == 0) ? stride : 1;
-                blocks->push_back(MBConvBlock(in_ch, out_ch, expansion, kernel, s, reduction));
+                blocks->push_back(MBConvBlock(in_cht, out_cht, expansion, kernel, s, reduction));
                 register_module("block_" + std::to_string(stage_idx) + "_" + std::to_string(i),
                                 blocks[blocks->size() - 1]);
-                in_ch = out_ch;
+                in_cht = out_cht;
             }
             stage_idx++;
         }
@@ -2814,13 +2826,15 @@ namespace xt::models
         int stage_idx = 0;
         for (const auto& [num_repeats, in_ch, out_ch, expansion, kernel, stride, reduction] : config)
         {
+            int in_cht = in_ch;
+            int out_cht = out_ch;
             for (int i = 0; i < num_repeats; ++i)
             {
                 int s = (i == 0) ? stride : 1;
-                blocks->push_back(MBConvBlock(in_ch, out_ch, expansion, kernel, s, reduction));
+                blocks->push_back(MBConvBlock(in_cht, out_cht, expansion, kernel, s, reduction));
                 register_module("block_" + std::to_string(stage_idx) + "_" + std::to_string(i),
                                 blocks[blocks->size() - 1]);
-                in_ch = out_ch;
+                in_cht = out_cht;
             }
             stage_idx++;
         }
