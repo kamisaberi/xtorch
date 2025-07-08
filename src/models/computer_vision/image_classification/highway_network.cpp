@@ -219,7 +219,7 @@ namespace xt::models {
         // Highway layers
         for (int i = 0; i < num_layers; ++i) {
             layers->push_back(HighwayLayer(input_size));
-            register_module("highway_" + std::to_string(i), layers->back());
+            register_module("highway_" + std::to_string(i), layers[layers->size()-1]);
         }
 
         // Output layer
@@ -235,25 +235,25 @@ namespace xt::models {
         return x;
     }
 
-    HighwayNetwork::HighwayNetwork(int num_classes, int in_channels) {
-    }
-
-    HighwayNetwork::HighwayNetwork(int num_classes, int in_channels, std::vector <int64_t> input_shape) {
-    }
-
-    void HighwayNetwork::reset() {
-    }
-
-    auto HighwayNetwork::forward(std::initializer_list <std::any> tensors) -> std::any {
-        std::vector <std::any> any_vec(tensors);
-
-        std::vector <torch::Tensor> tensor_vec;
-        for (const auto &item: any_vec) {
-            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
-        }
-
-        torch::Tensor x = tensor_vec[0];
-
-        return x;
-    }
+    // HighwayNetwork::HighwayNetwork(int num_classes, int in_channels) {
+    // }
+    //
+    // HighwayNetwork::HighwayNetwork(int num_classes, int in_channels, std::vector <int64_t> input_shape) {
+    // }
+    //
+    // void HighwayNetwork::reset() {
+    // }
+    //
+    // auto HighwayNetwork::forward(std::initializer_list <std::any> tensors) -> std::any {
+    //     std::vector <std::any> any_vec(tensors);
+    //
+    //     std::vector <torch::Tensor> tensor_vec;
+    //     for (const auto &item: any_vec) {
+    //         tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+    //     }
+    //
+    //     torch::Tensor x = tensor_vec[0];
+    //
+    //     return x;
+    // }
 }
