@@ -34,7 +34,7 @@ namespace xt::models
 
         torch::nn::Conv2d expand_conv{nullptr}, depthwise_conv{nullptr}, pointwise_conv{nullptr};
         torch::nn::BatchNorm2d bn0{nullptr}, bn1{nullptr}, bn2{nullptr};
-        SEBlock se{nullptr};
+        std::shared_ptr<SEBlock> se{nullptr};
         bool skip_connection;
     };
 
@@ -51,7 +51,7 @@ namespace xt::models
         torch::nn::Conv2d stem_conv{nullptr}, head_conv{nullptr};
         torch::nn::BatchNorm2d bn0{nullptr}, bn1{nullptr};
         torch::nn::Linear fc{nullptr};
-        xt::ModuleList blocks{xt::ModuleList()};
+        vector<std::shared_ptr<xt::Module>> blocks;
     };
 
     // TORCH_MODULE(EfficientNetB0);
@@ -82,7 +82,7 @@ namespace xt::models
         torch::nn::Conv2d stem_conv{nullptr}, head_conv{nullptr};
         torch::nn::BatchNorm2d bn0{nullptr}, bn1{nullptr};
         torch::nn::Linear fc{nullptr};
-        xt::ModuleList blocks{xt::ModuleList()};
+        vector<std::shared_ptr<xt::Module>> blocks;
     };
 
     // TORCH_MODULE(EfficientNetB1);
@@ -113,7 +113,7 @@ namespace xt::models
         torch::nn::Conv2d stem_conv{nullptr}, head_conv{nullptr};
         torch::nn::BatchNorm2d bn0{nullptr}, bn1{nullptr};
         torch::nn::Linear fc{nullptr};
-        xt::ModuleList blocks{xt::ModuleList()};
+        vector<std::shared_ptr<xt::Module>> blocks;
     };
 
     // TORCH_MODULE(EfficientNetB2);
@@ -144,7 +144,7 @@ namespace xt::models
         torch::nn::Conv2d stem_conv{nullptr}, head_conv{nullptr};
         torch::nn::BatchNorm2d bn0{nullptr}, bn1{nullptr};
         torch::nn::Linear fc{nullptr};
-        xt::ModuleList blocks{xt::ModuleList()};
+        vector<std::shared_ptr<xt::Module>> blocks;
     };
 
     // TORCH_MODULE(EfficientNetB3);
@@ -174,7 +174,7 @@ namespace xt::models
         torch::nn::Conv2d stem_conv{nullptr}, head_conv{nullptr};
         torch::nn::BatchNorm2d bn0{nullptr}, bn1{nullptr};
         torch::nn::Linear fc{nullptr};
-        xt::ModuleList blocks{xt::ModuleList()};
+        vector<std::shared_ptr<xt::Module>> blocks;
     };
 
     // TORCH_MODULE(EfficientNetB4);
@@ -205,7 +205,7 @@ namespace xt::models
         torch::nn::Conv2d stem_conv{nullptr}, head_conv{nullptr};
         torch::nn::BatchNorm2d bn0{nullptr}, bn1{nullptr};
         torch::nn::Linear fc{nullptr};
-        xt::ModuleList blocks{xt::ModuleList()};
+        vector<std::shared_ptr<xt::Module>> blocks;
     };
 
     // TORCH_MODULE(EfficientNetB5);
@@ -236,7 +236,7 @@ namespace xt::models
         torch::nn::Conv2d stem_conv{nullptr}, head_conv{nullptr};
         torch::nn::BatchNorm2d bn0{nullptr}, bn1{nullptr};
         torch::nn::Linear fc{nullptr};
-        xt::ModuleList blocks{xt::ModuleList()};
+        vector<std::shared_ptr<xt::Module>> blocks;
     };
 
     // TORCH_MODULE(EfficientNetB6);
@@ -268,7 +268,7 @@ namespace xt::models
         torch::nn::Conv2d stem_conv{nullptr}, head_conv{nullptr};
         torch::nn::BatchNorm2d bn0{nullptr}, bn1{nullptr};
         torch::nn::Linear fc{nullptr};
-        xt::ModuleList blocks{xt::ModuleList()};
+        vector<std::shared_ptr<xt::Module>> blocks;
     };
 
     // TORCH_MODULE(EfficientNetB7);
