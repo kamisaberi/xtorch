@@ -188,6 +188,7 @@ auto forward(std::initializer_list <std::any> tensors) -> std::any override;
         std::tuple<torch::Tensor, torch::Tensor> forward(torch::Tensor x);
 
         bool aux_logits_;
+        bool is_training_;
         torch::nn::Conv2d conv1{nullptr}, conv2{nullptr}, conv3{nullptr}, conv4{nullptr}, conv5{nullptr};
         torch::nn::BatchNorm2d bn1{nullptr}, bn2{nullptr}, bn3{nullptr}, bn4{nullptr}, bn5{nullptr};
         torch::nn::MaxPool2d pool1{nullptr}, pool2{nullptr};
