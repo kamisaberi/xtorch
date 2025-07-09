@@ -6,10 +6,11 @@
 namespace xt::models
 {
     // Inception Module
-    struct InceptionModuleImpl : torch::nn::Module
+    struct InceptionModule : xt::Module
     {
-        InceptionModuleImpl(int in_channels, int ch1x1, int ch3x3red, int ch3x3, int ch5x5red, int ch5x5,
-                            int pool_proj_count);
+        InceptionModule(int in_channels, int ch1x1, int ch3x3red, int ch3x3, int ch5x5red, int ch5x5,
+                        int pool_proj_count);
+        auto forward(std::initializer_list<std::any> tensors) -> std::any override;
 
         torch::Tensor forward(torch::Tensor x);
 
@@ -20,24 +21,25 @@ namespace xt::models
         torch::nn::MaxPool2d pool{nullptr};
     };
 
-    TORCH_MODULE(InceptionModule);
+    // TORCH_MODULE(InceptionModule);
 
-    // Simplified GoogLeNet
-    struct GoogLeNetImpl : torch::nn::Module
+    // Sified GoogLeNet
+    struct GoogLeNet : xt::Module
     {
-        GoogLeNetImpl(int in_channels, int num_classes);
+        GoogLeNet(int in_channels, int num_classes);
+        auto forward(std::initializer_list<std::any> tensors) -> std::any override;
 
         torch::Tensor forward(torch::Tensor x);
 
         torch::nn::Conv2d stem_conv{nullptr};
         torch::nn::BatchNorm2d stem_bn{nullptr};
-        InceptionModule inception1{nullptr}, inception2{nullptr};
+        std::shared_ptr<InceptionModule> inception1{nullptr}, inception2{nullptr};
         torch::nn::MaxPool2d pool{nullptr};
         torch::nn::AdaptiveAvgPool2d global_pool{nullptr};
         torch::nn::Linear fc{nullptr};
     };
 
-    TORCH_MODULE(GoogLeNet);
+    // TORCH_MODULE(GoogLeNet);
 
 
     // struct GoogLeNet : xt::Cloneable<GoogLeNet> {
