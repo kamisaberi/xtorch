@@ -49,7 +49,7 @@ namespace xt::models
         torch::nn::Linear linear;
 
         SENet(const std::vector<int>& num_blocks, int num_classes = 10, int reduction_ratio = 16);
-        torch::nn::Sequential _make_layer(int& in_planes, int planes, int num_blocks, int stride, int reduction);
+        torch::nn::Sequential _make_layer(int in_planes, int planes, int num_blocks, int stride, int reduction);
         auto forward(std::initializer_list<std::any> tensors) -> std::any override;
 
         torch::Tensor forward(torch::Tensor x);

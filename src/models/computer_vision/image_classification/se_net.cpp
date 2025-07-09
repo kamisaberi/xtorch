@@ -283,12 +283,12 @@ namespace xt::models
 
     // --- A Basic ResNet Block with an integrated SE Module ---
 
-    SEBasicBlock::SEBasicBlock(int in_planes, int planes, int stride = 1, int reduction_ratio)
+    SEBasicBlock::SEBasicBlock(int in_planes, int planes, int stride , int reduction_ratio)
         : conv1(torch::nn::Conv2dOptions(in_planes, planes, 3).stride(stride).padding(1).bias(false)),
           bn1(planes),
           conv2(torch::nn::Conv2dOptions(planes, planes, 3).stride(1).padding(1).bias(false)),
           bn2(planes),
-          se_module(planes, reduction_ratio)
+          se_module(std::make_shared<SEModule>(planes, reduction_ratio))
     {
         register_module("conv1", conv1);
         register_module("bn1", bn1);
@@ -339,7 +339,7 @@ namespace xt::models
 
     // --- The Full SENet Model (using the SE-ResNet backbone) ---
 
-    SENet::SENet(const std::vector<int>& num_blocks, int num_classes = 10, int reduction_ratio)
+    SENet::SENet(const std::vector<int>& num_blocks, int num_classes , int reduction_ratio)
     {
         // Stem for MNIST (1 input channel)
         conv1 = register_module("conv1", torch::nn::Conv2d(
@@ -358,7 +358,7 @@ namespace xt::models
         linear = register_module("linear", torch::nn::Linear(256, num_classes));
     }
 
-    torch::nn::Sequential SENet::_make_layer(int& in_planes, int planes, int num_blocks, int stride, int reduction)
+    torch::nn::Sequential SENet::_make_layer(int in_planes, int planes, int num_blocks, int stride, int reduction)
     {
         torch::nn::Sequential layers;
         layers->push_back(SEBasicBlock(in_planes, planes, stride, reduction));
