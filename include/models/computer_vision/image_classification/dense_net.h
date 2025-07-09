@@ -6,11 +6,14 @@
 using namespace std;
 
 
-namespace xt::models {
-
+namespace xt::models
+{
     // Dense Layer (Bottleneck: 1x1 conv -> 3x3 conv)
-    struct DenseLayerImpl : torch::nn::Module {
-        DenseLayerImpl(int in_channels, int growth_rate);
+    struct DenseLayer : xt::Module
+    {
+        DenseLayer(int in_channels, int growth_rate);
+
+        auto forward(std::initializer_list<std::any> tensors) -> std::any override;
 
         torch::Tensor forward(torch::Tensor x);
 
@@ -18,23 +21,27 @@ namespace xt::models {
         torch::nn::Conv2d conv1{nullptr}, conv2{nullptr};
     };
 
-    TORCH_MODULE(DenseLayer);
+    // TORCH_MODULE(DenseLayer);
 
     // Dense Block
-    struct DenseBlockImpl : torch::nn::Module {
-        DenseBlockImpl(int num_layers, int in_channels, int growth_rate);
+    struct DenseBlock : xt::Module
+    {
+        DenseBlock(int num_layers, int in_channels, int growth_rate);
+        auto forward(std::initializer_list<std::any> tensors) -> std::any override;
 
         torch::Tensor forward(torch::Tensor x);
 
-        torch::nn::ModuleList layers{torch::nn::ModuleList()};
+        vector<xt::Module> layers;
     };
 
-    TORCH_MODULE(DenseBlock);
+    // TORCH_MODULE(DenseBlock);
 
     // Transition Layer (1x1 conv + 2x2 avg pool)
-    struct TransitionLayerImpl : torch::nn::Module {
-        TransitionLayerImpl(int in_channels, int out_channels);
+    struct TransitionLayer : xt::Module
+    {
+        TransitionLayer(int in_channels, int out_channels);
 
+        auto forward(std::initializer_list<std::any> tensors) -> std::any override;
         torch::Tensor forward(torch::Tensor x);
 
         torch::nn::BatchNorm2d bn{nullptr};
@@ -42,70 +49,78 @@ namespace xt::models {
         torch::nn::AvgPool2d pool{nullptr};
     };
 
-    TORCH_MODULE(TransitionLayer);
+    // TORCH_MODULE(TransitionLayer);
 
     // DenseNet121
-    struct DenseNet121Impl : torch::nn::Module {
-        DenseNet121Impl(int num_classes = 10, int growth_rate = 32, int init_channels = 64);
+    struct DenseNet121 : xt::Module
+    {
+        DenseNet121(int num_classes = 10, int growth_rate = 32, int init_channels = 64);
 
+        auto forward(std::initializer_list<std::any> tensors) -> std::any override;
         torch::Tensor forward(torch::Tensor x);
 
         torch::nn::Conv2d conv0{nullptr};
         torch::nn::BatchNorm2d bn0{nullptr}, bn_final{nullptr};
-        DenseBlock dense1{nullptr}, dense2{nullptr}, dense3{nullptr}, dense4{nullptr};
-        TransitionLayer trans1{nullptr}, trans2{nullptr}, trans3{nullptr};
+        std::shared_ptr<DenseBlock> dense1{nullptr}, dense2{nullptr}, dense3{nullptr}, dense4{nullptr};
+        std::shared_ptr<TransitionLayer> trans1{nullptr}, trans2{nullptr}, trans3{nullptr};
         torch::nn::Linear fc{nullptr};
     };
 
-    TORCH_MODULE(DenseNet121);
+    // TORCH_MODULE(DenseNet121);
 
 
     // DenseNet169
-    struct DenseNet169Impl : torch::nn::Module {
-        DenseNet169Impl(int num_classes = 10, int growth_rate = 32, int init_channels = 64);
+    struct DenseNet169 : xt::Module
+    {
+        DenseNet169(int num_classes = 10, int growth_rate = 32, int init_channels = 64);
 
+        auto forward(std::initializer_list<std::any> tensors) -> std::any override;
         torch::Tensor forward(torch::Tensor x);
 
         torch::nn::Conv2d conv0{nullptr};
         torch::nn::BatchNorm2d bn0{nullptr}, bn_final{nullptr};
-        DenseBlock dense1{nullptr}, dense2{nullptr}, dense3{nullptr}, dense4{nullptr};
-        TransitionLayer trans1{nullptr}, trans2{nullptr}, trans3{nullptr};
+        std::shared_ptr<DenseBlock> dense1{nullptr}, dense2{nullptr}, dense3{nullptr}, dense4{nullptr};
+        std::shared_ptr<TransitionLayer> trans1{nullptr}, trans2{nullptr}, trans3{nullptr};
         torch::nn::Linear fc{nullptr};
     };
 
-    TORCH_MODULE(DenseNet169);
+    // TORCH_MODULE(DenseNet169);
 
 
     // DenseNet201
-    struct DenseNet201Impl : torch::nn::Module {
-        DenseNet201Impl(int num_classes = 10, int growth_rate = 32, int init_channels = 64);
+    struct DenseNet201 : xt::Module
+    {
+        DenseNet201(int num_classes = 10, int growth_rate = 32, int init_channels = 64);
 
+        auto forward(std::initializer_list<std::any> tensors) -> std::any override;
         torch::Tensor forward(torch::Tensor x);
 
         torch::nn::Conv2d conv0{nullptr};
         torch::nn::BatchNorm2d bn0{nullptr}, bn_final{nullptr};
-        DenseBlock dense1{nullptr}, dense2{nullptr}, dense3{nullptr}, dense4{nullptr};
-        TransitionLayer trans1{nullptr}, trans2{nullptr}, trans3{nullptr};
+        std::shared_ptr<DenseBlock> dense1{nullptr}, dense2{nullptr}, dense3{nullptr}, dense4{nullptr};
+        std::shared_ptr<TransitionLayer> trans1{nullptr}, trans2{nullptr}, trans3{nullptr};
         torch::nn::Linear fc{nullptr};
     };
 
-    TORCH_MODULE(DenseNet201);
+    // TORCH_MODULE(DenseNet201);
 
 
     // DenseNet264
-    struct DenseNet264Impl : torch::nn::Module {
-        DenseNet264Impl(int num_classes = 10, int growth_rate = 32, int init_channels = 64);
+    struct DenseNet264 : xt::Module
+    {
+        DenseNet264(int num_classes = 10, int growth_rate = 32, int init_channels = 64);
 
+        auto forward(std::initializer_list<std::any> tensors) -> std::any override;
         torch::Tensor forward(torch::Tensor x);
 
         torch::nn::Conv2d conv0{nullptr};
         torch::nn::BatchNorm2d bn0{nullptr}, bn_final{nullptr};
-        DenseBlock dense1{nullptr}, dense2{nullptr}, dense3{nullptr}, dense4{nullptr};
-        TransitionLayer trans1{nullptr}, trans2{nullptr}, trans3{nullptr};
+        std::shared_ptr<DenseBlock> dense1{nullptr}, dense2{nullptr}, dense3{nullptr}, dense4{nullptr};
+        std::shared_ptr<TransitionLayer> trans1{nullptr}, trans2{nullptr}, trans3{nullptr};
         torch::nn::Linear fc{nullptr};
     };
 
-    TORCH_MODULE(DenseNet264);
+    // TORCH_MODULE(DenseNet264);
 
 
     // struct DenseNet121 : xt::Cloneable<DenseNet121> {
