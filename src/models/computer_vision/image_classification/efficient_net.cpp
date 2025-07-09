@@ -2158,13 +2158,13 @@ namespace xt::models
     }
 
     // Squeeze-and-Excitation Block
-    SEBlockImpl::SEBlockImpl(int in_channels, int reduction)
+    SEBlock::SEBlock(int in_channels, int reduction)
     {
         fc1 = register_module("fc1", torch::nn::Linear(in_channels, in_channels / reduction));
         fc2 = register_module("fc2", torch::nn::Linear(in_channels / reduction, in_channels));
     }
 
-    torch::Tensor SEBlockImpl::forward(torch::Tensor x)
+    torch::Tensor SEBlock::forward(torch::Tensor x)
     {
         auto batch = x.size(0);
         auto channels = x.size(1);
@@ -2175,8 +2175,8 @@ namespace xt::models
     }
 
     // MBConv Block (Inverted Residual with Depthwise Separable Conv)
-    MBConvBlockImpl::MBConvBlockImpl(int in_channels, int out_channels, int expansion, int kernel_size, int stride,
-                                     int reduction)
+    MBConvBlock::MBConvBlock(int in_channels, int out_channels, int expansion, int kernel_size, int stride,
+                             int reduction)
     {
         int expanded_channels = in_channels * expansion;
         bool has_se = reduction > 0;
@@ -2196,7 +2196,7 @@ namespace xt::models
 
         if (has_se)
         {
-            se = register_module("se", SEBlock(expanded_channels, reduction));
+            se = register_module("se", std::make_shared<SEBlock>(expanded_channels, reduction));
         }
 
         pointwise_conv = register_module("pointwise_conv", torch::nn::Conv2d(
@@ -2206,7 +2206,7 @@ namespace xt::models
         skip_connection = (in_channels == out_channels && stride == 1);
     }
 
-    torch::Tensor MBConvBlockImpl::forward(torch::Tensor x)
+    torch::Tensor MBConvBlock::forward(torch::Tensor x)
     {
         auto out = x;
         if (expand_conv)
@@ -2228,12 +2228,12 @@ namespace xt::models
 
 
     // EfficientNetB0
-    EfficientNetB0Impl::EfficientNetB0Impl(int num_classes)
+    EfficientNetB0::EfficientNetB0(int num_classes)
     {
         // Initial stem
         stem_conv = register_module("stem_conv", torch::nn::Conv2d(
                                         torch::nn::Conv2dOptions(3, 32, 3).stride(1).padding(1).bias(false)));
-        // Simplified stride
+        // Sified stride
         bn0 = register_module("bn0", torch::nn::BatchNorm2d(32));
 
         // MBConv blocks configuration: {num_repeats, in_channels, out_channels, expansion, kernel_size, stride, se_reduction}
@@ -2255,9 +2255,9 @@ namespace xt::models
             for (int i = 0; i < num_repeats; ++i)
             {
                 int s = (i == 0) ? stride : 1;
-                blocks->push_back(MBConvBlock(in_cht, out_cht, expansion, kernel, s, reduction));
+                blocks.push_back(std::make_shared<MBConvBlock>(in_cht, out_cht, expansion, kernel, s, reduction));
                 register_module("block_" + std::to_string(stage_idx) + "_" + std::to_string(i),
-                                blocks[blocks->size() - 1]);
+                                blocks[blocks.size() - 1]);
                 in_cht = out_cht;
             }
             stage_idx++;
@@ -2270,7 +2270,7 @@ namespace xt::models
         fc = register_module("fc", torch::nn::Linear(1280, num_classes));
     }
 
-    torch::Tensor EfficientNetB0Impl::forward(torch::Tensor x)
+    torch::Tensor EfficientNetB0::forward(torch::Tensor x)
     {
         x = swish(bn0->forward(stem_conv->forward(x))); // [batch, 32, 32, 32]
         for (auto& block : *blocks)
@@ -2308,12 +2308,12 @@ namespace xt::models
     // }
 
 
-    EfficientNetB1Impl::EfficientNetB1Impl(int num_classes = 10)
+    EfficientNetB1::EfficientNetB1(int num_classes = 10)
     {
         // Initial stem
         stem_conv = register_module("stem_conv", torch::nn::Conv2d(
                                         torch::nn::Conv2dOptions(3, 32, 3).stride(1).padding(1).bias(false)));
-        // Simplified stride
+        // Sified stride
         bn0 = register_module("bn0", torch::nn::BatchNorm2d(32));
 
         // MBConv blocks configuration: {num_repeats, in_channels, out_channels, expansion, kernel_size, stride, se_reduction}
@@ -2351,7 +2351,7 @@ namespace xt::models
         fc = register_module("fc", torch::nn::Linear(1280, num_classes));
     }
 
-    torch::Tensor EfficientNetB1Impl::forward(torch::Tensor x)
+    torch::Tensor EfficientNetB1::forward(torch::Tensor x)
     {
         x = swish(bn0->forward(stem_conv->forward(x))); // [batch, 32, 32, 32]
         for (auto& block : *blocks)
@@ -2390,12 +2390,12 @@ namespace xt::models
 
 
     // EfficientNetB2
-    EfficientNetB2Impl::EfficientNetB2Impl(int num_classes = 10)
+    EfficientNetB2::EfficientNetB2(int num_classes = 10)
     {
         // Initial stem
         stem_conv = register_module("stem_conv", torch::nn::Conv2d(
                                         torch::nn::Conv2dOptions(3, 32, 3).stride(1).padding(1).bias(false)));
-        // Simplified stride
+        // Sified stride
         bn0 = register_module("bn0", torch::nn::BatchNorm2d(32));
 
         // MBConv blocks configuration: {num_repeats, in_channels, out_channels, expansion, kernel_size, stride, se_reduction}
@@ -2434,7 +2434,7 @@ namespace xt::models
         fc = register_module("fc", torch::nn::Linear(1408, num_classes));
     }
 
-    torch::Tensor EfficientNetB2Impl::forward(torch::Tensor x)
+    torch::Tensor EfficientNetB2::forward(torch::Tensor x)
     {
         x = swish(bn0->forward(stem_conv->forward(x))); // [batch, 32, 32, 32]
         for (auto& block : *blocks)
@@ -2473,12 +2473,12 @@ namespace xt::models
 
 
     // EfficientNetB3
-    EfficientNetB3Impl::EfficientNetB3Impl(int num_classes = 10)
+    EfficientNetB3::EfficientNetB3(int num_classes = 10)
     {
         // Initial stem
         stem_conv = register_module("stem_conv", torch::nn::Conv2d(
                                         torch::nn::Conv2dOptions(3, 40, 3).stride(1).padding(1).bias(
-                                            false))); // Simplified stride, increased channels
+                                            false))); // Sified stride, increased channels
         bn0 = register_module("bn0", torch::nn::BatchNorm2d(40));
 
         // MBConv blocks configuration: {num_repeats, in_channels, out_channels, expansion, kernel_size, stride, se_reduction}
@@ -2517,7 +2517,7 @@ namespace xt::models
         fc = register_module("fc", torch::nn::Linear(1536, num_classes));
     }
 
-    torch::Tensor EfficientNetB3Impl::forward(torch::Tensor x)
+    torch::Tensor EfficientNetB3::forward(torch::Tensor x)
     {
         x = swish(bn0->forward(stem_conv->forward(x))); // [batch, 40, 32, 32]
         for (auto& block : *blocks)
@@ -2555,12 +2555,12 @@ namespace xt::models
     // }
 
     // EfficientNetB4
-    EfficientNetB4Impl::EfficientNetB4Impl(int num_classes = 10)
+    EfficientNetB4::EfficientNetB4(int num_classes = 10)
     {
         // Initial stem
         stem_conv = register_module("stem_conv", torch::nn::Conv2d(
                                         torch::nn::Conv2dOptions(3, 48, 3).stride(1).padding(1).bias(
-                                            false))); // Simplified stride, increased channels
+                                            false))); // Sified stride, increased channels
         bn0 = register_module("bn0", torch::nn::BatchNorm2d(48));
 
         // MBConv blocks configuration: {num_repeats, in_channels, out_channels, expansion, kernel_size, stride, se_reduction}
@@ -2599,7 +2599,7 @@ namespace xt::models
         fc = register_module("fc", torch::nn::Linear(1792, num_classes));
     }
 
-    torch::Tensor EfficientNetB4Impl::forward(torch::Tensor x)
+    torch::Tensor EfficientNetB4::forward(torch::Tensor x)
     {
         x = swish(bn0->forward(stem_conv->forward(x))); // [batch, 48, 32, 32]
         for (auto& block : *blocks)
@@ -2638,12 +2638,12 @@ namespace xt::models
 
 
     // EfficientNetB5
-    EfficientNetB5Impl::EfficientNetB5Impl(int num_classes = 10)
+    EfficientNetB5::EfficientNetB5(int num_classes = 10)
     {
         // Initial stem
         stem_conv = register_module("stem_conv", torch::nn::Conv2d(
                                         torch::nn::Conv2dOptions(3, 48, 3).stride(1).padding(1).bias(
-                                            false))); // Simplified stride, increased channels
+                                            false))); // Sified stride, increased channels
         bn0 = register_module("bn0", torch::nn::BatchNorm2d(48));
 
         // MBConv blocks configuration: {num_repeats, in_channels, out_channels, expansion, kernel_size, stride, se_reduction}
@@ -2682,7 +2682,7 @@ namespace xt::models
         fc = register_module("fc", torch::nn::Linear(2048, num_classes));
     }
 
-    torch::Tensor EfficientNetB5Impl::forward(torch::Tensor x)
+    torch::Tensor EfficientNetB5::forward(torch::Tensor x)
     {
         x = swish(bn0->forward(stem_conv->forward(x))); // [batch, 48, 32, 32]
         for (auto& block : *blocks)
@@ -2721,12 +2721,12 @@ namespace xt::models
 
 
     // EfficientNetB6
-    EfficientNetB6Impl::EfficientNetB6Impl(int num_classes = 10)
+    EfficientNetB6::EfficientNetB6(int num_classes = 10)
     {
         // Initial stem
         stem_conv = register_module("stem_conv", torch::nn::Conv2d(
                                         torch::nn::Conv2dOptions(3, 56, 3).stride(1).padding(1).bias(
-                                            false))); // Simplified stride, increased channels
+                                            false))); // Sified stride, increased channels
         bn0 = register_module("bn0", torch::nn::BatchNorm2d(56));
 
         // MBConv blocks configuration: {num_repeats, in_channels, out_channels, expansion, kernel_size, stride, se_reduction}
@@ -2765,7 +2765,7 @@ namespace xt::models
         fc = register_module("fc", torch::nn::Linear(2304, num_classes));
     }
 
-    torch::Tensor EfficientNetB6Impl::forward(torch::Tensor x)
+    torch::Tensor EfficientNetB6::forward(torch::Tensor x)
     {
         x = swish(bn0->forward(stem_conv->forward(x))); // [batch, 56, 32, 32]
         for (auto& block : *blocks)
@@ -2803,12 +2803,12 @@ namespace xt::models
     // }
 
 
-    EfficientNetB7Impl::EfficientNetB7Impl(int num_classes = 10)
+    EfficientNetB7::EfficientNetB7(int num_classes = 10)
     {
         // Initial stem
         stem_conv = register_module("stem_conv", torch::nn::Conv2d(
                                         torch::nn::Conv2dOptions(3, 64, 3).stride(1).padding(1).bias(
-                                            false))); // Simplified stride, increased channels
+                                            false))); // Sified stride, increased channels
         bn0 = register_module("bn0", torch::nn::BatchNorm2d(64));
 
         // MBConv blocks configuration: {num_repeats, in_channels, out_channels, expansion, kernel_size, stride, se_reduction}
@@ -2847,7 +2847,7 @@ namespace xt::models
         fc = register_module("fc", torch::nn::Linear(2560, num_classes));
     }
 
-    torch::Tensor EfficientNetB7Impl::forward(torch::Tensor x)
+    torch::Tensor EfficientNetB7::forward(torch::Tensor x)
     {
         x = swish(bn0->forward(stem_conv->forward(x))); // [batch, 64, 32, 32]
         for (auto& block : *blocks)
