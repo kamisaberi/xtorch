@@ -296,6 +296,20 @@ namespace xt::models
         bn = register_module("bn", torch::nn::BatchNorm2d(out_channels));
     }
 
+    auto Conv1x1::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        std::vector<std::any> any_vec(tensors);
+
+        std::vector<torch::Tensor> tensor_vec;
+        for (const auto& item : any_vec)
+        {
+            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+        }
+
+        torch::Tensor x = tensor_vec[0];
+        return this->forward(x);
+    }
+
     torch::Tensor Conv1x1::forward(torch::Tensor x)
     {
         return torch::relu(bn->forward(conv->forward(x)));
@@ -358,8 +372,8 @@ namespace xt::models
         stem = register_module("stem", torch::nn::Conv2d(
                                    torch::nn::Conv2dOptions(in_channels, channels, 3).stride(1).padding(1)));
         bn_stem = register_module("bn_stem", torch::nn::BatchNorm2d(channels));
-        normal_cell = register_module("normal_cell", std::make_shared<NormalCell>(channels, channels) );
-        reduction_cell = register_module("reduction_cell", std::make_shared< ReductionCell>(channels * 2, channels));
+        normal_cell = register_module("normal_cell", std::make_shared<NormalCell>(channels, channels));
+        reduction_cell = register_module("reduction_cell", std::make_shared<ReductionCell>(channels * 2, channels));
         classifier = register_module("classifier", torch::nn::Linear(4 * channels, num_classes));
         pool = register_module("pool", torch::nn::AdaptiveAvgPool2d(1));
     }

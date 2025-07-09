@@ -33,9 +33,10 @@ namespace xt::models {
 //    TORCH_MODULE(Conv1x1);
 
     // Operation: 3x3 Max Pool
-    struct MaxPool3x3 : torch::nn::Module {
+    struct MaxPool3x3 : xt::Module {
         MaxPool3x3();
 
+        auto forward(std::initializer_list <std::any> tensors) -> std::any override;
         torch::Tensor forward(torch::Tensor x);
 
         torch::nn::MaxPool2d pool{nullptr};
@@ -44,9 +45,10 @@ namespace xt::models {
     // TORCH_MODULE(MaxPool3x3);
 
     // Normal Cell
-    struct NormalCell : torch::nn::Module {
+    struct NormalCell : xt::Module {
         NormalCell(int prev_channels, int channels);
 
+        auto forward(std::initializer_list <std::any> tensors) -> std::any override;
         torch::Tensor forward(torch::Tensor prev, torch::Tensor curr);
 
         std::shared_ptr<Conv3x3> op1{nullptr};
@@ -57,9 +59,10 @@ namespace xt::models {
     // TORCH_MODULE(NormalCell);
 
     // Reduction Cell
-    struct ReductionCell : torch::nn::Module {
+    struct ReductionCell : xt::Module {
         ReductionCell(int prev_channels, int channels);
 
+        auto forward(std::initializer_list <std::any> tensors) -> std::any override;
         torch::Tensor forward(torch::Tensor prev, torch::Tensor curr);
 
         torch::nn::Conv2d op1{nullptr};
@@ -71,9 +74,10 @@ namespace xt::models {
     // TORCH_MODULE(ReductionCell);
 
     // AmoebaNet-A (Simplified)
-    struct AmoebaNet : torch::nn::Module {
+    struct AmoebaNet : xt::Module {
         AmoebaNet(int in_channels, int num_classes, int channels = 64);
 
+        auto forward(std::initializer_list <std::any> tensors) -> std::any override;
         torch::Tensor forward(torch::Tensor x);
 
         torch::nn::Conv2d stem{nullptr};
