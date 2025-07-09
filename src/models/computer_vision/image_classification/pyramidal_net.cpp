@@ -11,13 +11,13 @@ using namespace std;
 //
 // // --- The Core Pyramidal Residual Block ---
 //
-// struct PyramidalBasicBlockImpl : torch::nn::Module {
+// struct PyramidalBasicBlock : torch::nn::Module {
 //     torch::nn::Conv2d conv1{nullptr}, conv2_nobn{nullptr};
 //     torch::nn::BatchNorm2d bn1{nullptr}, bn2{nullptr};
 //
 //     int stride = 1;
 //
-//     PyramidalBasicBlockImpl(int in_planes, int out_planes, int stride = 1)
+//     PyramidalBasicBlock(int in_planes, int out_planes, int stride = 1)
 //         : stride(stride)
 //     {
 //         conv1 = register_module("conv1", torch::nn::Conv2d(torch::nn::Conv2dOptions(in_planes, out_planes, 3).stride(stride).padding(1).bias(false)));
@@ -64,15 +64,15 @@ using namespace std;
 //
 // // --- The Full PyramidalNet Model ---
 //
-// struct PyramidalNetImpl : torch::nn::Module {
+// struct PyramidalNet : torch::nn::Module {
 //     torch::nn::Conv2d conv1;
 //     torch::nn::BatchNorm2d bn1;
 //     torch::nn::Sequential layer1, layer2, layer3;
 //     torch::nn::Linear linear;
 //
-//     PyramidalNetImpl(int N, int alpha, int num_classes = 10)
+//     PyramidalNet(int N, int alpha, int num_classes = 10)
 //     {
-//         // For MNIST, we use a simple stem
+//         // For MNIST, we use a se stem
 //         conv1 = register_module("conv1", torch::nn::Conv2d(torch::nn::Conv2dOptions(1, 16, 3).stride(1).padding(1).bias(false)));
 //         bn1 = register_module("bn1", torch::nn::BatchNorm2d(16));
 //
@@ -240,7 +240,7 @@ using namespace std;
 namespace xt::models {
 
 
-    PyramidalBasicBlockImpl::PyramidalBasicBlockImpl(int in_planes, int out_planes, int stride = 1)
+    PyramidalBasicBlock::PyramidalBasicBlock(int in_planes, int out_planes, int stride = 1)
             : stride(stride) {
         conv1 = register_module("conv1", torch::nn::Conv2d(
                 torch::nn::Conv2dOptions(in_planes, out_planes, 3).stride(stride).padding(1).bias(false)));
@@ -252,7 +252,7 @@ namespace xt::models {
         bn2 = register_module("bn2", torch::nn::BatchNorm2d(out_planes));
     }
 
-    torch::Tensor PyramidalBasicBlockImpl::forward(torch::Tensor x) {
+    torch::Tensor PyramidalBasicBlock::forward(torch::Tensor x) {
         auto out = torch::relu(bn1(conv1(x)));
         out = bn2(conv2_nobn(out));
 
@@ -287,8 +287,8 @@ namespace xt::models {
 
     // --- The Full PyramidalNet Model ---
 
-    PyramidalNetImpl::PyramidalNetImpl(int N, int alpha, int num_classes = 10) {
-        // For MNIST, we use a simple stem
+    PyramidalNet::PyramidalNet(int N, int alpha, int num_classes = 10) {
+        // For MNIST, we use a se stem
         conv1 = register_module("conv1", torch::nn::Conv2d(
                 torch::nn::Conv2dOptions(1, 16, 3).stride(1).padding(1).bias(false)));
         bn1 = register_module("bn1", torch::nn::BatchNorm2d(16));
@@ -334,7 +334,7 @@ namespace xt::models {
         linear = register_module("linear", torch::nn::Linear(final_planes, num_classes));
     }
 
-    torch::Tensor PyramidalNetImpl::forward(torch::Tensor x) {
+    torch::Tensor PyramidalNet::forward(torch::Tensor x) {
         x = torch::relu(bn1(conv1(x)));
         x = layer1->forward(x);
         x = layer2->forward(x);

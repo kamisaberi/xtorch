@@ -13,6 +13,7 @@ namespace xt::models {
         int stride = 1;
 
         PyramidalBasicBlock(int in_planes, int out_planes, int stride = 1);
+        auto forward(std::initializer_list <std::any> tensors) -> std::any override;
 
         torch::Tensor forward(torch::Tensor x);
     };
@@ -29,6 +30,7 @@ namespace xt::models {
         torch::nn::Linear linear;
 
         PyramidalNet(int N, int alpha, int num_classes = 10);
+        auto forward(std::initializer_list <std::any> tensors) -> std::any override;
 
         torch::Tensor forward(torch::Tensor x);
     };
