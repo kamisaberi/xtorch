@@ -200,7 +200,7 @@ using namespace std;
 namespace xt::models {
 
 
-    NetworkInNetwork::NetworkInNetwork(int num_classes = 10)
+    NetworkInNetwork::NetworkInNetwork(int num_classes )
     // Global Average Pooling will average each feature map to a 1x1 size.
             : global_avg_pool(torch::nn::AdaptiveAvgPool2dOptions(1)) {
         // Block 1
@@ -246,6 +246,21 @@ namespace xt::models {
         register_module("mlpconv3", mlpconv3);
 
         register_module("global_avg_pool", global_avg_pool);
+    }
+
+
+    auto NetworkInNetwork::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        std::vector<std::any> any_vec(tensors);
+
+        std::vector<torch::Tensor> tensor_vec;
+        for (const auto& item : any_vec)
+        {
+            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+        }
+
+        torch::Tensor x = tensor_vec[0];
+        return this->forward(x);
     }
 
     torch::Tensor NetworkInNetwork::forward(torch::Tensor x) {
