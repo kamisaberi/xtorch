@@ -322,6 +322,20 @@ namespace xt::models
                                    torch::nn::MaxPool2dOptions(3).stride(1).padding(1)));
     }
 
+    auto MaxPool3x3::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        std::vector<std::any> any_vec(tensors);
+
+        std::vector<torch::Tensor> tensor_vec;
+        for (const auto& item : any_vec)
+        {
+            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+        }
+
+        torch::Tensor x = tensor_vec[0];
+        return this->forward(x);
+    }
+
     torch::Tensor MaxPool3x3::forward(torch::Tensor x)
     {
         return pool->forward(x);
