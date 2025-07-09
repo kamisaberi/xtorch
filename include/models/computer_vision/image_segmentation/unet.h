@@ -1,31 +1,16 @@
 #pragma once
+
 #include "../../common.h"
 
 
 // #include "../../../exceptions/implementation.h"
 
-namespace xt::models
-{
+namespace xt::models {
     // Double Convolution Block
-    struct DoubleConvImpl : torch::nn::Module
-    {
-        DoubleConvImpl(int in_channels, int out_channels)
-        {
-            conv1 = register_module("conv1", torch::nn::Conv2d(
-                                        torch::nn::Conv2dOptions(in_channels, out_channels, 3).padding(1)));
-            bn1 = register_module("bn1", torch::nn::BatchNorm2d(out_channels));
-            conv2 = register_module("conv2", torch::nn::Conv2d(
-                                        torch::nn::Conv2dOptions(out_channels, out_channels, 3).padding(1)));
-            bn2 = register_module("bn2", torch::nn::BatchNorm2d(out_channels));
-        }
+    struct DoubleConvImpl : torch::nn::Module {
+        DoubleConvImpl(int in_channels, int out_channels);
 
-        torch::Tensor forward(torch::Tensor x)
-        {
-            // x: [batch, in_channels, h, w]
-            x = torch::relu(bn1->forward(conv1->forward(x))); // [batch, out_channels, h, w]
-            x = torch::relu(bn2->forward(conv2->forward(x))); // [batch, out_channels, h, w]
-            return x;
-        }
+        torch::Tensor forward(torch::Tensor x);
 
         torch::nn::Conv2d conv1{nullptr}, conv2{nullptr};
         torch::nn::BatchNorm2d bn1{nullptr}, bn2{nullptr};
@@ -34,10 +19,8 @@ namespace xt::models
     TORCH_MODULE(DoubleConv);
 
     // U-Net Model
-    struct UNetImpl : torch::nn::Module
-    {
-        UNetImpl(int in_channels, int out_channels)
-        {
+    struct UNetImpl : torch::nn::Module {
+        UNetImpl(int in_channels, int out_channels) {
             // Encoder
             enc1 = register_module("enc1", DoubleConv(in_channels, 64));
             enc2 = register_module("enc2", DoubleConv(64, 128));
@@ -48,22 +31,21 @@ namespace xt::models
 
             // Decoder
             upconv3 = register_module("upconv3", torch::nn::ConvTranspose2d(
-                                          torch::nn::ConvTranspose2dOptions(512, 256, 2).stride(2)));
+                    torch::nn::ConvTranspose2dOptions(512, 256, 2).stride(2)));
             dec3 = register_module("dec3", DoubleConv(512, 256));
             upconv2 = register_module("upconv2", torch::nn::ConvTranspose2d(
-                                          torch::nn::ConvTranspose2dOptions(256, 128, 2).stride(2)));
+                    torch::nn::ConvTranspose2dOptions(256, 128, 2).stride(2)));
             dec2 = register_module("dec2", DoubleConv(256, 128));
             upconv1 = register_module("upconv1", torch::nn::ConvTranspose2d(
-                                          torch::nn::ConvTranspose2dOptions(128, 64, 2).stride(2)));
+                    torch::nn::ConvTranspose2dOptions(128, 64, 2).stride(2)));
             dec1 = register_module("dec1", DoubleConv(128, 64));
 
             // Output layer
             out_conv = register_module("out_conv", torch::nn::Conv2d(
-                                           torch::nn::Conv2dOptions(64, out_channels, 1)));
+                    torch::nn::Conv2dOptions(64, out_channels, 1)));
         }
 
-        torch::Tensor forward(torch::Tensor x)
-        {
+        torch::Tensor forward(torch::Tensor x) {
             // x: [batch, in_channels, h, w]
 
             // Encoder
@@ -101,14 +83,11 @@ namespace xt::models
     TORCH_MODULE(UNet);
 
     // Dice Loss for Binary Segmentation
-    struct DiceLossImpl : torch::nn::Module
-    {
-        DiceLossImpl(float smooth = 1.0) : smooth_(smooth)
-        {
+    struct DiceLossImpl : torch::nn::Module {
+        DiceLossImpl(float smooth = 1.0) : smooth_(smooth) {
         }
 
-        torch::Tensor forward(torch::Tensor input, torch::Tensor target)
-        {
+        torch::Tensor forward(torch::Tensor input, torch::Tensor target) {
             // input: [batch, 1, h, w], target: [batch, 1, h, w]
             input = torch::sigmoid(input); // Convert logits to probabilities
             auto intersection = (input * target).sum({2, 3}); // [batch, 1]
