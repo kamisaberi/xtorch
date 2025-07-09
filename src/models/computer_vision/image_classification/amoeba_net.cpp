@@ -349,6 +349,21 @@ namespace xt::models
         op3 = register_module("op3", std::make_shared<Conv1x1>(prev_channels, channels));
     }
 
+    auto NormalCell::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        std::vector<std::any> any_vec(tensors);
+
+        std::vector<torch::Tensor> tensor_vec;
+        for (const auto& item : any_vec)
+        {
+            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+        }
+
+        torch::Tensor prev = tensor_vec[0];
+        torch::Tensor curr = tensor_vec[1];
+        return this->forward(prev, curr);
+    }
+
     torch::Tensor NormalCell::forward(torch::Tensor prev, torch::Tensor curr)
     {
         // Branch 1: Conv3x3(prev) + MaxPool3x3(curr)
@@ -370,6 +385,23 @@ namespace xt::models
         op3 = register_module("op3", std::make_shared<Conv1x1>(prev_channels, channels));
     }
 
+
+    auto ReductionCell::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        std::vector<std::any> any_vec(tensors);
+
+        std::vector<torch::Tensor> tensor_vec;
+        for (const auto& item : any_vec)
+        {
+            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+        }
+
+        torch::Tensor prev = tensor_vec[0];
+        torch::Tensor curr = tensor_vec[1];
+        return this->forward(prev, curr);
+    }
+
+
     torch::Tensor ReductionCell::forward(torch::Tensor prev, torch::Tensor curr)
     {
         // Branch 1: Conv3x3 stride 2(prev) + MaxPool3x3 stride 2(curr)
@@ -390,6 +422,20 @@ namespace xt::models
         reduction_cell = register_module("reduction_cell", std::make_shared<ReductionCell>(channels * 2, channels));
         classifier = register_module("classifier", torch::nn::Linear(4 * channels, num_classes));
         pool = register_module("pool", torch::nn::AdaptiveAvgPool2d(1));
+    }
+
+    auto AmoebaNet::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        std::vector<std::any> any_vec(tensors);
+
+        std::vector<torch::Tensor> tensor_vec;
+        for (const auto& item : any_vec)
+        {
+            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+        }
+
+        torch::Tensor x = tensor_vec[0];
+        return this->forward(x);
     }
 
     torch::Tensor AmoebaNet::forward(torch::Tensor x)
