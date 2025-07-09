@@ -14,8 +14,8 @@ using namespace std;
 // #include <random>
 //
 // // Highway Layer
-// struct HighwayLayerImpl : torch::nn::Module {
-//     HighwayLayerImpl(int input_size) {
+// struct HighwayLayer : torch::nn::Module {
+//     HighwayLayer(int input_size) {
 //         // Transform gate: W_T * x + b_T
 //         transform = register_module("transform", torch::nn::Linear(input_size, input_size));
 //         // Plain layer: W * x + b
@@ -38,8 +38,8 @@ using namespace std;
 // TORCH_MODULE(HighwayLayer);
 //
 // // Highway Network
-// struct HighwayNetworkImpl : torch::nn::Module {
-//     HighwayNetworkImpl(int input_size, int num_classes, int num_layers) {
+// struct HighwayNetwork : torch::nn::Module {
+//     HighwayNetwork(int input_size, int num_classes, int num_layers) {
 //         // Input layer
 //         input_layer = register_module("input_layer", torch::nn::Linear(input_size, input_size));
 //
@@ -195,7 +195,7 @@ using namespace std;
 namespace xt::models
 {
     // Highway Layer
-    HighwayLayerImpl::HighwayLayerImpl(int input_size)
+    HighwayLayer::HighwayLayer(int input_size)
     {
         // Transform gate: W_T * x + b_T
         transform = register_module("transform", torch::nn::Linear(input_size, input_size));
@@ -205,7 +205,7 @@ namespace xt::models
         transform->bias.data().fill_(-2.0);
     }
 
-    torch::Tensor HighwayLayerImpl::forward(torch::Tensor x)
+    torch::Tensor HighwayLayer::forward(torch::Tensor x)
     {
         // Transform gate output: sigmoid(W_T * x + b_T)
         auto T = torch::sigmoid(transform->forward(x));
@@ -215,7 +215,7 @@ namespace xt::models
         return T * H + (1.0 - T) * x;
     }
 
-    HighwayNetworkImpl::HighwayNetworkImpl(int input_size, int num_classes, int num_layers)
+    HighwayNetwork::HighwayNetwork(int input_size, int num_classes, int num_layers)
     {
         // Input layer
         input_layer = register_module("input_layer", torch::nn::Linear(input_size, input_size));
@@ -231,7 +231,7 @@ namespace xt::models
         output_layer = register_module("output_layer", torch::nn::Linear(input_size, num_classes));
     }
 
-    torch::Tensor HighwayNetworkImpl::forward(torch::Tensor x)
+    torch::Tensor HighwayNetwork::forward(torch::Tensor x)
     {
         x = torch::relu(input_layer->forward(x));
         for (auto& layer : layers)

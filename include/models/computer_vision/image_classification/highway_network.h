@@ -2,30 +2,32 @@
 
 #include "../../common.h"
 
-namespace xt::models {
-
+namespace xt::models
+{
     // Highway Layer
-    struct HighwayLayerImpl : torch::nn::Module {
-        HighwayLayerImpl(int input_size);
+    struct HighwayLayer : xt::Module
+    {
+        HighwayLayer(int input_size);
 
         torch::Tensor forward(torch::Tensor x);
 
         torch::nn::Linear transform{nullptr}, plain{nullptr};
     };
 
-    TORCH_MODULE(HighwayLayer);
+    // TORCH_MODULE(HighwayLayer);
 
     // Highway Network
-    struct HighwayNetworkImpl : torch::nn::Module {
-        HighwayNetworkImpl(int input_size, int num_classes, int num_layers);
+    struct HighwayNetwork : xt::Module
+    {
+        HighwayNetwork(int input_size, int num_classes, int num_layers);
 
         torch::Tensor forward(torch::Tensor x);
 
         torch::nn::Linear input_layer{nullptr}, output_layer{nullptr};
-        vector<xt::Module> layers;
+        vector< std::shared_ptr<xt::Module>> layers;
     };
 
-    TORCH_MODULE(HighwayNetwork);
+    // TORCH_MODULE(HighwayNetwork);
 
 
     // struct HighwayNetwork : xt::Cloneable<HighwayNetwork> {
@@ -40,6 +42,4 @@ namespace xt::models {
     //
     //     void reset() override;
     // };
-
-
 }
