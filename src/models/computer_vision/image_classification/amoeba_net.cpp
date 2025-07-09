@@ -331,7 +331,7 @@ namespace xt::models
         return torch::cat({b1, b2}, 1); // [batch, 2*channels, h, w]
     }
 
-    ReductionCellImpl::ReductionCellImpl(int prev_channels, int channels)
+    ReductionCell::ReductionCell(int prev_channels, int channels)
     {
         // Simplified: Two branches (Conv3x3 stride 2, MaxPool3x3 stride 2)
         op1 = register_module("op1", torch::nn::Conv2d(
@@ -342,7 +342,7 @@ namespace xt::models
         op3 = register_module("op3", std::make_shared<Conv1x1>(prev_channels, channels));
     }
 
-    torch::Tensor ReductionCellImpl::forward(torch::Tensor prev, torch::Tensor curr)
+    torch::Tensor ReductionCell::forward(torch::Tensor prev, torch::Tensor curr)
     {
         // Branch 1: Conv3x3 stride 2(prev) + MaxPool3x3 stride 2(curr)
         auto b1 = torch::relu(bn1->forward(op1->forward(prev))) + op2->forward(curr);
@@ -353,18 +353,18 @@ namespace xt::models
     }
 
 
-    AmoebaNetImpl::AmoebaNetImpl(int in_channels, int num_classes, int channels)
+    AmoebaNet::AmoebaNet(int in_channels, int num_classes, int channels)
     {
         stem = register_module("stem", torch::nn::Conv2d(
                                    torch::nn::Conv2dOptions(in_channels, channels, 3).stride(1).padding(1)));
         bn_stem = register_module("bn_stem", torch::nn::BatchNorm2d(channels));
         normal_cell = register_module("normal_cell", std::make_shared<NormalCell>(channels, channels) );
-        reduction_cell = register_module("reduction_cell", ReductionCell(channels * 2, channels));
+        reduction_cell = register_module("reduction_cell", std::make_shared< ReductionCell>(channels * 2, channels));
         classifier = register_module("classifier", torch::nn::Linear(4 * channels, num_classes));
         pool = register_module("pool", torch::nn::AdaptiveAvgPool2d(1));
     }
 
-    torch::Tensor AmoebaNetImpl::forward(torch::Tensor x)
+    torch::Tensor AmoebaNet::forward(torch::Tensor x)
     {
         // x: [batch, in_channels, 32, 32]
         auto h = torch::relu(bn_stem->forward(stem->forward(x))); // [batch, channels, 32, 32]

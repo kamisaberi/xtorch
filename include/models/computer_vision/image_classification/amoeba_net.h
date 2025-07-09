@@ -57,8 +57,8 @@ namespace xt::models {
     // TORCH_MODULE(NormalCell);
 
     // Reduction Cell
-    struct ReductionCellImpl : torch::nn::Module {
-        ReductionCellImpl(int prev_channels, int channels);
+    struct ReductionCell : torch::nn::Module {
+        ReductionCell(int prev_channels, int channels);
 
         torch::Tensor forward(torch::Tensor prev, torch::Tensor curr);
 
@@ -68,23 +68,23 @@ namespace xt::models {
         std::shared_ptr<Conv1x1> op3{nullptr};
     };
 
-    TORCH_MODULE(ReductionCell);
+    // TORCH_MODULE(ReductionCell);
 
     // AmoebaNet-A (Simplified)
-    struct AmoebaNetImpl : torch::nn::Module {
-        AmoebaNetImpl(int in_channels, int num_classes, int channels = 64);
+    struct AmoebaNet : torch::nn::Module {
+        AmoebaNet(int in_channels, int num_classes, int channels = 64);
 
         torch::Tensor forward(torch::Tensor x);
 
         torch::nn::Conv2d stem{nullptr};
         torch::nn::BatchNorm2d bn_stem{nullptr};
         std::shared_ptr<NormalCell> normal_cell{nullptr};
-        ReductionCell reduction_cell{nullptr};
+        std::shared_ptr<ReductionCell> reduction_cell{nullptr};
         torch::nn::Linear classifier{nullptr};
         torch::nn::AdaptiveAvgPool2d pool{nullptr};
     };
 
-    TORCH_MODULE(AmoebaNet);
+    // TORCH_MODULE(AmoebaNet);
 
 
     struct AmoabaNet : xt::Cloneable<AmoabaNet> {
