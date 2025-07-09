@@ -9,6 +9,7 @@ namespace xt::models
     struct DepthwiseSeparableConv : xt::Module
     {
         DepthwiseSeparableConv(int in_channels, int out_channels, int stride);
+        auto forward(std::initializer_list <std::any> tensors) -> std::any override;
 
         torch::Tensor forward(torch::Tensor x);
 
@@ -22,6 +23,7 @@ namespace xt::models
     struct MobileNetV1 : xt::Module
     {
         MobileNetV1(int in_channels, int num_classes);
+        auto forward(std::initializer_list <std::any> tensors) -> std::any override;
 
         torch::Tensor forward(torch::Tensor x);
 
@@ -38,6 +40,7 @@ namespace xt::models
     struct InvertedResidualBlock : xt::Module
     {
         InvertedResidualBlock(int in_channels, int exp_channels, int out_channels, int stride);
+        auto forward(std::initializer_list <std::any> tensors) -> std::any override;
 
         torch::Tensor forward(torch::Tensor x);
 
@@ -51,6 +54,7 @@ namespace xt::models
     struct MobileNetV2 : xt::Module
     {
         MobileNetV2(int in_channels, int num_classes);
+        auto forward(std::initializer_list <std::any> tensors) -> std::any override;
 
         torch::Tensor forward(torch::Tensor x);
 
@@ -81,6 +85,7 @@ namespace xt::models
     struct MobileNetV3 : xt::Module
     {
         MobileNetV3(int in_channels, int num_classes);
+        auto forward(std::initializer_list <std::any> tensors) -> std::any override;
 
         torch::Tensor forward(torch::Tensor x);
 

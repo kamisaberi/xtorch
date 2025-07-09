@@ -670,6 +670,20 @@ namespace xt::models
         pw_bn = register_module("pw_bn", torch::nn::BatchNorm2d(out_channels));
     }
 
+    auto DepthwiseSeparableConv::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        std::vector<std::any> any_vec(tensors);
+
+        std::vector<torch::Tensor> tensor_vec;
+        for (const auto& item : any_vec)
+        {
+            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+        }
+
+        torch::Tensor x = tensor_vec[0];
+        return this->forward(x);
+    }
+
     torch::Tensor DepthwiseSeparableConv::forward(torch::Tensor x)
     {
         x = torch::relu(dw_bn->forward(dw_conv->forward(x))); // Depthwise
@@ -696,6 +710,20 @@ namespace xt::models
         // Head
         pool = register_module("pool", torch::nn::AdaptiveAvgPool2d(1));
         fc = register_module("fc", torch::nn::Linear(256, num_classes));
+    }
+
+    auto MobileNetV1::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        std::vector<std::any> any_vec(tensors);
+
+        std::vector<torch::Tensor> tensor_vec;
+        for (const auto& item : any_vec)
+        {
+            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+        }
+
+        torch::Tensor x = tensor_vec[0];
+        return this->forward(x);
     }
 
     torch::Tensor MobileNetV1::forward(torch::Tensor x)
@@ -726,6 +754,20 @@ namespace xt::models
         project_conv = register_module("project_conv", torch::nn::Conv2d(
                                            torch::nn::Conv2dOptions(exp_channels, out_channels, 1).stride(1)));
         project_bn = register_module("project_bn", torch::nn::BatchNorm2d(out_channels));
+    }
+
+    auto InvertedResidualBlock::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        std::vector<std::any> any_vec(tensors);
+
+        std::vector<torch::Tensor> tensor_vec;
+        for (const auto& item : any_vec)
+        {
+            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+        }
+
+        torch::Tensor x = tensor_vec[0];
+        return this->forward(x);
     }
 
     torch::Tensor InvertedResidualBlock::forward(torch::Tensor x)
@@ -772,6 +814,20 @@ namespace xt::models
         fc = register_module("fc", torch::nn::Linear(128, num_classes));
     }
 
+    auto MobileNetV2::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        std::vector<std::any> any_vec(tensors);
+
+        std::vector<torch::Tensor> tensor_vec;
+        for (const auto& item : any_vec)
+        {
+            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+        }
+
+        torch::Tensor x = tensor_vec[0];
+        return this->forward(x);
+    }
+
     torch::Tensor MobileNetV2::forward(torch::Tensor x)
     {
         // x: [batch, in_channels, 32, 32]
@@ -788,6 +844,20 @@ namespace xt::models
     {
         fc1 = register_module("fc1", torch::nn::Linear(in_channels, in_channels / reduction));
         fc2 = register_module("fc2", torch::nn::Linear(in_channels / reduction, in_channels));
+    }
+
+    auto SEModule::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        std::vector<std::any> any_vec(tensors);
+
+        std::vector<torch::Tensor> tensor_vec;
+        for (const auto& item : any_vec)
+        {
+            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+        }
+
+        torch::Tensor x = tensor_vec[0];
+        return this->forward(x);
     }
 
     torch::Tensor SEModule::forward(torch::Tensor x)
@@ -823,6 +893,20 @@ namespace xt::models
         head_bn = register_module("head_bn", torch::nn::BatchNorm2d(128));
         pool = register_module("pool", torch::nn::AdaptiveAvgPool2d(1));
         fc = register_module("fc", torch::nn::Linear(128, num_classes));
+    }
+
+    auto MobileNetV3::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        std::vector<std::any> any_vec(tensors);
+
+        std::vector<torch::Tensor> tensor_vec;
+        for (const auto& item : any_vec)
+        {
+            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+        }
+
+        torch::Tensor x = tensor_vec[0];
+        return this->forward(x);
     }
 
     torch::Tensor MobileNetV3::forward(torch::Tensor x)
