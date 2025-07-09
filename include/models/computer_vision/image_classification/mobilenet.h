@@ -72,6 +72,7 @@ namespace xt::models
     struct SEModule : xt::Module
     {
         SEModule(int in_channels, int reduction = 4);
+        auto forward(std::initializer_list <std::any> tensors) -> std::any override;
 
         torch::Tensor forward(torch::Tensor x);
 
