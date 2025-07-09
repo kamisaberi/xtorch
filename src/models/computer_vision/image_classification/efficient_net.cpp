@@ -2164,6 +2164,20 @@ namespace xt::models
         fc2 = register_module("fc2", torch::nn::Linear(in_channels / reduction, in_channels));
     }
 
+    auto SEBlock::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        std::vector<std::any> any_vec(tensors);
+
+        std::vector<torch::Tensor> tensor_vec;
+        for (const auto& item : any_vec)
+        {
+            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+        }
+
+        torch::Tensor x = tensor_vec[0];
+        return this->forward(x);
+    }
+
     torch::Tensor SEBlock::forward(torch::Tensor x)
     {
         auto batch = x.size(0);
@@ -2204,6 +2218,20 @@ namespace xt::models
         bn2 = register_module("bn2", torch::nn::BatchNorm2d(out_channels));
 
         skip_connection = (in_channels == out_channels && stride == 1);
+    }
+
+    auto MBConvBlock::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        std::vector<std::any> any_vec(tensors);
+
+        std::vector<torch::Tensor> tensor_vec;
+        for (const auto& item : any_vec)
+        {
+            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+        }
+
+        torch::Tensor x = tensor_vec[0];
+        return this->forward(x);
     }
 
     torch::Tensor MBConvBlock::forward(torch::Tensor x)
@@ -2269,6 +2297,20 @@ namespace xt::models
         bn1 = register_module("bn1", torch::nn::BatchNorm2d(1280));
         fc = register_module("fc", torch::nn::Linear(1280, num_classes));
     }
+    auto EfficientNetB0::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        std::vector<std::any> any_vec(tensors);
+
+        std::vector<torch::Tensor> tensor_vec;
+        for (const auto& item : any_vec)
+        {
+            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+        }
+
+        torch::Tensor x = tensor_vec[0];
+        return this->forward(x);
+    }
+
 
     torch::Tensor EfficientNetB0::forward(torch::Tensor x)
     {
@@ -2349,6 +2391,20 @@ namespace xt::models
                                         torch::nn::Conv2dOptions(320, 1280, 1).bias(false)));
         bn1 = register_module("bn1", torch::nn::BatchNorm2d(1280));
         fc = register_module("fc", torch::nn::Linear(1280, num_classes));
+    }
+
+    auto EfficientNetB1::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        std::vector<std::any> any_vec(tensors);
+
+        std::vector<torch::Tensor> tensor_vec;
+        for (const auto& item : any_vec)
+        {
+            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+        }
+
+        torch::Tensor x = tensor_vec[0];
+        return this->forward(x);
     }
 
     torch::Tensor EfficientNetB1::forward(torch::Tensor x)
@@ -2434,6 +2490,20 @@ namespace xt::models
         fc = register_module("fc", torch::nn::Linear(1408, num_classes));
     }
 
+    auto EfficientNetB2::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        std::vector<std::any> any_vec(tensors);
+
+        std::vector<torch::Tensor> tensor_vec;
+        for (const auto& item : any_vec)
+        {
+            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+        }
+
+        torch::Tensor x = tensor_vec[0];
+        return this->forward(x);
+    }
+
     torch::Tensor EfficientNetB2::forward(torch::Tensor x)
     {
         x = swish(bn0->forward(stem_conv->forward(x))); // [batch, 32, 32, 32]
@@ -2517,6 +2587,20 @@ namespace xt::models
         fc = register_module("fc", torch::nn::Linear(1536, num_classes));
     }
 
+    auto EfficientNetB3::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        std::vector<std::any> any_vec(tensors);
+
+        std::vector<torch::Tensor> tensor_vec;
+        for (const auto& item : any_vec)
+        {
+            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+        }
+
+        torch::Tensor x = tensor_vec[0];
+        return this->forward(x);
+    }
+
     torch::Tensor EfficientNetB3::forward(torch::Tensor x)
     {
         x = swish(bn0->forward(stem_conv->forward(x))); // [batch, 40, 32, 32]
@@ -2597,6 +2681,20 @@ namespace xt::models
         // Increased channels vs. B3
         bn1 = register_module("bn1", torch::nn::BatchNorm2d(1792));
         fc = register_module("fc", torch::nn::Linear(1792, num_classes));
+    }
+
+    auto EfficientNetB4::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        std::vector<std::any> any_vec(tensors);
+
+        std::vector<torch::Tensor> tensor_vec;
+        for (const auto& item : any_vec)
+        {
+            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+        }
+
+        torch::Tensor x = tensor_vec[0];
+        return this->forward(x);
     }
 
     torch::Tensor EfficientNetB4::forward(torch::Tensor x)
@@ -2682,6 +2780,20 @@ namespace xt::models
         fc = register_module("fc", torch::nn::Linear(2048, num_classes));
     }
 
+    auto EfficientNetB5::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        std::vector<std::any> any_vec(tensors);
+
+        std::vector<torch::Tensor> tensor_vec;
+        for (const auto& item : any_vec)
+        {
+            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+        }
+
+        torch::Tensor x = tensor_vec[0];
+        return this->forward(x);
+    }
+
     torch::Tensor EfficientNetB5::forward(torch::Tensor x)
     {
         x = swish(bn0->forward(stem_conv->forward(x))); // [batch, 48, 32, 32]
@@ -2765,6 +2877,20 @@ namespace xt::models
         fc = register_module("fc", torch::nn::Linear(2304, num_classes));
     }
 
+    auto EfficientNetB6::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        std::vector<std::any> any_vec(tensors);
+
+        std::vector<torch::Tensor> tensor_vec;
+        for (const auto& item : any_vec)
+        {
+            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+        }
+
+        torch::Tensor x = tensor_vec[0];
+        return this->forward(x);
+    }
+
     torch::Tensor EfficientNetB6::forward(torch::Tensor x)
     {
         x = swish(bn0->forward(stem_conv->forward(x))); // [batch, 56, 32, 32]
@@ -2845,6 +2971,20 @@ namespace xt::models
         // Increased channels vs. B6
         bn1 = register_module("bn1", torch::nn::BatchNorm2d(2560));
         fc = register_module("fc", torch::nn::Linear(2560, num_classes));
+    }
+
+    auto EfficientNetB7::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        std::vector<std::any> any_vec(tensors);
+
+        std::vector<torch::Tensor> tensor_vec;
+        for (const auto& item : any_vec)
+        {
+            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+        }
+
+        torch::Tensor x = tensor_vec[0];
+        return this->forward(x);
     }
 
     torch::Tensor EfficientNetB7::forward(torch::Tensor x)
