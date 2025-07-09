@@ -32,13 +32,14 @@ namespace xt::models {
     TORCH_MODULE(UNet);
 
     // Dice Loss for Binary Segmentation
-    struct DiceLossImpl : torch::nn::Module {
-        DiceLossImpl(float smooth = 1.0);
+    struct DiceLoss : xt::Module {
+        DiceLoss(float smooth = 1.0);
 
+        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
         torch::Tensor forward(torch::Tensor input, torch::Tensor target);
 
         float smooth_;
     };
 
-    TORCH_MODULE(DiceLoss);
+//    TORCH_MODULE(DiceLoss);
 }

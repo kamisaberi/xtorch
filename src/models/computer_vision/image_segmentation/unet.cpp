@@ -313,16 +313,33 @@ namespace xt::models {
         return out;
     }
 
-    DiceLossImpl::DiceLossImpl(float smooth = 1.0) : smooth_(smooth) {
+    DiceLoss::DiceLoss(float smooth = 1.0) : smooth_(smooth) {
     }
 
-    torch::Tensor DiceLossImpl::forward(torch::Tensor input, torch::Tensor target) {
+    auto LeNet5::forward(std::initializer_list <std::any> tensors) -> std::any {
+        std::vector <std::any> any_vec(tensors);
+
+        std::vector <torch::Tensor> tensor_vec;
+        for (const auto &item: any_vec) {
+            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+        }
+
+        torch::Tensor input = tensor_vec[0];
+        torch::Tensor target = tensor_vec[1];
+        input = input.to(torch::kFloat32);
+        target = target.to(torch::kFloat32);
         // input: [batch, 1, h, w], target: [batch, 1, h, w]
         input = torch::sigmoid(input); // Convert logits to probabilities
         auto intersection = (input * target).sum({2, 3}); // [batch, 1]
         auto union1 = input.sum({2, 3}) + target.sum({2, 3}); // [batch, 1]
         auto dice = (2.0 * intersection + smooth_) / (union1 + smooth_); // [batch, 1]
         return 1.0 - dice.mean(); // Average loss
+
+    }
+
+    torch::Tensor DiceLossImpl::forward(torch::Tensor input, torch::Tensor target) {
+        x = std::any_cast<torch::Tensor>(this->forward({input, target}))
+        return x;
     }
 
 }
