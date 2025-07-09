@@ -170,11 +170,7 @@ namespace xt::models
     // This model follows the spirit of ZefNet (multiple conv stages with LRN)
     // but is adapted for the smaller 28x28 MNIST input.
 
-    struct ZefNetImpl : torch::nn::Module {
-        // We separate the model into a feature extractor and a classifier
-        torch::nn::Sequential features, classifier;
-
-        ZefNetImpl(int num_classes = 10) {
+    ZefNetImpl::ZefNetImpl(int num_classes = 10) {
 
             // --- Feature Extractor ---
             // A sequence of Convolution, ReLU, Pooling, and LRN layers
@@ -226,15 +222,13 @@ namespace xt::models
             register_module("classifier", classifier);
         }
 
-        torch::Tensor forward(torch::Tensor x) {
+        torch::Tensor ZefNetImpl::forward(torch::Tensor x) {
             x = features->forward(x);
             // Flatten the feature maps before the classifier
             x = torch::flatten(x, 1);
             x = classifier->forward(x);
             return x;
         }
-    };
-    TORCH_MODULE(ZefNet);
 
 //    ZefNet::ZefNet(int num_classes, int in_channels)
 //    {
