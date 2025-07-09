@@ -130,10 +130,10 @@ namespace xt::models
     // The Full InceptionResNetV2 model adapted for MNIST
     struct InceptionResNetV2 : xt::Module
     {
-        Stem stem;
+        std::shared_ptr<Stem> stem;
         torch::nn::Sequential repeat_a, repeat_b, repeat_c;
-        ReductionA reduction_a;
-        ReductionB reduction_b;
+        std::shared_ptr<ReductionA> reduction_a;
+        std::shared_ptr<ReductionB> reduction_b;
         torch::nn::AdaptiveAvgPool2d avgpool;
         torch::nn::Dropout dropout;
         torch::nn::Linear logits;
