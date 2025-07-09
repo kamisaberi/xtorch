@@ -1191,6 +1191,20 @@ namespace xt::models
         fc = register_module("fc", torch::nn::Linear(num_features, num_classes));
     }
 
+    auto DenseNet121::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        std::vector<std::any> any_vec(tensors);
+
+        std::vector<torch::Tensor> tensor_vec;
+        for (const auto& item : any_vec)
+        {
+            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+        }
+
+        torch::Tensor x = tensor_vec[0];
+        return this->forward(x);
+    }
+
     torch::Tensor DenseNet121::forward(torch::Tensor x)
     {
         x = torch::relu(bn0->forward(conv0->forward(x))); // [batch, 64, 32, 32]
@@ -1262,6 +1276,20 @@ namespace xt::models
         // Final layers
         bn_final = register_module("bn_final", torch::nn::BatchNorm2d(num_features));
         fc = register_module("fc", torch::nn::Linear(num_features, num_classes));
+    }
+
+    auto DenseNet169::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        std::vector<std::any> any_vec(tensors);
+
+        std::vector<torch::Tensor> tensor_vec;
+        for (const auto& item : any_vec)
+        {
+            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+        }
+
+        torch::Tensor x = tensor_vec[0];
+        return this->forward(x);
     }
 
     torch::Tensor DenseNet169::forward(torch::Tensor x)
