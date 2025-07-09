@@ -313,7 +313,7 @@ namespace xt::models
         return pool->forward(x);
     }
 
-    NormalCellImpl::NormalCellImpl(int prev_channels, int channels)
+    NormalCell::NormalCell(int prev_channels, int channels)
     {
         // Simplified: Two branches (Conv3x3 + MaxPool3x3, Conv1x1)
         op1 = register_module("op1", std::make_shared<Conv3x3>(prev_channels, channels));
@@ -321,10 +321,10 @@ namespace xt::models
         op3 = register_module("op3", std::make_shared<Conv1x1>(prev_channels, channels));
     }
 
-    torch::Tensor NormalCellImpl::forward(torch::Tensor prev, torch::Tensor curr)
+    torch::Tensor NormalCell::forward(torch::Tensor prev, torch::Tensor curr)
     {
         // Branch 1: Conv3x3(prev) + MaxPool3x3(curr)
-        auto b1 = op1->forward(prev) + op2.forward(curr);
+        auto b1 = op1->forward(prev) + op2->forward(curr);
         // Branch 2: Conv1x1(curr)
         auto b2 = op3->forward(curr);
         // Combine
@@ -358,7 +358,7 @@ namespace xt::models
         stem = register_module("stem", torch::nn::Conv2d(
                                    torch::nn::Conv2dOptions(in_channels, channels, 3).stride(1).padding(1)));
         bn_stem = register_module("bn_stem", torch::nn::BatchNorm2d(channels));
-        normal_cell = register_module("normal_cell", NormalCell(channels, channels));
+        normal_cell = register_module("normal_cell", std::make_shared<NormalCell>(channels, channels) );
         reduction_cell = register_module("reduction_cell", ReductionCell(channels * 2, channels));
         classifier = register_module("classifier", torch::nn::Linear(4 * channels, num_classes));
         pool = register_module("pool", torch::nn::AdaptiveAvgPool2d(1));

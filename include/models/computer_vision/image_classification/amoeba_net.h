@@ -44,8 +44,8 @@ namespace xt::models {
     // TORCH_MODULE(MaxPool3x3);
 
     // Normal Cell
-    struct NormalCellImpl : torch::nn::Module {
-        NormalCellImpl(int prev_channels, int channels);
+    struct NormalCell : torch::nn::Module {
+        NormalCell(int prev_channels, int channels);
 
         torch::Tensor forward(torch::Tensor prev, torch::Tensor curr);
 
@@ -54,7 +54,7 @@ namespace xt::models {
         std::shared_ptr<Conv1x1> op3{nullptr};
     };
 
-    TORCH_MODULE(NormalCell);
+    // TORCH_MODULE(NormalCell);
 
     // Reduction Cell
     struct ReductionCellImpl : torch::nn::Module {
@@ -78,7 +78,7 @@ namespace xt::models {
 
         torch::nn::Conv2d stem{nullptr};
         torch::nn::BatchNorm2d bn_stem{nullptr};
-        NormalCell normal_cell{nullptr};
+        std::shared_ptr<NormalCell> normal_cell{nullptr};
         ReductionCell reduction_cell{nullptr};
         torch::nn::Linear classifier{nullptr};
         torch::nn::AdaptiveAvgPool2d pool{nullptr};
