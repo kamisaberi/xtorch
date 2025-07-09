@@ -2336,9 +2336,9 @@ namespace xt::models
             for (int i = 0; i < num_repeats; ++i)
             {
                 int s = (i == 0) ? stride : 1;
-                blocks->push_back(MBConvBlock(in_cht, out_cht, expansion, kernel, s, reduction));
+                blocks.push_back(std::make_shared<MBConvBlock>(in_cht, out_cht, expansion, kernel, s, reduction));
                 register_module("block_" + std::to_string(stage_idx) + "_" + std::to_string(i),
-                                blocks[blocks->size() - 1]);
+                                blocks[blocks.size() - 1]);
                 in_cht = out_cht;
             }
             stage_idx++;
@@ -2354,9 +2354,9 @@ namespace xt::models
     torch::Tensor EfficientNetB1::forward(torch::Tensor x)
     {
         x = swish(bn0->forward(stem_conv->forward(x))); // [batch, 32, 32, 32]
-        for (auto& block : *blocks)
+        for (auto& block : blocks)
         {
-            x = block->forward(x);
+            x = std::any_cast<torch::Tensor>(block->forward({x}));
         }
         x = swish(bn1->forward(head_conv->forward(x)));
         x = torch::avg_pool2d(x, x.size(2)); // Global avg pool: [batch, 1280, 1, 1]
