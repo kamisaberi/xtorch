@@ -261,7 +261,8 @@ namespace xt::models
         torch::Tensor SpatialAttentionImpl::forward(torch::Tensor x) {
             // x: [batch, channels, h, w]
             auto avg_pool = x.mean(1, true); // [batch, 1, h, w]
-            auto max_pool = x.max(1, true).values; // [batch, 1, h, w]
+            // auto max_pool = x.max(1, true).values; // [batch, 1, h, w]
+            auto [max_pool, max_indices] = x.max(1, true);
             auto concat = torch::cat({avg_pool, max_pool}, 1); // [batch, 2, h, w]
             auto attention = torch::sigmoid(conv->forward(concat)); // [batch, 1, h, w]
             return x * attention; // Element-wise multiplication
