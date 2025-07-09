@@ -302,13 +302,13 @@ namespace xt::models
     }
 
 
-    MaxPool3x3Impl::MaxPool3x3Impl()
+    MaxPool3x3::MaxPool3x3()
     {
         pool = register_module("pool", torch::nn::MaxPool2d(
                                    torch::nn::MaxPool2dOptions(3).stride(1).padding(1)));
     }
 
-    torch::Tensor MaxPool3x3Impl::forward(torch::Tensor x)
+    torch::Tensor MaxPool3x3::forward(torch::Tensor x)
     {
         return pool->forward(x);
     }
@@ -317,14 +317,14 @@ namespace xt::models
     {
         // Simplified: Two branches (Conv3x3 + MaxPool3x3, Conv1x1)
         op1 = register_module("op1", std::make_shared<Conv3x3>(prev_channels, channels));
-        op2 = register_module("op2", MaxPool3x3());
+        op2 = register_module("op2", std::make_shared<MaxPool3x3>());
         op3 = register_module("op3", std::make_shared<Conv1x1>(prev_channels, channels));
     }
 
     torch::Tensor NormalCellImpl::forward(torch::Tensor prev, torch::Tensor curr)
     {
         // Branch 1: Conv3x3(prev) + MaxPool3x3(curr)
-        auto b1 = op1->forward(prev) + op2->forward(curr);
+        auto b1 = op1->forward(prev) + op2.forward(curr);
         // Branch 2: Conv1x1(curr)
         auto b2 = op3->forward(curr);
         // Combine

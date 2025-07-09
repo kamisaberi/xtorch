@@ -33,15 +33,15 @@ namespace xt::models {
 //    TORCH_MODULE(Conv1x1);
 
     // Operation: 3x3 Max Pool
-    struct MaxPool3x3Impl : torch::nn::Module {
-        MaxPool3x3Impl();
+    struct MaxPool3x3 : torch::nn::Module {
+        MaxPool3x3();
 
         torch::Tensor forward(torch::Tensor x);
 
         torch::nn::MaxPool2d pool{nullptr};
     };
 
-    TORCH_MODULE(MaxPool3x3);
+    // TORCH_MODULE(MaxPool3x3);
 
     // Normal Cell
     struct NormalCellImpl : torch::nn::Module {
@@ -50,7 +50,7 @@ namespace xt::models {
         torch::Tensor forward(torch::Tensor prev, torch::Tensor curr);
 
         std::shared_ptr<Conv3x3> op1{nullptr};
-        MaxPool3x3 op2{nullptr};
+        std::shared_ptr<MaxPool3x3> op2{nullptr};
         std::shared_ptr<Conv1x1> op3{nullptr};
     };
 
