@@ -1122,7 +1122,7 @@ namespace xt::models
     {
         for (auto& layer : layers)
         {
-            x = std::any_cast<torch::Tensor>(layer.forward({x}));
+            x = std::any_cast<torch::Tensor>(layer->forward({x}));
         }
         return x;
     }
@@ -1168,22 +1168,22 @@ namespace xt::models
 
         // Dense blocks and transition layers
         int num_features = init_channels;
-        dense1 = register_module("dense1", DenseBlock(/*num_layers*/6, num_features, growth_rate));
+        dense1 = register_module("dense1", std::make_shared<DenseBlock>(/*num_layers*/6, num_features, growth_rate));
         num_features += 6 * growth_rate;
-        trans1 = register_module("trans1", TransitionLayer(num_features, num_features / 2));
+        trans1 = register_module("trans1", std::make_shared<TransitionLayer>(num_features, num_features / 2));
         num_features /= 2;
 
-        dense2 = register_module("dense2", DenseBlock(/*num_layers*/12, num_features, growth_rate));
+        dense2 = register_module("dense2", std::make_shared<DenseBlock>(/*num_layers*/12, num_features, growth_rate));
         num_features += 12 * growth_rate;
-        trans2 = register_module("trans2", TransitionLayer(num_features, num_features / 2));
+        trans2 = register_module("trans2", std::make_shared<TransitionLayer>(num_features, num_features / 2));
         num_features /= 2;
 
-        dense3 = register_module("dense3", DenseBlock(/*num_layers*/24, num_features, growth_rate));
+        dense3 = register_module("dense3", std::make_shared<DenseBlock>(/*num_layers*/24, num_features, growth_rate));
         num_features += 24 * growth_rate;
-        trans3 = register_module("trans3", TransitionLayer(num_features, num_features / 2));
+        trans3 = register_module("trans3", std::make_shared<TransitionLayer>(num_features, num_features / 2));
         num_features /= 2;
 
-        dense4 = register_module("dense4", DenseBlock(/*num_layers*/16, num_features, growth_rate));
+        dense4 = register_module("dense4", std::make_shared<DenseBlock>(/*num_layers*/16, num_features, growth_rate));
         num_features += 16 * growth_rate;
 
         // Final layers
