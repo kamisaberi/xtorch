@@ -7,16 +7,15 @@
 
 namespace xt::models {
     // Double Convolution Block
-    struct DoubleConvImpl : torch::nn::Module {
+    struct DoubleConv : xt::Module {
         DoubleConvImpl(int in_channels, int out_channels);
-
         torch::Tensor forward(torch::Tensor x);
-
+        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
         torch::nn::Conv2d conv1{nullptr}, conv2{nullptr};
         torch::nn::BatchNorm2d bn1{nullptr}, bn2{nullptr};
     };
 
-    TORCH_MODULE(DoubleConv);
+//    TORCH_MODULE(DoubleConv);
 
     // U-Net Model
     struct UNetImpl : torch::nn::Module {

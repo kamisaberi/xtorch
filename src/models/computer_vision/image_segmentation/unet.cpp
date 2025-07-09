@@ -226,7 +226,7 @@
 
 namespace xt::models {
 
-    DoubleConvImpl::DoubleConvImpl(int in_channels, int out_channels) {
+    DoubleConv::DoubleConv(int in_channels, int out_channels) {
         conv1 = register_module("conv1", torch::nn::Conv2d(
                 torch::nn::Conv2dOptions(in_channels, out_channels, 3).padding(1)));
         bn1 = register_module("bn1", torch::nn::BatchNorm2d(out_channels));
@@ -235,10 +235,27 @@ namespace xt::models {
         bn2 = register_module("bn2", torch::nn::BatchNorm2d(out_channels));
     }
 
-    torch::Tensor DoubleConvImpl::forward(torch::Tensor x) {
-        // x: [batch, in_channels, h, w]
+    auto DoubleConv::forward(std::initializer_list <std::any> tensors) -> std::any {
+        std::vector <std::any> any_vec(tensors);
+
+        std::vector <torch::Tensor> tensor_vec;
+        for (const auto &item: any_vec) {
+            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+        }
+
+        torch::Tensor x = tensor_vec[0];
+        x = x.to(torch::kFloat32);
         x = torch::relu(bn1->forward(conv1->forward(x))); // [batch, out_channels, h, w]
         x = torch::relu(bn2->forward(conv2->forward(x))); // [batch, out_channels, h, w]
+        return x;
+
+    }
+
+    torch::Tensor DoubleConv::forward(torch::Tensor x) {
+        x = std::any_cast<torch::Tensor>(this->forward({x}))
+//        // x: [batch, in_channels, h, w]
+//        x = torch::relu(bn1->forward(conv1->forward(x))); // [batch, out_channels, h, w]
+//        x = torch::relu(bn2->forward(conv2->forward(x))); // [batch, out_channels, h, w]
         return x;
     }
 
