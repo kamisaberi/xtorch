@@ -14,6 +14,8 @@ namespace xt::models
         InceptionModule(int in_channels, int ch1x1, int ch3x3_reduce, int ch3x3, int ch5x5_reduce, int ch5x5,
                         int pool_proj);
 
+        auto forward(std::initializer_list <std::any> tensors) -> std::any override;
+
         torch::Tensor forward(torch::Tensor x);
 
         torch::nn::Conv2d conv1x1{nullptr}, conv3x3_reduce{nullptr}, conv3x3{nullptr};
@@ -30,6 +32,8 @@ namespace xt::models
     struct InceptionAModule : xt::Module
     {
         InceptionAModule(int in_channels, int pool_features);
+
+        auto forward(std::initializer_list <std::any> tensors) -> std::any override;
 
         torch::Tensor forward(torch::Tensor x);
 
@@ -48,6 +52,7 @@ namespace xt::models
     struct InceptionBModule : xt::Module
     {
         InceptionBModule(int in_channels);
+        auto forward(std::initializer_list <std::any> tensors) -> std::any override;
 
         torch::Tensor forward(torch::Tensor x);
 
@@ -62,6 +67,7 @@ namespace xt::models
     struct InceptionCModule : xt::Module
     {
         InceptionCModule(int in_channels, int channels_7x7);
+        auto forward(std::initializer_list <std::any> tensors) -> std::any override;
 
         torch::Tensor forward(torch::Tensor x);
 
@@ -81,6 +87,7 @@ namespace xt::models
     struct AuxClassifier : xt::Module
     {
         AuxClassifier(int in_channels, int num_classes);
+        auto forward(std::initializer_list <std::any> tensors) -> std::any override;
 
         torch::Tensor forward(torch::Tensor x);
 
@@ -97,6 +104,7 @@ namespace xt::models
     struct ReductionAModule : xt::Module
     {
         ReductionAModule(int in_channels, int k, int l, int m, int n);
+        auto forward(std::initializer_list <std::any> tensors) -> std::any override;
 
         torch::Tensor forward(torch::Tensor x);
 
@@ -111,6 +119,7 @@ namespace xt::models
     struct ReductionBModule : xt::Module
     {
         ReductionBModule(int in_channels);
+        auto forward(std::initializer_list <std::any> tensors) -> std::any override;
 
         torch::Tensor forward(torch::Tensor x);
 
@@ -129,6 +138,7 @@ namespace xt::models
     {
         InceptionV1(int num_classes = 10);
 
+auto forward(std::initializer_list <std::any> tensors) -> std::any override;
         torch::Tensor forward(torch::Tensor x);
 
         torch::nn::Conv2d conv1{nullptr}, conv2{nullptr}, conv3{nullptr};
@@ -148,6 +158,8 @@ namespace xt::models
     struct InceptionV2 : xt::Module
     {
         InceptionV2(int num_classes = 10);
+        auto forward(std::initializer_list <std::any> tensors) -> std::any override;
+
         torch::Tensor forward(torch::Tensor x);
 
         torch::nn::Conv2d conv1{nullptr}, conv2{nullptr}, conv3{nullptr}, conv4{nullptr}, conv5{nullptr};
@@ -171,6 +183,7 @@ namespace xt::models
     struct InceptionV3 : xt::Module
     {
         InceptionV3(int num_classes = 10, bool aux_logits = true);
+        auto forward(std::initializer_list <std::any> tensors) -> std::any override;
 
         std::tuple<torch::Tensor, torch::Tensor> forward(torch::Tensor x);
 
@@ -195,6 +208,7 @@ namespace xt::models
     struct InceptionV4 : xt::Module
     {
         InceptionV4(int num_classes = 10);
+        auto forward(std::initializer_list <std::any> tensors) -> std::any override;
 
         torch::Tensor forward(torch::Tensor x);
 
