@@ -8,7 +8,7 @@
 namespace xt::models {
     // Double Convolution Block
     struct DoubleConv : xt::Module {
-        DoubleConvImpl(int in_channels, int out_channels);
+        DoubleConv(int in_channels, int out_channels);
         torch::Tensor forward(torch::Tensor x);
         auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
         torch::nn::Conv2d conv1{nullptr}, conv2{nullptr};
