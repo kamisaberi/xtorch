@@ -18,8 +18,8 @@ namespace xt::models {
 //    TORCH_MODULE(DoubleConv);
 
     // U-Net Model
-    struct UNetImpl : xt::Module {
-        UNetImpl(int in_channels, int out_channels);
+    struct UNet : xt::Module {
+        UNet(int in_channels, int out_channels);
 
         auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
         torch::Tensor forward(torch::Tensor x);
@@ -30,7 +30,7 @@ namespace xt::models {
         torch::nn::Conv2d out_conv{nullptr};
     };
 
-    TORCH_MODULE(UNet);
+//    TORCH_MODULE(UNet);
 
     // Dice Loss for Binary Segmentation
     struct DiceLoss : xt::Module {
