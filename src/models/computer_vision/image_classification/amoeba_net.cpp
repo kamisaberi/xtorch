@@ -267,7 +267,7 @@ namespace xt::models {
         bn = register_module("bn", torch::nn::BatchNorm2d(out_channels));
     }
 
-    auto LeNet5::forward(std::initializer_list <std::any> tensors) -> std::any {
+    auto Conv3x3::forward(std::initializer_list <std::any> tensors) -> std::any {
         std::vector <std::any> any_vec(tensors);
 
         std::vector <torch::Tensor> tensor_vec;
@@ -281,7 +281,7 @@ namespace xt::models {
 
     }
 
-    torch::Tensor Conv3x3Impl::forward(torch::Tensor x) {
+    torch::Tensor Conv3x3::forward(torch::Tensor x) {
         return torch::relu(bn->forward(conv->forward(x)));
     }
 
