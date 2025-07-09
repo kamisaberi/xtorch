@@ -49,9 +49,9 @@ namespace xt::models {
 
         torch::Tensor forward(torch::Tensor prev, torch::Tensor curr);
 
-        Conv3x3 op1{nullptr};
+        std::shared_ptr<Conv3x3> op1{nullptr};
         MaxPool3x3 op2{nullptr};
-        Conv1x1 op3{nullptr};
+        std::shared_ptr<Conv1x1> op3{nullptr};
     };
 
     TORCH_MODULE(NormalCell);
@@ -65,7 +65,7 @@ namespace xt::models {
         torch::nn::Conv2d op1{nullptr};
         torch::nn::BatchNorm2d bn1{nullptr};
         torch::nn::MaxPool2d op2{nullptr};
-        Conv1x1 op3{nullptr};
+        std::shared_ptr<Conv1x1> op3{nullptr};
     };
 
     TORCH_MODULE(ReductionCell);
