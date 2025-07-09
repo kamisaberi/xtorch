@@ -8,33 +8,39 @@ using namespace std;
 namespace xt::models
 {
     // Channel Attention Module
-    struct ChannelAttentionImpl : torch::nn::Module
+    struct ChannelAttention : xt::Module
     {
-        ChannelAttentionImpl(int channels, int reduction = 16);
+        ChannelAttention(int channels, int reduction = 16);
+
+        auto forward(std::initializer_list <std::any> tensors) -> std::any override;
 
         torch::Tensor forward(torch::Tensor x);
 
         torch::nn::Linear fc1{nullptr}, fc2{nullptr};
     };
 
-    TORCH_MODULE(ChannelAttention);
+    // TORCH_MODULE(ChannelAttention);
 
     // Spatial Attention Module
-    struct SpatialAttentionImpl : torch::nn::Module
+    struct SpatialAttention : xt::Module
     {
-        SpatialAttentionImpl(int channels);
+        SpatialAttention(int channels);
+
+        auto forward(std::initializer_list <std::any> tensors) -> std::any override;
 
         torch::Tensor forward(torch::Tensor x);
 
         torch::nn::Conv2d conv{nullptr};
     };
 
-    TORCH_MODULE(SpatialAttention);
+    // TORCH_MODULE(SpatialAttention);
 
     // CBAM Module
-    struct CBAMImpl : torch::nn::Module
+    struct CBAM : xt::Module
     {
-        CBAMImpl(int channels, int reduction = 16);
+        CBAM(int channels, int reduction = 16);
+
+        auto forward(std::initializer_list <std::any> tensors) -> std::any override;
 
         torch::Tensor forward(torch::Tensor x);
 
@@ -42,12 +48,14 @@ namespace xt::models
         SpatialAttention spatial_attention{nullptr};
     };
 
-    TORCH_MODULE(CBAM);
+    // TORCH_MODULE(CBAM);
 
     // CNN with CBAM
-    struct CBAMNetImpl : torch::nn::Module
+    struct CBAMNet : torch::nn::Module
     {
-        CBAMNetImpl(int in_channels, int num_classes);
+        CBAMNet(int in_channels, int num_classes);
+
+        auto forward(std::initializer_list <std::any> tensors) -> std::any override;
 
         torch::Tensor forward(torch::Tensor x);
 
@@ -58,7 +66,7 @@ namespace xt::models
         torch::nn::Linear fc{nullptr};
     };
 
-    TORCH_MODULE(CBAMNet);
+    // TORCH_MODULE(CBAMNet);
 
 
     // struct CBAM : xt::Cloneable<CBAM>
