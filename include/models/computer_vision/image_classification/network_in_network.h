@@ -4,17 +4,16 @@
 
 namespace xt::models {
     // The Network-in-Network model, built from scratch for MNIST.
-    struct NetworkInNetworkImpl : torch::nn::Module {
+    struct NetworkInNetwork : torch::nn::Module {
         torch::nn::Sequential mlpconv1, mlpconv2, mlpconv3;
 
         torch::nn::AdaptiveAvgPool2d global_avg_pool;
 
-        NetworkInNetworkImpl(int num_classes = 10);
+        NetworkInNetwork(int num_classes = 10);
 
         torch::Tensor forward(torch::Tensor x);
     };
 
-    TORCH_MODULE(NetworkInNetwork);
 
 
 //    struct NetworkInNetwork : xt::Cloneable<NetworkInNetwork>
