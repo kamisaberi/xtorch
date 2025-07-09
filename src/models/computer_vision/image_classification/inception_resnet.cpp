@@ -674,11 +674,14 @@ namespace xt::models
 
 
     InceptionResNetA::InceptionResNetA(int in_planes, double scale = 1.0) : b0(in_planes, 32, 1, 1, 0),
-        b1_0(in_planes, 32, 1, 1, 0), b1_1(32, 32, 3, 1, 1),
-        b2_0(in_planes, 32, 1, 1, 0), b2_1(32, 48, 3, 1, 1),
-        b2_2(48, 64, 3, 1, 1),
-        conv(torch::nn::Conv2dOptions(128, 384, 1).stride(1).
-                                                   padding(0)), scale(scale)
+                                                                            b1_0(in_planes, 32, 1, 1, 0),
+                                                                            b1_1(32, 32, 3, 1, 1),
+                                                                            b2_0(in_planes, 32, 1, 1, 0),
+                                                                            b2_1(32, 48, 3, 1, 1),
+                                                                            b2_2(48, 64, 3, 1, 1),
+                                                                            conv(torch::nn::Conv2dOptions(128, 384, 1).
+                                                                                stride(1).
+                                                                                padding(0)), scale(scale)
     {
         register_module("b0", b0);
         register_module("b1_0", b1_0);
@@ -701,11 +704,12 @@ namespace xt::models
     }
 
     InceptionResNetB::InceptionResNetB(int in_planes, double scale = 1.0) : b0(in_planes, 192, 1, 1, 0),
-        b1_0(in_planes, 128, 1, 1, 0),
-        b1_1(128, 160, {1, 7}, 1, {0, 3}),
-        b1_2(160, 192, {7, 1}, 1, {3, 0}),
-        conv(torch::nn::Conv2dOptions(384, 896, 1).stride(1).
-                                                   padding(0)), scale(scale)
+                                                                            b1_0(in_planes, 128, 1, 1, 0),
+                                                                            b1_1(128, 160, {1, 7}, 1, {0, 3}),
+                                                                            b1_2(160, 192, {7, 1}, 1, {3, 0}),
+                                                                            conv(torch::nn::Conv2dOptions(384, 896, 1).
+                                                                                stride(1).
+                                                                                padding(0)), scale(scale)
     {
         register_module("b0", b0);
         register_module("b1_0", b1_0);
@@ -725,11 +729,15 @@ namespace xt::models
     }
 
     InceptionResNetC::InceptionResNetC(int in_planes, double scale = 1.0) : b0(in_planes, 192, 1, 1, 0),
-        b1_0(in_planes, 192, 1, 1, 0),
-        b1_1(192, 224, {1, 3}, 1, {0, 1}),
-        b1_2(224, 256, {3, 1}, 1, {1, 0}),
-        conv(torch::nn::Conv2dOptions(448, 1792, 1).stride(1).
-                                                    padding(0)), scale(scale)
+                                                                            b1_0(std::make_shared<BasicConv2d>(
+                                                                                in_planes, 192, 1, 1, 0)),
+                                                                            b1_1(std::make_shared<BasicConv2d>(
+                                                                                192, 224, {1, 3}, 1, {0, 1})),
+                                                                            b1_2(std::make_shared<BasicConv2d>(
+                                                                                224, 256, {3, 1}, 1, {1, 0})),
+                                                                            conv(torch::nn::Conv2dOptions(448, 1792, 1).
+                                                                                stride(1).
+                                                                                padding(0)), scale(scale)
     {
         register_module("b0", b0);
         register_module("b1_0", b1_0);
@@ -749,9 +757,10 @@ namespace xt::models
     }
 
     ReductionA::ReductionA(int in_planes, int k, int l, int m, int n) : b0(in_planes, n, 3, 2, 0),
-        b1_0(in_planes, k, 1, 1, 0), b1_1(k, l, 3, 1, 1),
-        b1_2(l, m, 3, 2, 0),
-        b2(torch::nn::MaxPool2dOptions(3).stride(2))
+                                                                        b1_0(in_planes, k, 1, 1, 0),
+                                                                        b1_1(k, l, 3, 1, 1),
+                                                                        b1_2(l, m, 3, 2, 0),
+                                                                        b2(torch::nn::MaxPool2dOptions(3).stride(2))
     {
         register_module("b0", b0);
         register_module("b1_0", b1_0);
@@ -769,10 +778,10 @@ namespace xt::models
     }
 
     ReductionB::ReductionB(int in_planes) : b0_0(in_planes, 256, 1, 1, 0), b0_1(256, 384, 3, 2, 0),
-                                                    b1_0(in_planes, 256, 1, 1, 0), b1_1(256, 288, 3, 2, 0),
-                                                    b2_0(in_planes, 256, 1, 1, 0), b2_1(256, 288, 3, 1, 1),
-                                                    b2_2(288, 320, 3, 2, 0),
-                                                    b3(torch::nn::MaxPool2dOptions(3).stride(2))
+                                            b1_0(in_planes, 256, 1, 1, 0), b1_1(256, 288, 3, 2, 0),
+                                            b2_0(in_planes, 256, 1, 1, 0), b2_1(256, 288, 3, 1, 1),
+                                            b2_2(288, 320, 3, 2, 0),
+                                            b3(torch::nn::MaxPool2dOptions(3).stride(2))
     {
         register_module("b0_0", b0_0);
         register_module("b0_1", b0_1);
@@ -835,7 +844,7 @@ namespace xt::models
         return x;
     }
 
-    InceptionResNetV1::InceptionResNetV1(int num_classes )
+    InceptionResNetV1::InceptionResNetV1(int num_classes)
     // **MODIFICATION 1: Input channels changed from 3 to 1 for MNIST**
         : conv2d_1a(1, 32, 3, 2, 0),
           conv2d_2a(32, 32, 3, 1, 0),
@@ -907,7 +916,7 @@ namespace xt::models
     }
 
 
-    InceptionResNetV2::InceptionResNetV2(int num_classes )
+    InceptionResNetV2::InceptionResNetV2(int num_classes)
     // **MODIFICATION 1: Input channels changed from 3 to 1 for MNIST**
         : stem(1),
           reduction_a(320, 256, 256, 384, 384),
