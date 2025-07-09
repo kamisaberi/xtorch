@@ -8,17 +8,18 @@ using namespace std;
 namespace xt::models
 {
     // Operation: 3x3 Convolution
-    struct Conv3x3Impl : torch::nn::Module
+    struct Conv3x3 : xt::Module
     {
-        Conv3x3Impl(int in_channels, int out_channels);
+        Conv3x3(int in_channels, int out_channels);
 
+        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
         torch::Tensor forward(torch::Tensor x);
 
         torch::nn::Conv2d conv{nullptr};
         torch::nn::BatchNorm2d bn{nullptr};
     };
 
-    TORCH_MODULE(Conv3x3);
+//    TORCH_MODULE(Conv3x3);
 
     // Operation: 1x1 Convolution
     struct Conv1x1Impl : torch::nn::Module
