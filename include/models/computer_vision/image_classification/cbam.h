@@ -44,14 +44,14 @@ namespace xt::models
 
         torch::Tensor forward(torch::Tensor x);
 
-        ChannelAttention channel_attention{nullptr};
-        SpatialAttention spatial_attention{nullptr};
+        std::shared_ptr<ChannelAttention> channel_attention{nullptr};
+        std::shared_ptr<SpatialAttention> spatial_attention{nullptr};
     };
 
     // TORCH_MODULE(CBAM);
 
     // CNN with CBAM
-    struct CBAMNet : torch::nn::Module
+    struct CBAMNet : xt::Module
     {
         CBAMNet(int in_channels, int num_classes);
 
@@ -61,7 +61,7 @@ namespace xt::models
 
         torch::nn::Conv2d conv1{nullptr}, conv2{nullptr}, conv3{nullptr};
         torch::nn::BatchNorm2d bn1{nullptr}, bn2{nullptr}, bn3{nullptr};
-        CBAM cbam1{nullptr}, cbam2{nullptr}, cbam3{nullptr};
+        std::shared_ptr<CBAM> cbam1{nullptr}, cbam2{nullptr}, cbam3{nullptr};
         torch::nn::AdaptiveAvgPool2d pool{nullptr};
         torch::nn::Linear fc{nullptr};
     };
