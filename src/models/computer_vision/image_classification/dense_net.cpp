@@ -1099,8 +1099,8 @@ namespace xt::models
     {
         for (int i = 0; i < num_layers; ++i)
         {
-            layers->push_back(DenseLayer(in_channels + i * growth_rate, growth_rate));
-            register_module("denselayer_" + std::to_string(i), layers[layers->size() - 1]);
+            layers.push_back(  std::make_shared<DenseLayer>(in_channels + i * growth_rate, growth_rate));
+            register_module("denselayer_" + std::to_string(i), layers[layers.size() - 1]);
         }
     }
 
@@ -1364,6 +1364,7 @@ namespace xt::models
         bn_final = register_module("bn_final", torch::nn::BatchNorm2d(num_features));
         fc = register_module("fc", torch::nn::Linear(num_features, num_classes));
     }
+
     auto DenseNet201::forward(std::initializer_list<std::any> tensors) -> std::any
     {
         std::vector<std::any> any_vec(tensors);
@@ -1451,6 +1452,7 @@ namespace xt::models
         bn_final = register_module("bn_final", torch::nn::BatchNorm2d(num_features));
         fc = register_module("fc", torch::nn::Linear(num_features, num_classes));
     }
+
     auto DenseNet264::forward(std::initializer_list<std::any> tensors) -> std::any
     {
         std::vector<std::any> any_vec(tensors);

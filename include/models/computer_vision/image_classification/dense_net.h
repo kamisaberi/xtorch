@@ -31,7 +31,7 @@ namespace xt::models
 
         torch::Tensor forward(torch::Tensor x);
 
-        vector<xt::Module> layers;
+        vector<std::shared_ptr<xt::Module>> layers;
     };
 
     // TORCH_MODULE(DenseBlock);
