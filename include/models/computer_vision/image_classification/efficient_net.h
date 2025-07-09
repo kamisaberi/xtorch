@@ -12,21 +12,23 @@ namespace xt::models
     torch::Tensor swish(torch::Tensor x);
 
     // Squeeze-and-Excitation Block
-    struct SEBlockImpl : torch::nn::Module
+    struct SEBlock : xt::Module
     {
-        SEBlockImpl(int in_channels, int reduction);
+        SEBlock(int in_channels, int reduction);
+        auto forward(std::initializer_list <std::any> tensors) -> std::any override;
 
         torch::Tensor forward(torch::Tensor x);
 
         torch::nn::Linear fc1{nullptr}, fc2{nullptr};
     };
 
-    TORCH_MODULE(SEBlock);
+    // TORCH_MODULE(SEBlock);
 
     // MBConv Block (Inverted Residual with Depthwise Separable Conv)
-    struct MBConvBlockImpl : torch::nn::Module
+    struct MBConvBlock : xt::Module
     {
-        MBConvBlockImpl(int in_channels, int out_channels, int expansion, int kernel_size, int stride, int reduction);
+        MBConvBlock(int in_channels, int out_channels, int expansion, int kernel_size, int stride, int reduction);
+        auto forward(std::initializer_list <std::any> tensors) -> std::any override;
 
         torch::Tensor forward(torch::Tensor x);
 
@@ -36,22 +38,23 @@ namespace xt::models
         bool skip_connection;
     };
 
-    TORCH_MODULE(MBConvBlock);
+    // TORCH_MODULE(MBConvBlock);
 
     // EfficientNetB0
-    struct EfficientNetB0Impl : torch::nn::Module
+    struct EfficientNetB0 : xt::Module
     {
-        EfficientNetB0Impl(int num_classes = 10);
+        EfficientNetB0(int num_classes = 10);
+        auto forward(std::initializer_list <std::any> tensors) -> std::any override;
 
         torch::Tensor forward(torch::Tensor x);
 
         torch::nn::Conv2d stem_conv{nullptr}, head_conv{nullptr};
         torch::nn::BatchNorm2d bn0{nullptr}, bn1{nullptr};
         torch::nn::Linear fc{nullptr};
-        torch::nn::ModuleList blocks{torch::nn::ModuleList()};
+        xt::ModuleList blocks{xt::ModuleList()};
     };
 
-    TORCH_MODULE(EfficientNetB0);
+    // TORCH_MODULE(EfficientNetB0);
 
 
     // struct EfficientNetB0 : xt::Cloneable<EfficientNetB0> {
@@ -69,19 +72,20 @@ namespace xt::models
 
 
     // EfficientNetB1
-    struct EfficientNetB1Impl : torch::nn::Module
+    struct EfficientNetB1 : xt::Module
     {
-        EfficientNetB1Impl(int num_classes = 10);
+        EfficientNetB1(int num_classes = 10);
+        auto forward(std::initializer_list <std::any> tensors) -> std::any override;
 
         torch::Tensor forward(torch::Tensor x);
 
         torch::nn::Conv2d stem_conv{nullptr}, head_conv{nullptr};
         torch::nn::BatchNorm2d bn0{nullptr}, bn1{nullptr};
         torch::nn::Linear fc{nullptr};
-        torch::nn::ModuleList blocks{torch::nn::ModuleList()};
+        xt::ModuleList blocks{xt::ModuleList()};
     };
 
-    TORCH_MODULE(EfficientNetB1);
+    // TORCH_MODULE(EfficientNetB1);
 
 
     // struct EfficientNetB1 : xt::Cloneable<EfficientNetB1> {
@@ -99,19 +103,20 @@ namespace xt::models
 
 
     // EfficientNetB2
-    struct EfficientNetB2Impl : torch::nn::Module
+    struct EfficientNetB2 : xt::Module
     {
-        EfficientNetB2Impl(int num_classes = 10);
+        EfficientNetB2(int num_classes = 10);
+        auto forward(std::initializer_list <std::any> tensors) -> std::any override;
 
         torch::Tensor forward(torch::Tensor x);
 
         torch::nn::Conv2d stem_conv{nullptr}, head_conv{nullptr};
         torch::nn::BatchNorm2d bn0{nullptr}, bn1{nullptr};
         torch::nn::Linear fc{nullptr};
-        torch::nn::ModuleList blocks{torch::nn::ModuleList()};
+        xt::ModuleList blocks{xt::ModuleList()};
     };
 
-    TORCH_MODULE(EfficientNetB2);
+    // TORCH_MODULE(EfficientNetB2);
 
 
     // struct EfficientNetB2 : xt::Cloneable<EfficientNetB2> {
@@ -129,19 +134,20 @@ namespace xt::models
 
 
     // EfficientNetB3
-    struct EfficientNetB3Impl : torch::nn::Module
+    struct EfficientNetB3 : xt::Module
     {
-        EfficientNetB3Impl(int num_classes = 10);
+        EfficientNetB3(int num_classes = 10);
+        auto forward(std::initializer_list <std::any> tensors) -> std::any override;
 
         torch::Tensor forward(torch::Tensor x);
 
         torch::nn::Conv2d stem_conv{nullptr}, head_conv{nullptr};
         torch::nn::BatchNorm2d bn0{nullptr}, bn1{nullptr};
         torch::nn::Linear fc{nullptr};
-        torch::nn::ModuleList blocks{torch::nn::ModuleList()};
+        xt::ModuleList blocks{xt::ModuleList()};
     };
 
-    TORCH_MODULE(EfficientNetB3);
+    // TORCH_MODULE(EfficientNetB3);
 
 
     // struct EfficientNetB3 : xt::Cloneable<EfficientNetB3> {
@@ -157,20 +163,21 @@ namespace xt::models
     //     void reset() override;
     // };
 
-    struct EfficientNetB4Impl : torch::nn::Module
+    struct EfficientNetB4 : xt::Module
     {
         // EfficientNetB4
-        EfficientNetB4Impl(int num_classes = 10);
+        EfficientNetB4(int num_classes = 10);
+        auto forward(std::initializer_list <std::any> tensors) -> std::any override;
 
         torch::Tensor forward(torch::Tensor x);
 
         torch::nn::Conv2d stem_conv{nullptr}, head_conv{nullptr};
         torch::nn::BatchNorm2d bn0{nullptr}, bn1{nullptr};
         torch::nn::Linear fc{nullptr};
-        torch::nn::ModuleList blocks{torch::nn::ModuleList()};
+        xt::ModuleList blocks{xt::ModuleList()};
     };
 
-    TORCH_MODULE(EfficientNetB4);
+    // TORCH_MODULE(EfficientNetB4);
 
     // struct EfficientNetB4 : xt::Cloneable<EfficientNetB4>
     // {
@@ -188,19 +195,20 @@ namespace xt::models
 
 
     // EfficientNetB5
-    struct EfficientNetB5Impl : torch::nn::Module
+    struct EfficientNetB5 : xt::Module
     {
-        EfficientNetB5Impl(int num_classes = 10);
+        EfficientNetB5(int num_classes = 10);
+        auto forward(std::initializer_list <std::any> tensors) -> std::any override;
 
         torch::Tensor forward(torch::Tensor x);
 
         torch::nn::Conv2d stem_conv{nullptr}, head_conv{nullptr};
         torch::nn::BatchNorm2d bn0{nullptr}, bn1{nullptr};
         torch::nn::Linear fc{nullptr};
-        torch::nn::ModuleList blocks{torch::nn::ModuleList()};
+        xt::ModuleList blocks{xt::ModuleList()};
     };
 
-    TORCH_MODULE(EfficientNetB5);
+    // TORCH_MODULE(EfficientNetB5);
 
     // struct EfficientNetB5 : xt::Cloneable<EfficientNetB5>
     // {
@@ -218,19 +226,20 @@ namespace xt::models
 
 
     // EfficientNetB6
-    struct EfficientNetB6Impl : torch::nn::Module
+    struct EfficientNetB6 : xt::Module
     {
-        EfficientNetB6Impl(int num_classes = 10);
+        EfficientNetB6(int num_classes = 10);
+        auto forward(std::initializer_list <std::any> tensors) -> std::any override;
 
         torch::Tensor forward(torch::Tensor x);
 
         torch::nn::Conv2d stem_conv{nullptr}, head_conv{nullptr};
         torch::nn::BatchNorm2d bn0{nullptr}, bn1{nullptr};
         torch::nn::Linear fc{nullptr};
-        torch::nn::ModuleList blocks{torch::nn::ModuleList()};
+        xt::ModuleList blocks{xt::ModuleList()};
     };
 
-    TORCH_MODULE(EfficientNetB6);
+    // TORCH_MODULE(EfficientNetB6);
 
 
     // struct EfficientNetB6 : xt::Cloneable<EfficientNetB6>
@@ -249,19 +258,20 @@ namespace xt::models
 
 
     // EfficientNetB7
-    struct EfficientNetB7Impl : torch::nn::Module
+    struct EfficientNetB7 : xt::Module
     {
-        EfficientNetB7Impl(int num_classes = 10);
+        EfficientNetB7(int num_classes = 10);
+        auto forward(std::initializer_list <std::any> tensors) -> std::any override;
 
         torch::Tensor forward(torch::Tensor x);
 
         torch::nn::Conv2d stem_conv{nullptr}, head_conv{nullptr};
         torch::nn::BatchNorm2d bn0{nullptr}, bn1{nullptr};
         torch::nn::Linear fc{nullptr};
-        torch::nn::ModuleList blocks{torch::nn::ModuleList()};
+        xt::ModuleList blocks{xt::ModuleList()};
     };
 
-    TORCH_MODULE(EfficientNetB7);
+    // TORCH_MODULE(EfficientNetB7);
 
     // struct EfficientNetB7 : xt::Cloneable<EfficientNetB7>
     // {
