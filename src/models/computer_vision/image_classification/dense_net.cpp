@@ -1060,7 +1060,7 @@ using namespace std;
 namespace xt::models
 {
     // Dense Layer (Bottleneck: 1x1 conv -> 3x3 conv)
-    DenseLayerImpl::DenseLayerImpl(int in_channels, int growth_rate)
+    DenseLayer::DenseLayer(int in_channels, int growth_rate)
     {
         bn1 = register_module("bn1", torch::nn::BatchNorm2d(in_channels));
         conv1 = register_module("conv1", torch::nn::Conv2d(
@@ -1070,8 +1070,22 @@ namespace xt::models
                                     torch::nn::Conv2dOptions(4 * growth_rate, growth_rate, 3).padding(1).bias(false)));
     }
 
+    auto DenseLayer::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        std::vector<std::any> any_vec(tensors);
 
-    torch::Tensor DenseLayerImpl::forward(torch::Tensor x)
+        std::vector<torch::Tensor> tensor_vec;
+        for (const auto& item : any_vec)
+        {
+            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+        }
+
+        torch::Tensor x = tensor_vec[0];
+        return this->forward(x);
+    }
+
+
+    torch::Tensor DenseLayer::forward(torch::Tensor x)
     {
         auto out = torch::relu(bn1->forward(x));
         out = conv1->forward(out);
@@ -1081,7 +1095,7 @@ namespace xt::models
     }
 
     // Dense Block
-    DenseBlockImpl::DenseBlockImpl(int num_layers, int in_channels, int growth_rate)
+    DenseBlock::DenseBlock(int num_layers, int in_channels, int growth_rate)
     {
         for (int i = 0; i < num_layers; ++i)
         {
@@ -1090,16 +1104,30 @@ namespace xt::models
         }
     }
 
-    torch::Tensor DenseBlockImpl::forward(torch::Tensor x)
+    auto DenseBlock::forward(std::initializer_list<std::any> tensors) -> std::any
     {
-        for (auto& layer : *layers)
+        std::vector<std::any> any_vec(tensors);
+
+        std::vector<torch::Tensor> tensor_vec;
+        for (const auto& item : any_vec)
         {
-            x = layer->forward(x);
+            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+        }
+
+        torch::Tensor x = tensor_vec[0];
+        return this->forward(x);
+    }
+
+    torch::Tensor DenseBlock::forward(torch::Tensor x)
+    {
+        for (auto& layer : layers)
+        {
+            x = std::any_cast<torch::Tensor>(layer.forward({x}));
         }
         return x;
     }
 
-    TransitionLayerImpl::TransitionLayerImpl(int in_channels, int out_channels)
+    TransitionLayer::TransitionLayer(int in_channels, int out_channels)
     {
         bn = register_module("bn", torch::nn::BatchNorm2d(in_channels));
         conv = register_module("conv", torch::nn::Conv2d(
@@ -1108,7 +1136,21 @@ namespace xt::models
                                    torch::nn::AvgPool2dOptions(2).stride(2)));
     }
 
-    torch::Tensor TransitionLayerImpl::forward(torch::Tensor x)
+    auto TransitionLayer::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        std::vector<std::any> any_vec(tensors);
+
+        std::vector<torch::Tensor> tensor_vec;
+        for (const auto& item : any_vec)
+        {
+            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+        }
+
+        torch::Tensor x = tensor_vec[0];
+        return this->forward(x);
+    }
+
+    torch::Tensor TransitionLayer::forward(torch::Tensor x)
     {
         x = torch::relu(bn->forward(x));
         x = conv->forward(x);
@@ -1117,7 +1159,7 @@ namespace xt::models
     }
 
     // DenseNet121
-    DenseNet121Impl::DenseNet121Impl(int num_classes, int growth_rate, int init_channels)
+    DenseNet121::DenseNet121(int num_classes, int growth_rate, int init_channels)
     {
         // Initial conv layer
         conv0 = register_module("conv0", torch::nn::Conv2d(
@@ -1149,7 +1191,7 @@ namespace xt::models
         fc = register_module("fc", torch::nn::Linear(num_features, num_classes));
     }
 
-    torch::Tensor DenseNet121Impl::forward(torch::Tensor x)
+    torch::Tensor DenseNet121::forward(torch::Tensor x)
     {
         x = torch::relu(bn0->forward(conv0->forward(x))); // [batch, 64, 32, 32]
         x = dense1->forward(x);
@@ -1190,7 +1232,7 @@ namespace xt::models
     // }
 
     // DenseNet169
-    DenseNet169Impl::DenseNet169Impl(int num_classes, int growth_rate, int init_channels)
+    DenseNet169::DenseNet169(int num_classes, int growth_rate, int init_channels)
     {
         // Initial conv layer
         conv0 = register_module("conv0", torch::nn::Conv2d(
@@ -1222,7 +1264,7 @@ namespace xt::models
         fc = register_module("fc", torch::nn::Linear(num_features, num_classes));
     }
 
-    torch::Tensor DenseNet169Impl::forward(torch::Tensor x)
+    torch::Tensor DenseNet169::forward(torch::Tensor x)
     {
         x = torch::relu(bn0->forward(conv0->forward(x))); // [batch, 64, 32, 32]
         x = dense1->forward(x);
@@ -1263,7 +1305,7 @@ namespace xt::models
 
 
     // DenseNet201
-    DenseNet201Impl::DenseNet201Impl(int num_classes, int growth_rate, int init_channels)
+    DenseNet201::DenseNet201(int num_classes, int growth_rate, int init_channels)
     {
         // Initial conv layer
         conv0 = register_module("conv0", torch::nn::Conv2d(
@@ -1295,7 +1337,7 @@ namespace xt::models
         fc = register_module("fc", torch::nn::Linear(num_features, num_classes));
     }
 
-    torch::Tensor DenseNet201Impl::forward(torch::Tensor x)
+    torch::Tensor DenseNet201::forward(torch::Tensor x)
     {
         x = torch::relu(bn0->forward(conv0->forward(x))); // [batch, 64, 32, 32]
         x = dense1->forward(x);
@@ -1337,7 +1379,7 @@ namespace xt::models
 
 
     // DenseNet264
-    DenseNet264Impl::DenseNet264Impl(int num_classes, int growth_rate, int init_channels)
+    DenseNet264::DenseNet264(int num_classes, int growth_rate, int init_channels)
     {
         // Initial conv layer
         conv0 = register_module("conv0", torch::nn::Conv2d(
@@ -1369,7 +1411,7 @@ namespace xt::models
         fc = register_module("fc", torch::nn::Linear(num_features, num_classes));
     }
 
-    torch::Tensor DenseNet264Impl::forward(torch::Tensor x)
+    torch::Tensor DenseNet264::forward(torch::Tensor x)
     {
         x = torch::relu(bn0->forward(conv0->forward(x))); // [batch, 64, 32, 32]
         x = dense1->forward(x);
