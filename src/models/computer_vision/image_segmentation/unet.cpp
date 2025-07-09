@@ -296,25 +296,25 @@ namespace xt::models {
         x = x.to(torch::kFloat32);
 
         // Encoder
-        auto e1 = enc1->forward(x); // [batch, 64, 28, 28]
+        auto e1 = enc1.forward(x); // [batch, 64, 28, 28]
         auto p1 = torch::max_pool2d(e1, 2); // [batch, 64, 14, 14]
-        auto e2 = enc2->forward(p1); // [batch, 128, 14, 14]
+        auto e2 = enc2.forward(p1); // [batch, 128, 14, 14]
         auto p2 = torch::max_pool2d(e2, 2); // [batch, 128, 7, 7]
-        auto e3 = enc3->forward(p2); // [batch, 256, 7, 7]
+        auto e3 = enc3.forward(p2); // [batch, 256, 7, 7]
         auto p3 = torch::max_pool2d(e3, 2); // [batch, 256, 3, 3]
 
         // Bottleneck
-        auto b = bottleneck->forward(p3); // [batch, 512, 3, 3]
+        auto b = bottleneck.forward(p3); // [batch, 512, 3, 3]
 
         // Decoder
-        auto u3 = upconv3->forward(b); // [batch, 256, 6, 6]
+        auto u3 = upconv3.forward(b); // [batch, 256, 6, 6]
         // Pad to match e3 size (7x7)
         u3 = torch::pad(u3, {0, 1, 0, 1}); // [batch, 256, 7, 7]
-        auto d3 = dec3->forward(torch::cat({u3, e3}, 1)); // [batch, 256, 7, 7]
-        auto u2 = upconv2->forward(d3); // [batch, 128, 14, 14]
-        auto d2 = dec2->forward(torch::cat({u2, e2}, 1)); // [batch, 128, 14, 14]
-        auto u1 = upconv1->forward(d2); // [batch, 64, 28, 28]
-        auto d1 = dec1->forward(torch::cat({u1, e1}, 1)); // [batch, 64, 28, 28]
+        auto d3 = dec3.forward(torch::cat({u3, e3}, 1)); // [batch, 256, 7, 7]
+        auto u2 = upconv2.forward(d3); // [batch, 128, 14, 14]
+        auto d2 = dec2.forward(torch::cat({u2, e2}, 1)); // [batch, 128, 14, 14]
+        auto u1 = upconv1.forward(d2); // [batch, 64, 28, 28]
+        auto d1 = dec1.forward(torch::cat({u1, e1}, 1)); // [batch, 64, 28, 28]
 
         // Output
         auto out = out_conv->forward(d1); // [batch, out_channels, 28, 28]

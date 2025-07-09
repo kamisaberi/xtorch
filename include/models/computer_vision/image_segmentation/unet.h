@@ -24,8 +24,8 @@ namespace xt::models {
         auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
         torch::Tensor forward(torch::Tensor x);
 
-        DoubleConv enc1{nullptr}, enc2{nullptr}, enc3{nullptr}, bottleneck{nullptr};
-        DoubleConv dec1{nullptr}, dec2{nullptr}, dec3{nullptr};
+        std::shared_ptr<DoubleConv>  enc1{nullptr}, enc2{nullptr}, enc3{nullptr}, bottleneck{nullptr};
+        std::shared_ptr<DoubleConv> dec1{nullptr}, dec2{nullptr}, dec3{nullptr};
         torch::nn::ConvTranspose2d upconv1{nullptr}, upconv2{nullptr}, upconv3{nullptr};
         torch::nn::Conv2d out_conv{nullptr};
     };
