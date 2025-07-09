@@ -223,7 +223,7 @@ namespace xt::models
         // Highway layers
         for (int i = 0; i < num_layers; ++i)
         {
-            layers.push_back(HighwayLayer(input_size));
+            layers.push_back(std::make_shared<HighwayLayer>(input_size));
             register_module("highway_" + std::to_string(i), layers[layers.size() - 1]);
         }
 
@@ -236,8 +236,8 @@ namespace xt::models
         x = torch::relu(input_layer->forward(x));
         for (auto& layer : layers)
         {
-            layer.forward({x});
-            x = std::any_cast<torch::Tensor>(layer.forward({x}));
+            layer->forward({x});
+            x = std::any_cast<torch::Tensor>(layer->forward({x}));
         }
         x = output_layer->forward(x);
         return x;
