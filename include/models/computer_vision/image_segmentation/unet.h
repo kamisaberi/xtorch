@@ -18,9 +18,10 @@ namespace xt::models {
 //    TORCH_MODULE(DoubleConv);
 
     // U-Net Model
-    struct UNetImpl : torch::nn::Module {
+    struct UNetImpl : xt::Module {
         UNetImpl(int in_channels, int out_channels);
 
+        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
         torch::Tensor forward(torch::Tensor x);
 
         DoubleConv enc1{nullptr}, enc2{nullptr}, enc3{nullptr}, bottleneck{nullptr};

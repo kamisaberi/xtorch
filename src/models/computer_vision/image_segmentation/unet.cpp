@@ -284,6 +284,18 @@ namespace xt::models {
                 torch::nn::Conv2dOptions(64, out_channels, 1)));
     }
 
+    auto LeNet5::forward(std::initializer_list <std::any> tensors) -> std::any {
+        std::vector <std::any> any_vec(tensors);
+
+        std::vector <torch::Tensor> tensor_vec;
+        for (const auto &item: any_vec) {
+            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+        }
+
+        torch::Tensor x = tensor_vec[0];
+        x = x.to(torch::kFloat32);
+    }
+
     torch::Tensor UNetImpl::forward(torch::Tensor x) {
         // x: [batch, in_channels, h, w]
 
