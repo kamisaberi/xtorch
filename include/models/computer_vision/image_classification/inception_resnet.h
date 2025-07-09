@@ -8,127 +8,127 @@ using namespace std;
 
 namespace xt::models
 {
-    struct BasicConv2dImpl : torch::nn::Module
+    struct BasicConv2d : xt::Module
     {
         torch::nn::Conv2d conv{nullptr};
         torch::nn::BatchNorm2d bn{nullptr};
         bool use_relu;
 
-        BasicConv2dImpl(int in_planes, int out_planes, int kernel_size, int stride, int padding, bool relu = true);
+        BasicConv2d(int in_planes, int out_planes, int kernel_size, int stride, int padding, bool relu = true);
 
         torch::Tensor forward(torch::Tensor x);
     };
 
-    TORCH_MODULE(BasicConv2d);
+    // TORCH_MODULE(BasicConv2d);
 
 
     // Inception-ResNet-A block
-    struct InceptionResNetAImpl : torch::nn::Module
+    struct InceptionResNetA : xt::Module
     {
-        BasicConv2d b0, b1_0, b1_1, b2_0, b2_1, b2_2;
+        std::shared_ptr<BasicConv2d> b0, b1_0, b1_1, b2_0, b2_1, b2_2;
         torch::nn::Conv2d conv;
         double scale;
 
-        InceptionResNetAImpl(int in_planes, double scale = 1.0);
+        InceptionResNetA(int in_planes, double scale = 1.0);
         torch::Tensor forward(torch::Tensor x);
     };
 
-    TORCH_MODULE(InceptionResNetA);
+    // TORCH_MODULE(InceptionResNetA);
 
     // Inception-ResNet-B block
-    struct InceptionResNetBImpl : torch::nn::Module
+    struct InceptionResNetB : xt::Module
     {
-        BasicConv2d b0, b1_0, b1_1, b1_2;
+        std::shared_ptr<BasicConv2d> b0, b1_0, b1_1, b1_2;
         torch::nn::Conv2d conv;
         double scale;
 
-        InceptionResNetBImpl(int in_planes, double scale = 1.0);
+        InceptionResNetB(int in_planes, double scale = 1.0);
         torch::Tensor forward(torch::Tensor x);
     };
 
-    TORCH_MODULE(InceptionResNetB);
+    // TORCH_MODULE(InceptionResNetB);
 
     // Inception-ResNet-C block
-    struct InceptionResNetCImpl : torch::nn::Module
+    struct InceptionResNetC : xt::Module
     {
-        BasicConv2d b0, b1_0, b1_1, b1_2;
+        std::shared_ptr<BasicConv2d> b0, b1_0, b1_1, b1_2;
         torch::nn::Conv2d conv;
         double scale;
 
-        InceptionResNetCImpl(int in_planes, double scale = 1.0);
+        InceptionResNetC(int in_planes, double scale = 1.0);
         torch::Tensor forward(torch::Tensor x);
     };
 
-    TORCH_MODULE(InceptionResNetC);
+    // TORCH_MODULE(InceptionResNetC);
 
     // Reduction-A block
-    struct ReductionAImpl : torch::nn::Module
+    struct ReductionA : xt::Module
     {
-        BasicConv2d b0, b1_0, b1_1, b1_2;
+        std::shared_ptr<BasicConv2d> b0, b1_0, b1_1, b1_2;
         torch::nn::MaxPool2d b2;
 
-        ReductionAImpl(int in_planes, int k, int l, int m, int n);
+        ReductionA(int in_planes, int k, int l, int m, int n);
         torch::Tensor forward(torch::Tensor x);
     };
 
-    TORCH_MODULE(ReductionA);
+    // TORCH_MODULE(ReductionA);
 
     // Reduction-B block
-    struct ReductionBImpl : torch::nn::Module
+    struct ReductionB : xt::Module
     {
-        BasicConv2d b0_0, b0_1, b1_0, b1_1, b2_0, b2_1, b2_2;
+        std::shared_ptr<BasicConv2d> b0_0, b0_1, b1_0, b1_1, b2_0, b2_1, b2_2;
         torch::nn::MaxPool2d b3;
 
-        ReductionBImpl(int in_planes);
+        ReductionB(int in_planes);
 
         torch::Tensor forward(torch::Tensor x);
     };
 
-    TORCH_MODULE(ReductionB);
+    // TORCH_MODULE(ReductionB);
 
 
     // The complex stem of the InceptionResNetV2.
-    struct StemImpl : torch::nn::Module
+    struct Stem : xt::Module
     {
-        BasicConv2d conv2d_1a, conv2d_2a, conv2d_2b;
+        std::shared_ptr<BasicConv2d> conv2d_1a, conv2d_2a, conv2d_2b;
         torch::nn::MaxPool2d maxpool_3a;
-        BasicConv2d conv2d_3b, conv2d_4a;
-        BasicConv2d branch_0_conv, branch_1_conv_1, branch_1_conv_2;
+        std::shared_ptr<BasicConv2d> conv2d_3b, conv2d_4a;
+        std::shared_ptr<BasicConv2d> branch_0_conv, branch_1_conv_1, branch_1_conv_2;
         torch::nn::MaxPool2d branch_pool;
 
-        StemImpl(int in_channels);
+        Stem(int in_channels);
 
         torch::Tensor forward(torch::Tensor x);
     };
 
-    TORCH_MODULE(Stem);
+    // TORCH_MODULE(Stem);
 
 
     // The complete InceptionResNetV1 model, adapted for MNIST
-    struct InceptionResNetV1Impl : torch::nn::Module
+    struct InceptionResNetV1 : xt::Module
     {
-        BasicConv2d conv2d_1a, conv2d_2a, conv2d_2b;
+        std::shared_ptr<BasicConv2d> conv2d_1a, conv2d_2a, conv2d_2b;
         torch::nn::MaxPool2d maxpool_3a;
-        BasicConv2d conv2d_3b, conv2d_4a;
+        std::shared_ptr<BasicConv2d> conv2d_3b, conv2d_4a;
         torch::nn::MaxPool2d maxpool_5a;
         torch::nn::Sequential repeat, repeat_1, repeat_2;
-        ReductionA mixed_6a;
-        ReductionB mixed_7a;
-        BasicConv2d block8;
+        std::shared_ptr<ReductionA> mixed_6a;
+        std::shared_ptr<ReductionB> mixed_7a;
+        std::shared_ptr<BasicConv2d> block8;
         torch::nn::AdaptiveAvgPool2d avgpool_1a;
         torch::nn::Dropout dropout;
         torch::nn::Linear logits;
 
-        InceptionResNetV1Impl(int num_classes = 10);
+        InceptionResNetV1(int num_classes = 10);
 
         torch::Tensor forward(torch::Tensor x);
     };
 
-    TORCH_MODULE(InceptionResNetV1);
+    // TORCH_MODULE(InceptionResNetV1);
 
 
     // The Full InceptionResNetV2 model adapted for MNIST
-    struct InceptionResNetV2Impl : torch::nn::Module
+    struct InceptionResNetV2 : xt::Module
     {
         Stem stem;
         torch::nn::Sequential repeat_a, repeat_b, repeat_c;
@@ -138,12 +138,12 @@ namespace xt::models
         torch::nn::Dropout dropout;
         torch::nn::Linear logits;
 
-        InceptionResNetV2Impl(int num_classes = 10);
+        InceptionResNetV2(int num_classes = 10);
 
         torch::Tensor forward(torch::Tensor x);
     };
 
-    TORCH_MODULE(InceptionResNetV2);
+    // TORCH_MODULE(InceptionResNetV2);
 
 
     // struct InceptionResNetV1 : xt::Cloneable<InceptionResNetV1>
