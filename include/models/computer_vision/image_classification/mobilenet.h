@@ -6,9 +6,9 @@
 namespace xt::models
 {
     // Depthwise Separable Convolution
-    struct DepthwiseSeparableConvImpl : torch::nn::Module
+    struct DepthwiseSeparableConv : xt::Module
     {
-        DepthwiseSeparableConvImpl(int in_channels, int out_channels, int stride);
+        DepthwiseSeparableConv(int in_channels, int out_channels, int stride);
 
         torch::Tensor forward(torch::Tensor x);
 
@@ -16,12 +16,12 @@ namespace xt::models
         torch::nn::BatchNorm2d dw_bn{nullptr}, pw_bn{nullptr};
     };
 
-    TORCH_MODULE(DepthwiseSeparableConv);
+    // TORCH_MODULE(DepthwiseSeparableConv);
 
-    // Simplified MobileNetV1
-    struct MobileNetV1Impl : torch::nn::Module
+    // Sified MobileNetV1
+    struct MobileNetV1 : xt::Module
     {
-        MobileNetV1Impl(int in_channels, int num_classes);
+        MobileNetV1(int in_channels, int num_classes);
 
         torch::Tensor forward(torch::Tensor x);
 
@@ -32,12 +32,12 @@ namespace xt::models
         torch::nn::Linear fc{nullptr};
     };
 
-    TORCH_MODULE(MobileNetV1);
+    // TORCH_MODULE(MobileNetV1);
 
     // Inverted Residual Block
-    struct InvertedResidualBlockImpl : torch::nn::Module
+    struct InvertedResidualBlock : xt::Module
     {
-        InvertedResidualBlockImpl(int in_channels, int exp_channels, int out_channels, int stride);
+        InvertedResidualBlock(int in_channels, int exp_channels, int out_channels, int stride);
 
         torch::Tensor forward(torch::Tensor x);
 
@@ -45,12 +45,12 @@ namespace xt::models
         torch::nn::BatchNorm2d expand_bn{nullptr}, dw_bn{nullptr}, project_bn{nullptr};
     };
 
-    TORCH_MODULE(InvertedResidualBlock);
+    // TORCH_MODULE(InvertedResidualBlock);
 
-    // Simplified MobileNetV2
-    struct MobileNetV2Impl : torch::nn::Module
+    // Sified MobileNetV2
+    struct MobileNetV2 : xt::Module
     {
-        MobileNetV2Impl(int in_channels, int num_classes);
+        MobileNetV2(int in_channels, int num_classes);
 
         torch::Tensor forward(torch::Tensor x);
 
@@ -61,13 +61,13 @@ namespace xt::models
         torch::nn::Linear fc{nullptr};
     };
 
-    TORCH_MODULE(MobileNetV2);
+    // TORCH_MODULE(MobileNetV2);
 
 
     // Squeeze-and-Excitation Module
-    struct SEModuleImpl : torch::nn::Module
+    struct SEModule : xt::Module
     {
-        SEModuleImpl(int in_channels, int reduction = 4);
+        SEModule(int in_channels, int reduction = 4);
 
         torch::Tensor forward(torch::Tensor x);
 
@@ -75,12 +75,12 @@ namespace xt::models
     };
 
 
-    TORCH_MODULE(SEModule);
+    // TORCH_MODULE(SEModule);
 
-    // Simplified MobileNetV3-Small
-    struct MobileNetV3Impl : torch::nn::Module
+    // Sified MobileNetV3-Small
+    struct MobileNetV3 : xt::Module
     {
-        MobileNetV3Impl(int in_channels, int num_classes);
+        MobileNetV3(int in_channels, int num_classes);
 
         torch::Tensor forward(torch::Tensor x);
 
@@ -91,5 +91,5 @@ namespace xt::models
         torch::nn::Linear fc{nullptr};
     };
 
-    TORCH_MODULE(MobileNetV3);
+    // TORCH_MODULE(MobileNetV3);
 }

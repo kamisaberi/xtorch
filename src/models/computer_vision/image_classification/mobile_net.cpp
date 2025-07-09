@@ -13,8 +13,8 @@
 // #include <string>
 //
 // // Depthwise Separable Convolution
-// struct DepthwiseSeparableConvImpl : torch::nn::Module {
-//     DepthwiseSeparableConvImpl(int in_channels, int out_channels, int stride) {
+// struct DepthwiseSeparableConv : torch::nn::Module {
+//     DepthwiseSeparableConv(int in_channels, int out_channels, int stride) {
 //         dw_conv = register_module("dw_conv", torch::nn::Conv2d(
 //             torch::nn::Conv2dOptions(in_channels, in_channels, 3).stride(stride).padding(1).groups(in_channels)));
 //         dw_bn = register_module("dw_bn", torch::nn::BatchNorm2d(in_channels));
@@ -34,9 +34,9 @@
 // };
 // TORCH_MODULE(DepthwiseSeparableConv);
 //
-// // Simplified MobileNetV1
-// struct MobileNetV1Impl : torch::nn::Module {
-//     MobileNetV1Impl(int in_channels, int num_classes) {
+// // Sified MobileNetV1
+// struct MobileNetV1 : torch::nn::Module {
+//     MobileNetV1(int in_channels, int num_classes) {
 //         // Stem
 //         stem_conv = register_module("stem_conv", torch::nn::Conv2d(
 //             torch::nn::Conv2dOptions(in_channels, 32, 3).stride(2).padding(1)));
@@ -192,8 +192,8 @@
 // #include <string>
 //
 // // Depthwise Separable Convolution
-// struct DepthwiseSeparableConvImpl : torch::nn::Module {
-//     DepthwiseSeparableConvImpl(int in_channels, int out_channels, int stride) {
+// struct DepthwiseSeparableConv : torch::nn::Module {
+//     DepthwiseSeparableConv(int in_channels, int out_channels, int stride) {
 //         dw_conv = register_module("dw_conv", torch::nn::Conv2d(
 //             torch::nn::Conv2dOptions(in_channels, in_channels, 3).stride(stride).padding(1).groups(in_channels)));
 //         dw_bn = register_module("dw_bn", torch::nn::BatchNorm2d(in_channels));
@@ -214,8 +214,8 @@
 // TORCH_MODULE(DepthwiseSeparableConv);
 //
 // // Inverted Residual Block
-// struct InvertedResidualBlockImpl : torch::nn::Module {
-//     InvertedResidualBlockImpl(int in_channels, int exp_channels, int out_channels, int stride) {
+// struct InvertedResidualBlock : torch::nn::Module {
+//     InvertedResidualBlock(int in_channels, int exp_channels, int out_channels, int stride) {
 //         expand_conv = nullptr;
 //         if (in_channels != exp_channels) {
 //             expand_conv = register_module("expand_conv", torch::nn::Conv2d(
@@ -252,9 +252,9 @@
 // };
 // TORCH_MODULE(InvertedResidualBlock);
 //
-// // Simplified MobileNetV2
-// struct MobileNetV2Impl : torch::nn::Module {
-//     MobileNetV2Impl(int in_channels, int num_classes) {
+// // Sified MobileNetV2
+// struct MobileNetV2 : torch::nn::Module {
+//     MobileNetV2(int in_channels, int num_classes) {
 //         // Stem
 //         stem_conv = register_module("stem_conv", torch::nn::Conv2d(
 //             torch::nn::Conv2dOptions(in_channels, 32, 3).stride(2).padding(1)));
@@ -414,8 +414,8 @@
 // #include <string>
 //
 // // Squeeze-and-Excitation Module
-// struct SEModuleImpl : torch::nn::Module {
-//     SEModuleImpl(int in_channels, int reduction = 4) {
+// struct SEModule : torch::nn::Module {
+//     SEModule(int in_channels, int reduction = 4) {
 //         fc1 = register_module("fc1", torch::nn::Linear(in_channels, in_channels / reduction));
 //         fc2 = register_module("fc2", torch::nn::Linear(in_channels / reduction, in_channels));
 //     }
@@ -435,8 +435,8 @@
 // TORCH_MODULE(SEModule);
 //
 // // Depthwise Separable Convolution
-// struct DepthwiseSeparableConvImpl : torch::nn::Module {
-//     DepthwiseSeparableConvImpl(int in_channels, int out_channels, int stride) {
+// struct DepthwiseSeparableConv : torch::nn::Module {
+//     DepthwiseSeparableConv(int in_channels, int out_channels, int stride) {
 //         dw_conv = register_module("dw_conv", torch::nn::Conv2d(
 //             torch::nn::Conv2dOptions(in_channels, in_channels, 3).stride(stride).padding(1).groups(in_channels)));
 //         dw_bn = register_module("dw_bn", torch::nn::BatchNorm2d(in_channels));
@@ -457,8 +457,8 @@
 // TORCH_MODULE(DepthwiseSeparableConv);
 //
 // // Inverted Residual Block
-// struct InvertedResidualBlockImpl : torch::nn::Module {
-//     InvertedResidualBlockImpl(int in_channels, int exp_channels, int out_channels, int stride, bool use_se)
+// struct InvertedResidualBlock : torch::nn::Module {
+//     InvertedResidualBlock(int in_channels, int exp_channels, int out_channels, int stride, bool use_se)
 //         : use_se_(use_se) {
 //         expand_conv = nullptr;
 //         if (in_channels != exp_channels) {
@@ -505,9 +505,9 @@
 // };
 // TORCH_MODULE(InvertedResidualBlock);
 //
-// // Simplified MobileNetV3-Small
-// struct MobileNetV3Impl : torch::nn::Module {
-//     MobileNetV3Impl(int in_channels, int num_classes) {
+// // Sified MobileNetV3-Small
+// struct MobileNetV3 : torch::nn::Module {
+//     MobileNetV3(int in_channels, int num_classes) {
 //         // Stem
 //         stem_conv = register_module("stem_conv", torch::nn::Conv2d(
 //             torch::nn::Conv2dOptions(in_channels, 16, 3).stride(2).padding(1)));
@@ -659,7 +659,7 @@
 
 namespace xt::models
 {
-    DepthwiseSeparableConvImpl::DepthwiseSeparableConvImpl(int in_channels, int out_channels, int stride)
+    DepthwiseSeparableConv::DepthwiseSeparableConv(int in_channels, int out_channels, int stride)
     {
         dw_conv = register_module("dw_conv", torch::nn::Conv2d(
                                       torch::nn::Conv2dOptions(in_channels, in_channels, 3).stride(stride).
@@ -670,14 +670,14 @@ namespace xt::models
         pw_bn = register_module("pw_bn", torch::nn::BatchNorm2d(out_channels));
     }
 
-    torch::Tensor DepthwiseSeparableConvImpl::forward(torch::Tensor x)
+    torch::Tensor DepthwiseSeparableConv::forward(torch::Tensor x)
     {
         x = torch::relu(dw_bn->forward(dw_conv->forward(x))); // Depthwise
         x = torch::relu(pw_bn->forward(pw_conv->forward(x))); // Pointwise
         return x;
     }
 
-    MobileNetV1Impl::MobileNetV1Impl(int in_channels, int num_classes)
+    MobileNetV1::MobileNetV1(int in_channels, int num_classes)
     {
         // Stem
         stem_conv = register_module("stem_conv", torch::nn::Conv2d(
@@ -686,10 +686,10 @@ namespace xt::models
 
         // Depthwise separable convolution blocks
         blocks = torch::nn::Sequential(
-            DepthwiseSeparableConv(32, 64, 1), // [batch, 64, 16, 16]
-            DepthwiseSeparableConv(64, 128, 2), // [batch, 128, 8, 8]
-            DepthwiseSeparableConv(128, 128, 1), // [batch, 128, 8, 8]
-            DepthwiseSeparableConv(128, 256, 2) // [batch, 256, 4, 4]
+            std::make_shared<DepthwiseSeparableConv>(32, 64, 1), // [batch, 64, 16, 16]
+            std::make_shared<DepthwiseSeparableConv>(64, 128, 2), // [batch, 128, 8, 8]
+            std::make_shared<DepthwiseSeparableConv>(128, 128, 1), // [batch, 128, 8, 8]
+            std::make_shared<DepthwiseSeparableConv>(128, 256, 2) // [batch, 256, 4, 4]
         );
         register_module("blocks", blocks);
 
@@ -698,7 +698,7 @@ namespace xt::models
         fc = register_module("fc", torch::nn::Linear(256, num_classes));
     }
 
-    torch::Tensor MobileNetV1Impl::forward(torch::Tensor x)
+    torch::Tensor MobileNetV1::forward(torch::Tensor x)
     {
         // x: [batch, in_channels, 32, 32]
         x = torch::relu(stem_bn->forward(stem_conv->forward(x))); // [batch, 32, 16, 16]
@@ -709,8 +709,8 @@ namespace xt::models
     }
 
 
-    InvertedResidualBlockImpl::InvertedResidualBlockImpl(int in_channels, int exp_channels, int out_channels,
-                                                         int stride)
+    InvertedResidualBlock::InvertedResidualBlock(int in_channels, int exp_channels, int out_channels,
+                                                 int stride)
     {
         expand_conv = nullptr;
         if (in_channels != exp_channels)
@@ -728,7 +728,7 @@ namespace xt::models
         project_bn = register_module("project_bn", torch::nn::BatchNorm2d(out_channels));
     }
 
-    torch::Tensor InvertedResidualBlockImpl::forward(torch::Tensor x)
+    torch::Tensor InvertedResidualBlock::forward(torch::Tensor x)
     {
         auto residual = x;
         // Expansion
@@ -748,7 +748,7 @@ namespace xt::models
         return x;
     }
 
-    MobileNetV2Impl::MobileNetV2Impl(int in_channels, int num_classes)
+    MobileNetV2::MobileNetV2(int in_channels, int num_classes)
     {
         // Stem
         stem_conv = register_module("stem_conv", torch::nn::Conv2d(
@@ -757,10 +757,10 @@ namespace xt::models
 
         // Blocks: {in_channels, exp_channels, out_channels, stride}
         blocks = torch::nn::Sequential(
-            InvertedResidualBlock(32, 32, 16, 1), // [batch, 16, 16, 16]
-            InvertedResidualBlock(16, 96, 24, 2), // [batch, 24, 8, 8]
-            InvertedResidualBlock(24, 144, 24, 1), // [batch, 24, 8, 8]
-            InvertedResidualBlock(24, 144, 32, 2) // [batch, 32, 4, 4]
+            std::make_shared<InvertedResidualBlock>(32, 32, 16, 1), // [batch, 16, 16, 16]
+            std::make_shared<InvertedResidualBlock>(16, 96, 24, 2), // [batch, 24, 8, 8]
+            std::make_shared<InvertedResidualBlock>(24, 144, 24, 1), // [batch, 24, 8, 8]
+            std::make_shared<InvertedResidualBlock>(24, 144, 32, 2) // [batch, 32, 4, 4]
         );
         register_module("blocks", blocks);
 
@@ -772,7 +772,7 @@ namespace xt::models
         fc = register_module("fc", torch::nn::Linear(128, num_classes));
     }
 
-    torch::Tensor MobileNetV2Impl::forward(torch::Tensor x)
+    torch::Tensor MobileNetV2::forward(torch::Tensor x)
     {
         // x: [batch, in_channels, 32, 32]
         x = torch::relu(stem_bn->forward(stem_conv->forward(x))); // [batch, 32, 16, 16]
@@ -784,13 +784,13 @@ namespace xt::models
     }
 
 
-    SEModuleImpl::SEModuleImpl(int in_channels, int reduction )
+    SEModule::SEModule(int in_channels, int reduction)
     {
         fc1 = register_module("fc1", torch::nn::Linear(in_channels, in_channels / reduction));
         fc2 = register_module("fc2", torch::nn::Linear(in_channels / reduction, in_channels));
     }
 
-    torch::Tensor SEModuleImpl::forward(torch::Tensor x)
+    torch::Tensor SEModule::forward(torch::Tensor x)
     {
         // x: [batch, in_channels, h, w]
         auto avg_pool = torch::avg_pool2d(x, {x.size(2), x.size(3)}).squeeze(-1).squeeze(-1);
@@ -801,7 +801,7 @@ namespace xt::models
     }
 
 
-    MobileNetV3Impl::MobileNetV3Impl(int in_channels, int num_classes)
+    MobileNetV3::MobileNetV3(int in_channels, int num_classes)
     {
         // Stem
         stem_conv = register_module("stem_conv", torch::nn::Conv2d(
@@ -810,10 +810,10 @@ namespace xt::models
 
         // Blocks: {in_channels, exp_channels, out_channels, stride, use_se}
         blocks = torch::nn::Sequential(
-            InvertedResidualBlock(16, 16, 16, 2, true), // [batch, 16, 8, 8]
-            InvertedResidualBlock(16, 72, 24, 2, false), // [batch, 24, 4, 4]
-            InvertedResidualBlock(24, 88, 24, 1, false), // [batch, 24, 4, 4]
-            InvertedResidualBlock(24, 96, 40, 2, true) // [batch, 40, 2, 2]
+            std::make_shared<InvertedResidualBlock>(16, 16, 16, 2), // [batch, 16, 8, 8]
+            std::make_shared<InvertedResidualBlock>(16, 72, 24, 2), // [batch, 24, 4, 4]
+            std::make_shared<InvertedResidualBlock>(24, 88, 24, 1), // [batch, 24, 4, 4]
+            std::make_shared<InvertedResidualBlock>(24, 96, 40, 2) // [batch, 40, 2, 2]
         );
         register_module("blocks", blocks);
 
@@ -825,7 +825,7 @@ namespace xt::models
         fc = register_module("fc", torch::nn::Linear(128, num_classes));
     }
 
-    torch::Tensor MobileNetV3Impl::forward(torch::Tensor x)
+    torch::Tensor MobileNetV3::forward(torch::Tensor x)
     {
         // x: [batch, in_channels, 32, 32]
         x = torch::relu(stem_bn->forward(stem_conv->forward(x))); // [batch, 16, 16, 16]
