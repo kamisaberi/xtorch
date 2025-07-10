@@ -4,3 +4,4 @@
 #include "tensor.h"
 #include "cloneable.h"
 #include "dataset.h"
+#include "sequential.h"
