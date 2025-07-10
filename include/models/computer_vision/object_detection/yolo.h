@@ -61,19 +61,19 @@ namespace xt::models
 
     // TORCH_MODULE(YOLOv10);
 
-    // YOLO Loss Function
-    struct YOLOLoss : xt::Module
-    {
-        YOLOLoss(int num_classes, int num_anchors, float lambda_coord = 5.0, float lambda_noobj = 0.5);
-
-        auto forward(std::initializer_list<std::any> tensors) -> std::any override;
-
-        torch::Tensor forward(torch::Tensor pred, torch::Tensor target);
-
-        int num_classes_, num_anchors_;
-        float lambda_coord_, lambda_noobj_;
-        torch::Tensor anchors_;
-    };
+    // // YOLO Loss Function
+    // struct YOLOLoss : xt::Module
+    // {
+    //     YOLOLoss(int num_classes, int num_anchors, float lambda_coord = 5.0, float lambda_noobj = 0.5);
+    //
+    //     auto forward(std::initializer_list<std::any> tensors) -> std::any override;
+    //
+    //     torch::Tensor forward(torch::Tensor pred, torch::Tensor target);
+    //
+    //     int num_classes_, num_anchors_;
+    //     float lambda_coord_, lambda_noobj_;
+    //     torch::Tensor anchors_;
+    // };
 
     // TORCH_MODULE(YOLOLoss);
 }
