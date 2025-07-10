@@ -670,22 +670,22 @@ namespace xt::models
         pw_bn = register_module("pw_bn", torch::nn::BatchNorm2d(out_channels));
     }
 
-    auto DepthwiseSeparableConv::forward(std::initializer_list<std::any> tensors) -> std::any
-    {
-        std::vector<std::any> any_vec(tensors);
-
-        std::vector<torch::Tensor> tensor_vec;
-        for (const auto& item : any_vec)
-        {
-            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
-        }
-
-        torch::Tensor x = tensor_vec[0];
-        x = torch::relu(dw_bn->forward(dw_conv->forward(x))); // Depthwise
-        x = torch::relu(pw_bn->forward(pw_conv->forward(x))); // Pointwise
-        return x;
-        // return this->forward(x);
-    }
+    // auto DepthwiseSeparableConv::forward(std::initializer_list<std::any> tensors) -> std::any
+    // {
+    //     std::vector<std::any> any_vec(tensors);
+    //
+    //     std::vector<torch::Tensor> tensor_vec;
+    //     for (const auto& item : any_vec)
+    //     {
+    //         tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+    //     }
+    //
+    //     torch::Tensor x = tensor_vec[0];
+    //     // x = torch::relu(dw_bn->forward(dw_conv->forward(x))); // Depthwise
+    //     // x = torch::relu(pw_bn->forward(pw_conv->forward(x))); // Pointwise
+    //     // return x;
+    //     return this->forward(x);
+    // }
 
     torch::Tensor DepthwiseSeparableConv::forward(torch::Tensor x)
     {
@@ -759,19 +759,19 @@ namespace xt::models
         project_bn = register_module("project_bn", torch::nn::BatchNorm2d(out_channels));
     }
 
-    auto InvertedResidualBlock::forward(std::initializer_list<std::any> tensors) -> std::any
-    {
-        std::vector<std::any> any_vec(tensors);
-
-        std::vector<torch::Tensor> tensor_vec;
-        for (const auto& item : any_vec)
-        {
-            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
-        }
-
-        torch::Tensor x = tensor_vec[0];
-        return this->forward(x);
-    }
+    // auto InvertedResidualBlock::forward(std::initializer_list<std::any> tensors) -> std::any
+    // {
+    //     std::vector<std::any> any_vec(tensors);
+    //
+    //     std::vector<torch::Tensor> tensor_vec;
+    //     for (const auto& item : any_vec)
+    //     {
+    //         tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+    //     }
+    //
+    //     torch::Tensor x = tensor_vec[0];
+    //     return this->forward(x);
+    // }
 
     torch::Tensor InvertedResidualBlock::forward(torch::Tensor x)
     {

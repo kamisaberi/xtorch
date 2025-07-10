@@ -6,10 +6,10 @@
 namespace xt::models
 {
     // Depthwise Separable Convolution
-    struct DepthwiseSeparableConv : xt::Module
+    struct DepthwiseSeparableConv : torch::nn::Module
     {
         DepthwiseSeparableConv(int in_channels, int out_channels, int stride);
-        auto forward(std::initializer_list <std::any> tensors) -> std::any override;
+        // auto forward(std::initializer_list <std::any> tensors) -> std::any override;
 
         torch::Tensor forward(torch::Tensor x);
 
@@ -37,10 +37,10 @@ namespace xt::models
     // TORCH_MODULE(MobileNetV1);
 
     // Inverted Residual Block
-    struct InvertedResidualBlock : xt::Module
+    struct InvertedResidualBlock : torch::nn::Module
     {
         InvertedResidualBlock(int in_channels, int exp_channels, int out_channels, int stride);
-        auto forward(std::initializer_list <std::any> tensors) -> std::any override;
+        // auto forward(std::initializer_list <std::any> tensors) -> std::any override;
 
         torch::Tensor forward(torch::Tensor x);
 
