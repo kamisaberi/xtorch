@@ -673,6 +673,21 @@ namespace xt::models
         relu = register_module("relu", torch::nn::ReLU());
     }
 
+    auto Neck::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        std::vector<std::any> any_vec(tensors);
+
+        std::vector<torch::Tensor> tensor_vec;
+        for (const auto& item : any_vec)
+        {
+            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+        }
+
+        torch::Tensor x = tensor_vec[0];
+        return this->forward(x);
+    }
+
+
     torch::Tensor Neck::forward(torch::Tensor x)
     {
         x = relu->forward(conv1->forward(x)); // [batch, 32, 7, 7]
@@ -688,6 +703,21 @@ namespace xt::models
         conv = register_module(
             "conv", torch::nn::Conv2d(torch::nn::Conv2dOptions(16, num_anchors * (5 + num_classes), 1).stride(1)));
     }
+
+    auto Head::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        std::vector<std::any> any_vec(tensors);
+
+        std::vector<torch::Tensor> tensor_vec;
+        for (const auto& item : any_vec)
+        {
+            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+        }
+
+        torch::Tensor x = tensor_vec[0];
+        return this->forward(x);
+    }
+
 
     torch::Tensor Head::forward(torch::Tensor x)
     {
@@ -714,6 +744,21 @@ namespace xt::models
         neck = register_module("neck", std::make_shared<Neck>());
         head = register_module("head", std::make_shared<Head>(num_classes, num_anchors));
     }
+
+    auto YOLOv10::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        std::vector<std::any> any_vec(tensors);
+
+        std::vector<torch::Tensor> tensor_vec;
+        for (const auto& item : any_vec)
+        {
+            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+        }
+
+        torch::Tensor x = tensor_vec[0];
+        return this->forward(x);
+    }
+
 
     torch::Tensor YOLOv10::forward(torch::Tensor x)
     {
