@@ -15,6 +15,7 @@ namespace xt::models
                 "conv3", torch::nn::Conv2d(torch::nn::Conv2dOptions(32, 64, 3).stride(2).padding(1)));
             relu = register_module("relu", torch::nn::ReLU());
         }
+        auto forward(std::initializer_list <std::any> tensors) -> std::any override;
 
         torch::Tensor forward(torch::Tensor x)
         {
@@ -42,6 +43,7 @@ namespace xt::models
                 "conv2", torch::nn::Conv2d(torch::nn::Conv2dOptions(32, 16, 3).stride(1).padding(1)));
             relu = register_module("relu", torch::nn::ReLU());
         }
+        auto forward(std::initializer_list <std::any> tensors) -> std::any override;
 
         torch::Tensor forward(torch::Tensor x)
         {
@@ -67,6 +69,7 @@ namespace xt::models
             conv = register_module(
                 "conv", torch::nn::Conv2d(torch::nn::Conv2dOptions(16, num_anchors * (5 + num_classes), 1).stride(1)));
         }
+        auto forward(std::initializer_list <std::any> tensors) -> std::any override;
 
         torch::Tensor forward(torch::Tensor x)
         {
@@ -101,6 +104,7 @@ namespace xt::models
             neck = register_module("neck", Neck());
             head = register_module("head", Head(num_classes, num_anchors));
         }
+        auto forward(std::initializer_list <std::any> tensors) -> std::any override;
 
         torch::Tensor forward(torch::Tensor x)
         {
@@ -127,6 +131,7 @@ namespace xt::models
             // Predefined anchors (width, height) scaled to grid
             anchors_ = torch::tensor({{1.0, 1.0}, {2.0, 2.0}, {0.5, 0.5}}, torch::kFloat32);
         }
+        auto forward(std::initializer_list <std::any> tensors) -> std::any override;
 
         torch::Tensor forward(torch::Tensor pred, torch::Tensor target)
         {
