@@ -681,7 +681,10 @@ namespace xt::models
         }
 
         torch::Tensor x = tensor_vec[0];
-        return this->forward(x);
+        x = torch::relu(dw_bn->forward(dw_conv->forward(x))); // Depthwise
+        x = torch::relu(pw_bn->forward(pw_conv->forward(x))); // Pointwise
+        return x;
+        // return this->forward(x);
     }
 
     torch::Tensor DepthwiseSeparableConv::forward(torch::Tensor x)
