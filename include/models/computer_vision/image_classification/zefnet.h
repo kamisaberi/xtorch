@@ -8,16 +8,17 @@ namespace xt::models {
     // This model follows the spirit of ZefNet (multiple conv stages with LRN)
     // but is adapted for the smaller 28x28 MNIST input.
 
-    struct ZefNetImpl : torch::nn::Module {
+    struct ZefNet : xt::Module {
         // We separate the model into a feature extractor and a classifier
         torch::nn::Sequential features, classifier;
 
-        ZefNetImpl(int num_classes = 10);
+        ZefNet(int num_classes = 10);
+        auto forward(std::initializer_list <std::any> tensors) -> std::any override;
 
         torch::Tensor forward(torch::Tensor x);
     };
 
-    TORCH_MODULE(ZefNet);
+    // TORCH_MODULE(ZefNet);
 
 //    struct ZefNet : xt::Cloneable<ZefNet>
 //    {
