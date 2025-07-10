@@ -255,10 +255,8 @@ namespace xt::models
 
     torch::Tensor DoubleConv::forward(torch::Tensor x)
     {
-        x = std::any_cast<torch::Tensor>(this->forward({x}))
-        //        // x: [batch, in_channels, h, w]
-        //        x = torch::relu(bn1->forward(conv1->forward(x))); // [batch, out_channels, h, w]
-        //        x = torch::relu(bn2->forward(conv2->forward(x))); // [batch, out_channels, h, w]
+        x = torch::relu(bn1->forward(conv1->forward(x))); // [batch, out_channels, h, w]
+        x = torch::relu(bn2->forward(conv2->forward(x))); // [batch, out_channels, h, w]
         return x;
     }
 
@@ -270,18 +268,18 @@ namespace xt::models
         enc3 = register_module("enc3", std::make_shared<DoubleConv>(128, 256));
 
         // Bottleneck
-        bottleneck = register_module("bottleneck", DoubleConv(256, 512));
+        bottleneck = register_module("bottleneck", std::make_shared<DoubleConv>(256, 512));
 
         // Decoder
         upconv3 = register_module("upconv3", torch::nn::ConvTranspose2d(
                                       torch::nn::ConvTranspose2dOptions(512, 256, 2).stride(2)));
-        dec3 = register_module("dec3", DoubleConv(512, 256));
+        dec3 = register_module("dec3", std::make_shared<DoubleConv>(512, 256));
         upconv2 = register_module("upconv2", torch::nn::ConvTranspose2d(
                                       torch::nn::ConvTranspose2dOptions(256, 128, 2).stride(2)));
-        dec2 = register_module("dec2", DoubleConv(256, 128));
+        dec2 = register_module("dec2", std::make_shared<DoubleConv>(256, 128));
         upconv1 = register_module("upconv1", torch::nn::ConvTranspose2d(
                                       torch::nn::ConvTranspose2dOptions(128, 64, 2).stride(2)));
-        dec1 = register_module("dec1", DoubleConv(128, 64));
+        dec1 = register_module("dec1", std::make_shared<DoubleConv>(128, 64));
 
         // Output layer
         out_conv = register_module("out_conv", torch::nn::Conv2d(
