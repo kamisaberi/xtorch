@@ -9,10 +9,10 @@ using namespace std;
 // #include <vector>
 //
 // // --- The Core Building Block: Depthwise Separable Convolution ---
-// struct SeparableConv2dImpl : torch::nn::Module {
+// struct SeparableConv2d : torch::nn::Module {
 //     torch::nn::Conv2d depthwise, pointwise;
 //
-//     SeparableConv2dImpl(int in_channels, int out_channels, int kernel_size, int stride = 1, int padding = 0)
+//     SeparableConv2d(int in_channels, int out_channels, int kernel_size, int stride = 1, int padding = 0)
 //         // Depthwise convolution: processes each channel independently
 //         : depthwise(torch::nn::Conv2dOptions(in_channels, in_channels, kernel_size)
 //                         .stride(stride).padding(padding).groups(in_channels).bias(false)),
@@ -31,10 +31,10 @@ using namespace std;
 //
 //
 // // --- The Main Repeating Block in Xception ---
-// struct XceptionBlockImpl : torch::nn::Module {
+// struct XceptionBlock : torch::nn::Module {
 //     torch::nn::Sequential block, shortcut;
 //
-//     XceptionBlockImpl(int in_channels, int out_channels, int num_reps, int stride, bool start_with_relu = true) {
+//     XceptionBlock(int in_channels, int out_channels, int num_reps, int stride, bool start_with_relu = true) {
 //         torch::nn::Sequential layers;
 //         if (start_with_relu) {
 //             layers->push_back(torch::nn::ReLU());
@@ -74,13 +74,13 @@ using namespace std;
 //
 //
 // // --- The Full Xception Model ---
-// struct XceptionImpl : torch::nn::Module {
+// struct Xception : torch::nn::Module {
 //     torch::nn::Conv2d conv1, conv2;
 //     torch::nn::BatchNorm2d bn1, bn2;
 //     torch::nn::Sequential entry_flow, middle_flow, exit_flow;
 //     torch::nn::Linear fc;
 //
-//     XceptionImpl(int num_middle_blocks, int num_classes = 10) {
+//     Xception(int num_middle_blocks, int num_classes = 10) {
 //         // --- Entry Flow ---
 //         conv1 = register_module("conv1", torch::nn::Conv2d(torch::nn::Conv2dOptions(1, 32, 3).stride(2).padding(1).bias(false)));
 //         bn1 = register_module("bn1", torch::nn::BatchNorm2d(32));
@@ -223,8 +223,8 @@ using namespace std;
 
 namespace xt::models {
 
-    SeparableConv2dImpl::SeparableConv2dImpl(int in_channels, int out_channels, int kernel_size, int stride = 1,
-                                             int padding = 0)
+    SeparableConv2d::SeparableConv2d(int in_channels, int out_channels, int kernel_size, int stride ,
+                                             int padding )
     // Depthwise convolution: processes each channel independently
             : depthwise(torch::nn::Conv2dOptions(in_channels, in_channels, kernel_size)
                                 .stride(stride).padding(padding).groups(in_channels).bias(false)),
@@ -233,13 +233,26 @@ namespace xt::models {
         register_module("depthwise", depthwise);
         register_module("pointwise", pointwise);
     }
+    auto SeparableConv2d::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        std::vector<std::any> any_vec(tensors);
 
-    torch::Tensor SeparableConv2dImpl::forward(torch::Tensor x) {
+        std::vector<torch::Tensor> tensor_vec;
+        for (const auto& item : any_vec)
+        {
+            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+        }
+
+        torch::Tensor x = tensor_vec[0];
+        return this->forward(x);
+    }
+
+    torch::Tensor SeparableConv2d::forward(torch::Tensor x) {
         return pointwise(depthwise(x));
     }
 
-    XceptionBlockImpl::XceptionBlockImpl(int in_channels, int out_channels, int num_reps, int stride,
-                                         bool start_with_relu = true) {
+    XceptionBlock::XceptionBlock(int in_channels, int out_channels, int num_reps, int stride,
+                                         bool start_with_relu ) {
         torch::nn::Sequential layers;
         if (start_with_relu) {
             layers->push_back(torch::nn::ReLU());
@@ -269,8 +282,21 @@ namespace xt::models {
             ));
         }
     }
+    auto XceptionBlock::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        std::vector<std::any> any_vec(tensors);
 
-    torch::Tensor XceptionBlockImpl::forward(torch::Tensor x) {
+        std::vector<torch::Tensor> tensor_vec;
+        for (const auto& item : any_vec)
+        {
+            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+        }
+
+        torch::Tensor x = tensor_vec[0];
+        return this->forward(x);
+    }
+
+    torch::Tensor XceptionBlock::forward(torch::Tensor x) {
         auto out = block->forward(x);
         auto short_x = shortcut ? shortcut->forward(x) : x;
         return out + short_x;
@@ -279,7 +305,7 @@ namespace xt::models {
 
     // --- The Full Xception Model ---
 
-    XceptionImpl::XceptionImpl(int num_middle_blocks, int num_classes = 10) {
+    Xception::Xception(int num_middle_blocks, int num_classes ) {
         // --- Entry Flow ---
         conv1 = register_module("conv1",
                                 torch::nn::Conv2d(torch::nn::Conv2dOptions(1, 32, 3).stride(2).padding(1).bias(false)));
@@ -316,8 +342,21 @@ namespace xt::models {
         // --- Classifier ---
         fc = register_module("fc", torch::nn::Linear(2048, num_classes));
     }
+    auto Xception::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        std::vector<std::any> any_vec(tensors);
 
-    torch::Tensor XceptionImpl::forward(torch::Tensor x) {
+        std::vector<torch::Tensor> tensor_vec;
+        for (const auto& item : any_vec)
+        {
+            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+        }
+
+        torch::Tensor x = tensor_vec[0];
+        return this->forward(x);
+    }
+
+    torch::Tensor Xception::forward(torch::Tensor x) {
         x = torch::relu(bn1(conv1(x)));
         x = torch::relu(bn2(conv2(x)));
         x = entry_flow->forward(x);
