@@ -205,6 +205,21 @@ namespace xt::models
         transform->bias.data().fill_(-2.0);
     }
 
+    auto HighwayLayer::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        std::vector<std::any> any_vec(tensors);
+
+        std::vector<torch::Tensor> tensor_vec;
+        for (const auto& item : any_vec)
+        {
+            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+        }
+
+        torch::Tensor x = tensor_vec[0];
+        return this->forward(x);
+    }
+
+
     torch::Tensor HighwayLayer::forward(torch::Tensor x)
     {
         // Transform gate output: sigmoid(W_T * x + b_T)
@@ -230,6 +245,21 @@ namespace xt::models
         // Output layer
         output_layer = register_module("output_layer", torch::nn::Linear(input_size, num_classes));
     }
+
+    auto HighwayNetwork::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        std::vector<std::any> any_vec(tensors);
+
+        std::vector<torch::Tensor> tensor_vec;
+        for (const auto& item : any_vec)
+        {
+            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+        }
+
+        torch::Tensor x = tensor_vec[0];
+        return this->forward(x);
+    }
+
 
     torch::Tensor HighwayNetwork::forward(torch::Tensor x)
     {

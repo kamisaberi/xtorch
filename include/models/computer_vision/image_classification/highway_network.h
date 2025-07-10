@@ -8,6 +8,7 @@ namespace xt::models
     struct HighwayLayer : xt::Module
     {
         HighwayLayer(int input_size);
+        auto forward(std::initializer_list <std::any> tensors) -> std::any override;
 
         torch::Tensor forward(torch::Tensor x);
 
@@ -20,6 +21,7 @@ namespace xt::models
     struct HighwayNetwork : xt::Module
     {
         HighwayNetwork(int input_size, int num_classes, int num_layers);
+        auto forward(std::initializer_list <std::any> tensors) -> std::any override;
 
         torch::Tensor forward(torch::Tensor x);
 
