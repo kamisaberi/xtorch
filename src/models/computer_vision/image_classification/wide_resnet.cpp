@@ -11,7 +11,7 @@ using namespace std;
 // // This block is different from a standard ResNet block. It uses a (BN-ReLU-Conv) pre-activation
 // // sequence and includes a Dropout layer.
 //
-// struct WideBasicBlockImpl : torch::nn::Module {
+// struct WideBasicBlock : torch::nn::Module {
 //     torch::nn::BatchNorm2d bn1, bn2;
 //     torch::nn::Conv2d conv1, conv2;
 //     torch::nn::Dropout dropout;
@@ -19,7 +19,7 @@ using namespace std;
 //     // Shortcut connection for residual path
 //     torch::nn::Sequential shortcut;
 //
-//     WideBasicBlockImpl(int in_planes, int planes, double dropout_rate, int stride = 1)
+//     WideBasicBlock(int in_planes, int planes, double dropout_rate, int stride = 1)
 //         : bn1(in_planes),
 //           conv1(torch::nn::Conv2dOptions(in_planes, planes, 3).stride(stride).padding(1).bias(false)),
 //           bn2(planes),
@@ -59,13 +59,13 @@ using namespace std;
 //
 // // --- The Full WideResNet Model ---
 //
-// struct WideResNetImpl : torch::nn::Module {
+// struct WideResNet : torch::nn::Module {
 //     torch::nn::Conv2d conv1;
 //     torch::nn::Sequential layer1, layer2, layer3;
 //     torch::nn::BatchNorm2d bn_final;
 //     torch::nn::Linear linear;
 //
-//     WideResNetImpl(int depth, int widen_factor, double dropout_rate, int num_classes = 10) {
+//     WideResNet(int depth, int widen_factor, double dropout_rate, int num_classes = 10) {
 //         // Depth must be of the form 6*N + 4
 //         assert((depth - 4) % 6 == 0 && "WideResNet depth should be 6n+4");
 //         int N = (depth - 4) / 6;
@@ -234,7 +234,7 @@ namespace xt::models {
     // This block is different from a standard ResNet block. It uses a (BN-ReLU-Conv) pre-activation
     // sequence and includes a Dropout layer.
 
-    WideBasicBlockImpl::WideBasicBlockImpl(int in_planes, int planes, double dropout_rate, int stride = 1)
+    WideBasicBlock::WideBasicBlock(int in_planes, int planes, double dropout_rate, int stride )
             : bn1(in_planes),
               conv1(torch::nn::Conv2dOptions(in_planes, planes, 3).stride(stride).padding(1).bias(false)),
               bn2(planes),
@@ -254,8 +254,21 @@ namespace xt::models {
             register_module("shortcut", shortcut);
         }
     }
+    auto WideBasicBlock::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        std::vector<std::any> any_vec(tensors);
 
-    torch::Tensor WideBasicBlockImpl::forward(torch::Tensor x) {
+        std::vector<torch::Tensor> tensor_vec;
+        for (const auto& item : any_vec)
+        {
+            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+        }
+
+        torch::Tensor x = tensor_vec[0];
+        return this->forward(x);
+    }
+
+    torch::Tensor WideBasicBlock::forward(torch::Tensor x) {
         auto out = torch::relu(bn1(x));
         out = conv1(out);
         out = dropout(out); // Dropout is applied here in the WideResNet block
@@ -271,7 +284,7 @@ namespace xt::models {
 
     // --- The Full WideResNet Model ---
 
-    WideResNetImpl::WideResNetImpl(int depth, int widen_factor, double dropout_rate, int num_classes = 10) {
+    WideResNet::WideResNet(int depth, int widen_factor, double dropout_rate, int num_classes ) {
         // Depth must be of the form 6*N + 4
         assert((depth - 4) % 6 == 0 && "WideResNet depth should be 6n+4");
         int N = (depth - 4) / 6;
@@ -307,7 +320,7 @@ namespace xt::models {
     }
 
     torch::nn::Sequential
-    WideResNetImpl::_make_layer(int in_planes, int planes, int num_blocks, int stride, double dropout_rate) {
+    WideResNet::_make_layer(int in_planes, int planes, int num_blocks, int stride, double dropout_rate) {
         torch::nn::Sequential layers;
         layers->push_back(WideBasicBlock(in_planes, planes, dropout_rate, stride));
         for (int i = 1; i < num_blocks; ++i) {
@@ -315,8 +328,21 @@ namespace xt::models {
         }
         return layers;
     }
+    auto WideResNet::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        std::vector<std::any> any_vec(tensors);
 
-    torch::Tensor WideResNetImpl::forward(torch::Tensor x) {
+        std::vector<torch::Tensor> tensor_vec;
+        for (const auto& item : any_vec)
+        {
+            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+        }
+
+        torch::Tensor x = tensor_vec[0];
+        return this->forward(x);
+    }
+
+    torch::Tensor WideResNet::forward(torch::Tensor x) {
         x = conv1(x);
         x = layer1->forward(x);
         x = layer2->forward(x);
