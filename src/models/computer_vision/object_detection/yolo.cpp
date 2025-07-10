@@ -626,20 +626,9 @@ using namespace std;
 // }
 
 
-
-
-
-
-
-
-
 namespace xt::models
 {
-
-
-        struct Backbone : xt::Module
-    {
-        Backbone()
+        Backbone::Backbone()
         {
             conv1 = register_module(
                 "conv1", torch::nn::Conv2d(torch::nn::Conv2dOptions(1, 16, 3).stride(1).padding(1)));
@@ -650,19 +639,13 @@ namespace xt::models
             relu = register_module("relu", torch::nn::ReLU());
         }
 
-        torch::Tensor forward(torch::Tensor x)
+        torch::Tensor Backbone::forward(torch::Tensor x)
         {
             x = relu->forward(conv1->forward(x)); // [batch, 16, 28, 28]
             x = relu->forward(conv2->forward(x)); // [batch, 32, 14, 14]
             x = relu->forward(conv3->forward(x)); // [batch, 64, 7, 7]
             return x;
         }
-
-        torch::nn::Conv2d conv1{nullptr}, conv2{nullptr}, conv3{nullptr};
-        torch::nn::ReLU relu{nullptr};
-    };
-
-    // TORCH_MODULE(Backbone);
 
     // Sified YOLOv10 Neck
     struct Neck : xt::Module
@@ -862,7 +845,4 @@ namespace xt::models
         float lambda_coord_, lambda_noobj_;
         torch::Tensor anchors_;
     };
-
-
-
 }
