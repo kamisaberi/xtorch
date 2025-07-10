@@ -1357,7 +1357,7 @@ namespace xt::models
         trans3 = register_module("trans3", std::make_shared<TransitionLayer>(num_features, num_features / 2));
         num_features /= 2;
 
-        dense4 = register_module("dense4", DenseBlock(/*num_layers*/32, num_features, growth_rate));
+        dense4 = register_module("dense4", std::make_shared<DenseBlock>(/*num_layers*/32, num_features, growth_rate));
         num_features += 32 * growth_rate;
 
         // Final layers
