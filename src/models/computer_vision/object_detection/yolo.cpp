@@ -639,6 +639,21 @@ namespace xt::models
         relu = register_module("relu", torch::nn::ReLU());
     }
 
+    auto Backbone::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
+        std::vector<std::any> any_vec(tensors);
+
+        std::vector<torch::Tensor> tensor_vec;
+        for (const auto& item : any_vec)
+        {
+            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+        }
+
+        torch::Tensor x = tensor_vec[0];
+        return this->forward(x);
+    }
+
+
     torch::Tensor Backbone::forward(torch::Tensor x)
     {
         x = relu->forward(conv1->forward(x)); // [batch, 16, 28, 28]
