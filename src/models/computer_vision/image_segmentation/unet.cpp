@@ -248,9 +248,7 @@ namespace xt::models
 
         torch::Tensor x = tensor_vec[0];
         x = x.to(torch::kFloat32);
-        x = torch::relu(bn1->forward(conv1->forward(x))); // [batch, out_channels, h, w]
-        x = torch::relu(bn2->forward(conv2->forward(x))); // [batch, out_channels, h, w]
-        return x;
+        return this->forward(x);
     }
 
     torch::Tensor DoubleConv::forward(torch::Tensor x)
