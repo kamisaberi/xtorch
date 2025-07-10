@@ -651,7 +651,8 @@ namespace xt::models
     {
         conv1 = register_module("conv1", torch::nn::Conv2d(torch::nn::Conv2dOptions(64, 32, 1).stride(1)));
         upsample = register_module(
-            "upsample", torch::nn::Upsample(torch::nn::UpsampleOptions().scale_factor(2).mode(torch::kNearest)));
+            "upsample", torch::nn::Upsample(
+                torch::nn::UpsampleOptions().scale_factor(vector<double>{2.0}).mode(torch::kNearest)));
         conv2 = register_module(
             "conv2", torch::nn::Conv2d(torch::nn::Conv2dOptions(32, 16, 3).stride(1).padding(1)));
         relu = register_module("relu", torch::nn::ReLU());
@@ -666,7 +667,7 @@ namespace xt::models
     }
 
 
-    Head::Head(int num_classes, int num_anchors ) : num_classes_(num_classes), num_anchors_(num_anchors)
+    Head::Head(int num_classes, int num_anchors) : num_classes_(num_classes), num_anchors_(num_anchors)
     {
         // Output: [x, y, w, h, conf, classes] per anchor
         conv = register_module(
@@ -692,7 +693,7 @@ namespace xt::models
     }
 
 
-    YOLOv10::YOLOv10(int num_classes, int num_anchors )
+    YOLOv10::YOLOv10(int num_classes, int num_anchors)
     {
         backbone = register_module("backbone", std::make_shared<Backbone>());
         neck = register_module("neck", std::make_shared<Neck>());
