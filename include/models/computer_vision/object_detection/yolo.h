@@ -5,25 +5,10 @@ namespace xt::models
 {
     struct Backbone : xt::Module
     {
-        Backbone()
-        {
-            conv1 = register_module(
-                "conv1", torch::nn::Conv2d(torch::nn::Conv2dOptions(1, 16, 3).stride(1).padding(1)));
-            conv2 = register_module(
-                "conv2", torch::nn::Conv2d(torch::nn::Conv2dOptions(16, 32, 3).stride(2).padding(1)));
-            conv3 = register_module(
-                "conv3", torch::nn::Conv2d(torch::nn::Conv2dOptions(32, 64, 3).stride(2).padding(1)));
-            relu = register_module("relu", torch::nn::ReLU());
-        }
-        auto forward(std::initializer_list <std::any> tensors) -> std::any override;
+        Backbone();
+        auto forward(std::initializer_list<std::any> tensors) -> std::any override;
 
-        torch::Tensor forward(torch::Tensor x)
-        {
-            x = relu->forward(conv1->forward(x)); // [batch, 16, 28, 28]
-            x = relu->forward(conv2->forward(x)); // [batch, 32, 14, 14]
-            x = relu->forward(conv3->forward(x)); // [batch, 64, 7, 7]
-            return x;
-        }
+        torch::Tensor forward(torch::Tensor x);
 
         torch::nn::Conv2d conv1{nullptr}, conv2{nullptr}, conv3{nullptr};
         torch::nn::ReLU relu{nullptr};
@@ -34,24 +19,10 @@ namespace xt::models
     // Sified YOLOv10 Neck
     struct Neck : xt::Module
     {
-        Neck()
-        {
-            conv1 = register_module("conv1", torch::nn::Conv2d(torch::nn::Conv2dOptions(64, 32, 1).stride(1)));
-            upsample = register_module(
-                "upsample", torch::nn::Upsample(torch::nn::UpsampleOptions().scale_factor(2).mode(torch::kNearest)));
-            conv2 = register_module(
-                "conv2", torch::nn::Conv2d(torch::nn::Conv2dOptions(32, 16, 3).stride(1).padding(1)));
-            relu = register_module("relu", torch::nn::ReLU());
-        }
-        auto forward(std::initializer_list <std::any> tensors) -> std::any override;
+        Neck();
+        auto forward(std::initializer_list<std::any> tensors) -> std::any override;
 
-        torch::Tensor forward(torch::Tensor x)
-        {
-            x = relu->forward(conv1->forward(x)); // [batch, 32, 7, 7]
-            x = upsample->forward(x); // [batch, 32, 14, 14]
-            x = relu->forward(conv2->forward(x)); // [batch, 16, 14, 14]
-            return x;
-        }
+        torch::Tensor forward(torch::Tensor x);
 
         torch::nn::Conv2d conv1{nullptr}, conv2{nullptr};
         torch::nn::Upsample upsample{nullptr};
@@ -63,31 +34,10 @@ namespace xt::models
     // Sified YOLOv10 Head
     struct Head : xt::Module
     {
-        Head(int num_classes, int num_anchors = 3) : num_classes_(num_classes), num_anchors_(num_anchors)
-        {
-            // Output: [x, y, w, h, conf, classes] per anchor
-            conv = register_module(
-                "conv", torch::nn::Conv2d(torch::nn::Conv2dOptions(16, num_anchors * (5 + num_classes), 1).stride(1)));
-        }
-        auto forward(std::initializer_list <std::any> tensors) -> std::any override;
+        Head(int num_classes, int num_anchors = 3) : num_classes_(num_classes), num_anchors_(num_anchors);
+        auto forward(std::initializer_list<std::any> tensors) -> std::any override;
 
-        torch::Tensor forward(torch::Tensor x)
-        {
-            x = conv->forward(x); // [batch, num_anchors * (5 + num_classes), 14, 14]
-            // Reshape to [batch, num_anchors, 5 + num_classes, grid_h, grid_w]
-            auto batch_size = x.size(0);
-            x = x.view({batch_size, num_anchors_, 5 + num_classes_, 14, 14});
-            x = x.permute({0, 1, 3, 4, 2}); // [batch, num_anchors, grid_h, grid_w, 5 + num_classes]
-            // Apply sigmoid to x, y, conf, and class probs
-            x.select(4, 0) = torch::sigmoid(x.select(4, 0)); // x
-            x.select(4, 1) = torch::sigmoid(x.select(4, 1)); // y
-            x.select(4, 4) = torch::sigmoid(x.select(4, 4)); // conf
-            for (int i = 5; i < 5 + num_classes_; ++i)
-            {
-                x.select(4, i) = torch::sigmoid(x.select(4, i)); // class probs
-            }
-            return x;
-        }
+        torch::Tensor forward(torch::Tensor x);
 
         int num_classes_, num_anchors_;
         torch::nn::Conv2d conv{nullptr};
@@ -104,7 +54,8 @@ namespace xt::models
             neck = register_module("neck", Neck());
             head = register_module("head", Head(num_classes, num_anchors));
         }
-        auto forward(std::initializer_list <std::any> tensors) -> std::any override;
+
+        auto forward(std::initializer_list<std::any> tensors) -> std::any override;
 
         torch::Tensor forward(torch::Tensor x)
         {
@@ -131,7 +82,8 @@ namespace xt::models
             // Predefined anchors (width, height) scaled to grid
             anchors_ = torch::tensor({{1.0, 1.0}, {2.0, 2.0}, {0.5, 0.5}}, torch::kFloat32);
         }
-        auto forward(std::initializer_list <std::any> tensors) -> std::any override;
+
+        auto forward(std::initializer_list<std::any> tensors) -> std::any override;
 
         torch::Tensor forward(torch::Tensor pred, torch::Tensor target)
         {
