@@ -326,7 +326,7 @@ namespace xt::models
         return out;
     }
 
-    DiceLoss::DiceLoss(float smooth = 1.0) : smooth_(smooth)
+    DiceLoss::DiceLoss(float smooth) : smooth_(smooth)
     {
     }
 
