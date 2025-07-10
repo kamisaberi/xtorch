@@ -252,19 +252,19 @@ namespace xt::models {
         bn2 = register_module("bn2", torch::nn::BatchNorm2d(out_planes));
     }
 
-    auto PyramidalBasicBlock::forward(std::initializer_list<std::any> tensors) -> std::any
-    {
-        std::vector<std::any> any_vec(tensors);
-
-        std::vector<torch::Tensor> tensor_vec;
-        for (const auto& item : any_vec)
-        {
-            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
-        }
-
-        torch::Tensor x = tensor_vec[0];
-        return this->forward(x);
-    }
+    // auto PyramidalBasicBlock::forward(std::initializer_list<std::any> tensors) -> std::any
+    // {
+    //     std::vector<std::any> any_vec(tensors);
+    //
+    //     std::vector<torch::Tensor> tensor_vec;
+    //     for (const auto& item : any_vec)
+    //     {
+    //         tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+    //     }
+    //
+    //     torch::Tensor x = tensor_vec[0];
+    //     return this->forward(x);
+    // }
 
     torch::Tensor PyramidalBasicBlock::forward(torch::Tensor x) {
         auto out = torch::relu(bn1(conv1(x)));
@@ -347,19 +347,19 @@ namespace xt::models {
         int final_planes = static_cast<int>(round(current_planes));
         linear = register_module("linear", torch::nn::Linear(final_planes, num_classes));
     }
-    auto PyramidalNet::forward(std::initializer_list<std::any> tensors) -> std::any
-    {
-        std::vector<std::any> any_vec(tensors);
-
-        std::vector<torch::Tensor> tensor_vec;
-        for (const auto& item : any_vec)
-        {
-            tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
-        }
-
-        torch::Tensor x = tensor_vec[0];
-        return this->forward(x);
-    }
+    // auto PyramidalNet::forward(std::initializer_list<std::any> tensors) -> std::any
+    // {
+    //     std::vector<std::any> any_vec(tensors);
+    //
+    //     std::vector<torch::Tensor> tensor_vec;
+    //     for (const auto& item : any_vec)
+    //     {
+    //         tensor_vec.push_back(std::any_cast<torch::Tensor>(item));
+    //     }
+    //
+    //     torch::Tensor x = tensor_vec[0];
+    //     return this->forward(x);
+    // }
 
     torch::Tensor PyramidalNet::forward(torch::Tensor x) {
         x = torch::relu(bn1(conv1(x)));
