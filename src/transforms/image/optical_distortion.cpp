@@ -1,6 +1,41 @@
 #include "include/transforms/image/optical_distortion.h"
 
 
+// #include "transforms/image/optical_distortion.h"
+// #include <iostream>
+//
+// int main() {
+//     // 1. Create a dummy image tensor with a grid pattern to visualize the distortion
+//     torch::Tensor image = torch::zeros({3, 200, 200});
+//     for (int i = 0; i < 200; i += 20) {
+//         image.slice(1, i, i + 5).index_put_({torch::indexing::Slice()}, 1.0); // Horizontal lines
+//         image.slice(2, i, i + 5).index_put_({torch::indexing::Slice()}, 1.0); // Vertical lines
+//     }
+//
+//     // 2. Instantiate the transform for a noticeable barrel distortion effect.
+//     xt::transforms::image::OpticalDistortion transformer(
+//         /*distort_limit=*/0.6f,
+//         /*shift_limit=*/0.0f // No tangential shift for this demo
+//     );
+//
+//     // 3. Apply the transform
+//     std::any result_any = transformer.forward({image});
+//     torch::Tensor distorted_image = std::any_cast<torch::Tensor>(result_any);
+//
+//     // 4. Check the output
+//     std::cout << "Original image shape: " << image.sizes() << std::endl;
+//     std::cout << "Distorted image shape: " << distorted_image.sizes() << std::endl;
+//
+//     // You could save the original and distorted images to see the effect.
+//     // The straight lines of the grid will become curved outwards, like a barrel.
+//     // cv::Mat original_mat = xt::utils::image::tensor_to_mat_8u(image);
+//     // cv::imwrite("original_grid_for_optical.png", original_mat);
+//     //
+//     // cv::Mat distorted_mat = xt::utils::image::tensor_to_mat_8u(distorted_image);
+//     // cv::imwrite("distorted_optical.png", distorted_mat);
+//
+//     return 0;
+// }
 
 namespace xt::transforms::image {
 
