@@ -1,5 +1,44 @@
 #include "include/transforms/image/pad_if_needed.h"
-
+//
+// #include "transforms/image/pad_if_needed.h"
+// #include <iostream>
+//
+// void process_image(const torch::Tensor& image, xt::transforms::image::PadIfNeeded& padder) {
+//     std::cout << "Original shape: " << image.sizes();
+//     torch::Tensor result = std::any_cast<torch::Tensor>(padder.forward({image}));
+//     std::cout << " -> Padded shape: " << result.sizes() << std::endl;
+// }
+//
+// int main() {
+//     // 1. Define the minimum required size for our pipeline
+//     int min_height = 256;
+//     int min_width = 256;
+//
+//     // 2. Instantiate the transform
+//     xt::transforms::image::PadIfNeeded padder(min_height, min_width, "reflect");
+//
+//     // --- Example 1: An image that is too small in both dimensions ---
+//     std::cout << "--- Case 1: Small Image ---" << std::endl;
+//     torch::Tensor small_image = torch::rand({3, 100, 150});
+//     process_image(small_image, padder);
+//     // Expected output shape: [3, 256, 256]
+//
+//     // --- Example 2: An image that is too small in one dimension ---
+//     std::cout << "\n--- Case 2: Tall, Thin Image ---" << std::endl;
+//     torch::Tensor tall_image = torch::rand({3, 300, 100});
+//     process_image(tall_image, padder);
+//     // Height (300) is fine. Width (100) needs padding.
+//     // Expected output shape: [3, 300, 256]
+//
+//     // --- Example 3: An image that is large enough ---
+//     std::cout << "\n--- Case 3: Large Image ---" << std::endl;
+//     torch::Tensor large_image = torch::rand({3, 512, 512});
+//     process_image(large_image, padder);
+//     // No padding needed.
+//     // Expected output shape: [3, 512, 512]
+//
+//     return 0;
+// }
 
 namespace xt::transforms::image {
 
