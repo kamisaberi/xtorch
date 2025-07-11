@@ -1,6 +1,42 @@
 #include "include/transforms/image/to_sepia.h"
 
 
+// #include "transforms/image/to_sepia.h"
+// #include <iostream>
+//
+// int main() {
+//     // 1. Create a dummy color image tensor
+//     torch::Tensor image = torch::rand({3, 200, 200});
+//
+//     std::cout << "Original image shape: " << image.sizes() << std::endl;
+//
+//     // 2. Instantiate the transform
+//     xt::transforms::image::ToSepia sepia_toner;
+//
+//     // 3. Apply the transform
+//     std::any result_any = sepia_toner.forward({image});
+//     torch::Tensor sepia_image = std::any_cast<torch::Tensor>(result_any);
+//
+//     // 4. Check the output
+//     std::cout << "Sepia image shape: " << sepia_image.sizes() << std::endl;
+//     // The shape should be unchanged.
+//
+//     // You could save the output image to see the warm, brownish toning effect.
+//     // cv::Mat output_mat = xt::utils::image::tensor_to_mat_8u(sepia_image);
+//     // cv::imwrite("sepia_image.png", output_mat);
+//
+//     // We can also check that the channels are now highly correlated,
+//     // which is characteristic of a monochrome-like effect.
+//     auto r_channel = sepia_image[0];
+//     auto g_channel = sepia_image[1];
+//
+//     // The mean values should follow the ratios in the sepia matrix
+//     std::cout << "Mean of Red channel (sepia): " << r_channel.mean().item<float>() << std::endl;
+//     std::cout << "Mean of Green channel (sepia): " << g_channel.mean().item<float>() << std::endl;
+//
+//     return 0;
+// }
+
 namespace xt::transforms::image {
 
     ToSepia::ToSepia() {
