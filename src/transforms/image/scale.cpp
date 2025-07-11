@@ -1,5 +1,41 @@
 #include "include/transforms/image/scale.h"
-
+//
+//
+//
+// #include "transforms/image/scale.h"
+// #include <iostream>
+//
+// int main() {
+//     // 1. Create a dummy image tensor of size [3, 100, 200]
+//     torch::Tensor image = torch::rand({3, 100, 200});
+//
+//     std::cout << "Original image shape: " << image.sizes() << std::endl;
+//
+//     // --- Example 1: Upscaling ---
+//     // Scale the image to 150% of its original size.
+//     xt::transforms::image::Scale upscaler(1.5, "cubic"); // Cubic is good for upscaling
+//
+//     torch::Tensor upscaled_image = std::any_cast<torch::Tensor>(upscaler.forward({image}));
+//
+//     std::cout << "\n--- Upscaled Image ---" << std::endl;
+//     std::cout << "Upscaled image shape: " << upscaled_image.sizes() << std::endl;
+//     // New H = 100 * 1.5 = 150. New W = 200 * 1.5 = 300.
+//     // Expected output: [3, 150, 300]
+//
+//
+//     // --- Example 2: Downscaling ---
+//     // Scale the image to 25% of its original size.
+//     xt::transforms::image::Scale downscaler(0.25, "area"); // Area is best for downscaling
+//
+//     torch::Tensor downscaled_image = std::any_cast<torch::Tensor>(downscaler.forward({image}));
+//
+//     std::cout << "\n--- Downscaled Image ---" << std::endl;
+//     std::cout << "Downscaled image shape: " << downscaled_image.sizes() << std::endl;
+//     // New H = 100 * 0.25 = 25. New W = 200 * 0.25 = 50.
+//     // Expected output: [3, 25, 50]
+//
+//     return 0;
+// }
 
 namespace xt::transforms::image {
 
