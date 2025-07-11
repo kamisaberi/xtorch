@@ -254,6 +254,8 @@ find_package(glfw3 REQUIRED)
 find_package(OpenGL REQUIRED)
 
 
+find_package(Eigen3 REQUIRED)
+
 
 
 
@@ -447,6 +449,7 @@ target_link_libraries(xTorch
         sndfile
         imgui_backend_glfw_gl3
         implot
+        ${EIGEN3_INCLUDE_DIRS}
 )
 
 
