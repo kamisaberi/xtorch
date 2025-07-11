@@ -1,6 +1,39 @@
 #include "include/transforms/image/advanced_blur.h"
 
 
+
+
+// #include "transforms/image/adaptive_threshold.h"
+// #include <iostream>
+//
+// int main() {
+//     // 1. Create a dummy image with a light and dark area
+//     torch::Tensor image = torch::ones({1, 100, 200}) * 0.2; // Dark background
+//     image.slice(2, 100, 200) = 0.8; // Bright area on the right
+//     // Add some noise
+//     image += torch::randn_like(image) * 0.1;
+//     image.clamp_(0, 1);
+//
+//     // 2. Instantiate the advanced "0 or 1" transform
+//     // Use a 15x15 block to calculate the local threshold
+//     xt::transforms::image::AdaptiveThreshold advanced_binarizer(15, 2.0);
+//
+//     // 3. Apply the transform
+//     std::any result_any = advanced_binarizer.forward({image});
+//     torch::Tensor binary_image = std::any_cast<torch::Tensor>(result_any);
+//
+//     // 4. Check the output
+//     std::cout << "Original image shape: " << image.sizes() << std::endl;
+//     std::cout << "Binarized image shape: " << binary_image.sizes() << std::endl;
+//     // Expected shape: [1, 100, 200]
+//
+//     // You could now save the images to see the result. The adaptive threshold
+//     // will correctly binarize both the light and dark parts of the image,
+//     // where a global threshold would likely fail on one of them.
+//
+//     return 0;
+// }
+
 namespace xt::transforms::image {
 
     AdvancedBlur::AdvancedBlur() : block_size_(11), c_(2.0), adaptive_method_flag_(cv::ADAPTIVE_THRESH_GAUSSIAN_C) {}
