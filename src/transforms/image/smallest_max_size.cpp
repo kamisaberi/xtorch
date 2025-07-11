@@ -1,6 +1,44 @@
 #include "include/transforms/image/smallest_max_size.h"
 
-
+// #include "transforms/image/smallest_max_size.h"
+// #include <iostream>
+//
+// int main() {
+//     // Target size for the smallest side
+//     int target_size = 256;
+//
+//     // Instantiate the transform
+//     xt::transforms::image::SmallestMaxSize resizer(target_size, "cubic");
+//
+//     // --- Example 1: A landscape image (width > height) ---
+//     torch::Tensor landscape_image = torch::rand({3, 480, 640});
+//     // Smallest side is height (480).
+//     // Scale = 256 / 480 ~= 0.5333
+//     // New H = 480 * 0.5333 = 256
+//     // New W = 640 * 0.5333 = 341
+//
+//     std::cout << "--- Landscape Image ---" << std::endl;
+//     std::cout << "Original shape: " << landscape_image.sizes() << std::endl;
+//     torch::Tensor resized1 = std::any_cast<torch::Tensor>(resizer.forward({landscape_image}));
+//     std::cout << "Resized shape:  " << resized1.sizes() << std::endl;
+//     // Expected output: [3, 256, 341]
+//
+//
+//     // --- Example 2: A portrait image (height > width) ---
+//     torch::Tensor portrait_image = torch::rand({3, 1080, 720});
+//     // Smallest side is width (720).
+//     // Scale = 256 / 720 ~= 0.3555
+//     // New W = 720 * 0.3555 = 256
+//     // New H = 1080 * 0.3555 = 384
+//
+//     std::cout << "\n--- Portrait Image ---" << std::endl;
+//     std::cout << "Original shape: " << portrait_image.sizes() << std::endl;
+//     torch::Tensor resized2 = std::any_cast<torch::Tensor>(resizer.forward({portrait_image}));
+//     std::cout << "Resized shape:  " << resized2.sizes() << std::endl;
+//     // Expected output: [3, 384, 256]
+//
+//     return 0;
+// }
 
 namespace xt::transforms::image {
 
