@@ -1,37 +1,84 @@
 
 #include "include/transforms/image/pad.h"
 
+
+
 namespace xt::transforms::image {
 
+    Pad::Pad() : top_(0), bottom_(0), left_(0), right_(0), border_type_flag_(cv::BORDER_CONSTANT), fill_value_(0.0f) {}
 
-    /**
-     * @brief Constructs a Pad object with the specified padding sizes.
-     * @param padding A vector of 64-bit integers defining the padding amounts, in pairs (e.g., {left, right, top, bottom}).
-     *
-     * Initializes the Pad object by storing the provided padding vector, which will be used to pad
-     * input tensors in subsequent calls to the operator() function. The vector must contain an even
-     * number of elements, where each pair specifies the left and right padding for a dimension.
-     * No validation is performed in this implementation; invalid padding sizes may result in runtime
-     * errors when applied.
-     */
-    Pad::Pad(std::vector<int64_t> padding) : padding(padding) {
+    Pad::Pad(const std::vector<int>& padding, const std::string& mode, float fill_value)
+        : fill_value_(fill_value) {
+
+        // Parse the padding vector into top, bottom, left, right
+        if (padding.size() == 1) {
+            top_ = bottom_ = left_ = right_ = padding[0];
+        } else if (padding.size() == 2) {
+            top_ = bottom_ = padding[0];
+            left_ = right_ = padding[1];
+        } else if (padding.size() == 4) {
+            top_ = padding[0];
+            bottom_ = padding[1];
+            left_ = padding[2];
+            right_ = padding[3];
+        } else {
+            throw std::invalid_argument("Padding vector must have 1, 2, or 4 elements: {p}, {p_tb, p_lr}, or {top, bottom, left, right}.");
+        }
+
+        // Parse the string mode into an OpenCV enum
+        if (mode == "constant") {
+            border_type_flag_ = cv::BORDER_CONSTANT;
+        } else if (mode == "reflect") {
+            // Note: OpenCV has two reflect modes. BORDER_REFLECT_101 is usually what people mean.
+            border_type_flag_ = cv::BORDER_REFLECT_101;
+        } else if (mode == "replicate") {
+            border_type_flag_ = cv::BORDER_REPLICATE;
+        } else {
+            throw std::invalid_argument("Unsupported padding mode. Must be 'constant', 'reflect', or 'replicate'.");
+        }
     }
 
-    /**
-     * @brief Applies padding to the input tensor using the stored padding configuration.
-     * @param input The input tensor to be padded, typically in format [N, C, H, W] or [H, W].
-     * @return A new tensor with padded dimensions according to the stored padding configuration.
-     *
-     * This function pads the input tensor using LibTorch’s torch::nn::functional::pad utility with
-     * the padding sizes specified during construction. The padding is applied with constant mode
-     * (defaulting to zeros) to the last dimensions of the tensor, as determined by the number of
-     * pairs in the padding vector. For example, for a 4D tensor [N, C, H, W] with padding {p_left,
-     * p_right, p_top, p_bottom}, it pads width (W) and height (H), resulting in [N, C, H + p_top +
-     * p_bottom, W + p_left + p_right]. The number of padding values must be even and compatible
-     * with the tensor’s dimensions, or a runtime error will occur.
-     */
-    torch::Tensor Pad::operator()(torch::Tensor input) {
-        return torch::nn::functional::pad(input, padding);
+    auto Pad::forward(std::initializer_list<std::any> tensors) -> std::any {
+        // 1. --- Input Validation and Conversion to Mat ---
+        std::vector<std::any> any_vec(tensors);
+        if (any_vec.empty()) {
+            throw std::invalid_argument("Pad::forward received an empty list of tensors.");
+        }
+        torch::Tensor input_tensor = std::any_cast<torch::Tensor>(any_vec[0]);
+
+        if (!input_tensor.defined()) {
+            throw std::invalid_argument("Input tensor passed to Pad is not defined.");
+        }
+
+        cv::Mat input_mat = xt::utils::image::tensor_to_mat_local(input_tensor);
+
+        // 2. --- Apply Padding using cv::copyMakeBorder ---
+        cv::Mat padded_mat;
+
+        // The fill value needs to be converted to a cv::Scalar.
+        // If the mat has 3 channels, the scalar should have 3 identical values.
+        cv::Scalar cv_fill_value;
+        if (input_mat.channels() == 3) {
+            cv_fill_value = cv::Scalar(fill_value_, fill_value_, fill_value_);
+        } else {
+            cv_fill_value = cv::Scalar(fill_value_);
+        }
+
+        cv::copyMakeBorder(
+            input_mat,
+            padded_mat,
+            top_,
+            bottom_,
+            left_,
+            right_,
+            border_type_flag_,
+            cv_fill_value // This is only used for BORDER_CONSTANT
+        );
+
+        // 3. --- Convert back to LibTorch Tensor ---
+        torch::Tensor output_tensor = xt::utils::image::mat_to_tensor_local(padded_mat);
+
+        return output_tensor;
     }
 
-}
+} // namespace xt::transforms::image
