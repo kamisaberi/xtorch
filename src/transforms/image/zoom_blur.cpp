@@ -1,6 +1,44 @@
 #include "include/transforms/image/zoom_blur.h"
 
 
+
+// #include "transforms/image/zoom_blur.h"
+// #include <iostream>
+//
+// int main() {
+//     // 1. Create a dummy image tensor with distinct features
+//     torch::Tensor image = torch::zeros({3, 224, 224});
+//     // Add some "stars" to see the radial blur effect
+//     image.index_put_({torch::indexing::Slice(), 50, 50}, 1.0);
+//     image.index_put_({torch::indexing::Slice(), 100, 180}, 1.0);
+//     image.index_put_({torch::indexing::Slice(), 180, 80}, 1.0);
+//
+//     // 2. Instantiate the transform with a noticeable zoom factor
+//     xt::transforms::image::ZoomBlur blurer(
+//         /*max_zoom=*/1.8f,
+//         /*num_steps=*/10
+//     );
+//
+//     // 3. Apply the transform
+//     std::any result_any = blurer.forward({image});
+//     torch::Tensor blurred_image = std::any_cast<torch::Tensor>(result_any);
+//
+//     // 4. Check the output
+//     std::cout << "Original image shape: " << image.sizes() << std::endl;
+//     std::cout << "Zoom-blurred image shape: " << blurred_image.sizes() << std::endl;
+//
+//     // You could save the original and blurred images to see the effect.
+//     // The individual white "star" pixels will be blurred into streaks radiating
+//     // from the center of the image.
+//     // cv::Mat original_mat = xt::utils::image::tensor_to_mat_8u(image);
+//     // cv::imwrite("original_for_zoom.png", original_mat);
+//     //
+//     // cv::Mat blurred_mat = xt::utils::image::tensor_to_mat_8u(blurred_image);
+//     // cv::imwrite("zoom_blurred_image.png", blurred_mat);
+//
+//     return 0;
+// }
+
 namespace xt::transforms::image {
 
     ZoomBlur::ZoomBlur() : max_zoom_(1.5f), num_steps_(5) {}
