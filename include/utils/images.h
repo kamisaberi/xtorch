@@ -14,5 +14,6 @@ namespace xt::utils::image
     torch::Tensor mat_to_tensor_local(const cv::Mat& mat);
     cv::Mat tensor_to_mat_8u(torch::Tensor tensor);
     cv::Mat tensor_to_mat_8u(torch::Tensor tensor);
+    cv::Mat tensor_to_mat_float(torch::Tensor tensor);
     torch::Tensor mat_to_tensor_float(const cv::Mat& mat);
 }

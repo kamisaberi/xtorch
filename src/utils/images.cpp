@@ -95,6 +95,18 @@ namespace xt::utils::image
         return mat;
     }
 
+    cv::Mat tensor_to_mat_float(torch::Tensor tensor)
+    {
+        tensor = tensor.squeeze().detach().clone(); // Remove channel/batch dims
+
+        // Convert float tensor [0, 1] to uint8 tensor [0, 255]
+        tensor = tensor.mul(255).clamp(0, 255).to(torch::kU8);
+
+        cv::Mat mat(tensor.size(0), tensor.size(1), CV_32F);
+        std::memcpy(mat.data, tensor.data_ptr(), sizeof(torch::kU8) * tensor.numel());
+        return mat;
+    }
+
 
     torch::Tensor mat_to_tensor_float(const cv::Mat& mat)
     {
