@@ -2,6 +2,48 @@
 
 
 
+// #include "transforms/image/noise_injection.h"
+// #include <iostream>
+//
+// int main() {
+//     // 1. Create a dummy image tensor (a solid gray image)
+//     torch::Tensor image = torch::ones({3, 100, 100}) * 0.5;
+//
+//     // --- Example 1: Add Gaussian Noise ---
+//     std::cout << "--- Adding Gaussian Noise ---" << std::endl;
+//     xt::transforms::image::NoiseInjection gaussian_noiser("gaussian", {0.0, 0.15});
+//
+//     torch::Tensor gaussian_noisy_image = std::any_cast<torch::Tensor>(gaussian_noiser.forward({image}));
+//
+//     std::cout << "Original image mean: " << image.mean().item<float>() << std::endl;
+//     std::cout << "Noisy image mean (Gaussian): " << gaussian_noisy_image.mean().item<float>() << " (should be ~0.5)" << std::endl;
+//     std::cout << "Noisy image std (Gaussian): " << gaussian_noisy_image.std().item<float>() << " (should be ~0.15)" << std::endl;
+//
+//
+//     // --- Example 2: Add Uniform Noise ---
+//     std::cout << "\n--- Adding Uniform Noise ---" << std::endl;
+//     // Add noise uniformly from [-0.2, 0.2]
+//     xt::transforms::image::NoiseInjection uniform_noiser("uniform", {-0.2, 0.2});
+//
+//     torch::Tensor uniform_noisy_image = std::any_cast<torch::Tensor>(uniform_noiser.forward({image}));
+//
+//     std::cout << "Original image mean: " << image.mean().item<float>() << std::endl;
+//     std::cout << "Noisy image mean (Uniform): " << uniform_noisy_image.mean().item<float>() << " (should be ~0.5)" << std::endl;
+//     // Check the min and max to see the effect of the uniform noise
+//     std::cout << "Noisy image min (Uniform): " << uniform_noisy_image.min().item<float>() << " (should be ~0.3)" << std::endl;
+//     std::cout << "Noisy image max (Uniform): " << uniform_noisy_image.max().item<float>() << " (should be ~0.7)" << std::endl;
+//
+//
+//     // You could save the images to see the different noise textures.
+//     // cv::Mat g_mat = xt::utils::image::tensor_to_mat_8u(gaussian_noisy_image);
+//     // cv::imwrite("gaussian_noise_injected.png", g_mat);
+//     //
+//     // cv::Mat u_mat = xt::utils::image::tensor_to_mat_8u(uniform_noisy_image);
+//     // cv::imwrite("uniform_noise_injected.png", u_mat);
+//
+//     return 0;
+// }
+
 namespace xt::transforms::image {
 
     NoiseInjection::NoiseInjection() : noise_type_("gaussian"), params_({0.0, 0.1}) {}
