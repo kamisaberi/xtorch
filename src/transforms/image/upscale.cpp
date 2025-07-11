@@ -1,6 +1,37 @@
 #include "include/transforms/image/upscale.h"
 
-
+// #include "transforms/image/upscale.h"
+// #include <iostream>
+//
+// int main() {
+//     // 1. Create a dummy image tensor of size [3, 100, 150]
+//     torch::Tensor image = torch::rand({3, 100, 150});
+//
+//     std::cout << "Original image shape: " << image.sizes() << std::endl;
+//
+//     // --- Example 1: Double the size ---
+//     xt::transforms::image::Upscale upscaler_2x(2.0, "cubic");
+//
+//     torch::Tensor upscaled_2x_image = std::any_cast<torch::Tensor>(upscaler_2x.forward({image}));
+//
+//     std::cout << "\n--- Upscaled Image (2x) ---" << std::endl;
+//     std::cout << "Upscaled image shape: " << upscaled_2x_image.sizes() << std::endl;
+//     // New H = 100 * 2.0 = 200. New W = 150 * 2.0 = 300.
+//     // Expected output: [3, 200, 300]
+//
+//
+//     // --- Example 2: Upscale by 3.5x ---
+//     xt::transforms::image::Upscale upscaler_3_5x(3.5, "linear");
+//
+//     torch::Tensor upscaled_3_5x_image = std::any_cast<torch::Tensor>(upscaler_3_5x.forward({image}));
+//
+//     std::cout << "\n--- Upscaled Image (3.5x) ---" << std::endl;
+//     std::cout << "Upscaled image shape: " << upscaled_3_5x_image.sizes() << std::endl;
+//     // New H = 100 * 3.5 = 350. New W = 150 * 3.5 = 525.
+//     // Expected output: [3, 350, 525]
+//
+//     return 0;
+// }
 namespace xt::transforms::image {
 
     Upscale::Upscale() : scale_factor_(2.0), interpolation_flag_(cv::INTER_CUBIC) {}
