@@ -1,5 +1,44 @@
 #include "include/transforms/image/piecewise_affine.h"
 
+//
+// #include "transforms/image/piecewise_affine.h"
+// #include <iostream>
+//
+// int main() {
+//     // 1. Create a dummy image tensor with a grid pattern to visualize the distortion
+//     torch::Tensor image = torch::zeros({3, 224, 224});
+//     for (int i = 0; i < 224; i += 20) {
+//         image.slice(1, i, i + 5).index_put_({torch::indexing::Slice()}, 1.0); // Horizontal lines
+//         image.slice(2, i, i + 5).index_put_({torch::indexing::Slice()}, 1.0); // Vertical lines
+//     }
+//
+//     // 2. Instantiate the transform
+//     // A 5x5 grid of points with a moderate distortion scale of 5% of the image size.
+//     xt::transforms::image::PiecewiseAffine transformer(
+//         /*scale=*/0.05f,
+//         /*nb_rows=*/5,
+//         /*nb_cols=*/5,
+//         /*p=*/1.0f // Apply every time for demo
+//     );
+//
+//     // 3. Apply the transform
+//     std::any result_any = transformer.forward({image});
+//     torch::Tensor distorted_image = std::any_cast<torch::Tensor>(result_any);
+//
+//     // 4. Check the output
+//     std::cout << "Original image shape: " << image.sizes() << std::endl;
+//     std::cout << "Distorted image shape: " << distorted_image.sizes() << std::endl;
+//
+//     // You could save the original and distorted images to see the effect.
+//     // The straight lines of the grid will become wavy and distorted in a localized manner.
+//     // cv::Mat original_mat = xt::utils::image::tensor_to_mat_8u(image);
+//     // cv::imwrite("original_grid_for_piecewise.png", original_mat);
+//     //
+//     // cv::Mat distorted_mat = xt::utils::image::tensor_to_mat_8u(distorted_image);
+//     // cv::imwrite("distorted_piecewise.png", distorted_mat);
+//
+//     return 0;
+// }
 
 namespace xt::transforms::image {
 
