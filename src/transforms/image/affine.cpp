@@ -1,5 +1,36 @@
 #include "include/transforms/image/affine.h"
 
+
+
+#include "transforms/image/affine.h"
+#include <iostream>
+//
+// int main() {
+//     // 1. Create a dummy image
+//     torch::Tensor image = torch::zeros({3, 200, 200});
+//     // Add a rectangle to visualize the transformation
+//     image.slice(1, 75, 125).slice(2, 75, 125) = 1.0;
+//
+//     // 2. Instantiate the transform
+//     // Rotate 30 degrees, scale down to 75%, no translation or shear
+//     xt::transforms::image::Affine transformer(30.0, {0.0, 0.0}, 0.75, 0.0);
+//
+//     // 3. Apply the transform
+//     std::any result_any = transformer.forward({image});
+//     torch::Tensor transformed_image = std::any_cast<torch::Tensor>(result_any);
+//
+//     // 4. Check the output
+//     std::cout << "Original image shape: " << image.sizes() << std::endl;
+//     std::cout << "Transformed image shape: " << transformed_image.sizes() << std::endl;
+//
+//     // You could save the output image to see the rotated, smaller rectangle
+//     // cv::Mat output_mat = xt::utils::image::tensor_to_mat_local(transformed_image);
+//     // cv::imwrite("affine_transformed.png", output_mat * 255);
+//
+//     return 0;
+// }
+
+
 namespace xt::transforms::image {
 
     // Default constructor: identity transformation
