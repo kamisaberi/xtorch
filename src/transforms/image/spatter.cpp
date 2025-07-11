@@ -1,5 +1,35 @@
 #include "include/transforms/image/spatter.h"
 
+// #include "transforms/image/spatter.h"
+// #include <iostream>
+//
+// int main() {
+//     // 1. Create a dummy image tensor with a gradient to see the effect clearly
+//     torch::Tensor image = torch::linspace(0, 1, 200).view({1, -1}).repeat({3, 200, 1});
+//
+//     std::cout << "Original image std dev: " << image.std().item<float>() << std::endl;
+//
+//     // 2. Instantiate the transform to add spatter/speckle noise.
+//     // A sigma of 0.2 will create a noticeable effect.
+//     xt::transforms::image::Spatter spatterer(0.0, 0.2);
+//
+//     // 3. Apply the transform
+//     std::any result_any = spatterer.forward({image});
+//     torch::Tensor spattered_image = std::any_cast<torch::Tensor>(result_any);
+//
+//     // 4. Check the output
+//     std::cout << "Spattered image shape: " << spattered_image.sizes() << std::endl;
+//     std::cout << "Spattered image std dev: " << spattered_image.std().item<float>() << std::endl;
+//     // The standard deviation should be higher than the original.
+//
+//     // You can save the output to see the effect. The noise will be more intense
+//     // in the brighter parts of the gradient (right side) and less intense in the
+//     // darker parts (left side).
+//     // cv::Mat output_mat = xt::utils::image::tensor_to_mat_8u(spattered_image);
+//     // cv::imwrite("spatter_image.png", output_mat);
+//
+//     return 0;
+// }
 
 namespace xt::transforms::image {
 
