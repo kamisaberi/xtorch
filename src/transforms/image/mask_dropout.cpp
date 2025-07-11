@@ -1,5 +1,47 @@
 #include "include/transforms/image/mask_dropout.h"
 
+// #include "transforms/image/mask_dropout.h"
+// #include <iostream>
+//
+// int main() {
+//     // 1. Create a dummy image and a mask
+//     torch::Tensor image = torch::ones({3, 100, 100}); // A solid white image
+//     torch::Tensor mask = torch::zeros({1, 100, 100}, torch::kInt8);
+//     // Create a circular foreground mask in the center
+//     auto y = torch::arange(100).view({-1, 1});
+//     auto x = torch::arange(100);
+//     auto dist_from_center = torch::sqrt(torch::pow(y - 50, 2) + torch::pow(x - 50, 2));
+//     mask.masked_fill_(dist_from_center < 30, 1);
+//
+//     std::cout << "Original image mean: " << image.mean().item<float>() << std::endl;
+//
+//     // 2. Instantiate the transform
+//     // Drop 30% of the pixels within the mask, filling with a value of 0.2 (dark gray).
+//     // Apply this with a 100% probability for the demo.
+//     xt::transforms::image::MaskDropout dropper(
+//         /*max_objects=*/1,
+//         /*p=*/1.0f,
+//         /*holes_nb=*/1,
+//         /*mask_fill_value=*/0,
+//         /*p_replace=*/0.3f
+//     );
+//
+//     // 3. Apply the transform
+//     std::any result_any = dropper.forward({image, mask});
+//     torch::Tensor dropped_image = std::any_cast<torch::Tensor>(result_any);
+//
+//     // 4. Check the output
+//     std::cout << "Image with mask dropout shape: " << dropped_image.sizes() << std::endl;
+//     // The mean value should be lower than the original's 1.0, because we dropped pixels.
+//     std::cout << "Image with mask dropout mean: " << dropped_image.mean().item<float>() << std::endl;
+//
+//     // You could save the output image to see the "peppered" holes inside the
+//     // circular region, while the background remains untouched.
+//     // cv::Mat output_mat = xt::utils::image::tensor_to_mat_8u(dropped_image);
+//     // cv::imwrite("mask_dropout_image.png", output_mat);
+//
+//     return 0;
+// }
 
 namespace xt::transforms::image {
 
