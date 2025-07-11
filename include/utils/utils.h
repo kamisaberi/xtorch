@@ -37,6 +37,7 @@
 #include "videos.h"      // String utility functions
 
 #include "path.h"      // String utility functions
+#include "rabdom.h"      // String utility functions
 
 /*
  * Author: Kamran Saberifard
