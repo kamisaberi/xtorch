@@ -1,5 +1,34 @@
 #include "include/transforms/image/pixel_dropout.h"
 
+// #include "transforms/image/pixel_dropout.h"
+// #include <iostream>
+//
+// int main() {
+//     // 1. Create a dummy image tensor (a solid gray image)
+//     torch::Tensor image = torch::ones({3, 100, 100}) * 0.8;
+//
+//     std::cout << "Original image mean: " << image.mean().item<float>() << std::endl;
+//     // Expected output: 0.8
+//
+//     // 2. Instantiate the transform to drop 20% of pixels and replace them with 0 (black).
+//     xt::transforms::image::PixelDropout dropper(0.20, 0.0f);
+//
+//     // 3. Apply the transform
+//     std::any result_any = dropper.forward({image});
+//     torch::Tensor dropped_image = std::any_cast<torch::Tensor>(result_any);
+//
+//     // 4. Check the output
+//     std::cout << "Image with pixel dropout shape: " << dropped_image.sizes() << std::endl;
+//
+//     // The mean should be lower now. Approximately 0.8 * (1 - 0.2) = 0.64
+//     std::cout << "Image with pixel dropout mean: " << dropped_image.mean().item<float>() << std::endl;
+//
+//     // You could save the output image to see the "salt-and-pepper" like noise.
+//     // cv::Mat output_mat = xt::utils::image::tensor_to_mat_8u(dropped_image);
+//     // cv::imwrite("pixel_dropout_image.png", output_mat);
+//
+//     return 0;
+// }
 
 namespace xt::transforms::image {
 
