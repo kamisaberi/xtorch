@@ -1,6 +1,47 @@
 #include "include/transforms/image/mix_up.h"
 
 
+
+// #include "transforms/image/mixup.h"
+// #include <iostream>
+//
+// int main() {
+//     // 1. Create a dummy batch of data
+//     int batch_size = 4;
+//     int num_classes = 10;
+//
+//     // Create visually distinct images for the demo
+//     torch::Tensor image_a = torch::ones({1, 3, 32, 32}); // White
+//     torch::Tensor image_b = torch::zeros({1, 3, 32, 32}); // Black
+//     torch::Tensor images = torch::cat({image_a, image_b, image_a, image_b}, 0);
+//
+//     torch::Tensor labels = torch::tensor({0, 1, 0, 1}, torch::kLong);
+//
+//     std::cout << "Original labels: " << labels << std::endl;
+//     std::cout << "Mean of first image (before mixup): " << images[0].mean().item<float>() << std::endl;
+//
+//     // 2. Instantiate the Mixup transform
+//     xt::transforms::image::Mixup mixup_transform(0.4f, /*p=*/1.0f); // Apply every time for demo
+//
+//     // 3. Apply the transform to the batch
+//     auto result_any = mixup_transform.forward({images, labels});
+//     auto result_pair = std::any_cast<std::pair<torch::Tensor, torch::Tensor>>(result_any);
+//
+//     torch::Tensor mixed_images = result_pair.first;
+//     torch::Tensor mixed_labels = result_pair.second;
+//
+//     // 4. Check the output
+//     std::cout << "\nShape of mixed images: " << mixed_images.sizes() << std::endl;
+//     std::cout << "Shape of mixed labels: " << mixed_labels.sizes() << std::endl; // Should be [B, NumClasses]
+//     std::cout << "Mean of first image (after mixup): " << mixed_images[0].mean().item<float>() << std::endl;
+//     std::cout << "Mixed labels (soft labels):\n" << mixed_labels << std::endl;
+//     // Each row in the mixed_labels tensor will have two non-zero values that sum to 1.0
+//     // The mean of the first image will no longer be 1.0, but some value in between,
+//     // as it has been mixed with another image from the batch.
+//
+//     return 0;
+// }
+
 namespace xt::transforms::image {
 
     Mixup::Mixup() : alpha_(0.4f), p_(0.5f) {}
