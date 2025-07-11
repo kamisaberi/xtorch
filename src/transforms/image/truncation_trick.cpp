@@ -1,5 +1,62 @@
 #include "include/transforms/image/truncation_trick.h"
 
+//
+// #include "transforms/general/truncation_trick.h"
+// #include <iostream>
+//
+// // --- Dummy Mapping Network for Demonstration ---
+// struct MappingNetwork : torch::nn::Module {
+//     torch::nn::Linear layer;
+//     MappingNetwork(int z_dim, int w_dim) : layer(z_dim, w_dim) {
+//         register_module("layer", layer);
+//     }
+//     torch::Tensor forward(torch::Tensor z) {
+//         return layer->forward(z);
+//     }
+// };
+//
+// int main() {
+//     // --- 1. Setup ---
+//     int batch_size = 4;
+//     int z_dim = 512;
+//     int w_dim = 512;
+//
+//     // --- 2. Pre-compute or load the average latent vector (w_avg) ---
+//     // In a real scenario, you would calculate this by running thousands of
+//     // random z vectors through your mapping network and averaging the results.
+//     // For this demo, we'll just create a dummy one.
+//     torch::Tensor w_avg = torch::randn({1, w_dim}) * 0.1; // Typically close to zero
+//
+//     // --- 3. Instantiate the transform with the desired truncation level ---
+//     double truncation_psi = 0.7;
+//     xt::transforms::general::TruncationTrick truncator(w_avg, truncation_psi);
+//
+//     // --- 4. Simulate a generation step ---
+//     MappingNetwork mapping_network(z_dim, w_dim);
+//     torch::Tensor z = torch::randn({batch_size, z_dim}); // New random codes
+//     torch::Tensor w = mapping_network.forward(z);        // Map to style space
+//
+//     std::cout << "Original distance from avg (L2 norm): "
+//               << torch::linalg::norm(w - w_avg, c10::nullopt, c10::IntArrayRef({1})).mean().item<float>()
+//               << std::endl;
+//
+//     // --- 5. Apply the TruncationTrick ---
+//     std::any result_any = truncator.forward({w});
+//     torch::Tensor w_truncated = std::any_cast<torch::Tensor>(result_any);
+//
+//     // --- 6. Check the output ---
+//     std::cout << "Truncated distance from avg (L2 norm): "
+//               << torch::linalg::norm(w_truncated - w_avg, c10::nullopt, c10::IntArrayRef({1})).mean().item<float>()
+//               << std::endl;
+//     // The truncated distance should be smaller than the original distance by a factor of ~psi.
+//
+//     std::cout << "\nShape of original latents:    " << w.sizes() << std::endl;
+//     std::cout << "Shape of truncated latents: " << w_truncated.sizes() << std::endl;
+//
+//     // Now you would feed `w_truncated` into the GAN's synthesis network to generate high-quality images.
+//
+//     return 0;
+// }
 
 namespace xt::transforms::general {
 
