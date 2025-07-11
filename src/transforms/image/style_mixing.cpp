@@ -1,5 +1,58 @@
 #include "include/transforms/image/style_mixing.h"
 
+// #include "transforms/general/style_mixing.h"
+// #include <iostream>
+//
+// // --- Dummy Mapping Network for Demonstration ---
+// struct MappingNetwork : torch::nn::Module {
+//     torch::nn::Linear layer;
+//     MappingNetwork(int z_dim, int w_dim) : layer(z_dim, w_dim) {
+//         register_module("layer", layer);
+//     }
+//     torch::Tensor forward(torch::Tensor z) {
+//         return layer->forward(z);
+//     }
+// };
+//
+// int main() {
+//     // --- 1. Setup ---
+//     int batch_size = 4;
+//     int z_dim = 512;
+//     int w_dim = 512;
+//     int n_layers = 14; // For a 256x256 StyleGAN generator
+//
+//     // --- 2. Create the transform ---
+//     xt::transforms::general::StyleMixing mixer(0.9f, n_layers);
+//
+//     // --- 3. Simulate a training step ---
+//     // Create a dummy mapping network
+//     MappingNetwork mapping_network(z_dim, w_dim);
+//
+//     // Generate two batches of random latent codes (z-space)
+//     torch::Tensor z1 = torch::randn({batch_size, z_dim});
+//     torch::Tensor z2 = torch::randn({batch_size, z_dim});
+//
+//     // Map them to the style space (w-space)
+//     torch::Tensor w1 = mapping_network.forward(z1);
+//     torch::Tensor w2 = mapping_network.forward(z2);
+//
+//     std::cout << "Shape of input style vectors (w1, w2): " << w1.sizes() << std::endl;
+//
+//     // --- 4. Apply the StyleMixing transform ---
+//     // This takes the two style vectors and creates the mixed input for the generator.
+//     std::any result_any = mixer.forward({w1, w2});
+//     torch::Tensor mixed_styles = std::any_cast<torch::Tensor>(result_any);
+//
+//     // --- 5. Check the output ---
+//     std::cout << "Shape of mixed style tensor for generator: " << mixed_styles.sizes() << std::endl;
+//     // Expected output: [4, 14, 512]
+//
+//     // The `mixed_styles` tensor is now ready to be fed into the synthesis network of StyleGAN.
+//     // Each of the 4 samples in the batch will have a different random crossover point,
+//     // mixing the styles from `w1` and `w2` at different layers.
+//
+//     return 0;
+// }
 
 namespace xt::transforms::general {
 
