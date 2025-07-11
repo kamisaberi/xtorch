@@ -1,5 +1,60 @@
 #include "include/transforms/image/median_blur.h"
 
+//
+// #include "transforms/image/median_blur.h"
+// #include <iostream>
+//
+// // Helper function to add salt-and-pepper noise for the demo
+// torch::Tensor add_salt_pepper_noise(const torch::Tensor& image, float amount) {
+//     auto noisy_image = image.clone();
+//     int64_t num_pixels = image.numel() / image.size(0); // num pixels per channel
+//     int64_t num_salt = static_cast<int64_t>(num_pixels * amount / 2.0);
+//     int64_t num_pepper = static_cast<int64_t>(num_pixels * amount / 2.0);
+//
+//     for (int c = 0; c < image.size(0); ++c) {
+//         // Salt
+//         auto salt_coords_y = torch::randint(0, image.size(1), {num_salt});
+//         auto salt_coords_x = torch::randint(0, image.size(2), {num_salt});
+//         noisy_image.index_put_({c, salt_coords_y, salt_coords_x}, 1.0);
+//
+//         // Pepper
+//         auto pepper_coords_y = torch::randint(0, image.size(1), {num_pepper});
+//         auto pepper_coords_x = torch::randint(0, image.size(2), {num_pepper});
+//         noisy_image.index_put_({c, pepper_coords_y, pepper_coords_x}, 0.0);
+//     }
+//     return noisy_image;
+// }
+//
+// int main() {
+//     // 1. Create a dummy image and add salt-and-pepper noise
+//     torch::Tensor image = torch::ones({3, 200, 200}) * 0.5; // Solid gray
+//     torch::Tensor noisy_image = add_salt_pepper_noise(image, 0.1); // Add 10% noise
+//
+//     // 2. Instantiate the transform with a 5x5 kernel
+//     xt::transforms::image::MedianBlur blurer(5);
+//
+//     // 3. Apply the transform to the noisy image
+//     std::any result_any = blurer.forward({noisy_image});
+//     torch::Tensor denoised_image = std::any_cast<torch::Tensor>(result_any);
+//
+//     // 4. Check the output
+//     std::cout << "Original image shape: " << image.sizes() << std::endl;
+//     std::cout << "Denoised image shape: " << denoised_image.sizes() << std::endl;
+//
+//     // The mean of the denoised image should be very close to the original 0.5,
+//     // as the filter should have removed most of the salt (1.0) and pepper (0.0) pixels.
+//     std::cout << "Mean of original image: " << image.mean().item<float>() << std::endl;
+//     std::cout << "Mean of noisy image: " << noisy_image.mean().item<float>() << std::endl;
+//     std::cout << "Mean of denoised image: " << denoised_image.mean().item<float>() << std::endl;
+//
+//     // You could save the noisy and denoised images to see the effect.
+//     // cv::Mat noisy_mat = xt::utils::image::tensor_to_mat_8u(noisy_image);
+//     // cv::imwrite("noisy_image.png", noisy_mat);
+//     // cv::Mat denoised_mat = xt::utils::image::tensor_to_mat_8u(denoised_image);
+//     // cv::imwrite("denoised_image.png", denoised_mat);
+//
+//     return 0;
+// }
 
 namespace xt::transforms::image {
 
