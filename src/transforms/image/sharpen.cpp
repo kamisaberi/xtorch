@@ -1,5 +1,38 @@
 #include "include/transforms/image/sharpen.h"
 
+// #include "transforms/image/sharpen.h"
+// #include <iostream>
+//
+// int main() {
+//     // 1. Create a dummy image tensor. A slightly blurred image will show the effect best.
+//     torch::Tensor image = torch::rand({3, 200, 200});
+//     // Let's simulate a slightly soft image.
+//     // (This would require a blur transform, but we can just use the random one for demo)
+//
+//     // 2. Instantiate the transform for a strong sharpening effect.
+//     // alpha=0.8 means the final image is 80% sharpened effect.
+//     // lightness=1.5 means the sharpening itself is intense.
+//     xt::transforms::image::Sharpen sharpener(0.8f, 1.5f);
+//
+//     // 3. Apply the transform
+//     std::any result_any = sharpener.forward({image});
+//     torch::Tensor sharpened_image = std::any_cast<torch::Tensor>(result_any);
+//
+//     // 4. Check the output
+//     std::cout << "Original image shape: " << image.sizes() << std::endl;
+//     std::cout << "Sharpened image shape: " << sharpened_image.sizes() << std::endl;
+//
+//     // The standard deviation of the sharpened image should be higher than the original,
+//     // indicating increased contrast at the edges.
+//     std::cout << "Original std dev: " << image.std().item<float>() << std::endl;
+//     std::cout << "Sharpened std dev: " << sharpened_image.std().item<float>() << std::endl;
+//
+//     // You could save the output image to see the effect.
+//     // cv::Mat output_mat = xt::utils::image::tensor_to_mat_8u(sharpened_image);
+//     // cv::imwrite("sharpened_image.png", output_mat);
+//
+//     return 0;
+// }
 
 namespace xt::transforms::image {
 
