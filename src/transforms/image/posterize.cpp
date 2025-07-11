@@ -1,5 +1,40 @@
 #include "include/transforms/image/posterize.h"
 
+// #include "transforms/image/posterize.h"
+// #include <iostream>
+//
+// int main() {
+//     // 1. Create a dummy image tensor with a gradient to see the effect clearly.
+//     torch::Tensor image = torch::linspace(0, 1, 256).view({1, -1}).repeat({3, 256, 1});
+//
+//     // --- Example 1: Strong Posterization (2 bits) ---
+//     // This will result in only 2^2 = 4 color levels per channel.
+//     std::cout << "--- Posterizing to 2 bits ---" << std::endl;
+//     xt::transforms::image::Posterize posterizer_2_bits(2);
+//
+//     torch::Tensor posterized_2 = std::any_cast<torch::Tensor>(posterizer_2_bits.forward({image}));
+//
+//     // Find the unique color values in the output
+//     torch::Tensor unique_values_2 = std::get<0>(torch::unique_consecutive(posterized_2.flatten()));
+//     std::cout << "Number of unique values (2 bits): " << unique_values_2.size(0) << std::endl;
+//     std::cout << "Unique values: " << unique_values_2 << std::endl;
+//
+//     // --- Example 2: Mild Posterization (5 bits) ---
+//     // This will result in 2^5 = 32 color levels per channel.
+//     std::cout << "\n--- Posterizing to 5 bits ---" << std::endl;
+//     xt::transforms::image::Posterize posterizer_5_bits(5);
+//
+//     torch::Tensor posterized_5 = std::any_cast<torch::Tensor>(posterizer_5_bits.forward({image}));
+//
+//     torch::Tensor unique_values_5 = std::get<0>(torch::unique_consecutive(posterized_5.flatten()));
+//     std::cout << "Number of unique values (5 bits): " << unique_values_5.size(0) << std::endl;
+//
+//     // You could save the posterized gradient image to see the distinct color bands.
+//     // cv::Mat output_mat = xt::utils::image::tensor_to_mat_8u(posterized_2);
+//     // cv::imwrite("posterized_image.png", output_mat);
+//
+//     return 0;
+// }
 
 namespace xt::transforms::image {
 
