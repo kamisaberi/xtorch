@@ -1,6 +1,41 @@
 #include "include/transforms/signal/add_noise.h"
 
 
+//
+// #include "transforms/signal/add_noise.h"
+// #include <iostream>
+//
+// int main() {
+//     // 1. Create a dummy signal tensor (e.g., a clean sine wave)
+//     torch::Tensor t = torch::linspace(0, 4 * M_PI, 1000);
+//     torch::Tensor signal = torch::sin(t);
+//
+//     // Calculate the Power/Standard Deviation of the clean signal
+//     float original_power = signal.std().item<float>();
+//     std::cout << "Original signal power (std dev): " << original_power << std::endl;
+//
+//     // 2. Instantiate the transform to add noise with a random amplitude
+//     //    between 0.1 and 0.3.
+//     xt::transforms::signal::AddNoise noiser(0.1f, 0.3f, /*p=*/1.0f);
+//
+//     // 3. Apply the transform
+//     std::any result_any = noiser.forward({signal});
+//     torch::Tensor noisy_signal = std::any_cast<torch::Tensor>(result_any);
+//
+//     // 4. Check the output
+//     float noisy_power = noisy_signal.std().item<float>();
+//     std::cout << "Noisy signal power (std dev): " << noisy_power << std::endl;
+//     // The power of the noisy signal should be higher than the original.
+//
+//     std::cout << "\nOriginal signal shape: " << signal.sizes() << std::endl;
+//     std::cout << "Noisy signal shape:    " << noisy_signal.sizes() << std::endl;
+//
+//     // In a real application, you could plot the original and noisy signals
+//     // to visualize the effect.
+//
+//     return 0;
+// }
+
 namespace xt::transforms::signal {
 
     AddNoise::AddNoise() : min_amplitude_(0.001f), max_amplitude_(0.01f), p_(0.5f) {}
