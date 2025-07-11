@@ -157,6 +157,7 @@ file(GLOB_RECURSE OPTIMIZATION_FILES CONFIGURE_DEPENDS src/optimizations/*.cpp)
 file(GLOB_RECURSE TRAINER_FILES CONFIGURE_DEPENDS src/trainers/*.cpp)
 file(GLOB_RECURSE TRANSFORM_FILES CONFIGURE_DEPENDS src/transforms/*.cpp)
 file(GLOB_RECURSE UTILITY_FILES CONFIGURE_DEPENDS src/utils/*.cpp)
+file(GLOB_RECURSE MATH_FILES CONFIGURE_DEPENDS src/math/*.cpp)
 
 
 # Collect all header files from include directory
@@ -187,6 +188,7 @@ set(LIBRARY_SOURCE_FILES
         ${TRAINER_FILES}
         ${TRANSFORM_FILES}
         ${UTILITY_FILES}
+        ${MATH_FILES}
         path.cpp
 )
 
@@ -409,6 +411,8 @@ target_include_directories(xTorch
         ${SndFile_INCLUDE_DIRS}
         ${LIBTAR_INCLUDE_DIR}
         ${LIBZIP_INCLUDE_DIRS}  # Add this line
+        ${EIGEN3_INCLUDE_DIRS}
+
 )
 # ==============================================================================
 
