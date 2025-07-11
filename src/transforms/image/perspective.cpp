@@ -1,6 +1,43 @@
 #include "include/transforms/image/perspective.h"
 
-
+// #include "transforms/image/perspective.h"
+// #include <iostream>
+//
+// int main() {
+//     // 1. Create a dummy image tensor with a grid pattern to visualize the distortion
+//     torch::Tensor image = torch::zeros({3, 200, 200});
+//     for (int i = 0; i < 200; i += 20) {
+//         image.slice(1, i, i + 5).index_put_({torch::indexing::Slice()}, 1.0); // Horizontal lines
+//         image.slice(2, i, i + 5).index_put_({torch::indexing::Slice()}, 1.0); // Vertical lines
+//     }
+//
+//     // 2. Instantiate the transform
+//     // A distortion scale of 0.4 allows the corners to move up to 40% of the image size.
+//     // Apply every time for the demo (p=1.0).
+//     xt::transforms::image::Perspective transformer(
+//         /*distortion_scale=*/0.4f,
+//         /*p=*/1.0f
+//     );
+//
+//     // 3. Apply the transform
+//     std::any result_any = transformer.forward({image});
+//     torch::Tensor distorted_image = std::any_cast<torch::Tensor>(result_any);
+//
+//     // 4. Check the output
+//     std::cout << "Original image shape: " << image.sizes() << std::endl;
+//     std::cout << "Distorted image shape: " << distorted_image.sizes() << std::endl;
+//
+//     // You could save the original and distorted images to see the effect.
+//     // The straight grid lines will appear to converge or diverge as if
+//     // viewed from an angle.
+//     // cv::Mat original_mat = xt::utils::image::tensor_to_mat_8u(image);
+//     // cv::imwrite("original_grid_for_perspective.png", original_mat);
+//     //
+//     // cv::Mat distorted_mat = xt::utils::image::tensor_to_mat_8u(distorted_image);
+//     // cv::imwrite("distorted_perspective.png", distorted_mat);
+//
+//     return 0;
+// }
 
 namespace xt::transforms::image {
 
