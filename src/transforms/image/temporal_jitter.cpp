@@ -1,5 +1,49 @@
 #include "include/transforms/image/temporal_jitter.h"
-
+//
+// #include "transforms/video/temporal_jitter.h"
+// #include <iostream>
+//
+// int main() {
+//     // 1. Create a dummy video tensor [T, C, H, W]
+//     // Let's make each frame a different solid color to easily track the shift.
+//     int num_frames = 16;
+//     torch::Tensor video = torch::zeros({num_frames, 3, 32, 32});
+//     for (int t = 0; t < num_frames; ++t) {
+//         // Let's make frame 't' have a value of 't'.
+//         video[t] = static_cast<float>(t + 1);
+//     }
+//
+//     std::cout << "Original video's first frame mean: " << video[0].mean().item<float>() << std::endl;
+//     std::cout << "Original video's last frame mean: " << video[num_frames - 1].mean().item<float>() << std::endl;
+//
+//     // 2. Instantiate the transform with a max jitter of 3 frames
+//     xt::transforms::video::TemporalJitter jitterer(3);
+//
+//     // 3. Apply the transform
+//     std::any result_any = jitterer.forward({video});
+//     torch::Tensor jittered_video = std::any_cast<torch::Tensor>(result_any);
+//
+//     // 4. Check the output
+//     std::cout << "\n--- After Jitter ---" << std::endl;
+//     std::cout << "Jittered video shape is unchanged: " << jittered_video.sizes() << std::endl;
+//     std::cout << "Jittered video's first frame mean: " << jittered_video[0].mean().item<float>() << std::endl;
+//     std::cout << "Jittered video's last frame mean: " << jittered_video[num_frames - 1].mean().item<float>() << std::endl;
+//
+//     // Depending on the random offset, the first or last frame's mean value will have changed.
+//     // For example, if the offset was +2:
+//     // The new first frame is the original frame 2 (value=3), and the last two frames
+//     // are duplicates of the original last frame (value=16).
+//     // So the new first frame mean would be 3.0 and the new last frame mean would be 16.0.
+//     //
+//     // If the offset was -2:
+//     // The first two frames are duplicates of the original first frame (value=1).
+//     // The new last frame is the original frame 13 (value=14).
+//     // So the new first frame mean would be 1.0 and the new last frame mean would be 14.0.
+//
+//     return 0;
+// }
+//
+//
 
 namespace xt::transforms::video {
 
