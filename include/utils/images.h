@@ -13,6 +13,7 @@ namespace xt::utils::image {
     torch::Tensor resize(const torch::Tensor &tensor, const std::vector<int64_t> &size);
     cv::Mat tensor_to_mat_local(torch::Tensor tensor) ;
     torch::Tensor mat_to_tensor_local(const cv::Mat& mat) ;
+    inline cv::Mat tensor_to_mat_8u(torch::Tensor tensor);
 }
 
 
