@@ -1,5 +1,47 @@
 #include "include/transforms/image/motion_blur.h"
 
+// #include "transforms/image/motion_blur.h"
+// #include <iostream>
+//
+// int main() {
+//     // 1. Create a dummy image tensor with a distinct feature
+//     torch::Tensor image = torch::zeros({3, 200, 200});
+//     // Add a small white square in the center.
+//     image.slice(1, 95, 105).slice(2, 95, 105) = 1.0;
+//
+//     // --- Example 1: Horizontal Motion Blur ---
+//     // Angle = 0 degrees, kernel size = 15 pixels
+//     xt::transforms::image::MotionBlur horizontal_blurer(15, 0.0);
+//     torch::Tensor h_blurred = std::any_cast<torch::Tensor>(horizontal_blurer.forward({image}));
+//
+//     // You could save the output to see the horizontal blur trail
+//     // cv::Mat h_mat = xt::utils::image::tensor_to_mat_8u(h_blurred);
+//     // cv::imwrite("horizontal_blur.png", h_mat);
+//     std::cout << "Horizontal blur generated." << std::endl;
+//
+//     // --- Example 2: Diagonal Motion Blur ---
+//     // Angle = 45 degrees, kernel size = 21 pixels
+//     xt::transforms::image::MotionBlur diagonal_blurer(21, 45.0);
+//     torch::Tensor d_blurred = std::any_cast<torch::Tensor>(diagonal_blurer.forward({image}));
+//
+//     // cv::Mat d_mat = xt::utils::image::tensor_to_mat_8u(d_blurred);
+//     // cv::imwrite("diagonal_blur.png", d_mat);
+//     std::cout << "Diagonal blur generated." << std::endl;
+//
+//     // --- Example 3: Random Motion Blur ---
+//     // Angle = -1 means a random angle will be picked each time .forward() is called
+//     xt::transforms::image::MotionBlur random_blurer(11, -1.0);
+//     torch::Tensor r_blurred = std::any_cast<torch::Tensor>(random_blurer.forward({image}));
+//
+//     // cv::Mat r_mat = xt::utils::image::tensor_to_mat_8u(r_blurred);
+//     // cv::imwrite("random_blur.png", r_mat);
+//     std::cout << "Random blur generated." << std::endl;
+//
+//     return 0;
+// }
+
+
+
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
 #endif
