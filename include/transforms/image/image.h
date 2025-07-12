@@ -54,7 +54,6 @@
 #include "random_auto_contrast.h"
 #include "random_brightness.h"
 #include "random_brightness_contrast.h"
-#include "random_choice.h"
 #include "random_contrast.h"
 #include "random_crop.h"
 #include "random_crop_near_bbox.h"
