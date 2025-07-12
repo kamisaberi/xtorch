@@ -38,6 +38,7 @@
 
 #include "path.h"      // String utility functions
 #include "rabdom.h"      // String utility functions
+#include "audio.h"      // String utility functions
 
 /*
  * Author: Kamran Saberifard
