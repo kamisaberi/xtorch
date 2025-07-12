@@ -64,4 +64,4 @@ namespace xt::transforms::image {
         std::mt19937 gen_;
     };
 
-} // namespace xt::transforms::imagems::image
+} // namespace xt::transforms::image
