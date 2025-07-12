@@ -1,68 +1,139 @@
 #include "include/transforms/image/random_crop.h"
 
 
-namespace xt::transforms::image
-{
+// --- Example Main (for testing) ---
+// #include "transforms/image/random_crop.h"
+// #include <iostream>
+//
+// int main() {
+//     // 1. Create a large dummy image tensor (e.g., 3x500x400)
+//     torch::Tensor image = torch::randn({3, 500, 400});
+//     std::cout << "Original image shape: " << image.sizes() << std::endl;
+//
+//     // --- Example 1: Basic Random Crop ---
+//     std::cout << "\n--- Cropping to 224x224 ---" << std::endl;
+//     xt::transforms::image::RandomCrop cropper_224({224, 224});
+//
+//     torch::Tensor cropped_224 = std::any_cast<torch::Tensor>(cropper_224.forward({image}));
+//     std::cout << "Cropped shape: " << cropped_224.sizes() << std::endl;
+//
+//     // --- Example 2: Crop with Padding ---
+//     // Padding the original 500x400 image by 50px on each side makes it 600x500.
+//     // This increases the chance that the crop includes the original image edges.
+//     std::cout << "\n--- Cropping to 256x256 with 50px padding ---" << std::endl;
+//     xt::transforms::image::RandomCrop cropper_padded({256, 256}, /*padding=*/50);
+//
+//     torch::Tensor cropped_padded = std::any_cast<torch::Tensor>(cropper_padded.forward({image}));
+//     std::cout << "Cropped shape with padding: " << cropped_padded.sizes() << std::endl;
+//
+//     // --- Example 3: Cropping a smaller image with pad_if_needed ---
+//     torch::Tensor small_image = torch::randn({3, 100, 100});
+//     std::cout << "\n--- Cropping small image (100x100) to 128x128 ---" << std::endl;
+//     std::cout << "Original small image shape: " << small_image.sizes() << std::endl;
+//
+//     // This will pad the 100x100 image to 128x128 before "cropping" (returning the whole thing).
+//     xt::transforms::image::RandomCrop cropper_pad_needed({128, 128}, /*padding=*/0, /*pad_if_needed=*/true);
+//     torch::Tensor cropped_small = std::any_cast<torch::Tensor>(cropper_pad_needed.forward({small_image}));
+//     std::cout << "Shape after 'cropping' with pad_if_needed: " << cropped_small.sizes() << std::endl;
+//
+//     return 0;
+// }
 
-    RandomCrop::RandomCrop(std::vector<int64_t> size) : size(size) {
-        if (size.size() != 2) {
-            throw std::invalid_argument("Crop size must have exactly 2 elements (height, width).");
+
+namespace xt::transforms::image {
+
+    RandomCrop::RandomCrop() : RandomCrop({0, 0}) {}
+
+    RandomCrop::RandomCrop(
+        std::pair<int, int> size,
+        int padding,
+        bool pad_if_needed,
+        double fill)
+        : size_(size), padding_(padding), pad_if_needed_(pad_if_needed), fill_(fill) {
+
+        if (size_.first <= 0 || size_.second <= 0) {
+            // Note: In the default constructor case, this won't throw, but forward() will.
         }
-        if (size[0] <= 0 || size[1] <= 0) {
-            throw std::invalid_argument("Crop dimensions must be positive.");
+        if (padding_ < 0) {
+            throw std::invalid_argument("Padding must be a non-negative integer.");
         }
+
+        std::random_device rd;
+        gen_.seed(rd());
     }
 
-    // Operator: Randomly crop the input tensor to the target size
-    torch::Tensor RandomCrop::operator()(torch::Tensor input) {
-        int64_t input_dims = input.dim();
-        if (input_dims < 2) {
-            throw std::runtime_error("Input tensor must have at least 2 dimensions (e.g., [H, W]).");
+    std::pair<int, int> RandomCrop::get_crop_params(
+        const torch::Tensor& img,
+        const std::pair<int, int>& output_size,
+        std::mt19937& gen)
+    {
+        auto img_h = img.size(1);
+        auto img_w = img.size(2);
+        auto crop_h = output_size.first;
+        auto crop_w = output_size.second;
+
+        if (img_w < crop_w || img_h < crop_h) {
+            throw std::invalid_argument("Image is smaller than crop size. Consider using 'pad_if_needed'.");
         }
 
-        // Get input height and width (last two dimensions)
-        int64_t input_h = input.size(input_dims - 2);
-        int64_t input_w = input.size(input_dims - 1);
-        int64_t crop_h = size[0];
-        int64_t crop_w = size[1];
+        auto h_range = img_h - crop_h;
+        auto w_range = img_w - crop_w;
 
-        // Validate input size is large enough
-        if (input_h < crop_h || input_w < crop_w) {
-            throw std::runtime_error("Input dimensions must be >= crop size.");
+        std::uniform_int_distribution<int> top_dist(0, h_range);
+        std::uniform_int_distribution<int> left_dist(0, w_range);
+
+        return {top_dist(gen), left_dist(gen)};
+    }
+
+    auto RandomCrop::forward(std::initializer_list<std::any> tensors) -> std::any {
+        // --- Input Validation ---
+        std::vector<std::any> any_vec(tensors);
+        if (any_vec.empty()) {
+            throw std::invalid_argument("RandomCrop::forward received an empty list.");
+        }
+        torch::Tensor img = std::any_cast<torch::Tensor>(any_vec[0]);
+
+        if (!img.defined()) {
+            throw std::invalid_argument("Input tensor passed to RandomCrop is not defined.");
+        }
+        if (size_.first <= 0 || size_.second <= 0) {
+            throw std::invalid_argument("RandomCrop requires a positive crop size.");
         }
 
-        // Generate random start indices
-        int64_t h_start = torch::randint(0, input_h - crop_h + 1, {1}).item<int64_t>();
-        int64_t w_start = torch::randint(0, input_w - crop_w + 1, {1}).item<int64_t>();
-        int64_t h_end = h_start + crop_h;
-        int64_t w_end = w_start + crop_w;
+        // --- Step 1: Optional Padding ---
+        if (padding_ > 0) {
+            namespace F = torch::nn::functional;
+            // Pad is [left, right, top, bottom]
+            img = F::pad(img, F::PadFuncOptions({padding_, padding_, padding_, padding_})
+                               .mode(torch::kConstant)
+                               .value(fill_));
+        }
 
-        // Crop height (dim -2) and width (dim -1)
-        return input.slice(input_dims - 2, h_start, h_end)
-                .slice(input_dims - 1, w_start, w_end);
+        // --- Step 2: Handle `pad_if_needed` ---
+        auto img_h = img.size(1);
+        auto img_w = img.size(2);
+        auto crop_h = size_.first;
+        auto crop_w = size_.second;
+
+        if (pad_if_needed_ && (img_h < crop_h || img_w < crop_w)) {
+            auto pad_h = std::max(0L, crop_h - img_h);
+            auto pad_w = std::max(0L, crop_w - img_w);
+            namespace F = torch::nn::functional;
+            // Pad is [left, right, top, bottom]. Here we only pad right and bottom.
+            img = F::pad(img, F::PadFuncOptions({0, pad_w, 0, pad_h})
+                               .mode(torch::kConstant)
+                               .value(fill_));
+        }
+
+        // --- Step 3: Get random crop coordinates ---
+        auto [top, left] = get_crop_params(img, size_, gen_);
+        auto height = size_.first;
+        auto width = size_.second;
+
+        // --- Step 4: Perform the crop using tensor slicing ---
+        // slice(dim, start, end) where end is exclusive.
+        return img.slice(/*dim=*/1, /*start=*/top, /*end=*/top + height)
+                  .slice(/*dim=*/2, /*start=*/left, /*end=*/left + width);
     }
 
-
-
-    RandomCrop2::RandomCrop2(int height, int width)
-        : crop_height(height), crop_width(width) {
-    }
-
-    torch::Tensor RandomCrop2::operator()(const torch::Tensor &input_tensor) {
-        static thread_local std::mt19937 gen(std::random_device{}());
-
-        int C = input_tensor.size(0);
-        int H = input_tensor.size(1);
-        int W = input_tensor.size(2);
-
-        int y = std::uniform_int_distribution<>(0, H - crop_height)(gen);
-        int x = std::uniform_int_distribution<>(0, W - crop_width)(gen);
-
-        return input_tensor.slice(1, y, y + crop_height)
-                .slice(2, x, x + crop_width);
-    }
-
-
-
-
-}
+} // namespace xt::transforms::image
