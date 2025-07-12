@@ -1,9 +1,6 @@
 #pragma once
 
 #include "../common.h"
-#pragma once
-
-#include "../common.h"
 
 namespace xt::transforms::image {
 
