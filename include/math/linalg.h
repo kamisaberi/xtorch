@@ -28,4 +28,7 @@ namespace xt::linalg
     std::tuple<torch::Tensor, torch::Tensor, torch::Tensor> svd(
         const torch::Tensor& A,
         bool full_matrices = false);
+
+
+    torch::Tensor pinverse(const torch::Tensor& input, double rcond = 1e-15);
 } // namespace xt::linalg

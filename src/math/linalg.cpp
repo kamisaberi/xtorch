@@ -81,4 +81,60 @@ namespace xt::linalg
             eigen_to_tensor(Vh)
         );
     }
+
+
+    torch::Tensor pinverse(const torch::Tensor& input, double rcond) {
+        // --- 1. Input Validation ---
+        if (input.dim() != 2) {
+            throw std::invalid_argument("Input to pinverse must be a 2D matrix.");
+        }
+        // Ensure the tensor is on the CPU and is float32. Eigen works best with this.
+        auto input_cpu = input.to(torch::kCPU, torch::kFloat32).contiguous();
+
+        long rows = input_cpu.size(0);
+        long cols = input_cpu.size(1);
+        const float* tensor_ptr = input_cpu.data_ptr<float>();
+
+        // --- 2. Convert torch::Tensor to Eigen::Matrix ---
+        // Eigen::Map allows us to create an Eigen matrix that uses the tensor's memory
+        // without copying. We specify RowMajor because PyTorch tensors are row-major.
+        const Eigen::Map<const Eigen::Matrix<float, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor>>
+            eigen_matrix(tensor_ptr, rows, cols);
+
+        // --- 3. Compute SVD ---
+        // We use JacobiSVD which is robust for this kind of operation.
+        Eigen::JacobiSVD<Eigen::MatrixXf> svd(eigen_matrix, Eigen::ComputeThinU | Eigen::ComputeThinV);
+
+        // --- 4. Calculate Pseudo-Inverse of Singular Values ---
+        auto singular_values = svd.singularValues();
+        double tolerance = rcond * singular_values.maxCoeff();
+
+        Eigen::VectorXf singular_values_inv(singular_values.size());
+        for (long i = 0; i < singular_values.size(); ++i) {
+            if (singular_values(i) > tolerance) {
+                singular_values_inv(i) = 1.0f / singular_values(i);
+            } else {
+                singular_values_inv(i) = 0.0f;
+            }
+        }
+
+        // --- 5. Compute Pseudo-Inverse Matrix ---
+        // A_pinv = V * S_pinv * U^T
+        Eigen::MatrixXf result_eigen = svd.matrixV() * singular_values_inv.asDiagonal() * svd.matrixU().transpose();
+
+        // --- 6. Convert Eigen::Matrix back to torch::Tensor ---
+        // Create an empty tensor with the correct dimensions and options.
+        auto output_tensor = torch::empty({result_eigen.rows(), result_eigen.cols()}, input.options());
+        float* output_ptr = output_tensor.data_ptr<float>();
+
+        // Map the output tensor's memory and copy the Eigen result into it.
+        Eigen::Map<Eigen::Matrix<float, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor>>
+            output_map(output_ptr, result_eigen.rows(), result_eigen.cols());
+
+        output_map = result_eigen;
+
+        return output_tensor;
+    }
+
+
 } // namespace xt::linalg
