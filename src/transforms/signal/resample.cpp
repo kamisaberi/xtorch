@@ -1,5 +1,6 @@
 #include "include/transforms/signal/resample.h"
 
+#include <samplerate.h>
 
 
 /*

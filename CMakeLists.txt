@@ -258,8 +258,11 @@ find_package(OpenGL REQUIRED)
 
 find_package(Eigen3 REQUIRED)
 
+#find_package(SampleRate REQUIRED)
 
-
+# --- Find and link libsamplerate using pkg-config ---
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(SAMPLERATE REQUIRED samplerate)
 
 
 
@@ -412,6 +415,7 @@ target_include_directories(xTorch
         ${LIBTAR_INCLUDE_DIR}
         ${LIBZIP_INCLUDE_DIRS}  # Add this line
         ${EIGEN3_INCLUDE_DIRS}
+        ${SAMPLERATE_INCLUDE_DIRS}
 
 )
 # ==============================================================================
@@ -454,6 +458,8 @@ target_link_libraries(xTorch
         imgui_backend_glfw_gl3
         implot
         ${EIGEN3_INCLUDE_DIRS}
+        ${SAMPLERATE_LIBRARIES}
+#        SampleRate::samplerate
 )
 
 

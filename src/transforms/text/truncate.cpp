@@ -59,7 +59,7 @@ int main() {
 
 namespace xt::transforms::text {
 
-    Truncate::Truncate(int max_len, TruncationDirection trunc_dir)
+    Truncate::Truncate(int max_len, TruncationDirectionT trunc_dir)
             : max_len_(max_len), trunc_dir_(trunc_dir) {
         if (max_len_ < 0) {
             throw std::invalid_argument("Truncate max_len cannot be negative.");
@@ -81,7 +81,7 @@ namespace xt::transforms::text {
         try {
             std::vector<long> vec = std::any_cast<std::vector<long>>(input_any);
             if (vec.size() > max_len_) {
-                if (trunc_dir_ == TruncationDirection::RIGHT) {
+                if (trunc_dir_ == TruncationDirectionT::RIGHT) {
                     vec.resize(max_len_);
                 } else { // TruncationDirection::LEFT
                     vec.erase(vec.begin(), vec.begin() + (vec.size() - max_len_));
@@ -96,7 +96,7 @@ namespace xt::transforms::text {
         try {
             std::vector<std::string> vec = std::any_cast<std::vector<std::string>>(input_any);
             if (vec.size() > max_len_) {
-                if (trunc_dir_ == TruncationDirection::RIGHT) {
+                if (trunc_dir_ == TruncationDirectionT::RIGHT) {
                     vec.resize(max_len_);
                 } else { // TruncationDirection::LEFT
                     vec.erase(vec.begin(), vec.begin() + (vec.size() - max_len_));

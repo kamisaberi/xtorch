@@ -88,6 +88,7 @@ packages["LibTar"]="libtar-dev:libtar:libtar-devel:libtar-devel:libtar:libtar"
 packages["LibZip"]="libzip-dev:libzip:libzip-devel:libzip-devel:libzip:libzip"
 packages["GLFW3"]="libglfw3-dev:glfw-x11:glfw-devel:libglfw3-devel:glfw:glfw"
 packages["LibEigen3"]="libeigen3-dev:libeigen3-dev:libeigen3-dev:libeigen3-dev:libeigen3-dev"
+packages["Samplerate"]="libsamplerate0-dev:libeigen3-dev:libeigen3-dev:libeigen3-dev:libeigen3-dev"
 
 
 # --- Pre-Installation Checks (Your logic is good) ---

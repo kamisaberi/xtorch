@@ -60,7 +60,7 @@ int main() {
 
 namespace xt::transforms::text {
 
-    PadTransform::PadTransform(int max_len, long pad_id, PaddingDirection pad_dir, TruncationDirection trunc_dir)
+    PadTransform::PadTransform(int max_len, long pad_id, PaddingDirectionP pad_dir, TruncationDirectionP trunc_dir)
             : max_len_(max_len), pad_id_(pad_id), pad_dir_(pad_dir), trunc_dir_(trunc_dir) {
         if (max_len_ <= 0) {
             throw std::invalid_argument("PadTransform max_len must be positive.");
@@ -86,7 +86,7 @@ namespace xt::transforms::text {
 
         // 2. --- Truncation (if sequence is too long) ---
         if (output_vec.size() > max_len_) {
-            if (trunc_dir_ == TruncationDirection::RIGHT) {
+            if (trunc_dir_ == TruncationDirectionP::RIGHT) {
                 output_vec.resize(max_len_);
             } else { // TruncationDirection::LEFT
                 output_vec.erase(output_vec.begin(), output_vec.begin() + (output_vec.size() - max_len_));
@@ -96,7 +96,7 @@ namespace xt::transforms::text {
             // 3. --- Padding (if sequence is too short) ---
         else if (output_vec.size() < max_len_) {
             size_t num_pads = max_len_ - output_vec.size();
-            if (pad_dir_ == PaddingDirection::RIGHT) {
+            if (pad_dir_ == PaddingDirectionP::RIGHT) {
                 output_vec.insert(output_vec.end(), num_pads, pad_id_);
             } else { // PaddingDirection::LEFT
                 output_vec.insert(output_vec.begin(), num_pads, pad_id_);
