@@ -66,7 +66,9 @@ namespace xt::transforms::graph {
 
         // --- 2. Drop Edges ---
         auto keep_mask = torch::rand({num_edges}, x.options()) > drop_ratio_;
-        auto keep_indices = std::get<0>(torch::where(keep_mask));
+        // auto keep_indices = std::get<0>(torch::where(keep_mask));
+        auto keep_indices = torch::where(keep_mask)[0];
+
         auto remaining_edge_index = edge_index.index_select(/*dim=*/1, keep_indices);
 
         // --- 3. Add Edges ---

@@ -78,7 +78,9 @@ namespace xt::transforms::graph {
 
         // Select the columns (edges) from edge_index where the mask is true.
         // `torch::where` returns the indices of the true elements.
-        auto keep_indices = std::get<0>(torch::where(edge_mask));
+        // auto keep_indices = std::get<0>(torch::where(edge_mask));
+        auto keep_indices = torch::where(edge_mask)[0];
+
         auto new_edge_index = edge_index.index_select(/*dim=*/1, keep_indices);
 
         // --- 3. Return the new graph structure ---
