@@ -29,8 +29,8 @@ namespace xt::transforms::text {
         explicit PadTransform(
                 int max_len,
                 long pad_id = 0,
-                PaddingDirection pad_dir = PaddingDirection::RIGHT,
-                TruncationDirection trunc_dir = TruncationDirection::RIGHT
+                xt::transforms::text::PaddingDirection pad_dir = xt::transforms::text::PaddingDirection::RIGHT,
+                xt::transforms::text::TruncationDirection trunc_dir = xt::transforms::text::TruncationDirection::RIGHT
         );
 
         /**
@@ -45,8 +45,8 @@ namespace xt::transforms::text {
     private:
         int max_len_;
         long pad_id_;
-        PaddingDirection pad_dir_;
-        TruncationDirection trunc_dir_;
+        xt::transforms::text::PaddingDirection pad_dir_;
+        xt::transforms::text::TruncationDirection trunc_dir_;
     };
 
 } // namespace xt::transforms::text
