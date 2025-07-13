@@ -8,13 +8,6 @@
 
 namespace xt::transforms::text {
 
-    /**
-     * @brief Specifies the direction for truncation.
-     */
-    enum class TruncationDirection {
-        RIGHT, // Remove elements from the end of the sequence (default).
-        LEFT   // Remove elements from the beginning of the sequence.
-    };
 
 
     /**

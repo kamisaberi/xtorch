@@ -15,3 +15,26 @@
 #include <vector>
 #include <any>
 #include "../math/math.h"
+
+
+
+namespace xt::transforms::text
+{
+    /**
+    * @brief Specifies the direction for padding.
+    */
+    enum class PaddingDirection {
+        RIGHT, // Add padding to the end of the sequence.
+        LEFT   // Add padding to the beginning of the sequence.
+    };
+
+    /**
+     * @brief Specifies the direction for truncation.
+     */
+    enum class TruncationDirection {
+        RIGHT, // Remove elements from the end of the sequence.
+        LEFT   // Remove elements from the beginning of the sequence.
+    };
+
+
+}
