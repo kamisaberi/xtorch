@@ -1,5 +1,5 @@
 #include "include/transforms/graph/graph_diffusion.h"
-
+#include <unordered_set>
 
 // It's good practice to include utilities for sparse tensors if available.
 // Libtorch has some sparse support, but it can be limited. We'll use dense here
@@ -64,7 +64,7 @@ namespace xt::transforms::graph {
         auto options = x.options();
 
         // --- 2. Build Adjacency Matrix and Degree Vector ---
-        auto current_edge_index = edge_index;
+        torch::Tensor current_edge_index = edge_index;
         if (add_self_loops_) {
             auto self_loops = torch::arange(0, N, torch::kLong).to(device);
             self_loops = self_loops.unsqueeze(0).repeat({2, 1});
@@ -72,7 +72,6 @@ namespace xt::transforms::graph {
         }
 
         auto edge_values = torch::ones({current_edge_index.size(1)}, options);
-        // Note: For large graphs, this should be a sparse matrix.
         auto A = torch::zeros({N, N}, options);
         A.index_put_({current_edge_index[0], current_edge_index[1]}, edge_values);
 
@@ -81,20 +80,20 @@ namespace xt::transforms::graph {
         auto D_inv_sqrt_diag = torch::diag(D_inv_sqrt);
 
         // --- 3. Compute Normalized Laplacian ---
-        // L = I - D^(-1/2) * A * D^(-1/2)
         auto I = torch::eye(N, options);
         auto L = I - torch::mm(torch::mm(D_inv_sqrt_diag, A), D_inv_sqrt_diag);
 
         // --- 4. Approximate Diffusion Operator via Taylor Series ---
-        // P = exp(-beta * L) approx_equal_to sum_{i=0 to k} (-beta * L)^i / i!
-        torch::Tensor P = torch::zeros_like(L);
-        torch::Tensor L_pow_i = torch::eye(N, options); // L^0
-        double factorial_i = 1.0;
+        // P = exp(-beta * L) approx_equal_to sum_{i=0 to k-1} (-beta * L)^i / i!
+        // We calculate each term T_i = (-beta*L)^i / i! from the previous term T_{i-1}.
+        // T_i = T_{i-1} * (-beta*L) / i
+        torch::Tensor P = I.clone(); // P starts with the i=0 term (I)
+        torch::Tensor T_i = I.clone(); // T_0 = I
+        auto M = -beta_ * L;
 
-        for (int i = 0; i < k_; ++i) {
-            P += L_pow_i / factorial_i;
-            L_pow_i = torch::mm(L_pow_i, -beta_ * L);
-            if (i > 0) factorial_i *= i;
+        for (int i = 1; i < k_; ++i) {
+            T_i = torch::mm(T_i, M) / static_cast<double>(i);
+            P += T_i;
         }
 
         // --- 5. Apply Diffusion to Features ---
@@ -102,33 +101,48 @@ namespace xt::transforms::graph {
 
         // --- 6. Optionally Add New Edges ---
         auto new_edge_index = edge_index;
-        if (add_new_edges_threshold_ > 0.0) {
-            // Find entries in P above the threshold
+        if (add_new_edges_threshold_ > 0.0 && add_new_edges_threshold_ < 1.0) {
             auto diffused_adj = P.clone();
             diffused_adj.fill_diagonal_(0); // Remove self-loops from consideration
-            auto new_possible_edges = std::get<0>(torch::where(diffused_adj > add_new_edges_threshold_));
 
-            // To be safe, filter out edges that already exist
-            std::unordered_set<long long> existing_edges;
-            auto edge_index_cpu = edge_index.to(torch::kCPU).contiguous();
-            for(long i=0; i<edge_index.size(1); ++i) {
-                existing_edges.insert(
-                        edge_index_cpu[0][i].item<long>() * N + edge_index_cpu[1][i].item<long>()
-                );
-            }
+            // torch::where on a 2D tensor returns a std::vector of two tensors: {row_indices, col_indices}
+            auto new_indices_vec = torch::where(diffused_adj > add_new_edges_threshold_);
 
-            std::vector<torch::Tensor> edges_to_add_list;
-            for(long i=0; i<new_possible_edges.size(0); i += 2) {
-                long u = new_possible_edges[i].item<long>();
-                long v = new_possible_edges[i+1].item<long>();
-                if (existing_edges.find(u * N + v) == existing_edges.end()) {
-                    edges_to_add_list.push_back(torch::tensor({u, v}, torch::kLong));
+            if (!new_indices_vec.empty() && new_indices_vec[0].numel() > 0) {
+                auto u_indices = new_indices_vec[0];
+                auto v_indices = new_indices_vec[1];
+
+                // Filter out edges that already exist using a hash set.
+                std::unordered_set<long long> existing_edges;
+                auto edge_index_cpu = edge_index.to(torch::kCPU).contiguous();
+                auto u_existing_ptr = edge_index_cpu[0].data_ptr<long>();
+                auto v_existing_ptr = edge_index_cpu[1].data_ptr<long>();
+                for(long i = 0; i < edge_index.size(1); ++i) {
+                    existing_edges.insert(u_existing_ptr[i] * N + v_existing_ptr[i]);
                 }
-            }
 
-            if (!edges_to_add_list.empty()) {
-                auto edges_to_add_tensor = torch::stack(edges_to_add_list, 1).to(device);
-                new_edge_index = torch::cat({edge_index, edges_to_add_tensor}, 1);
+                std::vector<long> u_to_add;
+                std::vector<long> v_to_add;
+                auto u_new_cpu = u_indices.to(torch::kCPU).contiguous();
+                auto v_new_cpu = v_indices.to(torch::kCPU).contiguous();
+                auto u_new_ptr = u_new_cpu.data_ptr<long>();
+                auto v_new_ptr = v_new_cpu.data_ptr<long>();
+
+                for(long i = 0; i < u_indices.size(0); ++i) {
+                    long u = u_new_ptr[i];
+                    long v = v_new_ptr[i];
+                    if (existing_edges.find(u * N + v) == existing_edges.end()) {
+                        u_to_add.push_back(u);
+                        v_to_add.push_back(v);
+                    }
+                }
+
+                if (!u_to_add.empty()) {
+                    auto u_tensor = torch::tensor(u_to_add, torch::kLong);
+                    auto v_tensor = torch::tensor(v_to_add, torch::kLong);
+                    auto edges_to_add_tensor = torch::stack({u_tensor, v_tensor}).to(device);
+                    new_edge_index = torch::cat({edge_index, edges_to_add_tensor}, 1);
+                }
             }
         }
 
