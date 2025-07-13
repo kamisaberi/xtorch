@@ -1,34 +1,8 @@
 #include "include/transforms/graph/random_walk_subgraph.h"
-
-// ... inside forward method, after visited_nodes is populated ...
-// ... subgraph_nodes_tensor and new_x are created ...
-
-// --- 5. Extract and Re-index Subgraph Edges ---
-// Create a mapping from old node indices to new subgraph indices.
-// auto mapping = torch::full({num_nodes}, -1, torch::kLong).to(x.device());
-// mapping.index_put_({subgraph_nodes_tensor}, torch::arange(0, subgraph_nodes_tensor.numel(), torch::kLong).to(x.device()));
-//
-// // Filter edges where both source and destination are in the subgraph.
-// // This is a much cleaner way to build the mask.
-// auto node_mask = torch::zeros({num_nodes}, torch::kBool).to(x.device());
-// node_mask.index_fill_(0, subgraph_nodes_tensor, true);
-//
-// auto row = edge_index[0];
-// auto col = edge_index[1];
-// auto edge_keep_mask = node_mask.index({row}) & node_mask.index({col});
-//
-// auto kept_edges = edge_index.index_select(1, std::get<0>(torch::where(edge_keep_mask)));
-//
-// // Re-index the kept edges.
-// if (kept_edges.size(1) > 0) {
-// auto new_row = mapping.index({kept_edges[0]});
-// auto new_col = mapping.index({kept_edges[1]});
-// auto new_edge_index = torch::stack({new_row, new_col}, 0);
-// return std::vector<torch::Tensor>{new_x, new_edge_index};
-// } else {
-// auto new_edge_index = torch::empty({2, 0}, edge_index.options());
-// return std::vector<torch::Tensor>{new_x, new_edge_index};
-// }
+#include <numeric>
+#include <algorithm>
+#include <vector>
+#include <unordered_set>
 
 /*
 // Example Usage (goes in a main.cpp or test file)
@@ -106,12 +80,13 @@ namespace xt::transforms::graph {
         // --- 2. Build Adjacency List for Efficient Traversal ---
         std::vector<std::vector<long>> adj(num_nodes);
         auto edge_index_cpu = edge_index.to(torch::kCPU).contiguous();
+        auto row_ptr = edge_index_cpu[0].data_ptr<long>();
+        auto col_ptr = edge_index_cpu[1].data_ptr<long>();
         for(long i=0; i<edge_index.size(1); ++i) {
-            adj[edge_index_cpu[0][i].item<long>()].push_back(edge_index_cpu[1][i].item<long>());
+            adj[row_ptr[i]].push_back(col_ptr[i]);
         }
 
         // --- 3. Perform Random Walks ---
-        // Select starting nodes
         std::vector<long> all_nodes_vec(num_nodes);
         std::iota(all_nodes_vec.begin(), all_nodes_vec.end(), 0);
         std::shuffle(all_nodes_vec.begin(), all_nodes_vec.end(), random_engine_);
@@ -122,45 +97,33 @@ namespace xt::transforms::graph {
             visited_nodes.insert(current_node);
 
             for (int step = 0; step < walk_length_; ++step) {
-                if (adj[current_node].empty()) break; // Dead end
+                if (adj[current_node].empty()) break;
 
-                // Choose a random neighbor
                 std::uniform_int_distribution<size_t> dist(0, adj[current_node].size() - 1);
                 current_node = adj[current_node][dist(random_engine_)];
                 visited_nodes.insert(current_node);
             }
         }
 
-        // Convert the set of visited nodes to a sorted vector to create a mapping.
         std::vector<long> subgraph_nodes_vec(visited_nodes.begin(), visited_nodes.end());
-        std::sort(subgraph_nodes_vec.begin(), subgraph_nodes_vec.end());
         auto subgraph_nodes_tensor = torch::tensor(subgraph_nodes_vec, torch::kLong).to(x.device());
 
         // --- 4. Extract Subgraph Node Features ---
         auto new_x = x.index_select(0, subgraph_nodes_tensor);
 
         // --- 5. Extract and Re-index Subgraph Edges ---
-        // Create a mapping from old node indices to new subgraph indices.
         auto mapping = torch::full({num_nodes}, -1, torch::kLong).to(x.device());
         mapping.index_put_({subgraph_nodes_tensor}, torch::arange(0, subgraph_nodes_tensor.numel(), torch::kLong).to(x.device()));
 
-        // Filter edges where both source and destination are in the subgraph.
+        auto node_mask = torch::zeros({num_nodes}, torch::kBool).to(x.device());
+        node_mask.index_fill_(0, subgraph_nodes_tensor, true);
+
         auto row = edge_index[0];
         auto col = edge_index[1];
-        auto row_in_subgraph = torch::from_blob(
-                visited_nodes.count(row.data_ptr<long>()) ? (bool*)1 : (bool*)0,
-                row.sizes(),
-                torch::kBool
-        ); // This is a bit of a hack, better to iterate.
-        // A safer, more explicit way:
-        auto row_mask = torch::zeros({num_nodes}, torch::kBool).to(x.device());
-        row_mask.index_fill_(0, subgraph_nodes_tensor, true);
-        auto col_mask = row_mask; // Re-use for column
-        auto edge_keep_mask = row_mask.index({row}) & col_mask.index({col});
+        auto edge_keep_mask = node_mask.index({row}) & node_mask.index({col});
 
         auto kept_edges = edge_index.index_select(1, torch::where(edge_keep_mask)[0]);
 
-        // Re-index the kept edges.
         if (kept_edges.size(1) > 0) {
             auto new_row = mapping.index({kept_edges[0]});
             auto new_col = mapping.index({kept_edges[1]});
