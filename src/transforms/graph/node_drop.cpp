@@ -72,7 +72,9 @@ namespace xt::transforms::graph {
 
         // --- 2. Select Nodes to Keep ---
         auto keep_mask = torch::rand({num_nodes}, x.options()) > drop_rate_;
-        auto keep_indices = std::get<0>(torch::where(keep_mask));
+        // auto keep_indices = std::get<0>(torch::where(keep_mask));
+        auto keep_indices = torch::where(keep_mask)[0];
+
 
         if (keep_indices.numel() == 0) {
             // Avoid creating an empty graph, return a graph with one node.
@@ -95,8 +97,9 @@ namespace xt::transforms::graph {
         auto row_mask = keep_mask.index({row});
         auto col_mask = keep_mask.index({col});
         auto edge_keep_mask = row_mask & col_mask;
+        // auto keep_indices = torch::where(edge_mask)[0];
 
-        auto kept_edges = edge_index.index_select(1, std::get<0>(torch::where(edge_keep_mask)));
+        auto kept_edges = edge_index.index_select(1, torch::where(edge_keep_mask)[0]);
 
         // --- 6. Re-index Kept Edges ---
         if (kept_edges.size(1) > 0) {

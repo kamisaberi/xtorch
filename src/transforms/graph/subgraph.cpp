@@ -40,24 +40,30 @@ int main() {
 }
 */
 
-namespace xt::transforms::graph {
+namespace xt::transforms::graph
+{
+    Subgraph::Subgraph()
+    {
+    } // No parameters needed for this transform
 
-    Subgraph::Subgraph() {} // No parameters needed for this transform
-
-    auto Subgraph::forward(std::initializer_list<std::any> tensors) -> std::any {
+    auto Subgraph::forward(std::initializer_list<std::any> tensors) -> std::any
+    {
         // --- 1. Input Validation ---
         std::vector<std::any> any_vec(tensors);
-        if (any_vec.size() != 3) {
+        if (any_vec.size() != 3)
+        {
             throw std::invalid_argument("Subgraph expects 3 tensors: {node_features, edge_index, nodes_to_keep}.");
         }
         torch::Tensor x = std::any_cast<torch::Tensor>(any_vec[0]);
         torch::Tensor edge_index = std::any_cast<torch::Tensor>(any_vec[1]);
         torch::Tensor nodes_to_keep = std::any_cast<torch::Tensor>(any_vec[2]);
 
-        if (!x.defined() || !edge_index.defined() || !nodes_to_keep.defined()) {
+        if (!x.defined() || !edge_index.defined() || !nodes_to_keep.defined())
+        {
             throw std::invalid_argument("All input tensors must be defined.");
         }
-        if (nodes_to_keep.dim() != 1 || nodes_to_keep.dtype() != torch::kLong) {
+        if (nodes_to_keep.dim() != 1 || nodes_to_keep.dtype() != torch::kLong)
+        {
             throw std::invalid_argument("nodes_to_keep must be a 1D tensor of type long.");
         }
 
@@ -79,10 +85,11 @@ namespace xt::transforms::graph {
         auto col = edge_index[1];
         auto edge_keep_mask = node_mask.index({row}) & node_mask.index({col});
 
-        auto kept_edges = edge_index.index_select(1, std::get<0>(torch::where(edge_keep_mask)));
+        auto kept_edges = edge_index.index_select(1, torch::where(edge_keep_mask)[0]);
 
         // --- 5. Re-index Kept Edges ---
-        if (kept_edges.size(1) > 0) {
+        if (kept_edges.size(1) > 0)
+        {
             // Create a mapping from old node indices to new contiguous indices (0, 1, 2, ...).
             auto mapping = torch::full({num_nodes}, -1, torch::kLong).to(x.device());
             mapping.index_put_({nodes_to_keep}, torch::arange(0, nodes_to_keep.numel(), torch::kLong).to(x.device()));
@@ -92,11 +99,12 @@ namespace xt::transforms::graph {
             auto new_col = mapping.index({kept_edges[1]});
             auto new_edge_index = torch::stack({new_row, new_col}, 0);
             return std::vector<torch::Tensor>{new_x, new_edge_index};
-        } else {
+        }
+        else
+        {
             // If no edges remain, return an empty edge index tensor.
             auto new_edge_index = torch::empty({2, 0}, edge_index.options());
             return std::vector<torch::Tensor>{new_x, new_edge_index};
         }
     }
-
 } // namespace xt::transforms::graph

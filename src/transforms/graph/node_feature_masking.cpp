@@ -69,7 +69,9 @@ namespace xt::transforms::graph {
 
         // Create a mask for the feature dimensions (columns) to drop.
         auto drop_mask = torch::rand({num_features}, x.options()) < mask_rate_;
-        auto drop_indices = std::get<0>(torch::where(drop_mask));
+        // auto drop_indices = std::get<0>(torch::where(drop_mask));
+        auto drop_indices = torch::where(drop_mask)[0];
+
 
         if (drop_indices.numel() > 0) {
             // Use advanced indexing to set the selected columns to zero for all nodes.
