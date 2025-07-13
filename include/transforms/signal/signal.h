@@ -7,7 +7,6 @@
 #include "frequency_masking.h"
 #include "griffin_lim.h"
 #include "inverse_mel_scale.h"
-#include "mel_scale.h"
 #include "mel_spectrogram.h"
 #include "mfcc.h"
 #include "pitch_shift.h"
