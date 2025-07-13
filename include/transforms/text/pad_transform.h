@@ -4,6 +4,21 @@
 
 namespace xt::transforms::text {
 
+    /**
+     * @brief Specifies the direction for padding.
+     */
+    enum class PaddingDirectionP {
+        RIGHT, // Add padding to the end of the sequence.
+        LEFT   // Add padding to the beginning of the sequence.
+    };
+
+    /**
+     * @brief Specifies the direction for truncation.
+     */
+    enum class TruncationDirectionP {
+        RIGHT, // Remove elements from the end of the sequence.
+        LEFT   // Remove elements from the beginning of the sequence.
+    };
 
 
     /**
@@ -29,8 +44,8 @@ namespace xt::transforms::text {
         explicit PadTransform(
                 int max_len,
                 long pad_id = 0,
-                xt::transforms::text::PaddingDirection pad_dir = xt::transforms::text::PaddingDirection::RIGHT,
-                xt::transforms::text::TruncationDirection trunc_dir = xt::transforms::text::TruncationDirection::RIGHT
+                PaddingDirectionP pad_dir = PaddingDirectionP::RIGHT,
+                TruncationDirectionP trunc_dir = TruncationDirectionP::RIGHT
         );
 
         /**
@@ -45,8 +60,8 @@ namespace xt::transforms::text {
     private:
         int max_len_;
         long pad_id_;
-        xt::transforms::text::PaddingDirection pad_dir_;
-        xt::transforms::text::TruncationDirection trunc_dir_;
+        PaddingDirectionP pad_dir_;
+        TruncationDirectionP trunc_dir_;
     };
 
 } // namespace xt::transforms::text

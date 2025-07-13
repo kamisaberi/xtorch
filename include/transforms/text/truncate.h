@@ -8,6 +8,13 @@
 
 namespace xt::transforms::text {
 
+    /**
+     * @brief Specifies the direction for truncation.
+     */
+    enum class TruncationDirectionT {
+        RIGHT, // Remove elements from the end of the sequence (default).
+        LEFT   // Remove elements from the beginning of the sequence.
+    };
 
 
     /**
@@ -29,7 +36,7 @@ namespace xt::transforms::text {
          */
         explicit Truncate(
                 int max_len,
-                TruncationDirection trunc_dir = TruncationDirection::RIGHT
+                TruncationDirectionT trunc_dir = TruncationDirectionT::RIGHT
         );
 
         /**
@@ -44,7 +51,7 @@ namespace xt::transforms::text {
 
     private:
         int max_len_;
-        TruncationDirection trunc_dir_;
+        TruncationDirectionT trunc_dir_;
     };
 
 } // namespace xt::transforms::text
