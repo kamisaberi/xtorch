@@ -1,5 +1,4 @@
 #include "include/transforms/weather/dust_sand_clouds.h"
-
 #include <stdexcept>
 
 // --- Example Main (for testing) ---
@@ -89,8 +88,12 @@ namespace xt::transforms::weather {
         low_res_H = std::max<int64_t>(1, low_res_H);
         low_res_W = std::max<int64_t>(1, low_res_W);
 
-        // Create a seeded generator for reproducible results
-        auto generator = torch::make_generator<torch::CPUGenerator>(seed_);
+        // --- Start of fix ---
+        // Create a default generator instance. This is more robust across LibTorch versions.
+        torch::Generator generator;
+        // Set the seed for reproducible results.
+        generator.set_current_seed(seed_);
+        // --- End of fix ---
 
         // Create a small tensor of random values
         torch::Tensor noise = torch::rand({1, 1, low_res_H, low_res_W}, generator, image.options());
