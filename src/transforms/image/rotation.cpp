@@ -1,110 +1,137 @@
 #include "include/transforms/image/rotation.h"
 
+#include <cmath> // For std::abs, sin, cos
+
+// --- Example Main (for testing) ---
+// #include "transforms/image/rotation.h"
+// #include <iostream>
+// #include <opencv2/highgui.hpp>
+// #include "utils/image_conversion.h"
+//
+// int main() {
+//     // 1. Create a non-square image with an 'F' to see rotation and expansion.
+//     cv::Mat image_mat(200, 300, CV_8UC3, cv::Scalar(255, 255, 255));
+//     // Draw a large 'F'
+//     cv::rectangle(image_mat, {50, 50}, {80, 150}, {0,0,255}, -1);
+//     cv::rectangle(image_mat, {80, 50}, {180, 80}, {0,0,255}, -1);
+//     cv::rectangle(image_mat, {80, 100}, {150, 120}, {0,0,255}, -1);
+//
+//     cv::imwrite("rotation_fixed_before.png", image_mat);
+//     std::cout << "Saved rotation_fixed_before.png (Shape: " << image_mat.size() << ")" << std::endl;
+//
+//     torch::Tensor image = xt::utils::image::mat_to_tensor_float(image_mat);
+//
+//     std::cout << "--- Applying fixed Rotation ---" << std::endl;
+//
+//     // 2. Define transform to rotate by exactly 30 degrees, with expansion enabled.
+//     xt::transforms::image::Rotation rotator(
+//         /*degrees=*/30.0,
+//         /*expand=*/true,
+//         /*fill=*/{0.5, 0.5, 0.5}
+//     );
+//
+//     // 3. Apply the transform
+//     torch::Tensor transformed_tensor = std::any_cast<torch::Tensor>(rotator.forward({image}));
+//
+//     // 4. Save the result
+//     cv::Mat transformed_mat = xt::utils::image::tensor_to_mat_8u(transformed_tensor);
+//     cv::imwrite("rotation_fixed_after.png", transformed_mat);
+//     std::cout << "Saved rotation_fixed_after.png (Shape: " << transformed_mat.size() << ")" << std::endl;
+//
+//     return 0;
+// }
+
+
 namespace xt::transforms::image {
 
-    Rotation::Rotation(double angle_deg) : angle(angle_deg) {
+    Rotation::Rotation() : Rotation(0.0) {}
+
+    Rotation::Rotation(
+        double degrees,
+        bool expand,
+        const std::vector<double>& fill,
+        const std::string& interpolation)
+        : degrees_(degrees), expand_(expand) {
+
+        // --- Parameter Validation ---
+        if (fill.size() != 3 && fill.size() != 1) {
+            throw std::invalid_argument("Fill color must be a vector of size 1 or 3.");
+        }
+
+        // --- Initialize Members ---
+        if (fill.size() == 3) {
+            fill_color_ = cv::Scalar(fill[0], fill[1], fill[2]);
+        } else {
+            fill_color_ = cv::Scalar::all(fill[0]);
+        }
+
+        if (interpolation == "bilinear") {
+            interpolation_flag_ = cv::INTER_LINEAR;
+        } else if (interpolation == "nearest") {
+            interpolation_flag_ = cv::INTER_NEAREST;
+        } else {
+            throw std::invalid_argument("Unsupported interpolation type.");
+        }
     }
 
-    torch::Tensor Rotation::operator()(const torch::Tensor &input_tensor) {
-        // Convert torch::Tensor to OpenCV Mat (assuming CHW format and float32 in [0,1])
-        auto img_tensor = input_tensor.detach().cpu().clone();
-        img_tensor = img_tensor.permute({1, 2, 0}); // Convert CHW -> HWC
-        img_tensor = img_tensor.mul(255).clamp(0, 255).to(torch::kU8);
+    auto Rotation::forward(std::initializer_list<std::any> tensors) -> std::any {
+        // --- Input Validation ---
+        std::vector<std::any> any_vec(tensors);
+        if (any_vec.empty()) {
+            throw std::invalid_argument("Rotation::forward received an empty list.");
+        }
+        torch::Tensor input_tensor = std::any_cast<torch::Tensor>(any_vec[0]);
 
-        cv::Mat img(img_tensor.size(0), img_tensor.size(1), CV_8UC3);
-        std::memcpy((void *) img.data, img_tensor.data_ptr(), sizeof(uint8_t) * img_tensor.numel());
+        if (!input_tensor.defined()) {
+            throw std::invalid_argument("Input tensor passed to Rotation is not defined.");
+        }
 
-        // Compute center of the image and get rotation matrix
-        cv::Point2f center(img.cols / 2.0f, img.rows / 2.0f);
-        cv::Mat rot_matrix = cv::getRotationMatrix2D(center, angle, 1.0);
+        // If angle is 0, no rotation is needed
+        if (std::abs(degrees_) < 1e-6) {
+            return input_tensor;
+        }
 
-        // Rotate the image
-        cv::Mat rotated_img;
-        cv::warpAffine(img, rotated_img, rot_matrix, img.size(), cv::INTER_LINEAR);
+        // --- Convert to OpenCV Mat (Float for precision) ---
+        cv::Mat input_mat_32f = xt::utils::image::tensor_to_mat_float(input_tensor);
+        auto height = input_mat_32f.rows;
+        auto width = input_mat_32f.cols;
+        cv::Point2f center(width / 2.0f, height / 2.0f);
 
-        // Convert back to Tensor
-        torch::Tensor rotated_tensor = torch::from_blob(
-            rotated_img.data,
-            {rotated_img.rows, rotated_img.cols, 3},
-            torch::kUInt8).clone();
+        // --- Get Rotation Matrix and Handle Expansion ---
+        cv::Mat rotation_matrix = cv::getRotationMatrix2D(center, degrees_, 1.0);
+        cv::Size output_size = input_mat_32f.size();
 
-        rotated_tensor = rotated_tensor.permute({2, 0, 1}); // HWC -> CHW
-        rotated_tensor = rotated_tensor.to(torch::kFloat32).div(255); // Normalize to [0,1]
+        if (expand_) {
+            // Calculate the bounding box of the rotated image
+            double rad_angle = degrees_ * CV_PI / 180.0;
+            double abs_cos = std::abs(cos(rad_angle));
+            double abs_sin = std::abs(sin(rad_angle));
 
-        return rotated_tensor;
+            int new_width = static_cast<int>(height * abs_sin + width * abs_cos);
+            int new_height = static_cast<int>(height * abs_cos + width * abs_sin);
+            output_size = cv::Size(new_width, new_height);
+
+            // Adjust the rotation matrix to account for the new canvas size
+            rotation_matrix.at<double>(0, 2) += (new_width / 2.0) - center.x;
+            rotation_matrix.at<double>(1, 2) += (new_height / 2.0) - center.y;
+        }
+
+        // --- Apply the Affine Warp ---
+        cv::Mat output_mat;
+        cv::warpAffine(
+            input_mat_32f,
+            output_mat,
+            rotation_matrix,
+            output_size,
+            interpolation_flag_,
+            cv::BORDER_CONSTANT,
+            fill_color_
+        );
+
+        // --- Convert back to LibTorch Tensor ---
+        torch::Tensor output_tensor = xt::utils::image::mat_to_tensor_float(output_mat);
+
+        return output_tensor;
     }
 
-
-
-
-        // Rotation::Rotation(float angle) : angle(angle) {}
-    //
-    // // Operator: Rotate the input tensor by the specified angle
-    //
-    //
-    // torch::Tensor Rotation::operator()(torch::Tensor input) {
-    //     int64_t input_dims = input.dim();
-    //     if (input_dims < 3 || input_dims > 4) {
-    //         throw std::runtime_error("Input tensor must be 3D ([C, H, W]) or 4D ([N, C, H, W]).");
-    //     }
-    //
-    //     // Get spatial dimensions
-    //     int64_t h = input.size(input_dims - 2);
-    //     int64_t w = input.size(input_dims - 1);
-    //
-    //     // Convert angle to radians
-    //     float rad = angle * M_PI / 180.0;
-    //     float cos_val = std::cos(rad);
-    //     float sin_val = std::sin(rad);
-    //
-    //     // Create 2x3 affine matrix: [cos, -sin, 0; sin, cos, 0]
-    //     torch::Tensor theta = torch::tensor({
-    //         {cos_val, -sin_val, 0.0},
-    //         {sin_val,  cos_val, 0.0}
-    //     }, input.options()).reshape({1, 2, 3});
-    //
-    //     // Repeat for batch dimension if 4D
-    //     if (input_dims == 4) {
-    //         theta = theta.repeat({input.size(0), 1, 1});
-    //     }
-    //
-    //     // Generate grid for sampling
-    //     torch::Tensor grid = torch::nn::functional::affine_grid(
-    //         theta,
-    //         input_dims == 4 ? torch::IntArrayRef({input.size(0), input.size(1), h, w})
-    //                         : torch::IntArrayRef({1, input.size(0), h, w}),
-    //         /*align_corners=*/false
-    //     );
-    //
-    //     // Add batch dimension if 3D
-    //     bool is_3d = (input_dims == 3);
-    //     if (is_3d) {
-    //         input = input.unsqueeze(0);
-    //     }
-    //
-    //     // Sample the input with the rotated grid using correct enum types
-    //     torch::Tensor output = torch::nn::functional::grid_sample(
-    //         input,
-    //         grid,
-    //         torch::nn::functional::GridSampleFuncOptions()
-    //             .interpolation_mode(torch::enumtype::kBilinear)
-    //             .padding_mode(torch::enumtype::kZeros)
-    //             .align_corners(false)
-    //     );
-    //
-    //     // Remove batch dimension if added
-    //     if (is_3d) {
-    //         output = output.squeeze(0);
-    //     }
-    //
-    //     return output;
-    // }
-
-
-
-
-
-
-
-
-}
+} // namespace xt::transforms::image
