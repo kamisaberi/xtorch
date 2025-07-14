@@ -6,7 +6,7 @@ namespace xt::optim
     // --- DSPTOptions Methods ---
     void DSPTOptions::serialize(torch::serialize::OutputArchive& archive) const
     {
-        archive.write("lr", this->lr);
+        archive.write("lr", this->lr());
         archive.write("beta1", beta1());
         archive.write("beta2", beta2());
         archive.write("eps", eps());
@@ -21,7 +21,7 @@ namespace xt::optim
     void DSPTOptions::deserialize(torch::serialize::InputArchive& archive)
     {
         c10::IValue ivalue;
-        if (archive.try_read("lr", ivalue)) { this->lr = ivalue.toDouble(); }
+        if (archive.try_read("lr", ivalue)) { this->lr() = ivalue.toDouble(); }
         if (archive.try_read("beta1", ivalue)) { beta1_ = ivalue.toDouble(); }
         if (archive.try_read("beta2", ivalue)) { beta2_ = ivalue.toDouble(); }
         if (archive.try_read("eps", ivalue)) { eps_ = ivalue.toDouble(); }
@@ -35,7 +35,7 @@ namespace xt::optim
 
     std::unique_ptr<torch::optim::OptimizerOptions> DSPTOptions::clone() const
     {
-        auto cloned = std::make_unique<DSPTOptions>(this->lr);
+        auto cloned = std::make_unique<DSPTOptions>(this->lr());
         cloned->beta1(beta1()).beta2(beta2()).eps(eps()).weight_decay(weight_decay())
               .sparsity(sparsity()).prune_rate(prune_rate())
               .prune_frequency(prune_frequency()).start_pruning_step(start_pruning_step())
@@ -127,7 +127,7 @@ namespace xt::optim
                 auto v_hat = exp_avg_sq / bias_correction2;
                 auto denom = v_hat.sqrt().add_(options.eps());
 
-                p.data().addcdiv_(m_hat, denom, -options.lr);
+                p.data().addcdiv_(m_hat, denom, -options.lr());
 
                 // 4. Low-Rank update (if enabled)
                 if (options.low_rank_k() > 0)
@@ -200,27 +200,25 @@ namespace xt::optim
         auto momentum = state.exp_avg();
 
 
-        //TODO START We should create SVD
         throw std::runtime_error("torch::linalg::svd does not exist in libtorch");
         // SVD: M = U S V^T
 
-        // auto svd_result = torch::linalg::svd(momentum, false); // false = do not compute full U/V matrices
-        // auto U = std::get<0>(svd_result);
-        // auto S = std::get<1>(svd_result);
-        // auto Vh = std::get<2>(svd_result);
+        auto svd_result = xt::linalg::svd(momentum, false); // false = do not compute full U/V matrices
+        auto U = std::get<0>(svd_result);
+        auto S = std::get<1>(svd_result);
+        auto Vh = std::get<2>(svd_result);
 
-        // int k = options.low_rank_k();
+        int k = options.low_rank_k();
 
-        // // Reconstruct the low-rank approximation
-        // auto U_k = U.slice(/*dim=*/1, 0, k);
-        // auto S_k = torch::diag(S.slice(/*dim=*/0, 0, k));
-        // auto Vh_k = Vh.slice(/*dim=*/0, 0, k);
-        //
-        // auto low_rank_update = U_k.matmul(S_k).matmul(Vh_k);
-        //
-        // // Apply the dense low-rank update to the parameter
-        // param.data().add_(low_rank_update, -options.lr());
-        //TODO END We should create SVD
+        // Reconstruct the low-rank approximation
+        auto U_k = U.slice(/*dim=*/1, 0, k);
+        auto S_k = torch::diag(S.slice(/*dim=*/0, 0, k));
+        auto Vh_k = Vh.slice(/*dim=*/0, 0, k);
+
+        auto low_rank_update = U_k.matmul(S_k).matmul(Vh_k);
+
+        // Apply the dense low-rank update to the parameter
+        param.data().add_(low_rank_update, -options.lr());
     }
 
     // --- Boilerplate Methods ---

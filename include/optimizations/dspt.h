@@ -7,12 +7,11 @@ namespace xt::optim
     // --- Options for DSPT ---
     struct DSPTOptions : torch::optim::OptimizerOptions
     {
-        double lr;
 
         explicit DSPTOptions(double learning_rate = 1e-3)
             : torch::optim::OptimizerOptions()
         {
-            this->lr = learning_rate;
+            this->lr(learning_rate);
         }
 
         // Base Adam optimizer parameters
@@ -20,6 +19,7 @@ namespace xt::optim
         TORCH_ARG(double, beta2) = 0.999;
         TORCH_ARG(double, eps) = 1e-8;
         TORCH_ARG(double, weight_decay) = 0.0;
+        TORCH_ARG(double ,  lr) = 1e-6;   // For momentum on the gradient "force"
 
         // Sparsity parameters
         TORCH_ARG(double, sparsity) = 0.9; // Target sparsity (e.g., 90% of weights are zero)
