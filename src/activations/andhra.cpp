@@ -1,4 +1,3 @@
-//TODO SHOULD IMPLEMENT
 #include "include/activations/andhra.h"
 
 namespace xt::activations

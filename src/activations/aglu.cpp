@@ -1,4 +1,3 @@
-//TODO SHOULD IMPLEMENT
 #include "include/activations/aglu.h"
 
 namespace xt::activations

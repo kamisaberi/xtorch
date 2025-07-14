@@ -1,4 +1,3 @@
-//TODO SHOULD IMPLEMENT
 #include "include/activations/ahaf.h"
 
 namespace xt::activations
