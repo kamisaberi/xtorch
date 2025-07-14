@@ -1,5 +1,4 @@
 #include "include/transforms/weather/foggy_rain.h"
-
 #include <stdexcept>
 
 // --- Example Main (for testing) ---
@@ -44,6 +43,9 @@ int main() {
 }
 */
 
+#include "include/transforms/weather/foggy_rain.h"
+#include <stdexcept>
+
 namespace xt::transforms::weather {
 
     FoggyRain::FoggyRain()
@@ -51,9 +53,9 @@ namespace xt::transforms::weather {
               rain_intensity_(2000),
               rain_speed_(10.0f),
               rain_length_(4.0f),
-              seed_(0),
-              generator_(torch::make_generator<torch::CPUGenerator>(0))
+              seed_(0)
     {
+        generator_.set_current_seed(seed_);
         fog_color_ = torch::tensor({0.5, 0.5, 0.5});
         rain_color_ = torch::tensor({0.7, 0.7, 0.8});
     }
@@ -65,16 +67,15 @@ namespace xt::transforms::weather {
               rain_speed_(rain_speed),
               rain_length_(rain_length),
               rain_color_(std::move(rain_color)),
-              seed_(seed),
-              generator_(torch::make_generator<torch::CPUGenerator>(seed))
+              seed_(seed)
     {
+        generator_.set_current_seed(seed_);
         if (fog_density_ < 0 || rain_intensity_ <= 0 || rain_speed_ <= 0 || rain_length_ < 1) {
             throw std::invalid_argument("Fog and rain parameters must be positive.");
         }
     }
 
     void FoggyRain::initialize_rain(int64_t H, int64_t W) {
-        // Random initial (y, x) positions for each raindrop
         auto y_coords = torch::rand({rain_intensity_}, generator_) * H;
         auto x_coords = torch::rand({rain_intensity_}, generator_) * W;
         rain_positions_ = torch::stack({y_coords, x_coords}, 1).to(torch::kFloat32);
@@ -104,29 +105,30 @@ namespace xt::transforms::weather {
         torch::Tensor foggy_image = image * (1.0f - fog_density_) + fog_color_reshaped * fog_density_;
 
         // 3. --- Update Rain State ---
-        rain_positions_.select(1, 0) += rain_speed_; // Move drops down
+        rain_positions_.select(1, 0) += rain_speed_;
         torch::Tensor off_screen_mask = rain_positions_.select(1, 0) >= H;
-        rain_positions_.select(1, 0).masked_fill_(off_screen_mask, 0.0f); // Reset Y to top
+        rain_positions_.select(1, 0).masked_fill_(off_screen_mask, 0.0f);
         torch::Tensor new_x = torch::rand({rain_intensity_}, generator_) * W;
         rain_positions_.select(1, 1).masked_scatter_(off_screen_mask, new_x.masked_select(off_screen_mask));
 
         // 4. --- Render Rain Streaks ---
         torch::Tensor rain_overlay = torch::zeros({H, W}, image.options());
+
+        // --- Start of Fix ---
+        // Create a scalar tensor containing the value 1.0 with the correct data type.
+        torch::Tensor streak_value = torch::tensor(1.0, image.options());
+        // --- End of Fix ---
+
         for (int i = 0; i < static_cast<int>(rain_length_); ++i) {
-            // Calculate coordinates for each segment of the streak
             torch::Tensor y_coords = (rain_positions_.select(1, 0) - i).to(torch::kLong);
             torch::Tensor x_coords = rain_positions_.select(1, 1).to(torch::kLong);
-
-            // Create a mask for valid coordinates (on-screen)
             torch::Tensor valid_mask = (y_coords >= 0) & (y_coords < H) & (x_coords >= 0) & (x_coords < W);
-
-            // Get the valid indices
             auto y_idx = y_coords.masked_select(valid_mask);
             auto x_idx = x_coords.masked_select(valid_mask);
 
-            // Draw the streak segments onto the overlay
             if (y_idx.numel() > 0) {
-                rain_overlay.index_put_({y_idx, x_idx}, 1.0, true);
+                 // Use the tensor `streak_value` instead of the literal `1.0`.
+                rain_overlay.index_put_({y_idx, x_idx}, streak_value, true);
             }
         }
 

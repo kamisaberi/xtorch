@@ -43,14 +43,15 @@ int main() {
 
 namespace xt::transforms::weather {
 
+    // --- FIX 1: Corrected Generator Initialization ---
     ParticleRain::ParticleRain()
             : particle_count_(1500),
               min_speed_(5.0f),
               max_speed_(10.0f),
               streak_length_(8.0f),
-              seed_(0),
-              generator_(torch::make_generator<torch::CPUGenerator>(0))
+              seed_(0)
     {
+        generator_.set_current_seed(seed_);
         wind_vector_ = torch::tensor({2.0f, 1.0f}); // Gentle wind to the right-down
         rain_color_ = torch::tensor({0.8, 0.8, 0.9});
     }
@@ -62,9 +63,9 @@ namespace xt::transforms::weather {
               wind_vector_(std::move(wind_vector)),
               streak_length_(streak_length),
               rain_color_(std::move(rain_color)),
-              seed_(seed),
-              generator_(torch::make_generator<torch::CPUGenerator>(seed))
+              seed_(seed)
     {
+        generator_.set_current_seed(seed_);
         if (particle_count_ <= 0 || min_speed_ <= 0 || max_speed_ <= 0 || streak_length_ < 1) {
             throw std::invalid_argument("ParticleRain parameters must be positive.");
         }
@@ -76,14 +77,10 @@ namespace xt::transforms::weather {
     void ParticleRain::initialize_particles(int64_t H, int64_t W) {
         auto float_opts = torch::TensorOptions().dtype(torch::kFloat32);
 
-        // Random initial (y, x) positions
         auto y_coords = torch::rand({particle_count_}, generator_) * H;
         auto x_coords = torch::rand({particle_count_}, generator_) * W;
         particle_positions_ = torch::stack({y_coords, x_coords}, 1).to(float_opts);
-
-        // Assign a random base falling speed to each particle
         particle_speeds_ = torch::rand({particle_count_}, generator_) * (max_speed_ - min_speed_) + min_speed_;
-
         is_initialized_ = true;
     }
 
@@ -112,27 +109,34 @@ namespace xt::transforms::weather {
         torch::Tensor off_screen_x = (particle_positions_.select(1, 1) >= W) | (particle_positions_.select(1, 1) < 0);
         torch::Tensor off_screen_mask = off_screen_y | off_screen_x;
 
-        // Reset Y to top, give new random X
         particle_positions_.select(1, 0).masked_fill_(off_screen_mask, 0.0f);
         torch::Tensor new_x = torch::rand({particle_count_}, generator_) * W;
         particle_positions_.select(1, 1).masked_scatter_(off_screen_mask, new_x.masked_select(off_screen_mask));
 
         // 4. --- Render Rain Streaks ---
         torch::Tensor rain_overlay = torch::zeros({H, W}, image.options());
-        torch::Tensor normalized_velocity = velocity / torch::linalg::vector_norm(velocity, 2, {1}, true);
 
-        // Draw each streak segment by tracing backwards along the velocity vector
+        // --- FIX 2: Corrected Normalization ---
+        // Use the tensor's own .norm() method, which is more robust than torch::linalg::vector_norm
+        torch::Tensor normalized_velocity = velocity / velocity.norm(2, 1, true);
+
+        // --- FIX 3: Corrected index_put_ value ---
+        // Create a scalar tensor containing 1.0 to pass to index_put_
+        torch::Tensor streak_value = torch::tensor(1.0, image.options());
+
         for (int i = 0; i < static_cast<int>(streak_length_); ++i) {
             torch::Tensor y_coords = (particle_positions_.select(1, 0) - normalized_velocity.select(1, 0) * i).to(torch::kLong);
             torch::Tensor x_coords = (particle_positions_.select(1, 1) - normalized_velocity.select(1, 1) * i).to(torch::kLong);
 
-            // Create a mask for valid coordinates (on-screen)
             torch::Tensor valid_mask = (y_coords >= 0) & (y_coords < H) & (x_coords >= 0) & (x_coords < W);
             auto y_idx = y_coords.masked_select(valid_mask);
             auto x_idx = x_coords.masked_select(valid_mask);
 
             if (y_idx.numel() > 0) {
-                rain_overlay.index_put_({y_idx, x_idx}, 1.0, true);
+                // Use the tensor `streak_value` instead of the literal `1.0`.
+                // Note: The third argument `true` (accumulate) is no longer valid for this overload.
+                // We simply want to set the value, so we use the two-argument version.
+                rain_overlay.index_put_({y_idx, x_idx}, streak_value);
             }
         }
 

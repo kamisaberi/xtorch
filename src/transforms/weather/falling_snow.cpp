@@ -1,5 +1,4 @@
 #include "include/transforms/weather/falling_snow.h"
-
 #include <stdexcept>
 
 // --- Example Main (for testing) ---
@@ -39,15 +38,17 @@ int main() {
 
 namespace xt::transforms::weather {
 
+    // --- Start of Fix ---
     FallingSnow::FallingSnow()
             : flake_count_(1000),
               min_speed_(1.0f),
               max_speed_(4.0f),
               min_opacity_(0.3f),
               max_opacity_(0.8f),
-              seed_(0),
-              generator_(torch::make_generator<torch::CPUGenerator>(0))
+              seed_(0)
+              // The generator_ member is implicitly default-constructed here.
     {
+        generator_.set_current_seed(seed_); // Set the seed using the public API.
         snow_color_ = torch::tensor({1.0, 1.0, 1.0});
     }
 
@@ -58,9 +59,11 @@ namespace xt::transforms::weather {
               min_opacity_(min_opacity),
               max_opacity_(max_opacity),
               snow_color_(std::move(snow_color)),
-              seed_(seed),
-              generator_(torch::make_generator<torch::CPUGenerator>(seed))
+              seed_(seed)
+              // The generator_ member is implicitly default-constructed here.
     {
+        generator_.set_current_seed(seed_); // Set the seed using the public API.
+
         if (flake_count_ <= 0 || min_speed_ <= 0 || max_speed_ <= 0 || min_opacity_ < 0 || max_opacity_ < 0) {
             throw std::invalid_argument("Snow parameters must be positive.");
         }
@@ -68,6 +71,7 @@ namespace xt::transforms::weather {
             throw std::invalid_argument("Min values cannot be greater than max values.");
         }
     }
+    // --- End of Fix ---
 
     void FallingSnow::initialize_flakes(int64_t H, int64_t W) {
         auto float_opts = torch::TensorOptions().dtype(torch::kFloat32);
@@ -107,8 +111,9 @@ namespace xt::transforms::weather {
         auto W = image.size(2);
 
         // Initialize flakes on the first run or if image size changes
-        if (!is_initialized_ || flake_positions_.size(1) != H || flake_positions_.size(2) != W) {
-            initialize_flakes(H, W);
+        // Corrected the condition to check against the actual image dimensions
+        if (!is_initialized_ || flake_positions_.sizes()[0] != flake_count_) {
+             initialize_flakes(H, W);
         }
 
         // 2. --- Update Flake State ---
