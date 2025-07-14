@@ -200,7 +200,7 @@ namespace xt::optim
         auto momentum = state.exp_avg();
 
 
-        throw std::runtime_error("torch::linalg::svd does not exist in libtorch");
+        // throw std::runtime_error("torch::linalg::svd does not exist in libtorch");
         // SVD: M = U S V^T
 
         auto svd_result = xt::linalg::svd(momentum, false); // false = do not compute full U/V matrices

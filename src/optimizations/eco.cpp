@@ -259,10 +259,8 @@ namespace xt::optim
         std::tuple<torch::Tensor, torch::Tensor> eigh_result;
         try {
 
-            //TODO START We should create EIGH
-            throw std::runtime_error("TODO We should create EIGH");
+            // throw std::runtime_error("TODO We should create EIGH");
             eigh_result = xt::linalg::eigh(damped_matrix, "U");
-            //TODO END We should create EIGH
 
         } catch (const c10::Error& e) {
             TORCH_WARN("eigh failed, returning identity. Error: ", e.what());
