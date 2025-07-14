@@ -175,10 +175,7 @@ namespace xt::optim
         auto damped_matrix = matrix + torch::eye(matrix.size(0), matrix.options()) * damping;
         std::tuple<torch::Tensor, torch::Tensor> eigh_result;
         try {
-            //TODO START We should create EIGH
-            // throw std::runtime_error("We should create EIGH");
-            // eigh_result = torch::linalg::eigh(damped_matrix, "U");
-            //TODO START We should create EIGH
+            eigh_result = xt::linalg::eigh(damped_matrix, "U");
         } catch (const c10::Error& e) {
             return torch::eye(matrix.size(0), matrix.options());
         }
