@@ -575,3 +575,21 @@ install(CODE "
 # add_subdirectory(examples)
 # Temporary code directory (currently commented out)
 #add_subdirectory(temp)
+
+#enable_testing()
+#
+## Fetch the Google Test framework. This downloads it during the cmake step.
+#include(FetchContent)
+#FetchContent_Declare(
+#        googletest
+#        URL https://github.com/google/googletest/archive/refs/tags/v1.14.0.zip
+#)
+#
+## Make the gtest source code available to our project, but don't add it
+## to the global project, which keeps our project clean.
+#FetchContent_MakeAvailable(googletest)
+#
+## After fetching the content, add the subdirectory for tests.
+## This ensures that gtest is available before CMake processes the tests folder.
+#add_subdirectory(tests)
+#
