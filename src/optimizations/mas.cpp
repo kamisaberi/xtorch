@@ -157,23 +157,20 @@ namespace xt::optim
             auto& state = static_cast<MASParamState&>(*state_.at(p.unsafeGetTensorImpl()));
 
             // Update Omega: The new importance is the average of the absolute gradients
-            //TODO START data_loader does not have size method
-            throw std::runtime_error("data_loader does not have size method");
-            // auto new_importance = importance_grads[i] / data_loader.size().value();
+            auto new_importance = importance_grads[i] / data_loader.size();
 
             // Accumulate importance from previous tasks (optional, depends on MAS variant)
             // Here we just set the new importance. For multi-task, you might add.
             // state.importance(new_importance);
 
             // Update theta*: Store the current parameters as the "optimal" ones for this task
-            // state.optimal_param(p.detach().clone());
+            state.optimal_param(p.detach().clone());
 
             // Optional: Reset Adam state for the new task
-            // state.step(torch::tensor(0.0, torch::dtype(torch::kFloat64).device(torch::kCPU)));
-            // state.exp_avg(torch::zeros_like(p));
-            // state.exp_avg_sq(torch::zeros_like(p));
+            state.step(torch::tensor(0.0, torch::dtype(torch::kFloat64).device(torch::kCPU)));
+            state.exp_avg(torch::zeros_like(p));
+            state.exp_avg_sq(torch::zeros_like(p));
 
-            //TODO END data_loader does not have size method
         }
 
         model.train(true); // Set model back to train mode

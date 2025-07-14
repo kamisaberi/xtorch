@@ -36,6 +36,7 @@ namespace xt::dataloaders
         void reset_epoch();
         std::optional<BatchData> next_batch();
 
+        size_t size() const ;
     private:
         // This is the function executed by each worker thread
         void worker_loop(size_t worker_id);

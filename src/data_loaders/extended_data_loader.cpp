@@ -348,6 +348,11 @@ namespace xt::dataloaders
         return {{features_batch, labels_batch}};
     }
 
+    // --- NEW METHOD IMPLEMENTATION ---
+    size_t ExtendedDataLoader::size() const {
+        return total_batches_in_epoch_;
+    }
+
     ExtendedDataLoader::Iterator::Iterator(ExtendedDataLoader* loader, bool end )
         : loader_(loader), is_end_(end)
     {
