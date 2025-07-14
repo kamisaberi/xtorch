@@ -1,109 +1,89 @@
 #include "include/transforms/image/gaussian_blur.h"
 
+
+// --- Example Main (for testing) ---
+// #include "transforms/image/gaussian_blur.h"
+// #include <iostream>
+// #include <opencv2/highgui.hpp>
+// #include "utils/image_conversion.h"
+//
+// int main() {
+//     // 1. Create a sample image with sharp details (a grid).
+//     cv::Mat image_mat(256, 256, CV_8UC3, cv::Scalar(255, 255, 255));
+//     for (int i = 0; i < image_mat.rows; i += 16) cv::line(image_mat, {0, i}, {image_mat.cols, i}, {0, 0, 0}, 1);
+//     for (int i = 0; i < image_mat.cols; i += 16) cv::line(image_mat, {i, 0}, {i, image_mat.rows}, {0, 0, 0}, 1);
+//     cv::imwrite("blur_before.png", image_mat);
+//     std::cout << "Saved blur_before.png" << std::endl;
+//
+//     torch::Tensor image = xt::utils::image::mat_to_tensor_float(image_mat);
+//
+//     std::cout << "--- Applying GaussianBlur ---" << std::endl;
+//
+//     // 2. Define the transform. Kernel 15x15, sigmaX = 3.0.
+//     xt::transforms::image::GaussianBlur blurrer(15, {3.0, 0.0});
+//
+//     // 3. Apply the transform
+//     torch::Tensor blurred_tensor = std::any_cast<torch::Tensor>(blurrer.forward({image}));
+//
+//     // 4. Save the result.
+//     cv::Mat blurred_mat = xt::utils::image::tensor_to_mat_8u(blurred_tensor);
+//     cv::imwrite("blur_after.png", blurred_mat);
+//     std::cout << "Saved blur_after.png" << std::endl;
+//
+//     return 0;
+// }
+
+
 namespace xt::transforms::image {
 
+    GaussianBlur::GaussianBlur() : GaussianBlur(0, {0,0}) {}
 
+    GaussianBlur::GaussianBlur(
+        int kernel_size,
+        std::pair<double, double> sigma)
+        : kernel_size_(kernel_size), sigma_(sigma) {
 
-    GaussianBlur::GaussianBlur(std::vector<int64_t> kernel_size, float sigma)
-        : kernel_size(kernel_size), sigma(sigma) {
-        if (kernel_size.size() != 2) {
-            throw std::invalid_argument("Kernel size must have exactly 2 elements (height, width).");
+        if (kernel_size_ > 0 && kernel_size_ % 2 == 0) {
+            throw std::invalid_argument("Kernel size must be a positive, odd integer, or 0.");
         }
-        if (kernel_size[0] % 2 == 0 || kernel_size[1] % 2 == 0) {
-            throw std::invalid_argument("Kernel dimensions must be odd.");
-        }
-        if (sigma <= 0) {
-            throw std::invalid_argument("Sigma must be positive.");
+        if (sigma_.first < 0 || sigma_.second < 0) {
+            throw std::invalid_argument("Sigma values must be non-negative.");
         }
     }
 
-    torch::Tensor GaussianBlur::operator()(torch::Tensor input) {
-        int64_t input_dims = input.dim();
-        if (input_dims < 3 || input_dims > 4) {
-            throw std::runtime_error("Input tensor must be 3D ([C, H, W]) or 4D ([N, C, H, W]).");
+    auto GaussianBlur::forward(std::initializer_list<std::any> tensors) -> std::any {
+        // --- Input Validation ---
+        std::vector<std::any> any_vec(tensors);
+        if (any_vec.empty()) {
+            throw std::invalid_argument("GaussianBlur::forward received an empty list.");
+        }
+        torch::Tensor input_tensor = std::any_cast<torch::Tensor>(any_vec[0]);
+
+        if (!input_tensor.defined()) {
+            throw std::invalid_argument("Input tensor passed to GaussianBlur is not defined.");
+        }
+        if (kernel_size_ <= 0) {
+            // No-op if kernel size is not provided
+            return input_tensor;
         }
 
-        // Determine channels and ensure input format
-        int64_t channel_dim = (input_dims == 3) ? 0 : 1;
-        int64_t channels = input.size(channel_dim);
-        if (channels < 1) {
-            throw std::runtime_error("Input must have at least one channel.");
-        }
+        // --- Convert to OpenCV Mat (Float for precision) ---
+        cv::Mat input_mat_32f = xt::utils::image::tensor_to_mat_float(input_tensor);
 
-        // Generate 2D Gaussian kernel
-        int64_t k_h = kernel_size[0];
-        int64_t k_w = kernel_size[1];
-        torch::Tensor kernel = generate_gaussian_kernel(k_h, k_w, sigma, input.device());
+        // --- Apply Gaussian Blur ---
+        cv::Mat output_mat_32f;
+        cv::GaussianBlur(
+            input_mat_32f,
+            output_mat_32f,
+            cv::Size(kernel_size_, kernel_size_),
+            sigma_.first,  // sigmaX
+            sigma_.second  // sigmaY
+        );
 
-        // Reshape kernel for conv2d: [out_channels, in_channels/groups, k_h, k_w]
-        kernel = kernel.unsqueeze(0).unsqueeze(0); // [1, 1, k_h, k_w]
-        kernel = kernel.repeat({channels, 1, 1, 1}); // [C, 1, k_h, k_w]
-
-        // Add batch dimension if 3D
-        bool is_3d = (input_dims == 3);
-        if (is_3d) {
-            input = input.unsqueeze(0); // [1, C, H, W]
-        }
-
-        // Apply convolution with "same" padding
-        torch::Tensor output = torch::conv2d(input, kernel,
-                                             /*bias=*/torch::Tensor(),
-                                             /*stride=*/1,
-                                             /*padding=*/{(k_h - 1) / 2, (k_w - 1) / 2},
-                                             /*dilation=*/1,
-                                             /*groups=*/channels);
-
-        // Remove batch dimension if added
-        if (is_3d) {
-            output = output.squeeze(0); // [C, H, W]
-        }
-
-        return output;
-    }
-
-    torch::Tensor GaussianBlur::generate_gaussian_kernel(int64_t k_h, int64_t k_w, float sigma, torch::Device device) {
-        torch::Tensor x = torch::arange(-(k_w / 2), k_w / 2 + 1, torch::dtype(torch::kFloat32).device(device));
-        torch::Tensor y = torch::arange(-(k_h / 2), k_h / 2 + 1, torch::dtype(torch::kFloat32).device(device));
-        // auto [x_grid, y_grid] = torch::meshgrid({x, y}, "ij");
-        std::vector<torch::Tensor> grids = torch::meshgrid({x, y}, "ij");
-        torch::Tensor x_grid = grids[0];
-        torch::Tensor y_grid = grids[1];
-        torch::Tensor kernel = torch::exp(-(x_grid.pow(2) + y_grid.pow(2)) / (2 * sigma * sigma));
-        kernel = kernel / kernel.sum(); // Normalize
-        return kernel;
-    }
-
-
-    GaussianBlurOpenCV::GaussianBlurOpenCV(int ksize, double sigma_val)
-        : kernel_size(cv::Size(ksize, ksize)), sigma(sigma_val) {
-    }
-
-    torch::Tensor GaussianBlurOpenCV::operator()(const torch::Tensor &input_tensor) {
-        // Convert torch::Tensor to OpenCV Mat (CHW to HWC, [0,1] -> [0,255])
-        auto img_tensor = input_tensor.detach().cpu().clone();
-        img_tensor = img_tensor.permute({1, 2, 0}); // CHW -> HWC
-        img_tensor = img_tensor.mul(255).clamp(0, 255).to(torch::kU8);
-
-        cv::Mat img(img_tensor.size(0), img_tensor.size(1), CV_8UC3);
-        std::memcpy((void *) img.data, img_tensor.data_ptr(), sizeof(uint8_t) * img_tensor.numel());
-
-        // Apply Gaussian blur
-        cv::Mat blurred_img;
-        cv::GaussianBlur(img, blurred_img, kernel_size, sigma);
-
-        // Convert back to Tensor
-        torch::Tensor output_tensor = torch::from_blob(
-            blurred_img.data,
-            {blurred_img.rows, blurred_img.cols, 3},
-            torch::kUInt8).clone();
-
-        output_tensor = output_tensor.permute({2, 0, 1}); // HWC -> CHW
-        output_tensor = output_tensor.to(torch::kFloat32).div(255); // Normalize to [0,1]
+        // --- Convert back to LibTorch Tensor ---
+        torch::Tensor output_tensor = xt::utils::image::mat_to_tensor_float(output_mat_32f);
 
         return output_tensor;
     }
 
-
-
-
-}
+} // namespace xt::transforms::image
