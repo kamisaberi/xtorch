@@ -5,12 +5,12 @@ namespace xt::models
 {
     // --- The Core Squeeze-and-Excitation Module ---
 
-    struct SEModule : xt::Module
+    struct SEModule1 : xt::Module
     {
         torch::nn::AdaptiveAvgPool2d squeeze;
         torch::nn::Sequential excitation;
 
-        SEModule(int in_channels, int reduction_ratio = 16);
+        SEModule1(int in_channels, int reduction_ratio = 16);
         auto forward(std::initializer_list<std::any> tensors) -> std::any override;
 
         torch::Tensor forward(torch::Tensor x);
@@ -25,7 +25,7 @@ namespace xt::models
     {
         torch::nn::Conv2d conv1, conv2;
         torch::nn::BatchNorm2d bn1, bn2;
-        std::shared_ptr<SEModule> se_module;
+        std::shared_ptr<SEModule1> se_module;
 
         // Shortcut for residual connection
         torch::nn::Sequential shortcut;
