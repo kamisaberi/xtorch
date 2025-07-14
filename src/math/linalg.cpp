@@ -5,10 +5,13 @@
 #include <Eigen/Dense>
 #include <Eigen/SVD>
 #include <Eigen/Eigenvalues> // Required for eigendecomposition
+#include <Eigen/Dense>
+
 
 // --- Helper functions for this file only (can be in an anonymous namespace) ---
 namespace
 {
+
     // Converts a torch::Tensor to an Eigen::Matrix. This creates a copy.
     Eigen::MatrixXf tensor_to_eigen(const torch::Tensor& tensor)
     {
@@ -155,7 +158,7 @@ namespace xt::linalg
     }
 
 
-    std::tuple<torch::Tensor, torch::Tensor> eigh(const torch::Tensor& A)
+    std::tuple<torch::Tensor, torch::Tensor> eig(const torch::Tensor& A)
     {
         // 1. --- Input Validation ---
         if (A.dim() != 2 || A.size(0) != A.size(1))
@@ -187,6 +190,71 @@ namespace xt::linalg
         return std::make_tuple(
                 eigen_complex_vector_to_tensor(eigenvalues),
                 eigen_complex_matrix_to_tensor(eigenvectors)
+        );
+    }
+
+    //     // --- Implementation of `eig` for GENERAL matrices (returns complex) ---
+    // std::tuple<torch::Tensor, torch::Tensor> eig(const torch::Tensor& A)
+    // {
+    //     if (A.dim() != 2 || A.size(0) != A.size(1)) {
+    //         throw std::invalid_argument("Input to eig must be a square 2D matrix.");
+    //     }
+    //     Eigen::MatrixXf eigen_A_real = tensor_to_eigen(A);
+    //     Eigen::EigenSolver<Eigen::MatrixXf> solver(eigen_A_real, /* computeEigenvectors= */ true);
+    //
+    //     if (solver.info() != Eigen::Success) {
+    //         throw std::runtime_error("Eigendecomposition failed to converge.");
+    //     }
+    //
+    //     Eigen::VectorXcf eigenvalues = solver.eigenvalues();
+    //     Eigen::MatrixXcf eigenvectors = solver.eigenvectors();
+    //
+    //     return std::make_tuple(
+    //         eigen_complex_vector_to_tensor(eigenvalues),
+    //         eigen_complex_matrix_to_tensor(eigenvectors)
+    //     );
+    // }
+
+
+    // --- NEW: Correct Implementation of `eigh` for SYMMETRIC matrices (returns real) ---
+    std::tuple<torch::Tensor, torch::Tensor> eigh(const torch::Tensor& A, const std::string& UPLO)
+    {
+        // 1. --- Input Validation ---
+        if (A.dim() != 2 || A.size(0) != A.size(1)) {
+            throw std::invalid_argument("Input to eigh must be a square 2D matrix.");
+        }
+        if (UPLO != "U" && UPLO != "L") {
+            throw std::invalid_argument("UPLO argument must be 'U' or 'L'.");
+        }
+
+        // Convert the input tensor to a REAL Eigen matrix.
+        Eigen::MatrixXf eigen_A = tensor_to_eigen(A);
+
+        // 2. --- Compute Eigendecomposition using Eigen's specialized solver ---
+        // Use SelfAdjointEigenSolver, which is designed for symmetric matrices.
+        Eigen::SelfAdjointEigenSolver<Eigen::MatrixXf> solver;
+
+        // The UPLO flag tells the solver which half of the matrix to read.
+        if (UPLO == "U") {
+            solver.compute(eigen_A, Eigen::ComputeEigenvectors | Eigen::Upper);
+        } else { // UPLO == "L"
+            solver.compute(eigen_A, Eigen::ComputeEigenvectors | Eigen::Lower);
+        }
+
+        // Check if the computation was successful
+        if (solver.info() != Eigen::Success) {
+            throw std::runtime_error("Symmetric eigendecomposition failed to converge.");
+        }
+
+        // 3. --- Extract results ---
+        // For a symmetric matrix, eigenvalues and eigenvectors are guaranteed to be REAL.
+        Eigen::VectorXf eigenvalues = solver.eigenvalues();
+        Eigen::MatrixXf eigenvectors = solver.eigenvectors();
+
+        // 4. --- Convert back to REAL torch::Tensors and return ---
+        return std::make_tuple(
+            eigen_vector_to_tensor(eigenvalues), // Uses the REAL vector helper
+            eigen_to_tensor(eigenvectors)        // Uses the REAL matrix helper
         );
     }
 
