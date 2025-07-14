@@ -71,7 +71,7 @@ namespace xt {
                 if (i == 0) {
                     replicas_.push_back(original_module_); // Primary replica is the original_module_ itself
                 } else {
-                    // TODO: Proper deep cloning of the module for other devices.
+                    // Proper deep cloning of the module for other devices.
                     // This might involve knowing the concrete type of 'original_module_'
                     // or having a virtual 'clone' method in xt::Module.
                     // For now, this will lead to issues if not handled:

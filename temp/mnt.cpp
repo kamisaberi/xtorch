@@ -77,7 +77,7 @@ int main() {
     cout << transformed_dataset.get_batch(0).data << "  " << transformed_dataset.get_batch(0).target << "\n";
 
 
-    //TODO Custom Dataset START
+    //Custom Dataset START
     vector<torch::data::transforms::Lambda<torch::data::Example<> > > transforms = {
         xt::data::transforms::resize({32, 32}),
         xt::data::transforms::normalize(0.5, 0.5)
