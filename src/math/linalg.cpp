@@ -2,9 +2,9 @@
 #include <stdexcept>
 
 // --- Backend Implementation: Eigen ---
-// These heavy headers are hidden from the rest of your project.
 #include <Eigen/Dense>
 #include <Eigen/SVD>
+#include <Eigen/Eigenvalues> // Required for eigendecomposition
 
 // --- Helper functions for this file only (can be in an anonymous namespace) ---
 namespace
@@ -18,8 +18,6 @@ namespace
         }
         auto tensor_float = tensor.to(torch::kFloat32); // Ensure it's float
 
-        // Eigen::Map lets us view the tensor's data as an Eigen matrix without a copy,
-        // but we return a full MatrixXf which does perform a copy. This is safer.
         return Eigen::Map<const Eigen::Matrix<float, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor>>(
             tensor_float.data_ptr<float>(),
             tensor_float.size(0),
@@ -30,10 +28,8 @@ namespace
     // Converts an Eigen::Matrix back to a torch::Tensor.
     torch::Tensor eigen_to_tensor(const Eigen::MatrixXf& matrix)
     {
-        // We must clone the result because from_blob does not take ownership of the memory.
-        // The Eigen matrix will be destroyed when it goes out of scope.
         return torch::from_blob(
-            const_cast<float*>(matrix.data()), // from_blob needs non-const, but we know it's safe
+            const_cast<float*>(matrix.data()),
             {matrix.rows(), matrix.cols()},
             torch::kFloat32
         ).clone();
@@ -49,23 +45,17 @@ namespace
         ).clone();
     }
 
-
-    //////////////////////////////
-
-
-
-    // New helper: Converts a complex Eigen matrix to a complex torch::Tensor.
+    // Helper: Converts a complex Eigen matrix to a complex torch::Tensor.
     torch::Tensor eigen_complex_matrix_to_tensor(const Eigen::MatrixXcf& matrix)
     {
-        // from_blob does not take ownership, so we must clone.
         return torch::from_blob(
-                const_cast<std::complex<float>*>(matrix.data()), // from_blob needs non-const pointer
+                const_cast<std::complex<float>*>(matrix.data()),
                 {matrix.rows(), matrix.cols()},
                 torch::kComplexFloat
         ).clone();
     }
 
-    // New helper: Converts a complex Eigen vector to a complex 1D torch::Tensor.
+    // Helper: Converts a complex Eigen vector to a complex 1D torch::Tensor.
     torch::Tensor eigen_complex_vector_to_tensor(const Eigen::VectorXcf& vec)
     {
         return torch::from_blob(
@@ -75,16 +65,16 @@ namespace
         ).clone();
     }
 
-
 } // anonymous namespace
 
 
 // --- Public API Implementation ---
 namespace xt::linalg
 {
+    // ... (svd and pinverse implementations are correct) ...
     std::tuple<torch::Tensor, torch::Tensor, torch::Tensor> svd(
-        const torch::Tensor& A,
-        bool full_matrices)
+            const torch::Tensor& A,
+            bool full_matrices)
     {
         // 1. Convert input tensor to an Eigen matrix
         Eigen::MatrixXf eigen_A = tensor_to_eigen(A);
@@ -104,9 +94,9 @@ namespace xt::linalg
 
         // 4. Convert the Eigen results back to torch::Tensors and return them
         return std::make_tuple(
-            eigen_to_tensor(U),
-            eigen_vector_to_tensor(S),
-            eigen_to_tensor(Vh)
+                eigen_to_tensor(U),
+                eigen_vector_to_tensor(S),
+                eigen_to_tensor(Vh)
         );
     }
 
@@ -127,7 +117,7 @@ namespace xt::linalg
         // Eigen::Map allows us to create an Eigen matrix that uses the tensor's memory
         // without copying. We specify RowMajor because PyTorch tensors are row-major.
         const Eigen::Map<const Eigen::Matrix<float, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor>>
-            eigen_matrix(tensor_ptr, rows, cols);
+                eigen_matrix(tensor_ptr, rows, cols);
 
         // --- 3. Compute SVD ---
         // We use JacobiSVD which is robust for this kind of operation.
@@ -157,7 +147,7 @@ namespace xt::linalg
 
         // Map the output tensor's memory and copy the Eigen result into it.
         Eigen::Map<Eigen::Matrix<float, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor>>
-            output_map(output_ptr, result_eigen.rows(), result_eigen.cols());
+                output_map(output_ptr, result_eigen.rows(), result_eigen.cols());
 
         output_map = result_eigen;
 
@@ -173,13 +163,14 @@ namespace xt::linalg
             throw std::invalid_argument("Input to eig must be a square 2D matrix.");
         }
 
-        // Eigen's general eigensolver operates on complex matrices.
-        // It's safer to cast our real input to complex to handle all cases.
+        // --- START OF FIX ---
+        // Convert the input tensor to a REAL Eigen matrix.
         Eigen::MatrixXf eigen_A_real = tensor_to_eigen(A);
-        Eigen::MatrixXcf eigen_A_complex = eigen_A_real.cast<std::complex<float>>();
 
         // 2. --- Compute Eigendecomposition using Eigen ---
-        Eigen::EigenSolver<Eigen::MatrixXcf> solver(eigen_A_complex, /* computeEigenvectors= */ true);
+        // Instantiate EigenSolver with the REAL matrix type. This is the correct usage.
+        Eigen::EigenSolver<Eigen::MatrixXf> solver(eigen_A_real, /* computeEigenvectors= */ true);
+        // --- END OF FIX ---
 
         // Check if the computation was successful
         if (solver.info() != Eigen::Success) {
@@ -187,6 +178,8 @@ namespace xt::linalg
         }
 
         // 3. --- Extract results ---
+        // The .eigenvalues() and .eigenvectors() methods correctly return COMPLEX types
+        // even though the solver was instantiated with a REAL type.
         Eigen::VectorXcf eigenvalues = solver.eigenvalues();
         Eigen::MatrixXcf eigenvectors = solver.eigenvectors();
 
@@ -196,8 +189,5 @@ namespace xt::linalg
                 eigen_complex_matrix_to_tensor(eigenvectors)
         );
     }
-
-
-
 
 } // namespace xt::linalg
