@@ -4,6 +4,11 @@
 
 #include <torch/torch.h>
 
+#pragma once
+
+#include "../common.h"
+#include <torch/torch.h>
+
 namespace xt::transforms::weather {
 
     /**
@@ -33,10 +38,10 @@ namespace xt::transforms::weather {
          * @param seed A seed for the random number generator for reproducibility.
          */
         explicit VegetationMotion(
-                float wind_strength,
-                float gust_scale,
-                float animation_speed,
-                int64_t seed = 0
+            float wind_strength,
+            float gust_scale,
+            float animation_speed,
+            int64_t seed = 0
         );
 
         /**
@@ -66,7 +71,7 @@ namespace xt::transforms::weather {
 
         // State
         int64_t seed_;
-        torch::Generator generator_;
+        torch::Generator generator_; // The generator is simply declared here
         double time_step_ = 0.0;
         bool is_initialized_ = false;
 

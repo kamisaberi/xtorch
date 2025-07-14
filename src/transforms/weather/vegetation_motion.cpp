@@ -45,23 +45,33 @@ int main() {
 }
 */
 
+#include "include/transforms/weather/vegetation_motion.h"
+#include <stdexcept>
+#define _USE_MATH_DEFINES
+#include <math.h>
+
+// This header is required for functional calls like interpolate and grid_sample
+#include <torch/nn/functional.h>
+
 namespace xt::transforms::weather {
 
     VegetationMotion::VegetationMotion()
             : wind_strength_(5.0f),
               gust_scale_(32.0f),
               animation_speed_(0.5f),
-              seed_(0),
-              generator_(torch::make_generator<torch::CPUGenerator>(0))
-    {}
+              seed_(0)
+    {
+        generator_.set_current_seed(seed_);
+    }
 
     VegetationMotion::VegetationMotion(float wind_strength, float gust_scale, float animation_speed, int64_t seed)
             : wind_strength_(wind_strength),
               gust_scale_(gust_scale),
               animation_speed_(animation_speed),
-              seed_(seed),
-              generator_(torch::make_generator<torch::CPUGenerator>(seed))
+              seed_(seed)
     {
+        generator_.set_current_seed(seed_);
+
         if (wind_strength_ < 0 || gust_scale_ < 1.0f || animation_speed_ < 0) {
             throw std::invalid_argument("VegetationMotion parameters must be non-negative.");
         }
@@ -75,9 +85,16 @@ namespace xt::transforms::weather {
         noise_a_ = torch::rand({1, 1, low_res_H, low_res_W}, generator_, options);
         noise_b_ = torch::rand({1, 1, low_res_H, low_res_W}, generator_, options);
 
-        // Scale them up to full resolution using smooth interpolation
-        noise_a_ = torch::upsample_bilinear2d(noise_a_, {H, W}, false).squeeze(0);
-        noise_b_ = torch::upsample_bilinear2d(noise_b_, {H, W}, false).squeeze(0);
+        // --- Start of Fix ---
+        // Use torch::nn::functional::interpolate for upsampling. This is the modern, correct way.
+        auto interpolate_options = torch::nn::functional::InterpolateFuncOptions()
+                                        .size(std::vector<int64_t>{H, W})
+                                        .mode(torch::kBilinear)
+                                        .align_corners(false);
+
+        noise_a_ = torch::nn::functional::interpolate(noise_a_, interpolate_options).squeeze(0);
+        noise_b_ = torch::nn::functional::interpolate(noise_b_, interpolate_options).squeeze(0);
+        // --- End of Fix ---
 
         // Map noise from [0, 1] to [-1, 1] for left/right displacement
         noise_a_ = noise_a_ * 2.0f - 1.0f;
@@ -104,34 +121,29 @@ namespace xt::transforms::weather {
 
         // 2. --- Create Animated Displacement Field ---
         time_step_ += animation_speed_ * 0.1;
-        float alpha = (sin(time_step_) + 1.0f) / 2.0f; // Interpolation factor [0, 1]
+        float alpha = (sin(time_step_) + 1.0f) / 2.0f;
 
-        // Interpolate between the two noise fields for smooth animation
         torch::Tensor current_noise = torch::lerp(noise_a_, noise_b_, alpha);
-
-        // Create the displacement field: noise * strength * vegetation_mask
         torch::Tensor displacement_field = current_noise * wind_strength_;
-        displacement_field *= mask.to(image.options()); // Apply vegetation mask
+        displacement_field *= mask.to(image.options());
 
         // 3. --- Create Warping Grid for grid_sample ---
-        // Create a base grid of normalized coordinates [-1, 1]
         auto x_coords = torch::linspace(-1, 1, W, image.options());
         auto y_coords = torch::linspace(-1, 1, H, image.options());
         auto mesh = torch::meshgrid({y_coords, x_coords}, "ij");
-        torch::Tensor grid = torch::stack({mesh[1], mesh[0]}, 2); // Shape (H, W, 2), format (x, y)
+        torch::Tensor grid = torch::stack({mesh[1], mesh[0]}, 2);
 
-        // Normalize pixel displacement to the [-1, 1] grid range
         torch::Tensor normalized_displacement = displacement_field / (W / 2.0f);
-        grid.select(2, 0) += normalized_displacement.squeeze(0); // Add displacement to X coordinates
+        grid.select(2, 0) += normalized_displacement.squeeze(0);
 
         // 4. --- Apply Warping ---
-        // grid_sample expects inputs of shape (N, C, H, W) and (N, H_out, W_out, 2)
-        torch::Tensor warped_image = torch::grid_sample(
+        torch::Tensor warped_image = torch::nn::functional::grid_sample(
                 image.unsqueeze(0),
                 grid.unsqueeze(0),
-                0, // "bilinear" interpolation
-                0, // "zeros" padding
-                false // align_corners
+                torch::nn::functional::GridSampleFuncOptions()
+                    .mode(torch::kBilinear)
+                    .padding_mode(torch::kZeros)
+                    .align_corners(false)
         );
 
         return warped_image.squeeze(0);
