@@ -89,7 +89,7 @@ int main() {
                                                       });
     // cout << "mnt 03:" << dataset2.size().value() << "\n";
     // auto dataset3 =dataset2.map(torch::data::transforms::Stack<>());
-    //TODO Custom Dataset FINISH
+    //Custom Dataset FINISH
 
 
     auto train_loader = torch::data::make_data_loader<torch::data::samplers::SequentialSampler>(
