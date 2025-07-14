@@ -40,15 +40,19 @@ int main() {
 }
 */
 
+#include "include/transforms/weather/streak_based_rain.h"
+#include <stdexcept>
+
 namespace xt::transforms::weather {
 
+    // --- FIX 1: Corrected Generator Initialization ---
     StreakBasedRain::StreakBasedRain()
             : intensity_(2500),
               speed_(12.0f),
               length_(5.0f),
-              seed_(0),
-              generator_(torch::make_generator<torch::CPUGenerator>(0))
+              seed_(0)
     {
+        generator_.set_current_seed(seed_);
         rain_color_ = torch::tensor({0.8, 0.8, 0.9});
     }
 
@@ -57,9 +61,10 @@ namespace xt::transforms::weather {
               speed_(speed),
               length_(length),
               rain_color_(std::move(rain_color)),
-              seed_(seed),
-              generator_(torch::make_generator<torch::CPUGenerator>(seed))
+              seed_(seed)
     {
+        generator_.set_current_seed(seed_);
+
         if (intensity_ <= 0 || speed_ <= 0 || length_ < 1) {
             throw std::invalid_argument("Rain intensity, speed, and length must be positive.");
         }
@@ -69,7 +74,6 @@ namespace xt::transforms::weather {
     }
 
     void StreakBasedRain::initialize_drops(int64_t H, int64_t W) {
-        // Create random (y, x) positions for the bottom of each streak
         auto y_coords = torch::rand({intensity_}, generator_) * H;
         auto x_coords = torch::rand({intensity_}, generator_) * W;
         drop_positions_ = torch::stack({y_coords, x_coords}, 1).to(torch::kFloat32);
@@ -96,7 +100,6 @@ namespace xt::transforms::weather {
         // 2. --- Update Drop State ---
         drop_positions_.select(1, 0) += speed_; // Move drops down
 
-        // Reset drops that fall off the bottom of the screen
         torch::Tensor off_screen_mask = drop_positions_.select(1, 0) >= H;
         drop_positions_.select(1, 0).masked_fill_(off_screen_mask, 0.0f);
         torch::Tensor new_x = torch::rand({intensity_}, generator_) * W;
@@ -105,20 +108,21 @@ namespace xt::transforms::weather {
         // 3. --- Render Streaks to an Overlay Mask ---
         torch::Tensor rain_overlay = torch::zeros({H, W}, image.options());
 
-        // Loop for the length of the streak, drawing one segment at a time
+        // --- FIX 2: Corrected index_put_ Value ---
+        // Create a scalar tensor containing 1.0 with the correct data type.
+        torch::Tensor streak_value = torch::tensor(1.0, image.options());
+
         for (int i = 0; i < static_cast<int>(length_); ++i) {
-            // Get the integer coordinates for the current streak segment
             torch::Tensor y_coords = (drop_positions_.select(1, 0) - i).to(torch::kLong);
             torch::Tensor x_coords = drop_positions_.select(1, 1).to(torch::kLong);
 
-            // Create a mask to only use coordinates that are on-screen
             torch::Tensor valid_mask = (y_coords >= 0) & (y_coords < H) & (x_coords >= 0) & (x_coords < W);
             auto y_idx = y_coords.masked_select(valid_mask);
             auto x_idx = x_coords.masked_select(valid_mask);
 
-            // Draw the valid streak segments onto the overlay
             if (y_idx.numel() > 0) {
-                rain_overlay.index_put_({y_idx, x_idx}, 1.0, true);
+                // Use the tensor `streak_value` and the correct two-argument overload.
+                rain_overlay.index_put_({y_idx, x_idx}, streak_value);
             }
         }
 
