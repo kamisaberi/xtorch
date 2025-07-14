@@ -31,4 +31,7 @@ namespace xt::linalg
 
 
     torch::Tensor pinverse(const torch::Tensor& input, double rcond = 1e-15);
+
+    std::tuple<torch::Tensor, torch::Tensor> eig(const torch::Tensor& A);
+
 } // namespace xt::linalg

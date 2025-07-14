@@ -48,6 +48,34 @@ namespace
             torch::kFloat32
         ).clone();
     }
+
+
+    //////////////////////////////
+
+
+
+    // New helper: Converts a complex Eigen matrix to a complex torch::Tensor.
+    torch::Tensor eigen_complex_matrix_to_tensor(const Eigen::MatrixXcf& matrix)
+    {
+        // from_blob does not take ownership, so we must clone.
+        return torch::from_blob(
+                const_cast<std::complex<float>*>(matrix.data()), // from_blob needs non-const pointer
+                {matrix.rows(), matrix.cols()},
+                torch::kComplexFloat
+        ).clone();
+    }
+
+    // New helper: Converts a complex Eigen vector to a complex 1D torch::Tensor.
+    torch::Tensor eigen_complex_vector_to_tensor(const Eigen::VectorXcf& vec)
+    {
+        return torch::from_blob(
+                const_cast<std::complex<float>*>(vec.data()),
+                {vec.size()},
+                torch::kComplexFloat
+        ).clone();
+    }
+
+
 } // anonymous namespace
 
 
@@ -135,6 +163,41 @@ namespace xt::linalg
 
         return output_tensor;
     }
+
+
+    std::tuple<torch::Tensor, torch::Tensor> eig(const torch::Tensor& A)
+    {
+        // 1. --- Input Validation ---
+        if (A.dim() != 2 || A.size(0) != A.size(1))
+        {
+            throw std::invalid_argument("Input to eig must be a square 2D matrix.");
+        }
+
+        // Eigen's general eigensolver operates on complex matrices.
+        // It's safer to cast our real input to complex to handle all cases.
+        Eigen::MatrixXf eigen_A_real = tensor_to_eigen(A);
+        Eigen::MatrixXcf eigen_A_complex = eigen_A_real.cast<std::complex<float>>();
+
+        // 2. --- Compute Eigendecomposition using Eigen ---
+        Eigen::EigenSolver<Eigen::MatrixXcf> solver(eigen_A_complex, /* computeEigenvectors= */ true);
+
+        // Check if the computation was successful
+        if (solver.info() != Eigen::Success) {
+            throw std::runtime_error("Eigendecomposition failed to converge.");
+        }
+
+        // 3. --- Extract results ---
+        Eigen::VectorXcf eigenvalues = solver.eigenvalues();
+        Eigen::MatrixXcf eigenvectors = solver.eigenvectors();
+
+        // 4. --- Convert back to torch::Tensors and return ---
+        return std::make_tuple(
+                eigen_complex_vector_to_tensor(eigenvalues),
+                eigen_complex_matrix_to_tensor(eigenvectors)
+        );
+    }
+
+
 
 
 } // namespace xt::linalg
