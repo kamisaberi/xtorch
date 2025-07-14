@@ -261,7 +261,7 @@ namespace xt::optim
 
             //TODO START We should create EIGH
             throw std::runtime_error("TODO We should create EIGH");
-            // eigh_result = torch::linalg::eigh(damped_matrix, "U");
+            eigh_result = xt::linalg::eigh(damped_matrix, "U");
             //TODO END We should create EIGH
 
         } catch (const c10::Error& e) {

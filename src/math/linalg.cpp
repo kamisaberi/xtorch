@@ -155,7 +155,7 @@ namespace xt::linalg
     }
 
 
-    std::tuple<torch::Tensor, torch::Tensor> eig(const torch::Tensor& A)
+    std::tuple<torch::Tensor, torch::Tensor> eigh(const torch::Tensor& A)
     {
         // 1. --- Input Validation ---
         if (A.dim() != 2 || A.size(0) != A.size(1))
