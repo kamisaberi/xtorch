@@ -38,15 +38,18 @@ int main() {
 }
 */
 
+
 namespace xt::transforms::weather {
 
     PatchyFog::PatchyFog()
             : base_density_(0.2f),
               patch_intensity_(0.6f),
               granularity_(16.0f),
-              seed_(0),
-              generator_(torch::make_generator<torch::CPUGenerator>(0))
+              seed_(0)
+              // The generator_ member is implicitly default-constructed here
     {
+        // Set the seed on the default-constructed generator. This is the stable API.
+        generator_.set_current_seed(seed_);
         fog_color_ = torch::tensor({0.8, 0.8, 0.8});
     }
 
@@ -55,9 +58,12 @@ namespace xt::transforms::weather {
               patch_intensity_(patch_intensity),
               granularity_(granularity),
               fog_color_(std::move(fog_color)),
-              seed_(seed),
-              generator_(torch::make_generator<torch::CPUGenerator>(seed))
+              seed_(seed)
+              // The generator_ member is implicitly default-constructed here
     {
+        // Set the seed on the default-constructed generator. This is the stable API.
+        generator_.set_current_seed(seed_);
+
         if (base_density_ < 0.0f || base_density_ > 1.0f) {
             throw std::invalid_argument("Base density must be between 0.0 and 1.0.");
         }
