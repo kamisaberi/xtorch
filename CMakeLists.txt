@@ -427,6 +427,8 @@ target_include_directories(xTorch
 #        ${LIBZIP_LIBRARIES}  # Add this line
 #)
 
+#message("CUUUURRRRRRLLLLLL" , ${CURL_LIBRARIES})
+
 target_link_libraries(xTorch
         PUBLIC
         ${TORCH_LIBRARIES}    # Almost certainly public
