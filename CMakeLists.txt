@@ -15,8 +15,10 @@ cmake_minimum_required(VERSION 3.28 FATAL_ERROR)
 # Project definition with version and language (C++)
 project(xTorch VERSION 0.2.0 LANGUAGES CXX)
 
-add_definitions(-D_GLIBCXX_USE_CXX11_ABI=1)
 
+if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
+    add_definitions(-D_GLIBCXX_USE_CXX11_ABI=1)
+endif ()
 
 
 # --- 1. Define Dependency Configuration ---
@@ -27,7 +29,6 @@ add_definitions(-D_GLIBCXX_USE_CXX11_ABI=1)
 set(DEPS_DIR "${CMAKE_SOURCE_DIR}/third_party")
 set(LIBTORCH_DIR "${DEPS_DIR}/libtorch")
 set(ONNXRUNTIME_DIR "${DEPS_DIR}/onnxruntime")
-
 
 
 if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
@@ -46,23 +47,16 @@ else ()
 endif ()
 
 
-
-
-
-
-
-
-
 # Example for Linux CPU
 
 
 # Create the third_party directory if it doesn't exist
-if(NOT EXISTS "${DEPS_DIR}")
+if (NOT EXISTS "${DEPS_DIR}")
     file(MAKE_DIRECTORY "${DEPS_DIR}")
-endif()
+endif ()
 
 # --- 2. Fetch LibTorch if it doesn't exist locally ---
-if(NOT EXISTS "${LIBTORCH_DIR}")
+if (NOT EXISTS "${LIBTORCH_DIR}")
     message(STATUS "LibTorch not found locally. Downloading and extracting...")
     set(LIBTORCH_ARCHIVE "${DEPS_DIR}/libtorch.zip")
 
@@ -82,12 +76,12 @@ if(NOT EXISTS "${LIBTORCH_DIR}")
     # Clean up the downloaded archive
     file(REMOVE ${LIBTORCH_ARCHIVE})
     message(STATUS "LibTorch setup complete in ${LIBTORCH_DIR}")
-else()
+else ()
     message(STATUS "Found local LibTorch at ${LIBTORCH_DIR}")
-endif()
+endif ()
 
 # --- 3. Fetch ONNX Runtime if it doesn't exist locally ---
-if(NOT EXISTS "${ONNXRUNTIME_DIR}")
+if (NOT EXISTS "${ONNXRUNTIME_DIR}")
     message(STATUS "ONNX Runtime not found locally. Downloading and extracting...")
     # The archive extension can be .zip or .tgz
     string(REGEX MATCH "([^/]+)$" ONNXRUNTIME_FILENAME ${ONNXRUNTIME_URL})
@@ -115,9 +109,9 @@ if(NOT EXISTS "${ONNXRUNTIME_DIR}")
     file(REMOVE_RECURSE ${ONNXRUNTIME_TEMP_DIR})
     file(REMOVE ${ONNXRUNTIME_ARCHIVE})
     message(STATUS "ONNX Runtime setup complete in ${ONNXRUNTIME_DIR}")
-else()
+else ()
     message(STATUS "Found local ONNX Runtime at ${ONNXRUNTIME_DIR}")
-endif()
+endif ()
 
 
 # --- 4. Find and Configure the Libraries (now that they are guaranteed to exist) ---
@@ -138,10 +132,6 @@ find_library(
 )
 message(STATUS "Configured ONNX Runtime Library: ${ONNXRUNTIME_LIBRARY}")
 include_directories(${ONNXRUNTIME_INCLUDE_DIR})
-
-
-
-
 
 
 # =============================================================================
@@ -183,10 +173,6 @@ file(GLOB_RECURSE MATH_FILES CONFIGURE_DEPENDS src/math/*.cpp)
 
 # Collect all header files from include directory
 file(GLOB_RECURSE HEADER_FILES CONFIGURE_DEPENDS ./include/*.h)
-
-
-
-
 
 
 # Combine all source files into single list for library target
@@ -272,7 +258,6 @@ find_path(LIBTAR_INCLUDE_DIR tar.h REQUIRED)
 # find_package(onnxruntime REQUIRED)
 
 
-
 find_package(glfw3 REQUIRED)
 find_package(OpenGL REQUIRED)
 
@@ -284,8 +269,6 @@ find_package(Eigen3 REQUIRED)
 # --- Find and link libsamplerate using pkg-config ---
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(SAMPLERATE REQUIRED samplerate)
-
-
 
 
 ## --- 2. Find ONNX Runtime (Local Setup) ---
@@ -332,7 +315,6 @@ find_package(PkgConfig REQUIRED)
 pkg_check_modules(LIBZIP REQUIRED libzip)
 
 
-
 add_subdirectory(third_party/sndfile)
 
 # --- ADD THIS LINE ---
@@ -343,8 +325,6 @@ set_target_properties(sndfile PROPERTIES POSITION_INDEPENDENT_CODE ON)
 
 #add_library(xTorch SHARED ${SOURCES})
 #target_link_libraries(xTorch PRIVATE sndfile)
-
-
 
 
 # --- Add ImGui ---
@@ -378,8 +358,6 @@ target_include_directories(implot PUBLIC third_party/implot third_party/imgui)
 target_link_libraries(implot PUBLIC imgui)
 
 
-
-
 #find_package(SndFile REQUIRED
 #        PATHS /usr/lib/x86_64-linux-gnu/cmake
 #        /usr/local/lib/cmake
@@ -387,15 +365,9 @@ target_link_libraries(implot PUBLIC imgui)
 #        )
 
 
-
-
-
-
-
 # Find libtar (for tar archive handling)
 find_library(LIBTAR_LIBRARY tar REQUIRED)
 find_path(LIBTAR_INCLUDE_DIR tar.h REQUIRED)
-
 
 
 ## Configure include directories for the library
@@ -406,7 +378,6 @@ find_path(LIBTAR_INCLUDE_DIR tar.h REQUIRED)
 #        ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS}
 #        ${ZLIB_INCLUDE_DIRS} ${CURL_INCLUDE_DIR}
 #        ${LibArchive_INCLUDE_DIRS} ${SndFile_INCLUDE_DIRS})
-
 
 
 # ADD THESE TWO NEW BLOCKS INSTEAD
@@ -440,9 +411,6 @@ target_include_directories(xTorch
 
 )
 # ==============================================================================
-
-
-
 
 
 ## Link all required libraries to xTorch
@@ -480,7 +448,7 @@ target_link_libraries(xTorch
         implot
         ${EIGEN3_INCLUDE_DIRS}
         ${SAMPLERATE_LIBRARIES}
-#        SampleRate::samplerate
+        #        SampleRate::samplerate
 )
 
 
