@@ -1,4 +1,4 @@
-#include "include/losses/triplet_entropy_loss.h"
+#include <losses/triplet_entropy_loss.h>
 
 namespace xt::losses
 {

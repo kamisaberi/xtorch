@@ -1,4 +1,4 @@
-#include "include/losses/self_adjusting_smooth_l1_loss.h"
+#include <losses/self_adjusting_smooth_l1_loss.h>
 
 namespace xt::losses
 {

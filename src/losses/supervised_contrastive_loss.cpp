@@ -1,4 +1,4 @@
-#include "include/losses/supervised_contrastive_loss.h"
+#include <losses/supervised_contrastive_loss.h>
 
 namespace xt::losses
 {
