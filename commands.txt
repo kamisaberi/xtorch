@@ -1,0 +1,3 @@
+windows :
+$env:CURL_DIR = "C:/vcpkg/installed/x64-windows"
+cmake -G "Visual Studio 16 2019" -DCMAKE_PREFIX_PATH=C:/vcpkg/installed/x64-windows -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake ..
