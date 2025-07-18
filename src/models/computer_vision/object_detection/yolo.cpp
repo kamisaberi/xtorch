@@ -1,4 +1,4 @@
-#include "include/models/computer_vision/object_detection/yolo.h"
+#include <models/computer_vision/object_detection/yolo.h>
 
 
 using namespace std;
