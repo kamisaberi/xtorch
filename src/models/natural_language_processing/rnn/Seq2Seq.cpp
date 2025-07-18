@@ -1,4 +1,4 @@
-#include "include/models/natural_language_processing/rnn/seq2seq.h"
+#include <models/natural_language_processing/rnn/seq2seq.h>
 
 
 using namespace std;
