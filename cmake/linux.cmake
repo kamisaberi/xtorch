@@ -66,6 +66,9 @@ target_link_libraries(xTorch
         implot
         pthread
         dl
+        ${EIGEN3_INCLUDE_DIRS}
+        ${SAMPLERATE_LIBRARIES}
+
 )
 
 # --- 6. Add Linux-specific post-install script ---
