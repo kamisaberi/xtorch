@@ -1,4 +1,4 @@
-#include "include/losses/nt_xent_loss.h"
+#include <losses/nt_xent_loss.h>
 
 namespace xt::losses
 {
