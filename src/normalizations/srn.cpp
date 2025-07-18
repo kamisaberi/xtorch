@@ -1,4 +1,4 @@
-#include "include/normalizations/srn.h"
+#include <normalizations/srn.h>
 
 namespace xt::norm
 {

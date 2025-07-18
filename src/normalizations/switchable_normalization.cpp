@@ -1,4 +1,4 @@
-#include "include/normalizations/switchable_normalization.h"
+#include <normalizations/switchable_normalization.h>
 
 
 //
