@@ -1,4 +1,4 @@
-#include "include/losses/gan_hinge_loss.h"
+#include <losses/gan_hinge_loss.h>
 
 namespace xt::losses
 {

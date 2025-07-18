@@ -1,4 +1,4 @@
-#include "include/losses/flip_loss.h"
+#include <losses/flip_loss.h>
 
 namespace xt::losses
 {

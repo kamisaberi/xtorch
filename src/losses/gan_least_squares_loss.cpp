@@ -1,4 +1,4 @@
-#include "include/losses/gan_least_squares_loss.h"
+#include <losses/gan_least_squares_loss.h>
 
 namespace xt::losses
 {
