@@ -1,4 +1,4 @@
-#include "include/activations/m_arcsinh.h"
+#include <activations/m_arcsinh.h>
 
 namespace xt::activations
 {

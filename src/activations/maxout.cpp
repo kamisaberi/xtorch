@@ -1,4 +1,4 @@
-#include "include/activations/maxout.h"
+#include <activations/maxout.h>
 
 namespace xt::activations
 {

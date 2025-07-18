@@ -1,4 +1,4 @@
-#include "include/activations/margin_relu.h"
+#include <activations/margin_relu.h>
 
 namespace xt::activations
 {
