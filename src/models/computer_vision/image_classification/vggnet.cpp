@@ -1,4 +1,4 @@
-#include "include/models/computer_vision/image_classification/vggnet.h"
+#include <models/computer_vision/image_classification/vggnet.h>
 
 namespace xt::models
 {
