@@ -1,4 +1,4 @@
-#include "include/losses/proxy_anchor_loss.h"
+#include <losses/proxy_anchor_loss.h>
 
 namespace xt::losses
 {
