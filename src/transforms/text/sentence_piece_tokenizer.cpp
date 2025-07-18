@@ -1,4 +1,4 @@
-#include "include/transforms/text/sentence_piece_tokenizer.h"
+#include <transforms/text/sentence_piece_tokenizer.h>
 
 namespace xt::transforms::text
 {
