@@ -1,4 +1,4 @@
-#include "include/activations/swish.h"
+#include <activations/swish.h>
 
 namespace xt::activations
 {

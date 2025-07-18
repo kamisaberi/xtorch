@@ -1,4 +1,4 @@
-#include "include/activations/swigelu.h"
+#include <activations/swigelu.h>
 
 namespace xt::activations
 {
