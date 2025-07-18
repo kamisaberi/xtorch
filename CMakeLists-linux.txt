@@ -1,4 +1,35 @@
-add_definitions(-D_GLIBCXX_USE_CXX11_ABI=1)
+# =============================================================================
+# xTorch CMake Build System
+# Author: Kamran Saberifard
+# Email: kamisaberi@gmail.com
+# GitHub: https://github.com/kamisaberi
+#
+# Project: xTorch Machine Learning Framework
+
+# Version: 0.2.0
+# Description: CMake configuration for building xTorch shared library
+# =============================================================================
+
+# Minimum required CMake version with FATAL_ERROR if not met
+cmake_minimum_required(VERSION 3.28 FATAL_ERROR)
+
+
+#if ("WIN32")
+#    message("WINNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN")
+#    set(CMAKE_TOOLCHAIN_FILE "C:/vcpkg/scripts/buildsystems/vcpkg.cmake")
+#endif ()
+
+#set(CURL_DIR "C:/vcpkg/packages/curl_x86-windows/share/curl")
+# Project definition with version and language (C++)
+project(xTorch VERSION 0.2.0 LANGUAGES CXX)
+
+
+if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
+    add_definitions(-D_GLIBCXX_USE_CXX11_ABI=1)
+endif ()
+
+#set(LibArchive_INCLUDE_DIR "C:/vcpkg/installed/x64-windows/include")
+#set(LibArchive_LIBRARY "C:/vcpkg/installed/x64-windows/lib/archive.lib")
 
 # --- 1. Define Dependency Configuration ---
 # All URLs, hashes, and paths are defined here for easy updates.
