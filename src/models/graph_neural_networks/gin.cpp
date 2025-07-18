@@ -1,4 +1,4 @@
-#include "include/models/graph_neural_networks/gin.h"
+#include <models/graph_neural_networks/gin.h>
 
 
 using namespace std;

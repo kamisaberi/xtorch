@@ -1,4 +1,4 @@
-#include "include/models/graph_neural_networks/graph_sage.h"
+#include <models/graph_neural_networks/graph_sage.h>
 
 
 using namespace std;
