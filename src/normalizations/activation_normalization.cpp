@@ -1,4 +1,4 @@
-#include "include/normalizations/activation_normalization.h"
+#include <normalizations/activation_normalization.h>
 
 
 // #include <torch/torch.h>

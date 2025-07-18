@@ -1,4 +1,4 @@
-#include "include/normalizations/adaptive_instance_normalization.h"
+#include <normalizations/adaptive_instance_normalization.h>
 
 
 // #include <torch/torch.h>
