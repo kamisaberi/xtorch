@@ -1,4 +1,4 @@
-#include "include/losses/info_nce_loss.h"
+#include <losses/info_nce_loss.h>
 
 namespace xt::losses
 {

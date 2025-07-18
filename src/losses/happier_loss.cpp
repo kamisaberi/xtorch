@@ -1,4 +1,4 @@
-#include "include/losses/happier_loss.h"
+#include <losses/happier_loss.h>
 
 namespace xt::losses
 {
