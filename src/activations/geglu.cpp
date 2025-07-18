@@ -1,4 +1,4 @@
-#include "include/activations/geglu.h"
+#include <activations/geglu.h>
 
 namespace xt::activations
 {

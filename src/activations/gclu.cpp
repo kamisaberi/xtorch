@@ -1,4 +1,4 @@
-#include "include/activations/gclu.h"
+#include <activations/gclu.h>
 
 namespace xt::activations
 {

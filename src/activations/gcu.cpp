@@ -1,4 +1,4 @@
-#include "include/activations/gcu.h"
+#include <activations/gcu.h>
 
 namespace xt::activations
 {
