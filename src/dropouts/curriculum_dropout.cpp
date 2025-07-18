@@ -1,4 +1,4 @@
-#include "include/dropouts/curriculum_dropout.h"
+#include <dropouts/curriculum_dropout.h>
 
 //
 // #include <torch/torch.h>
