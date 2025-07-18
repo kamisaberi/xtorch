@@ -1,4 +1,4 @@
-#include "include/transforms/target/event_to_signal_converter.h"
+#include <transforms/target/event_to_signal_converter.h>
 
 #include <stdexcept>
 #include <cmath> // For std::exp and M_PI

@@ -1,4 +1,4 @@
-#include "include/transforms/target/james_stein_encoder.h"
+#include <transforms/target/james_stein_encoder.h>
 
 #include <stdexcept>
 
