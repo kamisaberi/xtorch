@@ -1,4 +1,4 @@
-#include "include/activations/reglu.h"
+#include <activations/reglu.h>
 
 namespace xt::activations
 {

@@ -1,4 +1,4 @@
-#include "include/activations/rational.h"
+#include <activations/rational.h>
 
 namespace xt::activations
 {
