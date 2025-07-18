@@ -1,4 +1,4 @@
-#include "include/models/reinforcement_learning/rainbow.h"
+#include <models/reinforcement_learning/rainbow.h>
 
 
 using namespace std;
