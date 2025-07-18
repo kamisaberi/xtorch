@@ -1,4 +1,4 @@
-#include "include/models/natural_language_processing/others/fast_text.h"
+#include <models/natural_language_processing/others/fast_text.h>
 
 
 using namespace std;
