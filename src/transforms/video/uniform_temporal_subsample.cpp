@@ -1,4 +1,4 @@
-#include "include/transforms/video/uniform_temporal_subsample.h"
+#include <transforms/video/uniform_temporal_subsample.h>
 
 #include <stdexcept>
 #include <cmath> // For std::round
