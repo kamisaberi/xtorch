@@ -1,4 +1,4 @@
-#include "include/models/computer_vision/image_classification/network_in_network.h"
+#include <models/computer_vision/image_classification/network_in_network.h>
 
 
 using namespace std;
