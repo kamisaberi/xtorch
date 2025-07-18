@@ -1,4 +1,4 @@
-#include "include/activations/kan.h"
+#include <activations/kan.h>
 
 namespace xt::activations
 {

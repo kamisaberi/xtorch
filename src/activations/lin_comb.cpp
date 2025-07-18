@@ -1,4 +1,4 @@
-#include "include/activations/lin_comb.h"
+#include <activations/lin_comb.h>
 
 namespace xt::activations
 {
