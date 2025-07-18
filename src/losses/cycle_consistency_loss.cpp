@@ -1,4 +1,4 @@
-#include "include/losses/cycle_consistency_loss.h"
+#include <losses/cycle_consistency_loss.h>
 
 namespace xt::losses
 {
