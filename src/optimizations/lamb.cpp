@@ -1,4 +1,4 @@
-#include "include/optimizations/lamb.h"
+#include <optimizations/lamb.h>
 #include <stdexcept>
 namespace xt::optim
 {
