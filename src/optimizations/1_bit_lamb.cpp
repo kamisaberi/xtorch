@@ -1,4 +1,4 @@
-#include "include/optimizations/1_bit_lamb.h"
+#include <optimizations/1_bit_lamb.h>
 #include <stdexcept> // For std::runtime_error
 
 namespace xt::optim

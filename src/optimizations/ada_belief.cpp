@@ -1,4 +1,4 @@
-#include "include/optimizations/ada_belief.h"
+#include <optimizations/ada_belief.h>
 #include <stdexcept> // For std::runtime_error
 
 namespace xt::optim
