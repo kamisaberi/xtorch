@@ -1,4 +1,4 @@
-#include "include/datasets/graph_data/node_classification/cora.h"
+#include <datasets/graph_data/node_classification/cora.h>
 
 namespace xt::datasets
 {

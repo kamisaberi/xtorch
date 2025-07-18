@@ -1,4 +1,4 @@
-#include "include/datasets/graph_data/molecular_property_prediction/ogb_mo_ihiv.h"
+#include <datasets/graph_data/molecular_property_prediction/ogb_mo_ihiv.h>
 
 namespace xt::datasets
 {
