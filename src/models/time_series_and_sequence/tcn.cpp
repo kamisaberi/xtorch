@@ -1,4 +1,4 @@
-#include "include/models/time_series_and_sequence/tcn.h"
+#include <models/time_series_and_sequence/tcn.h>
 
 
 using namespace std;
