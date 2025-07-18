@@ -1,4 +1,4 @@
-#include "include/activations/golu.h"
+#include <activations/golu.h>
 
 namespace xt::activations
 {

@@ -1,4 +1,4 @@
-#include "include/activations/gumbel.h"
+#include <activations/gumbel.h>
 
 namespace xt::activations
 {
