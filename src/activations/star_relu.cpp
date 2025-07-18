@@ -1,4 +1,4 @@
-#include "include/activations/star_relu.h"
+#include <activations/star_relu.h>
 
 namespace xt::activations
 {

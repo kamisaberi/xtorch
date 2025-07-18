@@ -1,4 +1,4 @@
-#include "include/activations/squared_relu.h"
+#include <activations/squared_relu.h>
 
 namespace xt::activations
 {

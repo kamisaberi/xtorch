@@ -1,4 +1,4 @@
-#include "include/activations/srelu.h"
+#include <activations/srelu.h>
 
 namespace xt::activations
 {
