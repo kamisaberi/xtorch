@@ -1,4 +1,4 @@
-#include "include/normalizations/batch_channel_normalization.h"
+#include <normalizations/batch_channel_normalization.h>
 
 
 //
