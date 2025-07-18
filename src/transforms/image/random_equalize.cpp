@@ -1,4 +1,4 @@
-#include "include/transforms/image/random_equalize.h"
+#include <transforms/image/random_equalize.h>
 
 
 // --- Example Main (for testing) ---
