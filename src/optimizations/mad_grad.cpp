@@ -1,4 +1,4 @@
-#include "include/optimizations/mad_grad.h"
+#include <optimizations/mad_grad.h>
 #include <stdexcept>
 
 namespace xt::optim
