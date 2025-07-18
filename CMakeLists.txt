@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.28 FATAL_ERROR)
 
+set(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "The configurations to build" FORCE)
+
 # Define the project. The included scripts will configure it.
 project(xTorch VERSION 0.2.0 LANGUAGES CXX)
 

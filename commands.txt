@@ -5,3 +5,5 @@ cmake -G "Visual Studio 16 2019" -DCMAKE_PREFIX_PATH=C:/vcpkg/installed/x64-wind
 
 
 cmake -G "Visual Studio 16 2019" -D CMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake -D CMAKE_BUILD_TYPE=Release ..
+cmake --build . --config Release
+cmake --build . --config Release -- -m:32

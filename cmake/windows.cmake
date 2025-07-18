@@ -17,18 +17,18 @@ set(LIBTORCH_SHA256 "031376821817e81e3a1e94871030999581c7908861d49a46323c938888e
 set(ONNXRUNTIME_URL "https://github.com/microsoft/onnxruntime/releases/download/v1.16.3/onnxruntime-win-x64-gpu-1.16.3.zip")
 set(ONNXRUNTIME_SHA256 "1c9ac64696144e138379633e7287968b594966141315995f553f495534125c11")
 
-if(NOT EXISTS "${DEPS_DIR}")
+if (NOT EXISTS "${DEPS_DIR}")
     file(MAKE_DIRECTORY "${DEPS_DIR}")
-endif()
-if(NOT EXISTS "${LIBTORCH_DIR}")
+endif ()
+if (NOT EXISTS "${LIBTORCH_DIR}")
     message(STATUS "LibTorch not found locally. Downloading and extracting...")
     string(REGEX MATCH "([^/]+)$" LIBTORCH_FILENAME ${LIBTORCH_URL})
     set(LIBTORCH_ARCHIVE "${DEPS_DIR}/${LIBTORCH_FILENAME}")
     file(DOWNLOAD ${LIBTORCH_URL} ${LIBTORCH_ARCHIVE} EXPECTED_HASH SHA256=${LIBTORCH_SHA256} SHOW_PROGRESS)
     execute_process(COMMAND ${CMAKE_COMMAND} -E tar xzf ${LIBTORCH_ARCHIVE} WORKING_DIRECTORY ${DEPS_DIR})
     file(REMOVE ${LIBTORCH_ARCHIVE})
-endif()
-if(NOT EXISTS "${ONNXRUNTIME_DIR}")
+endif ()
+if (NOT EXISTS "${ONNXRUNTIME_DIR}")
     message(STATUS "ONNX Runtime not found locally. Downloading and extracting...")
     string(REGEX MATCH "([^/]+)$" ONNXRUNTIME_FILENAME ${ONNXRUNTIME_URL})
     set(ONNXRUNTIME_ARCHIVE "${DEPS_DIR}/${ONNXRUNTIME_FILENAME}")
@@ -40,12 +40,12 @@ if(NOT EXISTS "${ONNXRUNTIME_DIR}")
     file(RENAME ${EXTRACTED_DIR} ${ONNXRUNTIME_DIR})
     file(REMOVE_RECURSE ${ONNXRUNTIME_TEMP_DIR})
     file(REMOVE ${ONNXRUNTIME_ARCHIVE})
-endif()
+endif ()
 
 # --- 2. Build Configuration ---
 if (NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
     set(CMAKE_BUILD_TYPE Release CACHE STRING "Choose the type of build." FORCE)
-endif()
+endif ()
 
 # --- 3. Source File Collection ---
 file(GLOB_RECURSE ACTIVATION_FILES CONFIGURE_DEPENDS src/activations/*.cpp)
@@ -95,8 +95,8 @@ find_library(ONNXRUNTIME_LIBRARY NAMES onnxruntime PATHS "${ONNXRUNTIME_DIR}/lib
 
 
 # --- Build third-party libs from source ---
-#add_subdirectory(third_party/sndfile)
-#set_target_properties(sndfile PROPERTIES POSITION_INDEPENDENT_CODE ON)
+add_subdirectory(third_party/sndfile)
+set_target_properties(sndfile PROPERTIES POSITION_INDEPENDENT_CODE ON)
 
 add_library(imgui third_party/imgui/imgui.cpp third_party/imgui/imgui_draw.cpp third_party/imgui/imgui_tables.cpp third_party/imgui/imgui_widgets.cpp third_party/imgui/imgui_demo.cpp)
 target_include_directories(imgui PUBLIC third_party/imgui)
@@ -118,7 +118,7 @@ target_include_directories(xTorch PRIVATE
         ${OpenCV_INCLUDE_DIRS}
         ${ZLIB_INCLUDE_DIRS}
         ${LibLZMA_INCLUDE_DIRS}
-#        ${SndFile_INCLUDE_DIRS}
+        ${SndFile_INCLUDE_DIRS}
         ${LIBZIP_INCLUDE_DIRS}
         ${EIGEN3_INCLUDE_DIRS}
 )
@@ -135,8 +135,8 @@ target_link_libraries(xTorch
         OpenSSL::SSL
         OpenSSL::Crypto
         LibLZMA::LibLZMA
-#        ${SndFile_LIBRARIES}
-#        sndfile
+        ${SndFile_LIBRARIES}
+        sndfile
         imgui_backend_glfw_gl3
         implot
 )
@@ -155,7 +155,7 @@ include(CMakePackageConfigHelpers)
 write_basic_package_version_file(${CMAKE_CURRENT_BINARY_DIR}/xTorchConfigVersion.cmake VERSION ${PROJECT_VERSION} COMPATIBILITY AnyNewerVersion)
 configure_package_config_file(${CMAKE_CURRENT_SOURCE_DIR}/cmake/xTorchConfig.cmake.in ${CMAKE_CURRENT_BINARY_DIR}/xTorchConfig.cmake INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/xTorch)
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/xTorchConfig.cmake ${CMAKE_CURRENT_BINARY_DIR}/xTorchConfigVersion.cmake DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/xTorch)
-if(NOT TARGET uninstall)
+if (NOT TARGET uninstall)
     configure_file("${CMAKE_CURRENT_SOURCE_DIR}/cmake_uninstall.cmake.in" "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake" IMMEDIATE @ONLY)
     add_custom_target(uninstall COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake)
-endif()
+endif ()
