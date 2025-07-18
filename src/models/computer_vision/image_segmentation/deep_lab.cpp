@@ -1,4 +1,4 @@
-#include "include/models/computer_vision/image_segmentation/deep_lab.h"
+#include <models/computer_vision/image_segmentation/deep_lab.h>
 
 
 using namespace std;

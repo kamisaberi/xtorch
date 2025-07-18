@@ -1,4 +1,4 @@
-#include "include/models/computer_vision/image_segmentation/fcn.h"
+#include <models/computer_vision/image_segmentation/fcn.h>
 
 
 using namespace std;
