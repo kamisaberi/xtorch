@@ -1,4 +1,4 @@
-#include "include/losses/dual_softmax_loss.h"
+#include <losses/dual_softmax_loss.h>
 
 namespace xt::losses
 {
