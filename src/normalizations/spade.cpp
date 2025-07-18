@@ -1,4 +1,4 @@
-#include "include/normalizations/spade.h"
+#include <normalizations/spade.h>
 
 
 // #include <torch/torch.h>

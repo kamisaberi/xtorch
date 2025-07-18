@@ -1,4 +1,4 @@
-#include "include/normalizations/sparse_switchable_normalization.h"
+#include <normalizations/sparse_switchable_normalization.h>
 
 
 // #include <torch/torch.h>
