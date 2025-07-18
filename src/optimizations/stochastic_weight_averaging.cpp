@@ -1,4 +1,4 @@
-#include "include/optimizations/stochastic_weight_averaging.h"
+#include <optimizations/stochastic_weight_averaging.h>
 #include <stdexcept>
 
 namespace xt::optim

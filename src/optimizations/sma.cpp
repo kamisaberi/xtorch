@@ -1,4 +1,4 @@
-#include "include/optimizations/sma.h"
+#include <optimizations/sma.h>
 #include <stdexcept>
 
 namespace xt::optim
