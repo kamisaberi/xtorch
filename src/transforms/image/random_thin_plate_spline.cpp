@@ -1,4 +1,4 @@
-#include "include/transforms/image/random_thin_plate_spline.h"
+#include <transforms/image/random_thin_plate_spline.h>
 
 #include <opencv2/imgproc.hpp>
 #include <opencv2/shape.hpp> // For ThinPlateSplineShapeTransformer
