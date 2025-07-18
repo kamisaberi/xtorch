@@ -1,4 +1,4 @@
-#include "include/transforms/text/synonym_replacement.h"
+#include <transforms/text/synonym_replacement.h>
 
 #include <stdexcept>
 #include <chrono>

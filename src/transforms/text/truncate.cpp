@@ -1,4 +1,4 @@
-#include "include/transforms/text/truncate.h"
+#include <transforms/text/truncate.h>
 
 #include <stdexcept>
 
