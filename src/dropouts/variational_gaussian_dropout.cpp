@@ -1,4 +1,4 @@
-#include "include/dropouts/variational_gaussian_dropout.h"
+#include <dropouts/variational_gaussian_dropout.h>
 
 
 //
