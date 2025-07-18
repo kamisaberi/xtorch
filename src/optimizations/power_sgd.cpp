@@ -1,4 +1,4 @@
-#include "include/optimizations/power_sgd.h"
+#include <optimizations/power_sgd.h>
 #include <stdexcept>
 
 namespace xt::optim
