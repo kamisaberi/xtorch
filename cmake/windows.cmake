@@ -17,7 +17,7 @@ set(LIBTORCH_SHA256 "B1D8287A7414073E9C6F58327EE7214E3BB96A214A128F80F0FD6EAC81A
 set(ONNXRUNTIME_URL "https://github.com/microsoft/onnxruntime/releases/download/v1.22.0/onnxruntime-win-x64-gpu-1.22.0.zip")
 set(ONNXRUNTIME_SHA256 "5B5241716B2628C1AB5E79EE620BE767531021149EE68F30FC46C16263FB94DD")
 # Trigger the download using the common logic
-include(dependencies.cmake)
+include(cmake/dependencies.cmake)
 
 
 # --- 3. Find All Windows Dependencies (via vcpkg) ---

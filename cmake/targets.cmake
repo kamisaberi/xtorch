@@ -58,6 +58,20 @@ add_library(imgui
 )
 target_include_directories(imgui PUBLIC third_party/imgui)
 
+
+# === THE FIX FOR IMPLOT IS HERE ===
+# Apply the same optimization workaround to ImPlot, as it triggers
+# the same GCC internal compiler error.
+if(CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_CLANG)
+    target_compile_options(implot PRIVATE
+            $<$<CONFIG:Release>:-O0>
+    )
+    message(STATUS "Adding -O0 for ImPlot in Release builds to work around compiler bug.")
+endif()
+# ==================================
+
+
+
 add_library(imgui_backend_glfw_gl3
         third_party/imgui/backends/imgui_impl_glfw.cpp
         third_party/imgui/backends/imgui_impl_opengl3.cpp
