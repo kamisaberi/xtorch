@@ -1,4 +1,4 @@
-#include "include/optimizations/sm3.h"
+#include <optimizations/sm3.h>
 #include <stdexcept>
 namespace xt::optim
 {
