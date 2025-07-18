@@ -1,4 +1,4 @@
-#include "include/math/linalg.h" // Include your public header
+#include <math/linalg.h> // Include your public header
 #include <stdexcept>
 
 // --- Backend Implementation: Eigen ---

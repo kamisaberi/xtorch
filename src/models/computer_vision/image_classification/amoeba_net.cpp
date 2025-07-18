@@ -1,4 +1,4 @@
-#include "include/models/computer_vision/image_classification/amoeba_net.h"
+#include <models/computer_vision/image_classification/amoeba_net.h>
 
 
 using namespace std;
