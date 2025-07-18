@@ -1,4 +1,4 @@
-#include "include/activations/kaf.h"
+#include <activations/kaf.h>
 
 namespace xt::activations
 {

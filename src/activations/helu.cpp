@@ -1,4 +1,4 @@
-#include "include/activations/helu.h"
+#include <activations/helu.h>
 
 namespace xt::activations
 {

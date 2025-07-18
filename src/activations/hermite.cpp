@@ -1,4 +1,4 @@
-#include "include/activations/hermite.h"
+#include <activations/hermite.h>
 
 namespace xt::activations
 {

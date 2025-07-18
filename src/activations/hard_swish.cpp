@@ -1,4 +1,4 @@
-#include "include/activations/hard_swish.h"
+#include <activations/hard_swish.h>
 
 namespace xt::activations
 {
