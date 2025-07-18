@@ -1,4 +1,4 @@
-#include "include/datasets/natural_language_processing/question_answering/trivia_qa.h"
+#include <datasets/natural_language_processing/question_answering/trivia_qa.h>
 
 namespace xt::datasets
 {
