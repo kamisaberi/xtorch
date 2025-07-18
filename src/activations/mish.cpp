@@ -1,4 +1,4 @@
-#include "include/activations/mish.h"
+#include <activations/mish.h>
 
 namespace xt::activations
 {

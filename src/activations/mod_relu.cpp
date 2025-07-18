@@ -1,4 +1,4 @@
-#include "include/activations/mod_relu.h"
+#include <activations/mod_relu.h>
 
 namespace xt::activations
 {

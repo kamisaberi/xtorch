@@ -1,4 +1,4 @@
-#include "include/activations/nail_or.h"
+#include <activations/nail_or.h>
 
 namespace xt::activations
 {
