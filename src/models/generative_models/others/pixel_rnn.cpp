@@ -1,4 +1,4 @@
-#include "include/models/generative_models/others/pixel_rnn.h"
+#include <models/generative_models/others/pixel_rnn.h>
 
 
 using namespace std;
