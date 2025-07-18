@@ -1,4 +1,4 @@
-#include "include/activations/nipuna.h"
+#include <activations/nipuna.h>
 
 namespace xt::activations
 {

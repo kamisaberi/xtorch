@@ -1,4 +1,4 @@
-#include "include/activations/nlsig.h"
+#include <activations/nlsig.h>
 
 namespace xt::activations
 {

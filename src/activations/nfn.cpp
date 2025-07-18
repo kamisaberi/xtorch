@@ -1,4 +1,4 @@
-#include "include/activations/nfn.h"
+#include <activations/nfn.h>
 
 namespace xt::activations
 {
