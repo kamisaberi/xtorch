@@ -1,4 +1,4 @@
-#include "include/datasets/tabular_data/classification/thyroid_disease.h"
+#include <datasets/tabular_data/classification/thyroid_disease.h>
 
 namespace xt::datasets
 {

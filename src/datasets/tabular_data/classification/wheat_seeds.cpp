@@ -1,4 +1,4 @@
-#include "include/datasets/tabular_data/classification/wheat_seeds.h"
+#include <datasets/tabular_data/classification/wheat_seeds.h>
 
 namespace xt::datasets
 {
