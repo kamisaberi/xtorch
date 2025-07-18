@@ -1,4 +1,4 @@
-#include "include/activations/scaled_soft_sign.h"
+#include <activations/scaled_soft_sign.h>
 
 namespace xt::activations
 {
