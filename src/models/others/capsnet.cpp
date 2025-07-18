@@ -1,4 +1,4 @@
-#include "include/models/others/capsnet.h"
+#include <models/others/capsnet.h>
 
 
 using namespace std;
