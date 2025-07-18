@@ -1,4 +1,4 @@
-#include "include/optimizations/ada_smooth.h"
+#include <optimizations/ada_smooth.h>
 #include <stdexcept>
 
 namespace xt::optim
