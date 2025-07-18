@@ -1,4 +1,4 @@
-#include "include/models/others/point_net.h"
+#include <models/others/point_net.h>
 
 
 using namespace std;
