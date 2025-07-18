@@ -1,4 +1,4 @@
-#include "include/datasets/natural_language_processing/text_summarization/cnn_daily_mail.h"
+#include <datasets/natural_language_processing/text_summarization/cnn_daily_mail.h>
 
 namespace xt::datasets
 {
