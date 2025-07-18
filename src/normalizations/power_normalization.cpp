@@ -1,4 +1,4 @@
-#include "include/normalizations/power_normalization.h"
+#include <normalizations/power_normalization.h>
 
 
 // #include <torch/torch.h>

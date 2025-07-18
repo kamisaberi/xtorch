@@ -1,4 +1,4 @@
-#include "include/normalizations/pixel_normalization.h"
+#include <normalizations/pixel_normalization.h>
 
 
 // #include <torch/torch.h>
