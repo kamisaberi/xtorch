@@ -95,8 +95,8 @@ find_library(ONNXRUNTIME_LIBRARY NAMES onnxruntime PATHS "${ONNXRUNTIME_DIR}/lib
 
 
 # --- Build third-party libs from source ---
-add_subdirectory(third_party/sndfile)
-set_target_properties(sndfile PROPERTIES POSITION_INDEPENDENT_CODE ON)
+#add_subdirectory(third_party/sndfile)
+#set_target_properties(sndfile PROPERTIES POSITION_INDEPENDENT_CODE ON)
 
 add_library(imgui third_party/imgui/imgui.cpp third_party/imgui/imgui_draw.cpp third_party/imgui/imgui_tables.cpp third_party/imgui/imgui_widgets.cpp third_party/imgui/imgui_demo.cpp)
 target_include_directories(imgui PUBLIC third_party/imgui)
@@ -118,7 +118,7 @@ target_include_directories(xTorch PRIVATE
         ${OpenCV_INCLUDE_DIRS}
         ${ZLIB_INCLUDE_DIRS}
         ${LibLZMA_INCLUDE_DIRS}
-        ${SndFile_INCLUDE_DIRS}
+#        ${SndFile_INCLUDE_DIRS}
         ${LIBZIP_INCLUDE_DIRS}
         ${EIGEN3_INCLUDE_DIRS}
 )
@@ -135,8 +135,8 @@ target_link_libraries(xTorch
         OpenSSL::SSL
         OpenSSL::Crypto
         LibLZMA::LibLZMA
-        ${SndFile_LIBRARIES}
-        sndfile
+#        ${SndFile_LIBRARIES}
+#        sndfile
         imgui_backend_glfw_gl3
         implot
 )
