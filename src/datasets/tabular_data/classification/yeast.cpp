@@ -1,4 +1,4 @@
-#include "include/datasets/tabular_data/classification/yeast.h"
+#include <datasets/tabular_data/classification/yeast.h>
 
 namespace xt::datasets
 {
