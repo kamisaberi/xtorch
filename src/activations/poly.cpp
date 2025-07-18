@@ -1,4 +1,4 @@
-#include "include/activations/poly.h"
+#include <activations/poly.h>
 
 namespace xt::activations
 {

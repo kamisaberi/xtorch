@@ -1,4 +1,4 @@
-#include "include/activations/phish.h"
+#include <activations/phish.h>
 
 namespace xt::activations
 {

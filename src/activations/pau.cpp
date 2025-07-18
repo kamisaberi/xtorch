@@ -1,4 +1,4 @@
-#include "include/activations/pau.h"
+#include <activations/pau.h>
 
 namespace xt::activations
 {
