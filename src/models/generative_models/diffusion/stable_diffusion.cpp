@@ -1,4 +1,4 @@
-#include "include/models/generative_models/diffusion/stable_diffusion.h"
+#include <models/generative_models/diffusion/stable_diffusion.h>
 
 
 using namespace std;

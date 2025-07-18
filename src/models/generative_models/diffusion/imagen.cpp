@@ -1,4 +1,4 @@
-#include "include/models/generative_models/diffusion/imagen.h"
+#include <models/generative_models/diffusion/imagen.h>
 
 
 using namespace std;
