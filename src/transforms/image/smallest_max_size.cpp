@@ -1,4 +1,4 @@
-#include "include/transforms/image/smallest_max_size.h"
+#include <transforms/image/smallest_max_size.h>
 
 // #include "transforms/image/smallest_max_size.h"
 // #include <iostream>
