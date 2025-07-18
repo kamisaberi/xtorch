@@ -1,4 +1,4 @@
-#include "include/losses/ghmr_loss.h"
+#include <losses/ghmr_loss.h>
 
 namespace xt::losses
 {

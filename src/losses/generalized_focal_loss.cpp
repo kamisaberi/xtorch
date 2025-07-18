@@ -1,4 +1,4 @@
-#include "include/losses/generalized_focal_loss.h"
+#include <losses/generalized_focal_loss.h>
 
 namespace xt::losses
 {
