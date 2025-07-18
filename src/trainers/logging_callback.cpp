@@ -1,5 +1,5 @@
-#include "include/trainers/logging_callback.h"
-#include "include/trainers/trainer.h" // To potentially access trainer->get_max_epochs(), etc. (optional)
+#include <trainers/logging_callback.h>
+#include <trainers/trainer.h> // To potentially access trainer->get_max_epochs(), etc. (optional)
 
 namespace xt {
 
