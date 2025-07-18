@@ -1,4 +1,4 @@
-#include "include/transforms/image/equalize.h"
+#include <transforms/image/equalize.h>
 
 
 
