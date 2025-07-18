@@ -1,4 +1,4 @@
-#include "include/losses/wgan_gp_loss.h" // Your header
+#include <losses/wgan_gp_loss.h> // Your header
 #include <torch/torch.h> // For torch functionalities
 #include <string>        // For std::string
 #include <memory>        // For std::shared_ptr
