@@ -1,4 +1,4 @@
-#include "include/normalizations/weight_standardization.h"
+#include <normalizations/weight_standardization.h>
 
 
 // #include <torch/torch.h>

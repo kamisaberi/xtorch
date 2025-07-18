@@ -1,4 +1,4 @@
-#include "include/normalizations/weight_normalization.h"
+#include <normalizations/weight_normalization.h>
 
 
 
