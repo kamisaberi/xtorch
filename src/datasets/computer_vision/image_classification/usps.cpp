@@ -1,4 +1,4 @@
-#include "include/datasets/computer_vision/image_classification/usps.h"
+#include <datasets/computer_vision/image_classification/usps.h>
 
 namespace xt::datasets
 {
