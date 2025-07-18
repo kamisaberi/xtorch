@@ -1,4 +1,4 @@
-#include "include/datasets/computer_vision/3d_point_cloud_analysis/model_net40.h"
+#include <datasets/computer_vision/3d_point_cloud_analysis/model_net40.h>
 
 namespace xt::datasets
 {
