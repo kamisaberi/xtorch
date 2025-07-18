@@ -1,4 +1,4 @@
-#include "include/normalizations/mixture_normalization.h"
+#include <normalizations/mixture_normalization.h>
 
 //
 // #include <torch/torch.h>

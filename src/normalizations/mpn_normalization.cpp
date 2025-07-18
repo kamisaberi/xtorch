@@ -1,4 +1,4 @@
-#include "include/normalizations/mpn_normalization.h"
+#include <normalizations/mpn_normalization.h>
 
 //
 // #include <torch/torch.h>
