@@ -1,4 +1,4 @@
-#include "include/activations/smooth_step.h"
+#include <activations/smooth_step.h>
 
 namespace xt::activations
 {

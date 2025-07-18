@@ -1,4 +1,4 @@
-#include "include/activations/splash.h"
+#include <activations/splash.h>
 
 namespace xt::activations
 {

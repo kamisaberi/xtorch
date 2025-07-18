@@ -1,4 +1,4 @@
-#include "include/activations/smish.h"
+#include <activations/smish.h>
 
 namespace xt::activations
 {
