@@ -1,4 +1,4 @@
-#include "include/datasets/tabular_data/classification/palmer_penguin.h"
+#include <datasets/tabular_data/classification/palmer_penguin.h>
 
 namespace xt::datasets
 {
