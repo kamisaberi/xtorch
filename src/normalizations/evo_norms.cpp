@@ -1,4 +1,4 @@
-#include "include/normalizations/evo_norms.h"
+#include <normalizations/evo_norms.h>
 
 // #include <torch/torch.h>
 // #include <iostream>

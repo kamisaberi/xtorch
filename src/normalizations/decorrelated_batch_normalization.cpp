@@ -1,4 +1,4 @@
-#include "include/normalizations/decorrelated_batch_normalization.h"
+#include <normalizations/decorrelated_batch_normalization.h>
 
 
 // #include <torch/torch.h>
