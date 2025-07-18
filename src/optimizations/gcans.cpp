@@ -1,4 +1,4 @@
-#include "include/optimizations/gcans.h"
+#include <optimizations/gcans.h>
 #include <stdexcept>
 
 namespace xt::optim
