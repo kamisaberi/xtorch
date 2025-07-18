@@ -1,5 +1,5 @@
 
-#include "include/datasets/general/text_folder.h"
+#include <datasets/general/text_folder.h>
 
 namespace xt::datasets {
 
