@@ -1,4 +1,4 @@
-#include "include/datasets/tabular_data/classification/balance_scale.h"
+#include <datasets/tabular_data/classification/balance_scale.h>
 
 namespace xt::datasets
 {
