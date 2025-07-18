@@ -1,4 +1,4 @@
-#include "include/models/generative_models/gans/wgan_gp.h"
+#include <models/generative_models/gans/wgan_gp.h>
 
 
 using namespace std;
