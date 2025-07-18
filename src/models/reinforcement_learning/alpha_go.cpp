@@ -1,4 +1,4 @@
-#include "include/models/reinforcement_learning/alpha_go.h"
+#include <models/reinforcement_learning/alpha_go.h>
 
 
 using namespace std;
