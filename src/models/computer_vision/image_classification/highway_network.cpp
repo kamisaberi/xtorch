@@ -1,4 +1,4 @@
-#include "include/models/computer_vision/image_classification/highway_network.h"
+#include <models/computer_vision/image_classification/highway_network.h>
 
 
 using namespace std;

@@ -1,4 +1,4 @@
-#include "include/models/computer_vision/image_classification/google_net.h"
+#include <models/computer_vision/image_classification/google_net.h>
 
 #include "models/computer_vision/image_classification/inception.h"
 
