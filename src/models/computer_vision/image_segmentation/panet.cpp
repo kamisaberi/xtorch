@@ -1,4 +1,4 @@
-#include "include/models/computer_vision/image_segmentation/panet.h"
+#include <models/computer_vision/image_segmentation/panet.h>
 
 
 using namespace std;
