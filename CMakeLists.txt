@@ -347,6 +347,23 @@ add_library(imgui
 )
 target_include_directories(imgui PUBLIC third_party/imgui)
 
+
+
+
+# === THE CORRECTED FIX IS HERE ===
+# This uses a generator expression to add a specific compile option
+# ONLY for the "Release" configuration, without overriding other flags.
+if(CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_CLANG)
+    target_compile_options(imgui PRIVATE
+            # Syntax: $<CONFIG:Release:YOUR_FLAG_HERE>
+            # This adds -O1 only when the build type is Release.
+            $<$<CONFIG:Release>:-O0>
+    )
+    message(STATUS "Adding -O1 for ImGui in Release builds to work around compiler bug.")
+endif()
+# ========================
+
+
 # ImGui Backend for GLFW and OpenGL3
 add_library(imgui_backend_glfw_gl3
         third_party/imgui/backends/imgui_impl_glfw.cpp
