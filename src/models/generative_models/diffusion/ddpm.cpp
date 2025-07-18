@@ -1,4 +1,4 @@
-#include "include/models/generative_models/diffusion/ddpm.h"
+#include <models/generative_models/diffusion/ddpm.h>
 
 
 using namespace std;

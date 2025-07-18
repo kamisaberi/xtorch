@@ -1,4 +1,4 @@
-#include "include/models/generative_models/diffusion/dall_e.h"
+#include <models/generative_models/diffusion/dall_e.h>
 
 
 using namespace std;
