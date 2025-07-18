@@ -1,4 +1,4 @@
-#include "include/activations/e_swich.h"
+#include <activations/e_swich.h>
 
 namespace xt::activations
 {

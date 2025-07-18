@@ -1,4 +1,4 @@
-#include "include/activations/elish.h"
+#include <activations/elish.h>
 
 namespace xt::activations
 {
