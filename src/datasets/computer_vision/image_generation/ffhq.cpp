@@ -1,4 +1,4 @@
-#include "include/datasets/computer_vision/image_generation/ffhq.h"
+#include <datasets/computer_vision/image_generation/ffhq.h>
 
 namespace xt::datasets
 {
