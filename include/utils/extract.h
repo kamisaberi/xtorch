@@ -19,7 +19,7 @@
 #include <filesystem>
 #include <zlib.h>
 #include <fstream>
-#include <tar.h>
+
 #include <archive.h>
 #include <archive_entry.h>
 #include <sys/stat.h>
@@ -36,6 +36,20 @@
 #include <fstream>
 #include <iostream>
 #include <filesystem>
+
+#if defined(_WIN32) || defined(_WIN64)
+// On Windows, include the necessary Windows headers.
+    // <io.h> contains equivalents for file-related functions like access().
+    // <process.h> can contain process-related functions.
+    // <direct.h> contains directory functions like mkdir().
+#include <io.h>
+#include <direct.h>
+#else
+// On non-Windows platforms (like Linux), include the original header.
+#include <unistd.h>
+#include <tar.h>
+
+#endif
 
 using namespace std;
 namespace fs = std::filesystem;
