@@ -1,4 +1,4 @@
-#include "include/activations/siren.h"
+#include <activations/siren.h>
 
 namespace xt::activations
 {

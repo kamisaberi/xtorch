@@ -1,4 +1,4 @@
-#include "include/activations/shilu.h"
+#include <activations/shilu.h>
 
 namespace xt::activations
 {

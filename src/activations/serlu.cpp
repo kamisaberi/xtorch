@@ -1,4 +1,4 @@
-#include "include/activations/serlu.h"
+#include <activations/serlu.h>
 
 namespace xt::activations
 {

@@ -1,4 +1,4 @@
-#include "include/activations/shifted_softplus.h"
+#include <activations/shifted_softplus.h>
 
 namespace xt::activations
 {
