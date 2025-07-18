@@ -1,4 +1,4 @@
-#include "include/activations/delu.h"
+#include <activations/delu.h>
 
 namespace xt::activations
 {

@@ -1,4 +1,4 @@
-#include "include/activations/crelu.h"
+#include <activations/crelu.h>
 
 namespace xt::activations
 {
