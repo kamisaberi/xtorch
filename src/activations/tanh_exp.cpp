@@ -1,4 +1,4 @@
-#include "include/activations/tanh_exp.h"
+#include <activations/tanh_exp.h>
 
 namespace xt::activations
 {
