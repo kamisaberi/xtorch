@@ -1,4 +1,4 @@
-#include "include/normalizations/virtual_batch_normalization.h"
+#include <normalizations/virtual_batch_normalization.h>
 
 
 //
