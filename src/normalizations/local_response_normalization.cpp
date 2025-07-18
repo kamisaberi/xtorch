@@ -1,4 +1,4 @@
-#include "include/normalizations/local_response_normalization.h"
+#include <normalizations/local_response_normalization.h>
 
 //
 // #include <torch/torch.h>
