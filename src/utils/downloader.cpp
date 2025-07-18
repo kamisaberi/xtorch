@@ -14,8 +14,8 @@
  * - File size detection (commented out)
  */
 
-#include "../../include/utils/downloader.h"
-#include "include/utils/path.h" // The header we just defined
+#include <utils/downloader.h>
+#include <utils/path.h> // The header we just defined
 using namespace std;
 namespace fs = std::filesystem;
 

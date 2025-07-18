@@ -11,7 +11,7 @@
  * including counting files in directories with optional recursion.
  */
 
-#include "../../include/utils/filesystem.h"
+#include <utils/filesystem.h>
 
 namespace xt::utils::fs {
 

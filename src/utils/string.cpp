@@ -12,7 +12,7 @@
  * - Whitespace trimming
  */
 
-#include "../../include/utils/string.h"
+#include <utils/string.h>
 
 namespace xt::utils::string {
 

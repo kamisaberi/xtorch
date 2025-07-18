@@ -16,7 +16,7 @@
  * - Automatic format detection
  */
 
-#include "../../include/utils/extract.h"
+#include <utils/extract.h>
 
 using namespace std;
 namespace fs = std::filesystem;
