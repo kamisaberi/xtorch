@@ -1,4 +1,4 @@
-#include "include/datasets/computer_vision/skin_lesion_classification/isic_skin_cancer.h"
+#include <datasets/computer_vision/skin_lesion_classification/isic_skin_cancer.h>
 
 namespace xt::datasets
 {
