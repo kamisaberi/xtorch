@@ -1,4 +1,4 @@
-#include "include/losses/early_exiting_loss.h"
+#include <losses/early_exiting_loss.h>
 
 namespace xt::losses
 {

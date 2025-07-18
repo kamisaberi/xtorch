@@ -1,4 +1,4 @@
-#include "include/losses/dynamic_smooth_l1_loss.h"
+#include <losses/dynamic_smooth_l1_loss.h>
 
 namespace xt::losses
 {

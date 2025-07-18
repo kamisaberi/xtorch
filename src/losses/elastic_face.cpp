@@ -1,4 +1,4 @@
-#include "include/losses/elastic_face.h"
+#include <losses/elastic_face.h>
 
 namespace xt::losses
 {
