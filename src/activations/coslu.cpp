@@ -1,4 +1,4 @@
-#include "include/activations/coslu.h"
+#include <activations/coslu.h>
 
 namespace xt::activations
 {
