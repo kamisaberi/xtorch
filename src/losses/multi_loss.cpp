@@ -1,4 +1,4 @@
-#include "include/losses/multi_loss.h"
+#include <losses/multi_loss.h>
 
 namespace xt::losses
 {
