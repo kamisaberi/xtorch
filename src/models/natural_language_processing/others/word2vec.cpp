@@ -1,4 +1,4 @@
-#include "include/models/natural_language_processing/others/word2vec.h"
+#include <models/natural_language_processing/others/word2vec.h>
 
 
 using namespace std;
