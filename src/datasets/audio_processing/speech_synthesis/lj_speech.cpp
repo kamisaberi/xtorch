@@ -1,4 +1,4 @@
-#include "include/datasets/audio_processing/speech_synthesis/lj_speech.h"
+#include <datasets/audio_processing/speech_synthesis/lj_speech.h>
 
 
 namespace xt::datasets
