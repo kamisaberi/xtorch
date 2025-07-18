@@ -1,4 +1,4 @@
-#include "include/models/computer_vision/image_classification/pyramidal_net.h"
+#include <models/computer_vision/image_classification/pyramidal_net.h>
 
 
 using namespace std;
