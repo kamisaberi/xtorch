@@ -45,10 +45,10 @@ int main() {
 }
 */
 
-#include "include/transforms/weather/vegetation_motion.h"
-#include <stdexcept>
-#define _USE_MATH_DEFINES
-#include <math.h>
+// #include "include/transforms/weather/vegetation_motion.h"
+// #include <stdexcept>
+// #define _USE_MATH_DEFINES
+// #include <math.h>
 
 // This header is required for functional calls like interpolate and grid_sample
 #include <torch/nn/functional.h>
