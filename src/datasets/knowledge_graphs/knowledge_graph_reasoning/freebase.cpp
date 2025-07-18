@@ -1,4 +1,4 @@
-#include "include/datasets/knowledge_graphs/knowledge_graph_reasoning/freebase.h"
+#include <datasets/knowledge_graphs/knowledge_graph_reasoning/freebase.h>
 
 namespace xt::datasets
 {
