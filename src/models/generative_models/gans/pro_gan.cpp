@@ -1,4 +1,4 @@
-#include "include/models/generative_models/gans/pro_gan.h"
+#include <models/generative_models/gans/pro_gan.h>
 
 
 using namespace std;
