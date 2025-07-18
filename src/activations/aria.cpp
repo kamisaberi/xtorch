@@ -1,4 +1,4 @@
-#include "include/activations/aria.h"
+#include <activations/aria.h>
 
 namespace xt::activations
 {
