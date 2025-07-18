@@ -1,4 +1,4 @@
-#include "include/datasets/tabular_data/binary_classification/adult_census_income.h"
+#include <datasets/tabular_data/binary_classification/adult_census_income.h>
 
 namespace xt::datasets
 {
