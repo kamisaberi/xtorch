@@ -1,4 +1,4 @@
-#include "include/optimizations/power_propagation.h"
+#include <optimizations/power_propagation.h>
 #include <stdexcept>
 
 namespace xt::optim
