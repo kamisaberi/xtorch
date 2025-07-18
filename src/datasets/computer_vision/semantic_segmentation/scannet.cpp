@@ -1,4 +1,4 @@
-#include "include/datasets/computer_vision/semantic_segmentation/scannet.h"
+#include <datasets/computer_vision/semantic_segmentation/scannet.h>
 
 namespace xt::datasets
 {
