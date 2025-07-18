@@ -1,4 +1,4 @@
-#include "include/optimizations/fata.h"
+#include <optimizations/fata.h>
 #include <stdexcept>
 
 namespace xt::optim
