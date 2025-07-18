@@ -1,4 +1,4 @@
-#include "include/normalizations/self_norm.h"
+#include <normalizations/self_norm.h>
 
 
 // #include <torch/torch.h>
