@@ -1,4 +1,4 @@
-#include "include/datasets/computer_vision/instance_segmentation/lvis.h"
+#include <datasets/computer_vision/instance_segmentation/lvis.h>
 
 namespace xt::datasets
 {
