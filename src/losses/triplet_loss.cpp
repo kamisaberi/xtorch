@@ -1,4 +1,4 @@
-#include "include/losses/triplet_loss.h"
+#include <losses/triplet_loss.h>
 
 namespace xt::losses
 {
