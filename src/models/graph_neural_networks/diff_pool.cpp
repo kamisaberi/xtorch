@@ -1,4 +1,4 @@
-#include "include/models/graph_neural_networks/diff_pool.h"
+#include <models/graph_neural_networks/diff_pool.h>
 
 
 using namespace std;

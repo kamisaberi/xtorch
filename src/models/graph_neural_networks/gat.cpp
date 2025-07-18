@@ -1,4 +1,4 @@
-#include "include/models/graph_neural_networks/gat.h"
+#include <models/graph_neural_networks/gat.h>
 
 
 using namespace std;
