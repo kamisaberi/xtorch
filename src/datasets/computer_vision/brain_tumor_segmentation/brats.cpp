@@ -1,4 +1,4 @@
-#include "include/datasets/computer_vision/brain_tumor_segmentation/brats.h"
+#include <datasets/computer_vision/brain_tumor_segmentation/brats.h>
 
 namespace xt::datasets
 {
