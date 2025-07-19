@@ -5,6 +5,7 @@ tutorial/.venv
 tutorial/site
 tutorial/docs/doxygen
 third_party/libtorch/
+third_party/libtorch-12.8/
 third_party/onnxruntime/
 #third_party/libtorch.zip
 #third_party/onnxruntime-linux-x64-gpu-1.22.0.tgz

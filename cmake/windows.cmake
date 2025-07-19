@@ -12,8 +12,10 @@ set(LIBTORCH_DIR "${DEPS_DIR}/libtorch")
 set(ONNXRUNTIME_DIR "${DEPS_DIR}/onnxruntime")
 
 # Using LibTorch/ONNX versions compatible with CUDA 11.8
-set(LIBTORCH_URL "https://download.pytorch.org/libtorch/cu118/libtorch-win-shared-with-deps-2.1.2%2Bcu118.zip")
-set(LIBTORCH_SHA256 "031376821817e81e3a1e94871030999581c7908861d49a46323c938888e24c68")
+#set(LIBTORCH_URL "https://download.pytorch.org/libtorch/cu118/libtorch-win-shared-with-deps-2.1.2%2Bcu118.zip")
+#set(LIBTORCH_SHA256 "031376821817e81e3a1e94871030999581c7908861d49a46323c938888e24c68")
+set(LIBTORCH_URL "https://download.pytorch.org/libtorch/cu118/libtorch-win-shared-with-deps-2.7.1%2Bcu118.zip")
+set(LIBTORCH_SHA256 "186AA930C1510482153BE939E573937FC6682AD527BA86500F50266C8F418428")
 set(ONNXRUNTIME_URL "https://github.com/microsoft/onnxruntime/releases/download/v1.16.3/onnxruntime-win-x64-gpu-1.16.3.zip")
 set(ONNXRUNTIME_SHA256 "1c9ac64696144e138379633e7287968b594966141315995f553f495534125c11")
 
@@ -69,12 +71,6 @@ set(LIBRARY_SOURCE_FILES ${ACTIVATION_FILES} ${BASE_FILES} ${DROPOUT_FILES} ${DA
 include_directories(SYSTEM ${CMAKE_SOURCE_DIR})
 add_library(xTorch SHARED ${LIBRARY_SOURCE_FILES})
 
-if(MSVC)
-    target_compile_options(xTorch PRIVATE /w34244)
-    target_compile_options(xTorch PRIVATE /WX-)
-
-    message(STATUS "Demoting warning C4244 to level 3 to prevent build failure with /WX.")
-endif()
 
 set_target_properties(xTorch PROPERTIES CXX_STANDARD 17 CXX_STANDARD_REQUIRED YES)
 
