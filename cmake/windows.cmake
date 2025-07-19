@@ -1,7 +1,7 @@
 # cmake/windows.cmake
 # ===============================================================
 #  Build script for WINDOWS using Visual Studio and vcpkg.
-#  (Corrected and Cleaned Version)
+#  (Corrected Order and Complete)
 # ===============================================================
 
 # NOTE: The project() command is already in the main CMakeLists.txt
@@ -9,14 +9,11 @@
 set(CUDA_TOOLKIT_ROOT_DIR "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.8") #<-- VERIFY THIS PATH
 message(STATUS "Hinting CUDA Toolkit location: ${CUDA_TOOLKIT_ROOT_DIR}")
 
-# --- 1. Dependency Downloading (with VS 2019 / CUDA 11.8 compatible versions) ---
+# --- 1. Dependency Downloading ---
 set(DEPS_DIR "${CMAKE_SOURCE_DIR}/third_party")
 set(LIBTORCH_DIR "${DEPS_DIR}/libtorch")
 set(ONNXRUNTIME_DIR "${DEPS_DIR}/onnxruntime")
 
-# Using LibTorch/ONNX versions compatible with CUDA 11.8
-#set(LIBTORCH_URL "https://download.pytorch.org/libtorch/cu118/libtorch-win-shared-with-deps-2.1.2%2Bcu118.zip")
-#set(LIBTORCH_SHA256 "031376821817e81e3a1e94871030999581c7908861d49a46323c938888e24c68")
 set(LIBTORCH_URL "https://download.pytorch.org/libtorch/cu118/libtorch-win-shared-with-deps-2.7.1%2Bcu118.zip")
 set(LIBTORCH_SHA256 "186AA930C1510482153BE939E573937FC6682AD527BA86500F50266C8F418428")
 set(ONNXRUNTIME_URL "https://github.com/microsoft/onnxruntime/releases/download/v1.16.3/onnxruntime-win-x64-gpu-1.16.3.zip")
@@ -73,29 +70,33 @@ set(LIBRARY_SOURCE_FILES ${ACTIVATION_FILES} ${BASE_FILES} ${DROPOUT_FILES} ${DA
 # --- 4. Library Target Definition ---
 include_directories(SYSTEM ${CMAKE_SOURCE_DIR})
 add_library(xTorch SHARED ${LIBRARY_SOURCE_FILES})
-
-
 set_target_properties(xTorch PROPERTIES CXX_STANDARD 17 CXX_STANDARD_REQUIRED YES)
 
+# =============================================================================
+# --- 5. Dependency Management for WINDOWS (REORDERED AND COMPLETE) ---
+# =============================================================================
 
+# STEP 1 (MOVED): Find CUDA FIRST, before any package that needs it.
+# We temporarily disable the vcpkg toolchain to ensure CMake's native
+# FindCUDA module is used for this system-level dependency.
+set(VCPKG_TOOLCHAIN_FILE_TEMP ${CMAKE_TOOLCHAIN_FILE})
+unset(CMAKE_TOOLCHAIN_FILE)
 find_package(CUDA REQUIRED)
+set(CMAKE_TOOLCHAIN_FILE ${VCPKG_TOOLCHAIN_FILE_TEMP})
 
 if(CUDA_FOUND)
     message(STATUS "Manually found CUDA version ${CUDA_VERSION}")
-    message(STATUS "CUDA Include Dirs: ${CUDA_INCLUDE_DIRS}")
     message(STATUS "CUDA CUDART Library: ${CUDA_CUDART_LIBRARY}")
 else()
     message(FATAL_ERROR "Manual CUDA search failed. Check your CUDA installation and PATH.")
 endif()
 
-
-# --- 5. Dependency Management for WINDOWS ---
-
-# THE CORE FIX: Append to CMAKE_PREFIX_PATH, don't overwrite it.
-# This preserves the paths from the vcpkg toolchain file.
+# STEP 2 (MOVED): Set up search paths BEFORE finding packages.
+# This appends the local LibTorch directory to the list of places CMake
+# will search. It must come before the find_package calls.
 list(APPEND CMAKE_PREFIX_PATH "${LIBTORCH_DIR}")
 
-# Find all dependencies. CMake will now search BOTH vcpkg paths and the LibTorch path.
+# STEP 3: Now, find all other packages.
 find_package(Torch REQUIRED)
 find_package(CURL REQUIRED)
 find_package(OpenCV REQUIRED)
@@ -106,17 +107,17 @@ find_package(libzip REQUIRED)
 find_package(glfw3 REQUIRED)
 find_package(OpenGL REQUIRED)
 find_package(Eigen3 REQUIRED)
-# LibArchive, LibTar, PkgConfig, and Samplerate are not used on Windows.
+# LibArchive and other Linux-specific packages are correctly omitted.
 
 # Find ONNX Runtime manually
 set(ONNXRUNTIME_INCLUDE_DIR "${ONNXRUNTIME_DIR}/include")
 find_library(ONNXRUNTIME_LIBRARY NAMES onnxruntime PATHS "${ONNXRUNTIME_DIR}/lib" REQUIRED)
 
-#set(ENABLE_TESTS OFF CACHE BOOL "Disable libsndfile's internal tests")
-
-# --- Build third-party libs from source ---
-#add_subdirectory(third_party/sndfile)
-#set_target_properties(sndfile PROPERTIES POSITION_INDEPENDENT_CODE ON)
+# STEP 4 (RESTORED): Build third-party libs from source.
+# This logic must be present to define the sndfile, imgui, and implot targets.
+set(ENABLE_TESTS OFF CACHE BOOL "Disable libsndfile's internal tests")
+add_subdirectory(third_party/sndfile)
+set_target_properties(sndfile PROPERTIES POSITION_INDEPENDENT_CODE ON)
 
 add_library(imgui third_party/imgui/imgui.cpp third_party/imgui/imgui_draw.cpp third_party/imgui/imgui_tables.cpp third_party/imgui/imgui_widgets.cpp third_party/imgui/imgui_demo.cpp)
 target_include_directories(imgui PUBLIC third_party/imgui)
@@ -138,7 +139,7 @@ target_include_directories(xTorch PRIVATE
         ${OpenCV_INCLUDE_DIRS}
         ${ZLIB_INCLUDE_DIRS}
         ${LibLZMA_INCLUDE_DIRS}
-#        ${SndFile_INCLUDE_DIRS}
+        ${SndFile_INCLUDE_DIRS}
         ${LIBZIP_INCLUDE_DIRS}
         ${EIGEN3_INCLUDE_DIRS}
 )
@@ -155,8 +156,8 @@ target_link_libraries(xTorch
         OpenSSL::SSL
         OpenSSL::Crypto
         LibLZMA::LibLZMA
-#        ${SndFile_LIBRARIES}
-#        sndfile
+        ${SndFile_LIBRARIES}
+        sndfile
         imgui_backend_glfw_gl3
         implot
 )
@@ -178,4 +179,4 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/xTorchConfig.cmake ${CMAKE_CURRENT_BIN
 if (NOT TARGET uninstall)
     configure_file("${CMAKE_CURRENT_SOURCE_DIR}/cmake_uninstall.cmake.in" "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake" IMMEDIATE @ONLY)
     add_custom_target(uninstall COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake)
-endif ()
+endif()
