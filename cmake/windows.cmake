@@ -77,6 +77,18 @@ add_library(xTorch SHARED ${LIBRARY_SOURCE_FILES})
 
 set_target_properties(xTorch PROPERTIES CXX_STANDARD 17 CXX_STANDARD_REQUIRED YES)
 
+
+find_package(CUDA REQUIRED)
+
+if(CUDA_FOUND)
+    message(STATUS "Manually found CUDA version ${CUDA_VERSION}")
+    message(STATUS "CUDA Include Dirs: ${CUDA_INCLUDE_DIRS}")
+    message(STATUS "CUDA CUDART Library: ${CUDA_CUDART_LIBRARY}")
+else()
+    message(FATAL_ERROR "Manual CUDA search failed. Check your CUDA installation and PATH.")
+endif()
+
+
 # --- 5. Dependency Management for WINDOWS ---
 
 # THE CORE FIX: Append to CMAKE_PREFIX_PATH, don't overwrite it.
