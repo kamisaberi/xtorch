@@ -10,20 +10,11 @@ set(LIBTORCH_DIR "${DEPS_DIR}/libtorch")
 set(ONNXRUNTIME_DIR "${DEPS_DIR}/onnxruntime")
 
 
-if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
-    set(LIBTORCH_URL "https://download.pytorch.org/libtorch/cu128/libtorch-win-shared-with-deps-debug-2.7.1%2Bcu128.zip")
-    set(LIBTORCH_SHA256 "B1D8287A7414073E9C6F58327EE7214E3BB96A214A128F80F0FD6EAC81AAFEB4")
-    set(ONNXRUNTIME_URL "https://github.com/microsoft/onnxruntime/releases/download/v1.22.0/onnxruntime-win-x64-gpu-1.22.0.zip")
-    set(ONNXRUNTIME_SHA256 "5B5241716B2628C1AB5E79EE620BE767531021149EE68F30FC46C16263FB94DD")
-elseif (CMAKE_SYSTEM_NAME STREQUAL "Linux")
-    set(LIBTORCH_URL "https://download.pytorch.org/libtorch/cu128/libtorch-cxx11-abi-shared-with-deps-2.7.1%2Bcu128.zip")
-    set(LIBTORCH_SHA256 "ae513b437ae99150744ef1d06b02a4ecbbb9275c9ffe540c88909623e3293041")
-    set(ONNXRUNTIME_URL "https://github.com/microsoft/onnxruntime/releases/download/v1.22.0/onnxruntime-linux-x64-gpu-1.22.0.tgz")
-    set(ONNXRUNTIME_SHA256 "2a19dbfa403672ec27378c3d40a68f793ac7a6327712cd0e8240a86be2b10c55")
-    #elseif (CMAKE_SYSTEM_NAME STREQUAL "Darwin")
-else ()
-    message(WARNING "Unsupported OS: ${CMAKE_SYSTEM_NAME}")
-endif ()
+set(LIBTORCH_URL "https://download.pytorch.org/libtorch/cu128/libtorch-cxx11-abi-shared-with-deps-2.7.1%2Bcu128.zip")
+set(LIBTORCH_SHA256 "ae513b437ae99150744ef1d06b02a4ecbbb9275c9ffe540c88909623e3293041")
+set(ONNXRUNTIME_URL "https://github.com/microsoft/onnxruntime/releases/download/v1.22.0/onnxruntime-linux-x64-gpu-1.22.0.tgz")
+set(ONNXRUNTIME_SHA256 "2a19dbfa403672ec27378c3d40a68f793ac7a6327712cd0e8240a86be2b10c55")
+#elseif (CMAKE_SYSTEM_NAME STREQUAL "Darwin")
 
 
 # Example for Linux CPU
@@ -317,19 +308,17 @@ add_library(imgui
 target_include_directories(imgui PUBLIC third_party/imgui)
 
 
-
-
 # === THE CORRECTED FIX IS HERE ===
 # This uses a generator expression to add a specific compile option
 # ONLY for the "Release" configuration, without overriding other flags.
-if(CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_CLANG)
+if (CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_CLANG)
     target_compile_options(imgui PRIVATE
             # Syntax: $<CONFIG:Release:YOUR_FLAG_HERE>
             # This adds -O1 only when the build type is Release.
             $<$<CONFIG:Release>:-O0>
     )
     message(STATUS "Adding -O1 for ImGui in Release builds to work around compiler bug.")
-endif()
+endif ()
 # ========================
 
 
