@@ -23,8 +23,7 @@
 #include <archive.h>
 #include <archive_entry.h>
 #include <sys/stat.h>
-#include <unistd.h>
-#include <libtar.h>
+//#include <unistd.h>
 #include <fcntl.h>
 #include <lzma.h>
 #include <iostream>
@@ -48,6 +47,7 @@
 // On non-Windows platforms (like Linux), include the original header.
 #include <unistd.h>
 #include <tar.h>
+#include <libtar.h>
 
 #endif
 
