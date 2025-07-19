@@ -6,6 +6,9 @@
 
 # NOTE: The project() command is already in the main CMakeLists.txt
 
+set(CUDA_TOOLKIT_ROOT_DIR "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.8") #<-- VERIFY THIS PATH
+message(STATUS "Hinting CUDA Toolkit location: ${CUDA_TOOLKIT_ROOT_DIR}")
+
 # --- 1. Dependency Downloading (with VS 2019 / CUDA 11.8 compatible versions) ---
 set(DEPS_DIR "${CMAKE_SOURCE_DIR}/third_party")
 set(LIBTORCH_DIR "${DEPS_DIR}/libtorch")
