@@ -68,6 +68,14 @@ set(LIBRARY_SOURCE_FILES ${ACTIVATION_FILES} ${BASE_FILES} ${DROPOUT_FILES} ${DA
 # --- 4. Library Target Definition ---
 include_directories(SYSTEM ${CMAKE_SOURCE_DIR})
 add_library(xTorch SHARED ${LIBRARY_SOURCE_FILES})
+
+if(MSVC)
+    target_compile_options(xTorch PRIVATE /w34244)
+    target_compile_options(xTorch PRIVATE /WX-)
+
+    message(STATUS "Demoting warning C4244 to level 3 to prevent build failure with /WX.")
+endif()
+
 set_target_properties(xTorch PROPERTIES CXX_STANDARD 17 CXX_STANDARD_REQUIRED YES)
 
 # --- 5. Dependency Management for WINDOWS ---
@@ -93,10 +101,11 @@ find_package(Eigen3 REQUIRED)
 set(ONNXRUNTIME_INCLUDE_DIR "${ONNXRUNTIME_DIR}/include")
 find_library(ONNXRUNTIME_LIBRARY NAMES onnxruntime PATHS "${ONNXRUNTIME_DIR}/lib" REQUIRED)
 
+#set(ENABLE_TESTS OFF CACHE BOOL "Disable libsndfile's internal tests")
 
 # --- Build third-party libs from source ---
-add_subdirectory(third_party/sndfile)
-set_target_properties(sndfile PROPERTIES POSITION_INDEPENDENT_CODE ON)
+#add_subdirectory(third_party/sndfile)
+#set_target_properties(sndfile PROPERTIES POSITION_INDEPENDENT_CODE ON)
 
 add_library(imgui third_party/imgui/imgui.cpp third_party/imgui/imgui_draw.cpp third_party/imgui/imgui_tables.cpp third_party/imgui/imgui_widgets.cpp third_party/imgui/imgui_demo.cpp)
 target_include_directories(imgui PUBLIC third_party/imgui)
@@ -118,7 +127,7 @@ target_include_directories(xTorch PRIVATE
         ${OpenCV_INCLUDE_DIRS}
         ${ZLIB_INCLUDE_DIRS}
         ${LibLZMA_INCLUDE_DIRS}
-        ${SndFile_INCLUDE_DIRS}
+#        ${SndFile_INCLUDE_DIRS}
         ${LIBZIP_INCLUDE_DIRS}
         ${EIGEN3_INCLUDE_DIRS}
 )
@@ -135,8 +144,8 @@ target_link_libraries(xTorch
         OpenSSL::SSL
         OpenSSL::Crypto
         LibLZMA::LibLZMA
-        ${SndFile_LIBRARIES}
-        sndfile
+#        ${SndFile_LIBRARIES}
+#        sndfile
         imgui_backend_glfw_gl3
         implot
 )

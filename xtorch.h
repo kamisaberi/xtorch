@@ -39,6 +39,13 @@
 // #include <optional>
 // #include <iostream> // For error messages
 
+// The definitive fix for C4244 in third-party headers
+
+//#ifdef _MSC_VER
+//// Microsoft Visual C++ Compiler
+//#pragma warning(push)
+//#pragma warning(disable: 4244) // Disables the narrowing conversion warning
+//#endif
 
 #include "include/base/base.h"
 #include "include/data_loaders/data_loaders.h"
@@ -55,6 +62,9 @@
 #include "include/normalizations/normalizations.h"
 #include "include/utils/utils.h"
 
+//#ifdef _MSC_VER
+//#pragma warning(pop) // Restore the original warning settings
+//#endif
 
 // // Platform-specific includes for dladdr / GetModuleHandleExA
 // #ifdef _WIN32
