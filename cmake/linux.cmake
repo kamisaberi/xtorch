@@ -274,11 +274,6 @@ pkg_check_modules(SAMPLERATE REQUIRED samplerate)
 # )
 
 
-
-
-
-
-
 # This command will download and configure the dependency.
 # It makes the targets defined in sndfile's CMakeLists.txt (like 'sndfile')
 # available to our project.
