@@ -1,3 +1,10 @@
+cmake_minimum_required(VERSION 3.28 FATAL_ERROR)
+project(xTorch VERSION 0.2.0 LANGUAGES CXX)
+set(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "The configurations to build" FORCE)
+
+
+
+
 add_definitions(-D_GLIBCXX_USE_CXX11_ABI=1)
 
 # --- 1. Define Dependency Configuration ---
