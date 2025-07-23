@@ -1,6 +1,3 @@
-#cmake_minimum_required(VERSION 3.28 FATAL_ERROR)
-#project(xTorch VERSION 0.2.0 LANGUAGES CXX)
-#set(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "The configurations to build" FORCE)
 
 add_definitions(-D_GLIBCXX_USE_CXX11_ABI=1)
 
@@ -13,12 +10,9 @@ set(DEPS_DIR "${CMAKE_SOURCE_DIR}/third_party")
 set(LIBTORCH_DIR "${DEPS_DIR}/libtorch")
 set(ONNXRUNTIME_DIR "${DEPS_DIR}/onnxruntime")
 
-
-set(LIBTORCH_URL "https://download.pytorch.org/libtorch/cu128/libtorch-cxx11-abi-shared-with-deps-2.7.1%2Bcu128.zip")
-set(LIBTORCH_SHA256 "ae513b437ae99150744ef1d06b02a4ecbbb9275c9ffe540c88909623e3293041")
-set(ONNXRUNTIME_URL "https://github.com/microsoft/onnxruntime/releases/download/v1.22.0/onnxruntime-linux-x64-gpu-1.22.0.tgz")
-set(ONNXRUNTIME_SHA256 "2a19dbfa403672ec27378c3d40a68f793ac7a6327712cd0e8240a86be2b10c55")
-#elseif (CMAKE_SYSTEM_NAME STREQUAL "Darwin")
+# ONNX Runtime for ARM64 CPU (download or build manually)
+set(ONNXRUNTIME_URL "https://github.com/microsoft/onnxruntime/releases/download/v1.22.0/onnxruntime-linux-aarch64-1.22.0.tgz")
+set(ONNXRUNTIME_SHA256 "bb76395092d150b52c7092dc6b8f2fe4d80f0f3bf0416d2f269193e347e24702") # Replace with actual SHA256
 
 
 # Example for Linux CPU
