@@ -8,6 +8,9 @@ third_party/libtorch/
 third_party/libtorch-12.8/
 third_party/libtorch-11.8/
 third_party/onnxruntime/
+third_party/onnxruntime-amd64
+third_party/libtorch
+third_party/libtorch-amd64
 #third_party/libtorch.zip
 #third_party/onnxruntime-linux-x64-gpu-1.22.0.tgz
 third_party/*.zip
