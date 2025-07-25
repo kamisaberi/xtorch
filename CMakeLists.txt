@@ -5,7 +5,7 @@ set(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "The configurations t
 # Check CPU architecture
 if(CMAKE_SYSTEM_PROCESSOR MATCHES "x86_64|AMD64|i386|i686")
     message(STATUS "Detected Intel-based CPU (Architecture: ${CMAKE_SYSTEM_PROCESSOR})")
-    include(cmake/linux.cmake)
+    include(cmake/amd.cmake)
 elseif(CMAKE_SYSTEM_PROCESSOR MATCHES "arm|aarch64|arm64")
     message(STATUS "Detected ARM-based CPU (Architecture: ${CMAKE_SYSTEM_PROCESSOR})")
     include(cmake/arm.cmake)
