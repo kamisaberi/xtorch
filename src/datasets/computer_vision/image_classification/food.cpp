@@ -191,6 +191,7 @@ namespace xt::datasets
         // Apply transforms if specified
         if (transformer != nullptr)
         {
+            cout << "INSIDE TRANSFORMERS" << endl;
             tensor = std::any_cast<torch::Tensor>((*transformer)({tensor}));
         }
 
