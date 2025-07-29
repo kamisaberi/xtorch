@@ -159,7 +159,7 @@ namespace xt::models
         }
 
         torch::Tensor x = tensor_vec[0];
-
+        x = x.to(torch::kFloat32);
         x = layer1->forward(x);
         x = layer2->forward(x);
         x = layer3->forward(x);

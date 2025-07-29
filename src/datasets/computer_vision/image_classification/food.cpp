@@ -25,7 +25,8 @@ namespace xt::datasets
     Food101::Food101(const std::string& root, xt::datasets::DataMode mode, bool download,
                      std::unique_ptr<xt::Module> transformer,
                      std::unique_ptr<xt::Module> target_transformer) : xt::datasets::Dataset(
-        mode, std::move(transformer), std::move(target_transformer))
+                                                                           mode, std::move(transformer),
+                                                                           std::move(target_transformer)), root(root)
     {
         check_resources(); // Verify dataset files exist
         load_classes(); // Load class names and mapping
@@ -37,11 +38,12 @@ namespace xt::datasets
         fs::path archive_file_abs_path = this->root / this->dataset_file_name;
         this->dataset_path = this->root / this->dataset_folder_name;
         fs::path images_path = this->dataset_path / fs::path("images");
-
+        cout << images_path.string() << endl;
         // Check if extracted dataset exists
         if (fs::exists(images_path))
         {
             size_t cnt = xt::utils::fs::countFiles(images_path, true);
+            cout << "Found " << cnt << " images" << endl;
             // Verify complete dataset
             if (cnt != this->images_number)
             {
@@ -96,6 +98,7 @@ namespace xt::datasets
 
     void Food101::load_data()
     {
+        cout << "Loading data..." << endl;
         fs::path images_path = this->dataset_path / fs::path("images");
         fs::path meta_path = this->dataset_path / fs::path("meta");
 
@@ -119,17 +122,18 @@ namespace xt::datasets
 
                 // Load and process image
                 fs::path img_path = images_path / fs::path(line + ".jpg");
-                torch::Tensor tensor = xt::utils::image::convertImageToTensor(img_path);
+                cout << img_path.string() << endl;
+                // torch::Tensor tensor = xt::utils::image::convertImageToTensor(img_path);
 
                 // Apply transforms if specified
-                if (transformer != nullptr)
-                {
-                    tensor = std::any_cast<torch::Tensor>((*transformer)({tensor}));
-                    // tensor = (*transformer)(tensor);
-                }
+                // if (transformer != nullptr)
+                // {
+                //     tensor = std::any_cast<torch::Tensor>((*transformer)({tensor}));
+                //     // tensor = (*transformer)(tensor);
+                // }
 
                 // Store results
-                this->data.push_back(tensor);
+                // this->data.push_back(tensor);
                 this->targets.push_back(classes_map[label]);
             }
         }
