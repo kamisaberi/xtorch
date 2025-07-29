@@ -186,16 +186,16 @@ namespace xt::datasets
         //
         // }
         torch::Tensor tensor = xt::utils::image::convertImageToTensor(image_path);
-        cout << "BE: " << tensor.sizes() << endl;
+        // cout << "BE: " << tensor.sizes() << endl;
 
         // Apply transforms if specified
         if (transformer != nullptr)
         {
-            cout << "INSIDE TRANSFORMERS" << endl;
+            // cout << "INSIDE TRANSFORMERS" << endl;
             tensor = std::any_cast<torch::Tensor>((*transformer)({tensor}));
         }
 
-        cout << "AF: " << tensor.sizes() << endl;
+        // cout << "AF: " << tensor.sizes() << endl;
         return {tensor, torch::tensor(targets[index])};
     }
 
