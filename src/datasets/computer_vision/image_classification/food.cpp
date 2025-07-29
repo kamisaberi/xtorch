@@ -122,8 +122,8 @@ namespace xt::datasets
 
                 // Load and process image
                 fs::path img_path = images_path / fs::path(line + ".jpg");
-                cout << img_path.string() << endl;
-                files.push_back(images_path);
+                // cout << img_path.string() << endl;
+                files.push_back(img_path);
                 // torch::Tensor tensor = xt::utils::image::convertImageToTensor(img_path);
 
                 // Apply transforms if specified
@@ -177,7 +177,15 @@ namespace xt::datasets
 
     torch::data::Example<> Food101::get(size_t index)
     {
-        torch::Tensor tensor = xt::utils::image::convertImageToTensor(files[index]);
+
+        auto image_path = this->files[index];
+        // cout <<"GET: " <<  image_path.string() << endl;
+        // if (image_path.extension()  != ".jpg" )
+        // {
+        //     throw std::runtime_error("ERROROROORORORORO");
+        //
+        // }
+        torch::Tensor tensor = xt::utils::image::convertImageToTensor(image_path);
 
         // Apply transforms if specified
         if (transformer != nullptr)
