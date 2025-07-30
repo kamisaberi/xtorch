@@ -122,6 +122,11 @@ namespace xt::datasets
             // (Original CIFAR-100 binary format has unusual dimension ordering)
             tensor_image = tensor_image.permute({0, 2, 1});
 
+            if (transformer != nullptr)
+            {
+                tensor_image = std::any_cast<torch::Tensor>((*transformer)({tensor_image}));
+            }
+
             // Store final tensor in data vector
             data.push_back(tensor_image);
         }

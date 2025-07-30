@@ -172,6 +172,22 @@ namespace xt::models
         return x;
     }
 
+    // torch::Tensor AlexNet::forward(torch::Tensor tensors)
+    // {
+    //     tensors = tensors.to(torch::kFloat32);
+    //     tensors = layer1->forward(tensors);
+    //     tensors = layer2->forward(tensors);
+    //     tensors = layer3->forward(tensors);
+    //     tensors = layer4->forward(tensors);
+    //     tensors = layer5->forward(tensors);
+    //     tensors = tensors.view({tensors.size(0), -1});
+    //     tensors = fc->forward(tensors);
+    //     tensors = fc1->forward(tensors);
+    //     tensors = fc2->forward(tensors);
+    //     return tensors;
+    //
+    // }
+
     void AlexNet::reset()
     {
     }

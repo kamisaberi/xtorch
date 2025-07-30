@@ -121,6 +121,11 @@ namespace xt::datasets
                 tensor_image = tensor_image.permute({0, 2, 1});
 
                 // Store final tensor in data vector
+                if (transformer != nullptr)
+                {
+                    tensor_image = std::any_cast<torch::Tensor>((*transformer)({tensor_image}));
+                }
+
                 data.push_back(tensor_image);
             }
 
