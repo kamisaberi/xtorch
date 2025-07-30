@@ -29,7 +29,7 @@ namespace xt::datasets
     CIFAR100::CIFAR100(const std::string& root, xt::datasets::DataMode mode, bool download,
                        std::unique_ptr<xt::Module> transformer,
                        std::unique_ptr<xt::Module> target_transformer) : xt::datasets::Dataset(
-        mode, std::move(transformer), std::move(target_transformer))
+        mode, std::move(transformer), std::move(target_transformer)), root(root)
     {
 
         // Same initialization as main constructor
