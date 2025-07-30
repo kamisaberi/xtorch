@@ -26,7 +26,7 @@ namespace xt::datasets
 
     FashionMNIST::FashionMNIST(const std::string& root, xt::datasets::DataMode mode, bool download,
                                std::unique_ptr<xt::Module> transformer, std::unique_ptr<xt::Module> target_transformer):
-        xt::datasets::Dataset(mode, std::move(transformer), std::move(target_transformer))
+        xt::datasets::Dataset(mode, std::move(transformer), std::move(target_transformer)), root(root)
     {
         check_resources();
         load_data();
@@ -131,7 +131,7 @@ namespace xt::datasets
                                                           torch::kByte).clone();
             if (transformer != nullptr)
             {
-                tensor_image =std::any_cast<torch::Tensor>((*transformer)({tensor_image}));
+                tensor_image = std::any_cast<torch::Tensor>((*transformer)({tensor_image}));
             }
             fimages.push_back(tensor_image);
         }
