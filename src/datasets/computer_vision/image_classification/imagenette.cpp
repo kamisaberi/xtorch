@@ -31,7 +31,7 @@ namespace xt::datasets
 
     Imagenette::Imagenette(const std::string& root, xt::datasets::DataMode mode, bool download, ImageType type,
                            std::unique_ptr<xt::Module> transformer, std::unique_ptr<xt::Module> target_transformer):
-        xt::datasets::Dataset(mode, std::move(transformer), std::move(target_transformer))
+        xt::datasets::Dataset(mode, std::move(transformer), std::move(target_transformer)), root(root)
     {
         check_resources(root, download);
         load_data();
@@ -109,7 +109,7 @@ namespace xt::datasets
                         // Apply transforms if specified
                         if (transformer != nullptr)
                         {
-                            tensor =std::any_cast<torch::Tensor>((*transformer)({tensor}));
+                            tensor = std::any_cast<torch::Tensor>((*transformer)({tensor}));
                             // tensor = (*transformer)(tensor);
                         }
 
@@ -143,7 +143,7 @@ namespace xt::datasets
                         // Apply transforms if specified
                         if (transformer != nullptr)
                         {
-                            tensor =std::any_cast<torch::Tensor>((*transformer)({tensor}));
+                            tensor = std::any_cast<torch::Tensor>((*transformer)({tensor}));
                             // tensor = (*transformer)(tensor);
                         }
 
