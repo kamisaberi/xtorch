@@ -188,6 +188,7 @@ namespace xt::models
         }
 
         torch::Tensor x = tensor_vec[0];
+        x = x.to(torch::kFloat32);
         x = conv1->forward(x);
         x = maxpool->forward(x);
         x = layer0->forward(x);
