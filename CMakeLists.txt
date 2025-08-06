@@ -1,7 +1,9 @@
 cmake_minimum_required(VERSION 3.28 FATAL_ERROR)
-#set(CMAKE_C_COMPILER "gcc-12")
-#set(CMAKE_CXX_COMPILER "g++-12")
-#set(CMAKE_CUDA_HOST_COMPILER "g++-12")
+set(CMAKE_C_COMPILER "gcc-12")
+set(CMAKE_CXX_COMPILER "g++-12")
+set(CMAKE_CUDA_HOST_COMPILER "g++-12")
+set(CMAKE_CUDA_ARCHITECTURES "75;86")
+set(CMAKE_CUDA_COMPILER /usr/local/cuda-12.8/bin/nvcc)
 
 project(xTorch VERSION 0.2.0 LANGUAGES CXX)
 
