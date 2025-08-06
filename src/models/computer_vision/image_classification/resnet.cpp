@@ -2,6 +2,120 @@
 
 namespace xt::models
 {
+    torch::nn::Conv2dOptions conv3x3(int64_t in_planes, int64_t out_planes, int64_t stride = 1)
+    {
+        return torch::nn::Conv2dOptions(in_planes, out_planes, 3)
+               .stride(stride)
+               .padding(1)
+               .bias(false);
+    }
+
+    torch::nn::Conv2dOptions conv1x1(int64_t in_planes, int64_t out_planes, int64_t stride = 1)
+    {
+        return torch::nn::Conv2dOptions(in_planes, out_planes, 1)
+               .stride(stride)
+               .bias(false);
+    }
+
+    // --- BasicBlock Implementation ---
+
+    const int BasicBlock::expansion = 1;
+
+    BasicBlock::BasicBlock(int64_t inplanes, int64_t planes, int64_t stride, torch::nn::Sequential _downsample)
+    {
+        conv1 = register_module("conv1", torch::nn::Conv2d(conv3x3(inplanes, planes, stride)));
+        bn1 = register_module("bn1", torch::nn::BatchNorm2d(planes));
+        conv2 = register_module("conv2", torch::nn::Conv2d(conv3x3(planes, planes)));
+        bn2 = register_module("bn2", torch::nn::BatchNorm2d(planes));
+
+        if (_downsample)
+        {
+            downsample = register_module("downsample", _downsample);
+        }
+    }
+
+    torch::Tensor BasicBlock::forward(torch::Tensor x)
+    {
+        torch::Tensor identity = x;
+
+        auto out = conv1->forward(x);
+        out = bn1->forward(out);
+        out = torch::relu(out);
+
+        out = conv2->forward(out);
+        out = bn2->forward(out);
+
+        if (downsample)
+        {
+            identity = downsample->forward(x);
+        }
+
+        out += identity;
+        out = torch::relu(out);
+
+        return out;
+    }
+
+
+    // --- ResNet Implementation ---
+
+    ResNet::ResNet(const std::vector<int>& layers, int num_classes, int in_channels)
+    {
+        conv1 = register_module(
+            "conv1", torch::nn::Conv2d(torch::nn::Conv2dOptions(in_channels, inplanes, 7).stride(2).padding(3).bias(false)));
+        bn1 = register_module("bn1", torch::nn::BatchNorm2d(inplanes));
+
+        layer1 = register_module("layer1", _make_layer(64, layers[0]));
+        layer2 = register_module("layer2", _make_layer(128, layers[1], 2));
+        layer3 = register_module("layer3", _make_layer(256, layers[2], 2));
+        layer4 = register_module("layer4", _make_layer(512, layers[3], 2));
+
+        fc = register_module("fc", torch::nn::Linear(512 * BasicBlock::expansion, num_classes));
+    }
+
+    torch::nn::Sequential ResNet::_make_layer(int64_t planes, int64_t blocks, int64_t stride)
+    {
+        torch::nn::Sequential downsample = nullptr;
+        if (stride != 1 || inplanes != planes * BasicBlock::expansion)
+        {
+            downsample = torch::nn::Sequential(
+                torch::nn::Conv2d(conv1x1(inplanes, planes * BasicBlock::expansion, stride)),
+                torch::nn::BatchNorm2d(planes * BasicBlock::expansion)
+            );
+        }
+
+        torch::nn::Sequential layers;
+        layers->push_back(BasicBlock(inplanes, planes, stride, downsample));
+        inplanes = planes * BasicBlock::expansion;
+        for (int i = 1; i < blocks; ++i)
+        {
+            layers->push_back(BasicBlock(inplanes, planes));
+        }
+
+        return layers;
+    }
+
+    torch::Tensor ResNet::forward(torch::Tensor x)
+    {
+        x = x.to(torch::kFloat32);
+        x = conv1->forward(x);
+        x = bn1->forward(x);
+        x = torch::relu(x);
+        x = torch::max_pool2d(x, 3, 2, 1);
+
+        x = layer1->forward(x);
+        x = layer2->forward(x);
+        x = layer3->forward(x);
+        x = layer4->forward(x);
+
+        x = torch::adaptive_avg_pool2d(x, {1, 1});
+        x = torch::flatten(x, 1);
+        x = fc->forward(x);
+
+        return x;
+    }
+
+
     namespace
     {
         ResidualBlock::ResidualBlock(int in_channels, int out_channels, int stride, torch::nn::Sequential downsample)

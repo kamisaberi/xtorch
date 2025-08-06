@@ -7,6 +7,46 @@ using namespace std;
 
 namespace xt::models
 {
+
+    struct BasicBlock : torch::nn::Module {
+        // Member layers
+        torch::nn::Conv2d conv1{nullptr}, conv2{nullptr};
+        torch::nn::BatchNorm2d bn1{nullptr}, bn2{nullptr};
+        torch::nn::Sequential downsample{nullptr};
+
+        static const int expansion;
+
+        // Constructor declaration
+        BasicBlock(int64_t inplanes, int64_t planes, int64_t stride = 1, torch::nn::Sequential _downsample = nullptr);
+
+        // Forward pass declaration
+        torch::Tensor forward(torch::Tensor x);
+    };
+
+    // The main ResNet model definition
+    struct ResNet : torch::nn::Module {
+    private:
+        int64_t inplanes = 64;
+        torch::nn::Conv2d conv1{nullptr};
+        torch::nn::BatchNorm2d bn1{nullptr};
+        torch::nn::Sequential layer1{nullptr}, layer2{nullptr}, layer3{nullptr}, layer4{nullptr};
+        torch::nn::Linear fc{nullptr};
+
+        // Helper function declaration
+        torch::nn::Sequential _make_layer(int64_t planes, int64_t blocks, int64_t stride = 1);
+
+    public:
+        // Constructor declaration
+        ResNet(const std::vector<int>& layers, int num_classes = 1000, int in_channels = 3);
+
+        // Forward pass declaration
+        torch::Tensor forward(torch::Tensor x);
+    };
+
+
+
+
+
     namespace
     {
         struct ResidualBlock : xt::Module
