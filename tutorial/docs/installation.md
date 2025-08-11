@@ -2,13 +2,13 @@
 
 This guide provides instructions for setting up the necessary dependencies, building, and installing the xTorch project on **Ubuntu**.
 
-**Important:** Before you proceed with the build process, you must install the required system-level development libraries.
+**Important:** Before you proceed with the build process, you must install the required system-level development libraries and Python environment.
 
 ---
 
 ## 1. Prerequisites: Install System Dependencies
 
-First, you need to install several libraries that xTorch depends on for its features. Open a terminal and run the following commands to install the required packages using `apt-get`.
+First, you need to install several libraries and tools that xTorch depends on. Open a terminal and run the following commands to install the required packages using `apt-get`.
 
 ### Step 1: Update Package Lists
 
@@ -24,11 +24,13 @@ You will need `build-essential` for a C++ compiler (like g++) and other essentia
 sudo apt-get install -y build-essential cmake
 ```
 
-### Step 3: Install Project-Specific Libraries
+### Step 3: Install Python and Project-Specific Libraries
 
-Install the development headers for all required libraries with a single command:
+Install Python, the virtual environment module (`venv`), and the development headers for all other required libraries with a single command:
 ```bash
 sudo apt-get install -y \
+    python3 \
+    python3-venv \
     libopencv-dev \
     libhdf5-dev \
     libcurl4-openssl-dev \
