@@ -5,11 +5,6 @@ This guide provides instructions for setting up the necessary dependencies, buil
 **Important:** Before you proceed with the build process, you must install the required system-level development libraries and Python environment.
 
 ---
-## 0. Cloning: Clone Repository
-First clone repository using git command :
-```
-git clone https://github.com/kamisaberi/xtorch 
-```
 
 ## 1. Prerequisites: Install System Dependencies
 
@@ -53,6 +48,14 @@ sudo apt-get install -y \
 ---
 
 ## 2. Building the Project
+
+### Step 1: Clone Repository
+First clone repository using git command :
+```bash
+git clone https://github.com/kamisaberi/xtorch
+cd xtorch 
+```
+
 
 Once all system dependencies are installed, you can build the xTorch project using CMake. The `CMakeLists.txt` file is configured to automatically download the correct versions of **LibTorch** and **ONNX Runtime**, so you do not need to install them manually.
 
