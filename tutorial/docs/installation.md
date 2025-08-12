@@ -5,6 +5,11 @@ This guide provides instructions for setting up the necessary dependencies, buil
 **Important:** Before you proceed with the build process, you must install the required system-level development libraries and Python environment.
 
 ---
+## 0. Cloning: Clone Repository
+First clone repository using git command :
+```
+git clone https://github.com/kamisaberi/xtorch 
+```
 
 ## 1. Prerequisites: Install System Dependencies
 
