@@ -18,3 +18,4 @@ third_party/*.tgz
 third_party/*.tar.gz
 #torch-extension/build/
 #torch-extension/cmake-build-debug/
+.qtcreator/
