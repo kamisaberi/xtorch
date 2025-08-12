@@ -66,6 +66,10 @@ cleaner interface to the developer.
 - **Extended Optimizers:** AdamW, RAdam, schedulers, learning rate strategies.
 - **Model Serialization & Deployment:** `save_model()`, `export_to_jit()`, inference helpers.
 
+
+## Installation
+For install library do step by step that we created in [Installation Instruction](https://github.com/kamisaberi/xtorch/blob/main/tutorial/docs/installation.md)
+
 ## Use Cases and Examples
 
 ### Example: CNN Training Pipeline (Simplified)
