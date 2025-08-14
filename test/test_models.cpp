@@ -18,14 +18,14 @@ TEST(XTorchModelTest, ForwardPassOutputShape) {
 }
 
 TEST(XTorchModelTest, TrainAndEvalModeDifference) {
-    auto model = xtorch::models::SimpleCNN();
+    auto model = xt::models::LeNet5(10, 3);
     auto input = torch::randn({4, 3, 32, 32});
 
-    model->train();
-    auto output_train = model->forward(input);
+    model.train();
+    auto output_train = std::any_cast<torch::Tensor>(model.forward({input}));
 
-    model->eval();
-    auto output_eval = model->forward(input);
+    model.eval();
+    auto output_eval =std::any_cast<torch::Tensor>(model.forward({input}));
 
     // In eval mode, dropout is disabled, so the output should be different
     ASSERT_FALSE(torch::allclose(output_train, output_eval));
