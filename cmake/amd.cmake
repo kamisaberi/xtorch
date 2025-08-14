@@ -14,10 +14,23 @@ set(LIBTORCH_DIR "${DEPS_DIR}/libtorch")
 set(ONNXRUNTIME_DIR "${DEPS_DIR}/onnxruntime")
 
 
-set(LIBTORCH_URL "https://download.pytorch.org/libtorch/cu128/libtorch-cxx11-abi-shared-with-deps-2.7.1%2Bcu128.zip")
-set(LIBTORCH_SHA256 "ae513b437ae99150744ef1d06b02a4ecbbb9275c9ffe540c88909623e3293041")
-set(ONNXRUNTIME_URL "https://github.com/microsoft/onnxruntime/releases/download/v1.22.0/onnxruntime-linux-x64-gpu-1.22.0.tgz")
-set(ONNXRUNTIME_SHA256 "2a19dbfa403672ec27378c3d40a68f793ac7a6327712cd0e8240a86be2b10c55")
+if(CMAKE_CUDA_COMPILER)
+    message(STATUS "CUDA is available.")
+    set(LIBTORCH_URL "https://download.pytorch.org/libtorch/cu128/libtorch-cxx11-abi-shared-with-deps-2.7.1%2Bcu128.zip")
+    set(LIBTORCH_SHA256 "ae513b437ae99150744ef1d06b02a4ecbbb9275c9ffe540c88909623e3293041")
+    set(ONNXRUNTIME_URL "https://github.com/microsoft/onnxruntime/releases/download/v1.22.0/onnxruntime-linux-x64-gpu-1.22.0.tgz")
+    set(ONNXRUNTIME_SHA256 "2a19dbfa403672ec27378c3d40a68f793ac7a6327712cd0e8240a86be2b10c55")
+else()
+    set(LIBTORCH_URL "https://download.pytorch.org/libtorch/cpu/libtorch-shared-with-deps-2.8.0%2Bcpu.zip")
+    set(LIBTORCH_SHA256 "8dea5bcfed4b53ca0f6852517bea4b4d1f3ff1cc0c21da662e834d34af1ec824")
+    set(ONNXRUNTIME_URL "https://github.com/microsoft/onnxruntime/releases/download/v1.22.0/onnxruntime-linux-x64-1.22.0.tgz")
+    set(ONNXRUNTIME_SHA256 "8344d55f93d5bc5021ce342db50f62079daf39aaafb5d311a451846228be49b3")
+endif()
+
+#set(LIBTORCH_URL "https://download.pytorch.org/libtorch/cu128/libtorch-cxx11-abi-shared-with-deps-2.7.1%2Bcu128.zip")
+#set(LIBTORCH_SHA256 "ae513b437ae99150744ef1d06b02a4ecbbb9275c9ffe540c88909623e3293041")
+#set(ONNXRUNTIME_URL "https://github.com/microsoft/onnxruntime/releases/download/v1.22.0/onnxruntime-linux-x64-gpu-1.22.0.tgz")
+#set(ONNXRUNTIME_SHA256 "2a19dbfa403672ec27378c3d40a68f793ac7a6327712cd0e8240a86be2b10c55")
 #elseif (CMAKE_SYSTEM_NAME STREQUAL "Darwin")
 
 
