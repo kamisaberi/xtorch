@@ -72,8 +72,14 @@ cd build
 
 Run `cmake` from inside the `build` directory. This command will find the system libraries you just installed and download the remaining C++ dependencies (LibTorch, ONNX Runtime).
 
+### if you installed cuda toolkit at deafult library path like `/usr/local/cuda` use : 
+
 ```bash
-cmake ..
+cmale ..
+```
+### otherwise find nvcc path using `nvcc --version` command and use following command 
+```bash
+cmale -DCMAKE_CUDA_COMPILER = 'path/to/nvcc' ..
 ```
 
 ### Step 3: Compile the Project with Make
