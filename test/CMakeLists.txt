@@ -15,7 +15,15 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/cpp/libtorch/)
 
 find_package(Torch REQUIRED)
-#find_package(xTorch REQUIRED)
+find_package(xTorch REQUIRED)
+find_package(LibLZMA REQUIRED)
+find_package(LibArchive REQUIRED)
+find_package(OpenSSL REQUIRED)
+find_package(CURL REQUIRED)
+find_package(OpenCV REQUIRED)
+find_package(ZLIB REQUIRED)
+find_package(SndFile REQUIRED)
+
 
 # [IMPORTANT] LibTorch ABI Compatibility
 # The pre-built LibTorch binaries can have ABI compatibility issues with other libraries.
@@ -41,14 +49,23 @@ FetchContent_MakeAvailable(googletest)
 
 ## --- Define Your Application Library ---
 ## This creates a library from your source code in the 'src' directory.
-add_library(my_lib my_lib.cpp)
+#add_library(my_lib my_lib.cpp)
 #
 ## Make sure your library can find the LibTorch headers.
-target_include_directories(my_lib PUBLIC ${TORCH_INCLUDE_DIRS})
+#target_include_directories(my_lib PUBLIC ${TORCH_INCLUDE_DIRS})
 
 # --- Define the Test Executable ---
 # This creates an executable named 'run_tests' from your test file.
-add_executable(run_tests src/test_linalg.cpp)
+add_executable(run_tests
+        src/test_activations.cpp
+        src/test_dataloader.cpp
+        src/test_datasets.cpp
+        src/test_dropouts.cpp
+        src/test_losses.cpp
+        src/test_models.cpp
+        src/test_optimizers.cpp
+        src/test_transforms.cpp
+)
 
 # Link the test executable against your library, LibTorch, and Google Test.
 # - my_lib: Your own code that you are testing.
@@ -56,7 +73,8 @@ add_executable(run_tests src/test_linalg.cpp)
 # - GTest::gtest_main: The Google Test library that includes a main() function.
 target_link_libraries(run_tests
         PRIVATE
-        my_lib
+        xTorch::xTorch
+#        my_lib
         ${TORCH_LIBRARIES}
         GTest::gtest_main
 )
