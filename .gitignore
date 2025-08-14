@@ -19,3 +19,5 @@ third_party/*.tar.gz
 #torch-extension/build/
 #torch-extension/cmake-build-debug/
 .qtcreator/
+test/build
+examples/build
