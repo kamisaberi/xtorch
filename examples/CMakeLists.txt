@@ -45,16 +45,15 @@ set(TEST_LIBRARIES ${CURL_LIBRARIES}
         OpenSSL::SSL
         OpenSSL::Crypto
         ZLIB::ZLIB
-#        ${ONNXRUNTIME_LIBRARY}
-#        onnxruntime
+        #        ${ONNXRUNTIME_LIBRARY}
+        #        onnxruntime
         ONNX::Runtime
         ${LIBZIP_LIBRARIES}  # Add this line
-#        LibZip::zip
+        #        LibZip::zip
 
         #        LibZip::zip
 
 )
-
 
 
 #add_executable(${PROJECT_NAME} ${TEST_SOURCE_FILES})
@@ -85,18 +84,16 @@ set(TEST_LIBRARIES ${CURL_LIBRARIES}
 #========================================= classifying_handwritten_digits_with_lenet_on_mnist =========================================
 
 add_executable(classifying_handwritten_digits_with_lenet_on_mnist ${TEST_SOURCE_FILES} classifying_handwritten_digits_with_lenet_on_mnist.cpp)
-#target_link_libraries(classifying_handwritten_digits_with_lenet_on_mnist PRIVATE "${TORCH_LIBRARIES}" xTorch::xTorch )
-
-target_link_libraries(classifying_handwritten_digits_with_lenet_on_mnist
-        PRIVATE
-        xTorch::xTorch
-)
+target_link_libraries(classifying_handwritten_digits_with_lenet_on_mnist PRIVATE xTorch::xTorch)
 set_property(TARGET classifying_handwritten_digits_with_lenet_on_mnist PROPERTY CXX_STANDARD 17)
-#target_include_directories(classifying_handwritten_digits_with_lenet_on_mnist PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS})
-#target_link_libraries(classifying_handwritten_digits_with_lenet_on_mnist ${TEST_LIBRARIES})
-target_include_directories(classifying_handwritten_digits_with_lenet_on_mnist PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS} ${XTORCH_INCLUDE_DIRS} )
-#target_link_libraries(classifying_handwritten_digits_with_lenet_on_mnist ${TEST_LIBRARIES})
+target_include_directories(classifying_handwritten_digits_with_lenet_on_mnist PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS} ${XTORCH_INCLUDE_DIRS})
 
+#========================================= generating_images_with_dcgan =========================================
+
+add_executable(generating_images_with_dcgan ${TEST_SOURCE_FILES} generating_images_with_dcgan.cpp)
+target_link_libraries(generating_images_with_dcgan PRIVATE xTorch::xTorch)
+set_property(TARGET generating_images_with_dcgan PROPERTY CXX_STANDARD 17)
+target_include_directories(generating_images_with_dcgan PRIVATE ${LIBTAR_INCLUDE_DIR} ${TORCH_INCLUDE_DIRS} ${LibArchive_INCLUDE_DIRS} ${XTORCH_INCLUDE_DIRS})
 
 
 #========================================= fine_tuning_resnet_on_cifar10 =========================================
