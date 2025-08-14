@@ -48,7 +48,7 @@ target_include_directories(my_lib PUBLIC ${TORCH_INCLUDE_DIRS})
 
 # --- Define the Test Executable ---
 # This creates an executable named 'run_tests' from your test file.
-add_executable(run_tests test_linalg.cpp)
+add_executable(run_tests src/test_linalg.cpp)
 
 # Link the test executable against your library, LibTorch, and Google Test.
 # - my_lib: Your own code that you are testing.

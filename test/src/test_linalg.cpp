@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include <torch/torch.h>
 // #include <xtorch/xtorch.h>
-#include  "my_lib.h"
+#include "../my_lib.h"
 
 // Test case for the double_tensor function
 TEST(MyLibTest, DoubleTensor) {
