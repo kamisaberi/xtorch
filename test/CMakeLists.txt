@@ -63,6 +63,7 @@ add_executable(run_tests
         src/test_dropouts.cpp
         src/test_losses.cpp
         src/test_models.cpp
+        src/test_normalizations.cpp
         src/test_optimizers.cpp
         src/test_transforms.cpp
 )
