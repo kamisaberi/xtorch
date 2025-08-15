@@ -105,7 +105,7 @@ sudo make install -j$(nproc)
 ```
 
 This completes the installation process. xTorch is now ready to be used in your C++ applications.
-
+---
 
 # Test Unit
 ### 1. go to test folder using `cd test`
@@ -114,7 +114,7 @@ This completes the installation process. xTorch is now ready to be used in your 
 ### 4. use `make ` to build test units
 ### 5. use `./runt_test` to run all test units
 
-
+---
 # Examples
 ### 1. go to test folder using `cd examples`
 ### 2. create build directory `mkdir build`
@@ -123,5 +123,6 @@ This completes the installation process. xTorch is now ready to be used in your 
 ### 5. use can any of examples that we list here 
     - classifying_handwritten_digits_with_lenet_on_mnist
     - generating_images_with_dcgan
-## for more examples please clone xtorch-examples repository at [xtorch examples](https://github.com/kamisaberi/xtorch-examples) and follow instruction to build and run them
+---
+### for more examples please clone xtorch-examples repository at [xtorch examples](https://github.com/kamisaberi/xtorch-examples) and follow instruction to build and run them
 
