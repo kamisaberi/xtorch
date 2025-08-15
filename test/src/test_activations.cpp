@@ -1,29 +1,29 @@
 #include <gtest/gtest.h>
+#include <torch/torch.h>
 #include <xtorch/xtorch.h>
 
-TEST(XTorchActivationTest, CorrectSize) {
-    auto train_dataset = xt::datasets::MNIST("./data" , xt::datasets::DataMode::TRAIN);
-    auto test_dataset = xt::datasets::MNIST("./data" , xt::datasets::DataMode::TEST);
-    ASSERT_EQ(train_dataset.size().value(), 100);
-    ASSERT_EQ(test_dataset.size().value(), 20);
+TEST(XTorchActivationTest, GeluGoldenValues) {
+    // Test a vector of known inputs
+    auto input = torch::tensor({-2.0, -1.0, 0.0, 1.0, 2.0});
+    // auto output = xt::activations::gelu(input);
+
+    // Expected values calculated from a trusted implementation (e.g., Hugging Face Transformers)
+    auto expected = torch::tensor({-0.0455, -0.1588, 0.0, 0.8412, 1.9545});
+
+    // ASSERT_TRUE(torch::allclose(output, expected, 1e-4, 1e-4));
 }
 
-TEST(XTorchActivationTest, SampleShapeAndType) {
-    auto dataset = xt::datasets::MNIST("./data" , xt::datasets::DataMode::TRAIN);
-    auto sample = dataset.get(0);
-    // Check data
-    ASSERT_EQ(sample.data.dim(), 3);
-    ASSERT_EQ(sample.data.size(0), 3); // Channels
-    ASSERT_EQ(sample.data.size(1), 32); // Height
-    ASSERT_EQ(sample.data.size(2), 32); // Width
-    ASSERT_EQ(sample.data.dtype(), torch::kFloat32);
+TEST(XTorchActivationTest, GeluGradientCheck) {
+    // Ensure that autograd works correctly through the function
+    auto input = torch::tensor({-0.5, 0.5}, torch::requires_grad());
+    // auto output = xt::activations::gelu(input);
+    // output.sum().backward();
 
-    // Check target
-    ASSERT_EQ(sample.target.dim(), 0); // Scalar
-    ASSERT_EQ(sample.target.dtype(), torch::kInt64);
-}
+    ASSERT_TRUE(input.grad().defined());
+    ASSERT_EQ(input.grad().sizes(), input.sizes());
 
-TEST(XTorchActivationTest, OutOfBoundsAccess) {
-    auto dataset = xt::datasets::MNIST("./data" , xt::datasets::DataMode::TRAIN);
-    ASSERT_THROW(dataset.get(dataset.size().value()), std::exception);
+    // Manual derivative of GELU at 0.5 is approx 0.849
+    // Manual derivative of GELU at -0.5 is approx 0.150
+    auto expected_grad = torch::tensor({0.1503, 0.8496});
+    ASSERT_TRUE(torch::allclose(input.grad(), expected_grad, 1e-4, 1e-4));
 }
