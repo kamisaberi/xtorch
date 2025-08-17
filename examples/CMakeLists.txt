@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.28 FATAL_ERROR)
 project(image_classification)
-list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/cpp/libtorch/)
+#list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/cpp/libtorch/)
 
 
 
@@ -14,20 +14,33 @@ list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/cpp/libtorch/)
 
 find_package(xTorch REQUIRED)
 
-# If xTorch is found, construct the path to its bundled libtorch
-if(XTORCH_FOUND)
-    # Get the include directory of xTorch
-    get_filename_component(XTORCH_INCLUDE_DIR ${XTORCH_INCLUDE_DIRS} DIRECTORY)
+# Use the correct variable 'xTorch_FOUND' (lowercase 'x')
+if(xTorch_FOUND)
+    # The xTorch_DIR variable is automatically set by find_package.
+    # It points to the directory containing xTorchConfig.cmake,
+    # e.g., /usr/local/lib/cmake/xTorch
+    message(STATUS "xTorch config directory found at: ${xTorch_DIR}")
 
-    # Construct the path to the third-party libtorch directory
-    set(BUNDLED_LIBTORCH_PATH "${XTORCH_INCLUDE_DIR}/xtorch/third_party/libtorch")
+    # To find the installation root, we go up a few directories from the config file location.
+    # This might require adjustment depending on xTorch's install structure,
+    # but /lib/cmake/xTorch is a very common pattern.
+    get_filename_component(XTORCH_INSTALL_DIR "${xTorch_DIR}" DIRECTORY) # up to /usr/local/lib/cmake
+    get_filename_component(XTORCH_INSTALL_DIR "${XTORCH_INSTALL_DIR}" DIRECTORY) # up to /usr/local/lib
+    get_filename_component(XTORCH_INSTALL_DIR "${XTORCH_INSTALL_DIR}" DIRECTORY) # up to /usr/local
 
-    # Add the bundled libtorch path to CMAKE_PREFIX_PATH
-    list(APPEND CMAKE_PREFIX_PATH ${BUNDLED_LIBTORCH_PATH})
+    message(STATUS "Deduced xTorch installation root: ${XTORCH_INSTALL_DIR}")
 
-    message(STATUS "Found xTorch, adding its libtorch to CMAKE_PREFIX_PATH: ${BUNDLED_LIBTORCH_PATH}")
+    # Now, construct the path to the bundled libtorch from this reliable root path
+    set(BUNDLED_LIBTORCH_PATH "${XTORCH_INSTALL_DIR}/include/xtorch/third_party/libtorch")
+
+    # Check if that directory actually exists before adding it
+    if(EXISTS "${BUNDLED_LIBTORCH_PATH}")
+        message(STATUS "Found bundled libtorch at: ${BUNDLED_LIBTORCH_PATH}")
+        list(PREPEND CMAKE_PREFIX_PATH ${BUNDLED_LIBTORCH_PATH})
+    else()
+        message(FATAL_ERROR "Could not find the bundled libtorch directory at the expected path: ${BUNDLED_LIBTORCH_PATH}")
+    endif()
 endif()
-
 find_package(Torch REQUIRED)
 find_package(LibLZMA REQUIRED)
 find_package(LibArchive REQUIRED)
