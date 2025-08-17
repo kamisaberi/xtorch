@@ -3,6 +3,8 @@ project(image_classification)
 list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/cpp/libtorch/)
 
 
+
+
 #find_package(PkgConfig REQUIRED)
 #pkg_check_modules(LIBZIP REQUIRED libzip)
 #
@@ -10,8 +12,23 @@ list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/cpp/libtorch/)
 #link_directories(${LIBZIP_LIBRARY_DIRS})
 
 
-find_package(Torch REQUIRED)
 find_package(xTorch REQUIRED)
+
+# If xTorch is found, construct the path to its bundled libtorch
+if(XTORCH_FOUND)
+    # Get the include directory of xTorch
+    get_filename_component(XTORCH_INCLUDE_DIR ${XTORCH_INCLUDE_DIRS} DIRECTORY)
+
+    # Construct the path to the third-party libtorch directory
+    set(BUNDLED_LIBTORCH_PATH "${XTORCH_INCLUDE_DIR}/xtorch/third_party/libtorch")
+
+    # Add the bundled libtorch path to CMAKE_PREFIX_PATH
+    list(APPEND CMAKE_PREFIX_PATH ${BUNDLED_LIBTORCH_PATH})
+
+    message(STATUS "Found xTorch, adding its libtorch to CMAKE_PREFIX_PATH: ${BUNDLED_LIBTORCH_PATH}")
+endif()
+
+find_package(Torch REQUIRED)
 find_package(LibLZMA REQUIRED)
 find_package(LibArchive REQUIRED)
 find_package(OpenSSL REQUIRED)
