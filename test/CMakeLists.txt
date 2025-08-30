@@ -12,10 +12,36 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # For this to work, you must specify the path to your LibTorch installation
 # when running cmake, e.g.,
 # cmake -DCMAKE_PREFIX_PATH=/path/to/libtorch ..
-list(APPEND CMAKE_PREFIX_PATH /home/kami/libs/cpp/libtorch/)
-
-find_package(Torch REQUIRED)
 find_package(xTorch REQUIRED)
+
+# Use the correct variable 'xTorch_FOUND' (lowercase 'x')
+if(xTorch_FOUND)
+    # The xTorch_DIR variable is automatically set by find_package.
+    # It points to the directory containing xTorchConfig.cmake,
+    # e.g., /usr/local/lib/cmake/xTorch
+    message(STATUS "xTorch config directory found at: ${xTorch_DIR}")
+
+    # To find the installation root, we go up a few directories from the config file location.
+    # This might require adjustment depending on xTorch's install structure,
+    # but /lib/cmake/xTorch is a very common pattern.
+    get_filename_component(XTORCH_INSTALL_DIR "${xTorch_DIR}" DIRECTORY) # up to /usr/local/lib/cmake
+    get_filename_component(XTORCH_INSTALL_DIR "${XTORCH_INSTALL_DIR}" DIRECTORY) # up to /usr/local/lib
+    get_filename_component(XTORCH_INSTALL_DIR "${XTORCH_INSTALL_DIR}" DIRECTORY) # up to /usr/local
+
+    message(STATUS "Deduced xTorch installation root: ${XTORCH_INSTALL_DIR}")
+
+    # Now, construct the path to the bundled libtorch from this reliable root path
+    set(BUNDLED_LIBTORCH_PATH "${XTORCH_INSTALL_DIR}/include/xtorch/third_party/libtorch")
+
+    # Check if that directory actually exists before adding it
+    if(EXISTS "${BUNDLED_LIBTORCH_PATH}")
+        message(STATUS "Found bundled libtorch at: ${BUNDLED_LIBTORCH_PATH}")
+        list(PREPEND CMAKE_PREFIX_PATH ${BUNDLED_LIBTORCH_PATH})
+    else()
+        message(FATAL_ERROR "Could not find the bundled libtorch directory at the expected path: ${BUNDLED_LIBTORCH_PATH}")
+    endif()
+endif()
+find_package(Torch REQUIRED)
 find_package(LibLZMA REQUIRED)
 find_package(LibArchive REQUIRED)
 find_package(OpenSSL REQUIRED)
@@ -23,6 +49,12 @@ find_package(CURL REQUIRED)
 find_package(OpenCV REQUIRED)
 find_package(ZLIB REQUIRED)
 find_package(SndFile REQUIRED)
+#find_package(LibZip REQUIRED)
+
+#find_package(onnxruntime REQUIRED)
+
+#set(CMAKE_CXX_STANDARD 17)
+#set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 
 # [IMPORTANT] LibTorch ABI Compatibility
