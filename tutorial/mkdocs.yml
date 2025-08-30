@@ -1,0 +1,202 @@
+# mkdocs.yml
+
+site_name: xTorch Documentation
+site_url: https://kamisaberi.github.io/xtorch/
+repo_url: https://github.com/kamisaberi/xtorch
+repo_name: kamisaberi/xtorch
+edit_uri: ""
+
+theme:
+  name: material
+  logo: assets/logo.png
+  palette:
+    - scheme: default
+      primary: 'blue'
+      accent: 'light blue'
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: 'blue'
+      accent: 'light blue'
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - toc.integrate
+    - search.suggest
+    - search.highlight
+    - content.tabs.link
+    - content.code.annotation
+    - content.code.copy
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - attr_list
+  - md_in_html
+
+# Page Tree and Navigation Structure
+nav:
+  - Home: 'index.md'
+  - Getting Started:
+      - Installation: 'getting-started/installation.md'
+      - Quick Start: A CNN Example: 'getting-started/quick-start-cnn.md'
+  - User Guide:
+      - Architecture & Design: 'user-guide/architecture.md'
+      - The Training Loop (Trainer): 'user-guide/trainer.md'
+      - Data Handling (Datasets & DataLoaders): 'user-guide/data-handling.md'
+      - Serialization & Inference: 'user-guide/serialization-inference.md'
+      - Performance: 'user-guide/performance.md'
+  - Examples & Tutorials:
+      - Overview: 'examples/index.md'
+      - Getting Started:
+          - Tensors & Autograd: 'examples/getting-started/intro-tensors-autograd.md'
+          - Build a Simple NN: 'examples/getting-started/building-simple-nn.md'
+          - Using the Trainer: 'examples/getting-started/using-xtorch-trainer.md'
+      - Computer Vision:
+          - Image Classification:
+              - LeNet on MNIST: 'examples/computer-vision/image-classification/lenet-mnist.md'
+              - Fine-Tuning ResNet on CIFAR-10: 'examples/computer-vision/image-classification/finetuning-resnet-cifar10.md'
+              - Transfer Learning on Custom Datasets: 'examples/computer-vision/image-classification/transfer-learning-custom.md'
+          - Image Generation:
+              - DCGAN for Image Generation: 'examples/computer-vision/image-generation/dcgan.md'
+              - Style Transfer with CycleGAN: 'examples/computer-vision/image-generation/cyclegan.md'
+          - Object Detection:
+              - Faster R-CNN: 'examples/computer-vision/object-detection/faster-rcnn.md'
+              - YOLOv3 on COCO: 'examples/computer-vision/object-detection/yolov3-coco.md'
+          - Semantic Segmentation:
+              - DeepLabV3: 'examples/computer-vision/semantic-segmentation/deeplab-v3.md'
+              - Mask R-CNN: 'examples/computer-vision/semantic-segmentation/mask-rcnn.md'
+      - Natural Language Processing:
+          - Text Classification:
+              - Sentiment Analysis with RNNs: 'examples/nlp/text-classification/sentiment-rnn.md'
+              - Transformers for Classification: 'examples/nlp/text-classification/transformer-classification.md'
+          - Language Modeling:
+              - Fine-Tuning BERT: 'examples/nlp/language-modeling/finetuning-bert.md'
+              - Training a GPT-like Model: 'examples/nlp/language-modeling/training-gpt.md'
+          - Sequence-to-Sequence:
+              - Machine Translation: 'examples/nlp/seq2seq/machine-translation.md'
+              - Summarization: 'examples/nlp/seq2seq/summarization.md'
+      - Audio and Speech:
+          - Audio Classification:
+              - Environmental Sounds: 'examples/audio/audio-classification/environmental-sounds.md'
+              - Music Genre Classification: 'examples/audio/audio-classification/music-genre.md'
+          - Speech Recognition:
+              - End-to-End with CTC: 'examples/audio/speech-recognition/e2e-ctc.md'
+              - Keyword Spotting: 'examples/audio/speech-recognition/keyword-spotting.md'
+      - Generative Models:
+          - GANs:
+              - Generating MNIST Digits: 'examples/generative/gans/mnist-gan.md'
+              - Progressive GANs: 'examples/generative/gans/progressive-gan.md'
+          - Autoencoders:
+              - Denoising Autoencoders: 'examples/generative/autoencoders/denoising-ae.md'
+              - Variational Autoencoders: 'examples/generative/autoencoders/vae.md'
+          - Diffusion Models:
+              - DDPM for Image Generation: 'examples/generative/diffusion/ddpm.md'
+      - Graph Neural Networks:
+          - Node-Level Tasks:
+              - GCN for Node Classification: 'examples/gnn/node-level/gcn.md'
+              - GraphSAGE for Node Embedding: 'examples/gnn/node-level/graphsage.md'
+          - Graph-Level Tasks:
+              - DiffPool for Graph Classification: 'examples/gnn/graph-level/diffpool.md'
+              - MPNN for Molecular Properties: 'examples/gnn/graph-level/mpnn.md'
+      - Time Series:
+          - Forecasting with LSTMs: 'examples/time-series/forecasting/lstm.md'
+          - Multivariate Forecasting: 'examples/time-series/forecasting/multivariate.md'
+          - Anomaly Detection with Autoencoders: 'examples/time-series/anomaly-detection/autoencoders.md'
+      - Reinforcement Learning:
+          - Value-Based Methods:
+              - Q-Learning for FrozenLake: 'examples/rl/value-based/q-learning.md'
+              - DQN for Atari Games: 'examples/rl/value-based/dqn-atari.md'
+          - Policy-Based Methods:
+              - REINFORCE for CartPole: 'examples/rl/policy-based/reinforce.md'
+              - PPO for Continuous Control: 'examples/rl/policy-based/ppo.md'
+      - Data Handling:
+          - Datasets:
+              - Custom Datasets (ImageFolder): 'examples/data-handling/datasets/custom-datasets.md'
+              - Using Built-in Datasets: 'examples/data-handling/datasets/builtin-datasets.md'
+          - DataLoaders:
+              - Efficient Data Loading: 'examples/data-handling/dataloaders/efficient-loading.md'
+          - Transforms:
+              - Image Augmentation: 'examples/data-handling/transforms/image-augmentation.md'
+      - Optimization Techniques:
+          - Optimizers:
+              - SGD with Momentum: 'examples/optimization/optimizers/sgd-momentum.md'
+              - AdamW Optimizer: 'examples/optimization/optimizers/adamw.md'
+          - LR Schedulers:
+              - Step Decay: 'examples/optimization/lr-schedulers/step-decay.md'
+              - Cosine Annealing: 'examples/optimization/lr-schedulers/cosine-annealing.md'
+          - Regularization:
+              - Dropout: 'examples/optimization/regularization/dropout.md'
+              - Weight Decay: 'examples/optimization/regularization/weight-decay.md'
+      - Distributed Training:
+          - Data Parallelism (Multi-GPU): 'examples/distributed/data-parallelism/multi-gpu.md'
+          - Model Parallelism: 'examples/distributed/model-parallelism/model-splitting.md'
+          - Distributed Training (Multi-Machine): 'examples/distributed/multi-machine/setup.md'
+      - Deployment & Production:
+          - Serialization:
+              - Saving & Loading Models: 'examples/deployment/serialization/save-load.md'
+              - Exporting to TorchScript: 'examples/deployment/serialization/export-torchscript.md'
+          - Inference:
+              - C++ Inference Application: 'examples/deployment/inference/cpp-app.md'
+              - TensorRT Optimization: 'examples/deployment/inference/tensorrt.md'
+          - Web Services:
+              - Serving with REST APIs: 'examples/deployment/web-services/rest-api.md'
+      - Performance:
+          - Memory Management:
+              - Gradient Checkpointing: 'examples/performance/memory/gradient-checkpointing.md'
+              - Data Loading Bottlenecks: 'examples/performance/memory/data-loading.md'
+          - Speed Optimization:
+              - Profiling Loops: 'examples/performance/speed/profiling.md'
+              - Mixed Precision Training: 'examples/performance/speed/mixed-precision.md'
+  - API Reference:
+      - Overview: 'api/index.md'
+      - Activations: 'api/activations.md'
+      - DataLoaders: 'api/dataloaders.md'
+      - Datasets:
+          - Overview: 'api/datasets/index.md'
+          - Computer Vision: 'api/datasets/computer-vision.md'
+          - Natural Language Processing: 'api/datasets/nlp.md'
+          - Audio Processing: 'api/datasets/audio.md'
+          - Time Series: 'api/datasets/time-series.md'
+          - Tabular Data: 'api/datasets/tabular.md'
+          - Graph Data: 'api/datasets/graph.md'
+          - General Purpose: 'api/datasets/general.md'
+          - Other Domains: 'api/datasets/other.md'
+      - Dropouts: 'api/dropouts.md'
+      - Losses: 'api/losses.md'
+      - Models:
+          - Overview: 'api/models/index.md'
+          - Computer Vision: 'api/models/computer-vision.md'
+          - Generative Models: 'api/models/generative.md'
+          - Natural Language Processing: 'api/models/nlp.md'
+          - Graph Neural Networks: 'api/models/gnn.md'
+          - Reinforcement Learning: 'api/models/rl.md'
+          - Multimodal: 'api/models/multimodal.md'
+      - Normalizations: 'api/normalizations.md'
+      - Optimizations: 'api/optimizations.md'
+      - Regularizations: 'api/regularizations.md'
+      - Trainers: 'api/trainers.md'
+      - Transforms:
+          - Overview: 'api/transforms/index.md'
+          - Appliers: 'api/transforms/appliers.md'
+          - Image: 'api/transforms/image.md'
+          - Signal (Audio): 'api/transforms/signal.md'
+          - Text: 'api/transforms/text.md'
+          - Graph: 'api/transforms/graph.md'
+          - Video: 'api/transforms/video.md'
+          - Weather: 'api/transforms/weather.md'
+      - Utilities: 'api/utils.md'
+  - Comparisons:
+      - xTorch vs. LibTorch vs. PyTorch Lightning: 'comparisons/comparison.md'
