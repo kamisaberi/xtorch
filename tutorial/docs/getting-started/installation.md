@@ -1,32 +1,38 @@
-# Installation Guide for xTorch on Ubuntu
+# Installation
 
-This guide provides instructions for setting up the necessary dependencies, building, and installing the xTorch project on **Ubuntu**.
+This guide provides a complete walkthrough for installing xTorch and its dependencies on **Ubuntu**.
 
-**Important:** Before you proceed with the build process, you must install the required system-level development libraries and Python environment.
+The process involves three main stages:
+1.  **Install System Dependencies**: Set up the required development tools and libraries.
+2.  **Build the Project**: Compile the xTorch library from the source code.
+3.  **Install the Library**: Make xTorch available system-wide for your C++ projects.
 
 ---
 
-## 1. Prerequisites: Install System Dependencies
+## 1. Prerequisites: System Dependencies
 
-First, you need to install several libraries and tools that xTorch depends on. Open a terminal and run the following commands to install the required packages using `apt-get`.
+Before building xTorch, you must install several essential system-level packages.
 
 ### Step 1: Update Package Lists
 
-Ensure your package manager has the latest list of available packages:
+First, ensure your package manager has the latest list of available software.
+
 ```bash
 sudo apt-get update
 ```
 
 ### Step 2: Install Core Build Tools
 
-You will need `build-essential` for a C++ compiler (like g++) and other essential tools, and `cmake` to configure and build the project.
+Install `build-essential` (which includes the g++ compiler) and `cmake`.
+
 ```bash
 sudo apt-get install -y build-essential cmake
 ```
 
-### Step 3: Install Python and Project-Specific Libraries
+### Step 3: Install Required Libraries
 
-Install Python, the virtual environment module (`venv`), and the development headers for all other required libraries with a single command:
+Install Python and all other libraries required by xTorch with a single command.
+
 ```bash
 sudo apt-get install -y \
     python3 \
@@ -47,82 +53,108 @@ sudo apt-get install -y \
 
 ---
 
-## 2. Building the Project
+## 2. Clone and Build xTorch
 
-### Step 1: Clone Repository
-First clone repository using git command :
+The build process is managed by CMake, which will automatically download and configure **LibTorch** and **ONNX Runtime** for you.
+
+### Step 1: Clone the Repository
+
+Get the latest source code from the official GitHub repository.
+
 ```bash
 git clone https://github.com/kamisaberi/xtorch
-cd xtorch 
+cd xtorch
 ```
 
+### Step 2: Create a Build Directory
 
-Once all system dependencies are installed, you can build the xTorch project using CMake. The `CMakeLists.txt` file is configured to automatically download the correct versions of **LibTorch** and **ONNX Runtime**, so you do not need to install them manually.
-
-### Step 1: Create a Build Directory
-
-It is a best practice to create a separate directory for the build files to keep the main project folder clean.
+It's standard practice to build the project in a separate directory to keep the source tree clean.
 
 ```bash
 mkdir build
 cd build
 ```
 
-### Step 2: Configure the Project with CMake
+### Step 3: Configure with CMake
 
-Run `cmake` from inside the `build` directory. This command will find the system libraries you just installed and download the remaining C++ dependencies (LibTorch, ONNX Runtime).
-
-### if you installed cuda toolkit at deafult library path like `/usr/local/cuda` use : 
+Run `cmake` from the `build` directory. This will check for dependencies and prepare the build files.
 
 ```bash
-cmale ..
+cmake ..
 ```
-### otherwise find nvcc path using `nvcc --version` command and use following command 
+
+!!! note "Custom CUDA Path"
+If your NVIDIA CUDA Toolkit is installed in a non-standard location, you'll need to tell CMake where to find the compiler (`nvcc`). First, find the path with `which nvcc`, then run cmake with the following flag:
 ```bash
-cmale -DCMAKE_CUDA_COMPILER = 'path/to/nvcc' ..
+cmake -DCMAKE_CUDA_COMPILER='/path/to/your/nvcc' ..
 ```
 
-### Step 3: Compile the Project with Make
+### Step 4: Compile the Library
 
-Use the `make` command to compile the xTorch library. The `-j$(nproc)` flag tells `make` to use all available CPU cores, which significantly speeds up the compilation process.
+Use `make` to compile the entire project. The `-j$(nproc)` flag uses all available CPU cores to significantly speed up the process.
 
 ```bash
 make -j$(nproc)
 ```
 
-After this step, the compiled shared library (`libxTorch.so`) will be located inside your `build` directory.
+Once complete, the compiled shared library (`libxTorch.so`) will be available in the `build` directory.
 
 ---
 
-## 3. Installing the Library
+## 3. Install the Library
 
-After successfully compiling the library, you can install it system-wide. This will copy the library files, headers, and CMake configuration files to standard system directories, making it easy for other projects to find and link against xTorch.
+To make xTorch easily accessible to other C++ projects, install it system-wide. This command copies the header files, the compiled library, and CMake configuration files to standard system locations (like `/usr/local/lib` and `/usr/local/include`).
 
-From within the `build` directory, run the following command:
+From within the `build` directory, run:
 
 ```bash
-sudo make install -j$(nproc)
+sudo make install
 ```
 
-This completes the installation process. xTorch is now ready to be used in your C++ applications.
 ---
 
-# Test Unit
-### 1. go to test folder using `cd test`
-### 2. create build directory `mkdir build`
-### 3. use `cmake ..` and wait until gtest library download and make files cretes
-### 4. use `make ` to build test units
-### 5. use `./runt_test` to run all test units
+## 4. Verify the Installation
 
----
-# Examples
-### 1. go to test folder using `cd examples`
-### 2. create build directory `mkdir build`
-### 3. use `cmake ..` and wait until gtest library download and make files cretes
-### 4. use `make ` to build test units
-### 5. use can any of examples that we list here 
-    - classifying_handwritten_digits_with_lenet_on_mnist
-    - generating_images_with_dcgan
----
-### for more examples please clone xtorch-examples repository at [xtorch examples](https://github.com/kamisaberi/xtorch-examples) and follow instruction to build and run them
+You can verify that everything was built correctly by running the included unit tests and examples.
 
+### Running Unit Tests
+
+1.  Navigate to the `test` directory in the source folder.
+    ```bash
+    cd ../test
+    ```
+2.  Create a build directory and configure with CMake. This will download the Google Test framework.
+    ```bash
+    mkdir build
+    cd build
+    cmake ..
+    ```
+3.  Compile and run the tests.
+    ```bash
+    make
+    ./run_test
+    ```
+
+### Building and Running Examples
+
+The main repository includes a few key examples to get you started.
+
+1.  Navigate to the main `examples` directory (create it if it doesn't exist or use the one from the repo).
+2.  Follow the same build process:
+    ```bash
+    mkdir build
+    cd build
+    cmake ..
+    make
+    ```
+3.  You can now run any of the compiled examples, such as:
+    ```bash
+    # Run the LeNet MNIST example
+    ./classifying_handwritten_digits_with_lenet_on_mnist
+
+    # Run the DCGAN image generation example
+    ./generating_images_with_dcgan
+    ```
+
+!!! success "Installation Complete!"
+xTorch is now successfully installed and ready to be used in your C++ applications. For a comprehensive collection of advanced examples, check out the dedicated [xtorch-examples repository](https://github.com/kamisaberi/xtorch-examples).
