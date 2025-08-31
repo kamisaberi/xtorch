@@ -8,17 +8,17 @@ edit_uri: ""
 
 theme:
   name: material
-  logo: https://aryorithm.com/assets/images/logo/ar-w%20(3).png
+  logo: assets/logo.png
   palette:
-    - scheme: slate
-      primary: black
-      accent: blue
+    - scheme: default
+      primary: 'blue'
+      accent: 'light blue'
       toggle:
         icon: material/brightness-7
         name: Switch to dark mode
     - scheme: slate
-      primary: black
-      accent: blue
+      primary: 'blue'
+      accent: 'light blue'
       toggle:
         icon: material/brightness-4
         name: Switch to light mode
@@ -51,7 +51,7 @@ nav:
   - Home: 'index.md'
   - Getting Started:
       - Installation: 'getting-started/installation.md'
-      - 'Quick Start: A CNN Example': 'getting-started/quick-start-cnn.md'
+      - Quick Start: A CNN Example: 'getting-started/quick-start-cnn.md'
   - User Guide:
       - Architecture & Design: 'user-guide/architecture.md'
       - The Training Loop (Trainer): 'user-guide/trainer.md'
