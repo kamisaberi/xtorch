@@ -2,7 +2,6 @@ cmake-build-debug/
 build/
 .idea/
 tutorial/.venv
-tutorial/venv
 tutorial/site
 tutorial/docs/doxygen
 third_party/libtorch/
