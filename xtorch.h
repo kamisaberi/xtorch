@@ -62,6 +62,8 @@
 #include "include/normalizations/normalizations.h"
 #include "include/utils/utils.h"
 
+namespace xtorch = xt;
+
 //#ifdef _MSC_VER
 //#pragma warning(pop) // Restore the original warning settings
 //#endif
