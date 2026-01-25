@@ -29,7 +29,7 @@ namespace xt::datasets
     CIFAR100::CIFAR100(const std::string& root, xt::datasets::DataMode mode, bool download,
                        std::unique_ptr<xt::Module> transformer,
                        std::unique_ptr<xt::Module> target_transformer) : xt::datasets::Dataset(
-        mode, std::move(transformer), std::move(target_transformer))
+        mode, std::move(transformer), std::move(target_transformer)), root(root)
     {
 
         // Same initialization as main constructor
@@ -121,6 +121,11 @@ namespace xt::datasets
             // Permute dimensions from (C, H, W) to (C, W, H) and back to (C, H, W)
             // (Original CIFAR-100 binary format has unusual dimension ordering)
             tensor_image = tensor_image.permute({0, 2, 1});
+
+            if (transformer != nullptr)
+            {
+                tensor_image = std::any_cast<torch::Tensor>((*transformer)({tensor_image}));
+            }
 
             // Store final tensor in data vector
             data.push_back(tensor_image);

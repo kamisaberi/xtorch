@@ -16,7 +16,11 @@ namespace xt::datasets
         Food101(const std::string& root, xt::datasets::DataMode mode, bool download);
         Food101(const std::string& root, xt::datasets::DataMode mode, bool download,
                 std::unique_ptr<xt::Module> transformer);
-        Food101(const std::string& root, xt::datasets::DataMode mode, bool download,
+
+        Food101(const std::string& root, xt::datasets::DataMode mode, bool download, bool instant_loading,
+                std::unique_ptr<xt::Module> transformer);
+
+        Food101(const std::string& root, xt::datasets::DataMode mode, bool download,bool instant_loading,
                 std::unique_ptr<xt::Module> transformer,
                 std::unique_ptr<xt::Module> target_transformer);
 
@@ -26,7 +30,7 @@ namespace xt::datasets
 
     private:
         std::string url = "http://data.vision.ee.ethz.ch/cvl/food-101.tar.gz";
-        vector<fs::path> files ;
+        vector<fs::path> files;
 
         fs::path dataset_file_name = "food-101.tar.gz";
 
@@ -41,6 +45,7 @@ namespace xt::datasets
         std::map<string, int> classes_map;
 
         bool download = false;
+        bool instant_loading = false;
         fs::path root;
         fs::path dataset_path;
 

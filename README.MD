@@ -1,8 +1,8 @@
-![Logo](https://github.com/user-attachments/assets/70527c02-c73e-429b-9d86-0b43172dccb2)
+[//]: # (![Logo]&#40;https://github.com/user-attachments/assets/70527c02-c73e-429b-9d86-0b43172dccb2&#41;)
 
-# 🔴 _LIBRARY UNDER DEVELOPMENT SITUATION PLEASE ONLY USE RELEASE VERSION_
+[//]: # (# 🔴 _LIBRARY UNDER DEVELOPMENT SITUATION PLEASE ONLY USE RELEASE VERSION_)
 
-[//]: # (# xTorch: Bridging the Usability Gap in PyTorch’s C++ API)
+# xTorch: Bridging the Usability Gap in PyTorch’s C++ API
 
 ## Motivation
 
@@ -65,6 +65,10 @@ cleaner interface to the developer.
 - **Utility Functions:** Logging, metrics, summary, device utils.
 - **Extended Optimizers:** AdamW, RAdam, schedulers, learning rate strategies.
 - **Model Serialization & Deployment:** `save_model()`, `export_to_jit()`, inference helpers.
+
+
+## Installation
+For install library do step by step that we created in [Installation Instruction](https://github.com/kamisaberi/xtorch/blob/main/tutorial/docs/installation.md)
 
 ## Use Cases and Examples
 

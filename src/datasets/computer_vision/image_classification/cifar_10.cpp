@@ -30,7 +30,8 @@ namespace xt::datasets
     CIFAR10::CIFAR10(const std::string& root, xt::datasets::DataMode mode, bool download,
                      std::unique_ptr<xt::Module> transformer,
                      std::unique_ptr<xt::Module> target_transformer) : xt::datasets::Dataset(
-        mode, std::move(transformer), std::move(target_transformer))
+                                                                           mode, std::move(transformer),
+                                                                           std::move(target_transformer)), root(root)
     {
         // Same initialization as main constructor
         this->root = fs::path(root);
@@ -120,6 +121,11 @@ namespace xt::datasets
                 tensor_image = tensor_image.permute({0, 2, 1});
 
                 // Store final tensor in data vector
+                if (transformer != nullptr)
+                {
+                    tensor_image = std::any_cast<torch::Tensor>((*transformer)({tensor_image}));
+                }
+
                 data.push_back(tensor_image);
             }
 

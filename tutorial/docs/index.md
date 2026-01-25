@@ -1,113 +1,78 @@
-![Logo](https://github.com/user-attachments/assets/70527c02-c73e-429b-9d86-0b43172dccb2)
+![xTorch Logo](assets/logo.png)
 
-[//]: # (# 🔴 _LIBRARY UNDER DEVELOPMENT SITUATION PLEASE ONLY USE RELEASE VERSION_  )
+# xTorch: The Batteries-Included C++ Library for PyTorch
 
-[//]: # (# xTorch: Bridging the Usability Gap in PyTorch’s C++ API)
+**Bridging the usability gap in PyTorch’s C++ API with high-level abstractions for building, training, and deploying models entirely in C++.**
 
-## Motivation
+[GitHub Repository](https://github.com/kamisaberi/xtorch){ .md-button }
+[Get Started](getting-started/installation/){ .md-button .md-button--primary }
+[View Examples](examples/){ .md-button }
 
-PyTorch’s C++ library (LibTorch) emerged as a powerful way to use PyTorch outside Python, but after 2019 it became challenging for developers to use it for end-to-end model development. Early on, LibTorch aimed to mirror the high-level Python API, yet many convenient abstractions and examples never fully materialized or were later removed.
+!!! danger "Library Under Development"
+    xTorch is currently under active development. The API may change. For stability, please use an official release version for production workloads.
 
-As of 2020, the C++ API had achieved near feature-parity with Python’s core operations, but it lagged in usability and community support. Fewer contributors focused on C++ meant that only low-level building blocks were provided, with high-level components (e.g. ready-made network architectures, datasets) largely absent. This left C++ practitioners to rewrite common tools from scratch – implementing standard models or data loaders manually – which is time-consuming and error-prone.
+---
 
-Another factor was PyTorch’s emphasis on the Python-to-C++ workflow. The official recommended path for production was to prototype in Python, then convert models to TorchScript for C++ deployment. This approach deprioritized making the pure C++ experience as friendly as Python’s.
+## The Motivation: A First-Class C++ Deep Learning Experience
 
-As a result, developers who preferred or needed to work in C++ (for integration with existing systems, performance, or deployment constraints) found LibTorch cumbersome. Simple tasks like data augmentation (e.g. random crops or flips) had no built-in support in LibTorch C++. Defining neural network modules in C++ involved boilerplate macros and manual registration, an awkward process compared to Python’s concise syntax. Crucial functionality for model serialization was limited – for instance, LibTorch could load Python-exported models but not easily export its own models to a portable format.
+PyTorch's C++ library, LibTorch, provides a powerful and performant core for deep learning. However, after 2019, its focus shifted primarily to a deployment-only role, leaving a significant gap for developers who wanted or needed to conduct end-to-end model development directly in C++. High-level utilities, data loaders with augmentations, and a rich model zoo—features that make the Python API so productive—were either missing or deprecated.
 
-xTorch was created to address this gap. It is a C++ library that extends LibTorch with the high-level abstractions and utilities that were missing or removed after 2019. By building on LibTorch’s robust computational core, xTorch restores ease-of-use without sacrificing performance. The motivation is to empower C++ developers with a productive experience similar to PyTorch in Python – enabling them to build, train, and deploy models with minimal fuss. In essence, xTorch revives and modernizes the “batteries-included” ethos for C++ deep learning, providing an all-in-one toolkit where the base library left off.
+**xTorch was created to fill this gap.**
 
-## Design and Architecture
+It extends LibTorch with the high-level, "batteries-included" abstractions that C++ developers have been missing. By building a thin, intuitive layer on top of LibTorch’s robust core, xTorch restores ease-of-use without sacrificing the raw performance of C++. Our goal is to empower C++ developers with a productive experience on par with PyTorch in Python, enabling them to build, train, and deploy models with minimal boilerplate and maximum efficiency.
 
-xTorch is architected as a thin layer on top of LibTorch’s C++ API, carefully integrating with it rather than reinventing it. The design follows a modular approach, adding a higher-level API that wraps around LibTorch’s lower-level classes. At its core, xTorch relies on LibTorch for tensor operations, autograd, and neural network primitives – effectively using LibTorch as the computational engine. The extended library then introduces its own set of C++ classes that encapsulate common patterns (model definitions, training loops, data handling, etc.), providing a cleaner interface to the developer.
+## Key Features
 
-### Architecture Layers
-- **LibTorch Core (Bottom Layer):** Provides `torch::Tensor`, `torch::autograd`, `torch::nn`, optimizers, etc.
-- **Extended Abstraction Layer (Middle):** Simplified classes inheriting from LibTorch core (e.g., `ExtendedModel`, `Trainer`).
-- **User Interface (Top Layer):** Intuitive APIs and boilerplate-free interaction.
+| Feature                       | Description                                                                                             |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------- |
+| :material-layers-triple: **High-Level Abstractions** | Simplified model classes, pre-built architectures (`ResNet`, `DCGAN`), and intuitive APIs.      |
+| :material-run-fast: **Simplified `Trainer` Loop**  | A powerful, callback-driven training loop that handles optimization, metrics, logging, and checkpointing. |
+| :material-database-search: **Enhanced Data Handling**  | Built-in datasets (`ImageFolder`, `MNIST`), powerful `DataLoader`, and a rich library of data transforms. |
+| :material-rocket-launch: **Seamless Serialization** | Easily save, load, and export models to TorchScript for production-ready inference pipelines.         |
+| :material-chart-line: **Uncompromised Performance** | Eliminate Python overhead. Achieve significant speedups over standard PyTorch workflows.             |
+| :material-wrench: **Extensive Toolkit**       | A massive collection of optimizers, loss functions, normalizations, and regularization techniques.      |
 
-### Modules
-- **Model Module:** High-level model class extensions.
-- **Data Module:** Enhanced datasets and DataLoader.
-- **Training Module:** Training logic, checkpointing, metrics.
-- **Utilities Module:** Logging, device helpers, summaries.
+## A Quick Look
 
-## Features and Enhancements
-
-- **High-Level Model Classes:** `XTModule`, prebuilt models like `ResNetExtended`, `XTCNN`.
-- **Simplified Training Loop (Trainer):** Full training abstraction with callbacks and metrics.
-- **Enhanced Data Handling:** `ImageFolderDataset`, `CSVDataset`, OpenCV-backed support.
-- **Utility Functions:** Logging, metrics, summary, device utils.
-- **Extended Optimizers:** AdamW, RAdam, schedulers, learning rate strategies.
-- **Model Serialization & Deployment:** `save_model()`, `export_to_jit()`, inference helpers.
-
-## Use Cases and Examples
-
-### Example: CNN Training Pipeline (Simplified)
+See how xTorch transforms a verbose C++ training task into a few lines of clean, expressive code.
 
 ```cpp
-#include <xtorch/xtorch.hpp>
+#include <xtorch/xtorch.h>
 
 int main() {
-    std::cout.precision(10);
-    auto dataset = xt::datasets::MNIST(
-        "/home/kami/Documents/temp/", DataMode::TRAIN, true,
-        {
-            xt::data::transforms::Resize({32, 32}),
-            torch::data::transforms::Normalize<>(0.5, 0.5)
-        }).map(torch::data::transforms::Stack<>());
+    // 1. Load data with transforms
+    auto dataset = xt::datasets::MNIST("./data", xt::datasets::DataMode::TRAIN,
+        std::make_unique<xt::transforms::Compose>(
+            std::make_shared<xt::transforms::image::Resize>(std::vector<int64_t>{32, 32}),
+            std::make_shared<xt::transforms::general::Normalize>(0.5, 0.5)
+        )
+    );
+    xt::dataloaders::ExtendedDataLoader data_loader(dataset, 64, true);
 
-
-    xt::DataLoader<decltype(dataset)> loader(
-        std::move(dataset),
-        torch::data::DataLoaderOptions().batch_size(64).drop_last(false),
-        true);
-    
+    // 2. Define model and optimizer
     xt::models::LeNet5 model(10);
-    model.to(torch::Device(torch::kCPU));
-    model.train();
+    torch::optim::Adam optimizer(model.parameters(), 1e-3);
 
-    torch::optim::Adam optimizer(model.parameters(), torch::optim::AdamOptions(1e-3));
-
+    // 3. Configure and run the trainer
     xt::Trainer trainer;
-    trainer.set_optimizer(&optimizer)
-            .set_max_epochs(5)
-            .set_loss_fn([](auto output, auto target) {
-                return torch::nll_loss(output, target);
-            });
-    
-    trainer.fit<decltype(dataset)>(&model, loader);
+    trainer.set_max_epochs(10)
+           .set_optimizer(optimizer)
+           .set_loss_fn(torch::nll_loss)
+           .add_callback(std::make_shared<xt::LoggingCallback>());
+
+    trainer.fit(model, data_loader, nullptr, torch::kCPU);
 
     return 0;
 }
 ```
 
-### Example: C++ Inference Pipeline
+## Who is this for?
 
-```cpp
-auto model = xt::load_model("resnet18_script.pt");
-auto tensor = xt::utils::imageToTensor("input.jpg");
-auto outputs = xt::utils::predict(model, tensor);
-int predictedClass = xt::utils::argmax(outputs);
-std::cout << "Predicted class = " << predictedClass << std::endl;
-```
+-   **C++ Developers** who want to leverage a PyTorch-like ML framework without leaving their primary ecosystem.
+-   **Performance Engineers** needing to eliminate Python bottlenecks for data-intensive training or inference workloads.
+-   **Researchers & Students** in HPC, robotics, or embedded systems where pure C++ deployment is a necessity.
+-   **Educators** looking for a tool to teach performance-aware machine learning concepts in C++.
 
-## Impact and Potential Applications
+---
 
-- **C++ Developers:** Enables use of PyTorch-like training without Python.
-- **Research in Embedded / HPC:** Pure C++ training and deployment possible.
-- **Industrial Use:** On-device training, edge deployment workflows.
-- **Education:** Useful for teaching performance-aware ML in C++.
-- **Ecosystem Growth:** Boosts community contributions, reuse, and experimentation.
-
-## Comparison with Related Tools
-
-| Feature                     | LibTorch | xTorch | PyTorch Lightning (Python) |
-|----------------------------|----------|-------------------|-----------------------------|
-| Training Loop Abstraction  | ❌       | ✅                | ✅                          |
-| Data Augmentation Built-in | ❌       | ✅                | ✅                          |
-| Built-in Model Zoo         | Limited  | ✅                | ✅                          |
-| Target Language            | C++      | C++               | Python                      |
-| TorchScript Export         | Limited  | ✅                | ✅                          |
-
-xTorch complements PyTorch’s C++ API like PyTorch Lightning does in Python, enabling expressive ML development in C++ with clean, modular code structures.
-
+Ready to dive in? Check out the [**Installation Guide**](getting-started/installation.md) to set up your environment.

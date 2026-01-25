@@ -2,30 +2,41 @@
 
 namespace xt::datasets
 {
-    Food101::Food101(const std::string& root): Food101(root, xt::datasets::DataMode::TRAIN, false, nullptr, nullptr)
+    Food101::Food101(const std::string& root): Food101(root, xt::datasets::DataMode::TRAIN, false, false, nullptr,
+                                                       nullptr)
     {
     }
 
     Food101::Food101(const std::string& root, xt::datasets::DataMode mode) : Food101(
-        root, mode, false, nullptr, nullptr)
+        root, mode, false, false, nullptr, nullptr)
     {
     }
 
     Food101::Food101(const std::string& root, xt::datasets::DataMode mode, bool download) : Food101(
-        root, mode, download, nullptr, nullptr)
+        root, mode, download, false, nullptr, nullptr)
     {
     }
 
     Food101::Food101(const std::string& root, xt::datasets::DataMode mode, bool download,
-                     std::unique_ptr<xt::Module> transformer): Food101(root, mode, download, std::move(transformer),
+                     std::unique_ptr<xt::Module> transformer): Food101(root, mode, download, false,
+                                                                       std::move(transformer),
                                                                        nullptr)
     {
     }
 
-    Food101::Food101(const std::string& root, xt::datasets::DataMode mode, bool download,
+    Food101::Food101(const std::string& root, xt::datasets::DataMode mode, bool download, bool instant_loading,
+                     std::unique_ptr<xt::Module> transformer): Food101(root, mode, download, instant_loading,
+                                                                       std::move(transformer),
+                                                                       nullptr)
+    {
+    }
+
+    Food101::Food101(const std::string& root, xt::datasets::DataMode mode, bool download, bool instant_loading,
                      std::unique_ptr<xt::Module> transformer,
                      std::unique_ptr<xt::Module> target_transformer) : xt::datasets::Dataset(
-        mode, std::move(transformer), std::move(target_transformer))
+                                                                           mode, std::move(transformer),
+                                                                           std::move(target_transformer)), root(root),
+                                                                       instant_loading(instant_loading)
     {
         check_resources(); // Verify dataset files exist
         load_classes(); // Load class names and mapping
@@ -37,11 +48,12 @@ namespace xt::datasets
         fs::path archive_file_abs_path = this->root / this->dataset_file_name;
         this->dataset_path = this->root / this->dataset_folder_name;
         fs::path images_path = this->dataset_path / fs::path("images");
-
+        cout << images_path.string() << endl;
         // Check if extracted dataset exists
         if (fs::exists(images_path))
         {
             size_t cnt = xt::utils::fs::countFiles(images_path, true);
+            cout << "Found " << cnt << " images" << endl;
             // Verify complete dataset
             if (cnt != this->images_number)
             {
@@ -96,6 +108,7 @@ namespace xt::datasets
 
     void Food101::load_data()
     {
+        cout << "Loading data..." << endl;
         fs::path images_path = this->dataset_path / fs::path("images");
         fs::path meta_path = this->dataset_path / fs::path("meta");
 
@@ -119,17 +132,19 @@ namespace xt::datasets
 
                 // Load and process image
                 fs::path img_path = images_path / fs::path(line + ".jpg");
-                torch::Tensor tensor = xt::utils::image::convertImageToTensor(img_path);
-
-                // Apply transforms if specified
-                if (transformer != nullptr)
+                // cout << img_path.string() << endl;
+                files.push_back(img_path);
+                if (instant_loading)
                 {
-                    tensor = std::any_cast<torch::Tensor>((*transformer)({tensor}));
-                    // tensor = (*transformer)(tensor);
+                    torch::Tensor tensor = xt::utils::image::convertImageToTensor(img_path);
+                    // Apply transforms if specified
+                    if (transformer != nullptr)
+                    {
+                        tensor = std::any_cast<torch::Tensor>((*transformer)({tensor}));
+                        // tensor = (*transformer)(tensor);
+                    }
+                    this->data.push_back(tensor);
                 }
-
-                // Store results
-                this->data.push_back(tensor);
                 this->targets.push_back(classes_map[label]);
             }
         }
@@ -154,17 +169,17 @@ namespace xt::datasets
                 // Load and process image
                 fs::path img_path = images_path / fs::path(line + ".jpg");
                 files.push_back(img_path);
-                // torch::Tensor tensor = xt::utils::image::convertImageToTensor(img_path);
-                //
-                // // Apply transforms if specified
-                // if (transformer != nullptr)
-                // {
-                //     tensor = std::any_cast<torch::Tensor>((*transformer)({tensor}));
-                //     // tensor = (*transformer)(tensor);
-                // }
-                //
-                // // Store results
-                // this->data.push_back(tensor);
+                if (instant_loading)
+                {
+                    torch::Tensor tensor = xt::utils::image::convertImageToTensor(img_path);
+                    // Apply transforms if specified
+                    if (transformer != nullptr)
+                    {
+                        tensor = std::any_cast<torch::Tensor>((*transformer)({tensor}));
+                        // tensor = (*transformer)(tensor);
+                    }
+                    this->data.push_back(tensor);
+                }
                 this->targets.push_back(classes_map[label]);
             }
         }
@@ -172,14 +187,18 @@ namespace xt::datasets
 
     torch::data::Example<> Food101::get(size_t index)
     {
-        torch::Tensor tensor = xt::utils::image::convertImageToTensor(files[index]);
-
-        // Apply transforms if specified
-        if (transformer != nullptr)
+        if (!instant_loading)
         {
-            tensor = std::any_cast<torch::Tensor>((*transformer)({tensor}));
+            auto image_path = this->files[index];
+            torch::Tensor tensor = xt::utils::image::convertImageToTensor(image_path);
+            // Apply transforms if specified
+            if (transformer != nullptr)
+            {
+                tensor = std::any_cast<torch::Tensor>((*transformer)({tensor}));
+            }
+            return {tensor, torch::tensor(targets[index])};
         }
-        return {tensor, torch::tensor(targets[index])};
+        return {data[index], torch::tensor(targets[index])};
     }
 
     torch::optional<size_t> Food101::size() const

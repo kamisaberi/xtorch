@@ -159,7 +159,7 @@ namespace xt::models
         }
 
         torch::Tensor x = tensor_vec[0];
-
+        x = x.to(torch::kFloat32);
         x = layer1->forward(x);
         x = layer2->forward(x);
         x = layer3->forward(x);
@@ -171,6 +171,22 @@ namespace xt::models
         x = fc2->forward(x);
         return x;
     }
+
+    // torch::Tensor AlexNet::forward(torch::Tensor tensors)
+    // {
+    //     tensors = tensors.to(torch::kFloat32);
+    //     tensors = layer1->forward(tensors);
+    //     tensors = layer2->forward(tensors);
+    //     tensors = layer3->forward(tensors);
+    //     tensors = layer4->forward(tensors);
+    //     tensors = layer5->forward(tensors);
+    //     tensors = tensors.view({tensors.size(0), -1});
+    //     tensors = fc->forward(tensors);
+    //     tensors = fc1->forward(tensors);
+    //     tensors = fc2->forward(tensors);
+    //     return tensors;
+    //
+    // }
 
     void AlexNet::reset()
     {
