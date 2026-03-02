@@ -11,8 +11,6 @@ namespace xt::activations
     struct PAU : xt::Module
     {
     public:
-        PAU() = default;
-        auto forward(std::initializer_list<std::any> tensors) -> std::any override;
 
     private:
     };
