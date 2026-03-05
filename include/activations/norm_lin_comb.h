@@ -8,8 +8,5 @@ namespace xt::activations
 
     struct NormLinComb : xt::Module
     {
-    public:
-
-    private:
     };
 }
