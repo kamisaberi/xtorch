@@ -7,8 +7,6 @@ namespace xt::activations {
 
     struct MarginReLU : xt::Module {
     public:
-        MarginReLU() = default;
-        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
 
     private:
     };
