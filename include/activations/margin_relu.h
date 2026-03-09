@@ -4,11 +4,6 @@
 
 namespace xt::activations {
 
-    struct MarginReLU : xt::Module {
-    public:
-
-    private:
-    };
 }
 
 
