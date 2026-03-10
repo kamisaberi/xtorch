@@ -5,10 +5,4 @@
 namespace xt::activations
 {
 
-    struct KAF : xt::Module
-    {
-    public:
-
-    private:
-    };
 }
