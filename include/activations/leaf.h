@@ -4,7 +4,6 @@
 
 namespace xt::activations {
 
-    struct LEAF : xt::Module {
     public:
 
     private:
