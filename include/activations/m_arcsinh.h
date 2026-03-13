@@ -7,9 +7,6 @@ namespace xt::activations {
 
     struct MArcsinh : xt::Module {
     public:
-        MArcsinh() = default;
-
-        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
 
     private:
     };
