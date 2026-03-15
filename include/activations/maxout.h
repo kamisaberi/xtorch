@@ -7,9 +7,6 @@ namespace xt::activations {
 
     struct Maxout : xt::Module {
     public:
-        Maxout() = default;
-
-        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
 
     private:
     };
