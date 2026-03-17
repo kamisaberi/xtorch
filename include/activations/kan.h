@@ -5,10 +5,4 @@
 namespace xt::activations
 {
 
-    struct KAN : xt::Module
-    {
-    public:
-
-    private:
-    };
 }
