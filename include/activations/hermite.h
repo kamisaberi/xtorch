@@ -9,6 +9,10 @@ namespace xt::activations {
     public:
         Hermite() = default;
 
+
+
+
+
         auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
 
     private:
