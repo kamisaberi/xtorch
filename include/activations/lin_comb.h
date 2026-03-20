@@ -5,10 +5,4 @@
 namespace xt::activations
 {
 
-    struct LinComb : xt::Module
-    {
-    public:
-
-    private:
-    };
 }
