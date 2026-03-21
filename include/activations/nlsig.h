@@ -7,8 +7,6 @@ namespace xt::activations {
 
     struct NLSIG : xt::Module {
     public:
-        NLSIG() = default;
-        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
 
     private:
     };
