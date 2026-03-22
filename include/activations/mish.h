@@ -6,12 +6,6 @@ namespace xt::activations {
     torch::Tensor mish(torch::Tensor x);
 
     struct Mish : xt::Module {
-    public:
-        Mish() = default;
-
-
-
-    private:
     };
 }
 
