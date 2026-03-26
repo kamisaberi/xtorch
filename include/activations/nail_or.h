@@ -7,9 +7,6 @@ namespace xt::activations {
 
     struct NailOr : xt::Module {
     public:
-        NailOr() = default;
-
-
     private:
     };
 }
