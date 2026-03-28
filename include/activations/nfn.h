@@ -11,8 +11,6 @@ namespace xt::activations {
 
     struct NFN : xt::Module {
     public:
-        NFN() = default;
-        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
 
     private:
     };
