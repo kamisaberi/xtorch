@@ -11,8 +11,8 @@ namespace xt::activations {
 
     struct AMLines : xt::Module {
     public:
-        AMLines() = default;
 
+        AMLines() = default;
         auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
 
     private:
