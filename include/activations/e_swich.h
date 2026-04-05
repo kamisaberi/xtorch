@@ -8,9 +8,7 @@ namespace xt::activations {
     struct ESwish : xt::Module {
     public:
         ESwish() = default;
-
         auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
-
     private:
     };
 }
