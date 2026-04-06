@@ -9,7 +9,12 @@
 #include <xtorch/xtorch.h>
 #include  <chrono>
 
+
+
 using namespace std;
+
+
+
 
 
 int main()
@@ -111,6 +116,10 @@ int main()
     auto duration_ms = std::chrono::duration_cast<std::chrono::milliseconds>(duration);
     std::cout << "Total loop duration: " << duration_ms.count() << " milliseconds." << std::endl;
 
+
+
+
+
     // auto logger = std::make_shared<xt::LoggingCallback>("[MyTrain]", /*log_every_N_batches=*/20, /*log_time=*/true);
     // xt::Trainer trainer;
     //
@@ -127,6 +136,10 @@ int main()
     // auto duration = end_time - start_time;
     // auto duration_ms = std::chrono::duration_cast<std::chrono::milliseconds>(duration);
     // std::cout << "Total loop duration: " << duration_ms.count() << " milliseconds." << std::endl;
+
+
+
+
 
     return 0;
 }
