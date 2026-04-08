@@ -4,10 +4,6 @@
 
 namespace xt::activations
 {
-    torch::Tensor poly(
-        const torch::Tensor& x,
-        const torch::Tensor& coefficients // Shape [degree, degree-1, ..., 1, 0]
-    );
 
 
 }
