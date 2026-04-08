@@ -10,10 +10,4 @@ namespace xt::activations
     );
 
 
-    struct Poly : xt::Module
-    {
-    public:
-
-    private:
-    };
 }
