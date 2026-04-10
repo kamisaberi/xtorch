@@ -15,7 +15,6 @@ namespace xt::activations
     struct Rational : xt::Module
     {
     public:
-        Rational() = default;
         auto forward(std::initializer_list<std::any> tensors) -> std::any override;
 
     private:
