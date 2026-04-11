@@ -14,8 +14,5 @@ namespace xt::activations
 
     struct Rational : xt::Module
     {
-    public:
-
-    private:
     };
 }
