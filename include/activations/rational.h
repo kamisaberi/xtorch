@@ -12,7 +12,4 @@ namespace xt::activations
     );
 
 
-    struct Rational : xt::Module
-    {
-    };
 }
