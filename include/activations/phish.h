@@ -9,11 +9,11 @@ namespace xt::activations {
     public:
         Phish() = default;
 
-        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
 
     private:
     };
 }
+
 
 
 
