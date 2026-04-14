@@ -4,13 +4,6 @@
 
 namespace xt::activations {
 
-    struct Phish : xt::Module {
-    public:
-        Phish() = default;
-
-
-    private:
-    };
 }
 
 
