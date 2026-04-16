@@ -8,7 +8,6 @@ namespace xt::activations {
     struct ReGLU : xt::Module {
     public:
         ReGLU() = default;
-        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
 
     };
 }
