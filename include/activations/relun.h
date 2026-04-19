@@ -7,7 +7,6 @@ namespace xt::activations {
 
     struct ReLUN : xt::Module {
     public:
-        ReLUN() = default;
 
 
     private:
