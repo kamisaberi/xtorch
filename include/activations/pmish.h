@@ -7,7 +7,6 @@ namespace xt::activations {
 
     struct PMish : xt::Module {
     public:
-        PMish() = default;
 
     private:
     };
