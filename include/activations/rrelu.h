@@ -16,7 +16,6 @@ namespace xt::activations
     struct RReLU : xt::Module
     {
     public:
-        RReLU() = default;
 
     private:
     };
