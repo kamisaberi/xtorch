@@ -13,10 +13,4 @@ namespace xt::activations
     );
 
 
-    struct RReLU : xt::Module
-    {
-    public:
-
-    private:
-    };
 }
