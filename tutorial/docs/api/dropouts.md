@@ -1,9 +1,7 @@
 # Dropouts
-
 Dropout is a powerful regularization technique used to prevent overfitting in neural networks. During training, it randomly sets a fraction of input units to zero at each update, which helps the model learn more robust features that are not overly dependent on any single neuron.
 
 ## Standard LibTorch Dropouts
-
 LibTorch provides the most common dropout implementations, which are fully supported and can be used in any xTorch model.
 
 **Standard Modules:**
@@ -16,15 +14,12 @@ For detailed usage, please see the [official PyTorch C++ API documentation](http
 ---
 
 ## xTorch Extended Dropouts
-
 Experimenting with different regularization strategies is key to achieving state-of-the-art performance. To facilitate this, xTorch provides a comprehensive library of advanced and specialized dropout variants proposed in recent research.
 
 These implementations allow you to easily swap out standard dropout with more sophisticated techniques like `DropBlock`, `ScheduledDropPath`, or `VariationalDropout`.
 
 ### Usage
-
 All xTorch dropout modules are located in the `xt::dropouts` namespace. They are implemented as `torch::nn::Module`s and can be integrated into your models just like `torch::nn::Dropout`.
-
 Most dropout layers require a dropout probability `p` during construction.
 
 ```cpp
