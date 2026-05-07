@@ -1,11 +1,8 @@
 # API Reference
-
 Welcome to the xTorch API reference. This section provides detailed documentation on all the public namespaces, classes, and functions that make up the xTorch library. It is designed to be a technical resource for understanding the specific components available for building your deep learning models.
 
 ## Relationship with LibTorch
-
 xTorch is built as a high-level extension of LibTorch (the PyTorch C++ API). Its goal is to provide usability and convenience, not to replace the core engine.
-
 While this reference covers all components added by **xTorch**, it does not duplicate the documentation for the underlying PyTorch C++ library. For fundamental operations involving `torch::Tensor`, `torch::autograd`, standard optimizers, and the base `torch::nn` modules (like `torch::nn::Linear`, `torch::nn::Conv2d`, `torch::nn::ReLU`), please refer to the **[official PyTorch C++ documentation](https://pytorch.org/cppdocs/)**.
 
 A good mental model is:
@@ -15,7 +12,6 @@ A good mental model is:
 ---
 
 ## Library Modules
-
 The xTorch API is organized into a series of modules, each corresponding to a specific part of the machine learning workflow. Use the links below to navigate to the detailed documentation for each component.
 
 -   **[Activations](activations.md)**: A comprehensive collection of modern and experimental activation functions to introduce non-linearity into your models.
