@@ -1,9 +1,7 @@
 # Normalization Layers
-
 Normalization layers are a crucial component in modern deep neural networks. They help stabilize the learning process, reduce internal covariate shift, and often lead to faster convergence and better generalization.
 
 ## Standard LibTorch Normalizations
-
 LibTorch provides a solid foundation with the most widely-used normalization layers. These are the go-to choices for many standard architectures.
 
 **Common Examples:**
@@ -18,9 +16,7 @@ For detailed usage of these standard layers, please refer to the [official PyTor
 ---
 
 ## xTorch Extended Normalizations
-
 To enable research and development with cutting-edge architectures, xTorch provides an extensive collection of advanced and specialized normalization techniques proposed in the literature.
-
 These implementations allow you to move beyond `BatchNorm` and experiment with alternatives like `EvoNorms`, `FilterResponseNormalization`, or `WeightStandardization` with ease.
 
 ### Usage
