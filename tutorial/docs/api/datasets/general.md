@@ -6,6 +6,9 @@ These classes save you from writing a custom C++ `Dataset` class from scratch fo
 
 ---
 
+
+
+
 ## `xt::datasets::ImageFolderDataset`
 
 This is one of the most useful dataset classes in the library. `ImageFolderDataset` allows you to load a custom image classification dataset from a directory, provided it follows a specific structure.
@@ -13,6 +16,10 @@ This is one of the most useful dataset classes in the library. `ImageFolderDatas
 ### Required Directory Structure
 
 The data must be organized into a root folder, with one subdirectory for each class. Each subdirectory should contain all the images belonging to that class.
+
+
+
+
 
 ```
 /path/to/your/data/
