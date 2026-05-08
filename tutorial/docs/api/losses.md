@@ -1,9 +1,7 @@
 # Loss Functions
-
 A loss function (or criterion) is a fundamental component of training a neural network. It calculates a single value that measures how well the model's prediction matches the target label. The goal of training is to minimize this value.
 
 ## Standard LibTorch Losses
-
 LibTorch provides a comprehensive set of standard loss functions that are sufficient for most common tasks. These can be used directly within any xTorch project.
 
 **Common Examples:**
@@ -18,15 +16,11 @@ For a complete list and usage instructions, please refer to the [official PyTorc
 ---
 
 ## xTorch Extended Losses
-
 For more advanced or specialized tasks—such as object detection, metric learning, or dealing with class imbalance—standard loss functions may not be optimal. To address this, xTorch provides a rich library of modern and specialized loss functions from the research literature.
-
 These implementations are ready to use, allowing you to easily experiment with advanced training objectives.
 
 ### Usage
-
 All xTorch loss functions are implemented as `torch::nn::Module`s and are located in the `xt::losses` namespace. They can be instantiated and used just like any standard `torch::nn` module.
-
 They integrate seamlessly with the `xt::Trainer`.
 
 ```cpp
@@ -56,7 +50,6 @@ int main() {
 ```
 
 ### Available Loss Functions
-
 Below is the comprehensive list of specialized loss functions available in the `xt::losses` module.
 
 | | | | |
