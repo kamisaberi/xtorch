@@ -1,18 +1,13 @@
 # Utilities
-
 The `xt::utils` namespace provides a collection of standalone helper functions and classes for common tasks that frequently appear in deep learning workflows.
-
 These utilities are designed to reduce boilerplate and simplify operations related to file handling, data conversion, and model inference.
-
 ---
 
 ## Model Serialization and Inference
-
 These functions streamline the process of saving, loading, and running inference with models.
 
 ### `xt::load_model(const std::string& model_path)`
 Loads a TorchScript model from a file.
-
 -   **Parameters:**
     -   `model_path`: The file path to the serialized `.pt` or `.pth` model.
 -   **Returns:** A `torch::jit::script::Module` ready for inference.
