@@ -8,7 +8,6 @@ namespace xt::activations {
     struct SPLASH : xt::Module {
     public:
         SPLASH() = default;
-        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
 
     private:
     };
