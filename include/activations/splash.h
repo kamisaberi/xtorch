@@ -7,7 +7,6 @@ namespace xt::activations {
 
     struct SPLASH : xt::Module {
     public:
-        SPLASH() = default;
 
     private:
     };
