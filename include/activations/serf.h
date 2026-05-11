@@ -8,7 +8,6 @@ namespace xt::activations {
     struct Serf : xt::Module {
     public:
         Serf() = default;
-        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
 
     private:
     };
