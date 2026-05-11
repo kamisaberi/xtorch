@@ -7,7 +7,6 @@ namespace xt::activations {
 
     struct Serf : xt::Module {
     public:
-        Serf() = default;
 
     private:
     };
