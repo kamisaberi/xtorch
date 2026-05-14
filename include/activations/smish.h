@@ -7,7 +7,6 @@ namespace xt::activations {
 
     struct Smish : xt::Module {
     public:
-        Smish() = default;
 
 
     private:
