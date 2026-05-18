@@ -8,7 +8,6 @@ namespace xt::activations {
     struct ScaledSoftSign : xt::Module {
     public:
         ScaledSoftSign() = default;
-        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
 
     private:
     };
