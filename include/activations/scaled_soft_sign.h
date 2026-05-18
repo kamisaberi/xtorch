@@ -7,7 +7,6 @@ namespace xt::activations {
 
     struct ScaledSoftSign : xt::Module {
     public:
-        ScaledSoftSign() = default;
 
     private:
     };
