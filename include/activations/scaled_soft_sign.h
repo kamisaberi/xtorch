@@ -5,11 +5,6 @@
 namespace xt::activations {
     torch::Tensor scaled_soft_sign(const torch::Tensor& x, double scale_in = 1.0, double scale_out = 1.0);
 
-    struct ScaledSoftSign : xt::Module {
-    public:
-
-    private:
-    };
 }
 
 
