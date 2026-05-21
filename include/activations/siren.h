@@ -7,7 +7,6 @@ namespace xt::activations {
 
     struct Siren : xt::Module {
     public:
-        Siren() = default;
 
     private:
     };
