@@ -8,7 +8,6 @@ namespace xt::activations {
     struct Siren : xt::Module {
     public:
         Siren() = default;
-        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
 
     private:
     };
