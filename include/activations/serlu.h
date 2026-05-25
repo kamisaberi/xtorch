@@ -8,8 +8,5 @@ namespace xt::activations
 
     struct SERLU : xt::Module
     {
-    public:
-
-    private:
     };
 }
