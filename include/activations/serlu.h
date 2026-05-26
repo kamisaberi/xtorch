@@ -4,6 +4,5 @@
 
 namespace xt::activations
 {
-    torch::Tensor serlu(const torch::Tensor& x, double lambda_serlu = 1.0507, double alpha_serlu = 1.67326);
 
 }
