@@ -8,7 +8,6 @@ namespace xt::activations {
     struct SmoothStep : xt::Module {
     public:
         SmoothStep() = default;
-        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
 
     private:
     };
