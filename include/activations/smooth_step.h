@@ -7,7 +7,6 @@ namespace xt::activations {
 
     struct SmoothStep : xt::Module {
     public:
-        SmoothStep() = default;
 
     private:
     };
