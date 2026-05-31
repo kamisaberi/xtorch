@@ -7,7 +7,6 @@ namespace xt::activations {
 
     struct SquaredReLU : xt::Module {
     public:
-        SquaredReLU() = default;
 
 
     private:
