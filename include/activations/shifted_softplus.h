@@ -11,7 +11,6 @@ namespace xt::activations
     struct ShiftedSoftplus : xt::Module
     {
     public:
-        ShiftedSoftplus() = default;
 
     private:
     };
