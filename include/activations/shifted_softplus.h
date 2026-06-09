@@ -10,8 +10,5 @@ namespace xt::activations
 
     struct ShiftedSoftplus : xt::Module
     {
-    public:
-
-    private:
     };
 }
