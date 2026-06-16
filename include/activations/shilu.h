@@ -8,7 +8,6 @@ namespace xt::activations {
     struct ShiLU : xt::Module {
     public:
         ShiLU() = default;
-        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
 
     private:
     };
