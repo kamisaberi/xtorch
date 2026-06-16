@@ -7,7 +7,6 @@ namespace xt::activations {
 
     struct ShiLU : xt::Module {
     public:
-        ShiLU() = default;
 
     private:
     };
