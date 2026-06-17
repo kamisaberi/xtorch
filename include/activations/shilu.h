@@ -4,8 +4,6 @@
 
 namespace xt::activations {
 
-    struct ShiLU : xt::Module {
-    };
 }
 
 
