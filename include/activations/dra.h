@@ -33,7 +33,6 @@ namespace xt::activations {
          * @brief Default constructor for DRA.
          */
         DRA() = default;
-
         /**
          * @brief Forward pass for the DRA module.
          *
