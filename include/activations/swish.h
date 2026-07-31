@@ -6,7 +6,4 @@ namespace xt::activations
 {
     torch::Tensor swish(const torch::Tensor& x, double beta = 1.0);
 
-    struct Swish : xt::Module
-    {
-    };
 }
