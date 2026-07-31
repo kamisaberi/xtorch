@@ -11,12 +11,6 @@ namespace xt::activations {
     const torch::Tensor& a_right // Slope for right part
 );
 
-
-    struct SReLU : xt::Module {
-    public:
-
-    private:
-    };
 }
 
 
