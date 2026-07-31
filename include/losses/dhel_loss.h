@@ -9,8 +9,6 @@ namespace xt::losses
     class DHELLoss : xt::Module
     {
     public:
-        DHELLoss() = default;
-        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
 
     private:
     };
