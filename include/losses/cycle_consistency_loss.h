@@ -9,7 +9,6 @@ namespace xt::losses
     {
     public:
         CycleConsistencyLoss() = default;
-        auto forward(std::initializer_list<std::any> tensors) -> std::any override;
 
     private:
     };
