@@ -6,10 +6,4 @@ namespace xt::losses
 {
     torch::Tensor arcface_loss(torch::Tensor x);
 
-    class ArcFaceLoss : xt::Module
-    {
-    public:
-
-    private:
-    };
 }
