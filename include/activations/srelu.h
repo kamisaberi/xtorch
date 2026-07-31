@@ -14,8 +14,6 @@ namespace xt::activations {
 
     struct SReLU : xt::Module {
     public:
-        SReLU() = default;
-        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
 
     private:
     };
