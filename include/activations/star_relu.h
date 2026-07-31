@@ -10,7 +10,6 @@ namespace xt::activations {
     struct StarReLU: xt::Module {
     public:
         StarReLU() = default;
-        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
 
     private:
     };
