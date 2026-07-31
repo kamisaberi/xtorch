@@ -10,7 +10,6 @@ namespace xt::losses {
     class AdaptiveLoss : xt::Module {
     public:
         AdaptiveLoss() = default;
-        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
     private:
     };
 
