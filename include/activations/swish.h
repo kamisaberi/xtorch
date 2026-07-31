@@ -10,7 +10,6 @@ namespace xt::activations
     {
     public:
         Swish() = default;
-        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
 
     private:
     };
