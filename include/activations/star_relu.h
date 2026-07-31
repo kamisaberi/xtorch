@@ -7,12 +7,6 @@ namespace xt::activations {
                         double leaky_slope = 0.01);
 
 
-    struct StarReLU: xt::Module {
-    public:
-        StarReLU() = default;
-
-    private:
-    };
 }
 
 
