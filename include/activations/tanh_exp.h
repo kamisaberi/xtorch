@@ -8,7 +8,6 @@ namespace xt::activations {
     struct TanhExp : xt::Module {
     public:
         TanhExp() = default;
-        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
 
     private:
     };
