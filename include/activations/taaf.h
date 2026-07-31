@@ -6,11 +6,4 @@ namespace xt::activations
 {
 
 
-    struct TAAF : xt::Module
-    {
-    public:
-        TAAF() = default;
-
-    private:
-    };
 }
