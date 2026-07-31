@@ -8,9 +8,5 @@ namespace xt::activations
 
     struct Swish : xt::Module
     {
-    public:
-        Swish() = default;
-
-    private:
     };
 }
