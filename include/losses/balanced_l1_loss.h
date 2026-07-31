@@ -8,8 +8,6 @@ namespace xt::losses
     class BalancedL1Loss : xt::Module
     {
     public:
-        BalancedL1Loss() = default;
-        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
     private:
     };
 }
