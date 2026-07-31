@@ -9,7 +9,6 @@ namespace xt::losses
     class ArcFaceLoss : xt::Module
     {
     public:
-        ArcFaceLoss() = default;
 
     private:
     };
