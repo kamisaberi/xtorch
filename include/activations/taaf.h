@@ -7,7 +7,7 @@ namespace xt::activations
     torch::Tensor taaf(
         const torch::Tensor& x,
         const torch::Tensor& alpha, // Per-channel learnable parameter
-        double beta = 1.0 // Global hyperparameter or fixed
+        double beta = 0.0 // Global hyperparameter or fixed
     );
 
 
