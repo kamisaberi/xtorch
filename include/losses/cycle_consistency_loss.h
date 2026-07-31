@@ -8,7 +8,6 @@ namespace xt::losses
     class CycleConsistencyLoss : xt::Module
     {
     public:
-        CycleConsistencyLoss() = default;
 
     private:
     };
