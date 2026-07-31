@@ -7,7 +7,6 @@ namespace xt::activations {
 
     struct TanhExp : xt::Module {
     public:
-        TanhExp() = default;
 
     private:
     };
