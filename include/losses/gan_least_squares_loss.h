@@ -8,7 +8,6 @@ namespace xt::losses
     class GANLeastSquaresLoss : xt::Module
     {
     public:
-        GANLeastSquaresLoss() = default;
 
 
     private:
