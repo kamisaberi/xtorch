@@ -9,8 +9,6 @@ namespace xt::losses
     {
     public:
 
-        DSAMLoss() = default;
-
     private:
     };
 }
