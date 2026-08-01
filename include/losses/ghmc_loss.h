@@ -8,8 +8,6 @@ namespace xt::losses
     class GHMCLoss : xt::Module
     {
     public:
-        GHMCLoss() = default;
-        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
 
     private:
     };
