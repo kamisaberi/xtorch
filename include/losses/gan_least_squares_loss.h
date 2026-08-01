@@ -4,11 +4,4 @@
 
 namespace xt::losses
 {
-    class GANLeastSquaresLoss : xt::Module
-    {
-    public:
-
-
-    private:
-    };
 }
