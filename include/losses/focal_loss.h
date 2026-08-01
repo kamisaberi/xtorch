@@ -4,7 +4,6 @@
 
 namespace xt::losses
 {
-    torch::Tensor focal_loss(torch::Tensor x);
     class FocalLoss : xt::Module
     {
     public:
