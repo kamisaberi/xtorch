@@ -8,7 +8,6 @@ namespace xt::losses
     class DynamicSmoothL1Loss : xt::Module
     {
     public:
-        DynamicSmoothL1Loss() = default;
         auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
 
     private:
