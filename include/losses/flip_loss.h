@@ -4,12 +4,4 @@
 
 namespace xt::losses
 {
-    class FLIPLoss : xt::Module
-    {
-    public:
-
-        FLIPLoss() = default;
-
-    private:
-    };
 }
