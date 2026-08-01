@@ -8,7 +8,6 @@ namespace xt::losses
     class GANHingeLoss : xt::Module
     {
     public:
-        GANHingeLoss() = default;
 
 
     private:
