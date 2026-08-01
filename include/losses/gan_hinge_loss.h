@@ -4,11 +4,4 @@
 
 namespace xt::losses
 {
-    class GANHingeLoss : xt::Module
-    {
-    public:
-
-
-    private:
-    };
 }
