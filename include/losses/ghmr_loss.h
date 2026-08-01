@@ -9,7 +9,6 @@ namespace xt::losses
     {
     public:
         GHMRLoss() = default;
-        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
 
     private:
     };
