@@ -8,7 +8,6 @@ namespace xt::losses
     class EarlyExitingLoss : xt::Module
     {
     public:
-        EarlyExitingLoss() = default;
 
 
     private:
