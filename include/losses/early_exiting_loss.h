@@ -4,11 +4,4 @@
 
 namespace xt::losses
 {
-    class EarlyExitingLoss : xt::Module
-    {
-    public:
-
-
-    private:
-    };
 }
