@@ -8,7 +8,6 @@ namespace xt::losses
     class ElasticFace : xt::Module
     {
     public:
-        ElasticFace() = default;
 
     private:
     };
