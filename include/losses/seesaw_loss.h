@@ -8,8 +8,6 @@ namespace xt::losses
     class SeesawLoss : xt::Module
     {
     public:
-        SeesawLoss() = default;
-        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
 
 
     private:
