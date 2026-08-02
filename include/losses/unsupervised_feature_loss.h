@@ -4,7 +4,6 @@
 
 namespace xt::losses
 {
-    torch::Tensor unsupervised_feature_loss(torch::Tensor x);
     class UnsupervisedFeatureLoss : xt::Module
     {
     public:
