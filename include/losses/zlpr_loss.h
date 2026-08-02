@@ -8,7 +8,6 @@ namespace xt::losses
     class ZLPRLoss : xt::Module
     {
     public:
-        ZLPRLoss() = default;
         auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
 
 
