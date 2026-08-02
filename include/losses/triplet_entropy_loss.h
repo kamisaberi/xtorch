@@ -8,8 +8,6 @@ namespace xt::losses
     class TripletEntropyLoss : xt::Module
     {
     public:
-        TripletEntropyLoss() = default;
-        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
 
 
     private:
