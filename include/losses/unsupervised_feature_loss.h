@@ -7,7 +7,6 @@ namespace xt::losses
     class UnsupervisedFeatureLoss : xt::Module
     {
     public:
-        UnsupervisedFeatureLoss() = default;
 
 
     private:
