@@ -8,7 +8,6 @@ namespace xt::losses
     class WGANGPLoss : xt::Module
     {
     public:
-        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
 
 
     private:
