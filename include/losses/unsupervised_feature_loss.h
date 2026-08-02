@@ -8,7 +8,6 @@ namespace xt::losses
     {
     public:
         UnsupervisedFeatureLoss() = default;
-        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
 
 
     private:
