@@ -8,8 +8,6 @@ namespace xt::losses
     class SelfAdjustingSmoothL1Loss : xt::Module
     {
     public:
-        SelfAdjustingSmoothL1Loss() = default;
-        auto forward(std::initializer_list<std::any> tensors) -> std::any  override;
 
 
     private:
