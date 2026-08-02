@@ -4,10 +4,4 @@
 
 namespace xt::losses
 {
-    class UPITLoss : xt::Module
-    {
-    public:
-
-    private:
-    };
 }
