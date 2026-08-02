@@ -4,7 +4,6 @@
 
 namespace xt::losses
 {
-    torch::Tensor upit_loss(torch::Tensor x);
     class UPITLoss : xt::Module
     {
     public:
