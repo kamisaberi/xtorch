@@ -12,7 +12,6 @@ namespace xt::dropouts
     struct AdaptiveDropout : xt::Module
     {
     public:
-        auto forward(std::initializer_list<std::any> tensors) -> std::any override;
     private:
         torch::Tensor log_alpha_;
     };
