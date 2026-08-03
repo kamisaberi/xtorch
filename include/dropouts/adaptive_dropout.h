@@ -9,7 +9,6 @@
 
 namespace xt::dropouts
 {
-    torch::Tensor adaptive_dropout(torch::Tensor x);
     struct AdaptiveDropout : xt::Module
     {
     public:
